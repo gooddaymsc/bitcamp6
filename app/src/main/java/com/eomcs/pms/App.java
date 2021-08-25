@@ -6,17 +6,17 @@ import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.handler.BoardHandler;
-import com.eomcs.pms.handler.MemberHandler;
+import com.eomcs.pms.handler.CartHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
   List<Board> boardList = new ArrayList<>();
-  List<Member> memberList = new LinkedList<>();
+  List<Cart> cartList = new LinkedList<>();
 
   BoardHandler boardHandler = new BoardHandler(boardList);
-  MemberHandler memberHandler = new MemberHandler(memberList);
+  Cart cartHandler = new Cart(cartList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -61,23 +61,23 @@ public class App {
 
     memberMenu.add(new Menu("등록") {
       public void execute() {
-        memberHandler.add(); 
+        cartHandler.add(); 
       }});
     memberMenu.add(new Menu("목록") {
       public void execute() {
-        memberHandler.list(); 
+        cartHandler.list(); 
       }});
     memberMenu.add(new Menu("상세보기") {
       public void execute() {
-        memberHandler.detail(); 
+        cartHandler.detail(); 
       }});
     memberMenu.add(new Menu("변경") {
       public void execute() {
-        memberHandler.update(); 
+        cartHandler.update(); 
       }});
     memberMenu.add(new Menu("삭제") {
       public void execute() {
-        memberHandler.delete(); 
+        cartHandler.delete(); 
       }});
 
     MenuGroup projectMenu = new MenuGroup("프로젝트");

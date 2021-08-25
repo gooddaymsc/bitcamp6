@@ -2,13 +2,13 @@ package com.eomcs.pms.domain;
 
 import java.sql.Date;
 
-public class Member {
+public class Cart {
   private int no;
   private String name;
-  private String email;
-  private String password;
+  private String kind;
+  private String madeIn;
   private String photo;
-  private String tel;
+  private String price;
   private Date registeredDate;
 
   public int getNo() {
@@ -23,17 +23,17 @@ public class Member {
   public void setName(String name) {
     this.name = name;
   }
-  public String getEmail() {
-    return email;
+  public String getKind() {
+    return kind;
   }
-  public void setEmail(String email) {
-    this.email = email;
+  public void setKind(String kind) {
+    this.kind = kind;
   }
-  public String getPassword() {
-    return password;
+  public String getMadeIn() {
+    return madeIn;
   }
-  public void setPassword(String password) {
-    this.password = password;
+  public void setMadeIn(String madeIn) {
+    this.madeIn = madeIn;
   }
   public String getPhoto() {
     return photo;
@@ -41,11 +41,11 @@ public class Member {
   public void setPhoto(String photo) {
     this.photo = photo;
   }
-  public String getTel() {
-    return tel;
+  public String getPrice() {
+    return price;
   }
-  public void setTel(String tel) {
-    this.tel = tel;
+  public void setPrice(String price) {
+    this.price = price;
   }
   public Date getRegisteredDate() {
     return registeredDate;
