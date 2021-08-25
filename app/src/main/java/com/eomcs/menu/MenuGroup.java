@@ -1,6 +1,6 @@
-package com.eomcs.pms.menu;
+package com.eomcs.menu;
 
-import com.eomcs.pms.handler.Stack;
+import java.util.Stack;
 import com.eomcs.util.Prompt;
 
 // 역할
@@ -10,7 +10,7 @@ public class MenuGroup extends Menu {
 
   // 메뉴의 bread crumb 목록 보관
   // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
-  static Stack breadCrumb = new Stack();
+  static Stack<Menu> breadCrumb = new Stack<>();
 
   Menu[] childs = new Menu[100];
   int size;
@@ -114,7 +114,7 @@ public class MenuGroup extends Menu {
       if (path.length() > 0) {
         path += " / ";
       }
-      Menu menu = (Menu) breadCrumb.get(i); 
+      Menu menu = breadCrumb.get(i); 
       path += menu.title;
     }
 

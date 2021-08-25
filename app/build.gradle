@@ -17,9 +17,8 @@ repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
-
-eclipse {
-    project {
+eclipse{
+    project{
         name = 'AlchoholFinder'
     }
 }
@@ -34,5 +33,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'AlchoholFinder.App'
+    mainClass = 'com.App'
 }
