@@ -23,6 +23,7 @@ public class BoardHandler {
     board.setContent(Prompt.inputString("내용? "));
     board.setWriter(Prompt.inputString("작성자? "));
     board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    board.setTag(Prompt.inputString("태그? "));
 
     boardList.add(board);
   }
@@ -66,6 +67,8 @@ public class BoardHandler {
     System.out.printf("조회수: %d\n", board.getViewCount());
     board.setLikeCount(board.getLikeCount() + 1);
     System.out.printf("좋아요: %d\n", board.getLikeCount());
+    System.out.printf("태그: %s\n", board.getTag());
+
   }
 
   public void update() {
@@ -91,6 +94,7 @@ public class BoardHandler {
 
     board.setTitle(title);
     board.setContent(content);
+    board.setTag(tag);
     System.out.println("게시글을 변경하였습니다.");
   }
 
