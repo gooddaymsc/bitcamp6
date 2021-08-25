@@ -7,24 +7,17 @@ import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.pms.domain.Project;
-import com.eomcs.pms.domain.Task;
 import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.MemberHandler;
-import com.eomcs.pms.handler.ProjectHandler;
-import com.eomcs.pms.handler.TaskHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
   List<Board> boardList = new ArrayList<>();
   List<Member> memberList = new LinkedList<>();
-  List<Project> projectList = new ArrayList<>();
-  List<Task> taskList = new LinkedList<>();
 
   BoardHandler boardHandler = new BoardHandler(boardList);
   MemberHandler memberHandler = new MemberHandler(memberList);
-  ProjectHandler projectHandler = new ProjectHandler(projectList, memberHandler);
-  TaskHandler taskHandler = new TaskHandler(taskList, memberHandler);
+
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -91,59 +84,9 @@ public class App {
     MenuGroup projectMenu = new MenuGroup("프로젝트");
     mainMenuGroup.add(projectMenu);
 
-    projectMenu.add(new Menu("등록") {
-      public void execute() {
-        projectHandler.add(); 
-      }});
-    projectMenu.add(new Menu("목록") {
-      public void execute() {
-        projectHandler.list(); 
-      }});
-    projectMenu.add(new Menu("상세보기") {
-      public void execute() {
-        projectHandler.detail(); 
-      }});
-    projectMenu.add(new Menu("변경") {
-      public void execute() {
-        projectHandler.update(); 
-      }});
-    projectMenu.add(new Menu("삭제") {
-      public void execute() {
-        projectHandler.delete(); 
-      }});
-
     MenuGroup taskMenu = new MenuGroup("작업");
     mainMenuGroup.add(taskMenu);
 
-    taskMenu.add(new Menu("등록") {
-      public void execute() {
-        taskHandler.add(); 
-      }});
-    taskMenu.add(new Menu("목록") {
-      public void execute() {
-        taskHandler.list(); 
-      }});
-    taskMenu.add(new Menu("상세보기") {
-      public void execute() {
-        taskHandler.detail(); 
-      }});
-    taskMenu.add(new Menu("변경") {
-      public void execute() {
-        taskHandler.update(); 
-      }});
-    taskMenu.add(new Menu("삭제") {
-      public void execute() {
-        taskHandler.delete(); 
-      }});
-
-    MenuGroup mg1 = new MenuGroup("관리1");
-    mainMenuGroup.add(mg1);
-
-    MenuGroup mg2 = new MenuGroup("관리2");
-    mg1.add(mg2);
-
-    MenuGroup mg3 = new MenuGroup("관리3");
-    mg2.add(mg3);
 
     return mainMenuGroup;
   }
