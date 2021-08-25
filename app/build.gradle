@@ -18,11 +18,11 @@ repositories {
     mavenCentral()
 }
 
-eclipse {
-    project {
-        name = 'AlchoholFinder'
-    }
-}
+// eclipse {
+//     project {
+//         name = 'AlchoholFinder'
+//     }
+// }
 
 dependencies {
     // Use JUnit test framework.
