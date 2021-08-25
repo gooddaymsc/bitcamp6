@@ -40,13 +40,11 @@ public class BoardHandler {
     // 이렇게 제네릭이 적용된 List를 사용하면 
     // List에서 값을 꺼낼 때 마다 형변환 할 필요가 없어 프로그래밍이 편리하다.
     for (Board board : boards) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("%d, %s, %s, %s\n", 
           board.getNo(), 
           board.getTitle(), 
           board.getWriter(),
-          board.getRegisteredDate(),
-          board.getViewCount(), 
-          board.getLike());
+          board.getViewCount();
     }
   }
 
