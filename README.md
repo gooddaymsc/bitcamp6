@@ -21,7 +21,7 @@
     - Domain
     - Prompt
 
-- project 폴더생성(완료)
+- project 폴더생성(gradle) 예)
     - bitcamp6\project\app\bin\main\java
         - domain
         - handler
@@ -29,15 +29,16 @@
         - util
 
 - 구현해야할 클래스
-    - Prompt
-    - menu
-        - Menu
-        - MenuGroup
-    - App
+    - domain
+    - handler
+
+    - 담당
+        - 개인정보관리(홍지현)
+        - 게시글관리(문세철)
+        - 회원관리(문세철)
+        - 장바구니관리(이용진)
+        - 예약관리(이용진)
+        - 재고관리(윤수민)
+        - 제품관리(윤수민)
 
 ## 11/23 : 발표
-
-Test 테스트 테스트
-Test 테스트 테스트
-Test 테스트 테스트
-Test 테스트 테스트
