@@ -20,11 +20,18 @@ public class MemberHandler {
 
     member.setNo(Prompt.inputInt("번호? "));
     member.setName(Prompt.inputString("이름? "));
+    member.setNickName(Prompt.inputString("닉네임? "));
     member.setEmail(Prompt.inputString("이메일? "));
-    member.setPassword(Prompt.inputString("암호? "));
+    member.setPassword(Prompt.inputString("비밀번호? "));
     member.setPhoto(Prompt.inputString("사진? "));
-    member.setTel(Prompt.inputString("전화? "));
+    member.setTel(Prompt.inputString("전화번호? "));
+    member.setAddress(Prompt.inputString("주소? "));
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
+    member.setLevel(Prompt.inputInt("등급? "));
+    member.setBuyerSeller(Prompt.inputString("일반회원/판매자? "));
+    member.setcNo(Prompt.inputInt("사업자번호? "));
+    member.setcTel(Prompt.inputInt("사업장번호? "));
+
 
     memberList.add(member);
   }
@@ -38,8 +45,11 @@ public class MemberHandler {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           member.getNo(), 
           member.getName(), 
+          member.getNickName(),
           member.getEmail(), 
           member.getTel(), 
+          member.getLevel(),
+          member.getBuyerSeller(),
           member.getRegisteredDate());
     }
   }
@@ -56,9 +66,11 @@ public class MemberHandler {
     }
 
     System.out.printf("이름: %s\n", member.getName());
+    System.out.printf("닉네임: %s\n", member.getNickName());
     System.out.printf("이메일: %s\n", member.getEmail());
     System.out.printf("사진: %s\n", member.getPhoto());
     System.out.printf("전화: %s\n", member.getTel());
+    System.out.printf("구매자or판매자: %s\n", member.getBuyerSeller());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
   }
 
@@ -78,6 +90,8 @@ public class MemberHandler {
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
     String tel = Prompt.inputString("전화(" + member.getTel() + ")? ");
+    String address = Prompt.inputString("주소(" + member.getAddress() + ")? ");
+
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -90,6 +104,7 @@ public class MemberHandler {
     member.setPassword(password);
     member.setPhoto(photo);
     member.setTel(tel);
+    member.setAddress(address);
 
     System.out.println("회원을 변경하였습니다.");
   }
