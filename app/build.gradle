@@ -17,9 +17,16 @@ repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
+<<<<<<< HEAD
 eclipse{
     project{
         name = 'AlchoholFinder'
+=======
+
+eclipse {
+    project {
+        name = "AlchoholFinder"
+>>>>>>> b6f134b9bb35f316857f3870d8561063be526eb8
     }
 }
 

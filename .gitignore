@@ -207,4 +207,8 @@ node_modules/
 temp/
 Debug/
 Release/
+<<<<<<< HEAD
 html-exam/  
+=======
+html-exam/
+>>>>>>> b6f134b9bb35f316857f3870d8561063be526eb8
