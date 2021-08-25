@@ -1,22 +1,25 @@
 package com.eomcs.pms;
 
-import com.eomcs.pms.handler.ArrayList;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import com.eomcs.menu.Menu;
+import com.eomcs.menu.MenuGroup;
+import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Project;
+import com.eomcs.pms.domain.Task;
 import com.eomcs.pms.handler.BoardHandler;
-import com.eomcs.pms.handler.LinkedList;
-import com.eomcs.pms.handler.List;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.ProjectHandler;
 import com.eomcs.pms.handler.TaskHandler;
-import com.eomcs.pms.menu.Menu;
-import com.eomcs.pms.menu.MenuGroup;
 import com.eomcs.util.Prompt;
 
 public class App {
-
-  List boardList = new ArrayList();
-  List memberList = new LinkedList();
-  List projectList = new ArrayList();
-  List taskList = new LinkedList();
+  List<Board> boardList = new ArrayList<>();
+  List<Member> memberList = new LinkedList<>();
+  List<Project> projectList = new ArrayList<>();
+  List<Task> taskList = new LinkedList<>();
 
   BoardHandler boardHandler = new BoardHandler(boardList);
   MemberHandler memberHandler = new MemberHandler(memberList);

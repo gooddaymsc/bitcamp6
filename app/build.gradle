@@ -20,7 +20,7 @@ repositories {
 
 eclipse {
     project {
-        name = 'AlchoholFinder'
+        name = "AlchoholFinder"
     }
 }
 
@@ -34,5 +34,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'AlchoholFinder.App'
+    mainClass = 'com.App'
 }
