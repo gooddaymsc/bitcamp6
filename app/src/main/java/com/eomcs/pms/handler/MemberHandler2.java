@@ -29,7 +29,7 @@ public class MemberHandler2 {
     member.setTel(Prompt.inputString("전화? "));
     member.setBusinessNo(Prompt.inputString("사업자번호? "));
     member.setBusinessAddress(Prompt.inputString("사업장주소? "));
-    member.setBusinessTel(Prompt.inputString("사업정번호? "));
+    member.setBusinessTel(Prompt.inputString("사업장번호? "));
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(member);
