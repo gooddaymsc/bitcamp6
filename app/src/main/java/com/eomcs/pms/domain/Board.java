@@ -9,7 +9,8 @@ public class Board {
   private String writer;
   private Date registeredDate;
   private int viewCount;
-  private int like;
+  private String tag;
+  private int likeCount;
 
   public int getNo() {
     return no;
@@ -47,10 +48,17 @@ public class Board {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public int getLike() {
-    return like;
+  public String getTag() {
+    return tag;
   }
-  public void setLike(int like) {
-    this.like = like;
+  public void setTag(String tag) {
+    this.tag = tag;
   }
+  public int getLikeCount() {
+    return likeCount;
+  }
+  public void setLikeCount(int likeCount) {
+    this.likeCount = likeCount;
+  }
+
 }

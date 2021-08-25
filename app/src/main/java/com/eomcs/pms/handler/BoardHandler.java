@@ -40,13 +40,14 @@ public class BoardHandler {
     // 이렇게 제네릭이 적용된 List를 사용하면 
     // List에서 값을 꺼낼 때 마다 형변환 할 필요가 없어 프로그래밍이 편리하다.
     for (Board board : boards) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("%d, %s, %s, %s, %d, %s, %d\n", 
           board.getNo(), 
           board.getTitle(), 
           board.getWriter(),
           board.getRegisteredDate(),
           board.getViewCount(), 
-          board.getLike());
+          board.getTag(), 
+          board.getLikeCount());
     }
   }
 
@@ -68,6 +69,8 @@ public class BoardHandler {
 
     board.setViewCount(board.getViewCount() + 1);
     System.out.printf("조회수: %d\n", board.getViewCount());
+    board.setLikeCount(board.getLikeCount() + 1);
+    System.out.printf("좋아요: %d\n", board.getLikeCount());
   }
 
   public void update() {
@@ -83,6 +86,7 @@ public class BoardHandler {
 
     String title = Prompt.inputString(String.format("제목(%s)? ", board.getTitle()));
     String content = Prompt.inputString(String.format("내용(%s)? ", board.getContent()));
+    String tag = Prompt.inputString(String.format("태그(%s)? ", board.getTag()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -118,8 +122,7 @@ public class BoardHandler {
   }
 
   private Board findByNo(int no) {
-    // 일부러 BoardList에 들어 있는 배열 보다 작은 배열을 넘겨준다.
-    // => 그러면 toArray()는 새 배열을 만들어 값을 저장한 후 리턴할 것이다.
+
     Board[] arr = boardList.toArray(new Board[0]);
     for (Board board : arr) {
       if (board.getNo() == no) {
