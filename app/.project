@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>AlchoholFinder</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+=======
+	<name>LastProject</name>
 	<comment></comment>
 	<projects/>
 	<natures>
@@ -14,4 +30,5 @@
 	</buildSpec>
 	<linkedResources/>
 	<filteredResources/>
+>>>>>>> 1ff5254f38b9483afa6ce43074d3041f68a9be1e
 </projectDescription>
