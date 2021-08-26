@@ -65,7 +65,7 @@
     - 7. 예약일 : registeredDate
 
 - ## Member (관리자-회원관리)
-    - 1.번호 : no
+    - 1. 번호 : no
     - 2. 이름 : name
     - 3. 닉네임 : nickName
     - 4. 전화번호 : tel
