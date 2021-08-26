@@ -95,34 +95,34 @@ public class App {
         memberHandler.delete(); 
       }});
 
-    //    MenuGroup member2Menu = new MenuGroup("판매자");
-    //    subMenu.add(member2Menu);
-    //
-    //    member2Menu.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        member2Handler.add(); 
-    //      }});
-    //    member2Menu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        member2Handler.list(); 
-    //      }});
-    //    member2Menu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        member2Handler.detail(); 
-    //      }});
-    //    member2Menu.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        member2Handler.update(); 
-    //      }});
-    //    member2Menu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        member2Handler.delete(); 
-    //      }});
+    MenuGroup member2Menu = new MenuGroup("판매자");
+    subMenu.add(member2Menu);
+
+    member2Menu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        member2Handler.add(); 
+      }});
+    member2Menu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        member2Handler.list(); 
+      }});
+    member2Menu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        member2Handler.detail(); 
+      }});
+    member2Menu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        member2Handler.update(); 
+      }});
+    member2Menu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        member2Handler.delete(); 
+      }});
 
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
@@ -270,7 +270,7 @@ public class App {
         stockHandler.delete(); 
       }});
 
-    MenuGroup personMenu = new MenuGroup("회원");
+    MenuGroup personMenu = new MenuGroup("회원관리");
     mainMenuGroup.add(personMenu);
 
     personMenu.add(new Menu("등록") {
@@ -302,7 +302,6 @@ public class App {
     return mainMenuGroup;
   }
 }
-
 
 
 
