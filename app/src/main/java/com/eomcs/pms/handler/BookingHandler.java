@@ -1,21 +1,21 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Book;
+import com.eomcs.pms.domain.Booking;
 import com.eomcs.util.Prompt;
 
-public class BookHandler {
+public class BookingHandler {
 
-  List<Book> booktList;
+  List<Booking> booktList;
 
-  public BookHandler(List<Book> bookList) {
+  public BookingHandler(List<Booking> bookList) {
     this.booktList = bookList;
   }
 
   public void add() {
     System.out.println("[예약 등록]");
 
-    Book book = new Book();
+    Booking book = new Booking();
 
     book.setNo(Prompt.inputInt("번호? "));
     book.setName(Prompt.inputString("예약명? "));
@@ -31,9 +31,9 @@ public class BookHandler {
   public void list() {
     System.out.println("[예약 목록]");
 
-    Book[] list = booktList.toArray(new Book[0]);
+    Booking[] list = booktList.toArray(new Booking[0]);
 
-    for (Book book : list) {
+    for (Booking book : list) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
           book.getNo(), 
           book.getName(), 
@@ -49,7 +49,7 @@ public class BookHandler {
     System.out.println("[예약 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Book Book = findByNo(no);
+    Booking Book = findByNo(no);
 
     if (Book == null) {
       System.out.println("해당 번호의 예약이 없습니다.");
@@ -68,7 +68,7 @@ public class BookHandler {
     System.out.println("[예약 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Book Book = findByNo(no);
+    Booking Book = findByNo(no);
 
     if (Book == null) {
       System.out.println("해당 번호의 예약이 없습니다.");
@@ -102,7 +102,7 @@ public class BookHandler {
     System.out.println("[예약 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Book Book = findByNo(no);
+    Booking Book = findByNo(no);
 
     if (Book == null) {
       System.out.println("해당 번호의 예약이 없습니다.");
@@ -120,9 +120,9 @@ public class BookHandler {
     System.out.println("예약을 삭제하였습니다.");
   }
 
-  private Book findByNo(int no) {
-    Book[] arr = booktList.toArray(new Book[0]);
-    for (Book Book : arr) {
+  private Booking findByNo(int no) {
+    Booking[] arr = booktList.toArray(new Booking[0]);
+    for (Booking Book : arr) {
       if (Book.getNo() == no) {
         return Book;
       }
@@ -131,8 +131,8 @@ public class BookHandler {
   }
 
   public boolean exist(String name) {
-    Book[] arr = booktList.toArray(new Book[0]);
-    for (Book Book : arr) {
+    Booking[] arr = booktList.toArray(new Booking[0]);
+    for (Booking Book : arr) {
       if (Book.getName().equals(name)) {
         return true;
       }

@@ -1,6 +1,6 @@
 package com.eomcs.pms.domain;
 
-public class Alcohol {
+public class Product {
   //상품번호
   //상품명
   //설명

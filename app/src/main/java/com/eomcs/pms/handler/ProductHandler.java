@@ -1,10 +1,10 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Alcohol;
+import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
-public class AlcoholHandler {
+public class ProductHandler {
   //상품번호
   //상품명
   //주종
@@ -14,16 +14,16 @@ public class AlcoholHandler {
   //테이스팅 노트 : 당도, 산도, 바디감
   //가격
 
-  List<Alcohol> alcoholList;
+  List<Product> alcoholList;
 
-  public AlcoholHandler(List<Alcohol> alcoholList) {
+  public ProductHandler(List<Product> alcoholList) {
     this.alcoholList = alcoholList;
   }
 
   public void add() {
     System.out.println("[상품 등록]");
 
-    Alcohol alcohol = new Alcohol();
+    Product alcohol = new Product();
 
     alcohol.setNo(Prompt.inputInt("번호? "));
     alcohol.setName(Prompt.inputString("상품명? "));
@@ -42,9 +42,9 @@ public class AlcoholHandler {
   public void list() {
     System.out.println("[상품 목록]");
 
-    Alcohol[] list = alcoholList.toArray(new Alcohol[0]);
+    Product[] list = alcoholList.toArray(new Product[0]);
 
-    for (Alcohol alcohol : list) {
+    for (Product alcohol : list) {
       System.out.printf("%d, %s, %s, %s, %s, %d, %d, %d, %d, %d \n", 
           alcohol.getNo(), 
           alcohol.getName(), 
@@ -63,7 +63,7 @@ public class AlcoholHandler {
     System.out.println("[상품 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Alcohol alcohol = findByNo(no);
+    Product alcohol = findByNo(no);
 
     if (alcohol == null) {
       System.out.println("해당 번호의 상품이 없습니다.");
@@ -85,7 +85,7 @@ public class AlcoholHandler {
     System.out.println("[상품 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Alcohol alcohol = findByNo(no);
+    Product alcohol = findByNo(no);
 
     if (alcohol == null) {
       System.out.println("해당 번호의 상품이 없습니다.");
@@ -125,7 +125,7 @@ public class AlcoholHandler {
     System.out.println("[상품 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Alcohol alcohol = findByNo(no);
+    Product alcohol = findByNo(no);
 
     if (alcohol == null) {
       System.out.println("해당 번호의 상품이 없습니다.");
@@ -143,9 +143,9 @@ public class AlcoholHandler {
     System.out.println("상품을 삭제하였습니다.");
   }
 
-  private Alcohol findByNo(int no) {
-    Alcohol[] arr = alcoholList.toArray(new Alcohol[0]);
-    for (Alcohol alcohol : arr) {
+  private Product findByNo(int no) {
+    Product[] arr = alcoholList.toArray(new Product[0]);
+    for (Product alcohol : arr) {
       if (alcohol.getNo() == no) {
         return alcohol;
       }
@@ -154,8 +154,8 @@ public class AlcoholHandler {
   }
 
   public boolean exist(String name) {
-    Alcohol[] arr = alcoholList.toArray(new Alcohol[0]);
-    for (Alcohol Alcohol : arr) {
+    Product[] arr = alcoholList.toArray(new Product[0]);
+    for (Product Alcohol : arr) {
       if (Alcohol.getName().equals(name)) {
         return true;
       }

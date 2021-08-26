@@ -2,20 +2,20 @@ package com.eomcs.pms.domain;
 
 import java.sql.Date;
 
-public class Person {
+public class Privacy {
   private int no;
   private String name;
   private String nickName;
   private String email;
+  private Date birthDay;
   private String password;
   private String photo;
   private String tel;
-  private String address;
   private Date registeredDate;
-  private int level;
-  private String buyerSeller;
-  private int cNo;
-  private int cTel;
+  /* private String businessNo;
+   * private String businessAddress;
+   * private String businessTel;
+   */
 
   public int getNo() {
     return no;
@@ -28,12 +28,6 @@ public class Person {
   }
   public void setName(String name) {
     this.name = name;
-  }
-  public String getNickName() {
-    return nickName;
-  }
-  public void setNickName(String nickName) {
-    this.nickName = nickName;
   }
   public String getEmail() {
     return email;
@@ -59,42 +53,22 @@ public class Person {
   public void setTel(String tel) {
     this.tel = tel;
   }
-  public String getAddress() {
-    return address;
-  }
-  public void setAddress(String address) {
-    this.address = address;
-  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-  public int getLevel() {
-    return level;
+  public String getNickName() {
+    return nickName;
   }
-  public void setLevel(int level) {
-    this.level = level;
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
   }
-  public String getBuyerSeller() {
-    return buyerSeller;
+  public Date getBirthDay() {
+    return birthDay;
   }
-  public void setBuyerSeller(String buyerSeller) {
-    this.buyerSeller = buyerSeller;
+  public void setBirthDay(Date birthDay) {
+    this.birthDay = birthDay;
   }
-  public int getcNo() {
-    return cNo;
-  }
-  public void setcNo(int cNo) {
-    this.cNo = cNo;
-  }
-  public int getcTel() {
-    return cTel;
-  }
-  public void setcTel(int cTel) {
-    this.cTel = cTel;
-  }
-
-
 }

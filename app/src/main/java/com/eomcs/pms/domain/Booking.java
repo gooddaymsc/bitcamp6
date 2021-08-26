@@ -1,6 +1,6 @@
 package com.eomcs.pms.domain;
 
-public class Book {
+public class Booking {
   private int no;
   private String name;
   private String kind;
