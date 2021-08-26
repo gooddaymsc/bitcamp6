@@ -2,27 +2,28 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class CartHandler {
 
-  List<CartHandler> cartList;
+  List<Cart> cartList;
 
-  public CartHandler(List<CartHandler> cartList) {
+  public CartHandler(List<Cart> cartList) {
     this.cartList = cartList;
   }
 
   public void add() {
     System.out.println("[장바구니 등록]");
 
-    CartHandler cart = new CartHandler();
+    Cart cart = new Cart();
 
     cart.setNo(Prompt.inputInt("번호? "));
-    cart.setName(Prompt.inputString("이름? "));
-    cart.setEmail(Prompt.inputString("이메일? "));
-    cart.setPassword(Prompt.inputString("암호? "));
+    cart.setName(Prompt.inputString("상품명? "));
+    cart.setKind(Prompt.inputString("종류? "));
+    cart.setMadeIn(Prompt.inputString("원산지? "));
     cart.setPhoto(Prompt.inputString("사진? "));
-    cart.setTel(Prompt.inputString("전화? "));
+    cart.setPrice(Prompt.inputString("가격? "));
     cart.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     cartList.add(cart);
@@ -31,14 +32,14 @@ public class CartHandler {
   public void list() {
     System.out.println("[장바구니 목록]");
 
-    CartHandler[] list = cartList.toArray(new CartHandler[0]);
+    Cart[] list = cartList.toArray(new Cart[0]);
 
-    for (CartHandler cart : list) {
+    for (Cart cart : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           cart.getNo(), 
           cart.getName(), 
-          cart.getEmail(), 
-          cart.getTel(), 
+          cart.getKind(), 
+          cart.getMadeIn(), 
           cart.getRegisteredDate());
     }
   }
@@ -47,17 +48,17 @@ public class CartHandler {
     System.out.println("[장바구니 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    CartHandler cart = findByNo(no);
+    Cart cart = findByNo(no);
 
     if (cart == null) {
       System.out.println("해당 번호의 상품이 없습니다.");
       return;
     }
 
-    System.out.printf("이름: %s\n", cart.getName());
-    System.out.printf("이메일: %s\n", cart.getEmail());
+    System.out.printf("상품명: %s\n", cart.getName());
+    System.out.printf("종류: %s\n", cart.getKind());
     System.out.printf("사진: %s\n", cart.getPhoto());
-    System.out.printf("전화: %s\n", cart.getTel());
+    System.out.printf("가격: %s\n", cart.getPrice());
     System.out.printf("등록일: %s\n", cart.getRegisteredDate());
   }
 
@@ -65,18 +66,18 @@ public class CartHandler {
     System.out.println("[장바구니 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    CartHandler cart = findByNo(no);
+    Cart cart = findByNo(no);
 
     if (cart == null) {
       System.out.println("해당 번호의 상품이 없습니다.");
       return;
     }
 
-    String name = Prompt.inputString("이름(" + cart.getName()  + ")? ");
-    String email = Prompt.inputString("이메일(" + cart.getEmail() + ")? ");
-    String password = Prompt.inputString("암호? ");
+    String name = Prompt.inputString("상품명(" + cart.getName()  + ")? ");
+    String kind = Prompt.inputString("종류(" + cart.getKind() + ")? ");
+    String madeIn = Prompt.inputString("원산지(" + cart.getMadeIn() + ")? ");
     String photo = Prompt.inputString("사진(" + cart.getPhoto() + ")? ");
-    String tel = Prompt.inputString("전화(" + cart.getTel() + ")? ");
+    String price = Prompt.inputString("전화(" + cart.getPrice() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -85,10 +86,10 @@ public class CartHandler {
     }
 
     cart.setName(name);
-    cart.setEmail(email);
-    cart.setPassword(password);
+    cart.setKind(kind);
+    cart.setMadeIn(madeIn);
     cart.setPhoto(photo);
-    cart.setTel(tel);
+    cart.setPrice(price);
 
     System.out.println("장바구니를 변경하였습니다.");
   }
@@ -97,7 +98,7 @@ public class CartHandler {
     System.out.println("[장바구니 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    CartHandler cart = findByNo(no);
+    Cart cart = findByNo(no);
 
     if (cart == null) {
       System.out.println("해당 번호의 상품이 없습니다.");
@@ -115,9 +116,9 @@ public class CartHandler {
     System.out.println("장바구니를 삭제하였습니다.");
   }
 
-  private CartHandler findByNo(int no) {
-    CartHandler[] arr = cartList.toArray(new CartHandler[0]);
-    for (CartHandler cart : arr) {
+  private Cart findByNo(int no) {
+    Cart[] arr = cartList.toArray(new Cart[0]);
+    for (Cart cart : arr) {
       if (cart.getNo() == no) {
         return cart;
       }
@@ -126,8 +127,8 @@ public class CartHandler {
   }
 
   public boolean exist(String name) {
-    CartHandler[] arr = cartList.toArray(new CartHandler[0]);
-    for (CartHandler cart : arr) {
+    Cart[] arr = cartList.toArray(new Cart[0]);
+    for (Cart cart : arr) {
       if (cart.getName().equals(name)) {
         return true;
       }
