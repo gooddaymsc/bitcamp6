@@ -2,7 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.eomcs.pms.domain.Person;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Member2;
 import com.eomcs.util.Prompt;
 
@@ -121,7 +121,7 @@ public class Member2Handler {
     System.out.println("[판매자 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    Person member = findByNo(no);
+    Member member = findByNo(no);
 
     if (member == null) {
       System.out.println("해당 번호의 판매자이 없습니다.");
