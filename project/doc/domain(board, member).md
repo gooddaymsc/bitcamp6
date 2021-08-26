@@ -1,4 +1,4 @@
-- ## Board (게시판관리)
+- ## Board
     - 1. 번호 : no
     - 2. 제목 : title
     - 3. 내용 : content
@@ -8,7 +8,7 @@
     - 7. 태그 : tag
     - 8. 좋아요 : likeCount
 
-- ## Privacy (개인정보관리)
+- ## Privacy
     - 1. 번호 : no
     - 2. 이름 : name
     - 3. 닉네임 : nickName
@@ -22,12 +22,12 @@
     - 11. 등급 : level
     - 12. 일반회원/판매자 : buyerSeller
 
-- ## sellerPrivacy (판매자-개인정보관리)
+- ## sellerPrivacy
     - 1. 사업자번호 : businessNo
     - 2. 사업장주소 : businessAddress
     - 3. 사업장번호 : businessTel
 
-- ## Product (상품정보)
+- ## Product
     - 1. 상품번호 : no
     - 2. 상품명 : name
     - 3. 종류 : kind
@@ -39,7 +39,7 @@
     - 9. 바디감 : body
     - 10. 가격 : price 
 
-- ## Stock (재고정보)
+- ## Stock
     - 1. 재고번호 : no
     - 2. 종류: kind
     - 3. 상품이름: name
@@ -47,7 +47,7 @@
     - 5. 원산지 : made
     - 6. 가격 : price
 
-- ## Booking (예약관리)
+- ## Booking
     - 1. 상품명 : name
     - 2. 종류 : kind
     - 3. 원산지 : madeIn
@@ -55,7 +55,7 @@
     - 5. 가격 : price
     - 6. 예약일 : book
 
-- ## Cart (장바구니 관리)
+- ## Cart
     - 1. 장바구니번호 : no
     - 2. 상품명 : name
     - 3. 종류 : kind
@@ -64,5 +64,5 @@
     - 6. 가격 : price
     - 7. 예약일 : registeredDate
 
-- ## Member (관리자-회원관리)
+-## Member (관리자-회원관리)
 
