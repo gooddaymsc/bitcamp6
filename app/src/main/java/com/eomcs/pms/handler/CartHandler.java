@@ -77,7 +77,7 @@ public class CartHandler {
     String kind = Prompt.inputString("종류(" + cart.getKind() + ")? ");
     String madeIn = Prompt.inputString("원산지(" + cart.getMadeIn() + ")? ");
     String photo = Prompt.inputString("사진(" + cart.getPhoto() + ")? ");
-    String price = Prompt.inputString("전화(" + cart.getPrice() + ")? ");
+    String price = Prompt.inputString("가격(" + cart.getPrice() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
