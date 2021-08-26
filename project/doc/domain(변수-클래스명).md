@@ -22,7 +22,7 @@
     - 11. 등급 : level
     - 12. 일반회원/판매자 : buyerSeller
 
-- ## sellerPrivacy (판매자-개인정보관리)
+- ## SellerPrivacy (판매자-개인정보관리)
     - 1. 사업자번호 : businessNo
     - 2. 사업장주소 : businessAddress
     - 3. 사업장번호 : businessTel
@@ -65,4 +65,9 @@
     - 7. 예약일 : registeredDate
 
 - ## Member (관리자-회원관리)
-
+    - 1. 번호 : no
+    - 2. 이름 : name
+    - 3. 닉네임 : nickName
+    - 4. 전화번호 : tel
+    - 5. 등급 : level
+    - 6. 일반회원/판매자 : buyerSeller
