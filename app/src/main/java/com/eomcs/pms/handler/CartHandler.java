@@ -57,6 +57,7 @@ public class CartHandler {
 
     System.out.printf("상품명: %s\n", cart.getName());
     System.out.printf("종류: %s\n", cart.getKind());
+    System.out.printf("원산지: %s\n", cart.getMadeIn());
     System.out.printf("사진: %s\n", cart.getPhoto());
     System.out.printf("가격: %s\n", cart.getPrice());
     System.out.printf("등록일: %s\n", cart.getRegisteredDate());
