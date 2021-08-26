@@ -1,7 +1,7 @@
 package com.eomcs.pms.domain;
 
 //판매자
-public class Member2 extends Member {
+public class Member2 extends Person {
 
   private String businessNo;
   private String businessAddress;

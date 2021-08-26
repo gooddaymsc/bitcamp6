@@ -33,6 +33,6 @@ application {
 
 eclipse {
     project {
-        name = "AlchoholFinder"
+        name = "AlcoholFinder"
     }
 }
