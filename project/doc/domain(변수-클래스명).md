@@ -65,4 +65,9 @@
     - 7. 예약일 : registeredDate
 
 - ## Member (관리자-회원관리)
-
+    - 1.번호 : no
+    - 2. 이름 : name
+    - 3. 닉네임 : nickName
+    - 4. 전화번호 : tel
+    - 5. 등급 : level
+    - 6. 일반회원/판매자 : buyerSeller
