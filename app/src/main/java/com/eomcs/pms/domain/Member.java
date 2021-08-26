@@ -7,7 +7,6 @@ public class Member {
   private String name;
   private String nickName;
   private String email;
-<<<<<<< HEAD
   private String password;
   private String photo;
   private String tel;
@@ -17,17 +16,6 @@ public class Member {
   private String buyerSeller;
   private int cNo;
   private int cTel;
-=======
-  private Date birthDay;
-  private String password;
-  private String photo;
-  private String tel;
-  private Date registeredDate;
-  /* private String businessNo;
-   * private String businessAddress;
-   * private String businessTel;
-   */
->>>>>>> 6c4f183e47537657ddd2ba48dd4a1f0dc247d036
 
   public int getNo() {
     return no;
@@ -41,15 +29,12 @@ public class Member {
   public void setName(String name) {
     this.name = name;
   }
-<<<<<<< HEAD
   public String getNickName() {
     return nickName;
   }
   public void setNickName(String nickName) {
     this.nickName = nickName;
   }
-=======
->>>>>>> 6c4f183e47537657ddd2ba48dd4a1f0dc247d036
   public String getEmail() {
     return email;
   }
@@ -74,22 +59,18 @@ public class Member {
   public void setTel(String tel) {
     this.tel = tel;
   }
-<<<<<<< HEAD
   public String getAddress() {
     return address;
   }
   public void setAddress(String address) {
     this.address = address;
   }
-=======
->>>>>>> 6c4f183e47537657ddd2ba48dd4a1f0dc247d036
   public Date getRegisteredDate() {
     return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-<<<<<<< HEAD
   public int getLevel() {
     return level;
   }
@@ -116,18 +97,4 @@ public class Member {
   }
 
 
-=======
-  public String getNickName() {
-    return nickName;
-  }
-  public void setNickName(String nickName) {
-    this.nickName = nickName;
-  }
-  public Date getBirthDay() {
-    return birthDay;
-  }
-  public void setBirthDay(Date birthDay) {
-    this.birthDay = birthDay;
-  }
->>>>>>> 6c4f183e47537657ddd2ba48dd4a1f0dc247d036
 }
