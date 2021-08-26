@@ -16,22 +16,22 @@ public class SellerPrivacyHandler {
   public void add() {
     System.out.println("[판매자 등록]");
 
-    SellerPrivacy member = new SellerPrivacy();
+    SellerPrivacy sellerPrivacy = new SellerPrivacy();
 
-    member.setNo(Prompt.inputInt("번호? "));
-    member.setName(Prompt.inputString("이름? "));
-    member.setNickName(Prompt.inputString("닉네임? "));
-    member.setEmail(Prompt.inputString("이메일? "));
-    member.setBirthDay(Prompt.inputDate("생일? "));
-    member.setPassword(Prompt.inputString("암호? "));
-    member.setPhoto(Prompt.inputString("사진? "));
-    member.setTel(Prompt.inputString("전화? "));
-    member.setBusinessNo(Prompt.inputString("사업자번호? "));
-    member.setBusinessAddress(Prompt.inputString("사업장주소? "));
-    member.setBusinessTel(Prompt.inputString("사업장번호? "));
-    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+    sellerPrivacy.setNo(Prompt.inputInt("번호? "));
+    sellerPrivacy.setName(Prompt.inputString("이름? "));
+    sellerPrivacy.setNickName(Prompt.inputString("닉네임? "));
+    sellerPrivacy.setEmail(Prompt.inputString("이메일? "));
+    sellerPrivacy.setBirthDay(Prompt.inputDate("생일? "));
+    sellerPrivacy.setPassword(Prompt.inputString("암호? "));
+    sellerPrivacy.setPhoto(Prompt.inputString("사진? "));
+    sellerPrivacy.setTel(Prompt.inputString("전화? "));
+    sellerPrivacy.setBusinessNo(Prompt.inputString("사업자번호? "));
+    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소? "));
+    sellerPrivacy.setBusinessTel(Prompt.inputString("사업장번호? "));
+    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    memberList.add(member);
+    memberList.add(sellerPrivacy);
   }
 
   public void list() {

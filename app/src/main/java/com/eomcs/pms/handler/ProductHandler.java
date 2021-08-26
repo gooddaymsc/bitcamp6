@@ -23,20 +23,20 @@ public class ProductHandler {
   public void add() {
     System.out.println("[상품 등록]");
 
-    Product alcohol = new Product();
+    Product product = new Product();
 
-    alcohol.setNo(Prompt.inputInt("번호? "));
-    alcohol.setName(Prompt.inputString("상품명? "));
-    alcohol.setKind(Prompt.inputString("주종? "));
-    alcohol.setMade(Prompt.inputString("원산지? "));
-    alcohol.setGrapes(Prompt.inputString("품종? "));
-    alcohol.setAbv(Prompt.inputInt("알콜도수? "));
-    alcohol.setSweet(Prompt.inputInt("당도(1-5)"));
-    alcohol.setAcidic(Prompt.inputInt("산도(1-5)"));
-    alcohol.setBody(Prompt.inputInt("바디감(1-5)"));
-    alcohol.setPrice(Prompt.inputInt("가격?"));
+    product.setNo(Prompt.inputInt("번호? "));
+    product.setName(Prompt.inputString("상품명? "));
+    product.setKind(Prompt.inputString("주종? "));
+    product.setMade(Prompt.inputString("원산지? "));
+    product.setGrapes(Prompt.inputString("품종? "));
+    product.setAbv(Prompt.inputInt("알콜도수? "));
+    product.setSweet(Prompt.inputInt("당도(1-5)"));
+    product.setAcidic(Prompt.inputInt("산도(1-5)"));
+    product.setBody(Prompt.inputInt("바디감(1-5)"));
+    product.setPrice(Prompt.inputInt("가격?"));
 
-    alcoholList.add(alcohol);
+    alcoholList.add(product);
   }
 
   public void list() {

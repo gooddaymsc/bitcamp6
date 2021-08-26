@@ -15,17 +15,17 @@ public class BookingHandler {
   public void add() {
     System.out.println("[예약 등록]");
 
-    Booking book = new Booking();
+    Booking booking = new Booking();
 
-    book.setNo(Prompt.inputInt("번호? "));
-    book.setName(Prompt.inputString("예약명? "));
-    book.setKind(Prompt.inputString("종류? "));
-    book.setMadeIn(Prompt.inputString("원산지? "));
-    book.setPhoto(Prompt.inputString("사진? "));
-    book.setPrice(Prompt.inputString("가격? "));
-    book.setBook(Prompt.inputString("예약시간? "));
+    booking.setNo(Prompt.inputInt("번호? "));
+    booking.setName(Prompt.inputString("예약명? "));
+    booking.setKind(Prompt.inputString("종류? "));
+    booking.setMadeIn(Prompt.inputString("원산지? "));
+    booking.setPhoto(Prompt.inputString("사진? "));
+    booking.setPrice(Prompt.inputString("가격? "));
+    booking.setBook(Prompt.inputString("예약시간? "));
 
-    booktList.add(book);
+    booktList.add(booking);
   }
 
   public void list() {

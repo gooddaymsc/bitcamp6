@@ -3,15 +3,15 @@ package com.eomcs.pms.domain;
 //판매자
 public class SellerPrivacy extends Privacy {
 
-  private String businessNo;
+  private String businessNumber;
   private String businessAddress;
-  private String businessTel;
+  private String businessPlaceNumber;
 
   public String getBusinessNo() {
-    return businessNo;
+    return businessNumber;
   }
   public void setBusinessNo(String businessNo) {
-    this.businessNo = businessNo;
+    this.businessNumber = businessNo;
   }
   public String getBusinessAddress() {
     return businessAddress;
@@ -20,10 +20,10 @@ public class SellerPrivacy extends Privacy {
     this.businessAddress = businessAddress;
   }
   public String getBusinessTel() {
-    return businessTel;
+    return businessPlaceNumber;
   }
   public void setBusinessTel(String businessTel) {
-    this.businessTel = businessTel;
+    this.businessPlaceNumber = businessTel;
   }
 
 

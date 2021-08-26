@@ -16,19 +16,19 @@ public class PrivacyHandler {
   public void add() {
     System.out.println("[회원 등록]");
 
-    Privacy member = new Privacy();
+    Privacy privacy = new Privacy();
 
-    member.setNo(Prompt.inputInt("번호? "));
-    member.setName(Prompt.inputString("이름? "));
-    member.setNickName(Prompt.inputString("닉네임? "));
-    member.setEmail(Prompt.inputString("이메일? "));
-    member.setBirthDay(Prompt.inputDate("생일? "));
-    member.setPassword(Prompt.inputString("암호? "));
-    member.setPhoto(Prompt.inputString("사진? "));
-    member.setTel(Prompt.inputString("전화? "));
-    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+    privacy.setNo(Prompt.inputInt("번호? "));
+    privacy.setName(Prompt.inputString("이름? "));
+    privacy.setNickName(Prompt.inputString("닉네임? "));
+    privacy.setEmail(Prompt.inputString("이메일? "));
+    privacy.setBirthDay(Prompt.inputDate("생일? "));
+    privacy.setPassword(Prompt.inputString("암호? "));
+    privacy.setPhoto(Prompt.inputString("사진? "));
+    privacy.setTel(Prompt.inputString("전화? "));
+    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    memberList.add(member);
+    memberList.add(privacy);
   }
 
   public void list() {

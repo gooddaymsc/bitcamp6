@@ -5,12 +5,12 @@ import java.sql.Date;
 public class Privacy {
   private int no;
   private String name;
-  private String nickName;
+  private String nickname;
   private String email;
-  private Date birthDay;
+  private Date birthday;
   private String password;
   private String photo;
-  private String tel;
+  private String phoneNumber;
   private Date registeredDate;
   /* private String businessNo;
    * private String businessAddress;
@@ -48,10 +48,10 @@ public class Privacy {
     this.photo = photo;
   }
   public String getTel() {
-    return tel;
+    return phoneNumber;
   }
   public void setTel(String tel) {
-    this.tel = tel;
+    this.phoneNumber = tel;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -60,15 +60,15 @@ public class Privacy {
     this.registeredDate = registeredDate;
   }
   public String getNickName() {
-    return nickName;
+    return nickname;
   }
   public void setNickName(String nickName) {
-    this.nickName = nickName;
+    this.nickname = nickName;
   }
   public Date getBirthDay() {
-    return birthDay;
+    return birthday;
   }
   public void setBirthDay(Date birthDay) {
-    this.birthDay = birthDay;
+    this.birthday = birthDay;
   }
 }
