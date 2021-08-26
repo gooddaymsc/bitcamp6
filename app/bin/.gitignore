@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Created by https://www.gitignore.io/api/java,linux,macos,gradle,windows,eclipse,java-web,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=java,linux,macos,gradle,windows,eclipse,java-web,visualstudiocode
@@ -208,3 +209,7 @@ temp/
 Debug/
 Release/
 html-exam/
+=======
+/main/
+/test/
+>>>>>>> 1ff5254f38b9483afa6ce43074d3041f68a9be1e
