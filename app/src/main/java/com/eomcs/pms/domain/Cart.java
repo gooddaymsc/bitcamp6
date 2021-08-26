@@ -3,43 +3,43 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Cart {
-  private int no;
-  private String name;
-  private String kind;
-  private String madeIn;
-  private String photo;
+  private int cartNumber;
+  private String productName;
+  private String productType;
+  private String countryOrigin;
+  private String productPhoto;
   private String price;
-  private Date registeredDate;
-
-  public int getNo() {
-    return no;
+  private Date registrationDate;
+  
+  public int getCartNumber() {
+    return cartNumber;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setCartNumber(int cartNumber) {
+    this.cartNumber = cartNumber;
   }
-  public String getName() {
-    return name;
+  public String getProductName() {
+    return productName;
   }
-  public void setName(String name) {
-    this.name = name;
+  public void setProductName(String productName) {
+    this.productName = productName;
   }
-  public String getKind() {
-    return kind;
+  public String getProductType() {
+    return productType;
   }
-  public void setKind(String kind) {
-    this.kind = kind;
+  public void setProductType(String productType) {
+    this.productType = productType;
   }
-  public String getMadeIn() {
-    return madeIn;
+  public String getCountryOrigin() {
+    return countryOrigin;
   }
-  public void setMadeIn(String madeIn) {
-    this.madeIn = madeIn;
+  public void setCountryOrigin(String countryOrigin) {
+    this.countryOrigin = countryOrigin;
   }
-  public String getPhoto() {
-    return photo;
+  public String getProductPhoto() {
+    return productPhoto;
   }
-  public void setPhoto(String photo) {
-    this.photo = photo;
+  public void setProductPhoto(String productPhoto) {
+    this.productPhoto = productPhoto;
   }
   public String getPrice() {
     return price;
@@ -47,10 +47,12 @@ public class Cart {
   public void setPrice(String price) {
     this.price = price;
   }
-  public Date getRegisteredDate() {
-    return registeredDate;
+  public Date getRegistrationDate() {
+    return registrationDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+  public void setRegistrationDate(Date registrationDate) {
+    this.registrationDate = registrationDate;
   }
+
+
 }

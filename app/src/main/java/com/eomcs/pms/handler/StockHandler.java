@@ -6,6 +6,7 @@ import com.eomcs.util.Prompt;
 
 public class StockHandler {
   //재고번호
+  //종류
   //상품명
   //재고수량
   //원산지
@@ -22,11 +23,11 @@ public class StockHandler {
 
     Stock stock = new Stock();
 
-    stock.setNo(Prompt.inputInt("번호? "));
-    stock.setKind(Prompt.inputString("주종? "));
-    stock.setName(Prompt.inputString("상품명? "));
+    stock.setStockNumber(Prompt.inputInt("번호? "));
+    stock.setProductType(Prompt.inputString("주종? "));
+    stock.setProductName(Prompt.inputString("상품명? "));
     stock.setStock(Prompt.inputInt("재고수량? "));
-    stock.setMade(Prompt.inputString("원산지? "));
+    stock.setCountryOrigin(Prompt.inputString("원산지? "));
     stock.setPrice(Prompt.inputInt("가격?"));
 
     stockList.add(stock);
@@ -39,10 +40,10 @@ public class StockHandler {
 
     for (Stock stock : list) {
       System.out.printf("%d, %s, %s, %s, %d \n", 
-          stock.getNo(), 
-          stock.getKind(), 
-          stock.getName(), 
-          stock.getMade(),
+          stock.getStockNumber(), 
+          stock.getProductType(), 
+          stock.getProductName(), 
+          stock.getCountryOrigin(),
           stock.getPrice());
     }
   }
@@ -57,9 +58,9 @@ public class StockHandler {
       System.out.println("해당 번호의 재고가 없습니다.");
       return;
     }
-    System.out.printf("주종: %s\n", stock.getKind());
-    System.out.printf("상품이름: %s\n", stock.getName());
-    System.out.printf("원산지: %s\n", stock.getMade());
+    System.out.printf("주종: %s\n", stock.getProductType());
+    System.out.printf("상품이름: %s\n", stock.getProductName());
+    System.out.printf("원산지: %s\n", stock.getCountryOrigin());
     System.out.printf("가격: %d\n", stock.getPrice ());
   }
 
@@ -73,9 +74,9 @@ public class StockHandler {
       System. out.println("해당 번호의 재고가 없습니다.");
       return;
     }
-    String kind = Prompt.inputString("주종(" + stock.getKind() + ")? ");
-    String name = Prompt.inputString("상품이름(" + stock.getName()  + ")? ");
-    String made = Prompt.inputString("원산지(" + stock.getMade() + ")? ");
+    String kind = Prompt.inputString("주종(" + stock.getProductType() + ")? ");
+    String name = Prompt.inputString("상품이름(" + stock.getProductName()  + ")? ");
+    String made = Prompt.inputString("원산지(" + stock.getCountryOrigin() + ")? ");
     int price = Prompt.inputInt("가격(" + stock.getPrice() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -84,9 +85,9 @@ public class StockHandler {
       return;
     }
 
-    stock.setKind(kind);
-    stock.setName(name);
-    stock.setMade(made);
+    stock.setProductType(kind);
+    stock.setProductName(name);
+    stock.setCountryOrigin(made);
     stock.setPrice(price);
 
     System.out.println("재고정보를 변경하였습니다.");
@@ -117,7 +118,7 @@ public class StockHandler {
   private Stock findByNo(int no) {
     Stock[] arr = stockList.toArray(new Stock[0]);
     for (Stock stock : arr) {
-      if (stock.getNo() == no) {
+      if (stock.getStockNumber() == no) {
         return stock;
       }
     }
@@ -127,7 +128,7 @@ public class StockHandler {
   public boolean exist(String name) {
     Stock[] arr = stockList.toArray(new Stock[0]);
     for (Stock stock : arr) {
-      if (stock.getName().equals(name)) {
+      if (stock.getProductName().equals(name)) {
         return true;
       }
     }

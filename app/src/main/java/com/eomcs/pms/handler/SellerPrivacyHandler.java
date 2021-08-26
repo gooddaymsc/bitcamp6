@@ -18,14 +18,14 @@ public class SellerPrivacyHandler {
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
 
-    sellerPrivacy.setNo(Prompt.inputInt("번호? "));
+    sellerPrivacy.setNumber(Prompt.inputInt("번호? "));
     sellerPrivacy.setName(Prompt.inputString("이름? "));
-    sellerPrivacy.setNickName(Prompt.inputString("닉네임? "));
+    sellerPrivacy.setNickname(Prompt.inputString("닉네임? "));
     sellerPrivacy.setEmail(Prompt.inputString("이메일? "));
-    sellerPrivacy.setBirthDay(Prompt.inputDate("생일? "));
+    sellerPrivacy.setBirthday(Prompt.inputDate("생일? "));
     sellerPrivacy.setPassword(Prompt.inputString("암호? "));
     sellerPrivacy.setPhoto(Prompt.inputString("사진? "));
-    sellerPrivacy.setTel(Prompt.inputString("전화? "));
+    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화? "));
     sellerPrivacy.setBusinessNo(Prompt.inputString("사업자번호? "));
     sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소? "));
     sellerPrivacy.setBusinessTel(Prompt.inputString("사업장번호? "));
@@ -41,10 +41,10 @@ public class SellerPrivacyHandler {
 
     for (SellerPrivacy member : list) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s\n", 
-          member.getNo(), 
+          member.getNumber(), 
           member.getName(), 
           member.getEmail(), 
-          member.getTel(), 
+          member.getPhoneNumber(), 
           member.getBusinessNo(),
           member.getBusinessAddress(),
           member.getBusinessTel(),
@@ -64,11 +64,11 @@ public class SellerPrivacyHandler {
     }
 
     System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("닉네임: %s\n", member.getNickName());
+    System.out.printf("닉네임: %s\n", member.getNickname());
     System.out.printf("이메일: %s\n", member.getEmail());
-    System.out.printf("생일: %s\n", member.getBirthDay());
+    System.out.printf("생일: %s\n", member.getBirthday());
     System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getTel());
+    System.out.printf("전화: %s\n", member.getPhoneNumber());
     System.out.printf("사업자번호: %s\n", member.getBusinessNo());
     System.out.printf("사업장주소: %s\n", member.getBusinessAddress());
     System.out.printf("사업장번호: %s\n", member.getBusinessTel());
@@ -87,12 +87,12 @@ public class SellerPrivacyHandler {
     }
 
     String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
-    String nickName = Prompt.inputString("닉네임(" + member.getNickName()  + ")? ");
+    String nickName = Prompt.inputString("닉네임(" + member.getNickname()  + ")? ");
     String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
-    Date birthDay = Prompt.inputDate("생일(" + member.getBirthDay() + ")? ");
+    Date birthDay = Prompt.inputDate("생일(" + member.getBirthday() + ")? ");
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
-    String tel = Prompt.inputString("전화(" + member.getTel() + ")? ");
+    String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
     String bussinessNo = Prompt.inputString("사업자번호(" + member.getBusinessNo() + ")? ");
     String bussinessAddress = Prompt.inputString("사업장주소(" + member.getBusinessAddress() + ")? ");
     String bussinessTel = Prompt.inputString("사업장번호(" + member.getBusinessTel() + ")? ");
@@ -103,12 +103,12 @@ public class SellerPrivacyHandler {
     }
 
     member.setName(name);
-    member.setNickName(nickName);
+    member.setNickname(nickName);
     member.setEmail(email);
-    member.setBirthDay(birthDay);
+    member.setBirthday(birthDay);
     member.setPassword(password);
     member.setPhoto(photo);
-    member.setTel(tel);
+    member.setPhoneNumber(tel);
     member.setBusinessNo(bussinessNo);
     member.setBusinessAddress(bussinessAddress);
     member.setBusinessTel(bussinessTel);
@@ -141,7 +141,7 @@ public class SellerPrivacyHandler {
   private SellerPrivacy findByNo(int no) {
     SellerPrivacy[] arr = memberList.toArray(new SellerPrivacy[0]);
     for (SellerPrivacy member : arr) {
-      if (member.getNo() == no) {
+      if (member.getNumber() == no) {
         return member;
       }
     }

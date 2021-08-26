@@ -3,7 +3,7 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Privacy {
-  private int no;
+  private int number;
   private String name;
   private String nickname;
   private String email;
@@ -16,12 +16,11 @@ public class Privacy {
    * private String businessAddress;
    * private String businessTel;
    */
-
-  public int getNo() {
-    return no;
+  public int getNumber() {
+    return number;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setNumber(int number) {
+    this.number = number;
   }
   public String getName() {
     return name;
@@ -29,11 +28,23 @@ public class Privacy {
   public void setName(String name) {
     this.name = name;
   }
+  public String getNickname() {
+    return nickname;
+  }
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
   public String getEmail() {
     return email;
   }
   public void setEmail(String email) {
     this.email = email;
+  }
+  public Date getBirthday() {
+    return birthday;
+  }
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
   }
   public String getPassword() {
     return password;
@@ -47,11 +58,11 @@ public class Privacy {
   public void setPhoto(String photo) {
     this.photo = photo;
   }
-  public String getTel() {
+  public String getPhoneNumber() {
     return phoneNumber;
   }
-  public void setTel(String tel) {
-    this.phoneNumber = tel;
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -59,16 +70,6 @@ public class Privacy {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-  public String getNickName() {
-    return nickname;
-  }
-  public void setNickName(String nickName) {
-    this.nickname = nickName;
-  }
-  public Date getBirthDay() {
-    return birthday;
-  }
-  public void setBirthDay(Date birthDay) {
-    this.birthday = birthDay;
-  }
+
+
 }

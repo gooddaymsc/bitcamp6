@@ -41,7 +41,7 @@ public class App {
 
   PrivacyHandler privacyHandler = new PrivacyHandler(privacyList);
   SellerPrivacyHandler sellerPrivacyHandler = new SellerPrivacyHandler(sellerPrivacyList);
-  BoardHandler boardHandler = new BoardHandler(boardList);
+  BoardHandler boardHandler = new BoardHandler(boardList); 
   BookingHandler bookingHandler = new BookingHandler(bookingList);
   CartHandler cartHandler = new CartHandler(cartList);
   ProductHandler productHandler = new ProductHandler(ProductList);

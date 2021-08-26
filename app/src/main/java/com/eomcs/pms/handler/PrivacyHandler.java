@@ -18,14 +18,14 @@ public class PrivacyHandler {
 
     Privacy privacy = new Privacy();
 
-    privacy.setNo(Prompt.inputInt("번호? "));
+    privacy.setNumber(Prompt.inputInt("번호? "));
     privacy.setName(Prompt.inputString("이름? "));
-    privacy.setNickName(Prompt.inputString("닉네임? "));
+    privacy.setNickname(Prompt.inputString("닉네임? "));
     privacy.setEmail(Prompt.inputString("이메일? "));
-    privacy.setBirthDay(Prompt.inputDate("생일? "));
+    privacy.setBirthday(Prompt.inputDate("생일? "));
     privacy.setPassword(Prompt.inputString("암호? "));
     privacy.setPhoto(Prompt.inputString("사진? "));
-    privacy.setTel(Prompt.inputString("전화? "));
+    privacy.setPhoneNumber(Prompt.inputString("전화? "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(privacy);
@@ -38,10 +38,10 @@ public class PrivacyHandler {
 
     for (Privacy member : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
-          member.getNo(), 
+          member.getNumber(), 
           member.getName(), 
           member.getEmail(), 
-          member.getTel(), 
+          member.getPhoneNumber(), 
           member.getRegisteredDate());
     }
   }
@@ -58,11 +58,11 @@ public class PrivacyHandler {
     }
 
     System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("닉네임: %s\n", member.getNickName());
+    System.out.printf("닉네임: %s\n", member.getNickname());
     System.out.printf("이메일: %s\n", member.getEmail());
-    System.out.printf("생일: %s\n", member.getBirthDay());
+    System.out.printf("생일: %s\n", member.getBirthday());
     System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getTel());
+    System.out.printf("전화: %s\n", member.getPhoneNumber());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
   }
 
@@ -78,12 +78,12 @@ public class PrivacyHandler {
     }
 
     String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
-    String nickName = Prompt.inputString("닉네임(" + member.getNickName()  + ")? ");
+    String nickName = Prompt.inputString("닉네임(" + member.getNickname()  + ")? ");
     String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
-    Date birthDay = Prompt.inputDate("생일(" + member.getBirthDay() + ")? ");
+    Date birthDay = Prompt.inputDate("생일(" + member.getBirthday() + ")? ");
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
-    String tel = Prompt.inputString("전화(" + member.getTel() + ")? ");
+    String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -92,12 +92,12 @@ public class PrivacyHandler {
     }
 
     member.setName(name);
-    member.setNickName(nickName);
+    member.setNickname(nickName);
     member.setEmail(email);
-    member.setBirthDay(birthDay);
+    member.setBirthday(birthDay);
     member.setPassword(password);
     member.setPhoto(photo);
-    member.setTel(tel);
+    member.setPhoneNumber(tel);
 
     System.out.println("회원을 변경하였습니다.");
   }
@@ -127,7 +127,7 @@ public class PrivacyHandler {
   private Privacy findByNo(int no) {
     Privacy[] arr = memberList.toArray(new Privacy[0]);
     for (Privacy member : arr) {
-      if (member.getNo() == no) {
+      if (member.getNumber() == no) {
         return member;
       }
     }

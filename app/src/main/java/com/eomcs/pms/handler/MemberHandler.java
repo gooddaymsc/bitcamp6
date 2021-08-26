@@ -18,13 +18,13 @@ public class MemberHandler {
 
     Member member = new Member();
 
-    member.setNo(Prompt.inputInt("번호? "));
+    member.setNumber(Prompt.inputInt("번호? "));
     member.setName(Prompt.inputString("이름? "));
-    member.setNickName(Prompt.inputString("닉네임? "));
+    member.setNickname(Prompt.inputString("닉네임? "));
     member.setEmail(Prompt.inputString("이메일? "));
     member.setPassword(Prompt.inputString("암호? "));
     member.setPhoto(Prompt.inputString("사진? "));
-    member.setTel(Prompt.inputString("전화? "));
+    member.setPhoneNumber(Prompt.inputString("전화? "));
     member.setAddress(Prompt.inputString("주소? "));
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
     member.setBuyerSeller(Prompt.inputString("구매자/판매자? "));
@@ -39,7 +39,7 @@ public class MemberHandler {
 
     for (Member member : list) {
       System.out.printf("%d, %s, %d, %s, %s\n", 
-          member.getNo(),
+          member.getNumber(),
           member.getName(), 
           member.getLevel(), 
           member.getBuyerSeller(), 
@@ -60,10 +60,10 @@ public class MemberHandler {
     }
 
     System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("닉네임: %s\n", member.getNickName());
+    System.out.printf("닉네임: %s\n", member.getNickname());
     System.out.printf("이메일: %s\n", member.getEmail());
     System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getTel());
+    System.out.printf("전화: %s\n", member.getPhoneNumber());
     System.out.printf("주소: %s\n", member.getAddress());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
     System.out.printf("구매자/판매자: %s\n", member.getBuyerSeller());
@@ -84,7 +84,7 @@ public class MemberHandler {
     String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
-    String tel = Prompt.inputString("전화(" + member.getTel() + ")? ");
+    String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
     String address = Prompt.inputString("주소(" + member.getAddress() + ")? ");
 
 
@@ -98,7 +98,7 @@ public class MemberHandler {
     member.setEmail(email);
     member.setPassword(password);
     member.setPhoto(photo);
-    member.setTel(tel);
+    member.setPhoneNumber(tel);
     member.setAddress(address);
 
     System.out.println("회원을 변경하였습니다.");
@@ -129,7 +129,7 @@ public class MemberHandler {
   private Member findByNo(int no) {
     Member[] arr = memberList.toArray(new Member[0]);
     for (Member member : arr) {
-      if (member.getNo() == no) {
+      if (member.getNumber() == no) {
         return member;
       }
     }
