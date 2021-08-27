@@ -3,7 +3,7 @@
  *
  * This generated file contains a sample Java application project to get you started.
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
- * User Manual available at https://docs.gradle.org/7.1.1/userguide/building_java_projects.html
+ * User Manual available at https://docs.gradle.org/7.1/userguide/building_java_projects.html
  */
 
 plugins {
@@ -11,12 +11,6 @@ plugins {
     id 'application'
     id 'java'
     id 'eclipse'
-}
-
-eclipse {
-    project {
-        name = 'AlcoholFinder'
-    }
 }
 
 repositories {
@@ -35,4 +29,10 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass = 'com.App'
+}
+
+eclipse {
+    project {
+        name = "AlchoholFinder"
+    }
 }

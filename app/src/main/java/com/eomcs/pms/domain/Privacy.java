@@ -11,7 +11,10 @@ public class Privacy {
   private String password;
   private String photo;
   private String phoneNumber;
+  private String address;
   private Date registeredDate;
+  private int level;
+  private String buyerSeller;
   /* private String businessNo;
    * private String businessAddress;
    * private String businessTel;
@@ -64,12 +67,31 @@ public class Privacy {
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+  public String getAddress() {
+    return address;
+  }
+  public void setAddress(String address) {
+    this.address = address;
+  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+  public int getLevel() {
+    return level;
+  }
+  public void setLevel(int level) {
+    this.level = level;
+  }
+  public String getBuyerSeller() {
+    return buyerSeller;
+  }
+  public void setBuyerSeller(String buyerSeller) {
+    this.buyerSeller = buyerSeller;
+  }
+
 
 
 }

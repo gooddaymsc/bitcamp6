@@ -10,7 +10,6 @@ public class Cart {
   private String productPhoto;
   private String price;
   private Date registeredDate;
-
   public int getCartNumber() {
     return cartNumber;
   }
