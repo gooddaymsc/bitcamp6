@@ -12,41 +12,35 @@ public class Booking {
   private String reservation;
   private Date registeredDate;
 
-  public Date getRegisteredDate() {
-    return registeredDate;
-  }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
-  }
-  public int getNo() {
+  public int getBookingNumber() {
     return bookingNumber;
   }
-  public void setNo(int no) {
-    this.bookingNumber = no;
+  public void setBookingNumber(int bookingNumber) {
+    this.bookingNumber = bookingNumber;
   }
-  public String getName() {
+  public String getProductName() {
     return productName;
   }
-  public void setName(String name) {
-    this.productName = name;
+  public void setProductName(String productName) {
+    this.productName = productName;
   }
-  public String getKind() {
+  public String getProductType() {
     return productType;
   }
-  public void setKind(String kind) {
-    this.productType = kind;
+  public void setProductType(String productType) {
+    this.productType = productType;
   }
-  public String getMadeIn() {
+  public String getCountryOrigin() {
     return countryOrigin;
   }
-  public void setMadeIn(String madeIn) {
-    this.countryOrigin = madeIn;
+  public void setCountryOrigin(String countryOrigin) {
+    this.countryOrigin = countryOrigin;
   }
-  public String getPhoto() {
+  public String getProductPhoto() {
     return productPhoto;
   }
-  public void setPhoto(String photo) {
-    this.productPhoto = photo;
+  public void setProductPhoto(String productPhoto) {
+    this.productPhoto = productPhoto;
   }
   public String getPrice() {
     return price;
@@ -54,11 +48,20 @@ public class Booking {
   public void setPrice(String price) {
     this.price = price;
   }
-  public String getBook() {
+  public String getReservation() {
     return reservation;
   }
-  public void setBook(String book) {
-    this.reservation = book;
+  public void setReservation(String reservation) {
+    this.reservation = reservation;
   }
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
+
+
+
 
 }

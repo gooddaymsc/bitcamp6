@@ -10,36 +10,35 @@ public class Cart {
   private String productPhoto;
   private String price;
   private Date registeredDate;
-
-  public int getNo() {
+  public int getCartNumber() {
     return cartNumber;
   }
-  public void setNo(int no) {
-    this.cartNumber = no;
+  public void setCartNumber(int cartNumber) {
+    this.cartNumber = cartNumber;
   }
-  public String getName() {
+  public String getProductName() {
     return productName;
   }
-  public void setName(String name) {
-    this.productName = name;
+  public void setProductName(String productName) {
+    this.productName = productName;
   }
-  public String getKind() {
+  public String getProductType() {
     return productType;
   }
-  public void setKind(String kind) {
-    this.productType = kind;
+  public void setProductType(String productType) {
+    this.productType = productType;
   }
-  public String getMadeIn() {
+  public String getCountryOrigin() {
     return countryOrigin;
   }
-  public void setMadeIn(String madeIn) {
-    this.countryOrigin = madeIn;
+  public void setCountryOrigin(String countryOrigin) {
+    this.countryOrigin = countryOrigin;
   }
-  public String getPhoto() {
+  public String getProductPhoto() {
     return productPhoto;
   }
-  public void setPhoto(String photo) {
-    this.productPhoto = photo;
+  public void setProductPhoto(String productPhoto) {
+    this.productPhoto = productPhoto;
   }
   public String getPrice() {
     return price;
@@ -47,10 +46,11 @@ public class Cart {
   public void setPrice(String price) {
     this.price = price;
   }
-  public Date getRegisteredDate() {
+  public Date getRegistrationDate() {
     return registeredDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
+  public void setRegistrationDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
 }

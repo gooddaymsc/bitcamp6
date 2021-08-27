@@ -25,15 +25,15 @@ public class ProductHandler {
 
     Product product = new Product();
 
-    product.setNo(Prompt.inputInt("번호? "));
-    product.setName(Prompt.inputString("상품명? "));
-    product.setKind(Prompt.inputString("주종? "));
-    product.setMade(Prompt.inputString("원산지? "));
-    product.setGrapes(Prompt.inputString("품종? "));
-    product.setAbv(Prompt.inputInt("알콜도수? "));
-    product.setSweet(Prompt.inputInt("당도(1-5)"));
-    product.setAcidic(Prompt.inputInt("산도(1-5)"));
-    product.setBody(Prompt.inputInt("바디감(1-5)"));
+    product.setProductNumber(Prompt.inputInt("번호? "));
+    product.setProductName(Prompt.inputString("상품명? "));
+    product.setProductType(Prompt.inputString("주종? "));
+    product.setCountryOrigin(Prompt.inputString("원산지? "));
+    product.setVariety(Prompt.inputString("품종? "));
+    product.setAlcoholLevel(Prompt.inputInt("알콜도수? "));
+    product.setSugerLevel(Prompt.inputInt("당도(1-5)"));
+    product.setAcidity(Prompt.inputInt("산도(1-5)"));
+    product.setWeight(Prompt.inputInt("바디감(1-5)"));
     product.setPrice(Prompt.inputInt("가격?"));
 
     alcoholList.add(product);
@@ -46,15 +46,15 @@ public class ProductHandler {
 
     for (Product alcohol : list) {
       System.out.printf("%d, %s, %s, %s, %s, %d, %d, %d, %d, %d \n", 
-          alcohol.getNo(), 
-          alcohol.getName(), 
-          alcohol.getKind(), 
-          alcohol.getMade(),
-          alcohol.getGrapes(),
-          alcohol.getAbv(),
-          alcohol.getSweet(),
-          alcohol.getAcidic(),
-          alcohol.getBody(),
+          alcohol.getProductNumber(), 
+          alcohol.getProductName(), 
+          alcohol.getProductType(), 
+          alcohol.getCountryOrigin(),
+          alcohol.getVariety(),
+          alcohol.getAlcoholLevel(),
+          alcohol.getSugerLevel(),
+          alcohol.getAcidity(),
+          alcohol.getWeight(),
           alcohol.getPrice());
     }
   }
@@ -70,14 +70,14 @@ public class ProductHandler {
       return;
     }
 
-    System.out.printf("상품이름: %s\n", alcohol.getName());
-    System.out.printf("주종: %s\n", alcohol.getKind());
-    System.out.printf("원산지: %s\n", alcohol.getMade());
-    System.out.printf("품종: %s\n", alcohol.getGrapes());
-    System.out.printf("알콜도수: %d\n", alcohol.getAbv());
-    System.out.printf("당도: %d\n", alcohol.getSweet());
-    System.out.printf("산도: %d\n", alcohol.getAcidic());
-    System.out.printf("바디감: %d\n", alcohol.getBody());
+    System.out.printf("상품이름: %s\n", alcohol.getProductName());
+    System.out.printf("주종: %s\n", alcohol.getProductType());
+    System.out.printf("원산지: %s\n", alcohol.getCountryOrigin());
+    System.out.printf("품종: %s\n", alcohol.getVariety());
+    System.out.printf("알콜도수: %d\n", alcohol.getAlcoholLevel());
+    System.out.printf("당도: %d\n", alcohol.getSugerLevel());
+    System.out.printf("산도: %d\n", alcohol.getAcidity());
+    System.out.printf("바디감: %d\n", alcohol.getWeight());
     System.out.printf("가격: %d\n", alcohol.getPrice ());
   }
 
@@ -92,14 +92,14 @@ public class ProductHandler {
       return;
     }
 
-    String name = Prompt.inputString("상품이름(" + alcohol.getName()  + ")? ");
-    String kind = Prompt.inputString("주종(" + alcohol.getKind() + ")? ");
-    String made = Prompt.inputString("원산지(" + alcohol.getMade() + ")? ");
-    String grapes = Prompt.inputString("품종(" + alcohol.getGrapes() + ")? ");
-    int abv = Prompt.inputInt("알콜도수(" + alcohol.getAbv() + ")? ");
-    int sweet = Prompt.inputInt("당도(" + alcohol.getSweet() + ")? ");
-    int acidic = Prompt.inputInt("산도(" + alcohol.getAcidic() + ")? ");
-    int body = Prompt.inputInt("바디감(" + alcohol.getBody() + ")? ");
+    String name = Prompt.inputString("상품이름(" + alcohol.getProductName()  + ")? ");
+    String kind = Prompt.inputString("주종(" + alcohol.getProductType() + ")? ");
+    String made = Prompt.inputString("원산지(" + alcohol.getCountryOrigin() + ")? ");
+    String grapes = Prompt.inputString("품종(" + alcohol.getVariety() + ")? ");
+    int abv = Prompt.inputInt("알콜도수(" + alcohol.getAlcoholLevel() + ")? ");
+    int sweet = Prompt.inputInt("당도(" + alcohol.getSugerLevel() + ")? ");
+    int acidic = Prompt.inputInt("산도(" + alcohol.getAcidity() + ")? ");
+    int body = Prompt.inputInt("바디감(" + alcohol.getWeight() + ")? ");
     int price = Prompt.inputInt("가격(" + alcohol.getPrice() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -108,14 +108,14 @@ public class ProductHandler {
       return;
     }
 
-    alcohol.setName(name);
-    alcohol.setKind(kind);
-    alcohol.setMade(made);
-    alcohol.setGrapes(grapes);
-    alcohol.setAbv(abv);
-    alcohol.setSweet(sweet);
-    alcohol.setAcidic(acidic);
-    alcohol.setBody(body);
+    alcohol.setProductName(name);
+    alcohol.setProductType(kind);
+    alcohol.setCountryOrigin(made);
+    alcohol.setVariety(grapes);
+    alcohol.setAlcoholLevel(abv);
+    alcohol.setSugerLevel(sweet);
+    alcohol.setAcidity(acidic);
+    alcohol.setWeight(body);
     alcohol.setPrice(price);
 
     System.out.println("상품정보를 변경하였습니다.");
@@ -146,7 +146,7 @@ public class ProductHandler {
   private Product findByNo(int no) {
     Product[] arr = alcoholList.toArray(new Product[0]);
     for (Product alcohol : arr) {
-      if (alcohol.getNo() == no) {
+      if (alcohol.getProductNumber() == no) {
         return alcohol;
       }
     }
@@ -156,7 +156,7 @@ public class ProductHandler {
   public boolean exist(String name) {
     Product[] arr = alcoholList.toArray(new Product[0]);
     for (Product Alcohol : arr) {
-      if (Alcohol.getName().equals(name)) {
+      if (Alcohol.getProductName().equals(name)) {
         return true;
       }
     }

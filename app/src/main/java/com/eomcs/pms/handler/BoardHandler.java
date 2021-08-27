@@ -18,11 +18,11 @@ public class BoardHandler {
 
     Board board = new Board();
 
-    board.setNo(Prompt.inputInt("번호? "));
+    board.setNumber(Prompt.inputInt("번호? "));
     board.setTitle(Prompt.inputString("제목? "));
     board.setContent(Prompt.inputString("내용? "));
     board.setWriter(Prompt.inputString("작성자? "));
-    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    board.setRegistrationDate(new Date(System.currentTimeMillis()));
     board.setTag(Prompt.inputString("태그? "));
 
     boardList.add(board);
@@ -37,13 +37,13 @@ public class BoardHandler {
 
     for (Board board : boards) {
       System.out.printf("%d, %s, %s, %s, %d, %s, %d\n", 
-          board.getNo(), 
+          board.getNumber(), 
           board.getTitle(), 
           board.getWriter(),
-          board.getRegisteredDate(),
-          board.getViewCount(), 
+          board.getRegistrationDate(),
+          board.getViews(), 
           board.getTag(), 
-          board.getLikeCount());
+          board.getLikes());
     }
   }
 
@@ -61,12 +61,12 @@ public class BoardHandler {
     System.out.printf("제목: %s\n", board.getTitle());
     System.out.printf("내용: %s\n", board.getContent());
     System.out.printf("작성자: %s\n", board.getWriter());
-    System.out.printf("등록일: %s\n", board.getRegisteredDate());
+    System.out.printf("등록일: %s\n", board.getRegistrationDate());
 
-    board.setViewCount(board.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", board.getViewCount());
-    board.setLikeCount(board.getLikeCount() + 1);
-    System.out.printf("좋아요: %d\n", board.getLikeCount());
+    board.setViews(board.getViews() + 1);
+    System.out.printf("조회수: %d\n", board.getViews());
+    board.setLikes(board.getLikes() + 1);
+    System.out.printf("좋아요: %d\n", board.getLikes());
     System.out.printf("태그: %s\n", board.getTag());
 
   }
@@ -124,7 +124,7 @@ public class BoardHandler {
 
     Board[] arr = boardList.toArray(new Board[0]);
     for (Board board : arr) {
-      if (board.getNo() == no) {
+      if (board.getNumber() == no) {
         return board;
       }
     }

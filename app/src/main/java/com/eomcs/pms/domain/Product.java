@@ -9,70 +9,70 @@ public class Product {
   //알콜도수
   //테이스팅 노트 : 당도, 산도, 바디감
   //가격
-  private int no;
-  private String name;
-  private String kind;
-  private String made;
-  private String grapes;
-  private int abv;
-  private int sweet;
-  private int acidic;
-  private int body;
+  private int productNumber;
+  private String productName;
+  private String productType;
+  private String countryOrigin;
+  private String variety;
+  private int alcoholLevel;
+  private int sugerLevel;
+  private int acidity;
+  private int weight;
   private int price;
 
-  public int getNo() {
-    return no;
+  public int getProductNumber() {
+    return productNumber;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setProductNumber(int productNumber) {
+    this.productNumber = productNumber;
   }
-  public String getName() {
-    return name;
+  public String getProductName() {
+    return productName;
   }
-  public void setName(String name) {
-    this.name = name;
+  public void setProductName(String productName) {
+    this.productName = productName;
   }
-  public String getKind() {
-    return kind;
+  public String getProductType() {
+    return productType;
   }
-  public void setKind(String kind) {
-    this.kind = kind;
+  public void setProductType(String productType) {
+    this.productType = productType;
   }
-  public String getMade() {
-    return made;
+  public String getCountryOrigin() {
+    return countryOrigin;
   }
-  public void setMade(String made) {
-    this.made = made;
+  public void setCountryOrigin(String countryOrigin) {
+    this.countryOrigin = countryOrigin;
   }
-  public String getGrapes() {
-    return grapes;
+  public String getVariety() {
+    return variety;
   }
-  public void setGrapes(String grapes) {
-    this.grapes = grapes;
+  public void setVariety(String variety) {
+    this.variety = variety;
   }
-  public int getAbv() {
-    return abv;
+  public int getAlcoholLevel() {
+    return alcoholLevel;
   }
-  public void setAbv(int abv) {
-    this.abv = abv;
+  public void setAlcoholLevel(int alcoholLevel) {
+    this.alcoholLevel = alcoholLevel;
   }
-  public int getSweet() {
-    return sweet;
+  public int getSugerLevel() {
+    return sugerLevel;
   }
-  public void setSweet(int sweet) {
-    this.sweet = sweet;
+  public void setSugerLevel(int sugerLevel) {
+    this.sugerLevel = sugerLevel;
   }
-  public int getAcidic() {
-    return acidic;
+  public int getAcidity() {
+    return acidity;
   }
-  public void setAcidic(int acidic) {
-    this.acidic = acidic;
+  public void setAcidity(int acidity) {
+    this.acidity = acidity;
   }
-  public int getBody() {
-    return body;
+  public int getWeight() {
+    return weight;
   }
-  public void setBody(int body) {
-    this.body = body;
+  public void setWeight(int weight) {
+    this.weight = weight;
   }
   public int getPrice() {
     return price;
@@ -80,5 +80,7 @@ public class Product {
   public void setPrice(int price) {
     this.price = price;
   }
+
+
 
 }

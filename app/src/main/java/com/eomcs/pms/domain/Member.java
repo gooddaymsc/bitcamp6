@@ -3,25 +3,23 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Member {
-  private int no;
+  private int number;
   private String name;
-  private String nickName;
+  private String nickname;
   private String email;
   private String password;
   private String photo;
-  private String tel;
+  private String phoneNumber;
   private String address;
   private Date registeredDate;
   private int level;
   private String buyerSeller;
-  private int cNo;
-  private int cTel;
 
-  public int getNo() {
-    return no;
+  public int getNumber() {
+    return number;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setNumber(int number) {
+    this.number = number;
   }
   public String getName() {
     return name;
@@ -29,11 +27,11 @@ public class Member {
   public void setName(String name) {
     this.name = name;
   }
-  public String getNickName() {
-    return nickName;
+  public String getNickname() {
+    return nickname;
   }
-  public void setNickName(String nickName) {
-    this.nickName = nickName;
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
   public String getEmail() {
     return email;
@@ -53,11 +51,11 @@ public class Member {
   public void setPhoto(String photo) {
     this.photo = photo;
   }
-  public String getTel() {
-    return tel;
+  public String getPhoneNumber() {
+    return phoneNumber;
   }
-  public void setTel(String tel) {
-    this.tel = tel;
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
   public String getAddress() {
     return address;
@@ -83,18 +81,7 @@ public class Member {
   public void setBuyerSeller(String buyerSeller) {
     this.buyerSeller = buyerSeller;
   }
-  public int getcNo() {
-    return cNo;
-  }
-  public void setcNo(int cNo) {
-    this.cNo = cNo;
-  }
-  public int getcTel() {
-    return cTel;
-  }
-  public void setcTel(int cTel) {
-    this.cTel = cTel;
-  }
+
 
 
 }

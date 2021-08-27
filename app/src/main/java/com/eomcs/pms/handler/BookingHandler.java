@@ -18,14 +18,15 @@ public class BookingHandler {
 
     Booking booking = new Booking();
 
-    booking.setNo(Prompt.inputInt("번호? "));
-    booking.setName(Prompt.inputString("예약명? "));
-    booking.setKind(Prompt.inputString("종류? "));
-    booking.setMadeIn(Prompt.inputString("원산지? "));
-    booking.setPhoto(Prompt.inputString("사진? "));
+    booking.setBookingNumber(Prompt.inputInt("번호? "));
+    booking.setProductName(Prompt.inputString("예약명? "));
+    booking.setProductType(Prompt.inputString("종류? "));
+    booking.setCountryOrigin(Prompt.inputString("원산지? "));
+    booking.setProductPhoto(Prompt.inputString("사진? "));
     booking.setPrice(Prompt.inputString("가격? "));
-    booking.setBook(Prompt.inputString("예약시간? "));
+    booking.setReservation(Prompt.inputString("예약시간? "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
+
 
     booktList.add(booking);
   }
@@ -37,13 +38,13 @@ public class BookingHandler {
 
     for (Booking book : list) {
       System.out.printf("%d, %s, %s, %s, %s, %s, %s\n", 
-          book.getNo(), 
-          book.getName(), 
-          book.getKind(), 
-          book.getMadeIn(), 
-          book.getPhoto(), 
+          book.getBookingNumber(), 
+          book.getProductName(), 
+          book.getProductType(), 
+          book.getCountryOrigin(), 
+          book.getProductPhoto(), 
           book.getPrice(), 
-          book.getBook());
+          book.getReservation());
     }
   }
 
@@ -58,12 +59,12 @@ public class BookingHandler {
       return;
     }
 
-    System.out.printf("예약명: %s\n", Book.getName());
-    System.out.printf("종류: %s\n", Book.getKind());
-    System.out.printf("원산지: %s\n", Book.getMadeIn());
-    System.out.printf("사진: %s\n", Book.getPhoto());
+    System.out.printf("예약명: %s\n", Book.getProductName());
+    System.out.printf("종류: %s\n", Book.getProductType());
+    System.out.printf("원산지: %s\n", Book.getCountryOrigin());
+    System.out.printf("사진: %s\n", Book.getProductPhoto());
     System.out.printf("가격: %s\n", Book.getPrice());
-    System.out.printf("예약시간: %s\n", Book.getBook());
+    System.out.printf("예약시간: %s\n", Book.getReservation());
   }
 
   public void update() {
@@ -77,12 +78,12 @@ public class BookingHandler {
       return;
     }
 
-    String name = Prompt.inputString("예약명(" + Book.getName()  + ")? ");
-    String kind = Prompt.inputString("종류(" + Book.getKind() + ")? ");
-    String madeIn = Prompt.inputString("원산지(" + Book.getMadeIn() + ")? ");
-    String photo = Prompt.inputString("사진(" + Book.getPhoto() + ")? ");
+    String name = Prompt.inputString("예약명(" + Book.getProductName()  + ")? ");
+    String kind = Prompt.inputString("종류(" + Book.getProductType() + ")? ");
+    String madeIn = Prompt.inputString("원산지(" + Book.getCountryOrigin() + ")? ");
+    String photo = Prompt.inputString("사진(" + Book.getProductPhoto() + ")? ");
     String price = Prompt.inputString("가격(" + Book.getPrice() + ")? ");
-    String book = Prompt.inputString("예약시간(" + Book.getBook() + ")? ");
+    String book = Prompt.inputString("예약시간(" + Book.getReservation() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -90,12 +91,12 @@ public class BookingHandler {
       return;
     }
 
-    Book.setName(name);
-    Book.setKind(kind);
-    Book.setMadeIn(madeIn);
-    Book.setPhoto(photo);
+    Book.setProductName(name);
+    Book.setProductType(kind);
+    Book.setCountryOrigin(madeIn);
+    Book.setProductPhoto(photo);
     Book.setPrice(price);
-    Book.setBook(book);
+    Book.setReservation(book);
 
     System.out.println("예약을 변경하였습니다.");
   }
@@ -125,7 +126,7 @@ public class BookingHandler {
   private Booking findByNo(int no) {
     Booking[] arr = booktList.toArray(new Booking[0]);
     for (Booking Book : arr) {
-      if (Book.getNo() == no) {
+      if (Book.getBookingNumber() == no) {
         return Book;
       }
     }
@@ -135,7 +136,7 @@ public class BookingHandler {
   public boolean exist(String name) {
     Booking[] arr = booktList.toArray(new Booking[0]);
     for (Booking Book : arr) {
-      if (Book.getName().equals(name)) {
+      if (Book.getProductName().equals(name)) {
         return true;
       }
     }
