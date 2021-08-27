@@ -8,17 +8,29 @@ import com.eomcs.util.Prompt;
 public class PrivacyHandler {
 
   List<Privacy> memberList;
+  List<String> uniqueIdList;
 
-  public PrivacyHandler(List<Privacy> memberList) {
+  int size = 1;
+  public PrivacyHandler(List<Privacy> memberList,  List<String> uniqueIdList) {
     this.memberList = memberList;
+    this.uniqueIdList = uniqueIdList;
+
   }
 
-  public void add() {
-    System.out.println("[회원 등록]");
+  public void memberAdd(int i) {
+    System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
+    privacy.setAuthority(i);
+    privacy.setNumber(size++);
+    //privacy.setNumber(Prompt.inputInt("번호? "));
 
-    privacy.setNumber(Prompt.inputInt("번호? "));
+    // 아이디가 중복되면 다시 아이디 재설정.
+    String checkId = promptMember(Prompt.inputString("아이디? "));
+    if (checkId == null) {
+      return;
+    }
+    privacy.setId(checkId);
     privacy.setName(Prompt.inputString("이름? "));
     privacy.setNickname(Prompt.inputString("닉네임? "));
     privacy.setEmail(Prompt.inputString("이메일? "));
@@ -29,16 +41,18 @@ public class PrivacyHandler {
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(privacy);
+    uniqueIdList.add(privacy.getId());
   }
 
-  public void list() {
-    System.out.println("[회원 목록]");
+
+  public void memberList() {
+    System.out.println("\n[회원 목록]");
 
     Privacy[] list = memberList.toArray(new Privacy[0]);
 
     for (Privacy member : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
-          member.getNumber(), 
+          member.getId(), 
           member.getName(), 
           member.getEmail(), 
           member.getPhoneNumber(), 
@@ -46,14 +60,15 @@ public class PrivacyHandler {
     }
   }
 
-  public void detail() {
-    System.out.println("[회원 상세보기]");
-    int no = Prompt.inputInt("번호? ");
 
-    Privacy member = findByNo(no);
+  public void memberDetail() {
+    System.out.println("\n[회원 상세보기]");
+    String id = Prompt.inputString("아이디 정보보기 : ");
+
+    Privacy member = findById(id);
 
     if (member == null) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 아이디의 회원이 없습니다.");
       return;
     }
 
@@ -64,16 +79,18 @@ public class PrivacyHandler {
     System.out.printf("사진: %s\n", member.getPhoto());
     System.out.printf("전화: %s\n", member.getPhoneNumber());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
+    System.out.printf("권한등급: %d", member.getAuthority());
   }
 
-  public void update() {
-    System.out.println("[회원 변경]");
-    int no = Prompt.inputInt("번호? ");
 
-    Privacy member = findByNo(no);
+  public void memberUpdate() {
+    System.out.println("\n[회원 변경]");
+    String id = Prompt.inputString("변경할 아이디 : ");
+
+    Privacy member = findById(id);
 
     if (member == null) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 아이디의 회원이 없습니다.");
       return;
     }
 
@@ -102,14 +119,15 @@ public class PrivacyHandler {
     System.out.println("회원을 변경하였습니다.");
   }
 
-  public void delete() {
-    System.out.println("[회원 삭제]");
-    int no = Prompt.inputInt("번호? ");
 
-    Privacy member = findByNo(no);
+  public void delete() {
+    System.out.println("\n[회원 삭제]");
+    String id = Prompt.inputString("삭제할 아이디 : ");
+
+    Privacy member = findById(id);
 
     if (member == null) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 아이디의 회원이 없습니다.");
       return;
     }
 
@@ -120,61 +138,35 @@ public class PrivacyHandler {
     }
 
     memberList.remove(member);
+    uniqueIdList.remove(member.getId());
 
     System.out.println("회원을 삭제하였습니다.");
   }
 
-  private Privacy findByNo(int no) {
+  private Privacy findById(String id) {
     Privacy[] arr = memberList.toArray(new Privacy[0]);
     for (Privacy member : arr) {
-      if (member.getNumber() == no) {
+      if (member.getId() == id) {
         return member;
       }
     }
     return null;
   }
 
-  public boolean exist(String name) {
-    Privacy[] arr = memberList.toArray(new Privacy[0]);
-    for (Privacy member : arr) {
-      if (member.getName().equals(name)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   public String promptMember(String label) {
     while (true) {
-      String owner = Prompt.inputString(label);
-      if (this.exist(owner)) {
-        return owner;
-      } else if (owner.length() == 0) {
+      //String owner = Prompt.inputString(label);
+      if (!uniqueIdList.contains(label)) {
+        return label;
+      } /*else if (label.length() == 0) {
+        System.out.println("아이디를 입력해 주세요.");
         return null;
-      }
-      System.out.println("등록된 회원이 아닙니다.");
+      } */
+      System.out.println("중복되는 아이디입니다.");
+      return null;
     }
-  }
-
-  public String promptMembers(String label) {
-    String members = "";
-    while (true) {
-      String member = Prompt.inputString(label);
-      if (this.exist(member)) {
-        if (members.length() > 0) {
-          members += ",";
-        }
-        members += member;
-        continue;
-      } else if (member.length() == 0) {
-        break;
-      } 
-      System.out.println("등록된 회원이 아닙니다.");
-    }
-    return members;
   }
 }
-
 
 
 
