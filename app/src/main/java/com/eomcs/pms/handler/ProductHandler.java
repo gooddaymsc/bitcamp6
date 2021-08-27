@@ -104,7 +104,7 @@ public class ProductHandler {
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("회원 변경을 취소하였습니다.");
+      System.out.println("상품 변경을 취소하였습니다.");
       return;
     }
 
