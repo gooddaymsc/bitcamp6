@@ -2,23 +2,19 @@ package com.eomcs.pms.domain;
 
 import java.sql.Date;
 
-public class Privacy {
+public class Privacy extends Manager {
   private int number;
   private String name;
   private String nickname;
   private String email;
   private Date birthday;
-  private String password;
   private String photo;
   private String phoneNumber;
   private String address;
   private Date registeredDate;
-  private int level;
-  private String buyerSeller;
-  /* private String businessNo;
-   * private String businessAddress;
-   * private String businessTel;
-   */
+  private int level; //add... sc
+  private String buyerSeller; //add... sc
+
   public int getNumber() {
     return number;
   }
@@ -31,6 +27,7 @@ public class Privacy {
   public void setName(String name) {
     this.name = name;
   }
+
   public String getNickname() {
     return nickname;
   }
@@ -49,12 +46,7 @@ public class Privacy {
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
   }
-  public String getPassword() {
-    return password;
-  }
-  public void setPassword(String password) {
-    this.password = password;
-  }
+
   public String getPhoto() {
     return photo;
   }
@@ -91,7 +83,6 @@ public class Privacy {
   public void setBuyerSeller(String buyerSeller) {
     this.buyerSeller = buyerSeller;
   }
-
 
 
 }
