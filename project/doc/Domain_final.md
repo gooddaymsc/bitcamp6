@@ -78,3 +78,5 @@
     - 5. 사진 : productPhoto
     - 6. 가격 : price
     - 7. 등록일 : registrationDate
+
+    ###test/sumin
