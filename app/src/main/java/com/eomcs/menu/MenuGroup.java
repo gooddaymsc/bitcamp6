@@ -104,6 +104,7 @@ public class MenuGroup extends Menu {
       }
 
       this.childs[menuNo - 1].execute();
+      System.out.println();
     }
   }
 

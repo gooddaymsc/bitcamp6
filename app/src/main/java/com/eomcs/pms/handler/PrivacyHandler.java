@@ -8,17 +8,52 @@ import com.eomcs.util.Prompt;
 public class PrivacyHandler {
 
   List<Privacy> memberList;
-
+  int size = 1;
   public PrivacyHandler(List<Privacy> memberList) {
     this.memberList = memberList;
   }
 
-  public void add() {
-    System.out.println("[회원 등록]");
+  //  public void chooseAdd(int i) {
+  //    if (i==1) {
+  //      memberAdd(i);
+  //    } else if (i==2) {
+  //      sellerAdd(i);
+  //    }
+  //  }
+  //
+  //  public void chooseList(int i) {
+  //    if (i==1) {
+  //      memberList();
+  //    } else if (i==2) {
+  //      sellerList();
+  //    }
+  //  }
+  //
+  //  public void chooseDetail(int i) {
+  //    if (i==1) {
+  //      memberDetail();
+  //    } else if (i==2) {
+  //      sellerDetail();
+  //    }
+  //  }
+  //
+  //  public void chooseUpdate(int i) {
+  //    if (i==1) {
+  //      memberUpdate();
+  //    } else if (i==2) {
+  //      sellerUpdate();
+  //    }
+  //  }
+
+
+  public void memberAdd(int i) {
+    System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
-
-    privacy.setNumber(Prompt.inputInt("번호? "));
+    privacy.setAuthority(i);
+    privacy.setNumber(size++);
+    //privacy.setNumber(Prompt.inputInt("번호? "));
+    privacy.setId(Prompt.inputString("아이디? "));
     privacy.setName(Prompt.inputString("이름? "));
     privacy.setNickname(Prompt.inputString("닉네임? "));
     privacy.setEmail(Prompt.inputString("이메일? "));
@@ -31,8 +66,9 @@ public class PrivacyHandler {
     memberList.add(privacy);
   }
 
-  public void list() {
-    System.out.println("[회원 목록]");
+
+  public void memberList() {
+    System.out.println("\n[회원 목록]");
 
     Privacy[] list = memberList.toArray(new Privacy[0]);
 
@@ -46,8 +82,9 @@ public class PrivacyHandler {
     }
   }
 
-  public void detail() {
-    System.out.println("[회원 상세보기]");
+
+  public void memberDetail() {
+    System.out.println("\n[회원 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
     Privacy member = findByNo(no);
@@ -64,10 +101,12 @@ public class PrivacyHandler {
     System.out.printf("사진: %s\n", member.getPhoto());
     System.out.printf("전화: %s\n", member.getPhoneNumber());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
+    System.out.printf("권한등급: %d", member.getAuthority());
   }
 
-  public void update() {
-    System.out.println("[회원 변경]");
+
+  public void memberUpdate() {
+    System.out.println("\n[회원 변경]");
     int no = Prompt.inputInt("번호? ");
 
     Privacy member = findByNo(no);
@@ -102,8 +141,9 @@ public class PrivacyHandler {
     System.out.println("회원을 변경하였습니다.");
   }
 
+
   public void delete() {
-    System.out.println("[회원 삭제]");
+    System.out.println("\n[회원 삭제]");
     int no = Prompt.inputInt("번호? ");
 
     Privacy member = findByNo(no);
@@ -173,6 +213,8 @@ public class PrivacyHandler {
     }
     return members;
   }
+
+
 }
 
 

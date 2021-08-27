@@ -16,6 +16,7 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.BookingHandler;
 import com.eomcs.pms.handler.CartHandler;
+import com.eomcs.pms.handler.Login;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.PrivacyHandler;
 import com.eomcs.pms.handler.ProductHandler;
@@ -47,7 +48,7 @@ public class App {
   ProductHandler productHandler = new ProductHandler(ProductList);
   StockHandler stockHandler = new StockHandler(stockList);
   MemberHandler memberHandler = new MemberHandler(memberList);
-
+  Login login = new Login(privacyList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -63,243 +64,302 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    MenuGroup subMenu = new MenuGroup("회원정보");
-    mainMenuGroup.add(subMenu);
+    MenuGroup loginMenu = new MenuGroup("로그인");
+    mainMenuGroup.add(loginMenu);
+
+    MenuGroup loginMemberMenu = new MenuGroup("일반회원");
+    loginMenu.add(loginMemberMenu);
+    loginMemberMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        login.inputId(); 
+      }});
+
+    MenuGroup loginSellerMenu = new MenuGroup("판매자");
+    loginMenu.add(loginSellerMenu);
+    //    loginSellerMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        privacyHandler.memberAdd(1); 
+    //      }});
+
+    MenuGroup joinMenu = new MenuGroup("회원가입");
+    mainMenuGroup.add(joinMenu);
 
     MenuGroup memberMenu = new MenuGroup("일반회원");
-    subMenu.add(memberMenu);
 
+    joinMenu.add(memberMenu);
     memberMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        privacyHandler.add(); 
+        privacyHandler.memberAdd(1); 
       }});
-    memberMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        privacyHandler.list(); 
-      }});
+
     memberMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        privacyHandler.detail(); 
-      }});
-    memberMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        privacyHandler.update(); 
-      }});
-    memberMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        privacyHandler.delete(); 
+        privacyHandler.memberDetail(); 
       }});
 
     MenuGroup member2Menu = new MenuGroup("판매자");
-    subMenu.add(member2Menu);
+    joinMenu.add(member2Menu);
+    member2Menu.add(new Menu("입력") {
+      @Override
+      public void execute() {
+        sellerPrivacyHandler.sellerAdd(2); 
+      }});
 
-    member2Menu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        sellerPrivacyHandler.add(); 
-      }});
-    member2Menu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        sellerPrivacyHandler.list(); 
-      }});
     member2Menu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        sellerPrivacyHandler.detail(); 
-      }});
-    member2Menu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        sellerPrivacyHandler.update(); 
-      }});
-    member2Menu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        sellerPrivacyHandler.delete(); 
+        sellerPrivacyHandler.sellerDetail(); 
       }});
 
-    MenuGroup cartMenu = new MenuGroup("장바구니");
-    mainMenuGroup.add(cartMenu);
+    MenuGroup findIdMenu = new MenuGroup("아이디찾기");
+    mainMenuGroup.add(findIdMenu);
 
-    cartMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        cartHandler.add(); 
-      }});
-    cartMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        cartHandler.list(); 
-      }});
-    cartMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        cartHandler.detail(); 
-      }});
-    cartMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        cartHandler.update(); 
-      }});
-    cartMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        cartHandler.delete(); 
-      }});
+    MenuGroup findPasswordMenu = new MenuGroup("비번찾기");
+    mainMenuGroup.add(findPasswordMenu);
+
+    MenuGroup nonUserMenu = new MenuGroup("비회원으로 둘러보기");
+    mainMenuGroup.add(nonUserMenu);
 
 
-    MenuGroup boardMenu = new MenuGroup("게시판");
-    mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        boardHandler.add(); 
-      }});
-    boardMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        boardHandler.list(); 
-      }});
-    boardMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        boardHandler.detail(); 
-      }});
-    boardMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        boardHandler.update(); 
-      }});
-    boardMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        boardHandler.delete(); 
-      }});
+    //    MenuGroup memberMenu = new MenuGroup("일반회원");
+    //    subMenu.add(memberMenu);
+    //
+    //    memberMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        privacyHandler.add(); 
+    //      }});
+    //    memberMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        privacyHandler.list(); 
+    //      }});
+    //    memberMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        privacyHandler.detail(); 
+    //      }});
+    //    memberMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        privacyHandler.update(); 
+    //      }});
+    //    memberMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        privacyHandler.delete(); 
+    //      }});
+    //
+    //    MenuGroup member2Menu = new MenuGroup("판매자");
+    //    subMenu.add(member2Menu);
+    //
+    //    member2Menu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        sellerPrivacyHandler.add(); 
+    //      }});
+    //    member2Menu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        sellerPrivacyHandler.list(); 
+    //      }});
+    //    member2Menu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        sellerPrivacyHandler.detail(); 
+    //      }});
+    //    member2Menu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        sellerPrivacyHandler.update(); 
+    //      }});
+    //    member2Menu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        sellerPrivacyHandler.delete(); 
+    //      }});
 
-    MenuGroup bookMenu = new MenuGroup("예약");
-    mainMenuGroup.add(bookMenu);
-
-    bookMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        bookingHandler.add(); 
-      }});
-    bookMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        bookingHandler.list(); 
-      }});
-    bookMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        bookingHandler.detail(); 
-      }});
-    bookMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        bookingHandler.update(); 
-      }});
-    bookMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        bookingHandler.delete(); 
-      }});
-
-
-    MenuGroup alcoholMenu = new MenuGroup("상품정보");
-    mainMenuGroup.add(alcoholMenu);
-
-    alcoholMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        productHandler.add(); 
-      }});
-    alcoholMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        productHandler.list(); 
-      }});
-    alcoholMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        productHandler.detail(); 
-      }});
-    alcoholMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        productHandler.update(); 
-      }});
-    alcoholMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        productHandler.delete(); 
-      }});
-
-
-    MenuGroup stockMenu = new MenuGroup("재고");
-    mainMenuGroup.add(stockMenu);
-
-    stockMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        stockHandler.add(); 
-      }});
-    stockMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        stockHandler.list(); 
-      }});
-    stockMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        stockHandler.detail(); 
-      }});
-    stockMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        stockHandler.update(); 
-      }});
-    stockMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        stockHandler.delete(); 
-      }});
-
-    MenuGroup personMenu = new MenuGroup("회원관리");
-    mainMenuGroup.add(personMenu);
-
-    personMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        memberHandler.add(); 
-      }});
-    personMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        memberHandler.list(); 
-      }});
-    personMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        memberHandler.detail(); 
-      }});
-    personMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        memberHandler.update(); 
-      }});
-    personMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        memberHandler.delete(); 
-      }});
+    //    MenuGroup cartMenu = new MenuGroup("장바구니");
+    //    mainMenuGroup.add(cartMenu);
+    //
+    //    cartMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.add(); 
+    //      }});
+    //    cartMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.list(); 
+    //      }});
+    //    cartMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.detail(); 
+    //      }});
+    //    cartMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.update(); 
+    //      }});
+    //    cartMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.delete(); 
+    //      }});
+    //
+    //
+    //    MenuGroup boardMenu = new MenuGroup("게시판");
+    //    mainMenuGroup.add(boardMenu);
+    //
+    //    boardMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.add(); 
+    //      }});
+    //    boardMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.list(); 
+    //      }});
+    //    boardMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.detail(); 
+    //      }});
+    //    boardMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.update(); 
+    //      }});
+    //    boardMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        boardHandler.delete(); 
+    //      }});
+    //
+    //    MenuGroup bookMenu = new MenuGroup("예약");
+    //    mainMenuGroup.add(bookMenu);
+    //
+    //    bookMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        bookingHandler.add(); 
+    //      }});
+    //    bookMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        bookingHandler.list(); 
+    //      }});
+    //    bookMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        bookingHandler.detail(); 
+    //      }});
+    //    bookMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        bookingHandler.update(); 
+    //      }});
+    //    bookMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        bookingHandler.delete(); 
+    //      }});
+    //
+    //
+    //    MenuGroup alcoholMenu = new MenuGroup("상품정보");
+    //    mainMenuGroup.add(alcoholMenu);
+    //
+    //    alcoholMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        productHandler.add(); 
+    //      }});
+    //    alcoholMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        productHandler.list(); 
+    //      }});
+    //    alcoholMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        productHandler.detail(); 
+    //      }});
+    //    alcoholMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        productHandler.update(); 
+    //      }});
+    //    alcoholMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        productHandler.delete(); 
+    //      }});
+    //
+    //
+    //    MenuGroup stockMenu = new MenuGroup("재고");
+    //    mainMenuGroup.add(stockMenu);
+    //
+    //    stockMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        stockHandler.add(); 
+    //      }});
+    //    stockMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        stockHandler.list(); 
+    //      }});
+    //    stockMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        stockHandler.detail(); 
+    //      }});
+    //    stockMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        stockHandler.update(); 
+    //      }});
+    //    stockMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        stockHandler.delete(); 
+    //      }});
+    //
+    //    MenuGroup personMenu = new MenuGroup("회원관리");
+    //    mainMenuGroup.add(personMenu);
+    //
+    //    personMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.add(); 
+    //      }});
+    //    personMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.list(); 
+    //      }});
+    //    personMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.detail(); 
+    //      }});
+    //    personMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.update(); 
+    //      }});
+    //    personMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.delete(); 
+    //      }});
 
     return mainMenuGroup;
   }

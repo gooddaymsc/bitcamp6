@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class Privacy {
   private int number;
+  private String id;
+
   private String name;
   private String nickname;
   private String email;
@@ -12,10 +14,8 @@ public class Privacy {
   private String photo;
   private String phoneNumber;
   private Date registeredDate;
-  /* private String businessNo;
-   * private String businessAddress;
-   * private String businessTel;
-   */
+  private int authority;
+
   public int getNumber() {
     return number;
   }
@@ -27,6 +27,12 @@ public class Privacy {
   }
   public void setName(String name) {
     this.name = name;
+  }
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
   }
   public String getNickname() {
     return nickname;
@@ -70,6 +76,14 @@ public class Privacy {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
+  public int getAuthority() {
+    return authority;
+  }
+  public void setAuthority(int authority) {
+    this.authority = authority;
+  }
+
 
 
 }

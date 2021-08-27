@@ -1,6 +1,5 @@
 package com.eomcs.pms.domain;
 
-//판매자
 public class SellerPrivacy extends Privacy {
 
   private String businessNumber;
@@ -25,6 +24,4 @@ public class SellerPrivacy extends Privacy {
   public void setBusinessTel(String businessTel) {
     this.businessPlaceNumber = businessTel;
   }
-
-
 }
