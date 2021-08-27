@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.util.Prompt;
@@ -24,6 +25,7 @@ public class BookingHandler {
     booking.setPhoto(Prompt.inputString("사진? "));
     booking.setPrice(Prompt.inputString("가격? "));
     booking.setBook(Prompt.inputString("예약시간? "));
+    booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     booktList.add(booking);
   }

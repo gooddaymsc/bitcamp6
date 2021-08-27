@@ -1,43 +1,52 @@
 package com.eomcs.pms.domain;
 
-public class Booking {
-  private int no;
-  private String name;
-  private String kind;
-  private String madeIn;
-  private String photo;
-  private String price;
-  private String book;
+import java.sql.Date;
 
+public class Booking {
+  private int bookingNumber;
+  private String productName;
+  private String productType;
+  private String countryOrigin;
+  private String productPhoto;
+  private String price;
+  private String reservation;
+  private Date registeredDate;
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
   public int getNo() {
-    return no;
+    return bookingNumber;
   }
   public void setNo(int no) {
-    this.no = no;
+    this.bookingNumber = no;
   }
   public String getName() {
-    return name;
+    return productName;
   }
   public void setName(String name) {
-    this.name = name;
+    this.productName = name;
   }
   public String getKind() {
-    return kind;
+    return productType;
   }
   public void setKind(String kind) {
-    this.kind = kind;
+    this.productType = kind;
   }
   public String getMadeIn() {
-    return madeIn;
+    return countryOrigin;
   }
   public void setMadeIn(String madeIn) {
-    this.madeIn = madeIn;
+    this.countryOrigin = madeIn;
   }
   public String getPhoto() {
-    return photo;
+    return productPhoto;
   }
   public void setPhoto(String photo) {
-    this.photo = photo;
+    this.productPhoto = photo;
   }
   public String getPrice() {
     return price;
@@ -46,10 +55,10 @@ public class Booking {
     this.price = price;
   }
   public String getBook() {
-    return book;
+    return reservation;
   }
   public void setBook(String book) {
-    this.book = book;
+    this.reservation = book;
   }
 
 }
