@@ -1,24 +1,17 @@
 package com.eomcs.pms.domain;
 
 public class Product {
-  //상품번호
-  //상품명
-  //설명
-  //원산지
-  //품종
-  //알콜도수
-  //테이스팅 노트 : 당도, 산도, 바디감
-  //가격
-  private int productNumber;
-  private String productName;
-  private String productType;
-  private String countryOrigin;
-  private String variety;
-  private int alcoholLevel;
-  private int sugerLevel;
-  private int acidity;
-  private int weight;
-  private int price;
+
+  private int productNumber;        //상품번
+  private String productName;       //상품명
+  private String productType;       //주종
+  private String countryOrigin;     //원산지
+  private String variety;           //품종
+  private int alcoholLevel;         //알콜도수
+  private int sugerLevel;           //당도
+  private int acidity;              //산도
+  private int weight;               //바디감
+  private int price;                //가격
 
   public int getProductNumber() {
     return productNumber;
