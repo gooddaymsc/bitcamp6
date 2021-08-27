@@ -30,8 +30,8 @@ public class App {
   List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
   // 일반회원
   List<Board> boardList = new ArrayList<>();
-  List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
+  List<Booking> bookingList = new LinkedList<>();
   // 판매자
   List<Product> ProductList = new ArrayList<>();
   List<Stock> stockList = new ArrayList<>();
@@ -93,6 +93,35 @@ public class App {
       @Override
       public void execute() {
         privacyHandler.delete(); 
+      }});
+
+    MenuGroup cartMenu = new MenuGroup("장바구니");
+    mainMenuGroup.add(cartMenu);
+
+    cartMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        cartHandler.add(); 
+      }});
+    cartMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        cartHandler.list(); 
+      }});
+    cartMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        cartHandler.detail(); 
+      }});
+    cartMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        cartHandler.update(); 
+      }});
+    cartMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        cartHandler.delete(); 
       }});
 
     MenuGroup member2Menu = new MenuGroup("판매자");
@@ -182,34 +211,6 @@ public class App {
         bookingHandler.delete(); 
       }});
 
-    MenuGroup cartMenu = new MenuGroup("장바구니");
-    mainMenuGroup.add(cartMenu);
-
-    cartMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        cartHandler.add(); 
-      }});
-    cartMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        cartHandler.list(); 
-      }});
-    cartMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        cartHandler.detail(); 
-      }});
-    cartMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        cartHandler.update(); 
-      }});
-    cartMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        cartHandler.delete(); 
-      }});
 
     MenuGroup alcoholMenu = new MenuGroup("상품정보");
     mainMenuGroup.add(alcoholMenu);
