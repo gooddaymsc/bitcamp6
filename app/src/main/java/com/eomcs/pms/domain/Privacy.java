@@ -4,8 +4,6 @@ import java.sql.Date;
 
 public class Privacy extends Manager {
   private int number;
-  private String id;
-
   private String name;
   private String nickname;
   private String email;
@@ -14,12 +12,7 @@ public class Privacy extends Manager {
   private String phoneNumber;
   private String address;
   private Date registeredDate;
-<<<<<<< HEAD
-  private int authority;
-=======
-  private int level; //add... sc
-  private String buyerSeller; //add... sc
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
+
 
   public int getNumber() {
     return number;
@@ -33,16 +26,7 @@ public class Privacy extends Manager {
   public void setName(String name) {
     this.name = name;
   }
-<<<<<<< HEAD
-  public String getId() {
-    return id;
-  }
-  public void setId(String id) {
-    this.id = id;
-  }
-=======
 
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
   public String getNickname() {
     return nickname;
   }
@@ -85,25 +69,6 @@ public class Privacy extends Manager {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
-  }
-  public int getLevel() {
-    return level;
-  }
-  public void setLevel(int level) {
-    this.level = level;
-  }
-  public String getBuyerSeller() {
-    return buyerSeller;
-  }
-  public void setBuyerSeller(String buyerSeller) {
-    this.buyerSeller = buyerSeller;
-  }
-
-  public int getAuthority() {
-    return authority;
-  }
-  public void setAuthority(int authority) {
-    this.authority = authority;
   }
 
 

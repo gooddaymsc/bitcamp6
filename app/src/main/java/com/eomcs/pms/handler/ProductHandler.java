@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
@@ -15,12 +16,17 @@ public class ProductHandler {
   //가격
 
   List<Product> alcoholList;
-
-  public ProductHandler(List<Product> alcoholList) {
+  Manager loginPrivacy;
+  public ProductHandler(List<Product> alcoholList, Manager loginPrivacy) {
     this.alcoholList = alcoholList;
+    this.loginPrivacy = loginPrivacy;
   }
 
   public void add() {
+    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[상품 등록]");
 
     Product product = new Product();
@@ -40,6 +46,7 @@ public class ProductHandler {
   }
 
   public void list() {
+
     System.out.println("[상품 목록]");
 
     Product[] list = alcoholList.toArray(new Product[0]);
@@ -82,6 +89,10 @@ public class ProductHandler {
   }
 
   public void update() {
+    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[상품 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -122,6 +133,10 @@ public class ProductHandler {
   }
 
   public void delete() {
+    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[상품 삭제]");
     int no = Prompt.inputInt("번호? ");
 

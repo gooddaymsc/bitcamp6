@@ -2,42 +2,37 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyHandler {
 
   List<SellerPrivacy> memberList;
-<<<<<<< HEAD
-=======
   List<String> uniqueIdList;
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
+  Manager loginPrivacy;
   int size=1;
 
-  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<String> uniqueIdList) {
+  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<String> uniqueIdList, Manager loginPrivacy) {
     this.memberList = memberList;
     this.uniqueIdList = uniqueIdList;
+    this.loginPrivacy = loginPrivacy;
   }
 
 
-  public void sellerAdd(int i) {
+  public void add(int i) {
     System.out.println("\n[판매자 등록]");
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setAuthority(i);
     sellerPrivacy.setNumber(size++);
     //sellerPrivacy.setNumber(Prompt.inputInt("번호? "));
-<<<<<<< HEAD
-    sellerPrivacy.setId(Prompt.inputString("아이디? "));
-=======
 
     String checkId = promptMember(Prompt.inputString("아이디? "));
     if (checkId == null) {
       return;
     }
     sellerPrivacy.setId(checkId);
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
-
     sellerPrivacy.setName(Prompt.inputString("이름? "));
     sellerPrivacy.setNickname(Prompt.inputString("닉네임? "));
     sellerPrivacy.setEmail(Prompt.inputString("이메일? "));
@@ -45,9 +40,9 @@ public class SellerPrivacyHandler {
     sellerPrivacy.setPassword(Prompt.inputString("암호? "));
     sellerPrivacy.setPhoto(Prompt.inputString("사진? "));
     sellerPrivacy.setPhoneNumber(Prompt.inputString("전화? "));
-    sellerPrivacy.setBusinessNo(Prompt.inputString("사업자번호? "));
+    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호? "));
     sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소? "));
-    sellerPrivacy.setBusinessTel(Prompt.inputString("사업장번호? "));
+    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호? "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
     uniqueIdList.add(sellerPrivacy.getId());
@@ -65,20 +60,17 @@ public class SellerPrivacyHandler {
           member.getName(), 
           member.getEmail(), 
           member.getPhoneNumber(), 
-          member.getBusinessNo(),
+          member.getBusinessNumber(),
           member.getBusinessAddress(),
-          member.getBusinessTel(),
+          member.getBusinessPlaceNumber(),
           member.getRegisteredDate());
     }
   }
 
-  public void sellerDetail() {
+  public void detail() {
     System.out.println("\n[판매자 상세보기]");
-<<<<<<< HEAD
-    int no = Prompt.inputInt("번호? ");
-=======
+
     String id = Prompt.inputString("번호? ");
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
     SellerPrivacy member = findById(id);
 
@@ -93,20 +85,17 @@ public class SellerPrivacyHandler {
     System.out.printf("생일: %s\n", member.getBirthday());
     System.out.printf("사진: %s\n", member.getPhoto());
     System.out.printf("전화: %s\n", member.getPhoneNumber());
-    System.out.printf("사업자번호: %s\n", member.getBusinessNo());
+    System.out.printf("사업자번호: %s\n", member.getBusinessNumber());
     System.out.printf("사업장주소: %s\n", member.getBusinessAddress());
-    System.out.printf("사업장번호: %s\n", member.getBusinessTel());
+    System.out.printf("사업장번호: %s\n", member.getBusinessPlaceNumber());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
     System.out.printf("권한등급: %d", member.getAuthority());
   }
 
   public void update() {
     System.out.println("\n[판매자 변경]");
-<<<<<<< HEAD
-    int no = Prompt.inputInt("번호? ");
-=======
+
     String id = Prompt.inputString("번호? ");
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
     SellerPrivacy member = findById(id);
 
@@ -122,9 +111,9 @@ public class SellerPrivacyHandler {
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
     String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
-    String bussinessNo = Prompt.inputString("사업자번호(" + member.getBusinessNo() + ")? ");
+    String bussinessNo = Prompt.inputString("사업자번호(" + member.getBusinessNumber() + ")? ");
     String bussinessAddress = Prompt.inputString("사업장주소(" + member.getBusinessAddress() + ")? ");
-    String bussinessTel = Prompt.inputString("사업장번호(" + member.getBusinessTel() + ")? ");
+    String bussinessTel = Prompt.inputString("사업장번호(" + member.getBusinessPlaceNumber() + ")? ");
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("판매자 변경을 취소하였습니다.");
@@ -138,20 +127,17 @@ public class SellerPrivacyHandler {
     member.setPassword(password);
     member.setPhoto(photo);
     member.setPhoneNumber(tel);
-    member.setBusinessNo(bussinessNo);
+    member.setBusinessNumber(bussinessNo);
     member.setBusinessAddress(bussinessAddress);
-    member.setBusinessTel(bussinessTel);
+    member.setBusinessPlaceNumber(bussinessTel);
 
     System.out.println("판매자을 변경하였습니다.");
   }
 
   public void delete() {
     System.out.println("\n[판매자 삭제]");
-<<<<<<< HEAD
-    int no = Prompt.inputInt("번호? ");
-=======
+
     String id = Prompt.inputString("번호? ");
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
     SellerPrivacy member = findById(id);
 
@@ -182,47 +168,6 @@ public class SellerPrivacyHandler {
     return null;
   }
 
-<<<<<<< HEAD
-  //  public boolean exist(String name) {
-  //    SellerPrivacy[] arr = memberList.toArray(new SellerPrivacy[0]);
-  //    for (SellerPrivacy member : arr) {
-  //      if (member.getName().equals(name)) {
-  //        return true;
-  //      }
-  //    }
-  //    return false;
-  //  }
-  //
-  //  public String promptMember(String label) {
-  //    while (true) {
-  //      String owner = Prompt.inputString(label);
-  //      if (this.exist(owner)) {
-  //        return owner;
-  //      } else if (owner.length() == 0) {
-  //        return null;
-  //      }
-  //      System.out.println("등록된 판매자가 아닙니다.");
-  //    }
-  //  }
-  //
-  //  public String promptMembers(String label) {
-  //    String members = "";
-  //    while (true) {
-  //      String member = Prompt.inputString(label);
-  //      if (this.exist(member)) {
-  //        if (members.length() > 0) {
-  //          members += ",";
-  //        }
-  //        members += member;
-  //        continue;
-  //      } else if (member.length() == 0) {
-  //        break;
-  //      } 
-  //      System.out.println("등록된 판매자가 아닙니다.");
-  //    }
-  //    return members;
-  //  }
-=======
   public String promptMember(String label) {
     while (true) {
       if (!uniqueIdList.contains(label)) {
@@ -235,7 +180,6 @@ public class SellerPrivacyHandler {
       return null;
     }
   }
->>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 }
 
 

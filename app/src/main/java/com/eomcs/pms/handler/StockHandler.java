@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
@@ -13,12 +14,17 @@ public class StockHandler {
   //가격
 
   List<Stock> stockList;
-
-  public StockHandler(List<Stock> stockList) {
+  Manager loginPrivacy;
+  public StockHandler(List<Stock> stockList, Manager loginPrivacy) {
     this.stockList = stockList;
+    this.loginPrivacy = loginPrivacy;
   }
 
-  public void add() {
+  public void add() {   
+    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[재고 등록]");
 
     Stock stock = new Stock();
@@ -34,6 +40,10 @@ public class StockHandler {
   }
 
   public void list() {
+    if (loginPrivacy.getAuthority()==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
     System.out.println("[재고 목록]");
 
     Stock[] list = stockList.toArray(new Stock[0]);
@@ -49,6 +59,10 @@ public class StockHandler {
   }
 
   public void detail() {
+    if (loginPrivacy.getAuthority()==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
     System.out.println("[재고 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -65,6 +79,10 @@ public class StockHandler {
   }
 
   public void update() {
+    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[재고 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -94,6 +112,10 @@ public class StockHandler {
   }
 
   public void delete() {
+    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[재고 삭제]");
     int no = Prompt.inputInt("번호? ");
 
