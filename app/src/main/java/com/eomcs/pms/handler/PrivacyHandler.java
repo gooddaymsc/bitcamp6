@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
 
@@ -10,19 +9,20 @@ public class PrivacyHandler {
 
   List<Privacy> memberList;
   List<String> uniqueIdList;
-  Manager loginPrivacy;
+
 
   int size = 1;
-  public PrivacyHandler(List<Privacy> memberList,  List<String> uniqueIdList, Manager loginPrivacy) {
+  public PrivacyHandler(List<Privacy> memberList,  List<String> uniqueIdList) {
 
     this.memberList = memberList;
     this.uniqueIdList = uniqueIdList;
-    this.loginPrivacy = loginPrivacy;
+
+
 
   }
 
-  public void add(int i) {
-    if (loginPrivacy.getAuthority() == 1 || loginPrivacy.getAuthority() == 2 || loginPrivacy.getAuthority() == 3) {
+  public void add(int i, int auth) {
+    if (auth== 1 || auth == 2 || auth == 3) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
@@ -53,8 +53,8 @@ public class PrivacyHandler {
   }
 
 
-  public void list() {
-    if (loginPrivacy.getAuthority() == 0) {
+  public void list(int auth) {
+    if (auth == 0 || auth== 1 || auth == 2 ) {
       System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
       return;
     }
@@ -73,8 +73,8 @@ public class PrivacyHandler {
   }
 
 
-  public void detail() {
-    if (loginPrivacy.getAuthority()==0) {
+  public void detail(int auth) {
+    if (auth==0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -88,10 +88,10 @@ public class PrivacyHandler {
       return;
     }
 
-    if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
-      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
-      return;
-    }
+    //    if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
+    //      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
+    //      return;
+    //    }
 
     System.out.printf("이름: %s\n", member.getName());
     System.out.printf("닉네임: %s\n", member.getNickname());
@@ -103,9 +103,9 @@ public class PrivacyHandler {
     System.out.printf("권한등급: %d", member.getAuthority());
   }
 
-  public void update() {
+  public void update(int auth) {
 
-    if (loginPrivacy.getAuthority()==0) {
+    if (auth==0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -120,10 +120,10 @@ public class PrivacyHandler {
       return;
     }
 
-    if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
-      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
-      return;
-    }
+    //    if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
+    //      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
+    //      return;
+    //    }
 
 
     String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
@@ -152,8 +152,8 @@ public class PrivacyHandler {
   }
 
 
-  public void delete() {
-    if (loginPrivacy.getAuthority()==0) {
+  public void delete(int auth) {
+    if (auth==0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -168,10 +168,10 @@ public class PrivacyHandler {
       return;
     }
 
-    if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
-      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
-      return;
-    }
+    //    if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
+    //      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
+    //      return;
+    //    }
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("회원 삭제를 취소하였습니다.");

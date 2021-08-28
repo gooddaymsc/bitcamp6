@@ -1,7 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
@@ -16,14 +15,14 @@ public class ProductHandler {
   //가격
 
   List<Product> alcoholList;
-  Manager loginPrivacy;
-  public ProductHandler(List<Product> alcoholList, Manager loginPrivacy) {
+  //Manager loginPrivacy;
+  public ProductHandler(List<Product> alcoholList) {
     this.alcoholList = alcoholList;
-    this.loginPrivacy = loginPrivacy;
+    //this.loginPrivacy = loginPrivacy;
   }
 
-  public void add() {
-    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+  public void add(int auth) {
+    if (auth == 0 || auth == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -88,8 +87,8 @@ public class ProductHandler {
     System.out.printf("가격: %d\n", alcohol.getPrice ());
   }
 
-  public void update() {
-    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+  public void update(int auth) {
+    if (auth == 0 || auth == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -132,8 +131,8 @@ public class ProductHandler {
     System.out.println("상품정보를 변경하였습니다.");
   }
 
-  public void delete() {
-    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+  public void delete(int auth) {
+    if (auth == 0 || auth == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }

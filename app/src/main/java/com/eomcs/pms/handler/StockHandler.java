@@ -1,7 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
@@ -14,14 +13,14 @@ public class StockHandler {
   //가격
 
   List<Stock> stockList;
-  Manager loginPrivacy;
-  public StockHandler(List<Stock> stockList, Manager loginPrivacy) {
+  //  Manager loginPrivacy;
+  public StockHandler(List<Stock> stockList) {
     this.stockList = stockList;
-    this.loginPrivacy = loginPrivacy;
+    //    this.loginPrivacy = loginPrivacy;
   }
 
-  public void add() {   
-    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+  public void add(int auth) {   
+    if (auth == 0 || auth == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -39,8 +38,8 @@ public class StockHandler {
     stockList.add(stock);
   }
 
-  public void list() {
-    if (loginPrivacy.getAuthority()==0) {
+  public void list(int auth) {
+    if (auth==0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -58,8 +57,8 @@ public class StockHandler {
     }
   }
 
-  public void detail() {
-    if (loginPrivacy.getAuthority()==0) {
+  public void detail(int auth) {
+    if (auth==0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -78,8 +77,8 @@ public class StockHandler {
     System.out.printf("가격: %d\n", stock.getPrice ());
   }
 
-  public void update() {
-    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+  public void update(int auth) {
+    if (auth == 0 || auth == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -111,8 +110,8 @@ public class StockHandler {
     System.out.println("재고정보를 변경하였습니다.");
   }
 
-  public void delete() {
-    if (loginPrivacy.getAuthority() == 0 || loginPrivacy.getAuthority() == 1 ) {
+  public void delete(int auth) {
+    if (auth == 0 || auth == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }

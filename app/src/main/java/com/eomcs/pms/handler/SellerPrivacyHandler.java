@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
@@ -10,17 +9,21 @@ public class SellerPrivacyHandler {
 
   List<SellerPrivacy> memberList;
   List<String> uniqueIdList;
-  Manager loginPrivacy;
+
   int size=1;
 
-  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<String> uniqueIdList, Manager loginPrivacy) {
+  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<String> uniqueIdList) {
     this.memberList = memberList;
     this.uniqueIdList = uniqueIdList;
-    this.loginPrivacy = loginPrivacy;
+
   }
 
 
-  public void add(int i) {
+  public void add(int i, int auth) {
+    if (auth== 1 || auth == 2 || auth == 3) {
+      System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
+      return;
+    }
     System.out.println("\n[판매자 등록]");
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
@@ -49,7 +52,12 @@ public class SellerPrivacyHandler {
 
   }
 
-  public void list() {
+  public void list(int auth) {
+    if (auth == 0) {
+      System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
+      return;
+    }
+
     System.out.println("\n[판매자 목록]");
 
     SellerPrivacy[] list = memberList.toArray(new SellerPrivacy[0]);
@@ -67,7 +75,12 @@ public class SellerPrivacyHandler {
     }
   }
 
-  public void detail() {
+  public void detail(int auth) {
+    if (auth==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    } 
+
     System.out.println("\n[판매자 상세보기]");
 
     String id = Prompt.inputString("번호? ");
@@ -92,7 +105,12 @@ public class SellerPrivacyHandler {
     System.out.printf("권한등급: %d", member.getAuthority());
   }
 
-  public void update() {
+  public void update(int auth) {
+    if (auth==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
+
     System.out.println("\n[판매자 변경]");
 
     String id = Prompt.inputString("번호? ");
@@ -134,7 +152,11 @@ public class SellerPrivacyHandler {
     System.out.println("판매자을 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int auth) {
+    if (auth==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
     System.out.println("\n[판매자 삭제]");
 
     String id = Prompt.inputString("번호? ");
