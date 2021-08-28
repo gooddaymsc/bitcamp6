@@ -175,63 +175,6 @@ public class App {
         System.out.println("로그아웃이 완료되었습니다.");
       }});
 
-    //    MenuGroup memberMenu = new MenuGroup("일반회원");
-    //    subMenu.add(memberMenu);
-    //
-    //    memberMenu.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        privacyHandler.add(); 
-    //      }});
-    //    memberMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        privacyHandler.list(); 
-    //      }});
-    //    memberMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        privacyHandler.detail(); 
-    //      }});
-    //    memberMenu.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        privacyHandler.update(); 
-    //      }});
-    //    memberMenu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        privacyHandler.delete(); 
-    //      }});
-    //
-    //    MenuGroup member2Menu = new MenuGroup("판매자");
-    //    subMenu.add(member2Menu);
-    //
-    //    member2Menu.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        sellerPrivacyHandler.add(); 
-    //      }});
-    //    member2Menu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        sellerPrivacyHandler.list(); 
-    //      }});
-    //    member2Menu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        sellerPrivacyHandler.detail(); 
-    //      }});
-    //    member2Menu.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        sellerPrivacyHandler.update(); 
-    //      }});
-    //    member2Menu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        sellerPrivacyHandler.delete(); 
-    //      }});
 
     //    MenuGroup cartMenu = new MenuGroup("장바구니");
     //    mainMenuGroup.add(cartMenu);
