@@ -8,10 +8,15 @@ import com.eomcs.util.Prompt;
 public class SellerPrivacyHandler {
 
   List<SellerPrivacy> memberList;
+<<<<<<< HEAD
+=======
+  List<String> uniqueIdList;
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
   int size=1;
 
-  public SellerPrivacyHandler(List<SellerPrivacy> memberList) {
+  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<String> uniqueIdList) {
     this.memberList = memberList;
+    this.uniqueIdList = uniqueIdList;
   }
 
 
@@ -22,7 +27,16 @@ public class SellerPrivacyHandler {
     sellerPrivacy.setAuthority(i);
     sellerPrivacy.setNumber(size++);
     //sellerPrivacy.setNumber(Prompt.inputInt("번호? "));
+<<<<<<< HEAD
     sellerPrivacy.setId(Prompt.inputString("아이디? "));
+=======
+
+    String checkId = promptMember(Prompt.inputString("아이디? "));
+    if (checkId == null) {
+      return;
+    }
+    sellerPrivacy.setId(checkId);
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
     sellerPrivacy.setName(Prompt.inputString("이름? "));
     sellerPrivacy.setNickname(Prompt.inputString("닉네임? "));
@@ -36,6 +50,8 @@ public class SellerPrivacyHandler {
     sellerPrivacy.setBusinessTel(Prompt.inputString("사업장번호? "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
+    uniqueIdList.add(sellerPrivacy.getId());
+
   }
 
   public void list() {
@@ -58,9 +74,13 @@ public class SellerPrivacyHandler {
 
   public void sellerDetail() {
     System.out.println("\n[판매자 상세보기]");
+<<<<<<< HEAD
     int no = Prompt.inputInt("번호? ");
+=======
+    String id = Prompt.inputString("번호? ");
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
-    SellerPrivacy member = findByNo(no);
+    SellerPrivacy member = findById(id);
 
     if (member == null) {
       System.out.println("해당 번호의 판매자가 없습니다.");
@@ -82,9 +102,13 @@ public class SellerPrivacyHandler {
 
   public void update() {
     System.out.println("\n[판매자 변경]");
+<<<<<<< HEAD
     int no = Prompt.inputInt("번호? ");
+=======
+    String id = Prompt.inputString("번호? ");
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
-    SellerPrivacy member = findByNo(no);
+    SellerPrivacy member = findById(id);
 
     if (member == null) {
       System.out.println("해당 번호의 회원이 없습니다.");
@@ -123,9 +147,13 @@ public class SellerPrivacyHandler {
 
   public void delete() {
     System.out.println("\n[판매자 삭제]");
+<<<<<<< HEAD
     int no = Prompt.inputInt("번호? ");
+=======
+    String id = Prompt.inputString("번호? ");
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
-    SellerPrivacy member = findByNo(no);
+    SellerPrivacy member = findById(id);
 
     if (member == null) {
       System.out.println("해당 번호의 판매자이 없습니다.");
@@ -139,20 +167,22 @@ public class SellerPrivacyHandler {
     }
 
     memberList.remove(member);
+    uniqueIdList.remove(member.getId());
 
     System.out.println("판매자를 삭제하였습니다.");
   }
 
-  private SellerPrivacy findByNo(int no) {
+  private SellerPrivacy findById(String id) {
     SellerPrivacy[] arr = memberList.toArray(new SellerPrivacy[0]);
     for (SellerPrivacy member : arr) {
-      if (member.getNumber() == no) {
+      if (member.getId() == id) {
         return member;
       }
     }
     return null;
   }
 
+<<<<<<< HEAD
   //  public boolean exist(String name) {
   //    SellerPrivacy[] arr = memberList.toArray(new SellerPrivacy[0]);
   //    for (SellerPrivacy member : arr) {
@@ -192,6 +222,20 @@ public class SellerPrivacyHandler {
   //    }
   //    return members;
   //  }
+=======
+  public String promptMember(String label) {
+    while (true) {
+      if (!uniqueIdList.contains(label)) {
+        return label;
+      } /*else if (label.length() == 0) {
+        System.out.println("아이디를 입력해 주세요.");
+        return null;
+      }*/
+      System.out.println("중복되는 아이디입니다.");
+      return null;
+    }
+  }
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 }
 
 

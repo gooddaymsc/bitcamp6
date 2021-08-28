@@ -2,7 +2,7 @@ package com.eomcs.pms.domain;
 
 import java.sql.Date;
 
-public class Privacy {
+public class Privacy extends Manager {
   private int number;
   private String id;
 
@@ -10,11 +10,16 @@ public class Privacy {
   private String nickname;
   private String email;
   private Date birthday;
-  private String password;
   private String photo;
   private String phoneNumber;
+  private String address;
   private Date registeredDate;
+<<<<<<< HEAD
   private int authority;
+=======
+  private int level; //add... sc
+  private String buyerSeller; //add... sc
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
 
   public int getNumber() {
     return number;
@@ -28,12 +33,16 @@ public class Privacy {
   public void setName(String name) {
     this.name = name;
   }
+<<<<<<< HEAD
   public String getId() {
     return id;
   }
   public void setId(String id) {
     this.id = id;
   }
+=======
+
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
   public String getNickname() {
     return nickname;
   }
@@ -52,12 +61,7 @@ public class Privacy {
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
   }
-  public String getPassword() {
-    return password;
-  }
-  public void setPassword(String password) {
-    this.password = password;
-  }
+
   public String getPhoto() {
     return photo;
   }
@@ -70,11 +74,29 @@ public class Privacy {
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+  public String getAddress() {
+    return address;
+  }
+  public void setAddress(String address) {
+    this.address = address;
+  }
   public Date getRegisteredDate() {
     return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public int getLevel() {
+    return level;
+  }
+  public void setLevel(int level) {
+    this.level = level;
+  }
+  public String getBuyerSeller() {
+    return buyerSeller;
+  }
+  public void setBuyerSeller(String buyerSeller) {
+    this.buyerSeller = buyerSeller;
   }
 
   public int getAuthority() {

@@ -24,4 +24,8 @@ public class SellerPrivacy extends Privacy {
   public void setBusinessTel(String businessTel) {
     this.businessPlaceNumber = businessTel;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d4ba18d87e2e3b9c596960774d541c0f48e315cb
