@@ -13,7 +13,11 @@ public class BookingHandler {
     this.booktList = bookList;
   }
 
-  public void add() {
+  public void add(int i, int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 등록]");
 
     Booking booking = new Booking();
@@ -31,7 +35,11 @@ public class BookingHandler {
     booktList.add(booking);
   }
 
-  public void list() {
+  public void list(int i, int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 목록]");
 
     Booking[] list = booktList.toArray(new Booking[0]);
@@ -48,7 +56,11 @@ public class BookingHandler {
     }
   }
 
-  public void detail() {
+  public void detail(int i, int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -67,7 +79,11 @@ public class BookingHandler {
     System.out.printf("예약시간: %s\n", Book.getReservation());
   }
 
-  public void update() {
+  public void update(int i, int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -101,7 +117,11 @@ public class BookingHandler {
     System.out.println("예약을 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int i, int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다.구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 삭제]");
     int no = Prompt.inputInt("번호? ");
 

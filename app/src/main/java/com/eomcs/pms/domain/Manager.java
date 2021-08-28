@@ -33,5 +33,4 @@ public class Manager {
     this.authority = authority;
   }
 
-
 }

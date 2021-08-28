@@ -1,16 +1,17 @@
 package com.eomcs.pms.domain;
 
+//판매자
 public class SellerPrivacy extends Privacy {
 
   private String businessNumber;
   private String businessAddress;
   private String businessPlaceNumber;
 
-  public String getBusinessNumber() {
+  public String getBusinessNo() {
     return businessNumber;
   }
-  public void setBusinessNumber(String businessNumber) {
-    this.businessNumber = businessNumber;
+  public void setBusinessNo(String businessNo) {
+    this.businessNumber = businessNo;
   }
   public String getBusinessAddress() {
     return businessAddress;
@@ -18,12 +19,10 @@ public class SellerPrivacy extends Privacy {
   public void setBusinessAddress(String businessAddress) {
     this.businessAddress = businessAddress;
   }
-  public String getBusinessPlaceNumber() {
+  public String getBusinessTel() {
     return businessPlaceNumber;
   }
-  public void setBusinessPlaceNumber(String businessPlaceNumber) {
-    this.businessPlaceNumber = businessPlaceNumber;
+  public void setBusinessTel(String businessTel) {
+    this.businessPlaceNumber = businessTel;
   }
-
-
 }
