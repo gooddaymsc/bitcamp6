@@ -8,7 +8,7 @@
     - 7. 태그 : tag
     - 8. 좋아요 : likes
 
-- ## Member
+<!-- - ## Member
     - 1. 번호 : number
     - 2. 이름 : name
     - 3. 닉네임 : nickname
@@ -19,7 +19,7 @@
     - 9. 주소 : address
     - 10. 가입일 : registeredDate
     - 11. 등급 : level
-    - 12. 일반회원/판매자 : buyerSeller
+    - 12. 일반회원/판매자 : buyerSeller -->
 
 - ## Privacy
     - 1. 번호 : number
@@ -30,13 +30,17 @@
     - 6. 비밀번호 : password
     - 7. 사진 : photo
     - 8. 전화번호 : phoneNumber
-    - 9. 가입일 : registeredDate
-    - 10. 등급 : level ??
+    - 9. 주소 : address
+    - 10. 가입일 : registeredDate
+    - 11. 등급 : level
+    - 12. 일반회원/판매자 : buyerSeller
+
 
 - ## SellerPrivacy (extends Privacy)
     - 1. 사업자번호 : businessNumber
     - 2. 사업장주소 : businessAddress
     - 3. 사업장번호 : businessPlaceNumber
+    - 4. 사업장이름 : businessName
 
 - ## Product
     - 1. 상품번호 : productNumber
