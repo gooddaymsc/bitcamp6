@@ -32,7 +32,7 @@ public class App {
   List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
   // 판매자
-  List<Product> ProductList = new ArrayList<>();
+  List<Product> productList = new ArrayList<>();
   List<Stock> stockList = new ArrayList<>();
   // 관리자
   //List<Member> memberList = new LinkedList<>();
@@ -47,8 +47,8 @@ public class App {
   SellerPrivacyHandler sellerPrivacyHandler = new SellerPrivacyHandler(sellerPrivacyList, uniqueIdList);
   BookingHandler bookingHandler = new BookingHandler(bookingList);
   CartHandler cartHandler = new CartHandler(cartList);
-  ProductHandler productHandler = new ProductHandler(ProductList);
-  StockHandler stockHandler = new StockHandler(stockList);
+  ProductHandler productHandler = new ProductHandler(productList);
+  StockHandler stockHandler = new StockHandler(stockList, productList);
 
   //MemberHandler memberHandler = new MemberHandler(memberList);
   LoginHandler loginHandler = new LoginHandler(privacyList, sellerPrivacyList);

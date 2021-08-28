@@ -5,14 +5,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductHandler {
-  //상품번호
-  //상품명
-  //주종
-  //원산지
-  //품종
-  //알콜도수
-  //테이스팅 노트 : 당도, 산도, 바디감
-  //가격
 
   List<Product> alcoholList;
   //Manager loginPrivacy;
