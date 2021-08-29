@@ -26,18 +26,18 @@ public class PrivacyHandler {
     //privacy.setNumber(Prompt.inputInt("번호? "));
 
     // 아이디가 중복되면 다시 아이디 재설정.
-    String checkId = promptMember(Prompt.inputString("아이디? "));
+    String checkId = promptMember(Prompt.inputString("아이디를 입력해주세요: "));
     if (checkId == null) {
       return;
     }
     privacy.setId(checkId);
-    privacy.setName(Prompt.inputString("이름? "));
-    privacy.setNickname(Prompt.inputString("닉네임? "));
-    privacy.setEmail(Prompt.inputString("이메일? "));
-    privacy.setBirthday(Prompt.inputDate("생일? "));
-    privacy.setPassword(Prompt.inputString("암호? "));
-    privacy.setPhoto(Prompt.inputString("사진? "));
-    privacy.setPhoneNumber(Prompt.inputString("전화? "));
+    privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
+    privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
+    privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
+    privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
+    privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
+    privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
+    privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     memberList.add(privacy);
@@ -71,20 +71,20 @@ public class PrivacyHandler {
       return;
     }
 
-    System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("닉네임: %s\n", member.getNickname());
-    System.out.printf("이메일: %s\n", member.getEmail());
-    System.out.printf("생일: %s\n", member.getBirthday());
-    System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getPhoneNumber());
-    System.out.printf("등록일: %s\n", member.getRegisteredDate());
-    System.out.printf("권한등급: %d", member.getAuthority());
+    System.out.printf("이름: %s입니다.\n", member.getName());
+    System.out.printf("닉네임: %s입니다.\n", member.getNickname());
+    System.out.printf("이메일: %s입니다.\n", member.getEmail());
+    System.out.printf("생일: %s입니다.\n", member.getBirthday());
+    System.out.printf("사진: %s입니다.\n", member.getPhoto());
+    System.out.printf("전화: %s입니다.\n", member.getPhoneNumber());
+    System.out.printf("등록일: %s입니다.\n", member.getRegisteredDate());
+    System.out.printf("권한등급: %d입니다.", member.getAuthority());
   }
 
 
   public void memberUpdate() {
     System.out.println("\n[회원 변경]");
-    String id = Prompt.inputString("변경할 아이디 : ");
+    String id = Prompt.inputString("변경할 아이디를 입력해주세요: ");
 
     Privacy member = findById(id);
 
@@ -93,13 +93,13 @@ public class PrivacyHandler {
       return;
     }
 
-    String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
-    String nickName = Prompt.inputString("닉네임(" + member.getNickname()  + ")? ");
-    String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
-    Date birthDay = Prompt.inputDate("생일(" + member.getBirthday() + ")? ");
-    String password = Prompt.inputString("암호? ");
-    String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
-    String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
+    String name = Prompt.inputString("변경 후의 이름(" + member.getName()  + ")을 입력해주세요. ");
+    String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")을 입력해주세요. ");
+    String email = Prompt.inputString("변경 후의 이메일(" + member.getEmail() + ")을 입력해주세요. ");
+    Date birthDay = Prompt.inputDate("변경 후의 생일(" + member.getBirthday() + ")을 입력해주세요. ");
+    String password = Prompt.inputString("변경 후의 암호을 입력해주세요. ");
+    String photo = Prompt.inputString("변경 후의 사진(" + member.getPhoto() + ")을 등록해주세요. ");
+    String tel = Prompt.inputString("변경 후의 전화(" + member.getPhoneNumber() + ")을 입력해주세요. ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -122,7 +122,7 @@ public class PrivacyHandler {
   public void delete() {
 
     System.out.println("\n[회원 삭제]");
-    String id = Prompt.inputString("삭제할 아이디 : ");
+    String id = Prompt.inputString("삭제할 아이디를 입력해주세요: ");
 
     Privacy member = findById(id);
 

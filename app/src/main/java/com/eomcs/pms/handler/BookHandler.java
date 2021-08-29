@@ -17,13 +17,13 @@ public class BookHandler {
 
     Book book = new Book();
 
-    book.setNo(Prompt.inputInt("번호? "));
-    book.setName(Prompt.inputString("예약명? "));
-    book.setKind(Prompt.inputString("종류? "));
-    book.setMadeIn(Prompt.inputString("원산지? "));
-    book.setPhoto(Prompt.inputString("사진? "));
-    book.setPrice(Prompt.inputString("가격? "));
-    book.setBook(Prompt.inputString("예약시간? "));
+    book.setNo(Prompt.inputInt("번호를 입력해주세요: "));
+    book.setName(Prompt.inputString("예약을 입력해주세요: "));
+    book.setKind(Prompt.inputString("종류를 입력해주세요: "));
+    book.setMadeIn(Prompt.inputString("원산지를 입력해주세요: "));
+    book.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
+    book.setPrice(Prompt.inputString("가격을 입력해주세요: "));
+    book.setBook(Prompt.inputString("예약시간을 입력해주세요: "));
 
     booktList.add(book);
   }
@@ -47,7 +47,7 @@ public class BookHandler {
 
   public void detail() {
     System.out.println("[예약 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Book Book = findByNo(no);
 
@@ -56,17 +56,17 @@ public class BookHandler {
       return;
     }
 
-    System.out.printf("예약명: %s\n", Book.getName());
-    System.out.printf("종류: %s\n", Book.getKind());
-    System.out.printf("원산지: %s\n", Book.getMadeIn());
-    System.out.printf("사진: %s\n", Book.getPhoto());
-    System.out.printf("가격: %s\n", Book.getPrice());
-    System.out.printf("예약시간: %s\n", Book.getBook());
+    System.out.printf("예약명: %s입니다.\n", Book.getName());
+    System.out.printf("종류: %s입니다.\n", Book.getKind());
+    System.out.printf("원산지: %s입니다.\n", Book.getMadeIn());
+    System.out.printf("사진: %s입니다.\n", Book.getPhoto());
+    System.out.printf("가격: %s입니다.\n", Book.getPrice());
+    System.out.printf("예약시간: %s입니다.\n", Book.getBook());
   }
 
   public void update() {
     System.out.println("[예약 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Book Book = findByNo(no);
 
@@ -75,12 +75,12 @@ public class BookHandler {
       return;
     }
 
-    String name = Prompt.inputString("예약명(" + Book.getName()  + ")? ");
-    String kind = Prompt.inputString("종류(" + Book.getKind() + ")? ");
-    String madeIn = Prompt.inputString("원산지(" + Book.getMadeIn() + ")? ");
-    String photo = Prompt.inputString("사진(" + Book.getPhoto() + ")? ");
-    String price = Prompt.inputString("가격(" + Book.getPrice() + ")? ");
-    String book = Prompt.inputString("예약시간(" + Book.getBook() + ")? ");
+    String name = Prompt.inputString("변경후의 예약명을 입력해주세요.(" + Book.getName()  + ") ");
+    String kind = Prompt.inputString("변경후의 종류를 입력해주세요.(" + Book.getKind() + ") ");
+    String madeIn = Prompt.inputString("변경후의 원산지를 입력해주세요.(" + Book.getMadeIn() + ") ");
+    String photo = Prompt.inputString("변경후의 사진을 등록해주세요.(" + Book.getPhoto() + ") ");
+    String price = Prompt.inputString("변경후의 가격을 입력해주세요.(" + Book.getPrice() + ") ");
+    String book = Prompt.inputString("변경후의 예약시간을 입력해주세요.(" + Book.getBook() + ") ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -100,7 +100,7 @@ public class BookHandler {
 
   public void delete() {
     System.out.println("[예약 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Book Book = findByNo(no);
 

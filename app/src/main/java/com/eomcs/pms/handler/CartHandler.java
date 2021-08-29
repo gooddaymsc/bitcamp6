@@ -22,12 +22,12 @@ public class CartHandler {
 
     Cart cart = new Cart();
 
-    cart.setCartNumber(Prompt.inputInt("번호? "));
-    cart.setProductName(Prompt.inputString("상품명? "));
-    cart.setProductType(Prompt.inputString("종류? "));
-    cart.setCountryOrigin(Prompt.inputString("원산지? "));
-    cart.setProductPhoto(Prompt.inputString("사진? "));
-    cart.setPrice(Prompt.inputString("가격? "));
+    cart.setCartNumber(Prompt.inputInt("번호를 입력해주세요: "));
+    cart.setProductName(Prompt.inputString("상품명을 입력해주세요: "));
+    cart.setProductType(Prompt.inputString("종류를 입력해주세요: "));
+    cart.setCountryOrigin(Prompt.inputString("원산지를 입력해주세요: "));
+    cart.setProductPhoto(Prompt.inputString("사진을 등록해주세요: "));
+    cart.setPrice(Prompt.inputString("가격을 입력해주세요: "));
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
     cartList.add(cart);
   }
@@ -57,7 +57,7 @@ public class CartHandler {
       return;
     }
     System.out.println("[장바구니 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요: ");
 
     Cart cart = findByNo(no);
 
@@ -66,12 +66,12 @@ public class CartHandler {
       return;
     }
 
-    System.out.printf("상품명: %s\n", cart.getProductName());
-    System.out.printf("종류: %s\n", cart.getProductType());
-    System.out.printf("원산지: %s\n", cart.getCountryOrigin());
-    System.out.printf("사진: %s\n", cart.getProductPhoto());
-    System.out.printf("가격: %s\n", cart.getPrice());
-    System.out.printf("등록일: %s\n", cart.getRegistrationDate());
+    System.out.printf("상품명: %s입니다.\n", cart.getProductName());
+    System.out.printf("종류: %s입니다.\n", cart.getProductType());
+    System.out.printf("원산지: %s입니다.\n", cart.getCountryOrigin());
+    System.out.printf("사진: %s입니다.\n", cart.getProductPhoto());
+    System.out.printf("가격: %s입니다.\n", cart.getPrice());
+    System.out.printf("등록일: %s입니다.\n", cart.getRegistrationDate());
   }
 
   public void update(int auth) {
@@ -80,7 +80,7 @@ public class CartHandler {
       return;
     }
     System.out.println("[장바구니 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요: ");
 
     Cart cart = findByNo(no);
 
@@ -89,11 +89,11 @@ public class CartHandler {
       return;
     }
 
-    String name = Prompt.inputString("상품명(" + cart.getProductName()  + ")? ");
-    String kind = Prompt.inputString("종류(" + cart.getProductType() + ")? ");
-    String madeIn = Prompt.inputString("원산지(" + cart.getCountryOrigin() + ")? ");
-    String photo = Prompt.inputString("사진(" + cart.getProductPhoto() + ")? ");
-    String price = Prompt.inputString("가격(" + cart.getPrice() + ")? ");
+    String name = Prompt.inputString("변경 후의 상품명을 입력해주세요:(" + cart.getProductName()  + ")? ");
+    String kind = Prompt.inputString("변경 후의 종류를 입력해주세요:(" + cart.getProductType() + ")? ");
+    String madeIn = Prompt.inputString("변경 후의 원산지를 입력해주세요:" + cart.getCountryOrigin() + ")? ");
+    String photo = Prompt.inputString("변경 후의 사진을 등록해주세요:(" + cart.getProductPhoto() + ")? ");
+    String price = Prompt.inputString("변경 후의 가격을 입력해주세요:(" + cart.getPrice() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -116,7 +116,7 @@ public class CartHandler {
       return;
     }
     System.out.println("[장바구니 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요: ");
 
     Cart cart = findByNo(no);
 

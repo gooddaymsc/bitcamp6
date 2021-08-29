@@ -20,7 +20,7 @@ public class LoginHandler {
 
 
   public Privacy memberInputId() {
-    String id = Prompt.inputString("아이디를 입력해주세요 : ");
+    String id = Prompt.inputString("아이디를 입력해주세요: ");
 
     if (id == null) {
       System.out.println("다시 입력해주세요.");
@@ -29,7 +29,7 @@ public class LoginHandler {
 
     for (Privacy s : memberList) {
       if (id.equals(s.getId())) {
-        String password = Prompt.inputString("비밀번호를 입력해주세요 : ");
+        String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
         if (password.equals(s.getPassword())) {
           System.out.println("로그인이 완료되었습니다.");
@@ -45,7 +45,7 @@ public class LoginHandler {
   }
 
   public Privacy sellerInputId() {
-    String id = Prompt.inputString("아이디를 입력해주세요 : ");
+    String id = Prompt.inputString("아이디를 입력해주세요: ");
 
     if (id == null) {
       System.out.println("다시 입력해주세요.");
@@ -54,7 +54,7 @@ public class LoginHandler {
 
     for (Privacy s : sellerList) {
       if (id.equals(s.getId())) {
-        String password = Prompt.inputString("비밀번호를 입력해주세요 : ");
+        String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
         if (password.equals(s.getPassword())) {
           System.out.println("로그인이 완료되었습니다.");

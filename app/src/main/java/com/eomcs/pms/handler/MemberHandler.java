@@ -50,7 +50,7 @@ public class MemberHandler {
     System.out.println("[회원 상세보기]");
 
     if (auth == 1) {
-      int no = Prompt.inputInt("번호? ");
+      int no = Prompt.inputInt("번호를 입력해주세요: ");
 
       Privacy member = findByNo(no);
 
@@ -59,18 +59,18 @@ public class MemberHandler {
         return;
       }
 
-      System.out.printf("이름: %s\n", member.getName());
-      System.out.printf("닉네임: %s\n", member.getNickname());
-      System.out.printf("이메일: %s\n", member.getEmail());
-      System.out.printf("사진: %s\n", member.getPhoto());
-      System.out.printf("전화: %s\n", member.getPhoneNumber());
-      System.out.printf("주소: %s\n", member.getAddress());
-      System.out.printf("등록일: %s\n", member.getRegisteredDate());
+      System.out.printf("이름: %s입니다.\n", member.getName());
+      System.out.printf("닉네임: %s입니다.\n", member.getNickname());
+      System.out.printf("이메일: %s입니다.\n", member.getEmail());
+      System.out.printf("사진: %s입니다.\n", member.getPhoto());
+      System.out.printf("전화: %s입니다.\n", member.getPhoneNumber());
+      System.out.printf("주소: %s입니다.\n", member.getAddress());
+      System.out.printf("등록일: %s입니다.\n", member.getRegisteredDate());
 
     }
 
     if (auth == 2) {
-      int no = Prompt.inputInt("번호? ");
+      int no = Prompt.inputInt("번호를 입력해주세요: ");
 
       SellerPrivacy member = findByNo2(no); 
 
@@ -79,15 +79,15 @@ public class MemberHandler {
         return;
       } 
 
-      System.out.printf("이름: %s\n", member.getName());
-      System.out.printf("닉네임: %s\n", member.getNickname());
-      System.out.printf("이메일: %s\n", member.getEmail());
-      System.out.printf("사진: %s\n", member.getPhoto());
-      System.out.printf("전화: %s\n", member.getPhoneNumber());
-      System.out.printf("주소: %s\n", member.getAddress());
-      System.out.printf("사업자번호: %s\n", member.getBusinessNumber());
-      System.out.printf("사업장주소: %s\n", member.getBusinessAddress());
-      System.out.printf("사업장번호: %s\n", member.getBusinessPlaceNumber());
+      System.out.printf("이름: %s입니다.\n", member.getName());
+      System.out.printf("닉네임: %s입니다.\n", member.getNickname());
+      System.out.printf("이메일: %s입니다.\n", member.getEmail());
+      System.out.printf("사진: %s입니다.\n", member.getPhoto());
+      System.out.printf("전화: %s입니다.\n", member.getPhoneNumber());
+      System.out.printf("주소: %s입니다.\n", member.getAddress());
+      System.out.printf("사업자번호: %s입니다.\n", member.getBusinessNumber());
+      System.out.printf("사업장주소: %s입니다.\n", member.getBusinessAddress());
+      System.out.printf("사업장번호: %s입니다.\n", member.getBusinessPlaceNumber());
     } 
 
   }
@@ -96,7 +96,7 @@ public class MemberHandler {
     System.out.println("[회원 변경]");
 
     if (auth == 1) {
-      int no = Prompt.inputInt("회원번호? ");
+      int no = Prompt.inputInt("회원번호를 입력해주세요: ");
 
       Privacy member = findByNo(no);
 
@@ -106,8 +106,8 @@ public class MemberHandler {
       }
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      String nickName = Prompt.inputString("닉네임(" + member.getNickname()  + ")? ");
-      int level = Prompt.inputInt("등급(" + member.getLevel()  + ")? ");
+      String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")을 입력해주세요: ");
+      int level = Prompt.inputInt("변경 후의 등급(" + member.getLevel()  + ")을 입력해주세요: ");
       //      String buyerSeller = Prompt.inputString("구매자/판매자(" + member.getBuyerSeller()  + ")? ");
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -123,7 +123,7 @@ public class MemberHandler {
     }
 
     if (auth == 2) {
-      int no = Prompt.inputInt("판매자번호? ");
+      int no = Prompt.inputInt("판매자번호를 입력해주세요: ");
 
       Privacy member = findByNo(no);
 
@@ -133,8 +133,8 @@ public class MemberHandler {
       }
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      String nickName = Prompt.inputString("닉네임(" + member.getNickname()  + ")? ");
-      int level = Prompt.inputInt("등급(" + member.getLevel()  + ")? ");
+      String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")을 입력해주세요: ");
+      int level = Prompt.inputInt("변경 후의 등급(" + member.getLevel()  + ")을 입력해주세요: ");
       //      String buyerSeller = Prompt.inputString("구매자/판매자(" + member.getBuyerSeller()  + ")? ");
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
@@ -156,7 +156,7 @@ public class MemberHandler {
 
   public void delete(int auth) {
     System.out.println("[회원 탈퇴]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Privacy member = findByNo(no);
 

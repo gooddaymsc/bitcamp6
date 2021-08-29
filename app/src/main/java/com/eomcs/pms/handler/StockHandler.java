@@ -24,15 +24,15 @@ public class StockHandler {
     }
     Stock stock = new Stock();
 
-    stock.setProductType(Prompt.inputString("주종? "));
+    stock.setProductType(Prompt.inputString("주종을 입력하세요: "));
     // Product 에 있는 이름을 비교해서 있으면 stock.product에 넣는다.
-    stock.product = findByProduct(Prompt.inputString("상품명?"));
+    stock.product = findByProduct(Prompt.inputString("상품명을 입력하세요:"));
     if (stock.product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;
     }
-    stock.setPrice(Prompt.inputInt("판매 가격?"));
-    stock.setStocks(Prompt.inputInt("재고 수량?"));
+    stock.setPrice(Prompt.inputInt("판매 가격을 입력하세요:"));
+    stock.setStocks(Prompt.inputInt("재고 수량을 입력하세요:"));
     stockList.add(stock);
   }
 
@@ -61,18 +61,18 @@ public class StockHandler {
       return;
     }
     System.out.println("[재고 상세보기]");
-    String name = Prompt.inputString("상품이름? ");
+    String name = Prompt.inputString("상품이름을 입력하세요: ");
     Stock stock = findByStock(name);
 
     if (stock == null) {
       System.out.println("해당 번호의 재고가 없습니다.");
       return;
     }
-    System.out.printf("상품: %s\n", stock.getProductType());
-    System.out.printf("상품이름: %s\n", stock.getProductName());
-    System.out.printf("원산지: %s\n", stock.getCountryOrigin());
-    System.out.printf("재고수량: %d\n", stock.getStocks ());
-    System.out.printf("가격: %d\n", stock.getPrice ());
+    System.out.printf("주종: %s입니다.\n", stock.getProductType());
+    System.out.printf("상품이름: %s입니다.\n", stock.getProductName());
+    System.out.printf("원산지: %s입니다.\n", stock.getCountryOrigin());
+    System.out.printf("재고수량: %d입니다.\n", stock.getStocks());
+    System.out.printf("가격: %d입니다.\n", stock.getPrice());
   }
 
   public void update(int auth) {
@@ -81,7 +81,7 @@ public class StockHandler {
       return;
     }
     System.out.println("[재고 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요: ");
 
     Stock stock = findByNo(no);
 
@@ -89,8 +89,8 @@ public class StockHandler {
       System. out.println("해당 번호의 재고가 없습니다.");
       return;
     }
-    int stocks = Prompt.inputInt("재고수량(" + stock.getStocks() + ")? ");
-    int price = Prompt.inputInt("가격(" + stock.getPrice() + ")? ");
+    int stocks = Prompt.inputInt("변경 후의 재고수량(" + stock.getStocks() + ")을 입력하세요: ");
+    int price = Prompt.inputInt("변경 후의 가격(" + stock.getPrice() + ")을 입력하세요: ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -110,7 +110,7 @@ public class StockHandler {
       return;
     }
     System.out.println("[재고 삭제]");
-    String name = Prompt.inputString("상품이름? ");
+    String name = Prompt.inputString("상품이름을 입력하세요: ");
 
     Stock stock = findByStock(name);
 

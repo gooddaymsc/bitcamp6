@@ -60,16 +60,16 @@ public class BoardHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", board.getTitle());
-    System.out.printf("내용: %s\n", board.getContent());
-    System.out.printf("작성자: %s\n", board.getWriter());
-    System.out.printf("등록일: %s\n", board.getRegistrationDate());
+    System.out.printf("제목: %s입니다.\n", board.getTitle());
+    System.out.printf("내용: %s입니다.\n", board.getContent());
+    System.out.printf("작성자: %s입니다.\n", board.getWriter());
+    System.out.printf("등록일: %s입니다.\n", board.getRegistrationDate());
 
     board.setViews(board.getViews() + 1);
-    System.out.printf("조회수: %d\n", board.getViews());
+    System.out.printf("조회수: %d입니다.\n", board.getViews());
     board.setLikes(board.getLikes() + 1);
-    System.out.printf("좋아요: %d\n", board.getLikes());
-    System.out.printf("태그: %s\n", board.getTag());
+    System.out.printf("좋아요 수: %d입니다.\n", board.getLikes());
+    System.out.printf("태그: %s입니다.\n", board.getTag());
 
   }
 
@@ -79,7 +79,7 @@ public class BoardHandler {
       return;
     }
     System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Board board = findByNo(no);
 
@@ -88,9 +88,9 @@ public class BoardHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", board.getTitle()));
-    String content = Prompt.inputString(String.format("내용(%s)? ", board.getContent()));
-    String tag = Prompt.inputString(String.format("태그(%s)? ", board.getTag()));
+    String title = Prompt.inputString(String.format("변경 후의 제목(%s)을 입력해주세요: ", board.getTitle()));
+    String content = Prompt.inputString(String.format("변경 후의 내용(%s)을 입력해주세요: ", board.getContent()));
+    String tag = Prompt.inputString(String.format("변경 후의 태그(%s)를 입력해주세요: ", board.getTag()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -110,7 +110,7 @@ public class BoardHandler {
       return;
     }
     System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Board board = findByNo(no);
 

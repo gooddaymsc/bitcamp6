@@ -23,24 +23,24 @@ public class SellerPrivacyHandler {
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setAuthority(i);
     sellerPrivacy.setNumber(size++);
-    //sellerPrivacy.setNumber(Prompt.inputInt("번호? "));
+    //sellerPrivacy.setNumber(Prompt.inputInt("번호를 입력하세요: "));
 
-    String checkId = promptMember(Prompt.inputString("아이디? "));
+    String checkId = promptMember(Prompt.inputString("아이디를 입력하세요: "));
     if (checkId == null) {
       return;
     }
     sellerPrivacy.setId(checkId);
 
-    sellerPrivacy.setName(Prompt.inputString("이름? "));
-    sellerPrivacy.setNickname(Prompt.inputString("닉네임? "));
-    sellerPrivacy.setEmail(Prompt.inputString("이메일? "));
-    sellerPrivacy.setBirthday(Prompt.inputDate("생일? "));
-    sellerPrivacy.setPassword(Prompt.inputString("암호? "));
-    sellerPrivacy.setPhoto(Prompt.inputString("사진? "));
-    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화? "));
-    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호? "));
-    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소? "));
-    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호? "));
+    sellerPrivacy.setName(Prompt.inputString("이름을 입력하세요: "));
+    sellerPrivacy.setNickname(Prompt.inputString("닉네임을 입력하세요: "));
+    sellerPrivacy.setEmail(Prompt.inputString("이메일을 입력하세요: "));
+    sellerPrivacy.setBirthday(Prompt.inputDate("생일을 입력하세요: "));
+    sellerPrivacy.setPassword(Prompt.inputString("암호를 입력하세요: "));
+    sellerPrivacy.setPhoto(Prompt.inputString("사진을 등록하세요: "));
+    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화를 입력하세요: "));
+    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호를 입력하세요: "));
+    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소를 입력하세요: "));
+    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호를 입력하세요: "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
     uniqueIdList.add(sellerPrivacy.getId());
@@ -67,7 +67,7 @@ public class SellerPrivacyHandler {
 
   public void sellerDetail() {
     System.out.println("\n[판매자 상세보기]");
-    String id = Prompt.inputString("번호? ");
+    String id = Prompt.inputString("번호를 입력하세요: ");
 
     SellerPrivacy member = findById(id);
 
@@ -76,22 +76,22 @@ public class SellerPrivacyHandler {
       return;
     }
 
-    System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("닉네임: %s\n", member.getNickname());
-    System.out.printf("이메일: %s\n", member.getEmail());
-    System.out.printf("생일: %s\n", member.getBirthday());
-    System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getPhoneNumber());
-    System.out.printf("사업자번호: %s\n", member.getBusinessNumber());
-    System.out.printf("사업장주소: %s\n", member.getBusinessAddress());
-    System.out.printf("사업장번호: %s\n", member.getBusinessPlaceNumber());
-    System.out.printf("등록일: %s\n", member.getRegisteredDate());
-    System.out.printf("권한등급: %d", member.getAuthority());
+    System.out.printf("이름: %s입니다.\n", member.getName());
+    System.out.printf("닉네임: %s입니다.\n", member.getNickname());
+    System.out.printf("이메일: %s입니다.\n", member.getEmail());
+    System.out.printf("생일: %s입니다.\n", member.getBirthday());
+    System.out.printf("사진: %s입니다.\n", member.getPhoto());
+    System.out.printf("전화: %s입니다.\n", member.getPhoneNumber());
+    System.out.printf("사업자번호: %s입니다.\n", member.getBusinessNumber());
+    System.out.printf("사업장주소: %s입니다.\n", member.getBusinessAddress());
+    System.out.printf("사업장번호: %s입니다.\n", member.getBusinessPlaceNumber());
+    System.out.printf("등록일: %s입니다.\n", member.getRegisteredDate());
+    System.out.printf("권한등급: %d입니다.", member.getAuthority());
   }
 
   public void update() {
     System.out.println("\n[판매자 변경]");
-    String id = Prompt.inputString("번호? ");
+    String id = Prompt.inputString("번호를 입력하세요: ");
 
     SellerPrivacy member = findById(id);
 
@@ -100,16 +100,16 @@ public class SellerPrivacyHandler {
       return;
     }
 
-    String name = Prompt.inputString("이름(" + member.getName()  + ")? ");
-    String nickName = Prompt.inputString("닉네임(" + member.getNickname()  + ")? ");
-    String email = Prompt.inputString("이메일(" + member.getEmail() + ")? ");
-    Date birthDay = Prompt.inputDate("생일(" + member.getBirthday() + ")? ");
-    String password = Prompt.inputString("암호? ");
-    String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
-    String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
-    String bussinessNo = Prompt.inputString("사업자번호(" + member.getBusinessNumber() + ")? ");
-    String bussinessAddress = Prompt.inputString("사업장주소(" + member.getBusinessAddress() + ")? ");
-    String bussinessTel = Prompt.inputString("사업장번호(" + member.getBusinessPlaceNumber() + ")? ");
+    String name = Prompt.inputString("변경 후의 이름(" + member.getName()  + ")를 입력해주세요: ");
+    String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")를 입력해주세요: ");
+    String email = Prompt.inputString("변경 후의 이메일(" + member.getEmail() + ")를 입력해주세요: ");
+    Date birthDay = Prompt.inputDate("변경 후의 생일(" + member.getBirthday() + ")를 입력해주세요: ");
+    String password = Prompt.inputString("변경 후의 암호를 입력해주세요: ");
+    String photo = Prompt.inputString("변경 후의 사진(" + member.getPhoto() + ")를 입력해주세요: ");
+    String tel = Prompt.inputString("변경 후의 전화(" + member.getPhoneNumber() + ")를 입력해주세요: ");
+    String bussinessNo = Prompt.inputString("변경 후의 사업자번호(" + member.getBusinessNumber() + ")를 입력해주세요: ");
+    String bussinessAddress = Prompt.inputString("변경 후의 사업장주소(" + member.getBusinessAddress() + ")를 입력해주세요: ");
+    String bussinessTel = Prompt.inputString("변경 후의 사업장번호(" + member.getBusinessPlaceNumber() + ")를 입력해주세요: ");
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("판매자 변경을 취소하였습니다.");
@@ -132,7 +132,7 @@ public class SellerPrivacyHandler {
 
   public void delete() {
     System.out.println("\n[판매자 삭제]");
-    String id = Prompt.inputString("번호? ");
+    String id = Prompt.inputString("번호를 입력하세요: ");
 
     SellerPrivacy member = findById(id);
 
