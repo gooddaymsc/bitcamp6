@@ -8,14 +8,16 @@ import com.eomcs.util.Prompt;
 public class BoardHandler {
 
   List<Board> boardList;
-
   public BoardHandler(List<Board> boardList) {
     this.boardList = boardList;
   }
 
-  public void add() {
+  public void add(int i, int auth) {
+    if (auth == 0 ) {
+      System.out.println("권한이 없습니다.\n로그인해주세요...");
+      return;
+    }
     System.out.println("[새 게시글]");
-
     Board board = new Board();
 
     board.setNumber(Prompt.inputInt("번호? "));
@@ -71,7 +73,11 @@ public class BoardHandler {
 
   }
 
-  public void update() {
+  public void update(int i, int auth) {
+    if (auth == 0) {
+      System.out.println("권한이 없습니다.\n로그인해주세요...");
+      return;
+    }
     System.out.println("[게시글 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -98,7 +104,11 @@ public class BoardHandler {
     System.out.println("게시글을 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int i, int auth) {
+    if (auth == 0) {
+      System.out.println("권한이 없습니다.\n로그인해주세요...");
+      return;
+    }
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 

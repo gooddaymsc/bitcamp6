@@ -15,7 +15,6 @@ public class Privacy extends Manager {
   private int level;
   private String buyerSeller;
 
-
   public int getNumber() {
     return number;
   }
@@ -84,7 +83,4 @@ public class Privacy extends Manager {
   public void setBuyerSeller(String buyerSeller) {
     this.buyerSeller = buyerSeller;
   }
-
-
-
 }
