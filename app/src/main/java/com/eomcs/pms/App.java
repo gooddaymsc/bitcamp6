@@ -34,7 +34,7 @@ public class App {
   List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
   // 판매자
-  List<Product> ProductList = new ArrayList<>();
+  List<Product> productList = new ArrayList<>();
   List<Stock> stockList = new ArrayList<>();
   // 관리자
   //List<Member> memberList = new LinkedList<>();
@@ -47,8 +47,8 @@ public class App {
   BoardHandler boardHandler = new BoardHandler(boardList); 
   BookingHandler bookingHandler = new BookingHandler(bookingList);
   CartHandler cartHandler = new CartHandler(cartList);
-  ProductHandler productHandler = new ProductHandler(ProductList);
-  StockHandler stockHandler = new StockHandler(stockList, ProductList);
+  ProductHandler productHandler = new ProductHandler(productList);
+  StockHandler stockHandler = new StockHandler(stockList, productList);
 
   MemberHandler memberHandler = new MemberHandler(privacyList, sellerPrivacyList); 
   LoginHandler loginHandler = new LoginHandler(privacyList, sellerPrivacyList);
@@ -414,22 +414,22 @@ public class App {
     managerMemberMenu1.add(new Menu("목록") {  
       @Override
       public void execute() {
-        memberHandler.list(1); 
+        memberHandler.list(loginPrivacy.getAuthority(), 1); 
       }});
     managerMemberMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(1); 
+        memberHandler.detail(loginPrivacy.getAuthority(), 1); 
       }});
     managerMemberMenu1.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(1); 
+        memberHandler.update(loginPrivacy.getAuthority(), 1); 
       }});
     managerMemberMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(1); 
+        memberHandler.delete(loginPrivacy.getAuthority(), 1); 
       }});
 
     //메인/4관리자/판매자관리
@@ -439,22 +439,22 @@ public class App {
     managerSellerMenu1.add(new Menu("목록") {  
       @Override
       public void execute() {
-        memberHandler.list(2); 
+        memberHandler.list(loginPrivacy.getAuthority(), 2); 
       }});
     managerSellerMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(2); 
+        memberHandler.detail(loginPrivacy.getAuthority(), 2); 
       }});
     managerSellerMenu1.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(2); 
+        memberHandler.update(loginPrivacy.getAuthority(), 2); 
       }});
     managerSellerMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(2); 
+        memberHandler.delete(loginPrivacy.getAuthority(), 2); 
       }});
     //메인/4관리자/게시판관리
     MenuGroup boardMenu1 = new MenuGroup("게시판관리");
