@@ -12,6 +12,8 @@ public class Privacy extends Manager {
   private String phoneNumber;
   private String address;
   private Date registeredDate;
+  private int level;
+  private String buyerSeller;
 
 
   public int getNumber() {
@@ -69,6 +71,18 @@ public class Privacy extends Manager {
   }
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public int getLevel() {
+    return level;
+  }
+  public void setLevel(int level) {
+    this.level = level;
+  }
+  public String getBuyerSeller() {
+    return buyerSeller;
+  }
+  public void setBuyerSeller(String buyerSeller) {
+    this.buyerSeller = buyerSeller;
   }
 
 
