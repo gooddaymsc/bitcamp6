@@ -12,8 +12,8 @@ public class BoardHandler {
     this.boardList = boardList;
   }
 
-  public void add(int i, int auth) {
-    if (auth == 0 ) {
+  public void add(int auth) {
+    if (auth == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;
     }
@@ -73,7 +73,7 @@ public class BoardHandler {
 
   }
 
-  public void update(int i, int auth) {
+  public void update(int auth) {
     if (auth == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;
@@ -104,7 +104,7 @@ public class BoardHandler {
     System.out.println("게시글을 변경하였습니다.");
   }
 
-  public void delete(int i, int auth) {
+  public void delete(int auth) {
     if (auth == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;

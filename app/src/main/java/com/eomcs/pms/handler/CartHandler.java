@@ -13,8 +13,8 @@ public class CartHandler {
     this.cartList = cartList;
   }
 
-  public void add(int i, int auth) {
-    if (auth == 0 || auth == 2 || auth == 3) {
+  public void add(int auth) {
+    if (auth != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -32,8 +32,8 @@ public class CartHandler {
     cartList.add(cart);
   }
 
-  public void list(int i, int auth) {
-    if (auth == 0 || auth == 2 || auth == 3) {
+  public void list(int auth) {
+    if (auth != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -51,8 +51,8 @@ public class CartHandler {
     }
   }
 
-  public void detail(int i, int auth) {
-    if (auth == 0 || auth == 2 || auth == 3) {
+  public void detail(int auth) {
+    if (auth != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -74,8 +74,8 @@ public class CartHandler {
     System.out.printf("등록일: %s\n", cart.getRegistrationDate());
   }
 
-  public void update(int i, int auth) {
-    if (auth == 0 || auth == 2 || auth == 3) {
+  public void update(int auth) {
+    if (auth != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -110,8 +110,8 @@ public class CartHandler {
     System.out.println("장바구니를 변경하였습니다.");
   }
 
-  public void delete(int i, int auth) {
-    if (auth == 0 || auth == 2 || auth == 3) {
+  public void delete(int auth) {
+    if (auth != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }

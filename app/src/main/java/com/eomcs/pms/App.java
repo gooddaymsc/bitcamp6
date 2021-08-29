@@ -177,7 +177,7 @@ public class App {
     boardMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.add(1, loginPrivacy.getAuthority()); 
+        boardHandler.add(loginPrivacy.getAuthority()); 
       }});
     boardMenu.add(new Menu("조회") {
       @Override
@@ -197,12 +197,12 @@ public class App {
     boardMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        boardHandler.update(1, loginPrivacy.getAuthority()); 
+        boardHandler.update(loginPrivacy.getAuthority()); 
       }});
     boardMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        boardHandler.delete(1, loginPrivacy.getAuthority()); 
+        boardHandler.delete(loginPrivacy.getAuthority()); 
       }});
 
     //-----------------------------------------
@@ -213,27 +213,27 @@ public class App {
     bookMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        bookingHandler.add(1, loginPrivacy.getAuthority()); 
+        bookingHandler.add(loginPrivacy.getAuthority()); 
       }});
     bookMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        bookingHandler.list(1, loginPrivacy.getAuthority()); 
+        bookingHandler.list(loginPrivacy.getAuthority()); 
       }});
     bookMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        bookingHandler.detail(1, loginPrivacy.getAuthority()); 
+        bookingHandler.detail(loginPrivacy.getAuthority()); 
       }});
     bookMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        bookingHandler.update(1, loginPrivacy.getAuthority()); 
+        bookingHandler.update(loginPrivacy.getAuthority()); 
       }});
     bookMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        bookingHandler.delete(1, loginPrivacy.getAuthority()); 
+        bookingHandler.delete(loginPrivacy.getAuthority()); 
       }});
 
 
@@ -245,27 +245,27 @@ public class App {
     cartMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        cartHandler.add(1, loginPrivacy.getAuthority()); 
+        cartHandler.add(loginPrivacy.getAuthority()); 
       }});
     cartMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        cartHandler.list(1, loginPrivacy.getAuthority()); 
+        cartHandler.list(loginPrivacy.getAuthority()); 
       }});
     cartMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        cartHandler.detail(1, loginPrivacy.getAuthority()); 
+        cartHandler.detail(loginPrivacy.getAuthority()); 
       }});
     cartMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        cartHandler.update(1, loginPrivacy.getAuthority()); 
+        cartHandler.update(loginPrivacy.getAuthority()); 
       }});
     cartMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        cartHandler.delete(1, loginPrivacy.getAuthority()); 
+        cartHandler.delete(loginPrivacy.getAuthority()); 
       }});
 
 

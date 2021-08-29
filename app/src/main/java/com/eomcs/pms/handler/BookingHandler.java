@@ -13,8 +13,8 @@ public class BookingHandler {
     this.booktList = bookList;
   }
 
-  public void add(int i, int auth) {
-    if (auth == 0 || auth == 3) {
+  public void add(int auth) {
+    if (auth != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -35,7 +35,7 @@ public class BookingHandler {
     booktList.add(booking);
   }
 
-  public void list(int i, int auth) {
+  public void list(int auth) {
     if (auth == 0 || auth == 3) {
       System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
       return;
@@ -56,7 +56,7 @@ public class BookingHandler {
     }
   }
 
-  public void detail(int i, int auth) {
+  public void detail(int auth) {
     if (auth == 0 || auth == 3) {
       System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
       return;
@@ -79,7 +79,7 @@ public class BookingHandler {
     System.out.printf("예약시간: %s\n", Book.getReservation());
   }
 
-  public void update(int i, int auth) {
+  public void update(int auth) {
     if (auth == 0 || auth == 3) {
       System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
       return;
@@ -117,7 +117,7 @@ public class BookingHandler {
     System.out.println("예약을 변경하였습니다.");
   }
 
-  public void delete(int i, int auth) {
+  public void delete(int auth) {
     if (auth == 0 || auth == 3) {
       System.out.println("권한이 없습니다.구매자 또는 판매자 기능입니다.");
       return;
