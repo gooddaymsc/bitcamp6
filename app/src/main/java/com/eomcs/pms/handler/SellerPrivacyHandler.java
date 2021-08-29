@@ -38,9 +38,9 @@ public class SellerPrivacyHandler {
     sellerPrivacy.setPassword(Prompt.inputString("암호? "));
     sellerPrivacy.setPhoto(Prompt.inputString("사진? "));
     sellerPrivacy.setPhoneNumber(Prompt.inputString("전화? "));
-    sellerPrivacy.setBusinessNo(Prompt.inputString("사업자번호? "));
+    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호? "));
     sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소? "));
-    sellerPrivacy.setBusinessTel(Prompt.inputString("사업장번호? "));
+    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호? "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
     uniqueIdList.add(sellerPrivacy.getId());
@@ -58,9 +58,9 @@ public class SellerPrivacyHandler {
           member.getName(), 
           member.getEmail(), 
           member.getPhoneNumber(), 
-          member.getBusinessNo(),
+          member.getBusinessNumber(),
           member.getBusinessAddress(),
-          member.getBusinessTel(),
+          member.getBusinessPlaceNumber(),
           member.getRegisteredDate());
     }
   }
@@ -82,9 +82,9 @@ public class SellerPrivacyHandler {
     System.out.printf("생일: %s\n", member.getBirthday());
     System.out.printf("사진: %s\n", member.getPhoto());
     System.out.printf("전화: %s\n", member.getPhoneNumber());
-    System.out.printf("사업자번호: %s\n", member.getBusinessNo());
+    System.out.printf("사업자번호: %s\n", member.getBusinessNumber());
     System.out.printf("사업장주소: %s\n", member.getBusinessAddress());
-    System.out.printf("사업장번호: %s\n", member.getBusinessTel());
+    System.out.printf("사업장번호: %s\n", member.getBusinessPlaceNumber());
     System.out.printf("등록일: %s\n", member.getRegisteredDate());
     System.out.printf("권한등급: %d", member.getAuthority());
   }
@@ -107,9 +107,9 @@ public class SellerPrivacyHandler {
     String password = Prompt.inputString("암호? ");
     String photo = Prompt.inputString("사진(" + member.getPhoto() + ")? ");
     String tel = Prompt.inputString("전화(" + member.getPhoneNumber() + ")? ");
-    String bussinessNo = Prompt.inputString("사업자번호(" + member.getBusinessNo() + ")? ");
+    String bussinessNo = Prompt.inputString("사업자번호(" + member.getBusinessNumber() + ")? ");
     String bussinessAddress = Prompt.inputString("사업장주소(" + member.getBusinessAddress() + ")? ");
-    String bussinessTel = Prompt.inputString("사업장번호(" + member.getBusinessTel() + ")? ");
+    String bussinessTel = Prompt.inputString("사업장번호(" + member.getBusinessPlaceNumber() + ")? ");
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("판매자 변경을 취소하였습니다.");
@@ -123,9 +123,9 @@ public class SellerPrivacyHandler {
     member.setPassword(password);
     member.setPhoto(photo);
     member.setPhoneNumber(tel);
-    member.setBusinessNo(bussinessNo);
+    member.setBusinessNumber(bussinessNo);
     member.setBusinessAddress(bussinessAddress);
-    member.setBusinessTel(bussinessTel);
+    member.setBusinessPlaceNumber(bussinessTel);
 
     System.out.println("판매자을 변경하였습니다.");
   }

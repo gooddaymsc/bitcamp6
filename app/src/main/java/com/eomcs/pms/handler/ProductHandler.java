@@ -5,22 +5,19 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductHandler {
-  //상품번호
-  //상품명
-  //주종
-  //원산지
-  //품종
-  //알콜도수
-  //테이스팅 노트 : 당도, 산도, 바디감
-  //가격
 
   List<Product> alcoholList;
-
+  //Manager loginPrivacy;
   public ProductHandler(List<Product> alcoholList) {
     this.alcoholList = alcoholList;
+    //this.loginPrivacy = loginPrivacy;
   }
 
-  public void add() {
+  public void add(int auth) {
+    if (auth == 0 || auth == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[상품 등록]");
 
     Product product = new Product();
@@ -40,6 +37,7 @@ public class ProductHandler {
   }
 
   public void list() {
+
     System.out.println("[상품 목록]");
 
     Product[] list = alcoholList.toArray(new Product[0]);
@@ -81,7 +79,11 @@ public class ProductHandler {
     System.out.printf("가격: %d\n", alcohol.getPrice ());
   }
 
-  public void update() {
+  public void update(int auth) {
+    if (auth == 0 || auth == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[상품 변경]");
     int no = Prompt.inputInt("번호? ");
 
@@ -121,7 +123,11 @@ public class ProductHandler {
     System.out.println("상품정보를 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int auth) {
+    if (auth == 0 || auth == 1 ) {
+      System.out.println("해당 메뉴는 판매자 권한입니다.");
+      return;
+    }
     System.out.println("[상품 삭제]");
     int no = Prompt.inputInt("번호? ");
 
