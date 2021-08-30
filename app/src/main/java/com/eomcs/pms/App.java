@@ -16,6 +16,7 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.BookingHandler;
 import com.eomcs.pms.handler.CartHandler;
+import com.eomcs.pms.handler.FindHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.ManagerBoardHandler;
 import com.eomcs.pms.handler.MemberHandler;
@@ -56,6 +57,8 @@ public class App {
   ManagerBoardHandler managerBoardHandler = new ManagerBoardHandler(boardList);
 
   LoginHandler loginHandler = new LoginHandler(managerList);
+
+  FindHandler findHandler = new FindHandler(privacyList, sellerPrivacyList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -100,16 +103,22 @@ public class App {
         sellerPrivacyHandler.sellerAdd(2,loginPrivacy.getAuthority()); 
       }});
 
+
+
+
+
+
+
+
     //메인/1로그인/3아이디비번찾기
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기");
     loginMenu.add(findMenu);
 
     //메인/1로그인/3아이디비번찾기/1아이디찾기
-    //    MenuGroup findIdMenu = new MenuGroup("아이디찾기");
     findMenu.add(new Menu("아이디찾기") {
       @Override
       public void execute() {
-        System.out.println("아직 구현 준비중입니다.");
+        findHandler.findId();
       }});
 
     //메인/1로그인/3아이디비번찾기/2비번찾기
@@ -117,10 +126,22 @@ public class App {
     findMenu.add(new Menu("비밀번호찾기") {
       @Override
       public void execute() {
-        System.out.println("아직 구현 준비중입니다.");
+        findHandler.findPassword();
       }});
+
+
+
+
+
+
+
+
+
+
+
+
+
     //메인/1로그인/4로그인실행
-    //MenuGroup goMenu = new MenuGroup("로그인실행");
     loginMenu.add(new Menu("로그인실행") {
       @Override
       public void execute() {
@@ -432,6 +453,17 @@ public class App {
     //메인/4관리자/게시판관리
     MenuGroup boardMenu1 = new MenuGroup("게시판관리");
     manager.add(boardMenu1);
+
+    boardMenu1.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        managerBoardHandler.list(loginPrivacy.getAuthority()); 
+      }});
+    boardMenu1.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        managerBoardHandler.detail(loginPrivacy.getAuthority()); 
+      }});
 
     boardMenu1.add(new Menu("삭제") {
       @Override
