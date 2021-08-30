@@ -11,7 +11,7 @@ public class StockHandler {
   List<Product> productList;
 
   //  Manager loginPrivacy;
-  public StockHandler (List<Stock> stockList, List<Product> productList) {
+  public StockHandler(List<Stock> stockList, List<Product> productList ) {
     this.stockList = stockList;
     this.productList = productList;
     //    this.loginPrivacy = loginPrivacy;
@@ -22,17 +22,25 @@ public class StockHandler {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
-    Stock stock = new Stock();
+    System.out.println("\n[재고등록]");
 
-    stock.setProductType(Prompt.inputString("주종을 입력하세요: "));
+    Stock stock = new Stock(); 
+
+    stock.setStockType(Prompt.inputString("주종? "));
     // Product 에 있는 이름을 비교해서 있으면 stock.product에 넣는다.
-    stock.product = findByProduct(Prompt.inputString("상품명을 입력하세요:"));
+    stock.product = findByProduct(Prompt.inputString("상품명?"));
+    stock.setStockName(stock.product.getProductName()); 
+
     if (stock.product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;
     }
-    stock.setPrice(Prompt.inputInt("판매 가격을 입력하세요:"));
-    stock.setStocks(Prompt.inputInt("재고 수량을 입력하세요:"));
+
+    stock.setStockNumber(stock.product.getProductNumber());    
+    stock.setStockOrigin(stock.product.getCountryOrigin());       
+    stock.setPrice(Prompt.inputInt("판매 가격?"));
+    stock.setStocks(Prompt.inputInt("재고 수량?"));
+    //원산지
     stockList.add(stock);
   }
 
@@ -46,12 +54,13 @@ public class StockHandler {
     Stock[] list = stockList.toArray(new Stock[0]);
 
     for (Stock stock : list) {
-      System.out.printf("%d, %s, %s, %d, %d \n", 
+      System.out.printf("%d, %s, %s, %d, %d, %s \n", 
           stock.getStockNumber(), 
-          stock.getProductType(), 
-          stock.getProductName(), 
+          stock.getStockType(), 
+          stock.getStockName(), 
           stock.getPrice(),
-          stock.getStocks()); 
+          stock.getStocks(), 
+          stock.getStockOrigin());
     }
   }
 
@@ -61,18 +70,20 @@ public class StockHandler {
       return;
     }
     System.out.println("[재고 상세보기]");
-    String name = Prompt.inputString("상품이름을 입력하세요: ");
+    String name = Prompt.inputString("상품이름? ");
     Stock stock = findByStock(name);
 
     if (stock == null) {
       System.out.println("해당 번호의 재고가 없습니다.");
       return;
     }
-    System.out.printf("주종: %s입니다.\n", stock.getProductType());
-    System.out.printf("상품이름: %s입니다.\n", stock.getProductName());
-    System.out.printf("원산지: %s입니다.\n", stock.getCountryOrigin());
-    System.out.printf("재고수량: %d입니다.\n", stock.getStocks());
-    System.out.printf("가격: %d입니다.\n", stock.getPrice());
+    System.out.printf("재고번호: %s\n", stock.getStockNumber());
+    System.out.printf("주종: %s\n", stock.getStockType());
+    System.out.printf("상품이름: %s\n", stock.getStockName());
+    System.out.printf("가격: %d\n", stock.getPrice ());
+    System.out.printf("재고수량: %d\n", stock.getStocks ());   
+    System.out.printf("원산지: %s\n", stock.getStockOrigin());
+
   }
 
   public void update(int auth) {
@@ -81,7 +92,7 @@ public class StockHandler {
       return;
     }
     System.out.println("[재고 변경]");
-    int no = Prompt.inputInt("번호를 입력하세요: ");
+    int no = Prompt.inputInt("번호? ");
 
     Stock stock = findByNo(no);
 
@@ -89,8 +100,9 @@ public class StockHandler {
       System. out.println("해당 번호의 재고가 없습니다.");
       return;
     }
-    int stocks = Prompt.inputInt("변경 후의 재고수량(" + stock.getStocks() + ")을 입력하세요: ");
-    int price = Prompt.inputInt("변경 후의 가격(" + stock.getPrice() + ")을 입력하세요: ");
+    int stocks = Prompt.inputInt("재고수량(" + stock.getStocks() + ")? ");
+    int price = Prompt.inputInt("가격(" + stock.getPrice() + ")? ");
+    String origin = Prompt.inputString("원산지.(" + stock.getStockOrigin() + ")? ");  //test
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -100,7 +112,7 @@ public class StockHandler {
 
     stock.setPrice(stocks);
     stock.setPrice(price);
-
+    stock.setStockOrigin(origin);   //test
     System.out.println("재고정보를 변경하였습니다.");
   }
 
@@ -110,7 +122,7 @@ public class StockHandler {
       return;
     }
     System.out.println("[재고 삭제]");
-    String name = Prompt.inputString("상품이름을 입력하세요: ");
+    String name = Prompt.inputString("상품이름? ");
 
     Stock stock = findByStock(name);
 
@@ -162,25 +174,12 @@ public class StockHandler {
   public boolean exist(String name) {
     Stock[] arr = stockList.toArray(new Stock[0]);
     for (Stock stock : arr) {
-      if (stock.getProductName().equals(name)) {
+      if (stock.getStockName().equals(name)) {
         return true;
       }
     }
     return false;
   }
-
-  //  public String promptStock(String label) {
-  //    while (true) {
-  //      String owner = Prompt.inputString(label);
-  //      if (this.exist(owner)) {
-  //        return owner;
-  //      } else if (owner.length() == 0) {
-  //        return null;
-  //      }
-  //      System.out.println("등록된 상품이 아닙니다.");
-  //    }
-  //  }
-
 
 }
 
