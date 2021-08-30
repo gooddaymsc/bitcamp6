@@ -1,5 +1,6 @@
 package com.eomcs.pms.domain;
 
+
 public class Product {
 
   private int productNumber;        //상품번
@@ -7,11 +8,11 @@ public class Product {
   private String productType;       //주종
   private String countryOrigin;     //원산지
   private String variety;           //품종
-  private int alcoholLevel;         //알콜도수
+  private float alcoholLevel;       //알콜도수
   private int sugerLevel;           //당도
   private int acidity;              //산도
   private int weight;               //바디감
-  private int price;                //가격
+
 
   public int getProductNumber() {
     return productNumber;
@@ -43,13 +44,13 @@ public class Product {
   public void setVariety(String variety) {
     this.variety = variety;
   }
-  public int getAlcoholLevel() {
+  public float getAlcoholLevel() {
     return alcoholLevel;
   }
-  public void setAlcoholLevel(int alcoholLevel) {
+  public void setAlcoholLevel(float alcoholLevel) {
     this.alcoholLevel = alcoholLevel;
   }
-  public int getSugerLevel() {
+  public int getSugerLevel() {  
     return sugerLevel;
   }
   public void setSugerLevel(int sugerLevel) {
@@ -67,13 +68,6 @@ public class Product {
   public void setWeight(int weight) {
     this.weight = weight;
   }
-  public int getPrice() {
-    return price;
-  }
-  public void setPrice(int price) {
-    this.price = price;
-  }
-
 
 
 }

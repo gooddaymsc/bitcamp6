@@ -5,7 +5,6 @@ import com.eomcs.pms.domain.Manager;
 import com.eomcs.util.Prompt;
 
 public class LoginHandler {
-
   List<Manager> managerList;
 
   public LoginHandler(List<Manager> managerList) {
@@ -20,6 +19,8 @@ public class LoginHandler {
       System.out.println("다시 입력해주세요.");
       return null;
     }
+
+    //Manager[] list = managerList.toArray(new Manager[0]);
 
     for (Manager s : managerList) {
       if (id.equals(s.getId())) {
