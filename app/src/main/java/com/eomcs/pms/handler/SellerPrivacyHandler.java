@@ -2,22 +2,27 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyHandler {
 
   List<SellerPrivacy> memberList;
-  List<String> uniqueIdList;
+  List<Manager> managerList;
   int size=1;
 
-  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<String> uniqueIdList) {
+  public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     this.memberList = memberList;
-    this.uniqueIdList = uniqueIdList;
+    this.managerList = managerList;
   }
 
 
-  public void sellerAdd(int i) {
+  public void sellerAdd(int i, int auth) {
+    if (auth== 1 || auth == 2 || auth == 3) {
+      System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
+      return;
+    }
     System.out.println("\n[판매자 등록]");
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
@@ -25,11 +30,15 @@ public class SellerPrivacyHandler {
     sellerPrivacy.setNumber(size++);
     //sellerPrivacy.setNumber(Prompt.inputInt("번호를 입력하세요: "));
 
-    String checkId = promptMember(Prompt.inputString("아이디를 입력하세요: "));
-    if (checkId == null) {
-      return;
+    String id = Prompt.inputString("아이디를 입력하세요: ");
+    int size = managerList.size();
+    if (size!=0) {
+      Manager checkmanager = addMember(id, size);
+      if (checkmanager != null) {
+        return;
+      }
     }
-    sellerPrivacy.setId(checkId);
+    sellerPrivacy.setId(id);
 
     sellerPrivacy.setName(Prompt.inputString("이름을 입력하세요: "));
     sellerPrivacy.setNickname(Prompt.inputString("닉네임을 입력하세요: "));
@@ -43,11 +52,15 @@ public class SellerPrivacyHandler {
     sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호를 입력하세요: "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
-    uniqueIdList.add(sellerPrivacy.getId());
+    managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));
 
   }
 
-  public void list() {
+  public void list(int auth) {
+    if (auth == 0 || auth== 1 || auth == 2 ) {
+      System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
+      return;
+    }
     System.out.println("\n[판매자 목록]");
 
     SellerPrivacy[] list = memberList.toArray(new SellerPrivacy[0]);
@@ -65,7 +78,11 @@ public class SellerPrivacyHandler {
     }
   }
 
-  public void sellerDetail() {
+  public void sellerDetail(int auth) {
+    if (auth==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
     System.out.println("\n[판매자 상세보기]");
     String id = Prompt.inputString("번호를 입력하세요: ");
 
@@ -89,7 +106,11 @@ public class SellerPrivacyHandler {
     System.out.printf("권한등급: %d입니다.", member.getAuthority());
   }
 
-  public void update() {
+  public void update(int auth) {
+    if (auth==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
     System.out.println("\n[판매자 변경]");
     String id = Prompt.inputString("번호를 입력하세요: ");
 
@@ -130,7 +151,11 @@ public class SellerPrivacyHandler {
     System.out.println("판매자을 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int auth) {
+    if (auth==0) {
+      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
+      return;
+    }
     System.out.println("\n[판매자 삭제]");
     String id = Prompt.inputString("번호를 입력하세요: ");
 
@@ -148,7 +173,7 @@ public class SellerPrivacyHandler {
     }
 
     memberList.remove(member);
-    uniqueIdList.remove(member.getId());
+    managerList.remove(delMember(id));
 
     System.out.println("판매자를 삭제하였습니다.");
   }
@@ -163,15 +188,27 @@ public class SellerPrivacyHandler {
     return null;
   }
 
-  public String promptMember(String label) {
+  public Manager addMember(String label, int size) {
+    int i;
+    for (i=0; i<size; i++) {
+      if (managerList.get(i).getId().equals(label)) {
+        System.out.println("중복되는 아이디입니다.");
+        return managerList.get(i);
+      }
+    }
+    return null;
+  }
+  public Manager delMember(String label) {
     while (true) {
-      if (!uniqueIdList.contains(label)) {
-        return label;
+      for (int i=0; i<managerList.size(); i++) {
+        if (managerList.get(i).getId().equals(label)) {
+          return managerList.get(i);
+        }
       } /*else if (label.length() == 0) {
-        System.out.println("아이디를 입력해 주세요.");
-        return null;
-      }*/
-      System.out.println("중복되는 아이디입니다.");
+          System.out.println("아이디를 입력해 주세요.");
+          return null;
+        }*/
+      System.out.println("일치하는 아이디가 없습니다.");
       return null;
     }
   }
