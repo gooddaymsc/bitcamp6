@@ -105,7 +105,7 @@ public class MenuGroup extends Menu {
         }
 
         this.childs[menuNo - 1].execute();
-      } catch (Throwable e) {
+      } catch (Exception e) {
         // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
         System.out.println("--------------------------------------------------------------");

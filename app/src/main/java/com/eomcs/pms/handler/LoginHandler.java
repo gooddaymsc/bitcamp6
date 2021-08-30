@@ -1,10 +1,8 @@
 package com.eomcs.pms.handler;
 
-
 import java.util.List;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.util.Prompt;
-
 
 public class LoginHandler {
   List<Manager> managerList;
@@ -40,5 +38,4 @@ public class LoginHandler {
     System.out.println("해당 아이디는 없는 아이디입니다.");
     return null;
   }
-
 }
