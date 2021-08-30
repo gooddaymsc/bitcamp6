@@ -59,6 +59,8 @@ public class App {
   }
 
   void service() {
+    managerList.add(new Manager("관리자","1234",3));
+
     createMenu().execute();
     Prompt.close();
   }
