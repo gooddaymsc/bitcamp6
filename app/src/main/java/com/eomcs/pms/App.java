@@ -17,6 +17,7 @@ import com.eomcs.pms.handler.BoardHandler;
 import com.eomcs.pms.handler.BookingHandler;
 import com.eomcs.pms.handler.CartHandler;
 import com.eomcs.pms.handler.LoginHandler;
+import com.eomcs.pms.handler.ManagerBoardHandler;
 import com.eomcs.pms.handler.MemberHandler;
 import com.eomcs.pms.handler.PrivacyHandler;
 import com.eomcs.pms.handler.ProductHandler;
@@ -52,6 +53,7 @@ public class App {
 
   MemberHandler memberHandler = new MemberHandler(privacyList, sellerPrivacyList); 
   LoginHandler loginHandler = new LoginHandler(privacyList, sellerPrivacyList);
+  ManagerBoardHandler managerBoardHandler = new ManagerBoardHandler(boardList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -459,6 +461,12 @@ public class App {
     //메인/4관리자/게시판관리
     MenuGroup boardMenu1 = new MenuGroup("게시판관리");
     manager.add(boardMenu1);
+
+    boardMenu1.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        managerBoardHandler.delete(loginPrivacy.getAuthority()); 
+      }});
 
     return mainMenuGroup;
   }
