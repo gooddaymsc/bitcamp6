@@ -130,8 +130,8 @@ public class PrivacyHandler {
   }
 
 
-  public void memberList(int auth) {
-    if (auth == 0 || auth== 1 || auth == 2 ) {
+  public void memberList() {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
       return;
     }
