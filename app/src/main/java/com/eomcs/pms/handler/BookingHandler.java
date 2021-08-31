@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.util.Prompt;
 
@@ -13,8 +14,8 @@ public class BookingHandler {
     this.booktList = bookList;
   }
 
-  public void add(int auth) {
-    if (auth != 1) {
+  public void add() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -35,8 +36,8 @@ public class BookingHandler {
     booktList.add(booking);
   }
 
-  public void list(int auth) {
-    if (auth == 0 || auth == 3) {
+  public void list() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 3) {
       System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
       return;
     }
@@ -56,8 +57,8 @@ public class BookingHandler {
     }
   }
 
-  public void detail(int auth) {
-    if (auth == 0 || auth == 3) {
+  public void detail() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 3) {
       System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
       return;
     }
@@ -79,8 +80,8 @@ public class BookingHandler {
     System.out.printf("예약시간: %s입니다.\n", Book.getReservation());
   }
 
-  public void update(int auth) {
-    if (auth == 0 || auth == 3) {
+  public void update() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 3) {
       System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
       return;
     }
@@ -117,8 +118,8 @@ public class BookingHandler {
     System.out.println("예약을 변경하였습니다.");
   }
 
-  public void delete(int auth) {
-    if (auth == 0 || auth == 3) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 3) {
       System.out.println("권한이 없습니다.구매자 또는 판매자 기능입니다.");
       return;
     }
@@ -153,45 +154,6 @@ public class BookingHandler {
     return null;
   }
 
-  public boolean exist(String name) {
-    Booking[] arr = booktList.toArray(new Booking[0]);
-    for (Booking Book : arr) {
-      if (Book.getProductName().equals(name)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public String promptBook(String label) {
-    while (true) {
-      String owner = Prompt.inputString(label);
-      if (this.exist(owner)) {
-        return owner;
-      } else if (owner.length() == 0) {
-        return null;
-      }
-      System.out.println("등록된 예약이 아닙니다.");
-    }
-  }
-
-  public String promptBooks(String label) {
-    String Books = "";
-    while (true) {
-      String Book = Prompt.inputString(label);
-      if (this.exist(Book)) {
-        if (Books.length() > 0) {
-          Books += ",";
-        }
-        Books += Book;
-        continue;
-      } else if (Book.length() == 0) {
-        break;
-      } 
-      System.out.println("등록된 예약이 아닙니다.");
-    }
-    return Books;
-  }
 }
 
 

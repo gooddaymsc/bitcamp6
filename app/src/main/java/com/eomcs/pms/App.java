@@ -332,22 +332,22 @@ public class App {
     managerMemberMenu1.add(new Menu("목록") {  
       @Override
       public void execute() {
-        memberHandler.list(, 1); 
+        memberHandler.list(1); 
       }});
     managerMemberMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(, 1); 
+        memberHandler.detail(1); 
       }});
     managerMemberMenu1.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(, 1); 
+        memberHandler.update(1); 
       }});
     managerMemberMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(, 1); 
+        memberHandler.delete(1); 
       }});
 
     MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");
@@ -356,22 +356,22 @@ public class App {
     managerSellerMenu1.add(new Menu("목록") {  
       @Override
       public void execute() {
-        memberHandler.list(, 2); 
+        memberHandler.list(2); 
       }});
     managerSellerMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(, 2); 
+        memberHandler.detail(2); 
       }});
     managerSellerMenu1.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(, 2); 
+        memberHandler.update(2); 
       }});
     managerSellerMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(, 2); 
+        memberHandler.delete(2); 
       }});
 
     MenuGroup boardMenu1 = new MenuGroup("게시판관리");
