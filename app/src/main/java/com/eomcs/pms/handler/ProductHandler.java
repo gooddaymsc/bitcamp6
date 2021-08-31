@@ -44,7 +44,7 @@ public class ProductHandler {
     Product[] list = alcoholList.toArray(new Product[0]);
 
     for (Product alcohol : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %d, %.2f, %d, %d, %d \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %.2f, %d, %d, %d \n", 
           alcohol.getProductNumber(), 
           alcohol.getProductName(), 
           alcohol.getProductType(), 
@@ -85,42 +85,48 @@ public class ProductHandler {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
-    System.out.println("[상품 변경]");
-    int no = Prompt.inputInt("번호? ");
+    while(true) {
+      System.out.println("[상품 변경]");
+      int no = Prompt.inputInt("번호? ");
 
-    Product alcohol = findByNo(no);
+      Product alcohol = findByNo(no);
 
-    if (alcohol == null) {
-      System.out.println("해당 번호의 상품이 없습니다.");
-      return;
+      if (alcohol == null) {
+        System.out.println("해당 번호의 상품이 없습니다.");
+        return;
+      }
+
+      String name = Prompt.inputString("상품이름(" + alcohol.getProductName()  + ")? ");
+      String kind = Prompt.inputString("주종(" + alcohol.getProductType() + ")? ");
+      String made = Prompt.inputString("원산지(" + alcohol.getCountryOrigin() + ")? ");
+      String grapes = Prompt.inputString("품종(" + alcohol.getVariety() + ")? ");
+      float abv = Prompt.inputFloat("알콜도수(" + alcohol.getAlcoholLevel() + ")? ");
+      int sweet = checkNum("당도(" + alcohol.getSugerLevel() + ")? ");
+      int acidic = checkNum("산도(" + alcohol.getAcidity() + ")? ");
+      int body = checkNum("바디감(" + alcohol.getWeight() + ")? ");
+
+
+      String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("회원 변경을 취소하였습니다.");
+        return;
+      }else if (input.equalsIgnoreCase("y")) {
+        alcohol.setProductName(name);
+        alcohol.setProductType(kind);
+        alcohol.setCountryOrigin(made);
+        alcohol.setVariety(grapes);
+        alcohol.setAlcoholLevel(abv);
+        alcohol.setSugerLevel(sweet);
+        alcohol.setAcidity(acidic);
+        alcohol.setWeight(body);
+
+        System.out.println("상품정보를 변경하였습니다.");
+        return;
+      } else {
+        System.out.println("유효하지 않음");
+        continue;
+      }
     }
-
-    String name = Prompt.inputString("상품이름(" + alcohol.getProductName()  + ")? ");
-    String kind = Prompt.inputString("주종(" + alcohol.getProductType() + ")? ");
-    String made = Prompt.inputString("원산지(" + alcohol.getCountryOrigin() + ")? ");
-    String grapes = Prompt.inputString("품종(" + alcohol.getVariety() + ")? ");
-    float abv = Prompt.inputFloat("알콜도수(" + alcohol.getAlcoholLevel() + ")? ");
-    int sweet = Prompt.inputInt("당도(" + alcohol.getSugerLevel() + ")? ");
-    int acidic = Prompt.inputInt("산도(" + alcohol.getAcidity() + ")? ");
-    int body = Prompt.inputInt("바디감(" + alcohol.getWeight() + ")? ");
-
-
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("회원 변경을 취소하였습니다.");
-      return;
-    }
-
-    alcohol.setProductName(name);
-    alcohol.setProductType(kind);
-    alcohol.setCountryOrigin(made);
-    alcohol.setVariety(grapes);
-    alcohol.setAlcoholLevel(abv);
-    alcohol.setSugerLevel(sweet);
-    alcohol.setAcidity(acidic);
-    alcohol.setWeight(body);
-
-    System.out.println("상품정보를 변경하였습니다.");
   }
 
   public void delete(int auth) {
@@ -128,25 +134,30 @@ public class ProductHandler {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
-    System.out.println("[상품 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    while(true) {
+      System.out.println("[상품 삭제]");
+      int no = Prompt.inputInt("번호? ");
 
-    Product alcohol = findByNo(no);
+      Product alcohol = findByNo(no);
 
-    if (alcohol == null) {
-      System.out.println("해당 번호의 상품이 없습니다.");
-      return;
+      if (alcohol == null) {
+        System.out.println("해당 번호의 상품이 없습니다.");
+        return;
+      }
+
+      String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("상품 삭제를 취소하였습니다.");
+        return;
+      } else if (input.equalsIgnoreCase("y")) {
+        alcoholList.remove(alcohol);   
+        System.out.println("상품을 삭제하였습니다.");
+        return;
+      } else {
+        System.out.println("유효하지 않음");
+        continue;
+      }
     }
-
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("상품 삭제를 취소하였습니다.");
-      return;
-    }
-
-    alcoholList.remove(alcohol);
-
-    System.out.println("상품을 삭제하였습니다.");
   }
 
   private Product findByNo(int no) {
