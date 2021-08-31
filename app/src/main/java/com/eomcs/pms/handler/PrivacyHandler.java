@@ -13,9 +13,60 @@ public class PrivacyHandler {
 
   int size = 1;
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
+    Privacy privacy = new Privacy();
+
+
+    privacy.setId("aaa");
+    privacy.setPassword("aaa");
+    privacy.setAuthority(2);
+
+    managerList.add(privacy);
+
+    privacy.setName("aaa");
+    privacy.setNickname("aaa");
+    privacy.setEmail("aaa");
+    privacy.setBirthday(Date.valueOf("2020-1-1"));
+    privacy.setPhoto("aaa.gif");
+    privacy.setPhoneNumber("010-1111-2222");
+    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(privacy);
+
+    privacy.setId("bbb");
+    privacy.setPassword("bbb");
+    privacy.setAuthority(2);
+
+    managerList.add(privacy);
+
+    privacy.setName("bbb");
+    privacy.setNickname("bbb");
+    privacy.setEmail("bbb");
+    privacy.setBirthday(Date.valueOf("2020-2-2"));
+    privacy.setPhoto("bbb.gif");
+    privacy.setPhoneNumber("010-3333-4444");
+    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(privacy);
+
+    privacy.setId("ccc");
+    privacy.setPassword("ccc");
+    privacy.setAuthority(2);
+
+    managerList.add(privacy);
+
+    privacy.setName("ccc");
+    privacy.setNickname("ccc");
+    privacy.setEmail("ccc");
+    privacy.setBirthday(Date.valueOf("2020-3-3"));
+    privacy.setPhoto("ccc.gif");
+    privacy.setPhoneNumber("010-5555-6666");
+    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(privacy);
+
+
     this.memberList = memberList;
     this.managerList = managerList;
-
   }
 
   public void memberAdd(int i, int auth) {

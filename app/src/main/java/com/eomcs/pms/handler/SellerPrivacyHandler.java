@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.domain.Manager;
+import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
@@ -15,6 +16,59 @@ public class SellerPrivacyHandler {
   public SellerPrivacyHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     this.memberList = memberList;
     this.managerList = managerList;
+
+    SellerPrivacy SellerPrivacy = new SellerPrivacy();
+
+    SellerPrivacy.setId("aaa");
+    SellerPrivacy.setPassword("aaa");
+    SellerPrivacy.setAuthority(2);
+
+    managerList.add(SellerPrivacy);
+
+    SellerPrivacy.setName("aaa");
+    SellerPrivacy.setNickname("aaa");
+    SellerPrivacy.setEmail("aaa");
+    SellerPrivacy.setBirthday(Date.valueOf("2020-1-1"));
+    SellerPrivacy.setPhoto("aaa.gif");
+    SellerPrivacy.setPhoneNumber("010-1111-2222");
+    SellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(SellerPrivacy);
+
+    SellerPrivacy.setId("bbb");
+    SellerPrivacy.setPassword("bbb");
+    SellerPrivacy.setAuthority(2);
+
+    managerList.add(SellerPrivacy);
+
+    SellerPrivacy.setName("bbb");
+    SellerPrivacy.setNickname("bbb");
+    SellerPrivacy.setEmail("bbb");
+    SellerPrivacy.setBirthday(Date.valueOf("2020-2-2"));
+    SellerPrivacy.setPhoto("bbb.gif");
+    SellerPrivacy.setPhoneNumber("010-3333-4444");
+    SellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(SellerPrivacy);
+
+    SellerPrivacy.setId("ccc");
+    SellerPrivacy.setPassword("ccc");
+    SellerPrivacy.setAuthority(2);
+
+    managerList.add(SellerPrivacy);
+
+    SellerPrivacy.setName("ccc");
+    SellerPrivacy.setNickname("ccc");
+    SellerPrivacy.setEmail("ccc");
+    SellerPrivacy.setBirthday(Date.valueOf("2020-3-3"));
+    SellerPrivacy.setPhoto("ccc.gif");
+    SellerPrivacy.setPhoneNumber("010-5555-6666");
+    SellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(SellerPrivacy);
+
+
+
   }
 
 
@@ -159,7 +213,7 @@ public class SellerPrivacyHandler {
     System.out.println("\n[판매자 삭제]");
     String id = Prompt.inputString("번호를 입력하세요: ");
 
-    SellerPrivacy member = findById(id);
+    Privacy member = findById(id);
 
     if (member == null) {
       System.out.println("해당 번호의 판매자이 없습니다.");
