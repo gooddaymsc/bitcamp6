@@ -5,7 +5,14 @@ package com.eomcs.menu;
 // 상속해주는 용도이기 때문에 추상 클래스로 정의한다.
 public abstract class Menu {
 
+  public static final int ENABLE_0 = 0;
+  public static final int ENABLE_1= 1;
+  public static final int ENABLE_2 = 2;
+  public static final int ENABLE_3 = 2;
+
   String title;
+
+  public int enableState;
 
   // 메뉴 이름없이 인스턴스를 생성할 수 없도록 
   // 기본 생성자를 정의하지 않는다.
@@ -13,6 +20,11 @@ public abstract class Menu {
   // 다음과 같이 String 을 파라미터로 받는 생성자를 정의한다.
   public Menu(String title) {
     this.title = title;
+  }
+
+  public Menu(String title, int enableState) {
+    this(title); // 메뉴 이름 설정은 기존 생성자를 통해 처리한다.
+    this.enableState = enableState;
   }
 
   // 서브 클래스에서 해야할 일을 정의한다.
