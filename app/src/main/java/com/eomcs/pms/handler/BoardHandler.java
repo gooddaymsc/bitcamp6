@@ -8,21 +8,24 @@ import com.eomcs.util.Prompt;
 public class BoardHandler {
 
   List<Board> boardList;
-
   public BoardHandler(List<Board> boardList) {
     this.boardList = boardList;
   }
 
-  public void add() {
+  public void add(int auth) {
+    if (auth == 0) {
+      System.out.println("권한이 없습니다.\n로그인해주세요...");
+      return;
+    }
     System.out.println("[새 게시글]");
-
     Board board = new Board();
 
-    board.setNo(Prompt.inputInt("번호? "));
+    board.setNumber(Prompt.inputInt("번호? "));
     board.setTitle(Prompt.inputString("제목? "));
     board.setContent(Prompt.inputString("내용? "));
     board.setWriter(Prompt.inputString("작성자? "));
-    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    board.setRegistrationDate(new Date(System.currentTimeMillis()));
+    board.setTag(Prompt.inputString("태그? "));
 
     boardList.add(board);
   }
@@ -35,14 +38,14 @@ public class BoardHandler {
     boardList.toArray(boards);
 
     for (Board board : boards) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          board.getNo(), 
+      System.out.printf("%d, %s, %s, %s, %d, %s, %d\n", 
+          board.getNumber(), 
           board.getTitle(), 
           board.getWriter(),
-          board.getRegisteredDate(),
-          board.getViewCount(), 
-          board.getTag(),
-          board.getLikeCount());
+          board.getRegistrationDate(),
+          board.getViews(), 
+          board.getTag(), 
+          board.getLikes());
     }
   }
 
@@ -57,21 +60,26 @@ public class BoardHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", board.getTitle());
-    System.out.printf("내용: %s\n", board.getContent());
-    System.out.printf("작성자: %s\n", board.getWriter());
-    System.out.printf("등록일: %s\n", board.getRegisteredDate());
+    System.out.printf("제목: %s입니다.\n", board.getTitle());
+    System.out.printf("내용: %s입니다.\n", board.getContent());
+    System.out.printf("작성자: %s입니다.\n", board.getWriter());
+    System.out.printf("등록일: %s입니다.\n", board.getRegistrationDate());
 
-    board.setViewCount(board.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", board.getViewCount());
+    board.setViews(board.getViews() + 1);
+    System.out.printf("조회수: %d입니다.\n", board.getViews());
+    board.setLikes(board.getLikes() + 1);
+    System.out.printf("좋아요 수: %d입니다.\n", board.getLikes());
+    System.out.printf("태그: %s입니다.\n", board.getTag());
 
-    board.setLikeCount(board.getLikeCount() + 1);
-    System.out.printf("좋아요: %d\n", board.getLikeCount());
   }
 
-  public void update() {
+  public void update(int auth) {
+    if (auth == 0) {
+      System.out.println("권한이 없습니다.\n로그인해주세요...");
+      return;
+    }
     System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Board board = findByNo(no);
 
@@ -80,9 +88,9 @@ public class BoardHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", board.getTitle()));
-    String content = Prompt.inputString(String.format("내용(%s)? ", board.getContent()));
-    String tag = Prompt.inputString(String.format("태그(%s)? ", board.getTag()));
+    String title = Prompt.inputString(String.format("변경 후의 제목(%s)을 입력해주세요: ", board.getTitle()));
+    String content = Prompt.inputString(String.format("변경 후의 내용(%s)을 입력해주세요: ", board.getContent()));
+    String tag = Prompt.inputString(String.format("변경 후의 태그(%s)를 입력해주세요: ", board.getTag()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -96,9 +104,13 @@ public class BoardHandler {
     System.out.println("게시글을 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int auth) {
+    if (auth == 0) {
+      System.out.println("권한이 없습니다.\n로그인해주세요...");
+      return;
+    }
     System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Board board = findByNo(no);
 
@@ -122,14 +134,13 @@ public class BoardHandler {
 
     Board[] arr = boardList.toArray(new Board[0]);
     for (Board board : arr) {
-      if (board.getNo() == no) {
+      if (board.getNumber() == no) {
         return board;
       }
     }
     return null;
   }
 }
-
 
 
 

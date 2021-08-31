@@ -3,20 +3,20 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Board {
-  private int no;
+  private int number;
   private String title;
   private String content;
   private String writer;
-  private Date registeredDate;
-  private int viewCount;
+  private Date registrationDate;
+  private int views;
   private String tag;
-  private int likeCount;
+  private int likes;
 
-  public int getNo() {
-    return no;
+  public int getNumber() {
+    return number;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setNumber(int number) {
+    this.number = number;
   }
   public String getTitle() {
     return title;
@@ -36,17 +36,17 @@ public class Board {
   public void setWriter(String writer) {
     this.writer = writer;
   }
-  public Date getRegisteredDate() {
-    return registeredDate;
+  public Date getRegistrationDate() {
+    return registrationDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+  public void setRegistrationDate(Date registrationDate) {
+    this.registrationDate = registrationDate;
   }
-  public int getViewCount() {
-    return viewCount;
+  public int getViews() {
+    return views;
   }
-  public void setViewCount(int viewCount) {
-    this.viewCount = viewCount;
+  public void setViews(int views) {
+    this.views = views;
   }
   public String getTag() {
     return tag;
@@ -54,12 +54,11 @@ public class Board {
   public void setTag(String tag) {
     this.tag = tag;
   }
-  public int getLikeCount() {
-    return likeCount;
-  }
-  public void setLikeCount(int likeCount) {
-    this.likeCount = likeCount;
-  }
 
-
+  public int getLikes() {
+    return likes;
+  }
+  public void setLikes(int likes) {
+    this.likes = likes;
+  }
 }
