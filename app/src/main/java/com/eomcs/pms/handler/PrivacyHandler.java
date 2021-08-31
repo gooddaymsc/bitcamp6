@@ -15,58 +15,76 @@ public class PrivacyHandler {
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
     Privacy privacy = new Privacy();
 
-
-    privacy.setId("aaa");
-    privacy.setPassword("aaa");
+    privacy.setId("aa");
+    privacy.setPassword("aa");
     privacy.setAuthority(2);
-
-    managerList.add(privacy);
-
-    privacy.setName("aaa");
-    privacy.setNickname("aaa");
-    privacy.setEmail("aaa");
-    privacy.setBirthday(Date.valueOf("2020-1-1"));
-    privacy.setPhoto("aaa.gif");
-    privacy.setPhoneNumber("010-1111-2222");
+    privacy.setName("aa");
+    privacy.setNickname("aa");
+    privacy.setEmail("aa");
+    privacy.setBirthday(Date.valueOf("2021-1-1"));
+    privacy.setPhoto("aa.gif");
+    privacy.setPhoneNumber("010-1111-1111");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
     memberList.add(privacy);
 
-    privacy.setId("bbb");
-    privacy.setPassword("bbb");
+    privacy.setId("aa");
+    privacy.setPassword("aa");
     privacy.setAuthority(2);
-
     managerList.add(privacy);
 
-    privacy.setName("bbb");
-    privacy.setNickname("bbb");
-    privacy.setEmail("bbb");
-    privacy.setBirthday(Date.valueOf("2020-2-2"));
-    privacy.setPhoto("bbb.gif");
-    privacy.setPhoneNumber("010-3333-4444");
+    privacy = new Privacy();
+    privacy.setId("bb");
+    privacy.setPassword("bb");
+    privacy.setAuthority(2);
+    privacy.setName("bb");
+    privacy.setNickname("bb");
+    privacy.setEmail("bb");
+    privacy.setBirthday(Date.valueOf("2021-1-1"));
+    privacy.setPhoto("bb.gif");
+    privacy.setPhoneNumber("010-2222-2222");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
     memberList.add(privacy);
 
-    privacy.setId("ccc");
-    privacy.setPassword("ccc");
+    privacy.setId("bb");
+    privacy.setPassword("bb");
     privacy.setAuthority(2);
-
     managerList.add(privacy);
 
-    privacy.setName("ccc");
-    privacy.setNickname("ccc");
-    privacy.setEmail("ccc");
-    privacy.setBirthday(Date.valueOf("2020-3-3"));
-    privacy.setPhoto("ccc.gif");
-    privacy.setPhoneNumber("010-5555-6666");
+    privacy = new Privacy();
+    privacy.setId("cc");
+    privacy.setPassword("cc");
+    privacy.setAuthority(2);
+    privacy.setName("cc");
+    privacy.setNickname("cc");
+    privacy.setEmail("cc");
+    privacy.setBirthday(Date.valueOf("2021-1-1"));
+    privacy.setPhoto("cc.gif");
+    privacy.setPhoneNumber("010-3333-3333");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
     memberList.add(privacy);
 
+    privacy.setId("cc");
+    privacy.setPassword("cc");
+    privacy.setAuthority(2);
+    managerList.add(privacy);
 
-    this.memberList = memberList;
-    this.managerList = managerList;
+    privacy = new Privacy();
+    privacy.setId("dd");
+    privacy.setPassword("dd");
+    privacy.setAuthority(2);
+    privacy.setName("dd");
+    privacy.setNickname("dd");
+    privacy.setEmail("dd");
+    privacy.setBirthday(Date.valueOf("2021-1-1"));
+    privacy.setPhoto("dd.gif");
+    privacy.setPhoneNumber("010-4444-4444");
+    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(privacy);
+
+    privacy.setId("dd");
+    privacy.setPassword("dd");
+    privacy.setAuthority(2);
+    managerList.add(privacy);
   }
 
   public void memberAdd(int i, int auth) {

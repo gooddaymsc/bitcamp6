@@ -17,58 +17,77 @@ public class SellerPrivacyHandler {
     this.memberList = memberList;
     this.managerList = managerList;
 
-    SellerPrivacy SellerPrivacy = new SellerPrivacy();
+    SellerPrivacy sellerPrivacy = new SellerPrivacy();
+    sellerPrivacy.setId("aaaa");
+    sellerPrivacy.setPassword("aaaa");
+    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setName("aaaa");
+    sellerPrivacy.setNickname("aaaa");
+    sellerPrivacy.setEmail("aaaa");
+    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
+    sellerPrivacy.setPhoto("aaaa.gif");
+    sellerPrivacy.setPhoneNumber("010-1111-1111");
+    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(sellerPrivacy);
 
-    SellerPrivacy.setId("aaa");
-    SellerPrivacy.setPassword("aaa");
-    SellerPrivacy.setAuthority(2);
+    sellerPrivacy.setId("aaaa");
+    sellerPrivacy.setPassword("aaaa");
+    sellerPrivacy.setAuthority(2);
+    managerList.add(sellerPrivacy);
 
-    managerList.add(SellerPrivacy);
+    sellerPrivacy = new SellerPrivacy();
+    sellerPrivacy.setId("bbbb");
+    sellerPrivacy.setPassword("bbbb");
+    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setName("bbbb");
+    sellerPrivacy.setNickname("bbbb");
+    sellerPrivacy.setEmail("bbbb");
+    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
+    sellerPrivacy.setPhoto("bbbb.gif");
+    sellerPrivacy.setPhoneNumber("010-2222-2222");
+    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(sellerPrivacy);
 
-    SellerPrivacy.setName("aaa");
-    SellerPrivacy.setNickname("aaa");
-    SellerPrivacy.setEmail("aaa");
-    SellerPrivacy.setBirthday(Date.valueOf("2020-1-1"));
-    SellerPrivacy.setPhoto("aaa.gif");
-    SellerPrivacy.setPhoneNumber("010-1111-2222");
-    SellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    sellerPrivacy.setId("bbbb");
+    sellerPrivacy.setPassword("bbbb");
+    sellerPrivacy.setAuthority(3);
+    managerList.add(sellerPrivacy);
 
-    memberList.add(SellerPrivacy);
+    sellerPrivacy = new SellerPrivacy();
+    sellerPrivacy.setId("cccc");
+    sellerPrivacy.setPassword("cccc");
+    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setName("cccc");
+    sellerPrivacy.setNickname("cccc");
+    sellerPrivacy.setEmail("cccc");
+    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
+    sellerPrivacy.setPhoto("cccc.gif");
+    sellerPrivacy.setPhoneNumber("010-3333-3333");
+    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(sellerPrivacy);
 
-    SellerPrivacy.setId("bbb");
-    SellerPrivacy.setPassword("bbb");
-    SellerPrivacy.setAuthority(2);
+    sellerPrivacy.setId("cccc");
+    sellerPrivacy.setPassword("cccc");
+    sellerPrivacy.setAuthority(3);
+    managerList.add(sellerPrivacy);
 
-    managerList.add(SellerPrivacy);
+    sellerPrivacy = new SellerPrivacy();
+    sellerPrivacy.setId("dddd");
+    sellerPrivacy.setPassword("dddd");
+    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setName("dddd");
+    sellerPrivacy.setNickname("dddd");
+    sellerPrivacy.setEmail("dddd");
+    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
+    sellerPrivacy.setPhoto("dddd.gif");
+    sellerPrivacy.setPhoneNumber("010-4444-4444");
+    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(sellerPrivacy);
 
-    SellerPrivacy.setName("bbb");
-    SellerPrivacy.setNickname("bbb");
-    SellerPrivacy.setEmail("bbb");
-    SellerPrivacy.setBirthday(Date.valueOf("2020-2-2"));
-    SellerPrivacy.setPhoto("bbb.gif");
-    SellerPrivacy.setPhoneNumber("010-3333-4444");
-    SellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    memberList.add(SellerPrivacy);
-
-    SellerPrivacy.setId("ccc");
-    SellerPrivacy.setPassword("ccc");
-    SellerPrivacy.setAuthority(2);
-
-    managerList.add(SellerPrivacy);
-
-    SellerPrivacy.setName("ccc");
-    SellerPrivacy.setNickname("ccc");
-    SellerPrivacy.setEmail("ccc");
-    SellerPrivacy.setBirthday(Date.valueOf("2020-3-3"));
-    SellerPrivacy.setPhoto("ccc.gif");
-    SellerPrivacy.setPhoneNumber("010-5555-6666");
-    SellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    memberList.add(SellerPrivacy);
-
-
-
+    sellerPrivacy.setId("dddd");
+    sellerPrivacy.setPassword("dddd");
+    sellerPrivacy.setAuthority(3);
+    managerList.add(sellerPrivacy);
   }
 
 
