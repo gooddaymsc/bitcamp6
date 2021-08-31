@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
@@ -8,14 +9,12 @@ public class ProductHandler {
 
   List<Product> alcoholList;
 
-  //Manager loginPrivacy;
   public ProductHandler(List<Product> alcoholList) {
     this.alcoholList = alcoholList;
-    //this.loginPrivacy = loginPrivacy;
   }
 
-  public void add(int auth) {
-    if (auth == 0 || auth == 1 ) {
+  public void add() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -80,8 +79,8 @@ public class ProductHandler {
 
   }
 
-  public void update(int auth) {
-    if (auth == 0 || auth == 1 ) {
+  public void update() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -129,8 +128,8 @@ public class ProductHandler {
     }
   }
 
-  public void delete(int auth) {
-    if (auth == 0 || auth == 1 ) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }

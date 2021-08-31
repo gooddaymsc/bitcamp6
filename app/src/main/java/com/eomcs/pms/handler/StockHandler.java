@@ -45,8 +45,8 @@ public class StockHandler {
     stockList.add(stock);
   }
 
-  public void list(int auth) {
-    if (auth==0) {
+  public void list() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -65,8 +65,8 @@ public class StockHandler {
     }
   }
 
-  public void detail(int auth) {
-    if (auth==0) {
+  public void detail() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -87,8 +87,8 @@ public class StockHandler {
 
   }
 
-  public void update(int auth) {
-    if (auth == 0 || auth == 1 ) {
+  public void update() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
@@ -122,8 +122,8 @@ public class StockHandler {
       }
     }
   }
-  public void delete(int auth) {
-    if (auth == 0 || auth == 1 ) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }

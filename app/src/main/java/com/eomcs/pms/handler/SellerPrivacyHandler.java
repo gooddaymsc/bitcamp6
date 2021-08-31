@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
@@ -91,8 +92,9 @@ public class SellerPrivacyHandler {
   }
 
 
-  public void sellerAdd(int i, int auth) {
-    if (auth== 1 || auth == 2 || auth == 3) {
+  public void sellerAdd(int i) {
+    if (App.getLoginUser().getAuthority() == 1 || App.getLoginUser().getAuthority() == 2 
+        || App.getLoginUser().getAuthority() == 3) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
@@ -129,8 +131,9 @@ public class SellerPrivacyHandler {
 
   }
 
-  public void list(int auth) {
-    if (auth == 0 || auth== 1 || auth == 2 ) {
+  public void list() {
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority()== 1 || 
+        App.getLoginUser().getAuthority() == 2 ) {
       System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
       return;
     }
@@ -151,8 +154,8 @@ public class SellerPrivacyHandler {
     }
   }
 
-  public void sellerDetail(int auth) {
-    if (auth==0) {
+  public void sellerDetail() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -179,8 +182,8 @@ public class SellerPrivacyHandler {
     System.out.printf("권한등급: %d입니다.", member.getAuthority());
   }
 
-  public void update(int auth) {
-    if (auth==0) {
+  public void update() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -224,8 +227,8 @@ public class SellerPrivacyHandler {
     System.out.println("판매자을 변경하였습니다.");
   }
 
-  public void delete(int auth) {
-    if (auth==0) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
