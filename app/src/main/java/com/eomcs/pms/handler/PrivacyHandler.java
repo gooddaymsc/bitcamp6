@@ -149,8 +149,8 @@ public class PrivacyHandler {
     }
   }
 
-  public void memberDetail(int auth) {
-    if (auth==0) {
+  public void memberDetail() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -179,8 +179,8 @@ public class PrivacyHandler {
   }
 
 
-  public void memberUpdate(int auth) {
-    if (auth==0) {
+  public void memberUpdate() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -224,8 +224,8 @@ public class PrivacyHandler {
   }
 
 
-  public void delete(int auth) {
-    if (auth==0) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }

@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
@@ -11,8 +12,8 @@ public class ManagerBoardHandler {
     this.boardList = boardList;
   }
 
-  public void list(int auth) {
-    if (auth != 3) {
+  public void list() {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
@@ -34,8 +35,8 @@ public class ManagerBoardHandler {
     }
   }
 
-  public void detail(int auth) {
-    if (auth != 3) {
+  public void detail() {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
@@ -62,8 +63,8 @@ public class ManagerBoardHandler {
 
   }
 
-  public void delete(int auth) {
-    if (auth != 3) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }

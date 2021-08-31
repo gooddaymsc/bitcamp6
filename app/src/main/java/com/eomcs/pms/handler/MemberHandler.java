@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
@@ -15,8 +16,8 @@ public class MemberHandler {
     this.sellerList = sellerList;
   }
 
-  public void list(int auth, int mem) {  
-    if (auth != 3) {
+  public void list(int mem) {  
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
@@ -48,8 +49,8 @@ public class MemberHandler {
     }
   }
 
-  public void detail(int auth, int mem) { 
-    if (auth != 3) {
+  public void detail(int mem) { 
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
@@ -100,8 +101,8 @@ public class MemberHandler {
 
   }
 
-  public void update(int auth, int mem) {
-    if (auth != 3) {
+  public void update(int mem) {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
@@ -166,8 +167,8 @@ public class MemberHandler {
     System.out.println("회원을 변경하였습니다.");
   }
 
-  public void delete(int auth, int mem) {
-    if (auth != 3) {
+  public void delete(int mem) {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
