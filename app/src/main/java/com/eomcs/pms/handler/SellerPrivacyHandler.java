@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.domain.Manager;
+import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
@@ -231,7 +232,7 @@ public class SellerPrivacyHandler {
     System.out.println("\n[판매자 삭제]");
     String id = Prompt.inputString("번호를 입력하세요: ");
 
-    SellerPrivacy member = findById(id);
+    Privacy member = findById(id);
 
     if (member == null) {
       System.out.println("해당 번호의 판매자이 없습니다.");

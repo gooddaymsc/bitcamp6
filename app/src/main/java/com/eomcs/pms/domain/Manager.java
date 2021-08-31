@@ -8,7 +8,7 @@ public class Manager {
 
 
   public Manager() {
-    this("-","-",0);
+    this(null,null,0);
   }
   public Manager(String id, String password, int authority) {
     this.id = id;

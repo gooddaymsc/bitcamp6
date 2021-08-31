@@ -41,16 +41,6 @@ public class App {
   List<Stock> stockList = new ArrayList<>();
   // 관리자
   List<Manager> managerList = new ArrayList<>();
-  //고유 id 생성 > 해당 아이디가 이미 있으면 다른 아이디 입력해라.
-  //List<String> uniqueIdList = new ArrayList<>();
-  // 로그인 식별번호
-  //  Manager loginPrivacy = new Manager();
-  //static Manager loginPrivacy;
-
-  static Manager loginPrivacy = new Manager();
-  public static Manager getLoginUser() {
-    return loginPrivacy;
-  }
 
   PrivacyHandler privacyHandler = new PrivacyHandler(privacyList, managerList);
   SellerPrivacyHandler sellerPrivacyHandler = new SellerPrivacyHandler(sellerPrivacyList,managerList);
@@ -67,6 +57,11 @@ public class App {
   LoginHandler loginHandler = new LoginHandler(managerList);
 
   FindHandler findHandler = new FindHandler(privacyList, sellerPrivacyList);
+
+  static Manager loginPrivacy;
+  public static Manager getLoginUser() {
+    return loginPrivacy;
+  }
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -100,7 +95,7 @@ public class App {
     joinMenu.add(new Menu("판매자") {
       @Override
       public void execute() {
-        sellerPrivacyHandler.sellerAdd(2,loginPrivacy.getAuthority()); 
+        sellerPrivacyHandler.sellerAdd(2); 
       }});
 
 
@@ -134,17 +129,16 @@ public class App {
     loginMenu.add(new Menu("현재로그인정보") {
       @Override
       public void execute() {
-        System.out.printf("\n현재 아이디 : %s",getLoginUser().getId());
-        System.out.printf("\n현재 비밀번호 : %s",getLoginUser().getPassword());
-        System.out.printf("\n현재 권한 : %s\n", level(getLoginUser().getAuthority()));
-
+        System.out.printf("\n현재 아이디 : %s",loginPrivacy.getId());
+        System.out.printf("\n현재 비밀번호 : %s",loginPrivacy.getPassword());
+        System.out.printf("\n현재 권한 : %s\n", level(loginPrivacy.getAuthority()));
       }});
 
 
     loginMenu.add(new Menu("로그아웃") {
       @Override
       public void execute() {
-        if (loginPrivacy.getAuthority() != 0) {
+        if ( loginPrivacy.getAuthority()!= 0) {
           loginPrivacy = new Manager(); 
           System.out.println("로그아웃이 완료되었습니다."); 
         } else {
@@ -175,12 +169,12 @@ public class App {
     boardMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        boardHandler.update(loginPrivacy.getAuthority()); 
+        boardHandler.update(); 
       }});
     boardMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        boardHandler.delete(loginPrivacy.getAuthority()); 
+        boardHandler.delete(); 
       }});
 
     ///////////////////////////////////////////
@@ -191,27 +185,27 @@ public class App {
     cartMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        cartHandler.add(loginPrivacy.getAuthority()); 
+        cartHandler.add(); 
       }});
     cartMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        cartHandler.list(loginPrivacy.getAuthority()); 
+        cartHandler.list(); 
       }});
     cartMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        cartHandler.detail(loginPrivacy.getAuthority()); 
+        cartHandler.detail(); 
       }});
     cartMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        cartHandler.update(loginPrivacy.getAuthority()); 
+        cartHandler.update(); 
       }});
     cartMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        cartHandler.delete(loginPrivacy.getAuthority()); 
+        cartHandler.delete(); 
       }});
 
     ///////////////////////////////////////////
@@ -222,27 +216,27 @@ public class App {
     bookMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        bookingHandler.add(loginPrivacy.getAuthority()); 
+        bookingHandler.add(); 
       }});
     bookMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        bookingHandler.list(loginPrivacy.getAuthority()); 
+        bookingHandler.list(); 
       }});
     bookMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        bookingHandler.detail(loginPrivacy.getAuthority()); 
+        bookingHandler.detail(); 
       }});
     bookMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        bookingHandler.update(loginPrivacy.getAuthority()); 
+        bookingHandler.update(); 
       }});
     bookMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        bookingHandler.delete(loginPrivacy.getAuthority()); 
+        bookingHandler.delete(); 
       }});
 
     ///////////////////////////////////////////
@@ -253,7 +247,7 @@ public class App {
     alcoholMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        productHandler.add(loginPrivacy.getAuthority()); 
+        productHandler.add(); 
       }});
     alcoholMenu.add(new Menu("목록") {
       @Override
@@ -268,12 +262,12 @@ public class App {
     alcoholMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        productHandler.update(loginPrivacy.getAuthority()); 
+        productHandler.update(); 
       }});
     alcoholMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        productHandler.delete(loginPrivacy.getAuthority()); 
+        productHandler.delete(); 
       }});
 
     ///////////////////////////////////////////
@@ -289,22 +283,22 @@ public class App {
     stockMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        stockHandler.list(loginPrivacy.getAuthority()); 
+        stockHandler.list(); 
       }});
     stockMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        stockHandler.detail(loginPrivacy.getAuthority()); 
+        stockHandler.detail(); 
       }});
     stockMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        stockHandler.update(loginPrivacy.getAuthority()); 
+        stockHandler.update(); 
       }});
     stockMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        stockHandler.delete(loginPrivacy.getAuthority()); 
+        stockHandler.delete(); 
       }});
 
     ///////////////////////////////////////////
@@ -314,17 +308,17 @@ public class App {
     personMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        privacyHandler.memberDetail(loginPrivacy.getAuthority()); 
+        privacyHandler.memberDetail(); 
       }});
     personMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        privacyHandler.memberUpdate(loginPrivacy.getAuthority()); 
+        privacyHandler.memberUpdate(); 
       }});
     personMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        privacyHandler.delete(loginPrivacy.getAuthority()); 
+        privacyHandler.delete(); 
       }});
 
     ///////////////////////////////////////////
@@ -338,22 +332,22 @@ public class App {
     managerMemberMenu1.add(new Menu("목록") {  
       @Override
       public void execute() {
-        memberHandler.list(loginPrivacy.getAuthority(), 1); 
+        memberHandler.list(, 1); 
       }});
     managerMemberMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(loginPrivacy.getAuthority(), 1); 
+        memberHandler.detail(, 1); 
       }});
     managerMemberMenu1.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(loginPrivacy.getAuthority(), 1); 
+        memberHandler.update(, 1); 
       }});
     managerMemberMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(loginPrivacy.getAuthority(), 1); 
+        memberHandler.delete(, 1); 
       }});
 
     MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");
@@ -362,22 +356,22 @@ public class App {
     managerSellerMenu1.add(new Menu("목록") {  
       @Override
       public void execute() {
-        memberHandler.list(loginPrivacy.getAuthority(), 2); 
+        memberHandler.list(, 2); 
       }});
     managerSellerMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        memberHandler.detail(loginPrivacy.getAuthority(), 2); 
+        memberHandler.detail(, 2); 
       }});
     managerSellerMenu1.add(new Menu("변경") {
       @Override
       public void execute() {
-        memberHandler.update(loginPrivacy.getAuthority(), 2); 
+        memberHandler.update(, 2); 
       }});
     managerSellerMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        memberHandler.delete(loginPrivacy.getAuthority(), 2); 
+        memberHandler.delete(, 2); 
       }});
 
     MenuGroup boardMenu1 = new MenuGroup("게시판관리");
@@ -386,18 +380,18 @@ public class App {
     boardMenu1.add(new Menu("목록") {
       @Override
       public void execute() {
-        managerBoardHandler.list(loginPrivacy.getAuthority()); 
+        managerBoardHandler.list(); 
       }});
     boardMenu1.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        managerBoardHandler.detail(loginPrivacy.getAuthority()); 
+        managerBoardHandler.detail(); 
       }});
 
     boardMenu1.add(new Menu("삭제") {
       @Override
       public void execute() {
-        managerBoardHandler.delete(loginPrivacy.getAuthority()); 
+        managerBoardHandler.delete(); 
       }});
 
     return mainMenuGroup;
