@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
@@ -12,8 +13,8 @@ public class BoardHandler {
     this.boardList = boardList;
   }
 
-  public void add(int auth) {
-    if (auth == 0) {
+  public void add() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;
     }

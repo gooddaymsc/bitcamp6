@@ -19,7 +19,7 @@ public class SellerPrivacyHandler {
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("aaaa");
     sellerPrivacy.setPassword("aaaa");
-    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setAuthority(2);
     sellerPrivacy.setName("aaaa");
     sellerPrivacy.setNickname("aaaa");
     sellerPrivacy.setEmail("aaaa");
@@ -37,7 +37,7 @@ public class SellerPrivacyHandler {
     sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("bbbb");
     sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setAuthority(2);
     sellerPrivacy.setName("bbbb");
     sellerPrivacy.setNickname("bbbb");
     sellerPrivacy.setEmail("bbbb");
@@ -49,13 +49,13 @@ public class SellerPrivacyHandler {
 
     sellerPrivacy.setId("bbbb");
     sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setAuthority(2);
     managerList.add(sellerPrivacy);
 
     sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("cccc");
     sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setAuthority(2);
     sellerPrivacy.setName("cccc");
     sellerPrivacy.setNickname("cccc");
     sellerPrivacy.setEmail("cccc");
@@ -67,7 +67,7 @@ public class SellerPrivacyHandler {
 
     sellerPrivacy.setId("cccc");
     sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setAuthority(2);
     managerList.add(sellerPrivacy);
 
     sellerPrivacy = new SellerPrivacy();
@@ -85,7 +85,7 @@ public class SellerPrivacyHandler {
 
     sellerPrivacy.setId("dddd");
     sellerPrivacy.setPassword("dddd");
-    sellerPrivacy.setAuthority(3);
+    sellerPrivacy.setAuthority(2);
     managerList.add(sellerPrivacy);
   }
 

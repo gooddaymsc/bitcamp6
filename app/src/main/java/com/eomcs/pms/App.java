@@ -47,10 +47,8 @@ public class App {
   //  Manager loginPrivacy = new Manager();
   //static Manager loginPrivacy;
 
-  static Manager loginPrivacy;
-
+  static Manager loginPrivacy = new Manager();
   public static Manager getLoginUser() {
-    //    Manager loginPrivacy = new Manager();
     return loginPrivacy;
   }
 
@@ -136,15 +134,10 @@ public class App {
     loginMenu.add(new Menu("현재로그인정보") {
       @Override
       public void execute() {
-        if (getLoginUser() == null) {
-          System.out.printf("\n현재 아이디 : %s","-");
-          System.out.printf("\n현재 비밀번호 : %s","-");
-          System.out.printf("\n현재 권한 : %s\n", 0);
-        } else {
-          System.out.printf("\n현재 아이디 : %s",getLoginUser().getId());
-          System.out.printf("\n현재 비밀번호 : %s",getLoginUser().getPassword());
-          System.out.printf("\n현재 권한 : %s\n", level(getLoginUser().getAuthority()));
-        }
+        System.out.printf("\n현재 아이디 : %s",getLoginUser().getId());
+        System.out.printf("\n현재 비밀번호 : %s",getLoginUser().getPassword());
+        System.out.printf("\n현재 권한 : %s\n", level(getLoginUser().getAuthority()));
+
       }});
 
 
@@ -167,7 +160,7 @@ public class App {
     boardMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        boardHandler.add(loginPrivacy.getAuthority()); 
+        boardHandler.add(); 
       }});
     boardMenu.add(new Menu("목록") {
       @Override
@@ -291,7 +284,7 @@ public class App {
     stockMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        stockHandler.add(loginPrivacy.getAuthority()); 
+        stockHandler.add(); 
       }});
     stockMenu.add(new Menu("목록") {
       @Override

@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
@@ -17,8 +18,8 @@ public class StockHandler {
     //    this.loginPrivacy = loginPrivacy;
   }
 
-  public void add(int auth) {   
-    if (auth == 0 || auth == 1 ) {
+  public void add() {   
+    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
