@@ -33,6 +33,7 @@ public class App {
   List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
   // 일반회원
   List<Board> boardList = new ArrayList<>();
+
   List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
   // 판매자
