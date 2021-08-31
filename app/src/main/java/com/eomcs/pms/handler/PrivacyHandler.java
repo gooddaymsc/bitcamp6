@@ -13,10 +13,8 @@ public class PrivacyHandler {
 
   int size = 1;
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
-    this.memberList = memberList;
-    this.managerList = managerList;
-
     Privacy privacy = new Privacy();
+
     privacy.setId("aa");
     privacy.setPassword("aa");
     privacy.setAuthority(1);

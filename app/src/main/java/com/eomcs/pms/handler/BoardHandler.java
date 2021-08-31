@@ -3,11 +3,14 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
   List<Board> boardList;
+  List<Privacy> memberList;
+
   public BoardHandler(List<Board> boardList) {
     this.boardList = boardList;
   }
@@ -67,10 +70,37 @@ public class BoardHandler {
 
     board.setViews(board.getViews() + 1);
     System.out.printf("조회수: %d입니다.\n", board.getViews());
-    board.setLikes(board.getLikes() + 1);
     System.out.printf("좋아요 수: %d입니다.\n", board.getLikes());
     System.out.printf("태그: %s입니다.\n", board.getTag());
 
+  }
+
+  public void like() {
+    System.out.println("[게시글 좋아요 누르기]");
+    int no = Prompt.inputInt("번호? ");
+
+    Board board = findByNo(no);
+
+    if (board == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+    String input = Prompt.inputString("좋아요를 누르시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("게시글 좋아요를 취소하였습니다.");
+      return;
+    } 
+
+    System.out.println("좋아요를 눌렀습니다.");
+    board.setLikes(board.getLikes() + 1);
+    System.out.printf("현재 좋아요 수: %d입니다.\n", board.getLikes());
+
+    //    if ( == 1) { 
+    //      Privacy[] list = memberList.toArray(new Privacy[0]);
+    //      for (Privacy member : list) {                        // 회원(구매자) 목록
+    //        System.out.printf("좋아요 누른 사람: %s입니다.\n", member.getId());
+    //      }
+    //    }
   }
 
   public void update(int auth) {
@@ -103,6 +133,7 @@ public class BoardHandler {
     board.setTag(tag);
     System.out.println("게시글을 변경하였습니다.");
   }
+
 
   public void delete(int auth) {
     if (auth == 0) {
