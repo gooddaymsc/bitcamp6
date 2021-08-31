@@ -13,12 +13,10 @@ public abstract class Menu {
   // 다음과 같이 String 을 파라미터로 받는 생성자를 정의한다.
   public Menu(String title) {
     this.title = title;
-
   }
 
   // 서브 클래스에서 해야할 일을 정의한다.
   // 단, 서브 클래스에서 반드시 재정의 할 메서드이기 때문에 
   // 구체적으로 구현하지 않는다.
   public abstract void execute();
-
 }

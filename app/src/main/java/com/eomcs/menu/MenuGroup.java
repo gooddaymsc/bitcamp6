@@ -17,7 +17,6 @@ public class MenuGroup extends Menu {
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
-
   // 생성자를 정의하지 않으면 컴파일러가 기본 생성자를 자동으로 추가해 준다.
   // 문제는 컴파일러가 추가한 기본 생성자는 수퍼 클래스의 기본 생성자를 호출하기 때문에
   // 컴파일 오류가 발생한다. 
@@ -83,8 +82,6 @@ public class MenuGroup extends Menu {
     breadCrumb.push(this);
 
     while (true) {
-      //      System.out.printf("\n<<<유저정보>>>\n사용자 : %s | 비밀번호 : %s | 권한 : %d", 
-      //          loginPrivacy.getId(), loginPrivacy.getPassword(), loginPrivacy.getAuthority());
       System.out.printf("\n[%s]\n", getBreadCrumb());
       for (int i = 0; i < this.size; i++) {
         System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
@@ -108,7 +105,7 @@ public class MenuGroup extends Menu {
         }
 
         this.childs[menuNo - 1].execute();
-      } catch (Throwable e) {
+      } catch (Exception e) {
         // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
         System.out.println("--------------------------------------------------------------");

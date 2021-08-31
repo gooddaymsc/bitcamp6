@@ -5,16 +5,9 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductHandler {
-  //상품번호
-  //상품명
-  //주종
-  //원산지
-  //품종
-  //알콜도수
-  //테이스팅 노트 : 당도, 산도, 바디감
-  //가격
 
   List<Product> alcoholList;
+
   //Manager loginPrivacy;
   public ProductHandler(List<Product> alcoholList) {
     this.alcoholList = alcoholList;
@@ -26,6 +19,7 @@ public class ProductHandler {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
+
     System.out.println("[상품 등록]");
 
     Product product = new Product();
@@ -35,11 +29,10 @@ public class ProductHandler {
     product.setProductType(Prompt.inputString("주종? "));
     product.setCountryOrigin(Prompt.inputString("원산지? "));
     product.setVariety(Prompt.inputString("품종? "));
-    product.setAlcoholLevel(Prompt.inputInt("알콜도수? "));
-    product.setSugerLevel(Prompt.inputInt("당도(1-5)"));
-    product.setAcidity(Prompt.inputInt("산도(1-5)"));
-    product.setWeight(Prompt.inputInt("바디감(1-5)"));
-    product.setPrice(Prompt.inputInt("가격?"));
+    product.setAlcoholLevel(Prompt.inputFloat("알콜도수? ")); 
+    product.setSugerLevel(checkNum("당도(1-5)"));
+    product.setAcidity(checkNum("산도(1-5)"));
+    product.setWeight(checkNum("바디감(1-5)"));
 
     alcoholList.add(product);
   }
@@ -51,7 +44,7 @@ public class ProductHandler {
     Product[] list = alcoholList.toArray(new Product[0]);
 
     for (Product alcohol : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %d, %d, %d, %d, %d \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %d, %.2f, %d, %d, %d \n", 
           alcohol.getProductNumber(), 
           alcohol.getProductName(), 
           alcohol.getProductType(), 
@@ -60,8 +53,8 @@ public class ProductHandler {
           alcohol.getAlcoholLevel(),
           alcohol.getSugerLevel(),
           alcohol.getAcidity(),
-          alcohol.getWeight(),
-          alcohol.getPrice());
+          alcohol.getWeight());
+
     }
   }
 
@@ -80,11 +73,11 @@ public class ProductHandler {
     System.out.printf("주종: %s\n", alcohol.getProductType());
     System.out.printf("원산지: %s\n", alcohol.getCountryOrigin());
     System.out.printf("품종: %s\n", alcohol.getVariety());
-    System.out.printf("알콜도수: %d\n", alcohol.getAlcoholLevel());
+    System.out.printf("알콜도수: %.2f\n", alcohol.getAlcoholLevel());
     System.out.printf("당도: %d\n", alcohol.getSugerLevel());
     System.out.printf("산도: %d\n", alcohol.getAcidity());
     System.out.printf("바디감: %d\n", alcohol.getWeight());
-    System.out.printf("가격: %d\n", alcohol.getPrice ());
+
   }
 
   public void update(int auth) {
@@ -106,11 +99,11 @@ public class ProductHandler {
     String kind = Prompt.inputString("주종(" + alcohol.getProductType() + ")? ");
     String made = Prompt.inputString("원산지(" + alcohol.getCountryOrigin() + ")? ");
     String grapes = Prompt.inputString("품종(" + alcohol.getVariety() + ")? ");
-    int abv = Prompt.inputInt("알콜도수(" + alcohol.getAlcoholLevel() + ")? ");
+    float abv = Prompt.inputFloat("알콜도수(" + alcohol.getAlcoholLevel() + ")? ");
     int sweet = Prompt.inputInt("당도(" + alcohol.getSugerLevel() + ")? ");
     int acidic = Prompt.inputInt("산도(" + alcohol.getAcidity() + ")? ");
     int body = Prompt.inputInt("바디감(" + alcohol.getWeight() + ")? ");
-    int price = Prompt.inputInt("가격(" + alcohol.getPrice() + ")? ");
+
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -126,7 +119,6 @@ public class ProductHandler {
     alcohol.setSugerLevel(sweet);
     alcohol.setAcidity(acidic);
     alcohol.setWeight(body);
-    alcohol.setPrice(price);
 
     System.out.println("상품정보를 변경하였습니다.");
   }
@@ -189,6 +181,7 @@ public class ProductHandler {
     }
   }
 
+
   public String promptAlcohols(String label) {
     String Alcohols = "";
     while (true) {
@@ -206,7 +199,28 @@ public class ProductHandler {
     }
     return Alcohols;
   }
+
+  public int checkNum(String label) {
+    int number = -1;
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 5) {  
+        System.out.println("1-5 사이 수를 입력해주세요!"); 
+        number = num;
+        continue;
+      }           
+      return num;       
+    }
+
+  }
+
 }
+
+
+
+
+
+
 
 
 

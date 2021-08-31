@@ -6,7 +6,7 @@ public class Manager {
   private int authority;
 
   public Manager() {
-    this(null,null,0);
+    this("-","-",0);
   }
   public Manager(String id, String password, int authority) {
     this.id = id;
@@ -32,6 +32,5 @@ public class Manager {
   public void setAuthority(int authority) {
     this.authority = authority;
   }
-
 
 }

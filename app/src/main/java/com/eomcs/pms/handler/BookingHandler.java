@@ -13,25 +13,33 @@ public class BookingHandler {
     this.booktList = bookList;
   }
 
-  public void add() {
+  public void add(int auth) {
+    if (auth != 1) {
+      System.out.println("권한이 없습니다. 구매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 등록]");
 
     Booking booking = new Booking();
 
-    booking.setBookingNumber(Prompt.inputInt("번호? "));
-    booking.setProductName(Prompt.inputString("예약명? "));
-    booking.setProductType(Prompt.inputString("종류? "));
-    booking.setCountryOrigin(Prompt.inputString("원산지? "));
-    booking.setProductPhoto(Prompt.inputString("사진? "));
-    booking.setPrice(Prompt.inputString("가격? "));
-    booking.setReservation(Prompt.inputString("예약시간? "));
+    booking.setBookingNumber(Prompt.inputInt("번호를 입력해주세요: "));
+    booking.setProductName(Prompt.inputString("상품명을 입력해주세요: "));
+    booking.setProductType(Prompt.inputString("종류를 입력해주세요: "));
+    booking.setCountryOrigin(Prompt.inputString("원산지를 입력해주세요: "));
+    booking.setProductPhoto(Prompt.inputString("사진을 등록해주세요: "));
+    booking.setPrice(Prompt.inputString("가격을 입력해주세요: "));
+    booking.setReservation(Prompt.inputString("예약시간을 입력해주세요: "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
 
     booktList.add(booking);
   }
 
-  public void list() {
+  public void list(int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 목록]");
 
     Booking[] list = booktList.toArray(new Booking[0]);
@@ -48,9 +56,13 @@ public class BookingHandler {
     }
   }
 
-  public void detail() {
+  public void detail(int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Booking Book = findByNo(no);
 
@@ -59,17 +71,21 @@ public class BookingHandler {
       return;
     }
 
-    System.out.printf("예약명: %s\n", Book.getProductName());
-    System.out.printf("종류: %s\n", Book.getProductType());
-    System.out.printf("원산지: %s\n", Book.getCountryOrigin());
-    System.out.printf("사진: %s\n", Book.getProductPhoto());
-    System.out.printf("가격: %s\n", Book.getPrice());
-    System.out.printf("예약시간: %s\n", Book.getReservation());
+    System.out.printf("상품명: %s입니다.\n", Book.getProductName());
+    System.out.printf("종류: %s입니다.\n", Book.getProductType());
+    System.out.printf("원산지: %s입니다.\n", Book.getCountryOrigin());
+    System.out.printf("사진: %s입니다.\n", Book.getProductPhoto());
+    System.out.printf("가격: %s입니다.\n", Book.getPrice());
+    System.out.printf("예약시간: %s입니다.\n", Book.getReservation());
   }
 
-  public void update() {
+  public void update(int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다. 구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 변경]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Booking Book = findByNo(no);
 
@@ -78,12 +94,12 @@ public class BookingHandler {
       return;
     }
 
-    String name = Prompt.inputString("예약명(" + Book.getProductName()  + ")? ");
-    String kind = Prompt.inputString("종류(" + Book.getProductType() + ")? ");
-    String madeIn = Prompt.inputString("원산지(" + Book.getCountryOrigin() + ")? ");
-    String photo = Prompt.inputString("사진(" + Book.getProductPhoto() + ")? ");
-    String price = Prompt.inputString("가격(" + Book.getPrice() + ")? ");
-    String book = Prompt.inputString("예약시간(" + Book.getReservation() + ")? ");
+    String name = Prompt.inputString("변경 후의 상품명을 입력해주세요:(" + Book.getProductName()  + ") ");
+    String kind = Prompt.inputString("변경 후의 종류를 입력해주세요:(" + Book.getProductType() + ") ");
+    String madeIn = Prompt.inputString("변경 후의 원산지를 입력해주세요:(" + Book.getCountryOrigin() + ") ");
+    String photo = Prompt.inputString("변경 후의 사진을 등록해주세요:(" + Book.getProductPhoto() + ") ");
+    String price = Prompt.inputString("변경 후의 가격을 입력해주세요:(" + Book.getPrice() + ") ");
+    String book = Prompt.inputString("변경 후의 예약시간을 입력해주세요:(" + Book.getReservation() + ") ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -101,9 +117,13 @@ public class BookingHandler {
     System.out.println("예약을 변경하였습니다.");
   }
 
-  public void delete() {
+  public void delete(int auth) {
+    if (auth == 0 || auth == 3) {
+      System.out.println("권한이 없습니다.구매자 또는 판매자 기능입니다.");
+      return;
+    }
     System.out.println("[예약 삭제]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력해주세요: ");
 
     Booking Book = findByNo(no);
 
