@@ -7,6 +7,7 @@ import com.eomcs.util.Prompt;
 public class ProductHandler {
 
   List<Product> alcoholList;
+
   //Manager loginPrivacy;
   public ProductHandler(List<Product> alcoholList) {
     this.alcoholList = alcoholList;
@@ -18,20 +19,20 @@ public class ProductHandler {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
+
     System.out.println("[상품 등록]");
 
     Product product = new Product();
 
-    product.setProductNumber(Prompt.inputInt("번호를 입력해주세요: "));
-    product.setProductName(Prompt.inputString("상품명를 입력해주세요: "));
-    product.setProductType(Prompt.inputString("주종을 입력해주세요: "));
-    product.setCountryOrigin(Prompt.inputString("원산지를 입력해주세요: "));
-    product.setVariety(Prompt.inputString("품종을 입력해주세요: "));
-    product.setAlcoholLevel(Prompt.inputInt("알콜도수를 입력해주세요: "));
-    product.setSugerLevel(Prompt.inputInt("당도(1~5)를 입력해주세요: "));
-    product.setAcidity(Prompt.inputInt("산도(1~5)를 입력해주세요: "));
-    product.setWeight(Prompt.inputInt("바디감(1~5)를 입력해주세요: "));
-    product.setPrice(Prompt.inputInt("가격을 입력해주세요: "));
+    product.setProductNumber(Prompt.inputInt("번호? "));
+    product.setProductName(Prompt.inputString("상품명? "));
+    product.setProductType(Prompt.inputString("주종? "));
+    product.setCountryOrigin(Prompt.inputString("원산지? "));
+    product.setVariety(Prompt.inputString("품종? "));
+    product.setAlcoholLevel(Prompt.inputFloat("알콜도수? ")); 
+    product.setSugerLevel(checkNum("당도(1-5)"));
+    product.setAcidity(checkNum("산도(1-5)"));
+    product.setWeight(checkNum("바디감(1-5)"));
 
     alcoholList.add(product);
   }
@@ -43,7 +44,7 @@ public class ProductHandler {
     Product[] list = alcoholList.toArray(new Product[0]);
 
     for (Product alcohol : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %d, %d, %d, %d, %d \n", 
+      System.out.printf("%d, %s, %s, %s, %s, %d, %.2f, %d, %d, %d \n", 
           alcohol.getProductNumber(), 
           alcohol.getProductName(), 
           alcohol.getProductType(), 
@@ -52,14 +53,14 @@ public class ProductHandler {
           alcohol.getAlcoholLevel(),
           alcohol.getSugerLevel(),
           alcohol.getAcidity(),
-          alcohol.getWeight(),
-          alcohol.getPrice());
+          alcohol.getWeight());
+
     }
   }
 
   public void detail() {
     System.out.println("[상품 상세보기]");
-    int no = Prompt.inputInt("번호를 입력해주세요: ");
+    int no = Prompt.inputInt("번호? ");
 
     Product alcohol = findByNo(no);
 
@@ -68,15 +69,15 @@ public class ProductHandler {
       return;
     }
 
-    System.out.printf("상품이름: %s입니다.\n", alcohol.getProductName());
-    System.out.printf("주종: %s입니다.\n", alcohol.getProductType());
-    System.out.printf("원산지: %s입니다.\n", alcohol.getCountryOrigin());
-    System.out.printf("품종: %s입니다.\n", alcohol.getVariety());
-    System.out.printf("알콜도수: %d입니다.\n", alcohol.getAlcoholLevel());
-    System.out.printf("당도: %d입니다.\n", alcohol.getSugerLevel());
-    System.out.printf("산도: %d입니다.\n", alcohol.getAcidity());
-    System.out.printf("바디감: %d입니다.\n", alcohol.getWeight());
-    System.out.printf("가격: %d입니다.\n", alcohol.getPrice ());
+    System.out.printf("상품이름: %s\n", alcohol.getProductName());
+    System.out.printf("주종: %s\n", alcohol.getProductType());
+    System.out.printf("원산지: %s\n", alcohol.getCountryOrigin());
+    System.out.printf("품종: %s\n", alcohol.getVariety());
+    System.out.printf("알콜도수: %.2f\n", alcohol.getAlcoholLevel());
+    System.out.printf("당도: %d\n", alcohol.getSugerLevel());
+    System.out.printf("산도: %d\n", alcohol.getAcidity());
+    System.out.printf("바디감: %d\n", alcohol.getWeight());
+
   }
 
   public void update(int auth) {
@@ -85,7 +86,7 @@ public class ProductHandler {
       return;
     }
     System.out.println("[상품 변경]");
-    int no = Prompt.inputInt("번호를 입력해주세요: ");
+    int no = Prompt.inputInt("번호? ");
 
     Product alcohol = findByNo(no);
 
@@ -94,15 +95,15 @@ public class ProductHandler {
       return;
     }
 
-    String name = Prompt.inputString("변경 후의 상품이름(" + alcohol.getProductName()  + ")을 입력해주세요: ");
-    String kind = Prompt.inputString("변경 후의 주종(" + alcohol.getProductType() + ")을 입력해주세요: ");
-    String made = Prompt.inputString("변경 후의 원산지(" + alcohol.getCountryOrigin() + ")를 입력해주세요: ");
-    String grapes = Prompt.inputString("변경 후의 품종(" + alcohol.getVariety() + ")을 입력해주세요: ");
-    int abv = Prompt.inputInt("변경 후의 알콜도수(" + alcohol.getAlcoholLevel() + ")를 입력해주세요: ");
-    int sweet = Prompt.inputInt("변경 후의 당도(" + alcohol.getSugerLevel() + ")를 입력해주세요: ");
-    int acidic = Prompt.inputInt("변경 후의 산도(" + alcohol.getAcidity() + ")를 입력해주세요: ");
-    int body = Prompt.inputInt("변경 후의 바디감(" + alcohol.getWeight() + ")을 입력해주세요: ");
-    int price = Prompt.inputInt("변경 후의 가격(" + alcohol.getPrice() + ")을 입력해주세요: ");
+    String name = Prompt.inputString("상품이름(" + alcohol.getProductName()  + ")? ");
+    String kind = Prompt.inputString("주종(" + alcohol.getProductType() + ")? ");
+    String made = Prompt.inputString("원산지(" + alcohol.getCountryOrigin() + ")? ");
+    String grapes = Prompt.inputString("품종(" + alcohol.getVariety() + ")? ");
+    float abv = Prompt.inputFloat("알콜도수(" + alcohol.getAlcoholLevel() + ")? ");
+    int sweet = Prompt.inputInt("당도(" + alcohol.getSugerLevel() + ")? ");
+    int acidic = Prompt.inputInt("산도(" + alcohol.getAcidity() + ")? ");
+    int body = Prompt.inputInt("바디감(" + alcohol.getWeight() + ")? ");
+
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -118,7 +119,6 @@ public class ProductHandler {
     alcohol.setSugerLevel(sweet);
     alcohol.setAcidity(acidic);
     alcohol.setWeight(body);
-    alcohol.setPrice(price);
 
     System.out.println("상품정보를 변경하였습니다.");
   }
@@ -129,7 +129,7 @@ public class ProductHandler {
       return;
     }
     System.out.println("[상품 삭제]");
-    int no = Prompt.inputInt("번호를 입력해주세요: ");
+    int no = Prompt.inputInt("번호? ");
 
     Product alcohol = findByNo(no);
 
@@ -181,6 +181,7 @@ public class ProductHandler {
     }
   }
 
+
   public String promptAlcohols(String label) {
     String Alcohols = "";
     while (true) {
@@ -198,7 +199,28 @@ public class ProductHandler {
     }
     return Alcohols;
   }
+
+  public int checkNum(String label) {
+    int number = -1;
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 5) {  
+        System.out.println("1-5 사이 수를 입력해주세요!"); 
+        number = num;
+        continue;
+      }           
+      return num;       
+    }
+
+  }
+
 }
+
+
+
+
+
+
 
 
 

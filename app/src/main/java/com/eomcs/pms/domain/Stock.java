@@ -1,14 +1,16 @@
 package com.eomcs.pms.domain;
 
+
 public class Stock {
 
   public Product product;
-  private int stockNumber;          //재고번호
-  private String productType;       //주종
-  private String productName;       //상품명    
-  private int stocks;                //재고 수량
-  private String countryOrigin;     //원산지
-  private int price;                //가격
+  public Stock stock;
+  private int stockNumber;            //재고번호
+  private String stockType;           //주종
+  private String stockName;           //상품명    
+  private int stocks;                 //재고 수량
+  private String stockOrigin;         //원산지
+  private int price;                  //가격
 
   public int getStockNumber() {
     return stockNumber;
@@ -16,17 +18,17 @@ public class Stock {
   public void setStockNumber(int stockNumber) {
     this.stockNumber = stockNumber;
   }
-  public String getProductType() {
-    return productType;
+  public String getStockType() {
+    return stockType;
   }
-  public void setProductType(String productType) {
-    this.productType = productType;
+  public void setStockType(String stockType) {
+    this.stockType = stockType;
   }
-  public String getProductName() {
-    return productName;
+  public String getStockName()  {
+    return stockName;
   }
-  public void setProductName(String productName) {
-    this.productName = productName;
+  public void setStockName(String stockName) {
+    this.stockName = stockName;
   }
   public int getStocks() {
     return stocks;
@@ -34,11 +36,11 @@ public class Stock {
   public void setStocks(int stocks) {
     this.stocks = stocks;
   }
-  public String getCountryOrigin() {
-    return countryOrigin;
+  public String getStockOrigin() {
+    return stockOrigin;
   }
-  public void setCountryOrigin(String countryOrigin) {
-    this.countryOrigin = countryOrigin;
+  public void setStockOrigin(String stockOrigin) {
+    this.stockOrigin = stockOrigin;
   }
   public int getPrice() {
     return price;
@@ -52,6 +54,5 @@ public class Stock {
   public void setProduct(Product product) {
     this.product = product;
   }
-
 
 }

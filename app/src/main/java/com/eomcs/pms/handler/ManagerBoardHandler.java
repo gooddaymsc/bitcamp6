@@ -5,11 +5,61 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class ManagerBoardHandler {
-  //sc 작성중
   List<Board> boardList;
 
   public ManagerBoardHandler(List<Board> boardList) {
     this.boardList = boardList;
+  }
+
+  public void list(int auth) {
+    if (auth != 3) {
+      System.out.println("권한이 없습니다. 관리자 기능입니다.");
+      return;
+    }
+    System.out.println("[게시글 목록]");
+
+    Board[] boards = new Board[boardList.size()];
+
+    boardList.toArray(boards);
+
+    for (Board board : boards) {
+      System.out.printf("%d, %s, %s, %s, %d, %s, %d\n", 
+          board.getNumber(), 
+          board.getTitle(), 
+          board.getWriter(),
+          board.getRegistrationDate(),
+          board.getViews(), 
+          board.getTag(), 
+          board.getLikes());
+    }
+  }
+
+  public void detail(int auth) {
+    if (auth != 3) {
+      System.out.println("권한이 없습니다. 관리자 기능입니다.");
+      return;
+    }
+    System.out.println("[게시글 상세보기]");
+    int no = Prompt.inputInt("번호? ");
+
+    Board board = findByNo(no);
+
+    if (board == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+
+    System.out.printf("제목: %s입니다.\n", board.getTitle());
+    System.out.printf("내용: %s입니다.\n", board.getContent());
+    System.out.printf("작성자: %s입니다.\n", board.getWriter());
+    System.out.printf("등록일: %s입니다.\n", board.getRegistrationDate());
+
+    board.setViews(board.getViews() + 1);
+    System.out.printf("조회수: %d입니다.\n", board.getViews());
+    board.setLikes(board.getLikes() + 1);
+    System.out.printf("좋아요 수: %d입니다.\n", board.getLikes());
+    System.out.printf("태그: %s입니다.\n", board.getTag());
+
   }
 
   public void delete(int auth) {

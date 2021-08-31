@@ -26,7 +26,15 @@ public class Prompt {
   public static void close() {
     keyboardScan.close();
   }
+
+  //상품등록-알콜도수 등록시 사용
+  public static float inputFloat(String title) {
+    return Float.parseFloat(inputString(title));
+  }  
+
 }
+
+
 
 
 

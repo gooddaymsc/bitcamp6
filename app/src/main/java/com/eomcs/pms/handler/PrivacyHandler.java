@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
@@ -10,7 +11,6 @@ public class PrivacyHandler {
 
   List<Privacy> memberList;
   List<Manager> managerList;
-
   int size = 1;
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
     this.memberList = memberList;
@@ -18,11 +18,18 @@ public class PrivacyHandler {
 
   }
 
-  public void memberAdd(int i, int auth) {
-    if (auth== 1 || auth == 2 || auth == 3) {
+  //  public void memberAdd(int i, int auth) {
+  //    if (auth== 1 || auth == 2 || auth == 3) {
+  //      System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
+  //      return;
+  //    }
+
+  public void memberAdd(int i) {
+    if (App.getLoginUser()!=null) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
+
     System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
