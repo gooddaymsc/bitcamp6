@@ -58,7 +58,7 @@ public class App {
 
   FindHandler findHandler = new FindHandler(privacyList, sellerPrivacyList);
 
-  static Manager loginPrivacy;
+  static Manager loginPrivacy = new Manager();
   public static Manager getLoginUser() {
     return loginPrivacy;
   }
