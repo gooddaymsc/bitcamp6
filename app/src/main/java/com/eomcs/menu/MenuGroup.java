@@ -1,15 +1,13 @@
 package com.eomcs.menu;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import com.eomcs.pms.App;
 import com.eomcs.util.Prompt;
 
-// 역할
-// - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.
-// 
 public class MenuGroup extends Menu {
 
-  // 메뉴의 bread crumb 목록 보관
-  // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
+
   static Stack<Menu> breadCrumb = new Stack<>();
 
   Menu[] childs = new Menu[100];
@@ -17,11 +15,17 @@ public class MenuGroup extends Menu {
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
-  // 생성자를 정의하지 않으면 컴파일러가 기본 생성자를 자동으로 추가해 준다.
-  // 문제는 컴파일러가 추가한 기본 생성자는 수퍼 클래스의 기본 생성자를 호출하기 때문에
-  // 컴파일 오류가 발생한다. 
-  // Menu 클래스에는 기본 생성자가 없다. 
-  // 따라서 개발자가 직접 생성자를 정의해야 한다.
+  private static class PrevMenu extends Menu {
+    public PrevMenu() {
+      super("");
+    }
+    @Override
+    public void execute() {      
+    }
+  }
+  static PrevMenu prevMenu = new PrevMenu();
+
+
   public MenuGroup(String title) {
     super(title);
   }
@@ -82,9 +86,33 @@ public class MenuGroup extends Menu {
     breadCrumb.push(this);
 
     while (true) {
+      ArrayList<Menu> menuList = new ArrayList<>();
       System.out.printf("\n[%s]\n", getBreadCrumb());
+
       for (int i = 0; i < this.size; i++) {
-        System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
+
+        if (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
+            App.getLoginUser().getAuthority() == 1) {
+          menuList.add(this.childs[i]);
+
+        } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPIVACY &&
+            App.getLoginUser().getAuthority() == 2) {
+          menuList.add(this.childs[i]);
+
+        } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
+            App.getLoginUser().getAuthority() == 3) {
+          menuList.add(this.childs[i]);
+
+        } else if (this.childs[i].enableState == Menu.ENABLE_VISITOR) {
+          menuList.add(this.childs[i]);
+        }
+
+        //        System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
+      }
+
+      int i = 1;
+      for (Menu menu : menuList) {
+        System.out.printf("%d. %s\n", i++, menu.title);
       }
 
       if (!disablePrevMenu) {
@@ -105,6 +133,12 @@ public class MenuGroup extends Menu {
       }
 
       this.childs[menuNo - 1].execute();
+
+
+      //      menuList.get(menuNo - 1).execute();
+
+
+
       //    } 
       //      catch (Exception e) {
       //        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
