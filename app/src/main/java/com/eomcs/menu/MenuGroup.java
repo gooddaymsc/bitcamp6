@@ -1,6 +1,7 @@
 package com.eomcs.menu;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import com.eomcs.pms.App;
 import com.eomcs.util.Prompt;
@@ -39,15 +40,13 @@ public class MenuGroup extends Menu {
     this.prevMenuTitle = prevMenuTitle;
   }
 
-  // MenuGroup이 포함하는 하위 Menu를 다룰 수 있도록 메서드를 정의한다.
   public void add(Menu child) {
     if (this.size == this.childs.length) {
-      return; // 하위 메뉴를 저장하는 배열이 꽉 찼다면 더이상 저장해서는 안된다.
+      return; 
     }
     this.childs[this.size++] = child; 
   }
 
-  // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
     int index = indexOf(child);
     if (index == -1) {
@@ -60,7 +59,6 @@ public class MenuGroup extends Menu {
     return child;
   }
 
-  // 배열에 들어 있는 Menu 객체의 인덱스를 알아낸다.
   public int indexOf(Menu child) {
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i] == child) {
@@ -70,7 +68,6 @@ public class MenuGroup extends Menu {
     return -1;
   }
 
-  // 배열에 들어 있는 Menu 객체를 찾는다.
   public Menu getMenu(String title) { 
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i].title.equals(title)) {
@@ -86,67 +83,46 @@ public class MenuGroup extends Menu {
     breadCrumb.push(this);
 
     while (true) {
-      ArrayList<Menu> menuList = new ArrayList<>();
-      System.out.printf("\n[%s]\n", getBreadCrumb());
+      printBreadCrumbMenuTitle();
+      List<Menu> menuList = getMenuList();
+      printMenuList(menuList);
 
-      for (int i = 0; i < this.size; i++) {
-
-        if (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
-            App.getLoginUser().getAuthority() == 1) {
-          menuList.add(this.childs[i]);
-
-        } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPIVACY &&
-            App.getLoginUser().getAuthority() == 2) {
-          menuList.add(this.childs[i]);
-
-        } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
-            App.getLoginUser().getAuthority() == 3) {
-          menuList.add(this.childs[i]);
-
-        } else if (this.childs[i].enableState == Menu.ENABLE_VISITOR) {
-          menuList.add(this.childs[i]);
+      try {
+        Menu menu = selectMenu(menuList);
+        if (menu == null) {
+          System.out.println("무효한 메뉴 번호입니다.");
+          continue;
+        }
+        if (menu instanceof PrevMenu) {
+          breadCrumb.pop();
+          return;
         }
 
-        //        System.out.printf("%d. %s\n", i + 1, this.childs[i].title);
+        menu.execute();
+
+        //        int menuNo = Prompt.inputInt("선택> ");
+
+        //        if (menuNo == 0 && !disablePrevMenu) {
+        //          // 현재 메뉴에서 나갈 때 스택에서 제거한다.
+        //          breadCrumb.pop();
+        //          return;
+        //        }
+        //
+        //        if (menuNo < 0 || menuNo > this.size) {
+        //          System.out.println("무효한 메뉴 번호입니다.");
+        //          continue;
+        //        }
+
+        //        this.childs[menuNo - 1].execute();
+
+      } catch (Exception e) {
+        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
+        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
+        System.out.println("--------------------------------------------------------------");
+        System.out.printf("오류 발생: %s\n", e.getClass().getName());
+        e.printStackTrace();
+        System.out.println("--------------------------------------------------------------");
       }
-
-      int i = 1;
-      for (Menu menu : menuList) {
-        System.out.printf("%d. %s\n", i++, menu.title);
-      }
-
-      if (!disablePrevMenu) {
-        System.out.printf("0. %s\n", this.prevMenuTitle);
-      }
-
-      //      try {
-      int menuNo = Prompt.inputInt("선택> ");
-      if (menuNo == 0 && !disablePrevMenu) {
-        // 현재 메뉴에서 나갈 때 스택에서 제거한다.
-        breadCrumb.pop();
-        return;
-      }
-
-      if (menuNo < 0 || menuNo > this.size) {
-        System.out.println("무효한 메뉴 번호입니다.");
-        continue;
-      }
-
-      this.childs[menuNo - 1].execute();
-
-
-      //      menuList.get(menuNo - 1).execute();
-
-
-
-      //    } 
-      //      catch (Exception e) {
-      //        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
-      //        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
-      //        System.out.println("--------------------------------------------------------------");
-      //        System.out.printf("오류 발생: %s\n", e.getClass().getName());
-      //        System.out.println("--------------------------------------------------------------");
-      //      }
     }
   }
 
@@ -162,6 +138,59 @@ public class MenuGroup extends Menu {
     }
 
     return path;
+  }
+
+  private List<Menu> getMenuList() {
+    ArrayList<Menu> menuList = new ArrayList<>();
+
+    for (int i = 0; i < this.size; i++) {
+
+      if (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
+          App.getLoginUser().getAuthority() == 1) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPIVACY &&
+          App.getLoginUser().getAuthority() == 2) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
+          App.getLoginUser().getAuthority() == 3) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_VISITOR) {
+        menuList.add(this.childs[i]);
+      }
+    }
+    return menuList;
+  }
+
+  private void printBreadCrumbMenuTitle() {
+    System.out.printf("\n[%s]\n", getBreadCrumb());
+  }
+
+  private void printMenuList(List<Menu> menuList) {
+    int i = 1;
+    for (Menu menu : menuList) {
+      System.out.printf("%d. %s\n", i++, menu.title);
+    }
+
+    if (!disablePrevMenu) {
+      System.out.printf("0. %s\n", this.prevMenuTitle);
+    }
+  }
+
+  private Menu selectMenu(List<Menu> menuList) {
+    int menuNo = Prompt.inputInt("선택> ");
+
+    if (menuNo < 0 || menuNo > menuList.size()) {
+      return null;
+    }
+
+    if (menuNo == 0 && !disablePrevMenu) {
+      return prevMenu; // 호출한 쪽에 '이전 메뉴' 선택을 알리게 위해 
+    } 
+
+    return menuList.get(menuNo - 1);
   }
 
 }

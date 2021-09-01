@@ -13,6 +13,9 @@ public class PrivacyHandler {
   List<Manager> managerList;
   int size = 1;
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
+    this.memberList = memberList;
+    this.managerList = managerList;
+
     Privacy privacy = new Privacy();
 
     privacy.setId("aa");
@@ -94,7 +97,7 @@ public class PrivacyHandler {
   //    }
 
   public void memberAdd(int i) {
-    if (App.getLoginUser()!=null) {
+    if (App.getLoginUser().getAuthority() != 0) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
