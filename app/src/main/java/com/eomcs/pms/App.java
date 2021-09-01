@@ -156,12 +156,12 @@ public class App {
       public void execute() {
         boardHandler.add(); 
       }});
-    boardMenu.add(new Menu("목록", Menu.ENABLE_MEMBER) {
+    boardMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    boardMenu.add(new Menu("상세보기", Menu.ENABLE_SELLER) {
+    boardMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         boardHandler.detail(); 

@@ -94,7 +94,7 @@ public class PrivacyHandler {
   //    }
 
   public void memberAdd(int i) {
-    if (App.getLoginUser()!=null) {
+    if (App.getLoginUser().getAuthority()!=0) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }

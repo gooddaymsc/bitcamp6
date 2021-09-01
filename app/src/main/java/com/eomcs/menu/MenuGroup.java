@@ -143,11 +143,11 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (int i = 0; i < this.size; i++) {
-      if  (this.childs[i].enableState == Menu.ENABLE_MEMBER &&
+      if  (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
           App.getLoginUser().getAuthority()==1) {
         menuList.add(this.childs[i]);
 
-      } else if (this.childs[i].enableState == Menu.ENABLE_SELLER &&
+      } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPRIVACY &&
           App.getLoginUser().getAuthority() == 2) {
         menuList.add(this.childs[i]);
 

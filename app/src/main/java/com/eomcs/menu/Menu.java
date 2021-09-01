@@ -7,8 +7,8 @@ public abstract class Menu {
 
   //  public static final int ENABLE_ALL = 0;
   public static final int ENABLE_VISITOR = 0; // 모두 접근 가능
-  public static final int ENABLE_MEMBER = 1;
-  public static final int ENABLE_SELLER = 2;
+  public static final int ENABLE_PRIVACY = 1;
+  public static final int ENABLE_SELLERPRIVACY = 2;
   public static final int ENABLE_ADMIN = 3;
 
   int enableState;
