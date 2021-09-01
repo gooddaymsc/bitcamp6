@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
@@ -13,8 +14,8 @@ public class CartHandler {
     this.cartList = cartList;
   }
 
-  public void add(int auth) {
-    if (auth != 1) {
+  public void add() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -32,8 +33,8 @@ public class CartHandler {
     cartList.add(cart);
   }
 
-  public void list(int auth) {
-    if (auth != 1) {
+  public void list() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -51,8 +52,8 @@ public class CartHandler {
     }
   }
 
-  public void detail(int auth) {
-    if (auth != 1) {
+  public void detail() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -74,8 +75,8 @@ public class CartHandler {
     System.out.printf("등록일: %s입니다.\n", cart.getRegistrationDate());
   }
 
-  public void update(int auth) {
-    if (auth != 1) {
+  public void update() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -110,8 +111,8 @@ public class CartHandler {
     System.out.println("장바구니를 변경하였습니다.");
   }
 
-  public void delete(int auth) {
-    if (auth != 1) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }

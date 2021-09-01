@@ -1,0 +1,844 @@
+[33mcommit f156e16483c1389c7adee2bc3dfe7a449e0265dc[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: 96bc672 558e7b2
+Author: jylion23 <jylion23@github.com>
+Date:   Tue Aug 31 22:32:55 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 558e7b269283aad80c6e9d559a5c38ff4ea1282c[m[33m ([m[1;31morigin/main[m[33m)[m
+Merge: bbf66b9 25ec6ab
+Author: Moon Sechul <77563427+gooddaymsc@users.noreply.github.com>
+Date:   Tue Aug 31 21:00:11 2021 +0900
+
+    Merge pull request #2 from gooddaymsc/sechul
+    
+    Sechul
+
+[33mcommit 96bc672b779971c1ed3b7155f471637f089f89d0[m
+Merge: 17f9e3f 25ec6ab
+Author: jylion23 <jylion23@github.com>
+Date:   Tue Aug 31 19:22:02 2021 +0900
+
+    .
+
+[33mcommit 17f9e3fdad20714a8c274868e5900334aef32e8d[m
+Author: jylion23 <jylion23@github.com>
+Date:   Tue Aug 31 19:14:55 2021 +0900
+
+    .
+
+[33mcommit 25ec6ab59b6ccf49b124f9d96d7e1da7b9bdfd82[m[33m ([m[1;31morigin/sechul[m[33m)[m
+Merge: 9b41f42 1a0b0f8
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Tue Aug 31 19:01:19 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 9b41f42ab19e48e4c391b471e7f414a424c1e344[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Tue Aug 31 19:00:45 2021 +0900
+
+    test id add
+
+[33mcommit 1a0b0f82e49293dd0c31d350a00bb763be4d5735[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Tue Aug 31 17:40:57 2021 +0900
+
+    sumin
+
+[33mcommit bbf66b95e7b65dd52641e2f9fcaf3653c7da5db4[m
+Merge: 6e27810 af7b161
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Tue Aug 31 13:56:31 2021 +0900
+
+    sc
+
+[33mcommit af7b161946322dffc0b6c908a5aebf0845fbb922[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Tue Aug 31 09:26:23 2021 +0900
+
+    'MainMenu'
+
+[33mcommit d259539c7dbc5739d4e36eb425cc5b216c04db05[m
+Merge: a827106 01db583
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Mon Aug 30 22:16:03 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit a82710660ec8d7b388b3faf7031dff663842d189[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Mon Aug 30 22:15:00 2021 +0900
+
+    sc idpwfind ManagerBoardH
+
+[33mcommit 01db5838b8c5041608d24b0ddb5b56e459124798[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Mon Aug 30 19:58:26 2021 +0900
+
+    sumin
+
+[33mcommit 9303990f8ffb4de8df0e22d93127d651f7d5f694[m
+Merge: d1bda5b c172ea1
+Author: unknown <evahong94@gmail.com>
+Date:   Mon Aug 30 16:00:40 2021 +0900
+
+    'loginHandler'
+
+[33mcommit d1bda5b95da0bed52219b16a0e87a1c2729d9e6f[m
+Author: unknown <evahong94@gmail.com>
+Date:   Mon Aug 30 15:58:07 2021 +0900
+
+    'put_manager'
+
+[33mcommit c172ea1216a4015760b3ffa3bccd59dea94a8a5d[m
+Merge: bb32cb8 141bd4f
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Mon Aug 30 15:24:04 2021 +0900
+
+    sc App : manager login service add
+
+[33mcommit bb32cb849c34b164202b9f8cacd53357686ef6b3[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Mon Aug 30 14:23:49 2021 +0900
+
+    sc ManagerBoardHandler
+
+[33mcommit 141bd4f333122fa8c229efe0d8884d5a638e2647[m
+Author: unknown <evahong94@gmail.com>
+Date:   Mon Aug 30 02:42:28 2021 +0900
+
+    'merge_login'
+
+[33mcommit aee98f936b895829c44de24f2af8b995a3fc17d5[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Sun Aug 29 16:33:40 2021 +0900
+
+    sc MemberHandler
+
+[33mcommit 2736d203f1c1c1781c908e29ae165d9616b0a2ea[m
+Author: jylion23 <jylion23@github.com>
+Date:   Sun Aug 29 14:37:03 2021 +0900
+
+    textEdit
+
+[33mcommit ad021d87c20cd2b17b4c9e7020888a584cc1371b[m
+Merge: 1454bb1 79dd577
+Author: jylion23 <jylion23@github.com>
+Date:   Sun Aug 29 11:48:03 2021 +0900
+
+    .
+
+[33mcommit 1454bb1bb566825cc32207ff3cdd94cbf1281cdb[m
+Author: jylion23 <jylion23@github.com>
+Date:   Sun Aug 29 11:17:14 2021 +0900
+
+    yj
+
+[33mcommit 79dd5772450bdc68db9137d977da0787e1a83f12[m
+Merge: 466804e baa6340
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Sun Aug 29 11:06:33 2021 +0900
+
+    sc App re-menu
+
+[33mcommit 466804ead1c0f119afc9598b147c38e347a999a4[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Sun Aug 29 09:45:19 2021 +0900
+
+    sc App re-menu
+
+[33mcommit baa6340d412631a3290e623ab4838b128472e902[m
+Author: jylion23 <jylion23@github.com>
+Date:   Sat Aug 28 22:18:20 2021 +0900
+
+    yj
+
+[33mcommit 61a9e13c03992fbc8b40d0ed63acd1599cfaf931[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Sat Aug 28 19:41:20 2021 +0900
+
+    sumin.0828
+
+[33mcommit 4374a7175c553c4f678c4e39b471109dfd012c79[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Sat Aug 28 18:17:21 2021 +0900
+
+    'rm_bin'
+
+[33mcommit ed701a0430d58cd3ae664c4d68d65bf518dad392[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Sat Aug 28 18:10:25 2021 +0900
+
+    'App_test'
+
+[33mcommit 0dcf07fbfb2a59315531c85355e449017cfbc8db[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Sat Aug 28 18:06:09 2021 +0900
+
+    test
+
+[33mcommit 15ecf9b376cfaf7b56418c4814c4510b562088de[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Sat Aug 28 17:33:26 2021 +0900
+
+    'authority'
+
+[33mcommit 40e9f41c6c52bfe5e20cd1ce902ad031ea4a0e1a[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Sat Aug 28 15:25:37 2021 +0900
+
+    'auth_JH'
+
+[33mcommit 7476efce6f7a1b9ca86f2c291535ecf83445dfc1[m
+Merge: 80b0dff d4ba18d
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Sat Aug 28 11:14:23 2021 +0900
+
+    'local'
+
+[33mcommit d4ba18d87e2e3b9c596960774d541c0f48e315cb[m
+Merge: 733ef8a 8405a0e
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Sat Aug 28 07:42:43 2021 +0900
+
+    sc
+
+[33mcommit 733ef8a76d34b6f6331c85b0a5499b3544164c81[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Sat Aug 28 06:50:37 2021 +0900
+
+    sc
+
+[33mcommit 8405a0e5c64b74f65b55127fd3f4b706c2dd2e1d[m
+Author: unknown <evahong94@gmail.com>
+Date:   Sat Aug 28 03:11:57 2021 +0900
+
+    'rm_unique'
+
+[33mcommit c37e959597b430ecc61ab02b518efbe94d5fd153[m
+Author: unknown <evahong94@gmail.com>
+Date:   Sat Aug 28 03:02:15 2021 +0900
+
+    'Login'
+
+[33mcommit 80b0dffa83acb44392dd82289d5d139f0226638f[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Fri Aug 27 20:17:29 2021 +0900
+
+    'JH_210827'
+
+[33mcommit 927e5a719afd3581c4eba7879dcfc15aca339313[m
+Author: jylion23 <jylion23@github.com>
+Date:   Fri Aug 27 17:56:44 2021 +0900
+
+    deleteClassFolderAndSettingsFolder
+
+[33mcommit 304f513e46c62051c78adb0b8ccbbff914064c83[m
+Author: unknown <evahong94@gmail.com>
+Date:   Fri Aug 27 12:34:26 2021 +0900
+
+    'ch_app'
+
+[33mcommit 4f12e2f3def76709ba73ac3dd53d71101a40d736[m
+Author: unknown <evahong94@gmail.com>
+Date:   Fri Aug 27 12:08:07 2021 +0900
+
+    'changeList'
+
+[33mcommit 9cf705ba12623eeec705dc64b03e3ab43b16a3de[m
+Merge: efe1f87 83648c3
+Author: unknown <evahong94@gmail.com>
+Date:   Fri Aug 27 10:11:59 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit efe1f87e885efefd05bd047f0e1c5a5e9c148631[m
+Merge: 645a48c 445e86a
+Author: unknown <evahong94@gmail.com>
+Date:   Fri Aug 27 10:09:07 2021 +0900
+
+    'ch_cart_booking'
+
+[33mcommit 83648c3db61172ff672b248d09b3ec47671fd6f7[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Fri Aug 27 10:06:58 2021 +0900
+
+    .
+
+[33mcommit 9e5d2835af452fe87b065e2ee7b4b6595a83e05e[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Fri Aug 27 09:59:37 2021 +0900
+
+    sumin
+
+[33mcommit 645a48c3c3d2012947eb719aa84ca7496cfe4769[m
+Author: unknown <evahong94@gmail.com>
+Date:   Fri Aug 27 09:58:17 2021 +0900
+
+    'ch_cart_booking'
+
+[33mcommit 445e86a4308eb18cd5c03f482083f3176f47f9e2[m
+Merge: 6147eb5 f2cc940
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Fri Aug 27 09:58:07 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 6147eb5adcbc38e18dc25d67f84e62d925e600b4[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Fri Aug 27 09:57:57 2021 +0900
+
+    sumin/test
+
+[33mcommit f2cc940303020207346d4db63be8b61acd7d077a[m
+Author: Moon Sechul <77563427+gooddaymsc@users.noreply.github.com>
+Date:   Fri Aug 27 09:49:48 2021 +0900
+
+    Create README.md
+
+[33mcommit b513ca63eea6606f27ad40e1c3e45b5343e2bf5e[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Fri Aug 27 01:55:04 2021 +0900
+
+    sc rename
+
+[33mcommit de1622da2a93d1796d742418a0b2690170efc264[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Fri Aug 27 01:48:19 2021 +0900
+
+    sc rename
+
+[33mcommit c73c587f3e558c78fabe9961177ac68e208f16dd[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 23:30:55 2021 +0900
+
+    'modify_name'
+
+[33mcommit f9f9312d2ceef2f47e613918493d91703c9eba93[m
+Merge: 72d52cb bc5c50b
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 22:24:11 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 72d52cb087c73fa561f6266a59c2dbd0fb2e1230[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 22:23:15 2021 +0900
+
+    'rm_gitignore'
+
+[33mcommit bc5c50ba4ae52b82b35eac5420636579fe996eee[m
+Author: jylion23 <jylion23@github.com>
+Date:   Thu Aug 26 22:06:57 2021 +0900
+
+    doc
+
+[33mcommit 9954f7063128c423cce30b69ddf8425cacfeb81f[m
+Merge: 9f8a2c4 ac6906b
+Author: jylion23 <jylion23@github.com>
+Date:   Thu Aug 26 22:04:50 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 9f8a2c4faad064c67e76ab12d8e6cdc6f3b9f346[m
+Author: jylion23 <jylion23@github.com>
+Date:   Thu Aug 26 22:04:14 2021 +0900
+
+    doc
+
+[33mcommit 4a10de9fdfdf4aafab179d444a32a719840f3440[m
+Author: jylion23 <jylion23@github.com>
+Date:   Thu Aug 26 21:58:14 2021 +0900
+
+    doc
+
+[33mcommit ac6906b4d0994cf6c115987850757a4a3a935f96[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 21:46:55 2021 +0900
+
+    'mk_app'
+
+[33mcommit 636490772cbf95a4a2869c018150f5d4ea3bb722[m
+Merge: dcb84b0 ecb5085
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 21:24:54 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6 into Jihyun
+
+[33mcommit ecb508550ba104fa877c3f783d620a7669991725[m
+Merge: 04c0f47 f1c76d9
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 21:11:39 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 04c0f47594475423a91d70a817bbdaec58dd5717[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 21:11:11 2021 +0900
+
+    'modifyApp'
+
+[33mcommit f1c76d998ae261aad24b0367e293831a5f8e8eef[m
+Merge: 291222f da41fcc
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 21:02:03 2021 +0900
+
+    sumin2
+
+[33mcommit 291222f1de22807980a864b345f69a07d66ac304[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 21:00:05 2021 +0900
+
+    sumin2
+
+[33mcommit da41fcce77f13104f1d3f0049b5b0dec4672af59[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Thu Aug 26 19:05:23 2021 +0900
+
+    sc
+
+[33mcommit c1a25fbe6b7e0f5baff63be8ea33cdfdacefeb37[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Thu Aug 26 18:20:39 2021 +0900
+
+    sc
+
+[33mcommit 9c84af94cb321f529def5b370c7f09da183001ba[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Thu Aug 26 18:17:11 2021 +0900
+
+    sc
+
+[33mcommit bb9d8089558026f88f752265402ad8c61e52b102[m
+Merge: 5039e7e fe7e591
+Author: jylion23 <jylion23@github.com>
+Date:   Thu Aug 26 17:58:50 2021 +0900
+
+    yj
+
+[33mcommit fe7e5918fafaa42a973008c9d27ed9f478fa92b7[m
+Merge: 7b8f8c7 ab668b0
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 17:54:56 2021 +0900
+
+    Merge branch 'sumin'
+
+[33mcommit ab668b0dcf083155aca16adfe5a0f6a02c4f7e49[m[33m ([m[1;31morigin/sumin[m[33m)[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 17:51:35 2021 +0900
+
+    sumin
+
+[33mcommit 7b8f8c76125acc9f75cdcd507f81d459f595373b[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Thu Aug 26 17:43:30 2021 +0900
+
+    sc
+
+[33mcommit 5039e7e0da3fe1433c91bcf9a0e0279ec4fe99c7[m
+Author: jylion23 <jylion23@github.com>
+Date:   Thu Aug 26 17:40:36 2021 +0900
+
+    yj
+
+[33mcommit 1ecc176e255ba747be72ef75eb796c852f0117a1[m
+Merge: 5de3feb 6c4f183
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Thu Aug 26 17:36:15 2021 +0900
+
+    sc
+
+[33mcommit 5de3feba01194480229e08b4c94ab259addeb005[m
+Author: MM&KK <gooddaymsc@naver.com>
+Date:   Thu Aug 26 17:32:26 2021 +0900
+
+    sc
+
+[33mcommit 6c4f183e47537657ddd2ba48dd4a1f0dc247d036[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 17:31:49 2021 +0900
+
+    'JH'
+
+[33mcommit 6dc6e4628bba5c75e8a0c25d21fe60bc09f179be[m
+Merge: 16643b6 19a8fea
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 17:16:34 2021 +0900
+
+    sumin
+
+[33mcommit 19a8feaff295440226d72f896eeead3d12822e1a[m
+Merge: ac1bf07 1ff5254
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 17:15:37 2021 +0900
+
+    sumin
+
+[33mcommit ac1bf0714d8ee9d31a75ef1e716bae7887aaf45c[m
+Merge: 613ecd1 7690e91
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 17:12:26 2021 +0900
+
+    sumin
+
+[33mcommit 1ff5254f38b9483afa6ce43074d3041f68a9be1e[m
+Merge: 8178687 b6de18c
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 17:00:43 2021 +0900
+
+    Merge branch 'sechul'
+
+[33mcommit b6de18cf49cf73457ae463232446ff887849e2d5[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:59:50 2021 +0900
+
+    'sechul1'
+
+[33mcommit 8178687981396ce6134279fc8f73623e43076930[m
+Merge: 26ae74f a0c58e5
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:52:47 2021 +0900
+
+    Merge branch 'sechul'
+
+[33mcommit a0c58e5239a57c381ef8063e2e9ea93705b9753b[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:49:52 2021 +0900
+
+    'sechul'
+
+[33mcommit dcb84b07805d79ab2efc1ed7a5b5bbeae487058a[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:47:46 2021 +0900
+
+    'addTest'
+
+[33mcommit 26ae74f5e6e16feebe4bc65354b4e53ea978d0e4[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:46:08 2021 +0900
+
+    'gitignore'
+
+[33mcommit 95bbd9faf2bce01d60f60d66a2eec1111a44dd90[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:44:50 2021 +0900
+
+    'Start'
+
+[33mcommit 35ca05a04d17cc30c8247fc2408bdc1d97bc1cb6[m
+Merge: 613ecd1 627224f
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:33:45 2021 +0900
+
+    'jhtosc'
+
+[33mcommit 613ecd1c33f251323fc7a3b596fda073e9999a4e[m
+Author: unknown <evahong94@gmail.com>
+Date:   Thu Aug 26 16:10:24 2021 +0900
+
+    'JH_0826'
+
+[33mcommit 7690e91c683ab6e0c8cc3f074c45c4325737d574[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 16:07:58 2021 +0900
+
+    sumin
+
+[33mcommit 4587ab1552a8502f833412e9a08ea3a781ccd390[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Thu Aug 26 02:22:27 2021 +0900
+
+    .
+
+[33mcommit 627224f35d1fd63fce9aa552f0fe55d980c16bd6[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Thu Aug 26 01:35:46 2021 +0900
+
+    ..
+
+[33mcommit ed80d7f389509981aba730bccc2d6b4b17bc3ef4[m
+Merge: 70b09c9 6c99d1f
+Author: unknown <gooddaymsc@naver.com>
+Date:   Thu Aug 26 01:10:08 2021 +0900
+
+    ..
+
+[33mcommit 70b09c96ca41d2faa1261f3d1955349535669e83[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Thu Aug 26 00:28:40 2021 +0900
+
+    ..
+
+[33mcommit 566741c84a1bfd551843740ed91ff59a45006018[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Wed Aug 25 22:42:54 2021 +0900
+
+    ..
+
+[33mcommit 3cdbfe6bfbe582391128a01d1c200f12b1bf5715[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Wed Aug 25 22:11:00 2021 +0900
+
+    ..
+
+[33mcommit 57464eba27b83f68f5762f01593c0c7484937cab[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 21:02:39 2021 +0900
+
+    ..
+
+[33mcommit 5ba9f872c314f548e0b9d3ca9af8d88d07698514[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 20:51:01 2021 +0900
+
+    ..
+
+[33mcommit 6c99d1fb027f0b89e9bb4ab96fed93ba08affab8[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 20:46:28 2021 +0900
+
+    'typo'
+
+[33mcommit a4917732d4efe2f945c146356b76f5d7c2fb83d1[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Wed Aug 25 20:46:03 2021 +0900
+
+    test
+
+[33mcommit 16643b66534fa18cc7d98f571355bc91d989e815[m
+Merge: 8246ecd b6f134b
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Wed Aug 25 20:44:45 2021 +0900
+
+    test
+
+[33mcommit 877d4fe338732b69bc2d1c0ca96f82c8c3868c24[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 20:26:52 2021 +0900
+
+    'member'
+
+[33mcommit 1d1868424ab3a923043b3ce7c3592f2b71a5eca7[m
+Merge: cfa5515 b6f134b
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 20:23:59 2021 +0900
+
+    Merge branch 'sechul' of https://github.com/gooddaymsc/bitcamp6 into sechul
+
+[33mcommit cfa5515966bcdc621b0dcf7196e9d26ec19805e6[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 20:16:01 2021 +0900
+
+    ..
+
+[33mcommit 6e278103e5ab13bc9d462cfa5c129be328e804f7[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 20:15:23 2021 +0900
+
+    ..
+
+[33mcommit 8246ecd50801f57e9e1abe72e4d71ad2c0b06726[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Wed Aug 25 19:49:24 2021 +0900
+
+    test
+
+[33mcommit 1f0fc43fa0e3e0bfd7af89ca369e687a2a55840f[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 19:39:03 2021 +0900
+
+    'jh'
+
+[33mcommit b6f134b9bb35f316857f3870d8561063be526eb8[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 18:48:55 2021 +0900
+
+    ..
+
+[33mcommit 73873c71b26622107d152df0d9605c146814f8c6[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 18:09:53 2021 +0900
+
+    'last'
+
+[33mcommit faa32767e3f4a43d0618b9960859121bd9f6e1f2[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 18:08:40 2021 +0900
+
+    '210825'
+
+[33mcommit 33f7ff67e95c695b80c82e86fd3eadbc96601d99[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 17:58:18 2021 +0900
+
+    '210825;
+
+[33mcommit 46bc18426efe81576a6db2cbb91f38a0fdb941c4[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 17:51:18 2021 +0900
+
+    '210825'
+
+[33mcommit c53d63e852a97c4b312391d0d0e4638d87fc110e[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 17:38:18 2021 +0900
+
+    'eclipse'
+
+[33mcommit 57c348d9e0a08183ff34a764e8d8d6334b1ee284[m
+Author: evahong-21 <evahong94@gmail.com>
+Date:   Wed Aug 25 17:31:23 2021 +0900
+
+    'mk_eclipse_env
+
+[33mcommit 946d371443d057e01b9b48bf9ba8c604a84e20f3[m
+Merge: 00758bd 1c3a172
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 17:27:03 2021 +0900
+
+    Merge branch 'main' of https://github.com/gooddaymsc/bitcamp6
+
+[33mcommit 00758bd94517c3caefbd783b1d556a6022ffe487[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 17:26:13 2021 +0900
+
+    ..
+
+[33mcommit 1c3a172cde65d5dd5447b5110c8c2eb52e9d7840[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Wed Aug 25 17:12:22 2021 +0900
+
+    ..
+
+[33mcommit b35e3e73e333ddbd172b6611d5a1524cfbb09d52[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 16:30:21 2021 +0900
+
+    ..
+
+[33mcommit ae1d78808af731726396692ccc38c34a621a4475[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 16:28:59 2021 +0900
+
+    ..
+
+[33mcommit 1615612ee7d6839a76243bec4461909a7eb99b1e[m
+Author: jylion23 <jylion23@github.com>
+Date:   Wed Aug 25 16:20:00 2021 +0900
+
+    .
+
+[33mcommit cdbb6e9ebfff4a20ccc91ba4f2c6f17e93a9b4ac[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Wed Aug 25 16:06:10 2021 +0900
+
+    ..
+
+[33mcommit fc76e158b03ad29a9832ed6133945eac8761b526[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Tue Aug 24 17:30:45 2021 +0900
+
+    ..
+
+[33mcommit 5326b1195e3d13662c22edb0b9046d9730a385cf[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Sun Aug 22 10:21:36 2021 +0900
+
+    ..
+
+[33mcommit d59daa55752d83c64d35cd1441aea86a45baa6da[m
+Author: SuMIn Yun <86589750+Sumin-yun@users.noreply.github.com>
+Date:   Sat Aug 21 13:14:17 2021 +0900
+
+    Update 판매자_UseCase(rev.0).md
+
+[33mcommit 65aec244e8bb23f5498ec22d04301058af31d00e[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Sat Aug 21 13:13:35 2021 +0900
+
+    UseCase
+
+[33mcommit 838cb0ca8a9bb4c89151e9fbd467e51e65d1ecd3[m
+Author: Sumin-yun <sumin.yun73@gmail.com>
+Date:   Sat Aug 21 13:09:06 2021 +0900
+
+    .
+
+[33mcommit 1d7af2282519492e5f6ffdaa02ecb97c94257cbd[m
+Author: SuMIn Yun <86589750+Sumin-yun@users.noreply.github.com>
+Date:   Fri Aug 20 22:14:29 2021 +0900
+
+    Update UseCaseModel(rev.0).md
+
+[33mcommit 21a106f5844212a9ea6d6772415769529c819ef3[m
+Author: SuMIn Yun <86589750+Sumin-yun@users.noreply.github.com>
+Date:   Fri Aug 20 22:13:24 2021 +0900
+
+    Update UseCaseModel(rev.0).md
+
+[33mcommit 69873e4e5a167402d265f0054e6dd021cd312a6d[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Fri Aug 20 18:10:39 2021 +0900
+
+    ..
+
+[33mcommit 4129cbff26ef35f51bab8f104d343dbbb7083625[m
+Author: unknown <gooddaymsc@naver.com>
+Date:   Fri Aug 20 16:13:07 2021 +0900
+
+    ..
+
+[33mcommit 9763b4a557b4cc68d3fbcfa742d0f917fedeb4e0[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 19:29:44 2021 +0900
+
+    ..
+
+[33mcommit 871026006be214e5db4abfa5abd0af08294b7d0e[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 18:17:58 2021 +0900
+
+    ..
+
+[33mcommit a306c44ca11dd0b779373c56bb936d5992fc2a59[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 11:43:50 2021 +0900
+
+    ..
+
+[33mcommit a4d2c643cff5c144b6b5ed0af20c552d42c105ef[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 11:42:24 2021 +0900
+
+    ..
+
+[33mcommit 542e1c6f5f48970db785d3e8d780e3177b656dcc[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 11:37:06 2021 +0900
+
+    ..
+
+[33mcommit 2bdce02aa53e9ca696ac67caaa4ec2f6459748ac[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 11:21:41 2021 +0900
+
+    ..
+
+[33mcommit e02565d270f32a29fdbcefeeddffb6665834d279[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 11:15:54 2021 +0900
+
+    ..
+
+[33mcommit 3308323121159f67a905e28d8e617d091460eb12[m
+Author: gooddaymsc@naver.com <gooddaymsc@naver.com>
+Date:   Thu Aug 19 11:09:34 2021 +0900
+
+    usecase
+
+[33mcommit 949f68822d8b307a4449bd776225250f3ec2ea7a[m
+Author: Moon Sechul <77563427+gooddaymsc@users.noreply.github.com>
+Date:   Tue Aug 10 20:04:21 2021 +0900
+
+    Initial commit
