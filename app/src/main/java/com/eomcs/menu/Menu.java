@@ -5,18 +5,24 @@ package com.eomcs.menu;
 // 상속해주는 용도이기 때문에 추상 클래스로 정의한다.
 public abstract class Menu {
 
+  //  public static final int ENABLE_ALL = 0;
+  public static final int ENABLE_VISITOR = 0; // 모두 접근 가능
+  public static final int ENABLE_MEMBER = 1;
+  public static final int ENABLE_SELLER = 2;
+  public static final int ENABLE_ADMIN = 3;
+
+  int enableState;
+
   String title;
 
-  // 메뉴 이름없이 인스턴스를 생성할 수 없도록 
-  // 기본 생성자를 정의하지 않는다.
-  // 대신 인스턴스를 만들 때 반드시 메뉴 이름을 입력하도록 강요하기 위해
-  // 다음과 같이 String 을 파라미터로 받는 생성자를 정의한다.
   public Menu(String title) {
     this.title = title;
   }
 
-  // 서브 클래스에서 해야할 일을 정의한다.
-  // 단, 서브 클래스에서 반드시 재정의 할 메서드이기 때문에 
-  // 구체적으로 구현하지 않는다.
+  public Menu(String title, int enableState) {
+    this(title); // 메뉴 이름 설정은 기존 생성자를 통해 처리한다.
+    this.enableState = enableState;
+  }
+
   public abstract void execute();
 }

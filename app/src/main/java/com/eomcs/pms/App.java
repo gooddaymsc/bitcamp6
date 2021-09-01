@@ -58,7 +58,7 @@ public class App {
 
   FindHandler findHandler = new FindHandler(privacyList, sellerPrivacyList);
 
-  static Manager loginPrivacy;
+  static Manager loginPrivacy = new Manager();
   public static Manager getLoginUser() {
     return loginPrivacy;
   }
@@ -156,17 +156,17 @@ public class App {
       public void execute() {
         boardHandler.add(); 
       }});
-    boardMenu.add(new Menu("목록") {
+    boardMenu.add(new Menu("목록", Menu.ENABLE_MEMBER) {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    boardMenu.add(new Menu("상세보기") {
+    boardMenu.add(new Menu("상세보기", Menu.ENABLE_SELLER) {
       @Override
       public void execute() {
         boardHandler.detail(); 
       }});
-    boardMenu.add(new Menu("변경") {
+    boardMenu.add(new Menu("변경", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
         boardHandler.update(); 
