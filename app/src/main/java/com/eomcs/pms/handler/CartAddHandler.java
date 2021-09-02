@@ -15,14 +15,23 @@ public class CartAddHandler extends AbstractCartHandler {
     super(cartList);
     this.abstractStockHandler = abstractStockHandler;
 
-    Cart cart = new Cart();
 
-    cart.setCartNumber(1111);
-    cart.setCartPrice(1111);
-    cart.setCartStocks(1111);
-    cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+    Cart testCart = new Cart();
+    testCart.setStock(abstractStockHandler.stockList.get(0));
+    testCart.setCartNumber(1111);
+    testCart.setCartPrice(1111);
+    testCart.setCartStocks(1111);
+    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
-    cartList.add(cart);
+    cartList.add(testCart);
+
+    testCart = new Cart();
+    testCart.setStock(abstractStockHandler.stockList.get(1));
+    testCart.setCartNumber(2222);
+    testCart.setCartPrice(2222);
+    testCart.setCartStocks(2222);
+    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+    cartList.add(testCart);
 
   }
 

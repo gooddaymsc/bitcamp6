@@ -135,12 +135,6 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
-    commandMap.put("/booking/list",   new BookingListHandler(bookingList));
-    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
-    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
-
     commandMap.put("/product/add",    new ProductAddHandler(productList));
     commandMap.put("/product/list",   new ProductListHandler(productList));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
@@ -158,6 +152,12 @@ public class App {
     commandMap.put("/cart/detail", new CartDetailHandler(cartList));
     commandMap.put("/cart/update", new CartUpdateHandler(cartList));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartList));
+
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
+    commandMap.put("/booking/list",   new BookingListHandler(bookingList));
+    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
+    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
 
     commandMap.put("/member/list",   new MemberListHandler(privacyList, sellerPrivacyList));
     commandMap.put("/member/detail", new MemberDetailHandler(privacyList, sellerPrivacyList));
@@ -181,13 +181,12 @@ public class App {
     MenuGroup loginMenu = new MenuGroup("로그인 메뉴");
     mainMenuGroup.add(loginMenu);
 
-    MenuGroup joinMenu = new MenuGroup("회원가입");
+    MenuGroup joinMenu = new MenuGroup("회원가입", Menu.ENABLE_VISITOR);
     loginMenu.add(joinMenu);
 
-    joinMenu.add(new MenuItem("일반회원", Menu.ENABLE_VISITOR, "/privacy/add"));
+    joinMenu.add(new MenuItem("일반회원", "/privacy/add"));
 
-    joinMenu.add(new MenuItem("판매자", Menu.ENABLE_VISITOR, "/sellerprivacy/add"));
-
+    joinMenu.add(new MenuItem("판매자", "/sellerprivacy/add"));
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기");
     loginMenu.add(findMenu);

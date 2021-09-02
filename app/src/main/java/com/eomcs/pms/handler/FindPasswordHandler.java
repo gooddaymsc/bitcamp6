@@ -32,10 +32,10 @@ public class FindPasswordHandler {
         return;
       }
       for (Privacy s : memberList) {
-        if (id.equals(s.getId())) {
+        if (s.getId().equals(id)) {
           String email = Prompt.inputString("이메일을 입력해주세요: ");
 
-          if (email.equals(s.getEmail())) {
+          if (s.getEmail().equals(email)) {
             System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
             return;
 
@@ -43,11 +43,10 @@ public class FindPasswordHandler {
             System.out.println("해당되는 이메일이 없습니다.");
             return;
           }
-        } else {
-          System.out.println("가입하신 아이디를 확인해주세요.");
-          return;          
         }
       }
+      System.out.println("가입하신 아이디를 확인해주세요.");
+
     }
 
     if (buyerSeller == 2) {
@@ -57,13 +56,12 @@ public class FindPasswordHandler {
         return;
       }
       for (SellerPrivacy s : sellerList) {
-        if (id.equals(s.getId())) {
+        if (s.getId().equals(id)) {
           String email = Prompt.inputString("이메일을 입력해주세요: ");
 
-          if (email.equals(s.getEmail())) {
+          if (s.getEmail().equals(email)) {
             String businessNumber = Prompt.inputString("사업자번호를 입력해주세요: ");
-
-            if (businessNumber.equals(s.getBusinessNumber())) {
+            if (s.getBusinessNumber().equals(businessNumber)) {
               System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
               return;
             } else {
@@ -75,12 +73,10 @@ public class FindPasswordHandler {
             System.out.println("해당되는 이메일이 없습니다.");
             return;
           }
-
-        } else {
-          System.out.println("가입하신 아이디를 확인해주세요.");
-          return;
         }
       }
+      System.out.println("가입하신 아이디를 확인해주세요.");
+
     }
   }
 }

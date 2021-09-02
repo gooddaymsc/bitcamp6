@@ -10,7 +10,54 @@ public class BoardAddHandler extends AbstractBoardHandler {
 
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
+
+    Board testBoard = new Board();
+
+    testBoard.setTitle("11");
+    testBoard.setContent("11");
+    testBoard.setWriter("11");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(11);
+    testBoard.setTag("11");
+    testBoard.setLikes(11);
+
+    boardList.add(testBoard);
+
+    testBoard = new Board();
+    testBoard.setTitle("22");
+    testBoard.setContent("22");
+    testBoard.setWriter("22");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(22);
+    testBoard.setTag("22");
+    testBoard.setLikes(22);
+
+    boardList.add(testBoard);
+
+    testBoard = new Board();
+    testBoard.setTitle("33");
+    testBoard.setContent("33");
+    testBoard.setWriter("33");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(33);
+    testBoard.setTag("33");
+    testBoard.setLikes(33);
+
+    boardList.add(testBoard);
+
+    testBoard = new Board();
+    testBoard.setTitle("44");
+    testBoard.setContent("44");
+    testBoard.setWriter("44");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(44);
+    testBoard.setTag("44");
+    testBoard.setLikes(44);
+
+    boardList.add(testBoard);
+
   }
+
 
   @Override
   public void execute() {
