@@ -11,10 +11,10 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
   static int size = 1;
   List<Manager> managerList;
-  public PrivacyAddHandler(List<Privacy> memberList,  List<Manager> managerList) {
-    super(memberList);
-    this.managerList = managerList;
 
+  public PrivacyAddHandler(List<Privacy> privacyList, List<Manager> managerList) {
+    super(privacyList);
+    this.managerList = managerList;
     Privacy privacy = new Privacy();
 
     privacy.setId("aa");
@@ -27,7 +27,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPhoto("aa.gif");
     privacy.setPhoneNumber("010-1111-1111");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(privacy);
+    privacyList.add(privacy);
 
     privacy.setId("aa");
     privacy.setPassword("aa");
@@ -45,7 +45,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPhoto("bb.gif");
     privacy.setPhoneNumber("010-2222-2222");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(privacy);
+    privacyList.add(privacy);
 
     privacy.setId("bb");
     privacy.setPassword("bb");
@@ -63,7 +63,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPhoto("cc.gif");
     privacy.setPhoneNumber("010-3333-3333");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(privacy);
+    privacyList.add(privacy);
 
     privacy.setId("cc");
     privacy.setPassword("cc");
@@ -81,7 +81,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPhoto("dd.gif");
     privacy.setPhoneNumber("010-4444-4444");
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(privacy);
+    privacyList.add(privacy);
 
     privacy.setId("dd");
     privacy.setPassword("dd");
@@ -107,26 +107,26 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     int size = managerList.size();
 
-    for (int i=0; i < size; i++) {
+    for (int i=0; i<size; i++) {
+
       if (managerList.get(i).getId().equals(id)) {
         System.out.println("중복되는 아이디입니다.");
         return;
       }
+
+      privacy.setId(id);
+      privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
+      privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
+      privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
+      privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
+      privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
+      privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
+      privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
+      privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+      privacyList.add(privacy);
+      managerList.add(new Manager(privacy.getId(), privacy.getPassword(), privacy.getAuthority()));
     }
-
-
-    privacy.setId(id);
-    privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
-    privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
-    privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
-    privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
-    privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
-    privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
-    privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    memberList.add(privacy);
-    managerList.add(new Manager(privacy.getId(), privacy.getPassword(), privacy.getAuthority()));
   }
 
 }

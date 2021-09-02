@@ -6,8 +6,8 @@ import com.eomcs.pms.domain.Privacy;
 
 public class PrivacyListHandler extends AbstractPrivacyHandler {
 
-  public PrivacyListHandler(List<Privacy> memberList) {
-    super(memberList);
+  public PrivacyListHandler(List<Privacy> privacyList) {
+    super(privacyList);
   }
 
 
@@ -19,7 +19,7 @@ public class PrivacyListHandler extends AbstractPrivacyHandler {
     }
     System.out.println("\n[회원 목록]");
 
-    Privacy[] list = memberList.toArray(new Privacy[0]);
+    Privacy[] list = privacyList.toArray(new Privacy[0]);
 
     for (Privacy member : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 

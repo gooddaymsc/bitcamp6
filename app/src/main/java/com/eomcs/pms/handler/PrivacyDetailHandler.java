@@ -7,11 +7,9 @@ import com.eomcs.util.Prompt;
 
 public class PrivacyDetailHandler extends AbstractPrivacyHandler {
 
-
-  public PrivacyDetailHandler(List<Privacy> memberList) {
-    super(memberList);
+  public PrivacyDetailHandler(List<Privacy> privacyList) {
+    super(privacyList);
   }
-
 
   @Override
   public void execute() {
