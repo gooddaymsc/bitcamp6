@@ -135,12 +135,6 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
-    commandMap.put("/booking/list",   new BookingListHandler(bookingList));
-    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
-    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
-
     commandMap.put("/product/add",    new ProductAddHandler(productList));
     commandMap.put("/product/list",   new ProductListHandler(productList));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
@@ -158,6 +152,12 @@ public class App {
     commandMap.put("/cart/detail", new CartDetailHandler(cartList));
     commandMap.put("/cart/update", new CartUpdateHandler(cartList));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartList));
+
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
+    commandMap.put("/booking/list",   new BookingListHandler(bookingList));
+    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
+    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
 
     commandMap.put("/member/list",   new MemberListHandler(privacyList, sellerPrivacyList));
     commandMap.put("/member/detail", new MemberDetailHandler(privacyList, sellerPrivacyList));
