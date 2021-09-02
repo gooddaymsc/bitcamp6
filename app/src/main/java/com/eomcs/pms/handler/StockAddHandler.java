@@ -7,6 +7,8 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
+  @Override
+  public void execute(int i) {}
   int stockNumber = 1;
   ProductListHandler productListHandler;
 
@@ -30,6 +32,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
   }
 
+  @Override
   public void execute() {   
     if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");

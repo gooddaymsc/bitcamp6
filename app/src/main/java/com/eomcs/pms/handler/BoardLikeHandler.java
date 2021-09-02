@@ -5,11 +5,14 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardLikeHandler extends AbstractBoardHandler {
+  @Override
+  public void execute(int i) {}
 
   public BoardLikeHandler(List<Board> boardList) {
     super(boardList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[게시글 좋아요 누르기]");
     int no = Prompt.inputInt("번호? ");

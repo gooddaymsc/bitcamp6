@@ -8,12 +8,15 @@ import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class BookingAddHandler extends AbstractBookingHandler {
+  @Override
+  public void execute(int i) {}
 
   int bookingNumber = 1;
   public BookingAddHandler(List<Booking> bookList , List<Cart> cartList) {
     super(bookList, cartList);
   }
 
+  @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");

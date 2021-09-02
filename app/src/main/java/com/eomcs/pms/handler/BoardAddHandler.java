@@ -8,10 +8,14 @@ import com.eomcs.util.Prompt;
 
 public class BoardAddHandler extends AbstractBoardHandler {
 
+  @Override
+  public void execute(int i) {}
+
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
   }
 
+  @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");

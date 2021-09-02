@@ -6,11 +6,15 @@ import com.eomcs.pms.domain.Stock;
 
 public class StockListHandler extends AbstractStockHandler {
 
+  @Override
+  public void execute(int i) {}
+
   public StockListHandler(List<Stock> stockList) {
     super(stockList);
   }
 
 
+  @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");

@@ -32,13 +32,23 @@ import com.eomcs.pms.handler.MemberDeleteHandler;
 import com.eomcs.pms.handler.MemberDetailHandler;
 import com.eomcs.pms.handler.MemberListHandler;
 import com.eomcs.pms.handler.MemberUpdateHandler;
+import com.eomcs.pms.handler.PrivacyAddHandler;
+import com.eomcs.pms.handler.PrivacyDeleteHandler;
+import com.eomcs.pms.handler.PrivacyDetailHandler;
 import com.eomcs.pms.handler.PrivacyHandler;
+import com.eomcs.pms.handler.PrivacyListHandler;
+import com.eomcs.pms.handler.PrivacyUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.SellerPrivacyAddHandler;
+import com.eomcs.pms.handler.SellerPrivacyDeleteHandler;
+import com.eomcs.pms.handler.SellerPrivacyDetailHandler;
 import com.eomcs.pms.handler.SellerPrivacyHandler;
+import com.eomcs.pms.handler.SellerPrivacyListHandler;
+import com.eomcs.pms.handler.SellerPrivacyUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
 import com.eomcs.pms.handler.StockDetailHandler;
@@ -64,6 +74,18 @@ public class App {
 
   PrivacyHandler privacyHandler = new PrivacyHandler(privacyList, managerList);
   SellerPrivacyHandler sellerPrivacyHandler = new SellerPrivacyHandler(sellerPrivacyList,managerList);
+
+  PrivacyAddHandler privacyAddHandler = new PrivacyAddHandler(privacyList, managerList);       
+  PrivacyListHandler privacyListHandler = new PrivacyListHandler(privacyList, managerList);    
+  PrivacyDetailHandler privacyDetailHandler = new PrivacyDetailHandler(privacyList, managerList);   
+  PrivacyDeleteHandler privacyDeleteHandler = new PrivacyDeleteHandler(privacyList, managerList);   
+  PrivacyUpdateHandler privacyUpdateHandler = new PrivacyUpdateHandler(privacyList, managerList);  
+
+  SellerPrivacyAddHandler sellerPrivacyAddHandler = new SellerPrivacyAddHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyListHandler sellerPrivacyListHandler = new SellerPrivacyListHandler(sellerPrivacyList,managerList); 
+  SellerPrivacyDetailHandler sellerPrivacyDetailHandler = new SellerPrivacyDetailHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyUpdateHandler sellerPrivacyUpdateHandler = new SellerPrivacyUpdateHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyDeleteHandler sellerPrivacyDeleteHandler = new SellerPrivacyDeleteHandler(sellerPrivacyList,managerList);
 
   BoardAddHandler boardAddHandler = new BoardAddHandler(boardList); 
   BoardListHandler boardListHandler = new BoardListHandler(boardList); 

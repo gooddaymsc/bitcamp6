@@ -6,10 +6,15 @@ import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
+  @Override
+  public void execute(int i) {}
+
+
   public BoardDetailHandler(List<Board> boardList) {
     super(boardList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[게시글 상세보기]");
     int no = Prompt.inputInt("번호? ");

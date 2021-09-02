@@ -4,11 +4,14 @@ import java.util.List;
 import com.eomcs.pms.domain.Product;
 
 public class ProductListHandler extends AbstractProductHandler {
+  @Override
+  public void execute(int i) {}
 
   public ProductListHandler(List<Product> productList) {
     super(productList);
   }
 
+  @Override
   public void execute() {
 
     System.out.println("[상품 목록]");
