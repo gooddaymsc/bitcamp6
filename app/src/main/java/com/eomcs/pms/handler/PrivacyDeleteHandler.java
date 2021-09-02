@@ -7,9 +7,10 @@ import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
 
 public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
-
+  List<Manager> managerList;
   public PrivacyDeleteHandler(List<Privacy> memberList,  List<Manager> managerList) {
-    super(memberList, managerList);
+    super(memberList);
+    this.managerList = managerList;
   }
 
 
@@ -36,7 +37,7 @@ public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
 
     if (input.equalsIgnoreCase("y")) {
       memberList.remove(member);
-      managerList.remove(delMember(id));    
+      managerList.remove(member);    
       System.out.println("회원을 삭제하였습니다.");
       return;
     } else {

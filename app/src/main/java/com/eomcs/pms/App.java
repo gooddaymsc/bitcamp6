@@ -168,6 +168,7 @@ public class App {
 
   void service() {
     managerList.add(new Manager("관리자","1234",3));
+
     createMenu().execute();
     Prompt.close();
   }
@@ -183,17 +184,9 @@ public class App {
     MenuGroup joinMenu = new MenuGroup("회원가입");
     loginMenu.add(joinMenu);
 
-    joinMenu.add(new Menu("일반회원") {
-      @Override
-      public void execute() {
-        privacyAddHandler.execute(); 
-      }});
+    joinMenu.add(new MenuItem("일반회원", Menu.ENABLE_VISITOR, "/privacy/add"));
 
-    joinMenu.add(new Menu("판매자") {
-      @Override
-      public void execute() {
-        sellerPrivacyAddHandler.execute(); 
-      }});
+    joinMenu.add(new MenuItem("판매자", Menu.ENABLE_VISITOR, "/privacy/add"));
 
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기");
@@ -248,233 +241,104 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new Menu("등록", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        boardAddHandler.execute(); 
-      }});
-    boardMenu.add(new Menu("목록", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        boardListHandler.execute(); 
-      }});
-    boardMenu.add(new Menu("상세보기", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        boardDetailHandler.execute(); 
-      }});
-    boardMenu.add(new Menu("좋아요", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        boardLikeHandler.execute(); 
-      }});
-    boardMenu.add(new Menu("변경", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        boardUpdateHandler.execute(); 
-      }});
-    boardMenu.add(new Menu("삭제", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        boardDeleteHandler.execute(); 
-      }});
+    boardMenu.add(new MenuItem("등록", Menu.ENABLE_PRIVACY, "/board/add"));
+    boardMenu.add(new MenuItem("목록", Menu.ENABLE_PRIVACY, "/board/list"));
+    boardMenu.add(new MenuItem("상세보기", Menu.ENABLE_PRIVACY, "/board/detail"));
+    boardMenu.add(new MenuItem("좋아요", Menu.ENABLE_PRIVACY, "/board/like"));
+    boardMenu.add(new MenuItem("변경", Menu.ENABLE_PRIVACY, "/board/update"));
+    boardMenu.add(new MenuItem("삭제", Menu.ENABLE_PRIVACY, "/board/delete"));
 
     ///////////////////////////////////////////
 
     MenuGroup cartMenu = new MenuGroup("장바구니");
     mainMenuGroup.add(cartMenu);
 
-    cartMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        cartAddHandler.execute(); 
-      }});
-    cartMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        cartListHandler.execute(); 
-      }});
-    cartMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        cartDetailHandler.execute(); 
-      }});
-    cartMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        cartUpdateHandler.execute(); 
-      }});
-    cartMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        cartDeleteHandler.execute(); 
-      }});
+    cartMenu.add(new MenuItem("등록", "/cart/add"));
+    cartMenu.add(new MenuItem("목록", "/cart/list"));
+    cartMenu.add(new MenuItem("상세보기", "/cart/detail"));
+    cartMenu.add(new MenuItem("변경", "/cart/update"));
+    cartMenu.add(new MenuItem("삭제", "/cart/delete"));
 
     ///////////////////////////////////////////
+
 
     MenuGroup bookMenu = new MenuGroup("예약");
     mainMenuGroup.add(bookMenu);
 
-    bookMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        bookingAddHandler.execute(); 
-      }});
-    bookMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        bookingListHandler.execute(); 
-      }});
-    bookMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        bookingDetailHandler.execute(); 
-      }});
-    bookMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        bookingUpdateHandler.execute(); 
-      }});
-    bookMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        bookingDeleteHandler.execute(); 
-      }});
+
+    bookMenu.add(new MenuItem("등록", "/book/add"));
+    bookMenu.add(new MenuItem("목록", "/book/list"));
+    bookMenu.add(new MenuItem("상세보기", "/book/detail"));
+    bookMenu.add(new MenuItem("변경", "/book/update"));
+    bookMenu.add(new MenuItem("삭제", "/book/delete"));
 
     ///////////////////////////////////////////
 
-    MenuGroup alcoholMenu = new MenuGroup("상품");
-    mainMenuGroup.add(alcoholMenu);
+    MenuGroup productMenu = new MenuGroup("상품");
+    mainMenuGroup.add(productMenu);
 
-    alcoholMenu.add(new Menu("등록", Menu.ENABLE_SELLERPIVACY) {
-      @Override
-      public void execute() {
-        productAddHandler.execute(); 
-      }});
-    alcoholMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        productListHandler.execute(); 
-      }});
-    alcoholMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        productDetailHandler.execute(); 
-      }});
-    alcoholMenu.add(new Menu("변경", Menu.ENABLE_SELLERPIVACY) {
-      @Override
-      public void execute() {
-        productUpdateHandler.execute(); 
-      }});
-    alcoholMenu.add(new Menu("삭제", Menu.ENABLE_SELLERPIVACY) {
-      @Override
-      public void execute() {
-        productDeleteHandler.execute(); 
-      }});
+    productMenu.add(new MenuItem("등록", "/product/add"));
+    productMenu.add(new MenuItem("목록", "/product/list"));
+    productMenu.add(new MenuItem("상세보기", "/product/detail"));
+    productMenu.add(new MenuItem("변경", "/product/update"));
+    productMenu.add(new MenuItem("삭제", "/product/delete"));
 
     ///////////////////////////////////////////
 
     MenuGroup stockMenu = new MenuGroup("재고");
     mainMenuGroup.add(stockMenu);
 
-    stockMenu.add(new Menu("등록", Menu.ENABLE_SELLERPIVACY) {
-      @Override
-      public void execute() {
-        stockAddHandler.execute(); 
-      }});
-    stockMenu.add(new Menu("목록", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        stockListHandler.execute(); 
-      }});
-    stockMenu.add(new Menu("상세보기", Menu.ENABLE_PRIVACY) {
-      @Override
-      public void execute() {
-        stockDetailHandler.execute(); 
-      }});
-    stockMenu.add(new Menu("변경", Menu.ENABLE_SELLERPIVACY) {
-      @Override
-      public void execute() {
-        stockUpdateHandler.execute(); 
-      }});
-    stockMenu.add(new Menu("삭제", Menu.ENABLE_SELLERPIVACY) {
-      @Override
-      public void execute() {
-        stockDeleteHandler.execute(); 
-      }});
+    stockMenu.add(new MenuItem("등록", "/stock/add"));
+    stockMenu.add(new MenuItem("목록", "/stock/list"));
+    stockMenu.add(new MenuItem("상세보기", "/stock/detail"));
+    stockMenu.add(new MenuItem("변경", "/stock/update"));
+    stockMenu.add(new MenuItem("삭제", "/stock/delete"));
 
     ///////////////////////////////////////////
 
     MenuGroup personMenu = new MenuGroup("프로필");
     mainMenuGroup.add(personMenu);
-    personMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        privacyDetailHandler.execute(); 
-      }});
-    personMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        privacyUpdateHandler.execute(); 
-      }});
-    personMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        privacyDeleteHandler.execute(); 
-      }});
+
+    personMenu.add(new MenuItem("상세보기", "/privacy/detail"));
+    personMenu.add(new MenuItem("변경", "/privacy/update"));
+    personMenu.add(new MenuItem("삭제", "/privacy/delete"));
+
+    //    personMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        privacyDetailHandler.execute(); 
+    //      }});
+    //    personMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        privacyUpdateHandler.execute(); 
+    //      }});
+    //    personMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        privacyDeleteHandler.execute(); 
+    //      }});
 
     ///////////////////////////////////////////
 
     MenuGroup managerMenu = new MenuGroup("관리자모드");
     mainMenuGroup.add(managerMenu);
 
-    MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리");
+    MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
     managerMenu.add(managerMemberMenu1);
 
-    managerMemberMenu1.add(new Menu("목록", Menu.ENABLE_ADMIN) {  
-      @Override
-      public void execute() {
-        memberListHandler.execute(1); 
-      }});
-    managerMemberMenu1.add(new Menu("상세보기", Menu.ENABLE_ADMIN) {
-      @Override
-      public void execute() {
-        memberDetailHandler.execute(1); 
-      }});
-    managerMemberMenu1.add(new Menu("변경", Menu.ENABLE_ADMIN) {
-      @Override
-      public void execute() {
-        memberUpdateHandler.execute(1); 
-      }});
-    managerMemberMenu1.add(new Menu("삭제", Menu.ENABLE_ADMIN) {
-      @Override
-      public void execute() {
-        memberDeleteHandler.execute(1); 
-      }});
+    managerMemberMenu1.add(new MenuItem("목록", "/member/list"));
+    managerMemberMenu1.add(new MenuItem("상세보기", "/member/detail"));
+    managerMemberMenu1.add(new MenuItem("변경", "/member/update"));
+    managerMemberMenu1.add(new MenuItem("삭제", "/member/delete"));
 
-    MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");
+    MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");  //2
     managerMenu.add(managerSellerMenu1);
 
-    managerSellerMenu1.add(new Menu("목록", Menu.ENABLE_ADMIN) {  
-      @Override
-      public void execute() {
-        memberListHandler.execute(2); 
-      }});
-    managerSellerMenu1.add(new Menu("상세보기", Menu.ENABLE_ADMIN) {
-      @Override
-      public void execute() {
-        memberDetailHandler.execute(2); 
-      }});
-    managerSellerMenu1.add(new Menu("변경", Menu.ENABLE_ADMIN) {
-      @Override
-      public void execute() {
-        memberUpdateHandler.execute(2); 
-      }});
-    managerSellerMenu1.add(new Menu("삭제", Menu.ENABLE_ADMIN) {
-      @Override
-      public void execute() {
-        memberDeleteHandler.execute(2); 
-      }});
+    managerSellerMenu1.add(new MenuItem("목록", "/member/list"));
+    managerSellerMenu1.add(new MenuItem("상세보기", "/member/detail"));
+    managerSellerMenu1.add(new MenuItem("변경", "/member/update"));
+    managerSellerMenu1.add(new MenuItem("삭제", "/member/delete"));
 
     return mainMenuGroup;
   }
