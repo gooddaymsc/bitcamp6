@@ -8,9 +8,10 @@ import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
-
+  List<Manager> managerList;
   public SellerPrivacyDeleteHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList, managerList);
+    super(memberList);
+    this.managerList = managerList;
   }
 
   @Override
@@ -20,12 +21,12 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
       return;
     }
     System.out.println("\n[판매자 삭제]");
-    String id = Prompt.inputString("번호를 입력하세요: ");
+    String id = Prompt.inputString("아이디를 입력하세요: ");
 
     Privacy member = findById(id);
 
     if (member == null) {
-      System.out.println("해당 번호의 판매자이 없습니다.");
+      System.out.println("해당 아이디를 갖는 판매자가 없습니다.");
       return;
     }
 
@@ -34,7 +35,7 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
     if (input.equalsIgnoreCase("y")) {
 
       memberList.remove(member);
-      managerList.remove(delMember(id));
+      managerList.remove(member);
 
       System.out.println("판매자를 삭제하였습니다.");
       return;
@@ -43,6 +44,7 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
       return;
     } 
   }
+
 }
 
 

@@ -81,9 +81,9 @@ public class App {
   PrivacyUpdateHandler privacyUpdateHandler = new PrivacyUpdateHandler(privacyList, managerList);  
 
   SellerPrivacyAddHandler sellerPrivacyAddHandler = new SellerPrivacyAddHandler(sellerPrivacyList,managerList);  
-  SellerPrivacyListHandler sellerPrivacyListHandler = new SellerPrivacyListHandler(sellerPrivacyList,managerList); 
-  SellerPrivacyDetailHandler sellerPrivacyDetailHandler = new SellerPrivacyDetailHandler(sellerPrivacyList,managerList);  
-  SellerPrivacyUpdateHandler sellerPrivacyUpdateHandler = new SellerPrivacyUpdateHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyListHandler sellerPrivacyListHandler = new SellerPrivacyListHandler(sellerPrivacyList); 
+  SellerPrivacyDetailHandler sellerPrivacyDetailHandler = new SellerPrivacyDetailHandler(sellerPrivacyList);  
+  SellerPrivacyUpdateHandler sellerPrivacyUpdateHandler = new SellerPrivacyUpdateHandler(sellerPrivacyList);  
   SellerPrivacyDeleteHandler sellerPrivacyDeleteHandler = new SellerPrivacyDeleteHandler(sellerPrivacyList,managerList);
 
   BoardAddHandler boardAddHandler = new BoardAddHandler(boardList); 
@@ -127,6 +127,9 @@ public class App {
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 
+  public App() {
+    managerList.add(new Manager("관리자","1234",3));
+  }
 
   static Manager loginPrivacy = new Manager();
   public static Manager getLoginUser() {
@@ -139,7 +142,6 @@ public class App {
   }
 
   void service() {
-    managerList.add(new Manager("관리자","1234",3));
 
     createMenu().execute();
     Prompt.close();
