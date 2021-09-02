@@ -12,7 +12,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     super(boardList);
   }
 
-  public void add() {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;

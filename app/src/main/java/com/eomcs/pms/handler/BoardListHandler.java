@@ -9,7 +9,7 @@ public class BoardListHandler extends AbstractBoardHandler {
     super(boardList);
   }
 
-  public void list() {
+  public void execute() {
     System.out.println("[게시글 목록]");
 
     Board[] boards = new Board[boardList.size()];

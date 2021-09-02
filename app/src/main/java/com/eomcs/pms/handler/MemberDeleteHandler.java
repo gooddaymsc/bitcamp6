@@ -12,7 +12,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
     super(memberList, sellerList);
   }
 
-  public void delete(int mem) {
+  public void execute(int mem) {
     if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
@@ -29,13 +29,13 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
       }
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("회원 탈퇴를 취소하였습니다.");
+      if (input.equalsIgnoreCase("y")) {
+        memberList.remove(member);
+        System.out.println("회원을 탈퇴시켰습니다.");
         return;
       }
-
-      memberList.remove(member);
-      System.out.println("회원을 탈퇴시켰습니다.");
+      System.out.println("회원 탈퇴를 취소하였습니다.");
+      return;
 
     }
 
@@ -50,13 +50,13 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
       }
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("판매자 탈퇴를 취소하였습니다.");
+      if (input.equalsIgnoreCase("y")) {
+        sellerList.remove(member);
+        System.out.println("판매자를 탈퇴시켰습니다.");
         return;
       }
-
-      sellerList.remove(member);
-      System.out.println("판매자를 탈퇴시켰습니다.");
+      System.out.println("판매자 탈퇴를 취소하였습니다.");
+      return;
     }
   }
 }

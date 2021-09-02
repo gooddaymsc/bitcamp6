@@ -5,9 +5,9 @@ import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
-public class MemberPromptHandler extends AbstractMemberHandler {
+public class MemberPrompt extends AbstractMemberHandler {
 
-  public MemberPromptHandler(List<Privacy> memberList, List<SellerPrivacy> sellerList) {
+  public MemberPrompt(List<Privacy> memberList, List<SellerPrivacy> sellerList) {
     super(memberList, sellerList);
   }
 

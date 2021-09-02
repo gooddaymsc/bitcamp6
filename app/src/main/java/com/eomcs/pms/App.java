@@ -196,35 +196,35 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new Menu("등록") {
+    boardMenu.add(new Menu("등록", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        boardAddHandler.add(); 
+        boardAddHandler.execute(); 
       }});
-    boardMenu.add(new Menu("목록") {
+    boardMenu.add(new Menu("목록", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        boardListHandler.list(); 
+        boardListHandler.execute(); 
       }});
-    boardMenu.add(new Menu("상세보기") {
+    boardMenu.add(new Menu("상세보기", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        boardDetailHandler.detail(); 
+        boardDetailHandler.execute(); 
       }});
-    boardMenu.add(new Menu("좋아요") {
+    boardMenu.add(new Menu("좋아요", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        boardLikeHandler.like(); 
+        boardLikeHandler.execute(); 
       }});
-    boardMenu.add(new Menu("변경") {
+    boardMenu.add(new Menu("변경", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        boardUpdateHandler.update(); 
+        boardUpdateHandler.execute(); 
       }});
-    boardMenu.add(new Menu("삭제") {
+    boardMenu.add(new Menu("삭제", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        boardDeleteHandler.delete(); 
+        boardDeleteHandler.execute(); 
       }});
 
     ///////////////////////////////////////////
@@ -379,49 +379,49 @@ public class App {
     MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리");
     managerMenu.add(managerMemberMenu1);
 
-    managerMemberMenu1.add(new Menu("목록") {  
+    managerMemberMenu1.add(new Menu("목록", Menu.ENABLE_ADMIN) {  
       @Override
       public void execute() {
-        memberListHandler.list(1); 
+        memberListHandler.execute(1); 
       }});
-    managerMemberMenu1.add(new Menu("상세보기") {
+    managerMemberMenu1.add(new Menu("상세보기", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
-        memberDetailHandler.detail(1); 
+        memberDetailHandler.execute(1); 
       }});
-    managerMemberMenu1.add(new Menu("변경") {
+    managerMemberMenu1.add(new Menu("변경", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
-        memberUpdateHandler.update(1); 
+        memberUpdateHandler.execute(1); 
       }});
-    managerMemberMenu1.add(new Menu("삭제") {
+    managerMemberMenu1.add(new Menu("삭제", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
-        memberDeleteHandler.delete(1); 
+        memberDeleteHandler.execute(1); 
       }});
 
     MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");
     managerMenu.add(managerSellerMenu1);
 
-    managerSellerMenu1.add(new Menu("목록") {  
+    managerSellerMenu1.add(new Menu("목록", Menu.ENABLE_ADMIN) {  
       @Override
       public void execute() {
-        memberListHandler.list(2); 
+        memberListHandler.execute(2); 
       }});
-    managerSellerMenu1.add(new Menu("상세보기") {
+    managerSellerMenu1.add(new Menu("상세보기", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
-        memberDetailHandler.detail(2); 
+        memberDetailHandler.execute(2); 
       }});
-    managerSellerMenu1.add(new Menu("변경") {
+    managerSellerMenu1.add(new Menu("변경", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
-        memberUpdateHandler.update(2); 
+        memberUpdateHandler.execute(2); 
       }});
-    managerSellerMenu1.add(new Menu("삭제") {
+    managerSellerMenu1.add(new Menu("삭제", Menu.ENABLE_ADMIN) {
       @Override
       public void execute() {
-        memberDeleteHandler.delete(2); 
+        memberDeleteHandler.execute(2); 
       }});
 
     return mainMenuGroup;

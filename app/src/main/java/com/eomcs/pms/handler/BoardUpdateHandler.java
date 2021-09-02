@@ -11,7 +11,7 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
     super(boardList);
   }
 
-  public void update() {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;
@@ -31,15 +31,16 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
     String tag = Prompt.inputString(String.format("변경 후의 태그(%s)를 입력해주세요: ", board.getTag()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 변경을 취소하였습니다.");
+    if (input.equalsIgnoreCase("y")) {
+      board.setTitle(title);
+      board.setContent(content);
+      board.setTag(tag);
+      System.out.println("게시글을 변경하였습니다.");
       return;
     }
 
-    board.setTitle(title);
-    board.setContent(content);
-    board.setTag(tag);
-    System.out.println("게시글을 변경하였습니다.");
+    System.out.println("게시글 변경을 취소하였습니다.");
+    return;
   }
 
 }
