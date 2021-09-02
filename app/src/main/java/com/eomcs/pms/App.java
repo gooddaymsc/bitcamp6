@@ -135,7 +135,7 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, cartListHandler));
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
     commandMap.put("/booking/list",   new BookingListHandler(bookingList));
     commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
@@ -153,7 +153,7 @@ public class App {
     commandMap.put("/stock/update", new StockUpdateHandler(stockList));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockList));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, stockListHandler));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, new StockListHandler(stockList)));
     commandMap.put("/cart/list",   new CartListHandler(cartList));
     commandMap.put("/cart/detail", new CartDetailHandler(cartList));
     commandMap.put("/cart/update", new CartUpdateHandler(cartList));
