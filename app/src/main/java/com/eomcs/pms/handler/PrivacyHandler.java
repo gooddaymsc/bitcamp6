@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
@@ -10,16 +11,16 @@ public class PrivacyHandler {
 
   List<Privacy> memberList;
   List<Manager> managerList;
-
   int size = 1;
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
     this.memberList = memberList;
     this.managerList = managerList;
 
     Privacy privacy = new Privacy();
+
     privacy.setId("aa");
     privacy.setPassword("aa");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     privacy.setName("aa");
     privacy.setNickname("aa");
     privacy.setEmail("aa");
@@ -31,13 +32,13 @@ public class PrivacyHandler {
 
     privacy.setId("aa");
     privacy.setPassword("aa");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     managerList.add(privacy);
 
     privacy = new Privacy();
     privacy.setId("bb");
     privacy.setPassword("bb");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     privacy.setName("bb");
     privacy.setNickname("bb");
     privacy.setEmail("bb");
@@ -49,13 +50,13 @@ public class PrivacyHandler {
 
     privacy.setId("bb");
     privacy.setPassword("bb");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     managerList.add(privacy);
 
     privacy = new Privacy();
     privacy.setId("cc");
     privacy.setPassword("cc");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     privacy.setName("cc");
     privacy.setNickname("cc");
     privacy.setEmail("cc");
@@ -67,13 +68,13 @@ public class PrivacyHandler {
 
     privacy.setId("cc");
     privacy.setPassword("cc");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     managerList.add(privacy);
 
     privacy = new Privacy();
     privacy.setId("dd");
     privacy.setPassword("dd");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     privacy.setName("dd");
     privacy.setNickname("dd");
     privacy.setEmail("dd");
@@ -85,15 +86,22 @@ public class PrivacyHandler {
 
     privacy.setId("dd");
     privacy.setPassword("dd");
-    privacy.setAuthority(2);
+    privacy.setAuthority(1);
     managerList.add(privacy);
   }
 
-  public void memberAdd(int i, int auth) {
-    if (auth== 1 || auth == 2 || auth == 3) {
+  //  public void memberAdd(int i, int auth) {
+  //    if (auth== 1 || auth == 2 || auth == 3) {
+  //      System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
+  //      return;
+  //    }
+
+  public void memberAdd(int i) {
+    if (App.getLoginUser().getAuthority() != 0) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
+
     System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
@@ -125,8 +133,8 @@ public class PrivacyHandler {
   }
 
 
-  public void memberList(int auth) {
-    if (auth == 0 || auth== 1 || auth == 2 ) {
+  public void memberList() {
+    if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
       return;
     }
@@ -144,8 +152,8 @@ public class PrivacyHandler {
     }
   }
 
-  public void memberDetail(int auth) {
-    if (auth==0) {
+  public void memberDetail() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -174,8 +182,8 @@ public class PrivacyHandler {
   }
 
 
-  public void memberUpdate(int auth) {
-    if (auth==0) {
+  public void memberUpdate() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -219,8 +227,8 @@ public class PrivacyHandler {
   }
 
 
-  public void delete(int auth) {
-    if (auth==0) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
@@ -285,7 +293,6 @@ public class PrivacyHandler {
     }
   }
 }
-
 
 
 

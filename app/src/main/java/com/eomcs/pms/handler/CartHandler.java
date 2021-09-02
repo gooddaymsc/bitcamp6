@@ -2,19 +2,23 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class CartHandler {
 
   List<Cart> cartList;
-
-  public CartHandler(List<Cart> cartList) {
+  int cartNumber=1;
+  AbstractStockHandler test;
+  public CartHandler(List<Cart> cartList, AbstractStockHandler test) {
     this.cartList = cartList;
+    this.test = test;
   }
 
-  public void add(int auth) {
-    if (auth != 1) {
+  public void add() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -22,18 +26,24 @@ public class CartHandler {
 
     Cart cart = new Cart();
 
-    cart.setCartNumber(Prompt.inputInt("번호를 입력해주세요: "));
-    cart.setProductName(Prompt.inputString("상품명을 입력해주세요: "));
-    cart.setProductType(Prompt.inputString("종류를 입력해주세요: "));
-    cart.setCountryOrigin(Prompt.inputString("원산지를 입력해주세요: "));
-    cart.setProductPhoto(Prompt.inputString("사진을 등록해주세요: "));
-    cart.setPrice(Prompt.inputString("가격을 입력해주세요: "));
+    cart.setCartNumber(cartNumber++);
+
+    Stock stock = test.findByStock(Prompt.inputString("상품명을 입력해주세요: "));
+    if (stock == null) {
+      System.out.println("해당 상품이 없습니다.");
+      return;
+    }
+    cart.setStock(stock);
+    cart.setCartStocks(Prompt.inputInt("수량 : "));
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+
     cartList.add(cart);
+
+    System.out.println("장바구니가 등록되었습니다.");
   }
 
-  public void list(int auth) {
-    if (auth != 1) {
+  public void list() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -44,15 +54,15 @@ public class CartHandler {
     for (Cart cart : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           cart.getCartNumber(), 
-          cart.getProductName(), 
-          cart.getProductType(), 
-          cart.getCountryOrigin(), 
+          cart.getCartNumber(), 
+          cart.getProduct().getProductName(), 
+          cart.getProduct().getCountryOrigin(), 
           cart.getRegistrationDate());
     }
   }
 
-  public void detail(int auth) {
-    if (auth != 1) {
+  public void detail() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -74,8 +84,8 @@ public class CartHandler {
     System.out.printf("등록일: %s입니다.\n", cart.getRegistrationDate());
   }
 
-  public void update(int auth) {
-    if (auth != 1) {
+  public void update() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -110,8 +120,8 @@ public class CartHandler {
     System.out.println("장바구니를 변경하였습니다.");
   }
 
-  public void delete(int auth) {
-    if (auth != 1) {
+  public void delete() {
+    if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }

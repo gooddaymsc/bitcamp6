@@ -5,6 +5,8 @@ public class Manager {
   private String password;
   private int authority;
 
+
+
   public Manager() {
     this("-","-",0);
   }
