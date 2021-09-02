@@ -3,13 +3,12 @@ package com.eomcs.pms.handler;
 import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
-import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
 
-  public BookingUpdateHandler(List<Booking> bookList, List<Cart> cartList) {
-    super(bookList, cartList);
+  public BookingUpdateHandler(List<Booking> bookList) {
+    super(bookList);
   }
 
   @Override

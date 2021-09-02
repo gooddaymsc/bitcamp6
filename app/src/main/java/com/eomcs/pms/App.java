@@ -1,6 +1,7 @@
 package com.eomcs.pms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.eomcs.menu.Menu;
@@ -29,6 +30,7 @@ import com.eomcs.pms.handler.CartDeleteHandler;
 import com.eomcs.pms.handler.CartDetailHandler;
 import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.CartUpdateHandler;
+import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
@@ -74,61 +76,31 @@ public class App {
   // 관리자
   List<Manager> managerList = new ArrayList<>();
 
-  PrivacyAddHandler privacyAddHandler = new PrivacyAddHandler(privacyList, managerList);       
-  PrivacyListHandler privacyListHandler = new PrivacyListHandler(privacyList, managerList);    
-  PrivacyDetailHandler privacyDetailHandler = new PrivacyDetailHandler(privacyList, managerList);   
-  PrivacyDeleteHandler privacyDeleteHandler = new PrivacyDeleteHandler(privacyList, managerList);   
-  PrivacyUpdateHandler privacyUpdateHandler = new PrivacyUpdateHandler(privacyList, managerList);  
-
-  SellerPrivacyAddHandler sellerPrivacyAddHandler = new SellerPrivacyAddHandler(sellerPrivacyList,managerList);  
-  SellerPrivacyListHandler sellerPrivacyListHandler = new SellerPrivacyListHandler(sellerPrivacyList); 
-  SellerPrivacyDetailHandler sellerPrivacyDetailHandler = new SellerPrivacyDetailHandler(sellerPrivacyList);  
-  SellerPrivacyUpdateHandler sellerPrivacyUpdateHandler = new SellerPrivacyUpdateHandler(sellerPrivacyList);  
-  SellerPrivacyDeleteHandler sellerPrivacyDeleteHandler = new SellerPrivacyDeleteHandler(sellerPrivacyList,managerList);
-
-  BoardAddHandler boardAddHandler = new BoardAddHandler(boardList); 
-  BoardListHandler boardListHandler = new BoardListHandler(boardList); 
-  BoardDetailHandler boardDetailHandler = new BoardDetailHandler(boardList); 
-  BoardLikeHandler boardLikeHandler = new BoardLikeHandler(boardList); 
-  BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList); 
-  BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList); 
-
-  BookingAddHandler bookingAddHandler = new BookingAddHandler(bookingList, cartList);
-  BookingListHandler bookingListHandler = new BookingListHandler(bookingList, cartList);
-  BookingDetailHandler bookingDetailHandler = new BookingDetailHandler(bookingList, cartList);
-  BookingUpdateHandler bookingUpdateHandler = new BookingUpdateHandler(bookingList, cartList);
-  BookingDeleteHandler bookingDeleteHandler = new BookingDeleteHandler(bookingList, cartList);
-
-  ProductAddHandler productAddHandler = new ProductAddHandler(productList);
-  ProductListHandler productListHandler = new ProductListHandler(productList);
-  ProductDetailHandler productDetailHandler = new ProductDetailHandler(productList);
-  ProductUpdateHandler productUpdateHandler = new ProductUpdateHandler(productList);
-  ProductDeleteHandler productDeleteHandler = new ProductDeleteHandler(productList);
-
-  StockAddHandler stockAddHandler = new StockAddHandler(stockList, productListHandler);
-  StockListHandler stockListHandler = new StockListHandler(stockList);
-  StockDetailHandler stockDetailHandler = new StockDetailHandler(stockList);
-  StockUpdateHandler stockUpdateHandler = new StockUpdateHandler(stockList);
-  StockDeleteHandler stockDeleteHandler = new StockDeleteHandler(stockList);
-
-  CartAddHandler cartAddHandler = new CartAddHandler(cartList, stockListHandler);
-  CartListHandler cartListHandler = new CartListHandler(cartList);
-  CartDetailHandler cartDetailHandler = new CartDetailHandler(cartList);
-  CartUpdateHandler cartUpdateHandler = new CartUpdateHandler(cartList);
-  CartDeleteHandler cartDeleteHandler = new CartDeleteHandler(cartList);
-
-  MemberListHandler memberListHandler = new MemberListHandler(privacyList, sellerPrivacyList); 
-  MemberDetailHandler memberDetailHandler = new MemberDetailHandler(privacyList, sellerPrivacyList); 
-  MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(privacyList, sellerPrivacyList); 
-  MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(privacyList, sellerPrivacyList); 
+  HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler(managerList);
 
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 
-  public App() {
-    managerList.add(new Manager("관리자","1234",3));
+  class MenuItem extends Menu{
+    String menuId;
+
+    public MenuItem(String title, String menuId) {
+      this(title, ENABLE_VISITOR, menuId);
+    }
+
+    public MenuItem(String title, int enableState, String menuId) {
+      super(title, enableState);
+      this.menuId = menuId;
+    }
+
+    @Override
+    public void execute() {
+
+      Command command  = commandMap.get(menuId);
+      command.execute();
+    }
   }
 
   static Manager loginPrivacy = new Manager();
@@ -141,8 +113,61 @@ public class App {
     app.service();
   }
 
-  void service() {
 
+  public App() {
+
+    commandMap.put("/privacy/add",    new PrivacyAddHandler(privacyList, managerList));
+    commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList, managerList));
+    commandMap.put("/privacy/detail", new PrivacyDetailHandler(privacyList, managerList));
+    commandMap.put("/privacy/update", new PrivacyUpdateHandler(privacyList, managerList));
+    commandMap.put("/privacy/delete", new PrivacyDeleteHandler(privacyList, managerList));
+
+    commandMap.put("/sellerprivacy/add",    new SellerPrivacyAddHandler(sellerPrivacyList, managerList));
+    commandMap.put("/sellerprivacy/list",   new SellerPrivacyListHandler(sellerPrivacyList));
+    commandMap.put("/sellerprivacy/detail", new SellerPrivacyDetailHandler(sellerPrivacyList));
+    commandMap.put("/sellerprivacy/update", new SellerPrivacyUpdateHandler(sellerPrivacyList));
+    commandMap.put("/sellerprivacy/delete", new SellerPrivacyDeleteHandler(sellerPrivacyList, managerList));
+
+    commandMap.put("/board/add",    new BoardAddHandler(boardList));
+    commandMap.put("/board/list",   new BoardListHandler(boardList));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
+    commandMap.put("/board/like",   new BoardLikeHandler(boardList));
+    commandMap.put("/board/update", new BoardUpdateHandler(boardList));
+    commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
+
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, cartListHandler));
+    commandMap.put("/booking/list",   new BookingListHandler(bookingList));
+    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
+    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
+
+    commandMap.put("/product/add",    new ProductAddHandler(productList));
+    commandMap.put("/product/list",   new ProductListHandler(productList));
+    commandMap.put("/product/detail", new ProductDetailHandler(productList));
+    commandMap.put("/product/update", new ProductUpdateHandler(productList));
+    commandMap.put("/product/delete", new ProductDeleteHandler(productList));
+
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockList, new ProductListHandler(productList)));
+    commandMap.put("/stock/list",   new StockListHandler(stockList));
+    commandMap.put("/stock/detail", new StockDetailHandler(stockList));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockList));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockList));
+
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, stockListHandler));
+    commandMap.put("/cart/list",   new CartListHandler(cartList));
+    commandMap.put("/cart/detail", new CartDetailHandler(cartList));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartList));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartList));
+
+    commandMap.put("/member/list",   new MemberListHandler(privacyList, sellerPrivacyList));
+    commandMap.put("/member/detail", new MemberDetailHandler(privacyList, sellerPrivacyList));
+    commandMap.put("/member/update", new MemberUpdateHandler(privacyList, sellerPrivacyList));
+    commandMap.put("/member/delete", new MemberDeleteHandler(privacyList, sellerPrivacyList));
+
+  }
+
+  void service() {
+    managerList.add(new Manager("관리자","1234",3));
     createMenu().execute();
     Prompt.close();
   }
