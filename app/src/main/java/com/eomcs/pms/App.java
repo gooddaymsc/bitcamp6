@@ -63,8 +63,8 @@ import com.eomcs.util.Prompt;
 public class App {
   // 7개 CRUD 
   // 개인회원 정보
-  static public List<Privacy> privacyList = new LinkedList<>();
-  static public List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
+  List<Privacy> privacyList = new LinkedList<>();
+  List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
   // 일반회원
   List<Board> boardList = new ArrayList<>();
 
