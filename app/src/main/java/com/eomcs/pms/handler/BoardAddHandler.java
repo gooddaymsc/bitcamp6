@@ -11,45 +11,50 @@ public class BoardAddHandler extends AbstractBoardHandler {
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
 
-    Board board = new Board();
+    Board testBoard = new Board();
 
-    board.setTitle("11");
-    board.setContent("11");
-    board.setWriter("11");
-    board.setRegistrationDate(new Date(System.currentTimeMillis()));
-    board.setViews(11);
-    board.setTag("11");
-    board.setLikes(11);
+    testBoard.setTitle("11");
+    testBoard.setContent("11");
+    testBoard.setWriter("11");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(11);
+    testBoard.setTag("11");
+    testBoard.setLikes(11);
 
-    board = new Board();
+    boardList.add(testBoard);
 
-    board.setTitle("22");
-    board.setContent("22");
-    board.setWriter("22");
-    board.setRegistrationDate(new Date(System.currentTimeMillis()));
-    board.setViews(22);
-    board.setTag("22");
-    board.setLikes(22);
+    testBoard = new Board();
+    testBoard.setTitle("22");
+    testBoard.setContent("22");
+    testBoard.setWriter("22");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(22);
+    testBoard.setTag("22");
+    testBoard.setLikes(22);
 
-    board = new Board();
+    boardList.add(testBoard);
 
-    board.setTitle("33");
-    board.setContent("33");
-    board.setWriter("33");
-    board.setRegistrationDate(new Date(System.currentTimeMillis()));
-    board.setViews(33);
-    board.setTag("33");
-    board.setLikes(33);
+    testBoard = new Board();
+    testBoard.setTitle("33");
+    testBoard.setContent("33");
+    testBoard.setWriter("33");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(33);
+    testBoard.setTag("33");
+    testBoard.setLikes(33);
 
-    board = new Board();
+    boardList.add(testBoard);
 
-    board.setTitle("44");
-    board.setContent("44");
-    board.setWriter("44");
-    board.setRegistrationDate(new Date(System.currentTimeMillis()));
-    board.setViews(44);
-    board.setTag("44");
-    board.setLikes(44);
+    testBoard = new Board();
+    testBoard.setTitle("44");
+    testBoard.setContent("44");
+    testBoard.setWriter("44");
+    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
+    testBoard.setViews(44);
+    testBoard.setTag("44");
+    testBoard.setLikes(44);
+
+    boardList.add(testBoard);
 
   }
 

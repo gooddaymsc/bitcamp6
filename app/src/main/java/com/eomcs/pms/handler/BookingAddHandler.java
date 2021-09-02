@@ -16,34 +16,21 @@ public class BookingAddHandler extends AbstractBookingHandler {
     super(bookList);
     this.abstractCartHandler = abstractCartHandler;
 
-    Booking book = new Booking();
-    book.setBookingNumber(22);
-    book.setReservation("11");
-    book.setRegisteredDate(new Date(System.currentTimeMillis()));
+    Booking testBook = new Booking();
+    testBook.setCart(abstractCartHandler.cartList.get(0));
+    testBook.setBookingNumber(11);
+    testBook.setReservation("11");
+    testBook.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    bookList.add(book);
+    bookList.add(testBook);
 
-    book = new Booking();
-    book.setBookingNumber(22);
-    book.setReservation("22");
-    book.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testBook = new Booking();
+    testBook.setCart(abstractCartHandler.cartList.get(1));
+    testBook.setBookingNumber(22);
+    testBook.setReservation("2");
+    testBook.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    bookList.add(book);
-
-    book = new Booking();
-    book.setBookingNumber(33);
-    book.setReservation("33");
-    book.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    bookList.add(book);
-
-    book = new Booking();
-    book.setBookingNumber(44);
-    book.setReservation("44");
-    book.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    bookList.add(book);
-
+    bookList.add(testBook);
   }
 
   @Override
