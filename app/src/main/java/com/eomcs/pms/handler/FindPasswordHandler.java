@@ -32,10 +32,10 @@ public class FindPasswordHandler {
         return;
       }
       for (Privacy s : memberList) {
-        if (id.equals(s.getId())) {
+        if (s.getId().equals(id)) {
           String email = Prompt.inputString("이메일을 입력해주세요: ");
 
-          if (email.equals(s.getEmail())) {
+          if (s.getEmail().equals(email)) {
             System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
             return;
 
@@ -57,13 +57,12 @@ public class FindPasswordHandler {
         return;
       }
       for (SellerPrivacy s : sellerList) {
-        if (id.equals(s.getId())) {
+        if (s.getId().equals(id)) {
           String email = Prompt.inputString("이메일을 입력해주세요: ");
 
-          if (email.equals(s.getEmail())) {
+          if (s.getEmail().equals(email)) {
             String businessNumber = Prompt.inputString("사업자번호를 입력해주세요: ");
-
-            if (businessNumber.equals(s.getBusinessNumber())) {
+            if (s.getBusinessPlaceNumber().equals(businessNumber)) {
               System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
               return;
             } else {

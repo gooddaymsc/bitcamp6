@@ -12,8 +12,9 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
   public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     super(memberList);
     this.managerList = managerList;
-
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
+    Manager manager = new Manager();
+
     sellerPrivacy.setId("aaaa");
     sellerPrivacy.setPassword("aaaa");
     sellerPrivacy.setAuthority(2);
@@ -30,10 +31,10 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     memberList.add(sellerPrivacy);
 
-    sellerPrivacy.setId("aaaa");
-    sellerPrivacy.setPassword("aaaa");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    manager.setId("aaaa");
+    manager.setPassword("aaaa");
+    manager.setAuthority(2);
+    managerList.add(manager);
 
     sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("bbbb");
@@ -51,10 +52,11 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setBusinessPlaceNumber("010-2222-2222");
     memberList.add(sellerPrivacy);
 
-    sellerPrivacy.setId("bbbb");
-    sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    manager = new Manager();
+    manager.setId("bbbb");
+    manager.setPassword("bbbb");
+    manager.setAuthority(2);
+    managerList.add(manager);
 
     sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("cccc");
@@ -72,31 +74,13 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setBusinessPlaceNumber("010-3333-3333");
     memberList.add(sellerPrivacy);
 
-    sellerPrivacy.setId("cccc");
-    sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    manager = new Manager();
+    manager.setId("cccc");
+    manager.setPassword("cccc");
+    manager.setAuthority(2);
+    managerList.add(manager);
 
-    sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("dddd");
-    sellerPrivacy.setPassword("dddd");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("dddd");
-    sellerPrivacy.setNickname("dddd");
-    sellerPrivacy.setEmail("dddd");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("dddd.gif");
-    sellerPrivacy.setPhoneNumber("010-4444-4444");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("dddd");
-    sellerPrivacy.setBusinessAddress("dddd");
-    sellerPrivacy.setBusinessPlaceNumber("010-4444-4444");
-    memberList.add(sellerPrivacy);
 
-    sellerPrivacy.setId("dddd");
-    sellerPrivacy.setPassword("dddd");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
   }
 
 
@@ -115,9 +99,9 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     String id = Prompt.inputString("아이디를 입력하세요: ");
 
-    int size = managerList.size();
+    int listSize = managerList.size();
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < listSize; i++) {
       if (managerList.get(i).getId().equals(id)) {
         System.out.println("중복되는 아이디입니다.");
         return;

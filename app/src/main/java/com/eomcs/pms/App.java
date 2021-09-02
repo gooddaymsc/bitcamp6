@@ -63,8 +63,8 @@ import com.eomcs.util.Prompt;
 public class App {
   // 7개 CRUD 
   // 개인회원 정보
-  List<Privacy> privacyList = new LinkedList<>();
-  List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
+  static List<Privacy> privacyList = new LinkedList<>();
+  static List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
   // 일반회원
   List<Board> boardList = new ArrayList<>();
 
@@ -181,12 +181,12 @@ public class App {
     MenuGroup loginMenu = new MenuGroup("로그인 메뉴");
     mainMenuGroup.add(loginMenu);
 
-    MenuGroup joinMenu = new MenuGroup("회원가입");
+    MenuGroup joinMenu = new MenuGroup("회원가입", Menu.ENABLE_VISITOR);
     loginMenu.add(joinMenu);
 
-    joinMenu.add(new MenuItem("일반회원", Menu.ENABLE_VISITOR, "/privacy/add"));
+    joinMenu.add(new MenuItem("일반회원", "/privacy/add"));
 
-    joinMenu.add(new MenuItem("판매자", Menu.ENABLE_VISITOR, "/privacy/add"));
+    joinMenu.add(new MenuItem("판매자", "/privacy/add"));
 
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기");
