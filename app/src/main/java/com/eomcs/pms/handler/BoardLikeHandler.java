@@ -10,7 +10,8 @@ public class BoardLikeHandler extends AbstractBoardHandler {
     super(boardList);
   }
 
-  public void like() {
+  @Override
+  public void execute() {
     System.out.println("[게시글 좋아요 누르기]");
     int no = Prompt.inputInt("번호? ");
 
@@ -21,14 +22,14 @@ public class BoardLikeHandler extends AbstractBoardHandler {
       return;
     }
     String input = Prompt.inputString("좋아요를 누르시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 좋아요를 취소하였습니다.");
+    if (input.equalsIgnoreCase("y")) {
+      System.out.println("좋아요를 눌렀습니다.");
+      board.setLikes(board.getLikes() + 1);
+      System.out.printf("현재 좋아요 수: %d입니다.\n", board.getLikes());
       return;
     } 
-
-    System.out.println("좋아요를 눌렀습니다.");
-    board.setLikes(board.getLikes() + 1);
-    System.out.printf("현재 좋아요 수: %d입니다.\n", board.getLikes());
+    System.out.println("게시글 좋아요를 취소하였습니다.");
+    return;
 
     //    if ( == 1) { 
     //      Privacy[] list = memberList.toArray(new Privacy[0]);

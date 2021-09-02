@@ -9,7 +9,8 @@ public class ProductListHandler extends AbstractProductHandler {
     super(productList);
   }
 
-  public void list() {
+  @Override
+  public void execute() {
 
     System.out.println("[상품 목록]");
     for (Product product : productList) {

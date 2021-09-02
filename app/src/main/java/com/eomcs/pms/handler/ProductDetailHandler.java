@@ -10,7 +10,8 @@ public class ProductDetailHandler extends AbstractProductHandler {
     super(alcoholList);
   }
 
-  public void detail() {
+  @Override
+  public void execute() {
     System.out.println("[상품 상세보기]");
 
     Product product = findByProduct(Prompt.inputString("상품명 : "));

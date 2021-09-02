@@ -4,7 +4,12 @@ import java.util.List;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
 
-public abstract class AbstractMemberHandler {
+public abstract class AbstractMemberHandler implements Command {
+
+  @Override
+  public void execute() {}
+
+  public void execute(int mem) {}
 
   protected List<Privacy> memberList;
   protected List<SellerPrivacy> sellerList;
@@ -33,4 +38,5 @@ public abstract class AbstractMemberHandler {
     }
     return null;
   }
+
 }
