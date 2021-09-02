@@ -3,7 +3,7 @@ package com.eomcs.pms.handler;
 import java.util.List;
 import com.eomcs.pms.domain.Stock;
 
-public abstract class AbstractStockHandler {
+public abstract class AbstractStockHandler implements Command {
 
   List<Stock> stockList;
 

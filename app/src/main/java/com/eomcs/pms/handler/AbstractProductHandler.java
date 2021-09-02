@@ -4,7 +4,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
-public abstract class AbstractProductHandler {
+public abstract class AbstractProductHandler implements Command {
 
   List<Product> productList;
 

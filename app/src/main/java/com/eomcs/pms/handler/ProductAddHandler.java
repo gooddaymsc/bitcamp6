@@ -35,7 +35,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     productList.add(testProduct);
   }
 
-  public void add() {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
