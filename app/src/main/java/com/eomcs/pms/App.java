@@ -19,7 +19,11 @@ import com.eomcs.pms.handler.BoardDetailHandler;
 import com.eomcs.pms.handler.BoardLikeHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
-import com.eomcs.pms.handler.BookingHandler;
+import com.eomcs.pms.handler.BookingAddHandler;
+import com.eomcs.pms.handler.BookingDeleteHandler;
+import com.eomcs.pms.handler.BookingDetailHandler;
+import com.eomcs.pms.handler.BookingListHandler;
+import com.eomcs.pms.handler.BookingUpdateHandler;
 import com.eomcs.pms.handler.CartHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
@@ -68,7 +72,12 @@ public class App {
   BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList); 
   BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList); 
 
-  BookingHandler bookingHandler = new BookingHandler(bookingList);
+  BookingAddHandler bookingAddHandler = new BookingAddHandler(bookingList, cartList);
+  BookingListHandler bookingListHandler = new BookingListHandler(bookingList, cartList);
+  BookingDetailHandler bookingDetailHandler = new BookingDetailHandler(bookingList, cartList);
+  BookingUpdateHandler bookingUpdateHandler = new BookingUpdateHandler(bookingList, cartList);
+  BookingDeleteHandler bookingDeleteHandler = new BookingDeleteHandler(bookingList, cartList);
+
   CartHandler cartHandler = new CartHandler(cartList);
 
   ProductAddHandler productAddHandler = new ProductAddHandler(productList);
@@ -257,27 +266,27 @@ public class App {
     bookMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        bookingHandler.add(); 
+        bookingAddHandler.add(); 
       }});
     bookMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        bookingHandler.list(); 
+        bookingListHandler.list(); 
       }});
     bookMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        bookingHandler.detail(); 
+        bookingDetailHandler.detail(); 
       }});
     bookMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        bookingHandler.update(); 
+        bookingUpdateHandler.update(); 
       }});
     bookMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        bookingHandler.delete(); 
+        bookingDeleteHandler.delete(); 
       }});
 
     ///////////////////////////////////////////

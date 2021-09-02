@@ -4,13 +4,14 @@ import java.sql.Date;
 
 public class Booking {
   public Cart cart;
-  private int bookingNumber;
-  private String reservation;
-  private Date registeredDate;
-
-
+  private int bookingNumber; //예약번호
+  private String reservation; //예약일시
+  private Date registeredDate; //등록일시
   public Cart getCart() {
     return cart;
+  }
+  public void setCart(Cart cart) {
+    this.cart = cart;
   }
   public int getBookingNumber() {
     return bookingNumber;
@@ -30,7 +31,6 @@ public class Booking {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
 
 
 
