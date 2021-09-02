@@ -4,14 +4,17 @@ import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class CartHandler {
 
   List<Cart> cartList;
-
-  public CartHandler(List<Cart> cartList) {
+  int cartNumber=1;
+  AbstractStockHandler test;
+  public CartHandler(List<Cart> cartList, AbstractStockHandler test) {
     this.cartList = cartList;
+    this.test = test;
   }
 
   public void add() {
@@ -23,14 +26,20 @@ public class CartHandler {
 
     Cart cart = new Cart();
 
-    cart.setCartNumber(Prompt.inputInt("번호를 입력해주세요: "));
-    cart.setProductName(Prompt.inputString("상품명을 입력해주세요: "));
-    cart.setProductType(Prompt.inputString("종류를 입력해주세요: "));
-    cart.setCountryOrigin(Prompt.inputString("원산지를 입력해주세요: "));
-    cart.setProductPhoto(Prompt.inputString("사진을 등록해주세요: "));
-    cart.setPrice(Prompt.inputString("가격을 입력해주세요: "));
+    cart.setCartNumber(cartNumber++);
+
+    Stock stock = test.findByStock(Prompt.inputString("상품명을 입력해주세요: "));
+    if (stock == null) {
+      System.out.println("해당 상품이 없습니다.");
+      return;
+    }
+    cart.setStock(stock);
+    cart.setCartStocks(Prompt.inputInt("수량 : "));
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+
     cartList.add(cart);
+
+    System.out.println("장바구니가 등록되었습니다.");
   }
 
   public void list() {
@@ -45,9 +54,9 @@ public class CartHandler {
     for (Cart cart : list) {
       System.out.printf("%d, %s, %s, %s, %s\n", 
           cart.getCartNumber(), 
-          cart.getProductName(), 
-          cart.getProductType(), 
-          cart.getCountryOrigin(), 
+          cart.getCartNumber(), 
+          cart.getProduct().getProductName(), 
+          cart.getProduct().getCountryOrigin(), 
           cart.getRegistrationDate());
     }
   }
