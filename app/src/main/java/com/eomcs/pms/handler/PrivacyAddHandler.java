@@ -15,64 +15,44 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
   public PrivacyAddHandler(List<Privacy> privacyList, List<Manager> managerList) {
     super(privacyList);
     this.managerList = managerList;
-    Privacy privacy = new Privacy();
-    Manager manager = new Manager();
+    Privacy testprivacy = new Privacy();
+    Manager testmanager = new Manager();
 
-    privacy.setId("aa");
-    privacy.setPassword("aa");
-    privacy.setAuthority(1);
-    privacy.setName("aa");
-    privacy.setNickname("aa");
-    privacy.setEmail("aa");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("aa.gif");
-    privacy.setPhoneNumber("010-1111-1111");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    privacyList.add(privacy);
+    testprivacy.setId("aa");
+    testprivacy.setPassword("aa");
+    testprivacy.setAuthority(1);
+    testprivacy.setName("aa");
+    testprivacy.setNickname("aa");
+    testprivacy.setEmail("aa");
+    testprivacy.setBirthday(Date.valueOf("2021-1-1"));
+    testprivacy.setPhoto("aa.gif");
+    testprivacy.setPhoneNumber("010-1111-1111");
+    testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    privacyList.add(testprivacy);
 
-    manager.setId("aa");
-    manager.setPassword("aa");
-    manager.setAuthority(1);
-    managerList.add(manager);
+    testmanager.setId("aa");
+    testmanager.setPassword("aa");
+    testmanager.setAuthority(1);
+    managerList.add(testmanager);
 
-    privacy = new Privacy();
-    privacy.setId("bb");
-    privacy.setPassword("bb");
-    privacy.setAuthority(1);
-    privacy.setName("bb");
-    privacy.setNickname("bb");
-    privacy.setEmail("bb");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("bb.gif");
-    privacy.setPhoneNumber("010-2222-2222");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testprivacy = new Privacy();
+    testprivacy.setId("a");
+    testprivacy.setPassword("a");
+    testprivacy.setAuthority(1);
+    testprivacy.setName("a");
+    testprivacy.setNickname("a");
+    testprivacy.setEmail("a");
+    testprivacy.setBirthday(Date.valueOf("2021-1-3"));
+    testprivacy.setPhoto("aa.gif");
+    testprivacy.setPhoneNumber("010-1111-1113");
+    testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    privacyList.add(testprivacy);
 
-    privacyList.add(privacy);
-    manager = new Manager();
-    privacy.setId("bb");
-    privacy.setPassword("bb");
-    privacy.setAuthority(1);
-    managerList.add(privacy);
-
-    privacy = new Privacy();
-    privacy.setId("cc");
-    privacy.setPassword("cc");
-    privacy.setAuthority(1);
-    privacy.setName("cc");
-    privacy.setNickname("cc");
-    privacy.setEmail("cc");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("cc.gif");
-    privacy.setPhoneNumber("010-3333-3333");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    privacyList.add(privacy);
-
-    manager = new Manager();
-    manager.setId("cc");
-    manager.setPassword("cc");
-    manager.setAuthority(1);
-    managerList.add(manager);
-
+    testmanager = new Manager();
+    testmanager.setId("a");
+    testmanager.setPassword("a");
+    testmanager.setAuthority(1);
+    managerList.add(testmanager);
 
   }
 
