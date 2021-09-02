@@ -12,75 +12,52 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
   public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     super(memberList);
     this.managerList = managerList;
-    SellerPrivacy sellerPrivacy = new SellerPrivacy();
-    Manager manager = new Manager();
+    SellerPrivacy testsellerPrivacy = new SellerPrivacy();
+    Manager testmanager = new Manager();
 
-    sellerPrivacy.setId("aaaa");
-    sellerPrivacy.setPassword("aaaa");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("aaaa");
-    sellerPrivacy.setNickname("aaaa");
-    sellerPrivacy.setEmail("aaaa");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("aaaa.gif");
-    sellerPrivacy.setPhoneNumber("010-1111-1111");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("aaaa");
-    sellerPrivacy.setBusinessAddress("aaaa");
-    sellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
+    testsellerPrivacy.setId("aaaa");
+    testsellerPrivacy.setPassword("aaaa");
+    testsellerPrivacy.setAuthority(2);
+    testsellerPrivacy.setName("aaaa");
+    testsellerPrivacy.setNickname("aaaa");
+    testsellerPrivacy.setEmail("aaaa");
+    testsellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
+    testsellerPrivacy.setPhoto("aaaa.gif");
+    testsellerPrivacy.setPhoneNumber("010-1111-1111");
+    testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testsellerPrivacy.setBusinessNumber("aaaa");
+    testsellerPrivacy.setBusinessAddress("aaaa");
+    testsellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
 
-    memberList.add(sellerPrivacy);
+    memberList.add(testsellerPrivacy);
 
-    manager.setId("aaaa");
-    manager.setPassword("aaaa");
-    manager.setAuthority(2);
-    managerList.add(manager);
+    testmanager.setId("aaaa");
+    testmanager.setPassword("aaaa");
+    testmanager.setAuthority(2);
+    managerList.add(testmanager);
 
-    sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("bbbb");
-    sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("bbbb");
-    sellerPrivacy.setNickname("bbbb");
-    sellerPrivacy.setEmail("bbbb");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("bbbb.gif");
-    sellerPrivacy.setPhoneNumber("010-2222-2222");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("bbbb");
-    sellerPrivacy.setBusinessAddress("bbbb");
-    sellerPrivacy.setBusinessPlaceNumber("010-2222-2222");
-    memberList.add(sellerPrivacy);
+    testsellerPrivacy = new SellerPrivacy();
+    testsellerPrivacy.setId("aaa");
+    testsellerPrivacy.setPassword("aaa");
+    testsellerPrivacy.setAuthority(2);
+    testsellerPrivacy.setName("aaa");
+    testsellerPrivacy.setNickname("aaa");
+    testsellerPrivacy.setEmail("aaa");
+    testsellerPrivacy.setBirthday(Date.valueOf("2021-1-2"));
+    testsellerPrivacy.setPhoto("aaaa.gif");
+    testsellerPrivacy.setPhoneNumber("010-1111-1112");
+    testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testsellerPrivacy.setBusinessNumber("aaa");
+    testsellerPrivacy.setBusinessAddress("aaa");
+    testsellerPrivacy.setBusinessPlaceNumber("010-1111-1112");
 
-    manager = new Manager();
-    manager.setId("bbbb");
-    manager.setPassword("bbbb");
-    manager.setAuthority(2);
-    managerList.add(manager);
+    memberList.add(testsellerPrivacy);
 
-    sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("cccc");
-    sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("cccc");
-    sellerPrivacy.setNickname("cccc");
-    sellerPrivacy.setEmail("cccc");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("cccc.gif");
-    sellerPrivacy.setPhoneNumber("010-3333-3333");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("cccc");
-    sellerPrivacy.setBusinessAddress("cccc");
-    sellerPrivacy.setBusinessPlaceNumber("010-3333-3333");
-    memberList.add(sellerPrivacy);
-
-    manager = new Manager();
-    manager.setId("cccc");
-    manager.setPassword("cccc");
-    manager.setAuthority(2);
-    managerList.add(manager);
-
-
+    testmanager = new Manager();
+    testmanager.setId("aaa");
+    testmanager.setPassword("aaa");
+    testmanager.setAuthority(2);
+    managerList.add(testmanager);
   }
 
 

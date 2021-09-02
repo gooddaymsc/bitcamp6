@@ -43,11 +43,10 @@ public class FindPasswordHandler {
             System.out.println("해당되는 이메일이 없습니다.");
             return;
           }
-        } else {
-          System.out.println("가입하신 아이디를 확인해주세요.");
-          return;          
         }
       }
+      System.out.println("가입하신 아이디를 확인해주세요.");
+
     }
 
     if (buyerSeller == 2) {
@@ -62,7 +61,7 @@ public class FindPasswordHandler {
 
           if (s.getEmail().equals(email)) {
             String businessNumber = Prompt.inputString("사업자번호를 입력해주세요: ");
-            if (s.getBusinessPlaceNumber().equals(businessNumber)) {
+            if (s.getBusinessNumber().equals(businessNumber)) {
               System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
               return;
             } else {
@@ -74,12 +73,10 @@ public class FindPasswordHandler {
             System.out.println("해당되는 이메일이 없습니다.");
             return;
           }
-
-        } else {
-          System.out.println("가입하신 아이디를 확인해주세요.");
-          return;
         }
       }
+      System.out.println("가입하신 아이디를 확인해주세요.");
+
     }
   }
 }
