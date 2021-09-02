@@ -6,13 +6,9 @@ import java.util.Stack;
 import com.eomcs.pms.App;
 import com.eomcs.util.Prompt;
 
-// 역할
-// - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.
-// 
 public class MenuGroup extends Menu {
 
-  // 메뉴의 bread crumb 목록 보관
-  // 모든 메뉴가 공유할 객체이기 때문에 스태틱 멤버로 선언한다.
+
   static Stack<Menu> breadCrumb = new Stack<>();
 
   Menu[] childs = new Menu[100];
@@ -20,17 +16,15 @@ public class MenuGroup extends Menu {
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
-  // 이전으로 이동시키는 메뉴를 표현하기 위해 만든 클래스
   private static class PrevMenu extends Menu {
     public PrevMenu() {
       super("");
     }
     @Override
-    public void execute() {
+    public void execute() {      
     }
   }
   static PrevMenu prevMenu = new PrevMenu();
-
 
 
   public MenuGroup(String title) {
@@ -46,15 +40,13 @@ public class MenuGroup extends Menu {
     this.prevMenuTitle = prevMenuTitle;
   }
 
-  // MenuGroup이 포함하는 하위 Menu를 다룰 수 있도록 메서드를 정의한다.
   public void add(Menu child) {
     if (this.size == this.childs.length) {
-      return; // 하위 메뉴를 저장하는 배열이 꽉 찼다면 더이상 저장해서는 안된다.
+      return; 
     }
     this.childs[this.size++] = child; 
   }
 
-  // 배열에 들어 있는 Menu 객체를 찾아 제거한다.
   public Menu remove(Menu child) {
     int index = indexOf(child);
     if (index == -1) {
@@ -67,7 +59,6 @@ public class MenuGroup extends Menu {
     return child;
   }
 
-  // 배열에 들어 있는 Menu 객체의 인덱스를 알아낸다.
   public int indexOf(Menu child) {
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i] == child) {
@@ -77,7 +68,6 @@ public class MenuGroup extends Menu {
     return -1;
   }
 
-  // 배열에 들어 있는 Menu 객체를 찾는다.
   public Menu getMenu(String title) { 
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i].title.equals(title)) {
@@ -110,6 +100,21 @@ public class MenuGroup extends Menu {
 
         menu.execute();
 
+        //        int menuNo = Prompt.inputInt("선택> ");
+
+        //        if (menuNo == 0 && !disablePrevMenu) {
+        //          // 현재 메뉴에서 나갈 때 스택에서 제거한다.
+        //          breadCrumb.pop();
+        //          return;
+        //        }
+        //
+        //        if (menuNo < 0 || menuNo > this.size) {
+        //          System.out.println("무효한 메뉴 번호입니다.");
+        //          continue;
+        //        }
+
+        //        this.childs[menuNo - 1].execute();
+
       } catch (Exception e) {
         // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
         // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
@@ -135,28 +140,25 @@ public class MenuGroup extends Menu {
     return path;
   }
 
-  // 출력될 메뉴 목록 준비
-  // 왜?
-  // - 메뉴 출력 속도를 빠르게 하기 위함.
-  // - 메뉴를 출력할 때 출력할 메뉴와 출력하지 말아야 할 메뉴를 구분하는 시간을 줄이기 위함.
-  // 
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
+
     for (int i = 0; i < this.size; i++) {
-      if  (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
-          App.getLoginUser().getAuthority()==1) {
+
+      if (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
+          App.getLoginUser().getAuthority() == 1) {
         menuList.add(this.childs[i]);
 
-      } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPRIVACY &&
+      } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPIVACY &&
           App.getLoginUser().getAuthority() == 2) {
         menuList.add(this.childs[i]);
 
-      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN && 
+      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
           App.getLoginUser().getAuthority() == 3) {
         menuList.add(this.childs[i]);
-      } else if (this.childs[i].enableState == Menu.ENABLE_VISITOR ) {
-        menuList.add(this.childs[i]);
 
+      } else if (this.childs[i].enableState == Menu.ENABLE_VISITOR) {
+        menuList.add(this.childs[i]);
       }
     }
     return menuList;
@@ -169,7 +171,7 @@ public class MenuGroup extends Menu {
   private void printMenuList(List<Menu> menuList) {
     int i = 1;
     for (Menu menu : menuList) {
-      System.out.printf("%d. %-20s\n", i++, menu.title);
+      System.out.printf("%d. %s\n", i++, menu.title);
     }
 
     if (!disablePrevMenu) {
@@ -190,11 +192,5 @@ public class MenuGroup extends Menu {
 
     return menuList.get(menuNo - 1);
   }
+
 }
-
-
-
-
-
-
-

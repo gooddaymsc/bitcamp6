@@ -151,17 +151,17 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new Menu("등록") {
+    boardMenu.add(new Menu("등록", Menu.ENABLE_VISITOR) {
       @Override
       public void execute() {
         boardHandler.add(); 
       }});
-    boardMenu.add(new Menu("목록") {
+    boardMenu.add(new Menu("목록", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
         boardHandler.list(); 
       }});
-    boardMenu.add(new Menu("상세보기") {
+    boardMenu.add(new Menu("상세보기", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
         boardHandler.detail(); 
