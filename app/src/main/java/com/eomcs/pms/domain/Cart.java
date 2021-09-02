@@ -3,9 +3,9 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Cart {
-  private Stock stock; // 장바구니 담을 상품
+  public Stock stock; // 장바구니 담을 상품
   private int cartStocks; // 장바구니상품의 갯수
-  private int cartPrice; // 총금액
+  private int cartPrice; // 총액
   private int cartNumber; //장바구니번호
   private Date registeredDate;
 

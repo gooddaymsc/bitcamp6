@@ -24,6 +24,11 @@ import com.eomcs.pms.handler.BookingDeleteHandler;
 import com.eomcs.pms.handler.BookingDetailHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingUpdateHandler;
+import com.eomcs.pms.handler.CartAddHandler;
+import com.eomcs.pms.handler.CartDeleteHandler;
+import com.eomcs.pms.handler.CartDetailHandler;
+import com.eomcs.pms.handler.CartListHandler;
+import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
@@ -31,13 +36,21 @@ import com.eomcs.pms.handler.MemberDeleteHandler;
 import com.eomcs.pms.handler.MemberDetailHandler;
 import com.eomcs.pms.handler.MemberListHandler;
 import com.eomcs.pms.handler.MemberUpdateHandler;
-import com.eomcs.pms.handler.PrivacyHandler;
+import com.eomcs.pms.handler.PrivacyAddHandler;
+import com.eomcs.pms.handler.PrivacyDeleteHandler;
+import com.eomcs.pms.handler.PrivacyDetailHandler;
+import com.eomcs.pms.handler.PrivacyListHandler;
+import com.eomcs.pms.handler.PrivacyUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
-import com.eomcs.pms.handler.SellerPrivacyHandler;
+import com.eomcs.pms.handler.SellerPrivacyAddHandler;
+import com.eomcs.pms.handler.SellerPrivacyDeleteHandler;
+import com.eomcs.pms.handler.SellerPrivacyDetailHandler;
+import com.eomcs.pms.handler.SellerPrivacyListHandler;
+import com.eomcs.pms.handler.SellerPrivacyUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
 import com.eomcs.pms.handler.StockDetailHandler;
@@ -61,8 +74,17 @@ public class App {
   // 관리자
   List<Manager> managerList = new ArrayList<>();
 
-  PrivacyHandler privacyHandler = new PrivacyHandler(privacyList, managerList);
-  SellerPrivacyHandler sellerPrivacyHandler = new SellerPrivacyHandler(sellerPrivacyList,managerList);
+  PrivacyAddHandler privacyAddHandler = new PrivacyAddHandler(privacyList, managerList);       
+  PrivacyListHandler privacyListHandler = new PrivacyListHandler(privacyList, managerList);    
+  PrivacyDetailHandler privacyDetailHandler = new PrivacyDetailHandler(privacyList, managerList);   
+  PrivacyDeleteHandler privacyDeleteHandler = new PrivacyDeleteHandler(privacyList, managerList);   
+  PrivacyUpdateHandler privacyUpdateHandler = new PrivacyUpdateHandler(privacyList, managerList);  
+
+  SellerPrivacyAddHandler sellerPrivacyAddHandler = new SellerPrivacyAddHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyListHandler sellerPrivacyListHandler = new SellerPrivacyListHandler(sellerPrivacyList,managerList); 
+  SellerPrivacyDetailHandler sellerPrivacyDetailHandler = new SellerPrivacyDetailHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyUpdateHandler sellerPrivacyUpdateHandler = new SellerPrivacyUpdateHandler(sellerPrivacyList,managerList);  
+  SellerPrivacyDeleteHandler sellerPrivacyDeleteHandler = new SellerPrivacyDeleteHandler(sellerPrivacyList,managerList);
 
   BoardAddHandler boardAddHandler = new BoardAddHandler(boardList); 
   BoardListHandler boardListHandler = new BoardListHandler(boardList); 
@@ -77,8 +99,6 @@ public class App {
   BookingUpdateHandler bookingUpdateHandler = new BookingUpdateHandler(bookingList, cartList);
   BookingDeleteHandler bookingDeleteHandler = new BookingDeleteHandler(bookingList, cartList);
 
-  //  CartHandler cartHandler = new CartHandler(cartList);
-
   ProductAddHandler productAddHandler = new ProductAddHandler(productList);
   ProductListHandler productListHandler = new ProductListHandler(productList);
   ProductDetailHandler productDetailHandler = new ProductDetailHandler(productList);
@@ -90,6 +110,12 @@ public class App {
   StockDetailHandler stockDetailHandler = new StockDetailHandler(stockList);
   StockUpdateHandler stockUpdateHandler = new StockUpdateHandler(stockList);
   StockDeleteHandler stockDeleteHandler = new StockDeleteHandler(stockList);
+
+  CartAddHandler cartAddHandler = new CartAddHandler(cartList, stockListHandler);
+  CartListHandler cartListHandler = new CartListHandler(cartList);
+  CartDetailHandler cartDetailHandler = new CartDetailHandler(cartList);
+  CartUpdateHandler cartUpdateHandler = new CartUpdateHandler(cartList);
+  CartDeleteHandler cartDeleteHandler = new CartDeleteHandler(cartList);
 
   MemberListHandler memberListHandler = new MemberListHandler(privacyList, sellerPrivacyList); 
   MemberDetailHandler memberDetailHandler = new MemberDetailHandler(privacyList, sellerPrivacyList); 
@@ -133,13 +159,13 @@ public class App {
     joinMenu.add(new Menu("일반회원") {
       @Override
       public void execute() {
-        privacyHandler.memberAdd(1); 
+        privacyAddHandler.execute(); 
       }});
 
     joinMenu.add(new Menu("판매자") {
       @Override
       public void execute() {
-        sellerPrivacyHandler.sellerAdd(2); 
+        sellerPrivacyAddHandler.execute(); 
       }});
 
 
@@ -192,7 +218,7 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup boardMenu = new MenuGroup("게시판", Menu.ENABLE_PRIVACY);
+    MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
     boardMenu.add(new Menu("등록", Menu.ENABLE_PRIVACY) {
@@ -228,34 +254,34 @@ public class App {
 
     ///////////////////////////////////////////
 
-    //    MenuGroup cartMenu = new MenuGroup("장바구니");
-    //    mainMenuGroup.add(cartMenu);
-    //
-    //    cartMenu.add(new Menu("등록") {
-    //      @Override
-    //      public void execute() {
-    //        cartHandler.add(); 
-    //      }});
-    //    cartMenu.add(new Menu("목록") {
-    //      @Override
-    //      public void execute() {
-    //        cartHandler.list(); 
-    //      }});
-    //    cartMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        cartHandler.detail(); 
-    //      }});
-    //    cartMenu.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        cartHandler.update(); 
-    //      }});
-    //    cartMenu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        cartHandler.delete(); 
-    //      }});
+    MenuGroup cartMenu = new MenuGroup("장바구니");
+    mainMenuGroup.add(cartMenu);
+
+    cartMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        cartAddHandler.execute(); 
+      }});
+    cartMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        cartListHandler.execute(); 
+      }});
+    cartMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        cartDetailHandler.execute(); 
+      }});
+    cartMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        cartUpdateHandler.execute(); 
+      }});
+    cartMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        cartDeleteHandler.execute(); 
+      }});
 
     ///////////////////////////////////////////
 
@@ -357,17 +383,17 @@ public class App {
     personMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        privacyHandler.memberDetail(); 
+        privacyDetailHandler.execute(); 
       }});
     personMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        privacyHandler.memberUpdate(); 
+        privacyUpdateHandler.execute(); 
       }});
     personMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        privacyHandler.delete(); 
+        privacyDeleteHandler.execute(); 
       }});
 
     ///////////////////////////////////////////

@@ -10,6 +10,7 @@ public class BoardLikeHandler extends AbstractBoardHandler {
     super(boardList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[게시글 좋아요 누르기]");
     int no = Prompt.inputInt("번호? ");
