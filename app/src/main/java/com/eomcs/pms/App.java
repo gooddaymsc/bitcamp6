@@ -186,7 +186,7 @@ public class App {
 
     joinMenu.add(new MenuItem("일반회원", Menu.ENABLE_VISITOR, "/privacy/add"));
 
-    joinMenu.add(new MenuItem("판매자", Menu.ENABLE_VISITOR, "/privacy/add"));
+    joinMenu.add(new MenuItem("판매자", Menu.ENABLE_VISITOR, "/sellerprivacy/add"));
 
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기");
