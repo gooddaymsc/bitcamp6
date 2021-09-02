@@ -7,8 +7,6 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
-  @Override
-  public void execute(int i) {}
   int stockNumber = 1;
   ProductListHandler productListHandler;
 

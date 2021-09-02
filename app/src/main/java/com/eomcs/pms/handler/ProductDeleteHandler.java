@@ -6,8 +6,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductDeleteHandler extends AbstractProductHandler {
-  @Override
-  public void execute(int i) {}
 
   public ProductDeleteHandler(List<Product> productList) {
     super(productList);

@@ -9,9 +9,6 @@ import com.eomcs.util.Prompt;
 
 public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
-  @Override
-  public void execute() {}
-
   public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     super(memberList, managerList);
 
@@ -90,7 +87,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
 
   @Override
-  public void execute(int i) {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 1 || App.getLoginUser().getAuthority() == 2 
         || App.getLoginUser().getAuthority() == 3) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
@@ -99,7 +96,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     System.out.println("\n[판매자 등록]");
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setAuthority(i);
+    sellerPrivacy.setAuthority(2);
     sellerPrivacy.setNumber(size++);
     //sellerPrivacy.setNumber(Prompt.inputInt("번호를 입력하세요: "));
 

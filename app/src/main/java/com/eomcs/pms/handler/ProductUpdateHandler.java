@@ -6,9 +6,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductUpdateHandler extends AbstractProductHandler {
-  @Override
-  public void execute(int i) {}
-
 
   public ProductUpdateHandler(List<Product> productList) {
     super(productList);

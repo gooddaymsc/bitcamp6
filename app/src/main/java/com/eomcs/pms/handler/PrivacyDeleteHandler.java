@@ -8,9 +8,6 @@ import com.eomcs.util.Prompt;
 
 public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
 
-  @Override
-  public void execute(int i) {}
-
   public PrivacyDeleteHandler(List<Privacy> memberList,  List<Manager> managerList) {
     super(memberList, managerList);
   }

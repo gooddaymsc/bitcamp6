@@ -5,8 +5,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductDetailHandler extends AbstractProductHandler {
-  @Override
-  public void execute(int i) {}
 
   public ProductDetailHandler(List<Product> alcoholList) {
     super(alcoholList);

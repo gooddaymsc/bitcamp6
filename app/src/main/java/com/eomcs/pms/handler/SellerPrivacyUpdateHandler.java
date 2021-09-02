@@ -9,16 +9,13 @@ import com.eomcs.util.Prompt;
 
 public class SellerPrivacyUpdateHandler extends AbstractSellerPrivacyHandler {
 
-  @Override
-  public void execute() {}
-
   public SellerPrivacyUpdateHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     super(memberList, managerList);
   }
 
 
   @Override
-  public void execute(int i) {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;

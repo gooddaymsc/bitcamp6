@@ -6,8 +6,6 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardUpdateHandler extends AbstractBoardHandler  {
-  @Override
-  public void execute(int i) {}
 
   public BoardUpdateHandler(List<Board> boardList) {
     super(boardList);

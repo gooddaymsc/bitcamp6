@@ -8,8 +8,6 @@ import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
 
 public class PrivacyUpdateHandler extends AbstractPrivacyHandler {
-  @Override
-  public void execute(int i) {}
 
   public PrivacyUpdateHandler(List<Privacy> memberList,  List<Manager> managerList) {
     super(memberList, managerList);

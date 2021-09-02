@@ -7,9 +7,6 @@ import com.eomcs.util.Prompt;
 
 public class ProductAddHandler extends AbstractProductHandler {
 
-  @Override
-  public void execute(int i) {}
-
   int i = 1;
   public ProductAddHandler(List<Product> productList) {
     super(productList);

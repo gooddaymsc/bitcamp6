@@ -8,8 +8,6 @@ import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class BookingAddHandler extends AbstractBookingHandler {
-  @Override
-  public void execute(int i) {}
 
   int bookingNumber = 1;
   public BookingAddHandler(List<Booking> bookList , List<Cart> cartList) {

@@ -12,7 +12,6 @@ public abstract class AbstractProductHandler implements Command {
     this.productList = productList;
   }
 
-
   protected Product findByNo(int no) {
     for (Product product : productList) {
       if (product.getProductNumber() == no) {
@@ -41,6 +40,8 @@ public abstract class AbstractProductHandler implements Command {
     }
     return null;
   }
+
+
 
 }
 

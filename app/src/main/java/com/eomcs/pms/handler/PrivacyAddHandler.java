@@ -9,9 +9,6 @@ import com.eomcs.util.Prompt;
 
 public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
-  @Override
-  public void execute() {}
-
   static int size = 1;
 
   public PrivacyAddHandler(List<Privacy> memberList,  List<Manager> managerList) {
@@ -91,7 +88,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
   }
 
   @Override
-  public void execute(int i) {
+  public void execute() {
     if (App.getLoginUser().getAuthority() != 0) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;

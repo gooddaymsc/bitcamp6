@@ -7,8 +7,6 @@ import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
-  @Override
-  public void execute(int i) {}
 
   public BookingUpdateHandler(List<Booking> bookList, List<Cart> cartList) {
     super(bookList, cartList);

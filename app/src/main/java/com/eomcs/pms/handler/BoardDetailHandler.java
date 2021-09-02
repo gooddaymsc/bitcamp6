@@ -6,10 +6,6 @@ import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
-  @Override
-  public void execute(int i) {}
-
-
   public BoardDetailHandler(List<Board> boardList) {
     super(boardList);
   }

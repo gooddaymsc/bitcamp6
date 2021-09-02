@@ -8,9 +8,6 @@ import com.eomcs.util.Prompt;
 
 public class BookingDeleteHandler extends AbstractBookingHandler {
 
-  @Override
-  public void execute(int i) {}
-
   List<Booking> booktList;
 
   public BookingDeleteHandler(List<Booking> bookList, List<Cart> cartList) {

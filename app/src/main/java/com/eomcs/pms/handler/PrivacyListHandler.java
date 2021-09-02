@@ -7,9 +7,6 @@ import com.eomcs.pms.domain.Privacy;
 
 public class PrivacyListHandler extends AbstractPrivacyHandler {
 
-  @Override
-  public void execute(int i) {}
-
   public PrivacyListHandler(List<Privacy> memberList,  List<Manager> managerList) {
     super(memberList, managerList);
   }

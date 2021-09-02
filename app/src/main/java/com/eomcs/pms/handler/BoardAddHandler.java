@@ -8,9 +8,6 @@ import com.eomcs.util.Prompt;
 
 public class BoardAddHandler extends AbstractBoardHandler {
 
-  @Override
-  public void execute(int i) {}
-
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
   }

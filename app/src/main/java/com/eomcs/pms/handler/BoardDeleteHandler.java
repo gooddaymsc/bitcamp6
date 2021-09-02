@@ -7,9 +7,6 @@ import com.eomcs.util.Prompt;
 
 public class BoardDeleteHandler extends AbstractBoardHandler {
 
-  @Override
-  public void execute(int i) {}
-
   public BoardDeleteHandler(List<Board> boardList) {
     super(boardList);
   }

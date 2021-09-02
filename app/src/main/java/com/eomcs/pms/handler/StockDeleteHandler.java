@@ -7,8 +7,6 @@ import com.eomcs.util.Prompt;
 
 public class StockDeleteHandler extends AbstractStockHandler {
 
-  @Override
-  public void execute(int i) {}
 
   public StockDeleteHandler(List<Stock> stockList) {
     super(stockList);

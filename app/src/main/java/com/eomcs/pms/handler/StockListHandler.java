@@ -6,9 +6,6 @@ import com.eomcs.pms.domain.Stock;
 
 public class StockListHandler extends AbstractStockHandler {
 
-  @Override
-  public void execute(int i) {}
-
   public StockListHandler(List<Stock> stockList) {
     super(stockList);
   }
