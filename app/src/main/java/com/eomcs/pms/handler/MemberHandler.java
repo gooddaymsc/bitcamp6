@@ -138,7 +138,7 @@ public class MemberHandler {
     if (mem == 2) {
       int no = Prompt.inputInt("판매자번호를 입력해주세요: ");
 
-      Privacy member = findByNo2(no);
+      SellerPrivacy member = findByNo2(no);
 
       if (member == null) {
         System.out.println("해당 번호의 판매자가 없습니다.");
@@ -196,7 +196,7 @@ public class MemberHandler {
     if (mem == 2) {
       int no = Prompt.inputInt("판매자번호를 입력해주세요: ");
 
-      Privacy member = findByNo2(no);
+      SellerPrivacy member = findByNo2(no);
 
       if (member == null) {
         System.out.println("해당 번호의 회원이 없습니다.");

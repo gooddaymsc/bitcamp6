@@ -3,7 +3,6 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.domain.Manager;
-import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
@@ -20,7 +19,7 @@ public class SellerPrivacyHandler {
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("aaaa");
     sellerPrivacy.setPassword("aaaa");
-    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setAuthority(3);
     sellerPrivacy.setName("aaaa");
     sellerPrivacy.setNickname("aaaa");
     sellerPrivacy.setEmail("aaaa");
@@ -50,13 +49,13 @@ public class SellerPrivacyHandler {
 
     sellerPrivacy.setId("bbbb");
     sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setAuthority(3);
     managerList.add(sellerPrivacy);
 
     sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("cccc");
     sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setAuthority(3);
     sellerPrivacy.setName("cccc");
     sellerPrivacy.setNickname("cccc");
     sellerPrivacy.setEmail("cccc");
@@ -68,7 +67,7 @@ public class SellerPrivacyHandler {
 
     sellerPrivacy.setId("cccc");
     sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setAuthority(3);
     managerList.add(sellerPrivacy);
 
     sellerPrivacy = new SellerPrivacy();
@@ -86,7 +85,7 @@ public class SellerPrivacyHandler {
 
     sellerPrivacy.setId("dddd");
     sellerPrivacy.setPassword("dddd");
-    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setAuthority(3);
     managerList.add(sellerPrivacy);
   }
 
@@ -232,7 +231,7 @@ public class SellerPrivacyHandler {
     System.out.println("\n[판매자 삭제]");
     String id = Prompt.inputString("번호를 입력하세요: ");
 
-    Privacy member = findById(id);
+    SellerPrivacy member = findById(id);
 
     if (member == null) {
       System.out.println("해당 번호의 판매자이 없습니다.");

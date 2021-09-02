@@ -13,11 +13,13 @@ public class PrivacyHandler {
 
   int size = 1;
   public PrivacyHandler(List<Privacy> memberList,  List<Manager> managerList) {
-    Privacy privacy = new Privacy();
+    this.memberList = memberList;
+    this.managerList = managerList;
 
+    Privacy privacy = new Privacy();
     privacy.setId("aa");
     privacy.setPassword("aa");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     privacy.setName("aa");
     privacy.setNickname("aa");
     privacy.setEmail("aa");
@@ -29,13 +31,13 @@ public class PrivacyHandler {
 
     privacy.setId("aa");
     privacy.setPassword("aa");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     managerList.add(privacy);
 
     privacy = new Privacy();
     privacy.setId("bb");
     privacy.setPassword("bb");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     privacy.setName("bb");
     privacy.setNickname("bb");
     privacy.setEmail("bb");
@@ -47,13 +49,13 @@ public class PrivacyHandler {
 
     privacy.setId("bb");
     privacy.setPassword("bb");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     managerList.add(privacy);
 
     privacy = new Privacy();
     privacy.setId("cc");
     privacy.setPassword("cc");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     privacy.setName("cc");
     privacy.setNickname("cc");
     privacy.setEmail("cc");
@@ -65,7 +67,7 @@ public class PrivacyHandler {
 
     privacy.setId("cc");
     privacy.setPassword("cc");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     managerList.add(privacy);
 
     privacy = new Privacy();
@@ -83,7 +85,7 @@ public class PrivacyHandler {
 
     privacy.setId("dd");
     privacy.setPassword("dd");
-    privacy.setAuthority(1);
+    privacy.setAuthority(2);
     managerList.add(privacy);
   }
 
