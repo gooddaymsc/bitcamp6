@@ -24,7 +24,6 @@ import com.eomcs.pms.handler.BookingDeleteHandler;
 import com.eomcs.pms.handler.BookingDetailHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingUpdateHandler;
-import com.eomcs.pms.handler.CartHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
@@ -78,7 +77,7 @@ public class App {
   BookingUpdateHandler bookingUpdateHandler = new BookingUpdateHandler(bookingList, cartList);
   BookingDeleteHandler bookingDeleteHandler = new BookingDeleteHandler(bookingList, cartList);
 
-  CartHandler cartHandler = new CartHandler(cartList);
+  //  CartHandler cartHandler = new CartHandler(cartList);
 
   ProductAddHandler productAddHandler = new ProductAddHandler(productList);
   ProductListHandler productListHandler = new ProductListHandler(productList);
@@ -193,7 +192,7 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup boardMenu = new MenuGroup("게시판");
+    MenuGroup boardMenu = new MenuGroup("게시판", Menu.ENABLE_PRIVACY);
     mainMenuGroup.add(boardMenu);
 
     boardMenu.add(new Menu("등록", Menu.ENABLE_PRIVACY) {
@@ -229,34 +228,34 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup cartMenu = new MenuGroup("장바구니");
-    mainMenuGroup.add(cartMenu);
-
-    cartMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        cartHandler.add(); 
-      }});
-    cartMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        cartHandler.list(); 
-      }});
-    cartMenu.add(new Menu("상세보기") {
-      @Override
-      public void execute() {
-        cartHandler.detail(); 
-      }});
-    cartMenu.add(new Menu("변경") {
-      @Override
-      public void execute() {
-        cartHandler.update(); 
-      }});
-    cartMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        cartHandler.delete(); 
-      }});
+    //    MenuGroup cartMenu = new MenuGroup("장바구니");
+    //    mainMenuGroup.add(cartMenu);
+    //
+    //    cartMenu.add(new Menu("등록") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.add(); 
+    //      }});
+    //    cartMenu.add(new Menu("목록") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.list(); 
+    //      }});
+    //    cartMenu.add(new Menu("상세보기") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.detail(); 
+    //      }});
+    //    cartMenu.add(new Menu("변경") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.update(); 
+    //      }});
+    //    cartMenu.add(new Menu("삭제") {
+    //      @Override
+    //      public void execute() {
+    //        cartHandler.delete(); 
+    //      }});
 
     ///////////////////////////////////////////
 

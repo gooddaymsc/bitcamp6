@@ -28,12 +28,21 @@ public class MenuGroup extends Menu {
 
 
   public MenuGroup(String title) {
-    super(title);
+    this(title, false);
   }
 
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
+  }
+
+  public MenuGroup(String title, int enableState) {
+    this(title, false, enableState);
+  }
+
+  public MenuGroup(String title, boolean disablePrevMenu, int enableState) {
+    this(title, disablePrevMenu);
+    this.enableState = enableState;
   }
 
   public void setPrevMenuTitle(String prevMenuTitle) {
