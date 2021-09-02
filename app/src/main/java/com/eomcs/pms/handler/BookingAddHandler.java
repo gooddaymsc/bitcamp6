@@ -10,8 +10,11 @@ import com.eomcs.util.Prompt;
 public class BookingAddHandler extends AbstractBookingHandler {
 
   int bookingNumber = 1;
-  public BookingAddHandler(List<Booking> bookList , List<Cart> cartList) {
-    super(bookList, cartList);
+  AbstractCartHandler abstractCartHandler;
+
+  public BookingAddHandler(List<Booking> bookList , AbstractCartHandler abstractCartHandler) {
+    super(bookList);
+    this.abstractCartHandler = abstractCartHandler;
   }
 
   @Override
@@ -25,13 +28,13 @@ public class BookingAddHandler extends AbstractBookingHandler {
     Booking booking = new Booking();
 
     booking.setBookingNumber(bookingNumber++);
-    Cart cart = findStock(Prompt.inputString("상품명을 입력해주세요: "));
 
-    if (cart == null) {
+    Cart bookingProduct = abstractCartHandler.findByCart(Prompt.inputString("상품명을 입력해주세요: "));
+    if (bookingProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;
     }
-    booking.setCart(cart);
+    booking.setCart(bookingProduct);
     booking.setReservation(Prompt.inputString("예약시간을 입력해주세요: "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 

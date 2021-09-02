@@ -15,7 +15,10 @@ public class Cart {
     return cartPrice;
   }
   public void setCartPrice(int cartPrice) {
-    this.cartPrice = stock.getPrice()*getCartStocks();
+    if (stock != null) {
+      cartPrice = stock.getPrice()*getCartStocks();
+    }
+    this.cartPrice = cartPrice;
   }
   public int getCartStocks() {
     return cartStocks;
