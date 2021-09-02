@@ -4,7 +4,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.Cart;
 
-public class AbstractBookingHandler {
+public abstract class AbstractBookingHandler implements Command {
 
   List<Booking> bookList;
   List<Cart> cartList;

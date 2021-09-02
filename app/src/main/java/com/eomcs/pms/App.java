@@ -266,27 +266,27 @@ public class App {
     bookMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        bookingAddHandler.add(); 
+        bookingAddHandler.execute(); 
       }});
     bookMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        bookingListHandler.list(); 
+        bookingListHandler.execute(); 
       }});
     bookMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        bookingDetailHandler.detail(); 
+        bookingDetailHandler.execute(); 
       }});
     bookMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        bookingUpdateHandler.update(); 
+        bookingUpdateHandler.execute(); 
       }});
     bookMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        bookingDeleteHandler.delete(); 
+        bookingDeleteHandler.execute(); 
       }});
 
     ///////////////////////////////////////////
@@ -297,27 +297,27 @@ public class App {
     alcoholMenu.add(new Menu("등록", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
-        productAddHandler.add(); 
+        productAddHandler.execute(); 
       }});
     alcoholMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        productListHandler.list(); 
+        productListHandler.execute(); 
       }});
     alcoholMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        productDetailHandler.detail(); 
+        productDetailHandler.execute(); 
       }});
     alcoholMenu.add(new Menu("변경", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
-        productUpdateHandler.update(); 
+        productUpdateHandler.execute(); 
       }});
     alcoholMenu.add(new Menu("삭제", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
-        productDeleteHandler.delete(); 
+        productDeleteHandler.execute(); 
       }});
 
     ///////////////////////////////////////////
@@ -328,27 +328,27 @@ public class App {
     stockMenu.add(new Menu("등록", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
-        stockAddHandler.add(); 
+        stockAddHandler.execute(); 
       }});
     stockMenu.add(new Menu("목록", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        stockListHandler.list(); 
+        stockListHandler.execute(); 
       }});
     stockMenu.add(new Menu("상세보기", Menu.ENABLE_PRIVACY) {
       @Override
       public void execute() {
-        stockDetailHandler.detail(); 
+        stockDetailHandler.execute(); 
       }});
     stockMenu.add(new Menu("변경", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
-        stockUpdateHandler.update(); 
+        stockUpdateHandler.execute(); 
       }});
     stockMenu.add(new Menu("삭제", Menu.ENABLE_SELLERPIVACY) {
       @Override
       public void execute() {
-        stockDeleteHandler.delete(); 
+        stockDeleteHandler.execute(); 
       }});
 
     ///////////////////////////////////////////

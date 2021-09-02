@@ -14,7 +14,7 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
     super(bookList, cartList);
   }
 
-  public void delete() {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 3) {
       System.out.println("권한이 없습니다.구매자 또는 판매자 기능입니다.");
       return;

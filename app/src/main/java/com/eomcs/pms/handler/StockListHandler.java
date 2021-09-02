@@ -11,7 +11,7 @@ public class StockListHandler extends AbstractStockHandler {
   }
 
 
-  public void list() {
+  public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
