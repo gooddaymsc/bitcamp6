@@ -24,6 +24,10 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setPhoto("aaaa.gif");
     sellerPrivacy.setPhoneNumber("010-1111-1111");
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    sellerPrivacy.setBusinessNumber("aaaa");
+    sellerPrivacy.setBusinessAddress("aaaa");
+    sellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
+
     memberList.add(sellerPrivacy);
 
     sellerPrivacy.setId("aaaa");
@@ -42,6 +46,9 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setPhoto("bbbb.gif");
     sellerPrivacy.setPhoneNumber("010-2222-2222");
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    sellerPrivacy.setBusinessNumber("bbbb");
+    sellerPrivacy.setBusinessAddress("bbbb");
+    sellerPrivacy.setBusinessPlaceNumber("010-2222-2222");
     memberList.add(sellerPrivacy);
 
     sellerPrivacy.setId("bbbb");
@@ -60,6 +67,9 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setPhoto("cccc.gif");
     sellerPrivacy.setPhoneNumber("010-3333-3333");
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    sellerPrivacy.setBusinessNumber("cccc");
+    sellerPrivacy.setBusinessAddress("cccc");
+    sellerPrivacy.setBusinessPlaceNumber("010-3333-3333");
     memberList.add(sellerPrivacy);
 
     sellerPrivacy.setId("cccc");
@@ -78,6 +88,9 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setPhoto("dddd.gif");
     sellerPrivacy.setPhoneNumber("010-4444-4444");
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    sellerPrivacy.setBusinessNumber("dddd");
+    sellerPrivacy.setBusinessAddress("dddd");
+    sellerPrivacy.setBusinessPlaceNumber("010-4444-4444");
     memberList.add(sellerPrivacy);
 
     sellerPrivacy.setId("dddd");
