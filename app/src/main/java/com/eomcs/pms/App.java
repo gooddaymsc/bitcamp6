@@ -20,7 +20,11 @@ import com.eomcs.pms.handler.BoardLikeHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingHandler;
-import com.eomcs.pms.handler.CartHandler;
+import com.eomcs.pms.handler.CartAddHandler;
+import com.eomcs.pms.handler.CartDeleteHandler;
+import com.eomcs.pms.handler.CartDetailHandler;
+import com.eomcs.pms.handler.CartListHandler;
+import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
@@ -68,20 +72,25 @@ public class App {
   BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList); 
   BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList); 
 
-  BookingHandler bookingHandler = new BookingHandler(bookingList);
-  CartHandler cartHandler = new CartHandler(cartList);
-
   ProductAddHandler productAddHandler = new ProductAddHandler(productList);
   ProductListHandler productListHandler = new ProductListHandler(productList);
   ProductDetailHandler productDetailHandler = new ProductDetailHandler(productList);
   ProductUpdateHandler productUpdateHandler = new ProductUpdateHandler(productList);
   ProductDeleteHandler productDeleteHandler = new ProductDeleteHandler(productList);
 
+  BookingHandler bookingHandler = new BookingHandler(bookingList);
+
   StockAddHandler stockAddHandler = new StockAddHandler(stockList, productListHandler);
   StockListHandler stockListHandler = new StockListHandler(stockList);
   StockDetailHandler stockDetailHandler = new StockDetailHandler(stockList);
   StockUpdateHandler stockUpdateHandler = new StockUpdateHandler(stockList);
   StockDeleteHandler stockDeleteHandler = new StockDeleteHandler(stockList);
+
+  CartAddHandler cartAddHandler = new CartAddHandler(cartList, stockListHandler);
+  CartListHandler cartListHandler = new CartListHandler(cartList);
+  CartDetailHandler cartDetailHandler = new CartDetailHandler(cartList);
+  CartUpdateHandler cartUpdateHandler = new CartUpdateHandler(cartList);
+  CartDeleteHandler cartDeleteHandler = new CartDeleteHandler(cartList);
 
   MemberListHandler memberListHandler = new MemberListHandler(privacyList, sellerPrivacyList); 
   MemberDetailHandler memberDetailHandler = new MemberDetailHandler(privacyList, sellerPrivacyList); 
@@ -226,27 +235,27 @@ public class App {
     cartMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        cartHandler.add(); 
+        cartAddHandler.execute(); 
       }});
     cartMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        cartHandler.list(); 
+        cartListHandler.execute(); 
       }});
     cartMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        cartHandler.detail(); 
+        cartDetailHandler.execute(); 
       }});
     cartMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        cartHandler.update(); 
+        cartUpdateHandler.execute(); 
       }});
     cartMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        cartHandler.delete(); 
+        cartDeleteHandler.execute(); 
       }});
 
     ///////////////////////////////////////////
