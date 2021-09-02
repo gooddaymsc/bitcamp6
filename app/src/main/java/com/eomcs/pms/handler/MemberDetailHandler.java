@@ -12,7 +12,7 @@ public class MemberDetailHandler extends AbstractMemberHandler {
     super(memberList, sellerList);
   }
 
-  public void detail(int mem) { 
+  public void execute(int mem) { 
     if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;

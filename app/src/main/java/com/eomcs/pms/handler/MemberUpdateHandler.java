@@ -12,7 +12,7 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
     super(memberList, sellerList);
   }
 
-  public void update(int mem) {
+  public void execute(int mem) {
     if (App.getLoginUser().getAuthority() != 3) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
@@ -36,14 +36,15 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
       // 관리자가 구매자를 판매자로 변경시키는 방법 구현 예정
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("회원 변경을 취소하였습니다.");
+      if (input.equalsIgnoreCase("y")) {
+        member.setNickname(nickName);
+        member.setLevel(level);
+        //      member.setBuyerSeller(buyerSeller);
+        System.out.println("회원 변경을 완료하였습니다.");
         return;
       }
-
-      member.setNickname(nickName);
-      member.setLevel(level);
-      //      member.setBuyerSeller(buyerSeller);
+      System.out.println("회원 변경을 취소하였습니다.");
+      return;
 
     }
 
@@ -64,18 +65,19 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
       // 관리자가 판매자를 구매자로 변경시키는 방법 구현 예정
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("회원 변경을 취소하였습니다.");
+      if (input.equalsIgnoreCase("y")) {
+        member.setNickname(nickName);
+        member.setLevel(level);
+        //      member.setBuyerSeller(buyerSeller);
+        System.out.println("회원 변경(판매자)을 완료하였습니다.");
         return;
       }
-
-      member.setNickname(nickName);
-      member.setLevel(level);
-      //      member.setBuyerSeller(buyerSeller);
+      System.out.println("회원 변경(판매자)을 취소하였습니다.");
+      return;
 
     }
 
-    System.out.println("회원을 변경하였습니다.");
+    System.out.println("회원(판매자)을 변경하였습니다.");
   }
 }
 
