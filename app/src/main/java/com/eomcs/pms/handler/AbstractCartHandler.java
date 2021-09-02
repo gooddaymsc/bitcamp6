@@ -13,7 +13,7 @@ public abstract class AbstractCartHandler implements Command {
 
   protected Cart findByCart (String ProductName) {
     for (Cart cart : cartList) {
-      if (cart.stock.product.getProductName().equals(ProductName)) {
+      if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
         return cart;
       }
     }

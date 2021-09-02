@@ -14,8 +14,19 @@ public class CartAddHandler extends AbstractCartHandler {
   public CartAddHandler(List<Cart> cartList, AbstractStockHandler abstractStockHandler) {
     super(cartList);
     this.abstractStockHandler = abstractStockHandler;
+
+    Cart cart = new Cart();
+
+    cart.setCartNumber(1111);
+    cart.setCartPrice(1111);
+    cart.setCartStocks(1111);
+    cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+
+    cartList.add(cart);
+
   }
 
+  @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != 1) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
