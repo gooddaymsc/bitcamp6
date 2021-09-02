@@ -4,11 +4,14 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 
 public class BoardListHandler extends AbstractBoardHandler {
+  @Override
+  public void execute(int i) {}
 
   public BoardListHandler(List<Board> boardList) {
     super(boardList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[게시글 목록]");
 

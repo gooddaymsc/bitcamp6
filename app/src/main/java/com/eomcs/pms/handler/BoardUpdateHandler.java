@@ -6,11 +6,14 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardUpdateHandler extends AbstractBoardHandler  {
+  @Override
+  public void execute(int i) {}
 
   public BoardUpdateHandler(List<Board> boardList) {
     super(boardList);
   }
 
+  @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() == 0) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
