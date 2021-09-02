@@ -117,9 +117,9 @@ public class App {
   public App() {
 
     commandMap.put("/privacy/add",    new PrivacyAddHandler(privacyList, managerList));
-    commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList, managerList));
-    commandMap.put("/privacy/detail", new PrivacyDetailHandler(privacyList, managerList));
-    commandMap.put("/privacy/update", new PrivacyUpdateHandler(privacyList, managerList));
+    commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList));
+    commandMap.put("/privacy/detail", new PrivacyDetailHandler(privacyList));
+    commandMap.put("/privacy/update", new PrivacyUpdateHandler(privacyList));
     commandMap.put("/privacy/delete", new PrivacyDeleteHandler(privacyList, managerList));
 
     commandMap.put("/sellerprivacy/add",    new SellerPrivacyAddHandler(sellerPrivacyList, managerList));

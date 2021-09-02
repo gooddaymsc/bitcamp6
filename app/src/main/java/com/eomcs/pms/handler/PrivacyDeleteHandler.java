@@ -8,8 +8,11 @@ import com.eomcs.util.Prompt;
 
 public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
 
-  public PrivacyDeleteHandler(List<Privacy> memberList,  List<Manager> managerList) {
-    super(memberList, managerList);
+  List<Manager> managerList;
+  public PrivacyDeleteHandler(List<Privacy> privacyList,  List<Manager> managerList) {
+    super(privacyList);
+    this.managerList = managerList;
+
   }
 
 
@@ -35,8 +38,8 @@ public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) "); 
 
     if (input.equalsIgnoreCase("y")) {
-      memberList.remove(member);
-      managerList.remove(delMember(id));    
+      privacyList.remove(member);
+      managerList.remove(member);    
       System.out.println("회원을 삭제하였습니다.");
       return;
     } else {

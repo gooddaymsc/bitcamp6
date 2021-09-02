@@ -3,14 +3,13 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.App;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
 
 public class PrivacyUpdateHandler extends AbstractPrivacyHandler {
 
-  public PrivacyUpdateHandler(List<Privacy> memberList,  List<Manager> managerList) {
-    super(memberList, managerList);
+  public PrivacyUpdateHandler(List<Privacy> privacyList) {
+    super(privacyList);
   }
 
   @Override
