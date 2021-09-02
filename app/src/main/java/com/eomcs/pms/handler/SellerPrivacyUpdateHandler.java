@@ -3,14 +3,13 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.App;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyUpdateHandler extends AbstractSellerPrivacyHandler {
 
-  public SellerPrivacyUpdateHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList, managerList);
+  public SellerPrivacyUpdateHandler(List<SellerPrivacy> memberList) {
+    super(memberList);
   }
 
 

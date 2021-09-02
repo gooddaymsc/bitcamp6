@@ -123,9 +123,9 @@ public class App {
     commandMap.put("/privacy/delete", new PrivacyDeleteHandler(privacyList, managerList));
 
     commandMap.put("/sellerprivacy/add",    new SellerPrivacyAddHandler(sellerPrivacyList, managerList));
-    commandMap.put("/sellerprivacy/list",   new SellerPrivacyListHandler(sellerPrivacyList, managerList));
-    commandMap.put("/sellerprivacy/detail", new SellerPrivacyDetailHandler(sellerPrivacyList, managerList));
-    commandMap.put("/sellerprivacy/update", new SellerPrivacyUpdateHandler(sellerPrivacyList, managerList));
+    commandMap.put("/sellerprivacy/list",   new SellerPrivacyListHandler(sellerPrivacyList));
+    commandMap.put("/sellerprivacy/detail", new SellerPrivacyDetailHandler(sellerPrivacyList));
+    commandMap.put("/sellerprivacy/update", new SellerPrivacyUpdateHandler(sellerPrivacyList));
     commandMap.put("/sellerprivacy/delete", new SellerPrivacyDeleteHandler(sellerPrivacyList, managerList));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
@@ -168,7 +168,6 @@ public class App {
 
   void service() {
     managerList.add(new Manager("관리자","1234",3));
-
     createMenu().execute();
     Prompt.close();
   }

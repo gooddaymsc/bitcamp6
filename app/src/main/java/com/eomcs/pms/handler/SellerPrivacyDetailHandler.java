@@ -2,14 +2,13 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.App;
-import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyDetailHandler extends AbstractSellerPrivacyHandler{
 
-  public SellerPrivacyDetailHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList, managerList);
+  public SellerPrivacyDetailHandler(List<SellerPrivacy> memberList) {
+    super(memberList);
   }
 
 

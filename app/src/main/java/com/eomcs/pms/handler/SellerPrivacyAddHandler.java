@@ -8,9 +8,10 @@ import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
-
+  List<Manager> managerList;
   public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList, managerList);
+    super(memberList);
+    this.managerList = managerList;
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setId("aaaa");
@@ -98,16 +99,18 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setAuthority(2);
     sellerPrivacy.setNumber(size++);
-    //sellerPrivacy.setNumber(Prompt.inputInt("번호를 입력하세요: "));
 
     String id = Prompt.inputString("아이디를 입력하세요: ");
+
     int size = managerList.size();
-    if (size!=0) {
-      Manager checkmanager = addMember(id, size);
-      if (checkmanager != null) {
+
+    for (int i = 0; i < size; i++) {
+      if (managerList.get(i).getId().equals(id)) {
+        System.out.println("중복되는 아이디입니다.");
         return;
       }
     }
+
     sellerPrivacy.setId(id);
 
     sellerPrivacy.setName(Prompt.inputString("이름을 입력하세요: "));
@@ -123,9 +126,9 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
     managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));
-
   }
 }
+
 
 
 

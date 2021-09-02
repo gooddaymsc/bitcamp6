@@ -2,6 +2,7 @@ package com.eomcs.menu;
 
 public abstract class Menu {
 
+
   public static final int ENABLE_VISITOR = 0;
   public static final int ENABLE_PRIVACY = 1;
   public static final int ENABLE_SELLERPIVACY = 2;
