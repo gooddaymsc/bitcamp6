@@ -113,22 +113,21 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
         System.out.println("중복되는 아이디입니다.");
         return;
       }
-
-      privacy.setId(id);
-      privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
-      privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
-      privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
-      privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
-      privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
-      privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
-      privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
-      privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-      privacyList.add(privacy);
-      managerList.add(new Manager(privacy.getId(), privacy.getPassword(), privacy.getAuthority()));
     }
-  }
 
+    privacy.setId(id);
+    privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
+    privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
+    privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
+    privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
+    privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
+    privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
+    privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
+    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    privacyList.add(privacy);
+    managerList.add(new Manager(privacy.getId(), privacy.getPassword(), privacy.getAuthority()));
+  }
 }
 
 
