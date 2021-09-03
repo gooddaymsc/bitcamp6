@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.Stock;
@@ -17,6 +18,7 @@ public class CartAddHandler extends AbstractCartHandler {
 
 
     Cart testCart = new Cart();
+    testCart.setCartNumber(cartNumber++);
     testCart.setStock(abstractStockHandler.stockList.get(0));
     testCart.setCartNumber(1111);
     testCart.setCartPrice(1111);
@@ -26,6 +28,7 @@ public class CartAddHandler extends AbstractCartHandler {
     cartList.add(testCart);
 
     testCart = new Cart();
+    testCart.setCartNumber(cartNumber++);
     testCart.setStock(abstractStockHandler.stockList.get(1));
     testCart.setCartNumber(2222);
     testCart.setCartPrice(2222);
@@ -37,7 +40,7 @@ public class CartAddHandler extends AbstractCartHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != 1) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -48,7 +51,7 @@ public class CartAddHandler extends AbstractCartHandler {
 
     cart.setCartNumber(cartNumber++);
 
-    Stock cartProduct = abstractStockHandler.findByStock(Prompt.inputString("상품명을 입력해주세요: "));
+    Stock cartProduct = abstractStockHandler.findByStock(Prompt.inputString("상품명 : "));
     if (cartProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;

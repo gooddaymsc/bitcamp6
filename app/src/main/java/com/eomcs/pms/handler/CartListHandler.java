@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 
@@ -10,8 +11,9 @@ public class CartListHandler extends AbstractCartHandler {
     super(cartList);
   }
 
+  @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != 1) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
