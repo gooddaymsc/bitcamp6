@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
@@ -14,17 +15,17 @@ public class SellerPrivacyDetailHandler extends AbstractSellerPrivacyHandler{
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
     System.out.println("\n[판매자 상세보기]");
-    String id = Prompt.inputString("번호를 입력하세요: ");
+    String id = Prompt.inputString("상세보기할 판매자 아이디: ");
 
     SellerPrivacy member = findById(id);
 
     if (member == null) {
-      System.out.println("해당 번호의 판매자가 없습니다.");
+      System.out.println("해당 아이디의 판매자가 없습니다.");
       return;
     }
 

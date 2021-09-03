@@ -91,7 +91,7 @@ public class App {
     String menuId;
 
     public MenuItem(String title, String menuId) {
-      this(title, ACCESS_LOGOUT | ACCESS_PRIVACY | ACCESS_SELLER | ACCESS_ADMIN, menuId);
+      this(title, ACCESS_LOGOUT | ACCESS_PRIVACY | ACCESS_SELLER | ACCESS_ADMIN , menuId);
     }
 
     public MenuItem(String title, int accessScope, String menuId) {

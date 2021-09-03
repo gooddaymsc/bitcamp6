@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
@@ -12,15 +13,16 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
     super(memberList, sellerList);
   }
 
+  @Override
   public void execute(int mem) {
-    if (App.getLoginUser().getAuthority() != 3) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_PRIVACY) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
     System.out.println("[회원 변경]");
 
     if (mem == 1) {
-      int no = Prompt.inputInt("회원번호를 입력해주세요: ");
+      int no = Prompt.inputInt("회원번호 : ");
 
       Privacy member = findByNo(no);
 
@@ -30,8 +32,9 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
       }
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")을 입력해주세요: ");
-      int level = Prompt.inputInt("변경 후의 등급(" + member.getLevel()  + ")을 입력해주세요: ");
+      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s)", member.getNickname()));
+      int level = Prompt.inputInt(String.format("등급(변경 전 : %d)", member.getLevel()));
+
       //      String buyerSeller = Prompt.inputString("구매자/판매자(" + member.getBuyerSeller()  + ")? ");
       // 관리자가 구매자를 판매자로 변경시키는 방법 구현 예정
 
@@ -49,7 +52,7 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
     }
 
     if (mem == 2) {
-      int no = Prompt.inputInt("판매자번호를 입력해주세요: ");
+      int no = Prompt.inputInt("판매자번호: ");
 
       Privacy member = findByNo2(no);
 
@@ -59,8 +62,8 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
       }
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")을 입력해주세요: ");
-      int level = Prompt.inputInt("변경 후의 등급(" + member.getLevel()  + ")을 입력해주세요: ");
+      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s)", member.getNickname()));
+      int level = Prompt.inputInt(String.format("등급(변경 전 : %d)", member.getLevel()));
       //      String buyerSeller = Prompt.inputString("구매자/판매자(" + member.getBuyerSeller()  + ")? ");
       // 관리자가 판매자를 구매자로 변경시키는 방법 구현 예정
 
