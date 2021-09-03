@@ -20,8 +20,8 @@ public class MemberListHandler extends AbstractMemberHandler {
     }
     System.out.println("[회원 목록]");
     if (mem == 1) { 
-      Privacy[] list = memberList.toArray(new Privacy[0]);
-      for (Privacy member : list) {                        // 회원(구매자) 목록
+      //      Privacy[] list = memberList.toArray(new Privacy[0]);
+      for (Privacy member : memberList) {                        // 회원(구매자) 목록
         System.out.printf("회원번호-%d, %s, %s, %s, 등급[%d], %s\n", 
             member.getNumber(),
             member.getId(),
@@ -33,8 +33,8 @@ public class MemberListHandler extends AbstractMemberHandler {
     }
 
     if (mem == 2) { 
-      SellerPrivacy[] list2 = sellerList.toArray(new SellerPrivacy[0]);
-      for (SellerPrivacy member : list2) {                       // 판매자 목록
+      //      SellerPrivacy[] list2 = sellerList.toArray(new SellerPrivacy[0]);
+      for (SellerPrivacy member : sellerList) {                       // 판매자 목록
         System.out.printf("판매자번호-%d, %s, %s, %s, 등급[%d], %s\n", 
             member.getNumber(),
             member.getId(),

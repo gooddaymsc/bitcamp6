@@ -171,7 +171,7 @@ public class App {
   }
 
   void service() {
-    managerList.add(new Manager("관리자","1234",0x08));
+    managerList.add(new Manager("관리자","1234", Menu.ACCESS_ADMIN));
 
     createMenu().execute();
     Prompt.close();
@@ -348,9 +348,9 @@ public class App {
 
   private String level(int i) {
     switch (i) {
-      case 0 : return "비회원";
-      case 1 : return "일반회원";
-      case 2 : return "판매자";
+      case Menu.ACCESS_LOGOUT : return "비회원";
+      case Menu.ACCESS_PRIVACY : return "일반회원";
+      case Menu.ACCESS_SELLER : return "판매자";
       default : return "관리자";
     }
   }
