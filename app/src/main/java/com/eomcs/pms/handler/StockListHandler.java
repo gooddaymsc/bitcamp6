@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
 
@@ -13,7 +14,7 @@ public class StockListHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
