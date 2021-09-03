@@ -13,27 +13,27 @@ public class BookingAddHandler extends AbstractBookingHandler {
   int bookingNumber = 1;
   AbstractCartHandler abstractCartHandler;
 
-  public BookingAddHandler(List<Booking> bookList , AbstractCartHandler abstractCartHandler) {
-    super(bookList);
+  public BookingAddHandler(List<Booking> bookingList , AbstractCartHandler abstractCartHandler) {
+    super(bookingList);
     this.abstractCartHandler = abstractCartHandler;
 
-    Booking testBook = new Booking();
-    testBook.setBookingNumber(bookingNumber++);
-    testBook.setCart(abstractCartHandler.cartList.get(0));
-    testBook.setBookingNumber(11);
-    testBook.setReservation("11");
-    testBook.setRegisteredDate(new Date(System.currentTimeMillis()));
+    Booking testBooking = new Booking();
+    testBooking.setBookingNumber(bookingNumber++);
+    testBooking.setCart(abstractCartHandler.cartList.get(0));
+    testBooking.setBookingNumber(11);
+    testBooking.setReservation("11");
+    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    bookList.add(testBook);
+    bookList.add(testBooking);
 
-    testBook = new Booking();
-    testBook.setBookingNumber(bookingNumber++);
-    testBook.setCart(abstractCartHandler.cartList.get(1));
-    testBook.setBookingNumber(22);
-    testBook.setReservation("2");
-    testBook.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testBooking = new Booking();
+    testBooking.setBookingNumber(bookingNumber++);
+    testBooking.setCart(abstractCartHandler.cartList.get(1));
+    testBooking.setBookingNumber(22);
+    testBooking.setReservation("2");
+    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    bookList.add(testBook);
+    bookList.add(testBooking);
   }
 
   @Override

@@ -266,14 +266,14 @@ public class App {
     ///////////////////////////////////////////
 
 
-    MenuGroup bookMenu = new MenuGroup("예약", ACCESS_PRIVACY | ACCESS_SELLER);
-    mainMenuGroup.add(bookMenu);
+    MenuGroup bookingMenu = new MenuGroup("예약", ACCESS_PRIVACY | ACCESS_SELLER);
+    mainMenuGroup.add(bookingMenu);
 
-    bookMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/book/add"));
-    bookMenu.add(new MenuItem("목록",  ACCESS_PRIVACY | ACCESS_SELLER, "/book/list"));
-    bookMenu.add(new MenuItem("상세보기",  ACCESS_PRIVACY | ACCESS_SELLER, "/book/detail"));
-    bookMenu.add(new MenuItem("변경", "/book/update"));
-    bookMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/book/delete"));
+    bookingMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/booking/add"));
+    bookingMenu.add(new MenuItem("목록",  ACCESS_PRIVACY | ACCESS_SELLER, "/booking/list"));
+    bookingMenu.add(new MenuItem("상세보기",  ACCESS_PRIVACY | ACCESS_SELLER,"/booking/detail"));
+    bookingMenu.add(new MenuItem("변경", "/booking/update"));
+    bookingMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/booking/delete"));
 
     ///////////////////////////////////////////
 
