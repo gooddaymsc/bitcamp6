@@ -22,7 +22,7 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
     }
     System.out.println("[예약 취소]");
 
-    Booking booking = findBooking(Prompt.inputString("상품명 : "));
+    Booking booking = findBooking(Prompt.inputString("예약 취소할 상품명 : "));
 
     if (booking == null) {
       System.out.println("예약이 없는 상품입니다.");

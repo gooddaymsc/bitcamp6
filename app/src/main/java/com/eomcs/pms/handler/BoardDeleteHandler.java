@@ -19,7 +19,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
       return;
     }
     System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("번호 : ");
+    int no = Prompt.inputInt("삭제할 게시글 번호 : ");
 
     Board board = findByNo(no);
 
