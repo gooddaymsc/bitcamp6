@@ -19,7 +19,7 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
       return;
     }
     System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("번호 : ");
+    int no = Prompt.inputInt("변경할 게시글 번호 : ");
 
     Board board = findByNo(no);
 
