@@ -31,15 +31,25 @@ public class PrivacyDetailHandler extends AbstractPrivacyHandler {
     //      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
     //      return;
     //    }
-
-    System.out.printf("이름: %s입니다.\n", member.getName());
-    System.out.printf("닉네임: %s입니다.\n", member.getNickname());
-    System.out.printf("이메일: %s입니다.\n", member.getEmail());
-    System.out.printf("생일: %s입니다.\n", member.getBirthday());
-    System.out.printf("사진: %s입니다.\n", member.getPhoto());
-    System.out.printf("전화: %s입니다.\n", member.getPhoneNumber());
-    System.out.printf("등록일: %s입니다.\n", member.getRegisteredDate());
-    System.out.printf("권한등급: %d입니다.", member.getAuthority());
+    if (App.getLoginUser().getAuthority()!=Menu.ACCESS_ADMIN) {
+      System.out.printf("이름: %s\n", member.getName());
+      System.out.printf("닉네임: %s\n", member.getNickname());
+      System.out.printf("이메일: %s\n", member.getEmail());
+      System.out.printf("생일: %s\n", member.getBirthday());
+      System.out.printf("사진: %s\n", member.getPhoto());
+      System.out.printf("전화: %s\n", member.getPhoneNumber());
+      System.out.printf("등록일: %s\n", member.getRegisteredDate());
+      System.out.printf("권한등급: %d", member.getAuthority());
+    } else {
+      System.out.printf("이름: %s\n", member.getName());
+      System.out.printf("닉네임: %s\n", member.getNickname());
+      System.out.printf("등급: %s\n", member.getLevel());
+      System.out.printf("이메일: %s\n", member.getEmail());
+      System.out.printf("사진: %s\n", member.getPhoto());
+      System.out.printf("전화: %s\n", member.getPhoneNumber());
+      //      System.out.printf("주소: %s입니다.\n", member.getAddress()); // 프라이버시입력?
+      System.out.printf("등록일: %s\n", member.getRegisteredDate());
+    }
   }
 }
 

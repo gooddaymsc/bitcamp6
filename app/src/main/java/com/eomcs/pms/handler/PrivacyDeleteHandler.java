@@ -22,31 +22,42 @@ public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
-    System.out.println("\n[회원 삭제]");
-    String id = Prompt.inputString("삭제할 아이디: ");
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
+      System.out.println("\n[탈퇴하기]");
 
-    Privacy member = findById(id);
+      Privacy member = findById(App.getLoginUser().getId());
+      String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) "); 
 
-    if (member == null) {
-      System.out.println("해당 아이디의 회원이 없습니다.");
-      return;
-    }
-    //  if (!loginPrivacy.getId().equals(member.getId()) && (loginPrivacy.getAuthority()==3)) {
-    //      System.out.println("현재 로그인 된 아이디로 입력하여주세요.");
-    //      return;
-    //    }
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) "); 
-
-    if (input.equalsIgnoreCase("y")) {
-      privacyList.remove(member);
-      managerList.remove(member);    
-      System.out.println("회원을 삭제하였습니다.");
-      return;
+      if (input.equalsIgnoreCase("y")) {
+        privacyList.remove(member);
+        managerList.remove(member);    
+        System.out.println("탈퇴가 완료되었습니다.");
+        return;
+      } else {
+        System.out.println("탈퇴를 취소하였습니다.");
+        return;
+      } 
     } else {
-      System.out.println("회원 삭제를 취소하였습니다.");
-      return;
-    } 
+      System.out.println("[회원 탈퇴]");
+      String id = Prompt.inputString("삭제할 아이디: ");
 
+      Privacy member = findById(id);
+
+      if (member == null) {
+        System.out.println("해당 아이디의 회원이 없습니다.");
+        return;
+      }
+      String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
+      if (input.equalsIgnoreCase("y")) {
+        privacyList.remove(member);
+        managerList.remove(member);
+        System.out.println("회원을 탈퇴시켰습니다.");
+        return;
+      }
+      System.out.println("회원 탈퇴를 취소하였습니다.");
+      return;
+
+    }
   }
 }
 

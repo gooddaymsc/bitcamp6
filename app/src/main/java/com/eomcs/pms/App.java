@@ -38,10 +38,6 @@ import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
-import com.eomcs.pms.handler.MemberDeleteHandler;
-import com.eomcs.pms.handler.MemberDetailHandler;
-import com.eomcs.pms.handler.MemberListHandler;
-import com.eomcs.pms.handler.MemberUpdateHandler;
 import com.eomcs.pms.handler.PrivacyAddHandler;
 import com.eomcs.pms.handler.PrivacyDeleteHandler;
 import com.eomcs.pms.handler.PrivacyDetailHandler;
@@ -163,10 +159,6 @@ public class App {
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
 
-    commandMap.put("/member/list",   new MemberListHandler(privacyList, sellerPrivacyList));
-    commandMap.put("/member/detail", new MemberDetailHandler(privacyList, sellerPrivacyList));
-    commandMap.put("/member/update", new MemberUpdateHandler(privacyList, sellerPrivacyList));
-    commandMap.put("/member/delete", new MemberDeleteHandler(privacyList, sellerPrivacyList));
 
   }
 
@@ -330,18 +322,18 @@ public class App {
     MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
     managerMenu.add(managerMemberMenu1);
 
-    managerMemberMenu1.add(new MenuItem("목록", "/member/list"));
-    managerMemberMenu1.add(new MenuItem("상세보기", "/member/detail"));
-    managerMemberMenu1.add(new MenuItem("변경", "/member/update"));
-    managerMemberMenu1.add(new MenuItem("삭제", "/member/delete"));
+    managerMemberMenu1.add(new MenuItem("목록", "/privacy/list"));
+    managerMemberMenu1.add(new MenuItem("상세보기", "/privacy/detail"));
+    managerMemberMenu1.add(new MenuItem("변경", "/privacy/update"));
+    managerMemberMenu1.add(new MenuItem("삭제", "/privacy/delete"));
 
     MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");  //2
     managerMenu.add(managerSellerMenu1);
 
-    managerSellerMenu1.add(new MenuItem("목록", "/member/list"));
-    managerSellerMenu1.add(new MenuItem("상세보기", "/member/detail"));
-    managerSellerMenu1.add(new MenuItem("변경", "/member/update"));
-    managerSellerMenu1.add(new MenuItem("삭제", "/member/delete"));
+    managerSellerMenu1.add(new MenuItem("목록", "/sellerprivacy/list"));
+    managerSellerMenu1.add(new MenuItem("상세보기", "/sellerprivacy/detail"));
+    managerSellerMenu1.add(new MenuItem("변경", "/sellerprivacy/update"));
+    managerSellerMenu1.add(new MenuItem("삭제", "/sellerprivacy/delete"));
 
     return mainMenuGroup;
   }
