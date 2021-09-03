@@ -12,7 +12,6 @@ public class MenuGroup extends Menu {
   static Stack<Menu> breadCrumb = new Stack<>();
 
   ArrayList<Menu> childs = new ArrayList<>();
-
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
@@ -85,24 +84,7 @@ public class MenuGroup extends Menu {
 
         menu.execute();
 
-        //        int menuNo = Prompt.inputInt("선택> ");
-
-        //        if (menuNo == 0 && !disablePrevMenu) {
-        //          // 현재 메뉴에서 나갈 때 스택에서 제거한다.
-        //          breadCrumb.pop();
-        //          return;
-        //        }
-        //
-        //        if (menuNo < 0 || menuNo > this.size) {
-        //          System.out.println("무효한 메뉴 번호입니다.");
-        //          continue;
-        //        }
-
-        //        this.childs[menuNo - 1].execute();
-
       } catch (Exception e) {
-        // try 블록 안에 있는 코드를 실행하다가 예외가 발생하면
-        // 다음 문장을 실행한 후 시스템을 멈추지 않고 실행을 계속한다.
         System.out.println("--------------------------------------------------------------");
         System.out.printf("오류 발생: %s\n", e.getClass().getName());
         e.printStackTrace();
@@ -129,7 +111,6 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
 
     for(Menu menu : childs) {
-
       if((menu.accessScope & App.getLoginUser().getAuthority()) > 0) {
         menuList.add(menu);
       }
