@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.SellerPrivacy;
 
@@ -13,8 +14,7 @@ public class SellerPrivacyListHandler extends AbstractSellerPrivacyHandler {
 
   @Override
   public void execute(){
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority()== 1 || 
-        App.getLoginUser().getAuthority() == 2 ) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN ) {
       System.out.println("해당 메뉴는 관리자만 접근 가능합니다.");
       return;
     }

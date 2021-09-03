@@ -18,6 +18,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     this.abstractCartHandler = abstractCartHandler;
 
     Booking testBook = new Booking();
+    testBook.setBookingNumber(bookingNumber++);
     testBook.setCart(abstractCartHandler.cartList.get(0));
     testBook.setBookingNumber(11);
     testBook.setReservation("11");
@@ -26,6 +27,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     bookList.add(testBook);
 
     testBook = new Booking();
+    testBook.setBookingNumber(bookingNumber++);
     testBook.setCart(abstractCartHandler.cartList.get(1));
     testBook.setBookingNumber(22);
     testBook.setReservation("2");
