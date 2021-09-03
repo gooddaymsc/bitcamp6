@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
@@ -15,6 +16,7 @@ public class StockAddHandler extends AbstractStockHandler {
     this.productListHandler = productListHandler;
 
     Stock testStock = new Stock();
+    testStock.setStockNumber(stockNumber++);
     testStock.setProduct(productListHandler.productList.get(0));
     testStock.setStocks(3);
     testStock.setPrice(38000);
@@ -22,6 +24,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stockList.add(testStock);
 
     testStock = new Stock();
+    testStock.setStockNumber(stockNumber++);
     testStock.setProduct(productListHandler.productList.get(1));
     testStock.setStocks(4);
     testStock.setPrice(52000);
@@ -32,7 +35,8 @@ public class StockAddHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {   
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER ) {
+
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }

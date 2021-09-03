@@ -3,10 +3,10 @@ package com.eomcs.menu;
 public abstract class Menu {
 
 
-  public static final int ACCESS_LOGOUT = 0x01;
-  public static final int ACCESS_PRIVACY = 0x02;
-  public static final int ACCESS_SELLER = 0x04;
-  public static final int ACCESS_ADMIN = 0x08;
+  public static final int ACCESS_LOGOUT = 0x01; //1
+  public static final int ACCESS_PRIVACY = 0x02; //2
+  public static final int ACCESS_SELLER = 0x04; //4
+  public static final int ACCESS_ADMIN = 0x08; //8
 
 
   String title;

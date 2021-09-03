@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
@@ -8,10 +9,13 @@ import com.eomcs.util.Prompt;
 public class ProductAddHandler extends AbstractProductHandler {
 
   int i = 1;
+  int productNumber = 1;
   public ProductAddHandler(List<Product> productList) {
     super(productList);
 
     Product testProduct = new Product();
+
+    testProduct.setProductNumber(productNumber++);
     testProduct.setProductName("쇼비뇽");
     testProduct.setProductType("와인");
     testProduct.setCountryOrigin("프랑스");
@@ -24,6 +28,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     productList.add(testProduct);
 
     testProduct = new Product();
+    testProduct.setProductNumber(productNumber++);
     testProduct.setProductName("앱솔루트");
     testProduct.setProductType("보트카");
     testProduct.setCountryOrigin("스웨덴");
@@ -38,8 +43,9 @@ public class ProductAddHandler extends AbstractProductHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
-      System.out.println("해당 메뉴는 판매자 권한입니다.");
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER &
+        App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
+      System.out.println("해당 메뉴 접근 권한이 없습니다.");
       return;
     }
 

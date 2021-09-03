@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
@@ -14,13 +15,16 @@ public class StockDeleteHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
+
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER  ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
     while(true) {
       System.out.println("[재고 삭제]");
-      String name = Prompt.inputString("상품이름? ");
+
+      String name = Prompt.inputString("삭제할 상품명 : ");
+
       Stock stock = findByStock(name);
 
       if (stock == null) {
