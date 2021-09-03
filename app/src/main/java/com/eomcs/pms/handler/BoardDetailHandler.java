@@ -22,15 +22,15 @@ public class BoardDetailHandler extends AbstractBoardHandler {
       return;
     }
 
-    System.out.printf("제목: %s입니다.\n", board.getTitle());
-    System.out.printf("내용: %s입니다.\n", board.getContent());
-    System.out.printf("작성자: %s입니다.\n", board.getWriter());
-    System.out.printf("등록일: %s입니다.\n", board.getRegistrationDate());
+    System.out.printf("제목 : %s\n", board.getTitle());
+    System.out.printf("내용 : %s\n", board.getContent());
+    System.out.printf("작성자 : %s\n", board.getWriter());
+    System.out.printf("등록일 : %s\n", board.getRegistrationDate());
 
     board.setViews(board.getViews() + 1);
-    System.out.printf("조회수: %d입니다.\n", board.getViews());
-    System.out.printf("좋아요 수: %d입니다.\n", board.getLikes());
-    System.out.printf("태그: %s입니다.\n", board.getTag());
+    System.out.printf("조회수 : %d\n", board.getViews());
+    System.out.printf("좋아요 수 : %d\n", board.getLikes());
+    System.out.printf("태그 : %s\n", board.getTag());
 
   }
 }

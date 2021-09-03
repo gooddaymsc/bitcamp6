@@ -83,13 +83,13 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     }
 
     privacy.setId(id);
-    privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
-    privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
-    privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
-    privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
-    privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
-    privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
-    privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
+    privacy.setName(Prompt.inputString("이름 : "));
+    privacy.setNickname(Prompt.inputString("닉네임 : "));
+    privacy.setEmail(Prompt.inputString("이메일 : "));
+    privacy.setBirthday(Prompt.inputDate("생일 : "));
+    privacy.setPassword(Prompt.inputString("암호 : "));
+    privacy.setPhoto(Prompt.inputString("사진 : "));
+    privacy.setPhoneNumber(Prompt.inputString("전화번호 : "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     privacyList.add(privacy);

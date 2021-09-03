@@ -34,6 +34,7 @@ public class MenuGroup extends Menu {
     super(title, accessScope);
   }
 
+
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
@@ -41,9 +42,10 @@ public class MenuGroup extends Menu {
 
 
   public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
-    this(title, accessScope);
+    super(title, accessScope);
     this.disablePrevMenu = disablePrevMenu;
   }
+
 
   public void setPrevMenuTitle(String prevMenuTitle) {
     this.prevMenuTitle = prevMenuTitle;
@@ -54,9 +56,8 @@ public class MenuGroup extends Menu {
   }
 
   public Menu remove(Menu child) {
-    if (childs.remove(child)) {
+    if(childs.remove(child))
       return child;
-    }
     return null;
   }
 
@@ -109,9 +110,8 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
 
-    for (Menu menu : childs) {
-
-      if ((menu.accessScope & App.getLoginUser().getAuthority()) > 0) {
+    for(Menu menu : childs) {
+      if((menu.accessScope & App.getLoginUser().getAuthority()) > 0) {
         menuList.add(menu);
       }
     }

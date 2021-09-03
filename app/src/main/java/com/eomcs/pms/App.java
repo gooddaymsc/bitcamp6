@@ -171,7 +171,7 @@ public class App {
   }
 
   void service() {
-    managerList.add(new Manager("관리자","1234", 0x08));
+    managerList.add(new Manager("관리자","1234",0x08));
 
     createMenu().execute();
     Prompt.close();
@@ -209,7 +209,7 @@ public class App {
       }});
 
 
-    loginMenu.add(new Menu("로그인실행") {
+    loginMenu.add(new Menu("로그인실행", ACCESS_LOGOUT) {
       @Override
       public void execute() {
         Manager prv = loginHandler.InputId(); 
@@ -220,7 +220,7 @@ public class App {
         }
       }});
 
-    loginMenu.add(new Menu("현재로그인정보") {
+    loginMenu.add(new Menu("현재로그인정보", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER ) {
       @Override
       public void execute() {
         System.out.printf("\n현재 아이디 : %s",loginPrivacy.getId());
@@ -229,7 +229,7 @@ public class App {
       }});
 
 
-    loginMenu.add(new Menu("로그아웃") {
+    loginMenu.add(new Menu("로그아웃", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER) {
       @Override
       public void execute() {
         if ( loginPrivacy.getAuthority()!= 0) {
@@ -245,16 +245,16 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/board/add"));
+    boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY, "/board/like"));
-    boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY, "/board/update"));
-    boardMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/board/delete"));
+    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY | ACCESS_SELLER, "/board/like"));
+    boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
+    boardMenu.add(new MenuItem("삭제",ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
 
     ///////////////////////////////////////////
 
-    MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_PRIVACY);
+    MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_PRIVACY );
     mainMenuGroup.add(cartMenu);
 
     cartMenu.add(new MenuItem("등록", "/cart/add"));
@@ -266,36 +266,35 @@ public class App {
     ///////////////////////////////////////////
 
 
-    MenuGroup bookMenu = new MenuGroup("예약", ACCESS_PRIVACY);
+    MenuGroup bookMenu = new MenuGroup("예약", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(bookMenu);
 
-
-    bookMenu.add(new MenuItem("등록", "/book/add"));
-    bookMenu.add(new MenuItem("목록", "/book/list"));
-    bookMenu.add(new MenuItem("상세보기", "/book/detail"));
+    bookMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/book/add"));
+    bookMenu.add(new MenuItem("목록",  ACCESS_PRIVACY | ACCESS_SELLER, "/book/list"));
+    bookMenu.add(new MenuItem("상세보기",  ACCESS_PRIVACY | ACCESS_SELLER, "/book/detail"));
     bookMenu.add(new MenuItem("변경", "/book/update"));
-    bookMenu.add(new MenuItem("삭제", "/book/delete"));
+    bookMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/book/delete"));
 
     ///////////////////////////////////////////
 
     MenuGroup productMenu = new MenuGroup("상품");
     mainMenuGroup.add(productMenu);
 
-    productMenu.add(new MenuItem("등록", "/product/add"));
+    productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
     productMenu.add(new MenuItem("상세보기", "/product/detail"));
-    productMenu.add(new MenuItem("변경", "/product/update"));
-    productMenu.add(new MenuItem("삭제", "/product/delete"));
+    productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
+    productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
 
     ///////////////////////////////////////////
 
-    MenuGroup stockMenu = new MenuGroup("재고", ACCESS_PRIVACY | ACCESS_SELLER);
+    MenuGroup stockMenu = new MenuGroup("재고", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER);
     mainMenuGroup.add(stockMenu);
 
     stockMenu.add(new MenuItem("등록", ACCESS_SELLER, "/stock/add"));
     stockMenu.add(new MenuItem("목록", "/stock/list"));
     stockMenu.add(new MenuItem("상세보기", "/stock/detail"));
-    stockMenu.add(new MenuItem("변경", ACCESS_SELLER, "/stock/update"));
+    stockMenu.add(new MenuItem("변경",  ACCESS_SELLER, "/stock/update"));
     stockMenu.add(new MenuItem("삭제", ACCESS_SELLER, "/stock/delete"));
 
     ///////////////////////////////////////////
@@ -325,7 +324,7 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN);
+    MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN );
     mainMenuGroup.add(managerMenu);
 
     MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1

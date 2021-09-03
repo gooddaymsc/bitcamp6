@@ -13,7 +13,7 @@ public class BoardLikeHandler extends AbstractBoardHandler {
   @Override
   public void execute() {
     System.out.println("[게시글 좋아요 누르기]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호 : ");
 
     Board board = findByNo(no);
 
