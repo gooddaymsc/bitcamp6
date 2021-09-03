@@ -9,13 +9,17 @@ import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
+
+  int sellerPrivacyNumber = 1;
   List<Manager> managerList;
+
   public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
     super(memberList);
     this.managerList = managerList;
     SellerPrivacy testsellerPrivacy = new SellerPrivacy();
     Manager testmanager = new Manager();
 
+    testsellerPrivacy.setNumber(sellerPrivacyNumber++);
     testsellerPrivacy.setId("aaaa");
     testsellerPrivacy.setPassword("aaaa");
     testsellerPrivacy.setAuthority(0x04);
@@ -38,6 +42,8 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     managerList.add(testmanager);
 
     testsellerPrivacy = new SellerPrivacy();
+
+    testsellerPrivacy.setNumber(sellerPrivacyNumber++);
     testsellerPrivacy.setId("aaa");
     testsellerPrivacy.setPassword("aaa");
     testsellerPrivacy.setAuthority(0x04);
@@ -72,7 +78,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setAuthority(0x04);
-    sellerPrivacy.setNumber(size++);
+    sellerPrivacy.setNumber(sellerPrivacyNumber++);
 
     String id = Prompt.inputString("등록할 아이디: ");
 

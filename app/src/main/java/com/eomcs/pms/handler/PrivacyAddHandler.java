@@ -10,7 +10,7 @@ import com.eomcs.util.Prompt;
 
 public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
-  static int size = 1;
+  int privacyNumber = 1;
   List<Manager> managerList;
 
   public PrivacyAddHandler(List<Privacy> privacyList, List<Manager> managerList) {
@@ -19,6 +19,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     Privacy testprivacy = new Privacy();
     Manager testmanager = new Manager();
 
+    testprivacy.setNumber(privacyNumber++);
     testprivacy.setId("aa");
     testprivacy.setPassword("aa");
     testprivacy.setAuthority(0x02);
@@ -37,6 +38,8 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     managerList.add(testmanager);
 
     testprivacy = new Privacy();
+
+    testprivacy.setNumber(privacyNumber++);
     testprivacy.setId("a");
     testprivacy.setPassword("a");
     testprivacy.setAuthority(0x02);
@@ -68,7 +71,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     Privacy privacy = new Privacy();
     privacy.setAuthority(0x02);
-    privacy.setNumber(size++);
+    privacy.setNumber(privacyNumber++);
 
     //아이디가 중복되면 다시 아이디 재설정.
     String id = Prompt.inputString("등록할 아이디: ");
