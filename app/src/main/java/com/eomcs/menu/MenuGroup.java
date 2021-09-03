@@ -11,8 +11,8 @@ public class MenuGroup extends Menu {
 
   static Stack<Menu> breadCrumb = new Stack<>();
 
-  Menu[] childs = new Menu[100];
-  int size;
+  ArrayList<Menu> childs = new ArrayList<>();
+
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
 
@@ -28,61 +28,37 @@ public class MenuGroup extends Menu {
 
 
   public MenuGroup(String title) {
-    this(title, false);
+    super(title);
   }
+
+  public MenuGroup(String title, int accessScope) {
+    super(title, accessScope);
+  }
+
 
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
   }
 
-  public MenuGroup(String title, int enableState) {
-    this(title, false, enableState);
+
+  public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
+    super(title, accessScope);
+    this.disablePrevMenu = disablePrevMenu;
   }
 
-  public MenuGroup(String title, boolean disablePrevMenu, int enableState) {
-    this(title, disablePrevMenu);
-    this.enableState = enableState;
-  }
 
   public void setPrevMenuTitle(String prevMenuTitle) {
     this.prevMenuTitle = prevMenuTitle;
   }
 
   public void add(Menu child) {
-    if (this.size == this.childs.length) {
-      return; 
-    }
-    this.childs[this.size++] = child; 
+    childs.add(child);
   }
 
   public Menu remove(Menu child) {
-    int index = indexOf(child);
-    if (index == -1) {
-      return null;
-    }
-    for (int i = index + 1; i < this.size; i++) {
-      this.childs[i - 1] = this.childs[i];
-    }
-    childs[--this.size] = null;
-    return child;
-  }
-
-  public int indexOf(Menu child) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i] == child) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  public Menu getMenu(String title) { 
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i].title.equals(title)) {
-        return this.childs[i];
-      }
-    }
+    if(childs.remove(child))
+      return child;
     return null;
   }
 
@@ -152,22 +128,10 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
 
-    for (int i = 0; i < this.size; i++) {
+    for(Menu menu : childs) {
 
-      if (this.childs[i].enableState == Menu.ENABLE_PRIVACY &&
-          App.getLoginUser().getAuthority() == 1) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_SELLERPIVACY &&
-          App.getLoginUser().getAuthority() == 2) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ADMIN &&
-          App.getLoginUser().getAuthority() == 3) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_VISITOR) {
-        menuList.add(this.childs[i]);
+      if((menu.accessScope & App.getLoginUser().getAuthority()) > 0) {
+        menuList.add(menu);
       }
     }
     return menuList;

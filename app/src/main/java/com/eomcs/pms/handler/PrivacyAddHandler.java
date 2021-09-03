@@ -20,7 +20,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     testprivacy.setId("aa");
     testprivacy.setPassword("aa");
-    testprivacy.setAuthority(1);
+    testprivacy.setAuthority(0x02);
     testprivacy.setName("aa");
     testprivacy.setNickname("aa");
     testprivacy.setEmail("aa");
@@ -32,13 +32,13 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     testmanager.setId("aa");
     testmanager.setPassword("aa");
-    testmanager.setAuthority(1);
+    testmanager.setAuthority(0x02);
     managerList.add(testmanager);
 
     testprivacy = new Privacy();
     testprivacy.setId("a");
     testprivacy.setPassword("a");
-    testprivacy.setAuthority(1);
+    testprivacy.setAuthority(0x02);
     testprivacy.setName("a");
     testprivacy.setNickname("a");
     testprivacy.setEmail("a");
@@ -51,7 +51,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testmanager = new Manager();
     testmanager.setId("a");
     testmanager.setPassword("a");
-    testmanager.setAuthority(1);
+    testmanager.setAuthority(0x02);
     managerList.add(testmanager);
 
   }
@@ -66,7 +66,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
-    privacy.setAuthority(1);
+    privacy.setAuthority(0x02);
     privacy.setNumber(size++);
 
     //아이디가 중복되면 다시 아이디 재설정.
