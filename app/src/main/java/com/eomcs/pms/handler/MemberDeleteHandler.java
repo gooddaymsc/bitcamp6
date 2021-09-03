@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
@@ -12,14 +13,15 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
     super(memberList, sellerList);
   }
 
+  @Override
   public void execute(int mem) {
-    if (App.getLoginUser().getAuthority() != 3) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
     System.out.println("[회원 탈퇴]");
     if (mem == 1) {
-      int no = Prompt.inputInt("회원번호를 입력해주세요: ");
+      int no = Prompt.inputInt("회원번호 : ");
 
       Privacy member = findByNo(no);
 
@@ -40,7 +42,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
     }
 
     if (mem == 2) {
-      int no = Prompt.inputInt("판매자번호를 입력해주세요: ");
+      int no = Prompt.inputInt("판매자번호 : ");
 
       Privacy member = findByNo2(no);
 

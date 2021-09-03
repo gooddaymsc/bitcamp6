@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.SellerPrivacy;
@@ -13,7 +14,7 @@ public class MemberListHandler extends AbstractMemberHandler {
 
   @Override
   public void execute(int mem) {  
-    if (App.getLoginUser().getAuthority() != 3) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("권한이 없습니다. 관리자 기능입니다.");
       return;
     }
