@@ -17,7 +17,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     testsellerPrivacy.setId("aaaa");
     testsellerPrivacy.setPassword("aaaa");
-    testsellerPrivacy.setAuthority(2);
+    testsellerPrivacy.setAuthority(0x04);
     testsellerPrivacy.setName("aaaa");
     testsellerPrivacy.setNickname("aaaa");
     testsellerPrivacy.setEmail("aaaa");
@@ -33,13 +33,13 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     testmanager.setId("aaaa");
     testmanager.setPassword("aaaa");
-    testmanager.setAuthority(2);
+    testmanager.setAuthority(0x04);
     managerList.add(testmanager);
 
     testsellerPrivacy = new SellerPrivacy();
     testsellerPrivacy.setId("aaa");
     testsellerPrivacy.setPassword("aaa");
-    testsellerPrivacy.setAuthority(2);
+    testsellerPrivacy.setAuthority(0x04);
     testsellerPrivacy.setName("aaa");
     testsellerPrivacy.setNickname("aaa");
     testsellerPrivacy.setEmail("aaa");
@@ -56,7 +56,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testmanager = new Manager();
     testmanager.setId("aaa");
     testmanager.setPassword("aaa");
-    testmanager.setAuthority(2);
+    testmanager.setAuthority(0x04);
     managerList.add(testmanager);
   }
 
@@ -71,7 +71,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     System.out.println("\n[판매자 등록]");
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setAuthority(2);
+    sellerPrivacy.setAuthority(0x04);
     sellerPrivacy.setNumber(size++);
 
     String id = Prompt.inputString("아이디를 입력하세요: ");
