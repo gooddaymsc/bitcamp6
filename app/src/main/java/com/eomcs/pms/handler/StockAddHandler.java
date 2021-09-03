@@ -16,6 +16,7 @@ public class StockAddHandler extends AbstractStockHandler {
     this.productListHandler = productListHandler;
 
     Stock testStock = new Stock();
+    testStock.setStockNumber(stockNumber++);
     testStock.setProduct(productListHandler.productList.get(0));
     testStock.setStocks(3);
     testStock.setPrice(38000);
@@ -23,6 +24,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stockList.add(testStock);
 
     testStock = new Stock();
+    testStock.setStockNumber(stockNumber++);
     testStock.setProduct(productListHandler.productList.get(1));
     testStock.setStocks(4);
     testStock.setPrice(52000);
