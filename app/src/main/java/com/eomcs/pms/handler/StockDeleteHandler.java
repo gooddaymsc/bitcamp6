@@ -14,13 +14,13 @@ public class StockDeleteHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
+    if (App.getLoginUser().getAuthority() == 3 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
     while(true) {
       System.out.println("[재고 삭제]");
-      String name = Prompt.inputString("상품이름? ");
+      String name = Prompt.inputString("삭제할 상품이름 : ");
       Stock stock = findByStock(name);
 
       if (stock == null) {

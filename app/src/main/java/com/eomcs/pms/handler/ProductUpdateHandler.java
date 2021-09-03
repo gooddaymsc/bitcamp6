@@ -13,14 +13,14 @@ public class ProductUpdateHandler extends AbstractProductHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
+    if (App.getLoginUser().getAuthority() == 2 || App.getLoginUser().getAuthority() == 1 ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
     while(true) {
       System.out.println("[상품 변경]");
 
-      Product product = findByProduct(Prompt.inputString("상품명 : "));
+      Product product = findByProduct(Prompt.inputString("변경할 상품 명 : "));
 
       if (product == null) {
         System.out.println("해당 상품이 존재하지 않습니다.");
