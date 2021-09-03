@@ -24,6 +24,7 @@ public class FindIdHandler {
       return;    
     }
 
+
     if (buyerSeller == 1) {
       String phoneNumber = Prompt.inputString("전화번호를 입력하세요: ");
       if (phoneNumber == null) {

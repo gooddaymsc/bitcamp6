@@ -13,7 +13,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     super(boardList);
 
     Board testBoard = new Board();
-
+    testBoard.setNumber(boardNunmber++);
     testBoard.setTitle("11");
     testBoard.setContent("11");
     testBoard.setWriter("11");
@@ -25,6 +25,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     boardList.add(testBoard);
 
     testBoard = new Board();
+    testBoard.setNumber(boardNunmber++);
     testBoard.setTitle("22");
     testBoard.setContent("22");
     testBoard.setWriter("22");
@@ -36,6 +37,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     boardList.add(testBoard);
 
     testBoard = new Board();
+    testBoard.setNumber(boardNunmber++);
     testBoard.setTitle("33");
     testBoard.setContent("33");
     testBoard.setWriter("33");
@@ -47,6 +49,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     boardList.add(testBoard);
 
     testBoard = new Board();
+    testBoard.setNumber(boardNunmber++);
     testBoard.setTitle("44");
     testBoard.setContent("44");
     testBoard.setWriter("44");
