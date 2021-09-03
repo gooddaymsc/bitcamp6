@@ -1,5 +1,9 @@
 package com.eomcs.pms;
 
+import static com.eomcs.menu.Menu.ACCESS_ADMIN;
+import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
+import static com.eomcs.menu.Menu.ACCESS_PRIVACY;
+import static com.eomcs.menu.Menu.ACCESS_SELLER;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -87,11 +91,11 @@ public class App {
     String menuId;
 
     public MenuItem(String title, String menuId) {
-      this(title, ENABLE_VISITOR, menuId);
+      this(title, ACCESS_LOGOUT, menuId);
     }
 
-    public MenuItem(String title, int enableState, String menuId) {
-      super(title, enableState);
+    public MenuItem(String title, int accessScope, String menuId) {
+      super(title, accessScope);
       this.menuId = menuId;
     }
 
@@ -167,7 +171,7 @@ public class App {
   }
 
   void service() {
-    managerList.add(new Manager("관리자","1234",3));
+    managerList.add(new Manager("관리자","1234", 0x08));
 
     createMenu().execute();
     Prompt.close();
@@ -181,7 +185,7 @@ public class App {
     MenuGroup loginMenu = new MenuGroup("로그인 메뉴");
     mainMenuGroup.add(loginMenu);
 
-    MenuGroup joinMenu = new MenuGroup("회원가입", Menu.ENABLE_VISITOR);
+    MenuGroup joinMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
     loginMenu.add(joinMenu);
 
     joinMenu.add(new MenuItem("일반회원", "/privacy/add"));
@@ -189,7 +193,7 @@ public class App {
     joinMenu.add(new MenuItem("판매자", "/sellerprivacy/add"));
 
 
-    MenuGroup findMenu = new MenuGroup("아이디/비번 찾기");
+    MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
     loginMenu.add(findMenu);
 
     findMenu.add(new Menu("아이디찾기") {
@@ -241,16 +245,16 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new MenuItem("등록", Menu.ENABLE_PRIVACY, "/board/add"));
-    boardMenu.add(new MenuItem("목록", Menu.ENABLE_PRIVACY, "/board/list"));
-    boardMenu.add(new MenuItem("상세보기", Menu.ENABLE_PRIVACY, "/board/detail"));
-    boardMenu.add(new MenuItem("좋아요", Menu.ENABLE_PRIVACY, "/board/like"));
-    boardMenu.add(new MenuItem("변경", Menu.ENABLE_PRIVACY, "/board/update"));
-    boardMenu.add(new MenuItem("삭제", Menu.ENABLE_PRIVACY, "/board/delete"));
+    boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/board/add"));
+    boardMenu.add(new MenuItem("목록", "/board/list"));
+    boardMenu.add(new MenuItem("상세보기", "/board/detail"));
+    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY, "/board/like"));
+    boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY, "/board/update"));
+    boardMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/board/delete"));
 
     ///////////////////////////////////////////
 
-    MenuGroup cartMenu = new MenuGroup("장바구니");
+    MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_PRIVACY);
     mainMenuGroup.add(cartMenu);
 
     cartMenu.add(new MenuItem("등록", "/cart/add"));
@@ -262,7 +266,7 @@ public class App {
     ///////////////////////////////////////////
 
 
-    MenuGroup bookMenu = new MenuGroup("예약");
+    MenuGroup bookMenu = new MenuGroup("예약", ACCESS_PRIVACY);
     mainMenuGroup.add(bookMenu);
 
 
@@ -285,18 +289,18 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup stockMenu = new MenuGroup("재고");
+    MenuGroup stockMenu = new MenuGroup("재고", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(stockMenu);
 
-    stockMenu.add(new MenuItem("등록", "/stock/add"));
+    stockMenu.add(new MenuItem("등록", ACCESS_SELLER, "/stock/add"));
     stockMenu.add(new MenuItem("목록", "/stock/list"));
     stockMenu.add(new MenuItem("상세보기", "/stock/detail"));
-    stockMenu.add(new MenuItem("변경", "/stock/update"));
-    stockMenu.add(new MenuItem("삭제", "/stock/delete"));
+    stockMenu.add(new MenuItem("변경", ACCESS_SELLER, "/stock/update"));
+    stockMenu.add(new MenuItem("삭제", ACCESS_SELLER, "/stock/delete"));
 
     ///////////////////////////////////////////
 
-    MenuGroup personMenu = new MenuGroup("프로필");
+    MenuGroup personMenu = new MenuGroup("프로필", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(personMenu);
 
     personMenu.add(new MenuItem("상세보기", "/privacy/detail"));
@@ -321,7 +325,7 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup managerMenu = new MenuGroup("관리자모드");
+    MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN);
     mainMenuGroup.add(managerMenu);
 
     MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
