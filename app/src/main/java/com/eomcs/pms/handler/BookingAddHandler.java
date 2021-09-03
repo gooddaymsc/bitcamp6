@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.Cart;
@@ -35,7 +36,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != 1) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -45,13 +46,13 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     booking.setBookingNumber(bookingNumber++);
 
-    Cart bookingProduct = abstractCartHandler.findByCart(Prompt.inputString("상품명을 입력해주세요: "));
+    Cart bookingProduct = abstractCartHandler.findByCart(Prompt.inputString("상품명 : "));
     if (bookingProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;
     }
     booking.setCart(bookingProduct);
-    booking.setReservation(Prompt.inputString("예약시간을 입력해주세요: "));
+    booking.setReservation(Prompt.inputString("예약시간 : "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
 
