@@ -22,7 +22,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testprivacy.setNumber(privacyNumber++);
     testprivacy.setId("aa");
     testprivacy.setPassword("aa");
-    testprivacy.setAuthority(0x02);
+    testprivacy.setAuthority(Menu.ACCESS_PRIVACY);
     testprivacy.setName("aa");
     testprivacy.setNickname("aa");
     testprivacy.setEmail("aa");
@@ -34,7 +34,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     testmanager.setId("aa");
     testmanager.setPassword("aa");
-    testmanager.setAuthority(0x02);
+    testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
 
     testprivacy = new Privacy();
@@ -42,7 +42,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testprivacy.setNumber(privacyNumber++);
     testprivacy.setId("a");
     testprivacy.setPassword("a");
-    testprivacy.setAuthority(0x02);
+    testprivacy.setAuthority(Menu.ACCESS_PRIVACY);
     testprivacy.setName("a");
     testprivacy.setNickname("a");
     testprivacy.setEmail("a");
@@ -55,7 +55,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testmanager = new Manager();
     testmanager.setId("a");
     testmanager.setPassword("a");
-    testmanager.setAuthority(0x02);
+    testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
 
   }
@@ -70,7 +70,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
-    privacy.setAuthority(0x02);
+    privacy.setAuthority(Menu.ACCESS_PRIVACY);
     privacy.setNumber(privacyNumber++);
 
     //아이디가 중복되면 다시 아이디 재설정.

@@ -22,7 +22,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setNumber(sellerPrivacyNumber++);
     testsellerPrivacy.setId("aaaa");
     testsellerPrivacy.setPassword("aaaa");
-    testsellerPrivacy.setAuthority(0x04);
+    testsellerPrivacy.setAuthority(Menu.ACCESS_SELLER);
     testsellerPrivacy.setName("aaaa");
     testsellerPrivacy.setNickname("aaaa");
     testsellerPrivacy.setEmail("aaaa");
@@ -38,7 +38,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     testmanager.setId("aaaa");
     testmanager.setPassword("aaaa");
-    testmanager.setAuthority(0x04);
+    testmanager.setAuthority(Menu.ACCESS_SELLER);
     managerList.add(testmanager);
 
     testsellerPrivacy = new SellerPrivacy();
@@ -46,7 +46,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setNumber(sellerPrivacyNumber++);
     testsellerPrivacy.setId("aaa");
     testsellerPrivacy.setPassword("aaa");
-    testsellerPrivacy.setAuthority(0x04);
+    testsellerPrivacy.setAuthority(Menu.ACCESS_SELLER);
     testsellerPrivacy.setName("aaa");
     testsellerPrivacy.setNickname("aaa");
     testsellerPrivacy.setEmail("aaa");
@@ -63,7 +63,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testmanager = new Manager();
     testmanager.setId("aaa");
     testmanager.setPassword("aaa");
-    testmanager.setAuthority(0x04);
+    testmanager.setAuthority(Menu.ACCESS_SELLER);
     managerList.add(testmanager);
   }
 
