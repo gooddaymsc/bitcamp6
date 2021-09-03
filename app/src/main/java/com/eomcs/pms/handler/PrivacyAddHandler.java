@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
@@ -58,7 +59,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != 0) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
@@ -70,7 +71,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setNumber(size++);
 
     //아이디가 중복되면 다시 아이디 재설정.
-    String id = Prompt.inputString("아이디를 입력해주세요: ");
+    String id = Prompt.inputString("등록할 아이디: ");
 
     int listSize = managerList.size();
 
@@ -83,13 +84,13 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     }
 
     privacy.setId(id);
-    privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
-    privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
-    privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
-    privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
-    privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
-    privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
-    privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
+    privacy.setName(Prompt.inputString("이름: "));
+    privacy.setNickname(Prompt.inputString("닉네임: "));
+    privacy.setEmail(Prompt.inputString("이메일: "));
+    privacy.setBirthday(Prompt.inputDate("생일: "));
+    privacy.setPassword(Prompt.inputString("암호: "));
+    privacy.setPhoto(Prompt.inputString("사진: "));
+    privacy.setPhoneNumber(Prompt.inputString("전화: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     privacyList.add(privacy);

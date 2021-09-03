@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
@@ -63,8 +64,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 1 || App.getLoginUser().getAuthority() == 2 
-        || App.getLoginUser().getAuthority() == 3) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
@@ -74,7 +74,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setAuthority(0x04);
     sellerPrivacy.setNumber(size++);
 
-    String id = Prompt.inputString("아이디를 입력하세요: ");
+    String id = Prompt.inputString("등록할 아이디: ");
 
     int listSize = managerList.size();
 
@@ -87,16 +87,16 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     sellerPrivacy.setId(id);
 
-    sellerPrivacy.setName(Prompt.inputString("이름을 입력하세요: "));
-    sellerPrivacy.setNickname(Prompt.inputString("닉네임을 입력하세요: "));
-    sellerPrivacy.setEmail(Prompt.inputString("이메일을 입력하세요: "));
-    sellerPrivacy.setBirthday(Prompt.inputDate("생일을 입력하세요: "));
-    sellerPrivacy.setPassword(Prompt.inputString("암호를 입력하세요: "));
-    sellerPrivacy.setPhoto(Prompt.inputString("사진을 등록하세요: "));
-    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화를 입력하세요: "));
-    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호를 입력하세요: "));
-    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소를 입력하세요: "));
-    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호를 입력하세요: "));
+    sellerPrivacy.setName(Prompt.inputString("이름: "));
+    sellerPrivacy.setNickname(Prompt.inputString("닉네임: "));
+    sellerPrivacy.setEmail(Prompt.inputString("이메일: "));
+    sellerPrivacy.setBirthday(Prompt.inputDate("생일: "));
+    sellerPrivacy.setPassword(Prompt.inputString("암호: "));
+    sellerPrivacy.setPhoto(Prompt.inputString("사진: "));
+    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화: "));
+    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호: "));
+    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소: "));
+    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호: "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(sellerPrivacy);
     managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));

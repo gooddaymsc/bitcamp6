@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
@@ -17,12 +18,12 @@ public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
     System.out.println("\n[회원 삭제]");
-    String id = Prompt.inputString("삭제할 아이디를 입력해주세요: ");
+    String id = Prompt.inputString("삭제할 아이디: ");
 
     Privacy member = findById(id);
 
