@@ -77,6 +77,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     board.setTag(Prompt.inputString("태그 : "));
 
     boardList.add(board);
+    System.out.println("게시글 등록을 완료하였습니다.");
   }
 }
 

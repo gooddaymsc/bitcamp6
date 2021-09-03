@@ -13,7 +13,7 @@ public class BoardDetailHandler extends AbstractBoardHandler {
   @Override
   public void execute() {
     System.out.println("[게시글 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("게시글 번호 : ");
 
     Board board = findByNo(no);
 

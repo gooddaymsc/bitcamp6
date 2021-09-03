@@ -20,7 +20,7 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
     }
     System.out.println("[예약 변경]");
 
-    Booking booking = findBooking(Prompt.inputString("상품명 : "));
+    Booking booking = findBooking(Prompt.inputString("예약 변경할 상품명 : "));
 
     if (booking == null) {
       System.out.println("예약이 없는 상품입니다.");
