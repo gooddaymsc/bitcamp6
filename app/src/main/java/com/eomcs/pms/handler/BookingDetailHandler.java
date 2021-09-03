@@ -8,8 +8,8 @@ import com.eomcs.util.Prompt;
 
 public class BookingDetailHandler extends AbstractBookingHandler {
 
-  public BookingDetailHandler(List<Booking> bookList) {
-    super(bookList);
+  public BookingDetailHandler(List<Booking> bookingList) {
+    super(bookingList);
   }
 
 
@@ -21,17 +21,17 @@ public class BookingDetailHandler extends AbstractBookingHandler {
     }
     System.out.println("[예약 상세보기]");
 
-    Booking book = findBooking(Prompt.inputString("상품명 : "));
+    Booking booking = findBooking(Prompt.inputString("상품명 : "));
 
-    if (book == null) {
+    if (booking == null) {
       System.out.println("예약이 없는 상품입니다.");
       return;
     }
 
-    System.out.printf("예약번호 : %s", book.getBookingNumber());
-    System.out.printf("상품명 : %s", book.getCart().getStock().getProduct().getProductName());
-    System.out.printf("결제 금액 : %d", book.getCart().getCartPrice());
-    System.out.printf("예약시간 : %s\n", book.getReservation());
+    System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
+    System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
+    System.out.printf("결제 금액 : %d \n", booking.getCart().getCartPrice());
+    System.out.printf("예약시간 : %s\n", booking.getReservation());
   }
 
 }

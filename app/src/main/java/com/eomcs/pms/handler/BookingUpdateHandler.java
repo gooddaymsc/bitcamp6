@@ -8,8 +8,8 @@ import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
 
-  public BookingUpdateHandler(List<Booking> bookList) {
-    super(bookList);
+  public BookingUpdateHandler(List<Booking> bookingList) {
+    super(bookingList);
   }
 
   @Override

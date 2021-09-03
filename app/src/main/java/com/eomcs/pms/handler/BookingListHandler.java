@@ -7,8 +7,8 @@ import com.eomcs.pms.domain.Booking;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
-  public BookingListHandler(List<Booking> bookList) {
-    super(bookList);
+  public BookingListHandler(List<Booking> bookingList) {
+    super(bookingList);
   }
 
 
@@ -19,11 +19,11 @@ public class BookingListHandler extends AbstractBookingHandler{
       return;
     }
     System.out.println("[예약 목록]");
-    for (Booking book : bookList) {
+    for (Booking booking : bookList) {
       System.out.printf("%d, %s, %s\n", 
-          book.getBookingNumber(), 
-          book.getCart().getStock().getProduct().getProductName(),
-          book.getReservation());
+          booking.getBookingNumber(), 
+          booking.getCart().getStock().getProduct().getProductName(),
+          booking.getReservation());
     }
   }
 
