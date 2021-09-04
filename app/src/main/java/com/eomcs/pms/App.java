@@ -103,7 +103,7 @@ public class App {
     }
   }
 
-  static Manager loginPrivacy = new Manager();
+  public static Manager loginPrivacy = new Manager();
   public static Manager getLoginUser() {
     return loginPrivacy;
   }
@@ -173,12 +173,8 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    //////////////////////////////////////////////////////////
-    MenuGroup loginMenu = new MenuGroup("로그인 메뉴");
-    mainMenuGroup.add(loginMenu);
-
     MenuGroup joinMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
-    loginMenu.add(joinMenu);
+    mainMenuGroup.add(joinMenu);
 
     joinMenu.add(new MenuItem("일반회원", "/privacy/add"));
 
@@ -186,7 +182,7 @@ public class App {
 
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
-    loginMenu.add(findMenu);
+    mainMenuGroup.add(findMenu);
 
     findMenu.add(new Menu("아이디찾기") {
       @Override
@@ -201,7 +197,7 @@ public class App {
       }});
 
 
-    loginMenu.add(new Menu("로그인실행", ACCESS_LOGOUT) {
+    mainMenuGroup.add(new Menu("로그인", ACCESS_LOGOUT) {
       @Override
       public void execute() {
         Manager prv = loginHandler.InputId(); 
@@ -212,16 +208,7 @@ public class App {
         }
       }});
 
-    loginMenu.add(new Menu("현재로그인정보", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER ) {
-      @Override
-      public void execute() {
-        System.out.printf("\n현재 아이디 : %s",loginPrivacy.getId());
-        System.out.printf("\n현재 비밀번호 : %s",loginPrivacy.getPassword());
-        System.out.printf("\n현재 권한 : %s\n", level(loginPrivacy.getAuthority()));
-      }});
-
-
-    loginMenu.add(new Menu("로그아웃", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER) {
+    mainMenuGroup.add(new Menu("로그아웃", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER) {
       @Override
       public void execute() {
         if ( loginPrivacy.getAuthority()!= 0) {
@@ -294,25 +281,13 @@ public class App {
     MenuGroup personMenu = new MenuGroup("프로필", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(personMenu);
 
-    personMenu.add(new MenuItem("상세보기", "/privacy/detail"));
-    personMenu.add(new MenuItem("변경", "/privacy/update"));
-    personMenu.add(new MenuItem("삭제", "/privacy/delete"));
+    personMenu.add(new MenuItem("상세보기", ACCESS_PRIVACY, "/privacy/detail"));
+    personMenu.add(new MenuItem("변경", ACCESS_PRIVACY, "/privacy/update"));
+    personMenu.add(new MenuItem("탈퇴", ACCESS_PRIVACY, "/privacy/delete"));
 
-    //    personMenu.add(new Menu("상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        privacyDetailHandler.execute(); 
-    //      }});
-    //    personMenu.add(new Menu("변경") {
-    //      @Override
-    //      public void execute() {
-    //        privacyUpdateHandler.execute(); 
-    //      }});
-    //    personMenu.add(new Menu("삭제") {
-    //      @Override
-    //      public void execute() {
-    //        privacyDeleteHandler.execute(); 
-    //      }});
+    personMenu.add(new MenuItem("상세보기", ACCESS_SELLER, "/sellerprivacy/detail"));
+    personMenu.add(new MenuItem("변경", ACCESS_SELLER, "/sellerprivacy/update"));
+    personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/sellerprivacy/delete"));
 
     ///////////////////////////////////////////
 
@@ -338,7 +313,7 @@ public class App {
     return mainMenuGroup;
   }
 
-  private String level(int i) {
+  public static String level(int i) {
     switch (i) {
       case Menu.ACCESS_LOGOUT : return "비회원";
       case Menu.ACCESS_PRIVACY : return "일반회원";

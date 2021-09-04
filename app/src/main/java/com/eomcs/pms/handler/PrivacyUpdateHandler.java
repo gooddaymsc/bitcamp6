@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
@@ -25,24 +24,23 @@ public class PrivacyUpdateHandler extends AbstractPrivacyHandler {
       System.out.println("\n[개인정보 변경]");
       Privacy member = findById(App.getLoginUser().getId());
 
-      //    String name = Prompt.inputString(String.format("이름(변경 전 : %s) : ", member.getName()));
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", member.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", member.getEmail()));
-      Date birthDay = Prompt.inputDate(String.format("생일(변경 전 : %s) : ", member.getBirthday()));
       String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", member.getPassword()));
       String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", member.getPhoto()));
+      String address = Prompt.inputString(String.format("주소(변경 전 : %s) : ", member.getAddress()));
       String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", member.getPhoneNumber()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        //      member.setName(name);
         member.setNickname(nickName);
         member.setEmail(email);
-        member.setBirthday(birthDay);
         member.setPassword(password);
         member.setPhoto(photo);
+        member.setAddress(address);
         member.setPhoneNumber(tel);
+
 
         System.out.println("개인정보를 변경하였습니다.");
         return;
@@ -61,17 +59,11 @@ public class PrivacyUpdateHandler extends AbstractPrivacyHandler {
         return;
       }
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s)", member.getNickname()));
       int level = Prompt.inputInt(String.format("등급(변경 전 : %d)", member.getLevel()));
-
-      //      String buyerSeller = Prompt.inputString("구매자/판매자(" + member.getBuyerSeller()  + ")? ");
-      // 관리자가 구매자를 판매자로 변경시키는 방법 구현 예정
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        member.setNickname(nickName);
         member.setLevel(level);
-        //      member.setBuyerSeller(buyerSeller);
         System.out.println("회원 변경을 완료하였습니다.");
         return;
       }

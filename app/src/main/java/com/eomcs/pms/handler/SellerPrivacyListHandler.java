@@ -26,11 +26,6 @@ public class SellerPrivacyListHandler extends AbstractSellerPrivacyHandler {
           member.getName(), 
           member.getNickname(),
           member.getLevel(),
-          //          member.getEmail(), 
-          //          member.getPhoneNumber(), 
-          //          member.getBusinessNumber(),
-          //          member.getBusinessAddress(),
-          //          member.getBusinessPlaceNumber(),
           member.getRegisteredDate());
     }
   }

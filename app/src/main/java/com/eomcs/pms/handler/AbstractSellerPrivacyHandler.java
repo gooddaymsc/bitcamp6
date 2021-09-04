@@ -13,9 +13,8 @@ public abstract class AbstractSellerPrivacyHandler implements Command {
   }
 
   protected SellerPrivacy findById(String id) {
-    SellerPrivacy[] arr = memberList.toArray(new SellerPrivacy[0]);
-    for (SellerPrivacy member : arr) {
-      if (member.getId() == id) {
+    for (SellerPrivacy member : memberList) {
+      if (member.getId().equals(id)) {
         return member;
       }
     }

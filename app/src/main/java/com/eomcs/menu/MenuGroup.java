@@ -119,7 +119,17 @@ public class MenuGroup extends Menu {
   }
 
   private void printBreadCrumbMenuTitle() {
-    System.out.printf("\n[%s]\n", getBreadCrumb());
+    System.out.println("\n--------------------------------------------------------------");
+
+    if (App.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
+      System.out.printf("<< %s >>",App.level(App.getLoginUser().getAuthority()));
+    } else {
+      System.out.printf("<< %s (%s) >>",
+          App.getLoginUser().getId(),
+          App.level(App.getLoginUser().getAuthority()));      
+    }
+    System.out.printf(" || [%s]\n", getBreadCrumb());
+    System.out.println("--------------------------------------------------------------");
   }
 
   private void printMenuList(List<Menu> menuList) {
