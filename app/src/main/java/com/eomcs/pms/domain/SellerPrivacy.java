@@ -1,10 +1,13 @@
 package com.eomcs.pms.domain;
 
+import java.util.List;
+
 public class SellerPrivacy extends Privacy {
 
   private String businessNumber;
   private String businessAddress;
   private String businessPlaceNumber;
+  private List<Stock> stock;
 
   public String getBusinessNumber() {
     return businessNumber;
@@ -24,6 +27,11 @@ public class SellerPrivacy extends Privacy {
   public void setBusinessPlaceNumber(String businessPlaceNumber) {
     this.businessPlaceNumber = businessPlaceNumber;
   }
-
+  public List<Stock> getStock() {
+    return stock;
+  }
+  public void setStock(List<Stock> stock) {
+    this.stock = stock;
+  }
 
 }

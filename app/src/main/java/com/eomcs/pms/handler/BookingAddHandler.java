@@ -13,8 +13,8 @@ public class BookingAddHandler extends AbstractBookingHandler {
   int bookingNumber = 1;
   AbstractCartHandler abstractCartHandler;
 
-  public BookingAddHandler(List<Booking> bookingList , AbstractCartHandler abstractCartHandler) {
-    super(bookingList);
+  public BookingAddHandler(List<Booking> bookList , AbstractCartHandler abstractCartHandler) {
+    super(bookList);
     this.abstractCartHandler = abstractCartHandler;
 
     Booking testBooking = new Booking();

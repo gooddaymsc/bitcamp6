@@ -10,8 +10,8 @@ import com.eomcs.util.Prompt;
 
 public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
   List<Manager> managerList;
-  public SellerPrivacyDeleteHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList);
+  public SellerPrivacyDeleteHandler(List<SellerPrivacy> sellerList, List<Manager> managerList) {
+    super(sellerList);
     this.managerList = managerList;
   }
 
@@ -31,7 +31,7 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
 
       if (input.equalsIgnoreCase("y")) {
 
-        memberList.remove(member);
+        sellerList.remove(member);
         for (Manager s : managerList) {
           if (s.getId().equals(member.getId())) {
             managerList.remove(s);
@@ -57,7 +57,7 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        memberList.remove(member);
+        sellerList.remove(member);
         for (Manager s : managerList) {
           if (s.getId().equals(member.getId())) {
             managerList.remove(s);

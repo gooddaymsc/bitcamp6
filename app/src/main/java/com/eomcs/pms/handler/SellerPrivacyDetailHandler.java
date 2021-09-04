@@ -8,8 +8,8 @@ import com.eomcs.util.Prompt;
 
 public class SellerPrivacyDetailHandler extends AbstractSellerPrivacyHandler{
 
-  public SellerPrivacyDetailHandler(List<SellerPrivacy> memberList) {
-    super(memberList);
+  public SellerPrivacyDetailHandler(List<SellerPrivacy> sellerList) {
+    super(sellerList);
   }
 
 

@@ -13,8 +13,8 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
   int sellerPrivacyNumber = 1;
   List<Manager> managerList;
 
-  public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList);
+  public SellerPrivacyAddHandler(List<SellerPrivacy> sellerList, List<Manager> managerList) {
+    super(sellerList);
     this.managerList = managerList;
     SellerPrivacy testsellerPrivacy = new SellerPrivacy();
     Manager testmanager = new Manager();
@@ -34,7 +34,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setBusinessAddress("aaaa");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
 
-    memberList.add(testsellerPrivacy);
+    sellerList.add(testsellerPrivacy);
 
     testmanager.setId("aaaa");
     testmanager.setPassword("aaaa");
@@ -58,7 +58,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setBusinessAddress("aaa");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1112");
 
-    memberList.add(testsellerPrivacy);
+    sellerList.add(testsellerPrivacy);
 
     testmanager = new Manager();
     testmanager.setId("aaa");
@@ -104,7 +104,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소 : "));
     sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(sellerPrivacy);
+    sellerList.add(sellerPrivacy);
     managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));
   }
 }
