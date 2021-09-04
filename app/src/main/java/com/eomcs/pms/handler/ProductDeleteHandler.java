@@ -32,6 +32,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
       String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         System.out.println("상품을 삭제하였습니다.");
+        productList.remove(product);
         return;
       } else {
         System.out.println("상품 삭제를 취소하였습니다.");

@@ -26,7 +26,6 @@ import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
-import com.eomcs.pms.handler.BookingDetailHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingUpdateHandler;
 import com.eomcs.pms.handler.CartAddHandler;
@@ -155,7 +154,6 @@ public class App {
 
     commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
     commandMap.put("/booking/list",   new BookingListHandler(bookingList));
-    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
 
@@ -258,14 +256,13 @@ public class App {
     ///////////////////////////////////////////
 
 
-    MenuGroup bookingMenu = new MenuGroup("예약", ACCESS_PRIVACY | ACCESS_SELLER);
+    MenuGroup bookingMenu = new MenuGroup("픽업예약", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(bookingMenu);
 
-    bookingMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/booking/add"));
-    bookingMenu.add(new MenuItem("목록",  ACCESS_PRIVACY | ACCESS_SELLER, "/booking/list"));
-    bookingMenu.add(new MenuItem("상세보기",  ACCESS_PRIVACY | ACCESS_SELLER,"/booking/detail"));
-    bookingMenu.add(new MenuItem("변경", "/booking/update"));
-    bookingMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/booking/delete"));
+    bookingMenu.add(new MenuItem("예약등록", ACCESS_PRIVACY, "/booking/add"));
+    bookingMenu.add(new MenuItem("예약내역",  ACCESS_PRIVACY | ACCESS_SELLER, "/booking/list"));
+    bookingMenu.add(new MenuItem("예약변경", "/booking/update"));
+    bookingMenu.add(new MenuItem("예약취소", ACCESS_PRIVACY, "/booking/delete"));
 
     ///////////////////////////////////////////
 
