@@ -10,8 +10,8 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
 
   List<Booking> bookingList;
 
-  public BookingDeleteHandler(List<Booking> bookList) {
-    super(bookList);
+  public BookingDeleteHandler(List<Booking> bookingList) {
+    super(bookingList);
   }
 
   @Override
