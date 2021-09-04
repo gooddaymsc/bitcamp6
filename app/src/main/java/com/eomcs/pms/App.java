@@ -192,6 +192,7 @@ public class App {
 
     joinMenu.add(new MenuItem("판매자", "/sellerprivacy/add"));
 
+
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
     loginMenu.add(findMenu);
 
