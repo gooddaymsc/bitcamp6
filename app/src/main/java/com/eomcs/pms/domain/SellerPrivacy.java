@@ -7,7 +7,8 @@ public class SellerPrivacy extends Privacy {
   private String businessNumber;
   private String businessAddress;
   private String businessPlaceNumber;
-  private List<Stock> stock;
+  private List<Stock> stockList;
+
 
   public String getBusinessNumber() {
     return businessNumber;
@@ -27,11 +28,12 @@ public class SellerPrivacy extends Privacy {
   public void setBusinessPlaceNumber(String businessPlaceNumber) {
     this.businessPlaceNumber = businessPlaceNumber;
   }
-  public List<Stock> getStock() {
-    return stock;
+  public List<Stock> getStockList() {
+    return stockList;
   }
-  public void setStock(List<Stock> stock) {
-    this.stock = stock;
+  public void setStockList(List<Stock> stockList) {
+    this.stockList = stockList;
   }
+
 
 }

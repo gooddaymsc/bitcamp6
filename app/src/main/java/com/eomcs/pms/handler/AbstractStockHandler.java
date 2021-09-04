@@ -21,9 +21,3 @@ public abstract class AbstractStockHandler implements Command {
   } 
 
 }
-
-
-
-
-
-

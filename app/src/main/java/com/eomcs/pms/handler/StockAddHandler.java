@@ -9,12 +9,11 @@ import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
   int stockNumber = 1;
-  AbstractProductHandler productListHandler;
-  AbstractSellerPrivacyHandler sellermemberList;
-  public StockAddHandler(List<Stock> stockList, AbstractProductHandler productListHandler, AbstractSellerPrivacyHandler sellermemberList) {
+  ProductListHandler productListHandler;
+
+  public StockAddHandler(List<Stock> stockList, ProductListHandler productListHandler) {
     super(stockList);
     this.productListHandler = productListHandler;
-    this.sellermemberList = sellermemberList;
 
     Stock testStock = new Stock();
     testStock.setStockNumber(stockNumber++);
@@ -57,14 +56,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
 
     stockList.add(stock);
-    sellermemberList.findById(App.getLoginUser().getId()).getStock().add(stock);
     System.out.println("재고 등록을 완료하였습니다.");
   }
 
 }
-
-
-
-
-
-

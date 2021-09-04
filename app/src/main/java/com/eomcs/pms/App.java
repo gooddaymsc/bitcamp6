@@ -21,12 +21,10 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
-import com.eomcs.pms.handler.BoardLikeHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
-import com.eomcs.pms.handler.BookingDetailHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingUpdateHandler;
 import com.eomcs.pms.handler.CartAddHandler;
@@ -131,23 +129,22 @@ public class App {
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
     commandMap.put("/board/detail", new BoardDetailHandler(boardList));
-    commandMap.put("/board/like",   new BoardLikeHandler(boardList));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(productList));
+    commandMap.put("/product/list",   new ProductListHandler(productList, stockList));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productList));
     commandMap.put("/product/delete", new ProductDeleteHandler(productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockList, new ProductListHandler(productList), new SellerPrivacyListHandler(sellerPrivacyList)));
-    commandMap.put("/stock/list",   new StockListHandler(stockList, new SellerPrivacyListHandler(sellerPrivacyList)));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockList, new ProductListHandler(productList, stockList)));
+    commandMap.put("/stock/list",   new StockListHandler(stockList));
     commandMap.put("/stock/detail", new StockDetailHandler(stockList));
     commandMap.put("/stock/update", new StockUpdateHandler(stockList));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockList));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, new StockDetailHandler(stockList)));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, new StockListHandler(stockList)));
     commandMap.put("/cart/list",   new CartListHandler(cartList));
     commandMap.put("/cart/detail", new CartDetailHandler(cartList));
     commandMap.put("/cart/update", new CartUpdateHandler(cartList));
@@ -155,7 +152,6 @@ public class App {
 
     commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
     commandMap.put("/booking/list",   new BookingListHandler(bookingList));
-    commandMap.put("/booking/detail", new BookingDetailHandler(bookingList));
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
 
@@ -227,7 +223,7 @@ public class App {
     boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY | ACCESS_SELLER, "/board/like"));
+    //    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY | ACCESS_SELLER, "/board/like"));
     boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
 
@@ -245,14 +241,13 @@ public class App {
     ///////////////////////////////////////////
 
 
-    MenuGroup bookingMenu = new MenuGroup("예약", ACCESS_PRIVACY | ACCESS_SELLER);
+    MenuGroup bookingMenu = new MenuGroup("픽업예약", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(bookingMenu);
 
-    bookingMenu.add(new MenuItem("등록", ACCESS_PRIVACY, "/booking/add"));
-    bookingMenu.add(new MenuItem("목록",  ACCESS_PRIVACY | ACCESS_SELLER, "/booking/list"));
-    bookingMenu.add(new MenuItem("상세보기",  ACCESS_PRIVACY | ACCESS_SELLER,"/booking/detail"));
-    bookingMenu.add(new MenuItem("변경", "/booking/update"));
-    bookingMenu.add(new MenuItem("삭제", ACCESS_PRIVACY, "/booking/delete"));
+    bookingMenu.add(new MenuItem("예약등록", ACCESS_PRIVACY, "/booking/add"));
+    bookingMenu.add(new MenuItem("예약내역",  ACCESS_PRIVACY | ACCESS_SELLER, "/booking/list"));
+    bookingMenu.add(new MenuItem("예약변경", "/booking/update"));
+    bookingMenu.add(new MenuItem("예약취소", ACCESS_PRIVACY, "/booking/delete"));
 
     ///////////////////////////////////////////
 
@@ -260,45 +255,27 @@ public class App {
     mainMenuGroup.add(productMenu);
 
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
-    //    productMenu.add(new MenuItem("목록", "/product/list") {
-    //      @Override
-    //      public void execute() {
-    //        Command command  = commandMap.get("/product/list");
-    ////      command.execute();
-    //      }
-    //    });
-
-    MenuGroup productListMenu = new MenuGroup("목록");
-    productMenu.add(productListMenu);
-    //    productListMenu.add(new MenuItem("판매 상품 등록", ACCESS_SELLER, "/stock/add"));
-
-
-    productMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        Command command  = commandMap.get("/product/list");
-        command.execute();        
-        productListMenu.add(new MenuItem("판매 상품 등록", ACCESS_SELLER, "/stock/add"));
-      }});
+    productMenu.add(new MenuItem("목록", "/product/list"));
     productMenu.add(new MenuItem("상세보기", "/product/detail"));
     productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
     productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
 
     ///////////////////////////////////////////
 
-    //    MenuGroup stockMenu = new MenuGroup("재고", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER);
-    //    mainMenuGroup.add(stockMenu);
-    //
-    //    stockMenu.add(new MenuItem("등록", ACCESS_SELLER, "/stock/add"));
-    //    stockMenu.add(new MenuItem("목록", "/stock/list"));
-    //    stockMenu.add(new MenuItem("상세보기", "/stock/detail"));
-    //    stockMenu.add(new MenuItem("변경",  ACCESS_SELLER, "/stock/update"));
-    //    stockMenu.add(new MenuItem("삭제", ACCESS_SELLER, "/stock/delete"));
+    MenuGroup stockMenu = new MenuGroup("재고", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER);
+    mainMenuGroup.add(stockMenu);
+
+    stockMenu.add(new MenuItem("등록", ACCESS_SELLER, "/stock/add"));
+    stockMenu.add(new MenuItem("목록", "/stock/list"));
+    stockMenu.add(new MenuItem("상세보기", "/stock/detail"));
+    stockMenu.add(new MenuItem("변경",  ACCESS_SELLER, "/stock/update"));
+    stockMenu.add(new MenuItem("삭제", ACCESS_SELLER, "/stock/delete"));
 
     ///////////////////////////////////////////
 
     MenuGroup personMenu = new MenuGroup("프로필", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(personMenu);
+
     personMenu.add(new MenuItem("상세보기", ACCESS_PRIVACY, "/privacy/detail"));
     personMenu.add(new MenuItem("변경", ACCESS_PRIVACY, "/privacy/update"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_PRIVACY, "/privacy/delete"));
@@ -307,12 +284,9 @@ public class App {
     personMenu.add(new MenuItem("변경", ACCESS_SELLER, "/sellerprivacy/update"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/sellerprivacy/delete"));
 
-
     MenuGroup sellerStoreMenu = new MenuGroup("My Store", ACCESS_SELLER);
     personMenu.add(sellerStoreMenu);
     sellerStoreMenu.add(new MenuItem("재고목록", "/stock/list"));
-
-
     ///////////////////////////////////////////
 
     MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN );

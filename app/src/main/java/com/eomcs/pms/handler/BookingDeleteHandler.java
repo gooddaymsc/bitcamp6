@@ -8,8 +8,8 @@ import com.eomcs.util.Prompt;
 
 public class BookingDeleteHandler extends AbstractBookingHandler {
 
-  public BookingDeleteHandler(List<Booking> bookList) {
-    super(bookList);
+  public BookingDeleteHandler(List<Booking> bookingList) {
+    super(bookingList);
   }
 
   @Override
@@ -30,7 +30,7 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
     String input = Prompt.inputString("정말 취소하시겠습니까?(y/N) ");
 
     if (input.equalsIgnoreCase("y")) {
-      bookList.remove(booking);
+      bookingList.remove(booking);
       System.out.println("예약을 취소하였습니다.");
       return;
     } else {
