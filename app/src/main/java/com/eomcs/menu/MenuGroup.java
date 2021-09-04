@@ -119,6 +119,7 @@ public class MenuGroup extends Menu {
   }
 
   private void printBreadCrumbMenuTitle() {
+    // 메모리누수문제?
     System.out.println("\n--------------------------------------------------------------");
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
