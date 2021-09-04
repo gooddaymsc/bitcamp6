@@ -57,10 +57,10 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setBusinessNumber("aaa");
     testsellerPrivacy.setBusinessAddress("aaa");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1112");
-
     memberList.add(testsellerPrivacy);
 
     testmanager = new Manager();
+
     testmanager.setId("aaa");
     testmanager.setPassword("aaa");
     testmanager.setAuthority(0x04);

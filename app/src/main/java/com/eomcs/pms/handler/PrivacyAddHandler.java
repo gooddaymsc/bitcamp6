@@ -53,6 +53,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacyList.add(testprivacy);
 
     testmanager = new Manager();
+
     testmanager.setId("a");
     testmanager.setPassword("a");
     testmanager.setAuthority(0x02);
