@@ -21,7 +21,6 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
-import com.eomcs.pms.handler.BoardLikeHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
@@ -131,17 +130,16 @@ public class App {
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
     commandMap.put("/board/detail", new BoardDetailHandler(boardList));
-    commandMap.put("/board/like",   new BoardLikeHandler(boardList));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(productList));
+    commandMap.put("/product/list",   new ProductListHandler(productList, stockList));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productList));
     commandMap.put("/product/delete", new ProductDeleteHandler(productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockList, new ProductListHandler(productList)));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockList, new ProductListHandler(productList, stockList)));
     commandMap.put("/stock/list",   new StockListHandler(stockList));
     commandMap.put("/stock/detail", new StockDetailHandler(stockList));
     commandMap.put("/stock/update", new StockUpdateHandler(stockList));
