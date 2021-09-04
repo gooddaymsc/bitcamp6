@@ -30,8 +30,14 @@ public class PrivacyDeleteHandler extends AbstractPrivacyHandler {
 
       if (input.equalsIgnoreCase("y")) {
         privacyList.remove(member);
+        for (Manager s : managerList) {
+          if (s.getId().equals(member.getId())) {
+            managerList.remove(s);
+          }
+        }
         managerList.remove(member);    
         System.out.println("탈퇴가 완료되었습니다.");
+        App.loginPrivacy = new Manager();
         return;
       } else {
         System.out.println("탈퇴를 취소하였습니다.");

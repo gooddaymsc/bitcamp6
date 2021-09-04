@@ -32,16 +32,21 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
       if (input.equalsIgnoreCase("y")) {
 
         memberList.remove(member);
-        managerList.remove(member);
-
+        for (Manager s : managerList) {
+          if (s.getId().equals(member.getId())) {
+            managerList.remove(s);
+          }
+        }
         System.out.println("탈퇴가 완료되었습니다.");
+        App.loginPrivacy = new Manager();
+
         return;
       } else {
         System.out.println("탈퇴를 취소하였습니다.");
         return;
       } 
     } else {
-      String id = Prompt.inputString("삭제할 아이디: ");
+      String id = Prompt.inputString("삭제할 아이디 : ");
 
       Privacy member = findById(id);
 
@@ -53,7 +58,11 @@ public class SellerPrivacyDeleteHandler extends AbstractSellerPrivacyHandler{
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         memberList.remove(member);
-        managerList.remove(member);
+        for (Manager s : managerList) {
+          if (s.getId().equals(member.getId())) {
+            managerList.remove(s);
+          }
+        }
         System.out.println("판매자를 탈퇴시켰습니다.");
         return;
       }

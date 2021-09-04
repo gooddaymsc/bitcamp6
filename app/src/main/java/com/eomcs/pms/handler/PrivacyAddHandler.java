@@ -28,6 +28,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testprivacy.setEmail("aa");
     testprivacy.setBirthday(Date.valueOf("2021-1-1"));
     testprivacy.setPhoto("aa.gif");
+    testprivacy.setAddress("서울 강남구");
     testprivacy.setPhoneNumber("010-1111-1111");
     testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     privacyList.add(testprivacy);
@@ -48,6 +49,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testprivacy.setEmail("a");
     testprivacy.setBirthday(Date.valueOf("2021-1-3"));
     testprivacy.setPhoto("aa.gif");
+    testprivacy.setAddress("서울 동작구");
     testprivacy.setPhoneNumber("010-1111-1113");
     testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     privacyList.add(testprivacy);
@@ -95,7 +97,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPassword(Prompt.inputString("암호: "));
     privacy.setPhoto(Prompt.inputString("사진: "));
     privacy.setPhoneNumber(Prompt.inputString("전화: "));
-
+    privacy.setAddress(Prompt.inputString("주소: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     privacyList.add(privacy);
