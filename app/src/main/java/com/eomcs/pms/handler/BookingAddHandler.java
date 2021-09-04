@@ -13,27 +13,31 @@ public class BookingAddHandler extends AbstractBookingHandler {
   int bookingNumber = 1;
   AbstractCartHandler abstractCartHandler;
 
-  public BookingAddHandler(List<Booking> bookList , AbstractCartHandler abstractCartHandler) {
-    super(bookList);
+  public BookingAddHandler(List<Booking> bookingList , AbstractCartHandler abstractCartHandler) {
+    super(bookingList);
     this.abstractCartHandler = abstractCartHandler;
 
-    Booking testBook = new Booking();
-    testBook.setBookingNumber(bookingNumber++);
-    testBook.setCart(abstractCartHandler.cartList.get(0));
-    testBook.setBookingNumber(11);
-    testBook.setReservation("11");
-    testBook.setRegisteredDate(new Date(System.currentTimeMillis()));
+    Booking testBooking = new Booking();
+    testBooking.setBookingNumber(bookingNumber++);
+    testBooking.setCart(abstractCartHandler.cartList.get(0));
+    testBooking.setBookingNumber(11);
+    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
+    testBooking.setBookingHour(19);
+    testBooking.setBookingMinute(25);   
+    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    bookList.add(testBook);
+    bookingList.add(testBooking);
 
-    testBook = new Booking();
-    testBook.setBookingNumber(bookingNumber++);
-    testBook.setCart(abstractCartHandler.cartList.get(1));
-    testBook.setBookingNumber(22);
-    testBook.setReservation("2");
-    testBook.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testBooking = new Booking();
+    testBooking.setBookingNumber(bookingNumber++);
+    testBooking.setCart(abstractCartHandler.cartList.get(1));
+    testBooking.setBookingNumber(22);
+    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
+    testBooking.setBookingHour(10);
+    testBooking.setBookingMinute(30);   
+    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    bookList.add(testBook);
+    bookingList.add(testBooking);
   }
 
   @Override
@@ -54,12 +58,14 @@ public class BookingAddHandler extends AbstractBookingHandler {
       return;
     }
     booking.setCart(bookingProduct);
-    booking.setReservation(Prompt.inputString("예약시간 : "));
+    booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
+    booking.setBookingHour(Prompt.inputInt("픽업시간(시): "));
+    booking.setBookingMinute(Prompt.inputInt("픽업시간(분): "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
 
-    bookList.add(booking);
-    System.out.println("예약등록을 완료하였습니다.");
+    bookingList.add(booking);
+    System.out.println("픽업예약을 완료하였습니다.");
   }
 
 }

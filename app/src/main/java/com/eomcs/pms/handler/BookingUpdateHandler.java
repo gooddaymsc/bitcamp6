@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
@@ -8,8 +9,8 @@ import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
 
-  public BookingUpdateHandler(List<Booking> bookList) {
-    super(bookList);
+  public BookingUpdateHandler(List<Booking> bookingList) {
+    super(bookingList);
   }
 
   @Override
@@ -27,16 +28,20 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
       return;
     }
 
-    String resevation = Prompt.inputString("예약시간 변경 (기존 : " + booking.getReservation() + ") ");
+    Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") ");
+    int reservationHour = Prompt.inputInt("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ")");
+    int reservationMinute = Prompt.inputInt("픽업시간 변경 (기존 : " + booking.getBookingHour() + "분"+ ")");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
     if (input.equalsIgnoreCase("y")) {
-      booking.setReservation(resevation);
-      System.out.println("예약을 변경하였습니다.");
+      booking.setBookingDate(reservationDate);
+      booking.setBookingHour(reservationHour);
+      booking.setBookingMinute(reservationMinute);
+      System.out.println("픽업 예약을 변경하였습니다.");
       return;
     } else {
-      System.out.println("예약 변경을 취소하였습니다.");
+      System.out.println("픽업 예약 변경을 취소하였습니다.");
       return;
     }
   }

@@ -20,8 +20,6 @@ public class LoginHandler {
       return null;
     }
 
-    //Manager[] list = managerList.toArray(new Manager[0]);
-
     for (Manager s : managerList) {
       if (id.equals(s.getId())) {
         String password = Prompt.inputString("비밀번호를 입력해주세요: ");

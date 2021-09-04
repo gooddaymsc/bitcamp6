@@ -22,19 +22,20 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testprivacy.setNumber(privacyNumber++);
     testprivacy.setId("aa");
     testprivacy.setPassword("aa");
-    testprivacy.setAuthority(0x02);
+    testprivacy.setAuthority(Menu.ACCESS_PRIVACY);
     testprivacy.setName("aa");
     testprivacy.setNickname("aa");
     testprivacy.setEmail("aa");
     testprivacy.setBirthday(Date.valueOf("2021-1-1"));
     testprivacy.setPhoto("aa.gif");
+    testprivacy.setAddress("서울 강남구");
     testprivacy.setPhoneNumber("010-1111-1111");
     testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     privacyList.add(testprivacy);
 
     testmanager.setId("aa");
     testmanager.setPassword("aa");
-    testmanager.setAuthority(0x02);
+    testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
 
     testprivacy = new Privacy();
@@ -42,12 +43,13 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testprivacy.setNumber(privacyNumber++);
     testprivacy.setId("a");
     testprivacy.setPassword("a");
-    testprivacy.setAuthority(0x02);
+    testprivacy.setAuthority(Menu.ACCESS_PRIVACY);
     testprivacy.setName("a");
     testprivacy.setNickname("a");
     testprivacy.setEmail("a");
     testprivacy.setBirthday(Date.valueOf("2021-1-3"));
     testprivacy.setPhoto("aa.gif");
+    testprivacy.setAddress("서울 동작구");
     testprivacy.setPhoneNumber("010-1111-1113");
     testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     privacyList.add(testprivacy);
@@ -56,7 +58,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     testmanager.setId("a");
     testmanager.setPassword("a");
-    testmanager.setAuthority(0x02);
+    testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
 
   }
@@ -71,7 +73,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
-    privacy.setAuthority(0x02);
+    privacy.setAuthority(Menu.ACCESS_PRIVACY);
     privacy.setNumber(privacyNumber++);
 
     //아이디가 중복되면 다시 아이디 재설정.
@@ -96,7 +98,7 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPassword(Prompt.inputString("암호: "));
     privacy.setPhoto(Prompt.inputString("사진: "));
     privacy.setPhoneNumber(Prompt.inputString("전화: "));
-
+    privacy.setAddress(Prompt.inputString("주소: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     privacyList.add(privacy);

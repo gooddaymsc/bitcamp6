@@ -21,9 +21,9 @@ public class StockListHandler extends AbstractStockHandler {
     System.out.println("[재고 목록]");
 
     for (Stock stock : stockList) {
-      System.out.printf("%s, %d, %d, %d\n", 
+      System.out.printf("%d, %s, %d, %d\n", 
+          stock.getStockNumber(),
           stock.getProduct().getProductName(), 
-          stock.getStockNumber(), 
           stock.getPrice(), 
           stock.getStocks());
     }

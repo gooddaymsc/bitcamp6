@@ -20,14 +20,13 @@ public class PrivacyListHandler extends AbstractPrivacyHandler {
     }
     System.out.println("\n[회원 목록]");
 
-    Privacy[] list = privacyList.toArray(new Privacy[0]);
-
-    for (Privacy member : list) {
-      System.out.printf("%d, %s, %s, %s, %s\n", 
+    for (Privacy member : privacyList) {
+      System.out.printf("회원번호-%d, %s, %s, %s, 등급[%d], %s\n", 
+          member.getNumber(),
           member.getId(), 
-          member.getName(), 
-          member.getEmail(), 
-          member.getPhoneNumber(), 
+          member.getName(),
+          member.getNickname(),
+          member.getLevel(),
           member.getRegisteredDate());
     }
   }

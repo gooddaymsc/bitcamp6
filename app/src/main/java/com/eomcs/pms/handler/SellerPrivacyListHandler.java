@@ -19,18 +19,13 @@ public class SellerPrivacyListHandler extends AbstractSellerPrivacyHandler {
       return;
     }
     System.out.println("\n[판매자 목록]");
-
-    SellerPrivacy[] list = memberList.toArray(new SellerPrivacy[0]);
-
-    for (SellerPrivacy member : list) {
-      System.out.printf("%d, %s, %s, %s, %s, %s, %s, %s\n", 
+    for (SellerPrivacy member : memberList) {
+      System.out.printf("판매자번호-%d, %s, %s, %s, 등급[%d], %s\n", 
           member.getNumber(), 
+          member.getId(),
           member.getName(), 
-          member.getEmail(), 
-          member.getPhoneNumber(), 
-          member.getBusinessNumber(),
-          member.getBusinessAddress(),
-          member.getBusinessPlaceNumber(),
+          member.getNickname(),
+          member.getLevel(),
           member.getRegisteredDate());
     }
   }
