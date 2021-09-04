@@ -17,7 +17,7 @@ import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.SellerPrivacy;
-import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
@@ -70,7 +70,7 @@ public class App {
   List<Cart> cartList = new ArrayList<>();
   // 판매자
   List<Product> productList = new ArrayList<>();
-  List<Stock> stockList = new ArrayList<>();
+  public static List<StockList> allStockList = new ArrayList<>();
   // 관리자
   List<Manager> managerList = new ArrayList<>();
 
@@ -133,18 +133,18 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(productList, stockList));
+    commandMap.put("/product/list",   new ProductListHandler(productList));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productList));
     commandMap.put("/product/delete", new ProductDeleteHandler(productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockList, new ProductListHandler(productList, stockList)));
-    commandMap.put("/stock/list",   new StockListHandler(stockList));
-    commandMap.put("/stock/detail", new StockDetailHandler(stockList));
-    commandMap.put("/stock/update", new StockUpdateHandler(stockList));
-    commandMap.put("/stock/delete", new StockDeleteHandler(stockList));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(new ProductListHandler(productList)));
+    commandMap.put("/stock/list",   new StockListHandler());
+    commandMap.put("/stock/detail", new StockDetailHandler());
+    commandMap.put("/stock/update", new StockUpdateHandler());
+    commandMap.put("/stock/delete", new StockDeleteHandler());
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, new StockListHandler(stockList)));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartList, new StockListHandler()));
     commandMap.put("/cart/list",   new CartListHandler(cartList));
     commandMap.put("/cart/detail", new CartDetailHandler(cartList));
     commandMap.put("/cart/update", new CartUpdateHandler(cartList));
@@ -262,31 +262,37 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup stockMenu = new MenuGroup("재고", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER);
-    mainMenuGroup.add(stockMenu);
-
-    stockMenu.add(new MenuItem("등록", ACCESS_SELLER, "/stock/add"));
-    stockMenu.add(new MenuItem("목록", "/stock/list"));
-    stockMenu.add(new MenuItem("상세보기", "/stock/detail"));
-    stockMenu.add(new MenuItem("변경",  ACCESS_SELLER, "/stock/update"));
-    stockMenu.add(new MenuItem("삭제", ACCESS_SELLER, "/stock/delete"));
-
-    ///////////////////////////////////////////
-
     MenuGroup personMenu = new MenuGroup("프로필", ACCESS_PRIVACY | ACCESS_SELLER);
     mainMenuGroup.add(personMenu);
 
-    personMenu.add(new MenuItem("상세보기", ACCESS_PRIVACY, "/privacy/detail"));
-    personMenu.add(new MenuItem("변경", ACCESS_PRIVACY, "/privacy/update"));
+    personMenu.add(new MenuItem("개인정보", ACCESS_PRIVACY, "/privacy/detail"));
+    personMenu.add(new MenuItem("개인정보 변경", ACCESS_PRIVACY, "/privacy/update"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_PRIVACY, "/privacy/delete"));
 
-    personMenu.add(new MenuItem("상세보기", ACCESS_SELLER, "/sellerprivacy/detail"));
-    personMenu.add(new MenuItem("변경", ACCESS_SELLER, "/sellerprivacy/update"));
+    personMenu.add(new MenuItem("개인정보", ACCESS_SELLER, "/sellerprivacy/detail"));
+    personMenu.add(new MenuItem("개인정보 변경", ACCESS_SELLER, "/sellerprivacy/update"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/sellerprivacy/delete"));
 
     MenuGroup sellerStoreMenu = new MenuGroup("My Store", ACCESS_SELLER);
     personMenu.add(sellerStoreMenu);
-    sellerStoreMenu.add(new MenuItem("재고목록", "/stock/list"));
+    sellerStoreMenu.add(new MenuItem("가게 정보 및 재고", "/stock/list") {
+      @Override
+      public void execute() {
+        SellerPrivacy mine = findSellerById(App.getLoginUser().getId());
+        System.out.printf("\n가게명 : %s\n", mine.getBusinessName());
+        System.out.printf("주소 : %s\n", mine.getBusinessAddress());
+        System.out.printf("전화번호 : %s\n", mine.getBusinessPlaceNumber());
+        System.out.println("-----------------------------------------------");
+        Command command  = commandMap.get(menuId);
+        command.execute();
+      }});
+
+
+    sellerStoreMenu.add(new MenuItem("재고등록", "/stock/add"));
+    sellerStoreMenu.add(new MenuItem("상세보기", "/stock/detail"));
+    sellerStoreMenu.add(new MenuItem("재고변경", "/stock/update"));
+    sellerStoreMenu.add(new MenuItem("재고삭제", "/stock/delete"));
+
     ///////////////////////////////////////////
 
     MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN );
@@ -318,5 +324,13 @@ public class App {
       case Menu.ACCESS_SELLER : return "판매자";
       default : return "관리자";
     }
+  }
+  private SellerPrivacy findSellerById(String id) {
+    for (SellerPrivacy member : sellerPrivacyList) {
+      if (member.getId().equals(id)) {
+        return member;
+      }
+    }
+    return null;
   }
 }

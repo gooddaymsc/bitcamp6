@@ -5,14 +5,13 @@ import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
   int stockNumber = 1;
-  List<Stock> stockList;
-  public ProductListHandler(List<Product> productList,  List<Stock> stockList) {
+  public ProductListHandler(List<Product> productList) {
     super(productList);
-    this.stockList = stockList;
   }
 
   @Override
@@ -53,7 +52,12 @@ public class ProductListHandler extends AbstractProductHandler {
         stock.setProduct(product);
         stock.setStockNumber(stockNumber++);
 
-        stockList.add(stock);
+        //        StockList stockList = findById(App.getLoginUser().getId());
+        //        List<Stock> sellerstock = stockList.getSellerStock();
+        StockList stockList = findById(App.getLoginUser().getId());
+        stockList.getSellerStock().add(stock);
+        //        sellerstock.add(stock);
+        //        stockList.setSellerStock(sellerstock);
         System.out.println("재고 등록을 완료하였습니다.");
         return;
       } else {

@@ -20,9 +20,10 @@ public class SellerPrivacyListHandler extends AbstractSellerPrivacyHandler {
     }
     System.out.println("\n[판매자 목록]");
     for (SellerPrivacy member : sellerList) {
-      System.out.printf("판매자번호-%d, %s, %s, %s, 등급[%d], %s\n", 
+      System.out.printf("판매자번호-%d, %s, %s, %s, %s, 등급[%d], %s\n", 
           member.getNumber(), 
           member.getId(),
+          member.getBusinessName(),
           member.getName(), 
           member.getNickname(),
           member.getLevel(),

@@ -1,7 +1,9 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public abstract class AbstractProductHandler implements Command {
@@ -32,6 +34,14 @@ public abstract class AbstractProductHandler implements Command {
     return null;
   }
 
+  protected StockList findById(String id) {
+    for (StockList stockList : App.allStockList) {
+      if (stockList.getId().equals(id)) {
+        return stockList;
+      }
+    }
+    return null;
+  }
 }
 
 

@@ -17,27 +17,27 @@ public class BookingAddHandler extends AbstractBookingHandler {
     super(bookList);
     this.abstractCartHandler = abstractCartHandler;
 
-    Booking testBooking = new Booking();
-    testBooking.setBookingNumber(bookingNumber++);
-    testBooking.setCart(abstractCartHandler.cartList.get(0));
-    testBooking.setBookingNumber(11);
-    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
-    testBooking.setBookingHour(19);
-    testBooking.setBookingMinute(25);   
-    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    bookingList.add(testBooking);
-
-    testBooking = new Booking();
-    testBooking.setBookingNumber(bookingNumber++);
-    testBooking.setCart(abstractCartHandler.cartList.get(1));
-    testBooking.setBookingNumber(22);
-    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
-    testBooking.setBookingHour(10);
-    testBooking.setBookingMinute(30);   
-    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    bookingList.add(testBooking);
+    //    Booking testBooking = new Booking();
+    //    testBooking.setBookingNumber(bookingNumber++);
+    //    testBooking.setCart(abstractCartHandler.cartList.get(0));
+    //    testBooking.setBookingNumber(11);
+    //    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
+    //    testBooking.setBookingHour(19);
+    //    testBooking.setBookingMinute(25);   
+    //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    bookingList.add(testBooking);
+    //
+    //    testBooking = new Booking();
+    //    testBooking.setBookingNumber(bookingNumber++);
+    //    testBooking.setCart(abstractCartHandler.cartList.get(1));
+    //    testBooking.setBookingNumber(22);
+    //    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
+    //    testBooking.setBookingHour(10);
+    //    testBooking.setBookingMinute(30);   
+    //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    bookingList.add(testBooking);
   }
 
   @Override

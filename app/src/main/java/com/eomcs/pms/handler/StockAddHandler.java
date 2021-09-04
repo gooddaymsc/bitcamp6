@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
@@ -11,25 +10,25 @@ public class StockAddHandler extends AbstractStockHandler {
   int stockNumber = 1;
   ProductListHandler productListHandler;
 
-  public StockAddHandler(List<Stock> stockList, ProductListHandler productListHandler) {
-    super(stockList);
+  public StockAddHandler(ProductListHandler productListHandler) {
+    //    super(stockList);
     this.productListHandler = productListHandler;
 
-    Stock testStock = new Stock();
-    testStock.setStockNumber(stockNumber++);
-    testStock.setProduct(productListHandler.productList.get(0));
-    testStock.setStocks(3);
-    testStock.setPrice(38000);
-
-    stockList.add(testStock);
-
-    testStock = new Stock();
-    testStock.setStockNumber(stockNumber++);
-    testStock.setProduct(productListHandler.productList.get(1));
-    testStock.setStocks(4);
-    testStock.setPrice(52000);
-
-    stockList.add(testStock);
+    //    Stock testStock = new Stock();
+    //    testStock.setStockNumber(stockNumber++);
+    //    testStock.setProduct(productListHandler.productList.get(0));
+    //    testStock.setStocks(3);
+    //    testStock.setPrice(38000);
+    //
+    //    stockList.add(testStock);
+    //
+    //    testStock = new Stock();
+    //    testStock.setStockNumber(stockNumber++);
+    //    testStock.setProduct(productListHandler.productList.get(1));
+    //    testStock.setStocks(4);
+    //    testStock.setPrice(52000);
+    //
+    //    stockList.add(testStock);
 
   }
 
@@ -55,7 +54,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
 
-    stockList.add(stock);
+    //    stockList.add(stock);
     System.out.println("재고 등록을 완료하였습니다.");
   }
 

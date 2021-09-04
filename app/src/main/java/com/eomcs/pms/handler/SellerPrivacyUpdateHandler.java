@@ -30,6 +30,7 @@ public class SellerPrivacyUpdateHandler extends AbstractSellerPrivacyHandler {
       String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", member.getName()));
       String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", member.getPhoto()));
       String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", member.getPhoneNumber()));
+      String bussinessName = Prompt.inputString(String.format("가게명(변경 전 : %s) : ", member.getBusinessName()));
       String bussinessNo = Prompt.inputString(String.format("사업자번호(변경 전 : %s) : ", member.getBusinessNumber()));
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", member.getBusinessAddress()));
       String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", member.getBusinessPlaceNumber()));
@@ -42,6 +43,7 @@ public class SellerPrivacyUpdateHandler extends AbstractSellerPrivacyHandler {
         member.setPassword(password);
         member.setPhoto(photo);
         member.setPhoneNumber(tel);
+        member.setBusinessName(bussinessName);
         member.setBusinessNumber(bussinessNo);
         member.setBusinessAddress(bussinessAddress);
         member.setBusinessPlaceNumber(bussinessTel);  

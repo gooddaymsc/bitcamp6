@@ -32,6 +32,7 @@ public class SellerPrivacyDetailHandler extends AbstractSellerPrivacyHandler{
       System.out.printf("생일 : %s\n", member.getBirthday());
       System.out.printf("사진 : %s\n", member.getPhoto());
       System.out.printf("전화 : %s\n", member.getPhoneNumber());
+      System.out.printf("가게명 : %s\n", member.getBusinessName());
       System.out.printf("사업자번호 : %s\n", member.getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", member.getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", member.getBusinessPlaceNumber());
