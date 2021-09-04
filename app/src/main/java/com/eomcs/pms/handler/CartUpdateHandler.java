@@ -26,21 +26,18 @@ public class CartUpdateHandler extends AbstractCartHandler {
       return;
     }
 
-    //변경할 수 있는 것 - 수량? 
     int cartstocks = Prompt.inputInt(String.format("수량(변경 전 : %d) : ", cart.getCartStocks()));
-
+    int cartPrice = cart.getCartPrice();
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    if (input.equalsIgnoreCase("y")) {
+      cart.setCartStocks(cartstocks);
+      cart.setCartPrice(cartPrice);
+      System.out.println("장바구니를 변경하였습니다.");
+      return;
+    } else {
       System.out.println("장바구니 변경을 취소하였습니다.");
       return;
     }
-    int cartPrice = 0;
-
-    cart.setCartStocks(cartstocks);
-    //자동으로 변경되어야할 것 - 가격
-    cart.setCartPrice(cartPrice);
-
-    System.out.println("장바구니를 변경하였습니다.");
   }
 
 }

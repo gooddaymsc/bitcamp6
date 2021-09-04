@@ -8,7 +8,6 @@ import com.eomcs.util.Prompt;
 
 public class ProductAddHandler extends AbstractProductHandler {
 
-  int i = 1;
   int productNumber = 1;
   public ProductAddHandler(List<Product> productList) {
     super(productList);
@@ -53,7 +52,7 @@ public class ProductAddHandler extends AbstractProductHandler {
 
     Product product = new Product();
 
-    product.setProductNumber(i++);
+    product.setProductNumber(productNumber++);
     product.setProductName(Prompt.inputString("상품명 : "));
     product.setProductType(Prompt.inputString("주종 : "));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));

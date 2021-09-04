@@ -27,13 +27,15 @@ public class CartDeleteHandler extends AbstractCartHandler {
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+
+    if (input.equalsIgnoreCase("y")) {
+      cartList.remove(cart);
+      System.out.println("장바구니를 삭제하였습니다.");
+      return;
+    } else {
       System.out.println("장바구니 삭제를 취소하였습니다.");
       return;
     }
-
-    cartList.remove(cart);
-
-    System.out.println("장바구니를 삭제하였습니다.");
   }
+
 }

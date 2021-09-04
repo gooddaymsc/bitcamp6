@@ -22,7 +22,7 @@ public class CartListHandler extends AbstractCartHandler {
     for (Cart cart : cartList) {
       System.out.printf("%d, %s, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
           cart.getCartNumber(), 
-          cart.stock.product.getProductName(), 
+          cart.getStock().getProduct().getProductName(), 
           cart.getCartStocks(), 
           cart.getCartPrice(),
           cart.getRegistrationDate());
