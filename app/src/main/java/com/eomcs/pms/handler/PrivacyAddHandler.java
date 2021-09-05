@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
@@ -38,6 +39,11 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
 
+    //일반회원을 생성할때 일반회원의 예약목록들을 저장할 list를 생성함.
+    BookingList testBookingList = new BookingList();
+    testBookingList.setId(testprivacy.getId());
+    App.allBookingList.add(testBookingList);
+
     testprivacy = new Privacy();
 
     testprivacy.setNumber(privacyNumber++);
@@ -55,10 +61,15 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacyList.add(testprivacy);
 
     testmanager = new Manager();
+
     testmanager.setId("a");
     testmanager.setPassword("a");
     testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
+
+    testBookingList = new BookingList();
+    testBookingList.setId(testprivacy.getId());
+    App.allBookingList.add(testBookingList);
 
   }
 

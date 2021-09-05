@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
@@ -13,8 +15,8 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
   int sellerPrivacyNumber = 1;
   List<Manager> managerList;
 
-  public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList);
+  public SellerPrivacyAddHandler(List<SellerPrivacy> sellerList, List<Manager> managerList) {
+    super(sellerList);
     this.managerList = managerList;
     SellerPrivacy testsellerPrivacy = new SellerPrivacy();
     Manager testmanager = new Manager();
@@ -30,16 +32,27 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setPhoto("aaaa.gif");
     testsellerPrivacy.setPhoneNumber("010-1111-1111");
     testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testsellerPrivacy.setBusinessName("오늘와인한잔");
     testsellerPrivacy.setBusinessNumber("aaaa");
     testsellerPrivacy.setBusinessAddress("aaaa");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
 
-    memberList.add(testsellerPrivacy);
+    sellerList.add(testsellerPrivacy);
 
     testmanager.setId("aaaa");
     testmanager.setPassword("aaaa");
     testmanager.setAuthority(Menu.ACCESS_SELLER);
     managerList.add(testmanager);
+
+    //판매자를 생성할때 판매자의 재고목록들을 저장할 list를 생성함.
+    StockList testStockList = new StockList();
+    testStockList.setId(testsellerPrivacy.getId());
+    App.allStockList.add(testStockList);
+
+    //판매자를 생성할때 판매자의 예약목록들을 저장할 list를 생성함.
+    BookingList testBookingList = new BookingList();
+    testBookingList.setId(testsellerPrivacy.getId());
+    App.allBookingList.add(testBookingList);
 
     testsellerPrivacy = new SellerPrivacy();
 
@@ -54,17 +67,26 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setPhoto("aaaa.gif");
     testsellerPrivacy.setPhoneNumber("010-1111-1112");
     testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testsellerPrivacy.setBusinessName("비올땐막걸리");
     testsellerPrivacy.setBusinessNumber("aaa");
     testsellerPrivacy.setBusinessAddress("aaa");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1112");
 
-    memberList.add(testsellerPrivacy);
+    sellerList.add(testsellerPrivacy);
 
     testmanager = new Manager();
     testmanager.setId("aaa");
     testmanager.setPassword("aaa");
     testmanager.setAuthority(Menu.ACCESS_SELLER);
     managerList.add(testmanager);
+
+    testStockList = new StockList();
+    testStockList.setId(testsellerPrivacy.getId());
+    App.allStockList.add(testStockList);
+
+    testBookingList = new BookingList();
+    testBookingList.setId(testsellerPrivacy.getId());
+    App.allBookingList.add(testBookingList);
   }
 
 
@@ -100,12 +122,18 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     sellerPrivacy.setPassword(Prompt.inputString("암호 : "));
     sellerPrivacy.setPhoto(Prompt.inputString("사진 : "));
     sellerPrivacy.setPhoneNumber(Prompt.inputString("전화 : "));
+    sellerPrivacy.setBusinessName(Prompt.inputString("가게명 : "));
     sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호 : "));
     sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소 : "));
     sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(sellerPrivacy);
+    sellerList.add(sellerPrivacy);
     managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));
+
+    StockList StockList = new StockList();
+    //stockList.setId(new List<>());
+    StockList.setId(sellerPrivacy.getId());
+    App.allStockList.add(StockList);
   }
 }
 

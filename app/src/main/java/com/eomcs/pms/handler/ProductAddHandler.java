@@ -38,6 +38,32 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setWeight(3);
 
     productList.add(testProduct);
+
+    testProduct = new Product();
+    testProduct.setProductNumber(productNumber++);
+    testProduct.setProductName("와인");
+    testProduct.setProductType("와인");
+    testProduct.setCountryOrigin("프랑스");
+    testProduct.setVariety("18");
+    testProduct.setAlcoholLevel(2);
+    testProduct.setSugerLevel(3);
+    testProduct.setAcidity(1);
+    testProduct.setWeight(2);
+
+    productList.add(testProduct);
+
+    testProduct = new Product();
+    testProduct.setProductNumber(productNumber++);
+    testProduct.setProductName("사케");
+    testProduct.setProductType("사케");
+    testProduct.setCountryOrigin("일본");
+    testProduct.setVariety("32");
+    testProduct.setAlcoholLevel(5);
+    testProduct.setSugerLevel(4);
+    testProduct.setAcidity(3);
+    testProduct.setWeight(2);
+
+    productList.add(testProduct);
   }
 
   @Override

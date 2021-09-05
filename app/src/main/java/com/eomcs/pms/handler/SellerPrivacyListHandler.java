@@ -7,8 +7,8 @@ import com.eomcs.pms.domain.SellerPrivacy;
 
 public class SellerPrivacyListHandler extends AbstractSellerPrivacyHandler {
 
-  public SellerPrivacyListHandler(List<SellerPrivacy> memberList) {
-    super(memberList);
+  public SellerPrivacyListHandler(List<SellerPrivacy> sellerList) {
+    super(sellerList);
   }
 
 
@@ -19,10 +19,11 @@ public class SellerPrivacyListHandler extends AbstractSellerPrivacyHandler {
       return;
     }
     System.out.println("\n[판매자 목록]");
-    for (SellerPrivacy member : memberList) {
-      System.out.printf("판매자번호-%d, %s, %s, %s, 등급[%d], %s\n", 
+    for (SellerPrivacy member : sellerList) {
+      System.out.printf("판매자번호-%d, %s, %s, %s, %s, 등급[%d], %s\n", 
           member.getNumber(), 
           member.getId(),
+          member.getBusinessName(),
           member.getName(), 
           member.getNickname(),
           member.getLevel(),

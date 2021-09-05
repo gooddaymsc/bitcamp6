@@ -1,16 +1,11 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class CartDetailHandler extends AbstractCartHandler {
-
-  public CartDetailHandler(List<Cart> cartList) {
-    super(cartList);
-  }
 
   @Override
   public void execute() {
@@ -26,7 +21,7 @@ public class CartDetailHandler extends AbstractCartHandler {
       return;
     }
 
-    System.out.printf("상품명: %s\n", cart.stock.product.getProductName());
+    System.out.printf("상품명: %s\n", cart.getStock().getProduct().getProductName());
     System.out.printf("수량: %s\n", cart.getCartStocks());
     System.out.printf("총액: %s\n", cart.getCartPrice());
     System.out.printf("등록일: %s\n", cart.getRegistrationDate());
