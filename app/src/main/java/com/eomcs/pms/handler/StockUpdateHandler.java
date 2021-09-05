@@ -6,7 +6,9 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class StockUpdateHandler extends AbstractStockHandler {
-
+  public StockUpdateHandler(StockPrompt stockPrompt) {
+    super(stockPrompt);
+  }
   @Override
   public void execute() {
 
@@ -18,7 +20,7 @@ public class StockUpdateHandler extends AbstractStockHandler {
     while(true) {
       System.out.println("[재고 변경]");
 
-      Stock stock = findByStock(Prompt.inputString("변경할 상품명 : "));
+      Stock stock = stockPrompt.findByStock(Prompt.inputString("변경할 상품명 : "));
 
       if (stock == null) {
         System. out.println("해당 상품의 재고가 없습니다.");

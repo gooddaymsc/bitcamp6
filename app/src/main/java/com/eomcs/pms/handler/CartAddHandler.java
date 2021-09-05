@@ -10,11 +10,10 @@ import com.eomcs.util.Prompt;
 
 public class CartAddHandler extends AbstractCartHandler {
   //  int cartNumber = 1;
-  StockListHandler stockListHandler;
-
-  public CartAddHandler(StockListHandler stockListHandler) {
+  StockPrompt stockPrompt;
+  public CartAddHandler(StockPrompt stockPrompt) {
     //    super(cartList);
-    this.stockListHandler = stockListHandler;
+    this.stockPrompt = stockPrompt;
     //    CartList testCartList = findById("aa");
     //    Cart testCart = new Cart();
     //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
@@ -59,7 +58,7 @@ public class CartAddHandler extends AbstractCartHandler {
     }
     System.out.println("\n[장바구니 등록]");
     Cart cart = new Cart();
-    Stock cartProduct = stockListHandler.findByStock(Prompt.inputString("상품명 : "));
+    Stock cartProduct = stockPrompt.findByStock(Prompt.inputString("상품명 : "));
     if (cartProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;

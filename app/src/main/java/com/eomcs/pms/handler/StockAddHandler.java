@@ -8,34 +8,33 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
-  //  int stockNumber = 1;
-  ProductListHandler productListHandler;
+  AbstractProductHandler productHandler;
+  public StockAddHandler(StockPrompt stockPrompt, AbstractProductHandler productHandler) {
+    super(stockPrompt);
+    this.productHandler = productHandler;
 
-  public StockAddHandler(ProductListHandler productListHandler) {
-    //    super(stockList);
-    this.productListHandler = productListHandler;
-    StockList teststockList = findById("aaaa");
+    StockList teststockList = stockPrompt.findById("aaaa");
     Stock testStock = new Stock();
-    testStock.setStockNumber(teststockList.getSellerStock().size());
-    testStock.setProduct(productListHandler.productList.get(0));
+    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
+    testStock.setProduct(productHandler.productList.get(0));
     testStock.setStocks(3);
     testStock.setPrice(38000);
 
     App.allStockList.get(0).getSellerStock().add(testStock);
 
-    teststockList = findById("aaaa");
+    teststockList = stockPrompt.findById("aaaa");
     testStock = new Stock();
-    testStock.setStockNumber(teststockList.getSellerStock().size());
-    testStock.setProduct(productListHandler.productList.get(1));
+    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
+    testStock.setProduct(productHandler.productList.get(1));
     testStock.setStocks(4);
     testStock.setPrice(52000);
 
     App.allStockList.get(0).getSellerStock().add(testStock);
 
-    teststockList = findById("aaa");
+    teststockList = stockPrompt.findById("aaa");
     testStock = new Stock();
-    testStock.setStockNumber(teststockList.getSellerStock().size());
-    testStock.setProduct(productListHandler.productList.get(0));
+    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
+    testStock.setProduct(productHandler.productList.get(0));
     testStock.setStocks(3);
     testStock.setPrice(38000);
 
@@ -54,15 +53,21 @@ public class StockAddHandler extends AbstractStockHandler {
 
     System.out.println("\n[재고등록]");
     Stock stock = new Stock(); 
-    Product product = productListHandler.findByProduct(Prompt.inputString("상품명 : "));
+    String productName = Prompt.inputString("상품명 : ");
+    Product product = productHandler.findByProduct(productName);
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;
     }
 
+    if (stockPrompt.findByStock(productName) != null) {
+      System.out.println("이미 추가된 상품입니다.");
+      return;
+    }
+
     stock.setProduct(product);
-    StockList stockList = findById(App.getLoginUser().getId());
-    stock.setStockNumber(stockList.getSellerStock().size());
+    StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
+    stock.setStockNumber(stockList.getSellerStock().size()+1);
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
     stockList.getSellerStock().add(stock);

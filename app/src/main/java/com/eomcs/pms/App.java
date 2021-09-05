@@ -58,6 +58,7 @@ import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
 import com.eomcs.pms.handler.StockDetailHandler;
 import com.eomcs.pms.handler.StockListHandler;
+import com.eomcs.pms.handler.StockPrompt;
 import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
@@ -86,7 +87,7 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler(managerList);
-
+  StockPrompt stockPrompt = new StockPrompt();
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 
@@ -142,24 +143,24 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(productList));
+    commandMap.put("/product/list",   new ProductListHandler(productList, stockPrompt));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productList));
     commandMap.put("/product/delete", new ProductDeleteHandler(productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(new ProductListHandler(productList)));
-    commandMap.put("/stock/list",   new StockListHandler(stockList));
-    commandMap.put("/stock/detail", new StockDetailHandler());
-    commandMap.put("/stock/update", new StockUpdateHandler());
-    commandMap.put("/stock/delete", new StockDeleteHandler());
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt,new ProductListHandler(productList, stockPrompt)));
+    commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
+    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(new StockListHandler(stockList)));
-    commandMap.put("/cart/list",   new CartListHandler(cartList));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(stockPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(stockPrompt));
     commandMap.put("/cart/detail", new CartDetailHandler());
     commandMap.put("/cart/update", new CartUpdateHandler());
     commandMap.put("/cart/delete", new CartDeleteHandler());
 
-    commandMap.put("/booking/add",    new BookingAddHandler(new CartListHandler(cartList)));
+    commandMap.put("/booking/add",    new BookingAddHandler(new CartListHandler(stockPrompt)));
     commandMap.put("/booking/list",   new BookingListHandler());
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());

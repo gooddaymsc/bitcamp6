@@ -8,7 +8,9 @@ import com.eomcs.util.Prompt;
 
 public class StockDeleteHandler extends AbstractStockHandler {
 
-
+  public StockDeleteHandler(StockPrompt stockPrompt) {
+    super(stockPrompt);
+  }
   @Override
   public void execute() {
 
@@ -21,7 +23,7 @@ public class StockDeleteHandler extends AbstractStockHandler {
 
       String name = Prompt.inputString("삭제할 상품명 : ");
 
-      Stock stock = findByStock(name);
+      Stock stock = stockPrompt.findByStock(name);
 
       if (stock == null) {
         System. out.println("해당 이름의 재고가 없습니다.");
@@ -31,7 +33,7 @@ public class StockDeleteHandler extends AbstractStockHandler {
       String input = Prompt.inputString("상품을 판매내역에서 삭제하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        StockList stockList = findById(App.getLoginUser().getId());
+        StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
 
         stockList.getSellerStock().remove(stock);
         System.out.println("상품을 삭제하였습니다.");

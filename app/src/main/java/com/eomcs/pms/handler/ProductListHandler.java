@@ -9,8 +9,11 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
-  public ProductListHandler(List<Product> productList) {
+  StockPrompt stockPrompt;
+  static int stockNumber = 1;
+  public ProductListHandler(List<Product> productList, StockPrompt stockPrompt) {
     super(productList);
+    this.stockPrompt = stockPrompt;
   }
 
   @Override
@@ -30,12 +33,14 @@ public class ProductListHandler extends AbstractProductHandler {
           product.getWeight());
     }
 
-    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER ) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_PRIVACY ) {
+
       return;
-    } else {
+    } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
       System.out.println("\n[재고등록]");
       Stock stock = new Stock(); 
-      Product product = findByProduct(Prompt.inputString("상품명 : "));
+      String productName = Prompt.inputString("상품명 : ");
+      Product product = findByProduct(productName);
 
 
       if (product == null) {
@@ -43,14 +48,18 @@ public class ProductListHandler extends AbstractProductHandler {
         return;
       }
 
+      if (stockPrompt.findByStock(productName) != null) {
+        System.out.println("이미 추가된 상품입니다.");
+        return;
+      }
       stock.setPrice(Prompt.inputInt("판매 가격 :"));
       stock.setStocks(Prompt.inputInt("재고 수량 :"));
 
       String input = Prompt.inputString("정말 등록하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        StockList stockList = findById(App.getLoginUser().getId());
+        StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
         stock.setProduct(product);
-        stock.setStockNumber(stockList.getSellerStock().size());
+        stock.setStockNumber(stockList.getSellerStock().size()+1);
         stockList.getSellerStock().add(stock);
         System.out.println("재고 등록을 완료하였습니다.");
         return;
