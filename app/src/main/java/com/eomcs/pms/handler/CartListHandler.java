@@ -1,12 +1,15 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 
 public class CartListHandler extends AbstractCartHandler {
-
+  public CartListHandler(List<Cart> cartList) {
+    this.cartList = cartList;
+  }
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {

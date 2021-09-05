@@ -10,43 +10,43 @@ import com.eomcs.util.Prompt;
 
 public class CartAddHandler extends AbstractCartHandler {
   //  int cartNumber = 1;
-  AbstractStockHandler abstractStockHandler;
+  StockListHandler stockListHandler;
 
-  public CartAddHandler(AbstractStockHandler abstractStockHandler) {
+  public CartAddHandler(StockListHandler stockListHandler) {
     //    super(cartList);
-    this.abstractStockHandler = abstractStockHandler;
-    CartList testCartList = findById("aa");
-    Cart testCart = new Cart();
-    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(abstractStockHandler.stockList.get(0));
-    testCart.setCartNumber(1);
-    testCart.setCartPrice(100);
-    testCart.setCartStocks(1);
-    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-    App.allCartList.get(0).getPrivacyCart().add(testCart);
-
-    testCartList = findById("aa");
-    testCart = new Cart();
-    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(abstractStockHandler.stockList.get(1));
-    testCart.setCartNumber(2);
-    testCart.setCartPrice(200);
-    testCart.setCartStocks(2);
-    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-    App.allCartList.get(0).getPrivacyCart().add(testCart);
-
-    testCartList = findById("a");
-    testCart = new Cart();
-    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(abstractStockHandler.stockList.get(0));
-    testCart.setCartNumber(1);
-    testCart.setCartPrice(100);
-    testCart.setCartStocks(1);
-    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-    App.allCartList.get(1).getPrivacyCart().add(testCart);
+    this.stockListHandler = stockListHandler;
+    //    CartList testCartList = findById("aa");
+    //    Cart testCart = new Cart();
+    //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
+    //    testCart.setStock(stockListHandler.stockList.get(0));
+    //    testCart.setCartNumber(1);
+    //    testCart.setCartPrice(100);
+    //    testCart.setCartStocks(1);
+    //    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+    //
+    //    App.allCartList.get(0).getPrivacyCart().add(testCart);
+    //
+    //    testCartList = findById("aa");
+    //    testCart = new Cart();
+    //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
+    //    testCart.setStock(stockListHandler.stockList.get(1));
+    //    testCart.setCartNumber(2);
+    //    testCart.setCartPrice(200);
+    //    testCart.setCartStocks(2);
+    //    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+    //
+    //    App.allCartList.get(0).getPrivacyCart().add(testCart);
+    //
+    //    testCartList = findById("a");
+    //    testCart = new Cart();
+    //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
+    //    testCart.setStock(stockListHandler.stockList.get(0));
+    //    testCart.setCartNumber(1);
+    //    testCart.setCartPrice(100);
+    //    testCart.setCartStocks(1);
+    //    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+    //
+    //    App.allCartList.get(1).getPrivacyCart().add(testCart);
 
   }
 
@@ -59,7 +59,7 @@ public class CartAddHandler extends AbstractCartHandler {
     }
     System.out.println("\n[장바구니 등록]");
     Cart cart = new Cart();
-    Stock cartProduct = abstractStockHandler.findByStock(Prompt.inputString("상품명 : "));
+    Stock cartProduct = stockListHandler.findByStock(Prompt.inputString("상품명 : "));
     if (cartProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;

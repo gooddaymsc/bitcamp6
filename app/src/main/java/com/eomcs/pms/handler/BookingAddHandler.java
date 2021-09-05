@@ -11,35 +11,35 @@ import com.eomcs.util.Prompt;
 public class BookingAddHandler extends AbstractBookingHandler {
 
   //  int bookingNumber = 1;
-  AbstractCartHandler abstractCartHandler;
+  CartListHandler CartListHandler;
 
-  public BookingAddHandler(AbstractCartHandler abstractCartHandler) {
+  public BookingAddHandler(CartListHandler CartListHandler) {
     //    super(bookList);
-    this.abstractCartHandler = abstractCartHandler;
+    this.CartListHandler = CartListHandler;
 
-    BookingList testbookingList = findById("aaaa");
-    Booking testBooking = new Booking();
-    testBooking.setBookingNumber(testbookingList.getBooking().size());
-    //    testBooking.setCart(abstractCartHandler.cartList.get(0));
-    testBooking.setBookingNumber(11);
-    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
-    testBooking.setBookingHour(19);
-    testBooking.setBookingMinute(25);   
-    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    App.allBookingList.get(0).getBooking().add(testBooking);
-
-    testbookingList = findById("aaa");
-    testBooking = new Booking();
-    testBooking.setBookingNumber(testbookingList.getBooking().size());
-    //    testBooking.setCart(abstractCartHandler.cartList.get(0));
-    testBooking.setBookingNumber(22);
-    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
-    testBooking.setBookingHour(10);
-    testBooking.setBookingMinute(30);   
-    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    App.allBookingList.get(1).getBooking().add(testBooking);
+    //    BookingList testbookingList = findById("aaaa");
+    //    Booking testBooking = new Booking();
+    //    testBooking.setBookingNumber(testbookingList.getBooking().size());
+    //    testBooking.setCart(CartListHandler.cartList.get(0));
+    //    testBooking.setBookingNumber(11);
+    //    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
+    //    testBooking.setBookingHour(19);
+    //    testBooking.setBookingMinute(25);   
+    //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    App.allBookingList.get(0).getBooking().add(testBooking);
+    //
+    //    testbookingList = findById("aaa");
+    //    testBooking = new Booking();
+    //    testBooking.setBookingNumber(testbookingList.getBooking().size());
+    //    testBooking.setCart(CartListHandler.cartList.get(0));
+    //    testBooking.setBookingNumber(22);
+    //    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
+    //    testBooking.setBookingHour(10);
+    //    testBooking.setBookingMinute(30);   
+    //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    App.allBookingList.get(1).getBooking().add(testBooking);
 
   }
 
@@ -53,7 +53,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     Booking booking = new Booking();
 
-    Cart bookingProduct = abstractCartHandler.findByCart(Prompt.inputString("상품명 : "));
+    Cart bookingProduct = CartListHandler.findByCart(Prompt.inputString("상품명 : "));
     if (bookingProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;

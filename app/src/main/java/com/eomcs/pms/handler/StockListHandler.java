@@ -1,11 +1,15 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 
 public class StockListHandler extends AbstractStockHandler {
+  public StockListHandler(List<Stock> stockList) {
+    this.stockList = stockList;
+  }
 
   @Override
   public void execute() {

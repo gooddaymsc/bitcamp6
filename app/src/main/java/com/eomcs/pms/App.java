@@ -71,7 +71,6 @@ public class App {
 
   List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
-  public static List<CartList> allCartList = new ArrayList<>();
 
   List<Stock> stockList = new ArrayList<>();
   // 판매자
@@ -79,6 +78,7 @@ public class App {
   //  List<Cart> sellerCartList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
+  public static List<CartList> allCartList = new ArrayList<>();
 
   // 관리자
   List<Manager> managerList = new ArrayList<>();
@@ -148,13 +148,13 @@ public class App {
     commandMap.put("/product/delete", new ProductDeleteHandler(productList));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(new ProductListHandler(productList)));
-    commandMap.put("/stock/list",   new StockListHandler());
+    commandMap.put("/stock/list",   new StockListHandler(stockList));
     commandMap.put("/stock/detail", new StockDetailHandler());
     commandMap.put("/stock/update", new StockUpdateHandler());
     commandMap.put("/stock/delete", new StockDeleteHandler());
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(new StockListHandler(stockList)));
-    commandMap.put("/cart/list",   new CartListHandler());
+    commandMap.put("/cart/list",   new CartListHandler(cartList));
     commandMap.put("/cart/detail", new CartDetailHandler());
     commandMap.put("/cart/update", new CartUpdateHandler());
     commandMap.put("/cart/delete", new CartDeleteHandler());
