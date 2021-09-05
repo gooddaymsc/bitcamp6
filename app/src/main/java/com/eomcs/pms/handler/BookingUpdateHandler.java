@@ -1,17 +1,12 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
-
-  public BookingUpdateHandler(List<Booking> bookingList) {
-    super(bookingList);
-  }
 
   @Override
   public void execute() {

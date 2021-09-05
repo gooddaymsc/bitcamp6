@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.pms.domain.StockList;
@@ -48,6 +49,11 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testStockList.setId(testsellerPrivacy.getId());
     App.allStockList.add(testStockList);
 
+    //판매자를 생성할때 판매자의 예약목록들을 저장할 list를 생성함.
+    BookingList testBookingList = new BookingList();
+    testBookingList.setId(testsellerPrivacy.getId());
+    App.allBookingList.add(testBookingList);
+
     testsellerPrivacy = new SellerPrivacy();
 
     testsellerPrivacy.setNumber(sellerPrivacyNumber++);
@@ -77,6 +83,10 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testStockList = new StockList();
     testStockList.setId(testsellerPrivacy.getId());
     App.allStockList.add(testStockList);
+
+    testBookingList = new BookingList();
+    testBookingList.setId(testsellerPrivacy.getId());
+    App.allBookingList.add(testBookingList);
   }
 
 

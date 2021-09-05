@@ -12,6 +12,7 @@ import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Booking;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
@@ -71,6 +72,8 @@ public class App {
   // 판매자
   List<Product> productList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
+  public static List<BookingList> allBookingList = new ArrayList<>();
+
   // 관리자
   List<Manager> managerList = new ArrayList<>();
 
@@ -150,10 +153,10 @@ public class App {
     commandMap.put("/cart/update", new CartUpdateHandler(cartList));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartList));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
-    commandMap.put("/booking/list",   new BookingListHandler(bookingList));
-    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
+    commandMap.put("/booking/add",    new BookingAddHandler(new CartListHandler(cartList)));
+    commandMap.put("/booking/list",   new BookingListHandler());
+    commandMap.put("/booking/update", new BookingUpdateHandler());
+    commandMap.put("/booking/delete", new BookingDeleteHandler());
 
 
   }
