@@ -9,7 +9,6 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
-  int stockNumber = 1;
   public ProductListHandler(List<Product> productList) {
     super(productList);
   }
@@ -49,10 +48,9 @@ public class ProductListHandler extends AbstractProductHandler {
 
       String input = Prompt.inputString("정말 등록하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        stock.setProduct(product);
-        stock.setStockNumber(stockNumber++);
-
         StockList stockList = findById(App.getLoginUser().getId());
+        stock.setProduct(product);
+        stock.setStockNumber(stockList.getSellerStock().size());
         stockList.getSellerStock().add(stock);
         System.out.println("재고 등록을 완료하였습니다.");
         return;
