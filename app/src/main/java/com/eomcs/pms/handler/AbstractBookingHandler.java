@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.domain.Booking;
+import com.eomcs.util.Prompt;
 
 public abstract class AbstractBookingHandler implements Command {
 
@@ -19,6 +20,29 @@ public abstract class AbstractBookingHandler implements Command {
     }
     return null;
   }
+
+  protected int checkHour (String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 24) {  
+        System.out.println("입력하신 수는 유효하지 않습니다"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
+  protected int checkMinute (String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 60) {  
+        System.out.println("입력하신 수는 유효하지 않습니다"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
 }
 
 
