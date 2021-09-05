@@ -52,12 +52,8 @@ public class ProductListHandler extends AbstractProductHandler {
         stock.setProduct(product);
         stock.setStockNumber(stockNumber++);
 
-        //        StockList stockList = findById(App.getLoginUser().getId());
-        //        List<Stock> sellerstock = stockList.getSellerStock();
         StockList stockList = findById(App.getLoginUser().getId());
         stockList.getSellerStock().add(stock);
-        //        sellerstock.add(stock);
-        //        stockList.setSellerStock(sellerstock);
         System.out.println("재고 등록을 완료하였습니다.");
         return;
       } else {
