@@ -1,11 +1,13 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 
 public abstract class AbstractStockHandler implements Command {
 
+  List<Stock> stockList;
 
   protected Stock findByStock (String ProductName) {
     StockList stockList = findById(App.getLoginUser().getId());
