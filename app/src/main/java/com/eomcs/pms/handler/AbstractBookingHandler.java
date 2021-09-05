@@ -2,11 +2,9 @@ package com.eomcs.pms.handler;
 
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
-<<<<<<< HEAD
-import com.eomcs.util.Prompt;
-=======
 import com.eomcs.pms.domain.BookingList;
->>>>>>> ddc34eb72d81c3e55b270f8e3fe6293e6772e13d
+import com.eomcs.util.Prompt;
+
 
 public abstract class AbstractBookingHandler implements Command {
 

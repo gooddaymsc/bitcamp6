@@ -17,8 +17,6 @@ public abstract class AbstractCartHandler implements Command {
     return null;
   }
 
-<<<<<<< HEAD
-=======
   protected CartList findById(String id) {
     for (CartList cartList : App.allCartList) {
       if (cartList.getId().equals(id)) {
@@ -27,5 +25,4 @@ public abstract class AbstractCartHandler implements Command {
     }
     return null;
   }
->>>>>>> ddc34eb72d81c3e55b270f8e3fe6293e6772e13d
 }

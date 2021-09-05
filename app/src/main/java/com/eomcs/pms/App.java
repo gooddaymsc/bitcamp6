@@ -160,18 +160,10 @@ public class App {
     commandMap.put("/cart/update", new CartUpdateHandler());
     commandMap.put("/cart/delete", new CartDeleteHandler());
 
-<<<<<<< HEAD
-    commandMap.put("/booking/add",    new BookingAddHandler(bookingList, new CartListHandler(cartList)));
-    commandMap.put("/booking/list",   new BookingListHandler(bookingList, new ProductListHandler(productList)));
-    commandMap.put("/booking/update", new BookingUpdateHandler(bookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingList));
-=======
     commandMap.put("/booking/add",    new BookingAddHandler(new CartListHandler(stockPrompt)));
-    commandMap.put("/booking/list",   new BookingListHandler());
+    commandMap.put("/booking/list",   new BookingListHandler(new ProductListHandler(productList, stockPrompt)));
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());
->>>>>>> ddc34eb72d81c3e55b270f8e3fe6293e6772e13d
-
 
   }
 

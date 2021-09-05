@@ -65,12 +65,9 @@ public class BookingAddHandler extends AbstractBookingHandler {
     booking.setBookingHour(checkHour("픽업시간(시): "));
     booking.setBookingMinute(checkMinute("픽업시간(분): "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
-<<<<<<< HEAD
 
-    bookingList.add(booking);
-=======
     bookingList.getBooking().add(booking);
->>>>>>> ddc34eb72d81c3e55b270f8e3fe6293e6772e13d
+
     System.out.println("픽업예약을 완료하였습니다.");
   }
 
