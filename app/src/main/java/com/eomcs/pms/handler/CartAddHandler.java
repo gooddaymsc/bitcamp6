@@ -28,7 +28,7 @@ public class CartAddHandler extends AbstractCartHandler {
     testCartList = findCartListById("aa");
     testCart = new Cart();
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(App.allStockList.get(0).getSellerStock().get(0));
+    testCart.setStock(App.allStockList.get(0).getSellerStock().get(1));
     testCart.setCartNumber(2);
     testCart.setCartPrice(200);
     testCart.setCartStocks(2);
@@ -39,7 +39,7 @@ public class CartAddHandler extends AbstractCartHandler {
     testCartList = findCartListById("a");
     testCart = new Cart();
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(App.allStockList.get(0).getSellerStock().get(1));
+    testCart.setStock(App.allStockList.get(1).getSellerStock().get(0));
     testCart.setCartNumber(1);
     testCart.setCartPrice(100);
     testCart.setCartStocks(1);
