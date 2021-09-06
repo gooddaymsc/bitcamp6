@@ -48,7 +48,6 @@ public abstract class AbstractBookingHandler implements Command {
       return num;       
     }
   }
-
 }
 
 

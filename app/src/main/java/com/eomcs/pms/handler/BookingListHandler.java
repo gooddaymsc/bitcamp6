@@ -40,34 +40,29 @@ public class BookingListHandler extends AbstractBookingHandler{
         System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
         System.out.printf("예약일시 : %s \n", booking.getRegisteredDate());
         System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
-
-        if(booking.getCart().getCartPrice() == 0) {
-          System.out.printf("결제상태 : 미결제 \n" );
-        } else {
-          System.out.printf("결제상태 : 결제완료 \n" );
-        }
         System.out.printf("픽업 예약날짜 : %s\n", booking.getBookingDate());
         System.out.printf("픽업 예약시간: %d시 %d분 \n", booking.getBookingHour(), booking.getBookingMinute());
 
         System.out.println("==================================");
-        String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >>");
-        Product bookingProduct = abstractProductHandler.findByProduct(Prompt.inputString("상품명 : "));
-        if (bookingProduct == null) {
-          System.out.println("해당 상품이 없습니다.");
-          return;
-        }
 
-        if (!input.equals("0")) {
-          System.out.printf("주종: %s\n",  bookingProduct.getProductType());
-          System.out.printf("원산지: %s\n", bookingProduct.getCountryOrigin());
-          System.out.printf("품종: %s\n",  bookingProduct.getVariety());
-          System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());
-          System.out.printf("당도: %d\n",  bookingProduct.getSugerLevel());
-          System.out.printf("산도: %d\n",  bookingProduct.getAcidity());
-          return;
-        } else {
-          return;
-        }
+//        String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >>");
+//        Product bookingProduct = abstractProductHandler.findByProduct(Prompt.inputString("상품명 : "));
+//        if (bookingProduct == null) {
+//          System.out.println("해당 상품이 없습니다.");
+//          return;
+//        }
+//
+//        if (!input.equals("0")) {
+//          System.out.printf("주종: %s\n",  bookingProduct.getProductType());
+//          System.out.printf("원산지: %s\n", bookingProduct.getCountryOrigin());
+//          System.out.printf("품종: %s\n",  bookingProduct.getVariety());
+//          System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());
+//          System.out.printf("당도: %d\n",  bookingProduct.getSugerLevel());
+//          System.out.printf("산도: %d\n",  bookingProduct.getAcidity());
+//          return;
+//        } else {
+//          return;
+//        }
       }
     }
 
