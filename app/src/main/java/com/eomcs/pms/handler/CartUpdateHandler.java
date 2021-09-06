@@ -7,6 +7,10 @@ import com.eomcs.util.Prompt;
 
 public class CartUpdateHandler extends AbstractCartHandler {
 
+  public CartUpdateHandler(CartPrompt cartPrompt) {
+    super(cartPrompt);
+  }
+
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
@@ -15,7 +19,7 @@ public class CartUpdateHandler extends AbstractCartHandler {
     }
     while(true) {
       System.out.println("[장바구니 변경]");
-      Cart cart = findByCart(Prompt.inputString("상품명 : "));
+      Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
 
       if (cart == null) {
         System.out.println("장바구니에 해당 상품이 없습니다.");

@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
@@ -9,8 +8,9 @@ import com.eomcs.util.Prompt;
 public class ProductAddHandler extends AbstractProductHandler {
 
   int productNumber = 1;
-  public ProductAddHandler(List<Product> productList) {
-    super(productList);
+  ProductPrompt productPrompt;
+  public ProductAddHandler(ProductPrompt productPrompt) {
+    super(productPrompt);
 
     Product testProduct = new Product();
 
@@ -24,7 +24,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(2);
     testProduct.setWeight(3);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
 
     testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
@@ -37,7 +37,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(1);
     testProduct.setWeight(3);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
 
     testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
@@ -50,7 +50,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(1);
     testProduct.setWeight(2);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
 
     testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
@@ -63,7 +63,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(3);
     testProduct.setWeight(2);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
   }
 
   @Override
@@ -103,7 +103,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     product.setAcidity(checkNum("산도(1-5) : "));
     product.setWeight(checkNum("바디감(1-5) : "));
 
-    productList.add(product);
+    productPrompt.productList.add(product);
     System.out.println("상품을 등록하였습니다.");
   }
 
