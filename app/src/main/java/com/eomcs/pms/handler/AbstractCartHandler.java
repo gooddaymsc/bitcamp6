@@ -8,7 +8,7 @@ public abstract class AbstractCartHandler implements Command {
 
 
   protected Cart findByCart (String ProductName) {
-    CartList cartList = findById(App.getLoginUser().getId());
+    CartList cartList = findCartListById(App.getLoginUser().getId());
     for (Cart cart : cartList.getPrivacyCart()) {
       if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
         return cart;
@@ -17,7 +17,7 @@ public abstract class AbstractCartHandler implements Command {
     return null;
   }
 
-  protected CartList findById(String id) {
+  protected CartList findCartListById(String id) {
     for (CartList cartList : App.allCartList) {
       if (cartList.getId().equals(id)) {
         return cartList;

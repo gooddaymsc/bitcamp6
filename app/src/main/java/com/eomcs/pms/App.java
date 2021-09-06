@@ -87,7 +87,7 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler(managerList);
-  StockPrompt stockPrompt = new StockPrompt();
+  StockPrompt stockPrompt = new StockPrompt(sellerPrivacyList);
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 

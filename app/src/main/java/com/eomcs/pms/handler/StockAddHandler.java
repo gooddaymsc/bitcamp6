@@ -13,7 +13,7 @@ public class StockAddHandler extends AbstractStockHandler {
     super(stockPrompt);
     this.productHandler = productHandler;
 
-    StockList teststockList = stockPrompt.findById("aaaa");
+    StockList teststockList = stockPrompt.findStockListById("aaaa");
     Stock testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
     testStock.setProduct(productHandler.productList.get(0));
@@ -22,7 +22,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
     App.allStockList.get(0).getSellerStock().add(testStock);
 
-    teststockList = stockPrompt.findById("aaaa");
+    teststockList = stockPrompt.findStockListById("aaaa");
     testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
     testStock.setProduct(productHandler.productList.get(1));
@@ -31,7 +31,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
     App.allStockList.get(0).getSellerStock().add(testStock);
 
-    teststockList = stockPrompt.findById("aaa");
+    teststockList = stockPrompt.findStockListById("aaa");
     testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
     testStock.setProduct(productHandler.productList.get(0));
@@ -66,7 +66,7 @@ public class StockAddHandler extends AbstractStockHandler {
     }
 
     stock.setProduct(product);
-    StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
+    StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
     stock.setStockNumber(stockList.getSellerStock().size()+1);
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));

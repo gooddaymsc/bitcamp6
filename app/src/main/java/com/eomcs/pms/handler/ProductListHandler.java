@@ -57,7 +57,7 @@ public class ProductListHandler extends AbstractProductHandler {
 
       String input = Prompt.inputString("정말 등록하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
+        StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
         stock.setProduct(product);
         stock.setStockNumber(stockList.getSellerStock().size()+1);
         stockList.getSellerStock().add(stock);

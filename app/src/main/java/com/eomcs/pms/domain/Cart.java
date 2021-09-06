@@ -7,6 +7,7 @@ public class Cart {
   private int cartStocks; // 장바구니상품의 갯수
   private int cartPrice; // 총액
   private int cartNumber; //장바구니번호
+  private String sellerId; //판매자 id
   private Date registeredDate;
 
 
@@ -43,6 +44,12 @@ public class Cart {
   }
   public void setRegistrationDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public String getSellerId() {
+    return sellerId;
+  }
+  public void setSellerId(String sellerId) {
+    this.sellerId = sellerId;
   }
 
 }

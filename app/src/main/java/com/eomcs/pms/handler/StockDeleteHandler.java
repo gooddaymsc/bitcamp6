@@ -33,7 +33,7 @@ public class StockDeleteHandler extends AbstractStockHandler {
       String input = Prompt.inputString("상품을 판매내역에서 삭제하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
+        StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
 
         stockList.getSellerStock().remove(stock);
         System.out.println("상품을 삭제하였습니다.");
