@@ -29,7 +29,7 @@ public class CartDeleteHandler extends AbstractCartHandler {
       String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        CartList cartList = findById(App.getLoginUser().getId());
+        CartList cartList = findCartListById(App.getLoginUser().getId());
 
         cartList.getPrivacyCart().remove(cart);
         System.out.println("장바구니를 삭제하였습니다.");

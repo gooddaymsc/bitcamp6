@@ -14,7 +14,7 @@ public class Privacy extends Manager {
   private String address;
   private Date registeredDate;
   private int level;
-  private List<Cart> cartList;
+  private List<Cart> cartList;  //
   private List<Booking> bookingList;
 
   public int getNumber() {
