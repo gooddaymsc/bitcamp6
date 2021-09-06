@@ -165,7 +165,7 @@ public class App {
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt));
+    commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt, stockPrompt));
     commandMap.put("/booking/list",   new BookingListHandler(productPrompt));
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());

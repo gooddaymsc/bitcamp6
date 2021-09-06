@@ -25,6 +25,16 @@ public class StockPrompt {
     return null;
   }
 
+  public Stock findStockById(String id, String stockName) {
+    StockList stockList = findStockListById(id);
+    for (Stock stock : stockList.getSellerStock()) {
+      if (stock.getProduct().getProductName().equals(stockName)) {
+        return stock;
+      }
+    }
+    return null;
+  }
+
   public Stock findByStock (String ProductName) {
     StockList stockList = findStockListById(App.getLoginUser().getId());
     for (Stock stock : stockList.getSellerStock()) {
