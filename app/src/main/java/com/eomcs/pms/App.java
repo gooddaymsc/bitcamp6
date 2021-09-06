@@ -72,13 +72,12 @@ public class App {
   BoardUpdateHandler boardUpdateHandler = new BoardUpdateHandler(boardList); 
   BoardDeleteHandler boardDeleteHandler = new BoardDeleteHandler(boardList); 
 
+  
   BookingAddHandler bookingAddHandler = new BookingAddHandler(bookingList, cartList);
   BookingListHandler bookingListHandler = new BookingListHandler(bookingList, cartList);
   BookingDetailHandler bookingDetailHandler = new BookingDetailHandler(bookingList, cartList);
   BookingUpdateHandler bookingUpdateHandler = new BookingUpdateHandler(bookingList, cartList);
   BookingDeleteHandler bookingDeleteHandler = new BookingDeleteHandler(bookingList, cartList);
-
-  CartHandler cartHandler = new CartHandler(cartList);
 
   ProductAddHandler productAddHandler = new ProductAddHandler(productList);
   ProductListHandler productListHandler = new ProductListHandler(productList);
