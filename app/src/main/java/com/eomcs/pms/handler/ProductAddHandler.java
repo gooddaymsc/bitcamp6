@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
@@ -9,8 +8,9 @@ import com.eomcs.util.Prompt;
 public class ProductAddHandler extends AbstractProductHandler {
 
   int productNumber = 1;
-  public ProductAddHandler(List<Product> productList) {
-    super(productList);
+  ProductPrompt productPrompt;
+  public ProductAddHandler(ProductPrompt productPrompt) {
+    super(productPrompt);
 
     Product testProduct = new Product();
 
@@ -24,7 +24,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(2);
     testProduct.setWeight(3);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
 
     testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
@@ -37,7 +37,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(1);
     testProduct.setWeight(3);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
 
     testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
@@ -50,7 +50,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(1);
     testProduct.setWeight(2);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
 
     testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
@@ -63,7 +63,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setAcidity(3);
     testProduct.setWeight(2);
 
-    productList.add(testProduct);
+    productPrompt.productList.add(testProduct);
   }
 
   @Override
@@ -80,7 +80,22 @@ public class ProductAddHandler extends AbstractProductHandler {
 
     product.setProductNumber(productNumber++);
     product.setProductName(Prompt.inputString("상품명 : "));
-    product.setProductType(Prompt.inputString("주종 : "));
+    String productType = Prompt.inputString("주종 : ");
+    while(true) {
+      if (productType.equals("양주") || productType.equals("위스키") 
+          || productType.equals("브랜디") || productType.equals("진")
+          || productType.equals("보드카") || productType.equals("데킬라")
+          || productType.equals("와인") || productType.equals("화이트와인")
+          || productType.equals("로제와인")  || productType.equals("레드와인")
+          || productType.equals("스파클링와인")  || productType.equals("디저트와인")
+          || productType.equals("사케")  || productType.equals("하이볼")) {
+        product.setProductType(productType);
+        break;
+      } else {
+        System.out.println("정확한 주종을 입력하세요.");
+        return;
+      } 
+    }
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
     product.setVariety(Prompt.inputString("품종 : "));
     product.setAlcoholLevel(Prompt.inputFloat("알콜도수 : ")); 
@@ -88,7 +103,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     product.setAcidity(checkNum("산도(1-5) : "));
     product.setWeight(checkNum("바디감(1-5) : "));
 
-    productList.add(product);
+    productPrompt.productList.add(product);
     System.out.println("상품을 등록하였습니다.");
   }
 

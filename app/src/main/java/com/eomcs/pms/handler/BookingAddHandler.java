@@ -11,11 +11,11 @@ import com.eomcs.util.Prompt;
 public class BookingAddHandler extends AbstractBookingHandler {
 
   //  int bookingNumber = 1;
-  CartListHandler CartListHandler;
+  CartPrompt cartPrompt;
 
-  public BookingAddHandler(CartListHandler CartListHandler) {
+  public BookingAddHandler(CartPrompt cartPrompt) {
     //    super(bookList);
-    this.CartListHandler = CartListHandler;
+    this.cartPrompt = cartPrompt;
 
     //    BookingList testbookingList = findById("aaaa");
     //    Booking testBooking = new Booking();
@@ -53,17 +53,28 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     Booking booking = new Booking();
 
-    Cart bookingProduct = CartListHandler.findByCart(Prompt.inputString("상품명 : "));
+    Cart bookingProduct = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
     if (bookingProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;
     }
     booking.setCart(bookingProduct);
     BookingList bookingList = findById(App.getLoginUser().getId());
-    booking.setBookingNumber(bookingList.getBooking().size());
+    booking.setBookingNumber(bookingList.getBooking().size()+1);
+
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     booking.setBookingHour(checkHour("픽업시간(시): "));
     booking.setBookingMinute(checkMinute("픽업시간(분): "));
+
+    //    while(true) {
+    //      if (pickUptime.equals(pickUptime)) {
+    //        booking.setBookingTime(pickUptime);
+    //        break;
+    //      } else {
+    //        System.out.println("영업시간이 아닙니다.");
+    //      }
+    //    }
+
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     bookingList.getBooking().add(booking);

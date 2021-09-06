@@ -8,6 +8,10 @@ import com.eomcs.util.Prompt;
 
 public class CartDeleteHandler extends AbstractCartHandler {
 
+  public CartDeleteHandler(CartPrompt cartPrompt) {
+    super(cartPrompt);
+  }
+
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
@@ -19,7 +23,7 @@ public class CartDeleteHandler extends AbstractCartHandler {
 
       String ProductName = Prompt.inputString("상품명 : ");
 
-      Cart cart = findByCart(ProductName);
+      Cart cart = cartPrompt.findByCart(ProductName);
 
       if (cart == null) {
         System.out.println("장바구니에 해당 상품이 없습니다.");
@@ -29,7 +33,7 @@ public class CartDeleteHandler extends AbstractCartHandler {
       String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        CartList cartList = findCartListById(App.getLoginUser().getId());
+        CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
 
         cartList.getPrivacyCart().remove(cart);
         System.out.println("장바구니를 삭제하였습니다.");

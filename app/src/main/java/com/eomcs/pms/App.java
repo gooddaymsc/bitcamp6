@@ -35,6 +35,7 @@ import com.eomcs.pms.handler.CartAddHandler;
 import com.eomcs.pms.handler.CartDeleteHandler;
 import com.eomcs.pms.handler.CartDetailHandler;
 import com.eomcs.pms.handler.CartListHandler;
+import com.eomcs.pms.handler.CartPrompt;
 import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.FindIdHandler;
@@ -49,6 +50,7 @@ import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
+import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.SellerPrivacyAddHandler;
 import com.eomcs.pms.handler.SellerPrivacyDeleteHandler;
@@ -77,7 +79,6 @@ public class App {
   List<Stock> stockList = new ArrayList<>();
   // 판매자
   List<Product> productList = new ArrayList<>();
-  //  List<Cart> sellerCartList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
   public static List<CartList> allCartList = new ArrayList<>();
@@ -89,6 +90,8 @@ public class App {
 
   LoginHandler loginHandler = new LoginHandler(managerList);
   StockPrompt stockPrompt = new StockPrompt(sellerPrivacyList);
+  ProductPrompt productPrompt = new ProductPrompt(productList);
+  CartPrompt cartPrompt = new CartPrompt();
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 
@@ -144,26 +147,26 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(productList, stockPrompt));
-    commandMap.put("/product/detail", new ProductDetailHandler(productList));
-    commandMap.put("/product/update", new ProductUpdateHandler(productList));
-    commandMap.put("/product/delete", new ProductDeleteHandler(productList));
+    commandMap.put("/product/add",    new ProductAddHandler(productPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(productPrompt, stockPrompt, cartPrompt));
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
+    commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
+    commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt,new ProductListHandler(productList, stockPrompt)));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt, productPrompt));
     commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
     commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(stockPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(stockPrompt));
-    commandMap.put("/cart/detail", new CartDetailHandler());
-    commandMap.put("/cart/update", new CartUpdateHandler());
-    commandMap.put("/cart/delete", new CartDeleteHandler());
+    commandMap.put("/cart/add"  ,  new CartAddHandler(stockPrompt, cartPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(stockPrompt, cartPrompt));
+    commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(new CartListHandler(stockPrompt)));
-    commandMap.put("/booking/list",   new BookingListHandler(new ProductListHandler(productList, stockPrompt)));
+    commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler(productPrompt));
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());
 
@@ -234,7 +237,6 @@ public class App {
     boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    //    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY | ACCESS_SELLER, "/board/like"));
     boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
