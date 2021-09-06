@@ -1,45 +1,54 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
-import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.BookingList;
+import com.eomcs.util.Prompt;
+
 
 public abstract class AbstractBookingHandler implements Command {
 
-  List<Booking> bookList;
-  List<Cart> cartList;
-
-  public AbstractBookingHandler(List<Booking> bookList, List<Cart> cartList) {
-    this.bookList = bookList;
-    this.cartList = cartList;
-  }
-
-  protected Booking findByNo(int no) {
-    for (Booking Book : bookList) {
-      if (Book.getBookingNumber() == no) {
-        return Book;
+  protected Booking findBooking(String bookingName) {
+    BookingList bookingList = findById(App.getLoginUser().getId());
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getCart().getStock().getProduct().getProductName().equals(bookingName)) {
+        return booking;
       }
     }
     return null;
   }
 
-  protected Cart findStock(String name) {
-    for (Cart cart : cartList) {
-      if (cart.getStock().getProduct().getProductName().equals(name)) {
-        return cart;
+  protected BookingList findById(String id) {
+    for (BookingList bookingList : App.allBookingList) {
+      if (bookingList.getId().equals(id)) {
+        return bookingList;
       }
     }
     return null;
   }
 
-  protected Booking findBooking(String name) {
-    for (Booking book : bookList) {
-      if (book.getCart().getStock().getProduct().getProductName().equals(name)) {
-        return book;
-      }
+  protected int checkHour (String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 24) {  
+        System.out.println("입력하신 수는 유효하지 않습니다"); 
+        continue;
+      }           
+      return num;       
     }
-    return null;
   }
+
+  protected int checkMinute (String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 60) {  
+        System.out.println("입력하신 수는 유효하지 않습니다"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
 }
 
 

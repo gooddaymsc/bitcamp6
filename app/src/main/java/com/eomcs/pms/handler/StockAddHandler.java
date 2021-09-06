@@ -1,63 +1,77 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
-  int stockNumber = 1;
-  ProductListHandler productListHandler;
+  AbstractProductHandler productHandler;
+  public StockAddHandler(StockPrompt stockPrompt, AbstractProductHandler productHandler) {
+    super(stockPrompt);
+    this.productHandler = productHandler;
 
-  public StockAddHandler(List<Stock> stockList, ProductListHandler productListHandler) {
-    super(stockList);
-    this.productListHandler = productListHandler;
-
+    StockList teststockList = stockPrompt.findStockListById("aaaa");
     Stock testStock = new Stock();
-    testStock.setProduct(productListHandler.productList.get(0));
+    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
+    testStock.setProduct(productHandler.productList.get(0));
     testStock.setStocks(3);
     testStock.setPrice(38000);
 
-    stockList.add(testStock);
+    App.allStockList.get(0).getSellerStock().add(testStock);
 
+    teststockList = stockPrompt.findStockListById("aaaa");
     testStock = new Stock();
-    testStock.setProduct(productListHandler.productList.get(1));
+    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
+    testStock.setProduct(productHandler.productList.get(1));
     testStock.setStocks(4);
     testStock.setPrice(52000);
 
-    stockList.add(testStock);
+    App.allStockList.get(0).getSellerStock().add(testStock);
+
+    teststockList = stockPrompt.findStockListById("aaa");
+    testStock = new Stock();
+    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
+    testStock.setProduct(productHandler.productList.get(0));
+    testStock.setStocks(3);
+    testStock.setPrice(38000);
+
+    App.allStockList.get(1).getSellerStock().add(testStock);
+
 
   }
 
+  @Override
   public void execute() {   
-    if (App.getLoginUser().getAuthority() == 0 || App.getLoginUser().getAuthority() == 1 ) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER ) {
+
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;
     }
 
     System.out.println("\n[재고등록]");
     Stock stock = new Stock(); 
-    Product product = productListHandler.findByProduct(Prompt.inputString("상품명 : "));
-
+    String productName = Prompt.inputString("상품명 : ");
+    Product product = productHandler.findByProduct(productName);
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;
     }
 
+    if (stockPrompt.findByStock(productName) != null) {
+      System.out.println("이미 추가된 상품입니다.");
+      return;
+    }
+
     stock.setProduct(product);
-    stock.setStockNumber(stockNumber++);
+    StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
+    stock.setStockNumber(stockList.getSellerStock().size()+1);
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
-
-    stockList.add(stock);
+    stockList.getSellerStock().add(stock);
     System.out.println("재고 등록을 완료하였습니다.");
   }
 
 }
-
-
-
-
-
-

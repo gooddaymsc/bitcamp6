@@ -3,10 +3,11 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Cart {
-  private Stock stock; // 장바구니 담을 상품
+  public Stock stock; // 장바구니 담을 상품
   private int cartStocks; // 장바구니상품의 갯수
-  private int cartPrice; // 총금액
+  private int cartPrice; // 총액
   private int cartNumber; //장바구니번호
+  private String sellerId; //판매자 id
   private Date registeredDate;
 
 
@@ -15,7 +16,10 @@ public class Cart {
     return cartPrice;
   }
   public void setCartPrice(int cartPrice) {
-    this.cartPrice = stock.getPrice()*getCartStocks();
+    if (stock != null) {
+      cartPrice = stock.getPrice()*getCartStocks();
+    }
+    this.cartPrice = cartPrice;
   }
   public int getCartStocks() {
     return cartStocks;
@@ -40,6 +44,12 @@ public class Cart {
   }
   public void setRegistrationDate(Date registeredDate) {
     this.registeredDate = registeredDate;
+  }
+  public String getSellerId() {
+    return sellerId;
+  }
+  public void setSellerId(String sellerId) {
+    this.sellerId = sellerId;
   }
 
 }

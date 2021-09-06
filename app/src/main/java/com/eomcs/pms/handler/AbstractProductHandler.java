@@ -12,16 +12,6 @@ public abstract class AbstractProductHandler implements Command {
     this.productList = productList;
   }
 
-
-  protected Product findByNo(int no) {
-    for (Product product : productList) {
-      if (product.getProductNumber() == no) {
-        return product;
-      }
-    }
-    return null;
-  }
-
   protected int checkNum(String label) {
     while(true) {
       int num = Prompt.inputInt(label);

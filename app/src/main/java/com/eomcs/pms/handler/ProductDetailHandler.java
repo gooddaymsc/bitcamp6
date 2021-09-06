@@ -10,6 +10,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
     super(alcoholList);
   }
 
+  @Override
   public void execute() {
     System.out.println("[상품 상세보기]");
 
