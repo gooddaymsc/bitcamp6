@@ -8,10 +8,10 @@ import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
-  AbstractProductHandler abstractProductHandler;
+  ProductPrompt productPrompt;
 
-  public BookingListHandler(AbstractProductHandler abstractProductHandler) {
-    this.abstractProductHandler = abstractProductHandler;
+  public BookingListHandler(ProductPrompt productPrompt) {
+    this.productPrompt = productPrompt;
   }
 
 
@@ -36,15 +36,12 @@ public class BookingListHandler extends AbstractBookingHandler{
 
     }
 
+    String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >> \n 상품명 : ");
+    if (input.equals("0")) {
+      return;
+    } else {
+      Product bookingProduct = productPrompt.findByProduct(input);
 
-    int i = 1;
-    for(Booking booking : bookingList.getBooking() ) {
-      System.out.print(i++);
-      System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
-      System.out.printf("예약일시 : %s \n", booking.getRegisteredDate());
-      System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
-      System.out.printf("픽업 예약날짜 : %s\n", booking.getBookingDate());
-      System.out.printf("픽업 예약시간: %d시 %d분 \n", booking.getBookingHour(), booking.getBookingMinute());
 
       System.out.println("==================================");
 
@@ -76,7 +73,7 @@ public class BookingListHandler extends AbstractBookingHandler{
           Product bookingProduct = abstractProductHandler.findByProduct(input);
 
           if (bookingProduct == null) {
-            System.out.println("해당 상품이 없습니다.");
+            System.out.println("해당 상품이 없습니다.");å
             return;
           }
 

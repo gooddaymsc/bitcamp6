@@ -8,7 +8,7 @@ import com.eomcs.util.Prompt;
 public class ProductSearchHandler extends AbstractProductHandler {
 
   List<SellerPrivacy> sellerList;
-  public ProductSearchHandler(List<Product> productList, List<SellerPrivacy> sellerList) {
+  public ProductSearchHandler(ProductPrompt productList, List<SellerPrivacy> sellerList) {
     super(productList);
     this.sellerList = sellerList;
   }
@@ -20,7 +20,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     String adress = Prompt.inputString("주소입력: ");       //구까지 입력받도록 해야함
 
-    Product productName = findByProduct(Prompt.inputString("상품입력"));
+    Product productName /* = indByProduct(Prompt.inputString("상품입력")) */;
 
     if (productName == null) {
       System.out.println("입력하신 상품이 없습니다.");

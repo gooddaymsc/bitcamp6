@@ -11,37 +11,41 @@ import com.eomcs.util.Prompt;
 
 public class CartAddHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
-  public CartAddHandler(StockPrompt stockPrompt) {
+  public CartAddHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
+    super(cartPrompt);
     this.stockPrompt = stockPrompt;
 
-    CartList testCartList = findCartListById("aa");
+    CartList testCartList = cartPrompt.findCartListById("aa");
     Cart testCart = new Cart();
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(0));
+    testCart.setStock(stockPrompt.findStockListById("aaa").getSellerStock().get(0));
     testCart.setCartNumber(1);
-    testCart.setCartStocks(1);
-    testCart.setCartPrice(stockPrompt.findStockListById("aaaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
+    testCart.setCartStocks(2);
+    testCart.setCartPrice(stockPrompt.findStockListById("aaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
+    testCart.setSellerId("aaa");
     testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     App.allCartList.get(0).getPrivacyCart().add(testCart);
 
-    testCartList = findCartListById("aa");
+    testCartList = cartPrompt.findCartListById("aa");
     testCart = new Cart();
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
     testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(1));
     testCart.setCartNumber(2);
     testCart.setCartStocks(2);
+    testCart.setSellerId("aaaa");
     testCart.setCartPrice(stockPrompt.findStockListById("aaaa").getSellerStock().get(1).getPrice()*testCart.getCartStocks());
     testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     App.allCartList.get(0).getPrivacyCart().add(testCart);
 
-    testCartList = findCartListById("a");
+    testCartList = cartPrompt.findCartListById("a");
     testCart = new Cart();
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
     testCart.setStock(stockPrompt.findStockListById("aaa").getSellerStock().get(0));
-    testCart.setCartNumber(1);
+    testCart.setCartNumber(3);
     testCart.setCartStocks(1);
+    testCart.setSellerId("aaa");
     testCart.setCartPrice(stockPrompt.findStockListById("aaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
     testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
@@ -59,10 +63,6 @@ public class CartAddHandler extends AbstractCartHandler {
     System.out.println("\n[장바구니 등록]");
     Cart cart = new Cart();
     HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
-    if (hashStock == null) {
-      System.out.println("해당 상품이 없습니다.");
-      return;
-    }
 
     if (hashStock.size() == 0) {
       System.out.println("해당 상품을 갖는 판매자가 없습니다.");
@@ -80,7 +80,7 @@ public class CartAddHandler extends AbstractCartHandler {
     cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
     System.out.println("장바구니가 등록되었습니다.");
-    CartList cartList = findCartListById(App.getLoginUser().getId());
+    CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
     cartList.getPrivacyCart().add(cart);
   }
 }

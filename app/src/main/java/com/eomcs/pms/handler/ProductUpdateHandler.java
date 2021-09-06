@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
@@ -8,8 +7,10 @@ import com.eomcs.util.Prompt;
 
 public class ProductUpdateHandler extends AbstractProductHandler {
 
-  public ProductUpdateHandler(List<Product> productList) {
-    super(productList);
+  ProductPrompt productPrompt;
+
+  public ProductUpdateHandler(ProductPrompt productPrompt) {
+    super(productPrompt);
   }
 
   @Override
@@ -21,7 +22,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
     while(true) {
       System.out.println("[상품 변경]");
 
-      Product product = findByProduct(Prompt.inputString("변경할 상품명 : "));
+      Product product = productPrompt.findByProduct(Prompt.inputString("변경할 상품명 : "));
 
       if (product == null) {
         System.out.println("해당 상품이 존재하지 않습니다.");

@@ -1,8 +1,11 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
+import java.sql.Date;
+import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
@@ -10,17 +13,20 @@ import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
   StockPrompt stockPrompt;
+  ProductPrompt productPrompt;
+  CartPrompt cartPrompt;
   static int stockNumber = 1;
-  public ProductListHandler(List<Product> productList, StockPrompt stockPrompt) {
-    super(productList);
+  public ProductListHandler(ProductPrompt productPrompt, StockPrompt stockPrompt, CartPrompt cartPrompt) {
+    super(productPrompt);
     this.stockPrompt = stockPrompt;
+    this.cartPrompt = cartPrompt;
   }
 
   @Override
   public void execute() {
 
     System.out.println("[상품 목록]");
-    for (Product product : productList) {
+    for (Product product : productPrompt.productList) {
       System.out.printf("%d, %s, %s, %s, %s, %.2f, %d, %d, %d \n", 
           product.getProductNumber(), 
           product.getProductName(), 
@@ -34,13 +40,37 @@ public class ProductListHandler extends AbstractProductHandler {
     }
 
     if (App.getLoginUser().getAuthority() == Menu.ACCESS_PRIVACY ) {
+      System.out.println("\n[장바구니 등록]");
+      Cart cart =new Cart();
+      HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
+      if (hashStock == null) {
+        System.out.println("해당 상품이 없습니다.");
+        return;
+      }
 
+      if (hashStock.size() == 0) {
+        System.out.println("해당 상품을 갖는 판매자가 없습니다.");
+        return;
+      }
+      String storeName = Prompt.inputString("가게명을 선택하세요 > ");
+
+      cart.setStock(hashStock.get(storeName));
+      int stockNumber = Prompt.inputInt("수량 : ");
+      cart.setCartStocks(stockNumber);
+      cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
+      cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
+      cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
+      cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+      System.out.println("장바구니가 등록되었습니다.");
+      CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
+      cartList.getPrivacyCart().add(cart);
       return;
+
     } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
       System.out.println("\n[재고등록]");
       Stock stock = new Stock(); 
       String productName = Prompt.inputString("상품명 : ");
-      Product product = findByProduct(productName);
+      Product product = productPrompt.findByProduct(productName);
 
 
       if (product == null) {
