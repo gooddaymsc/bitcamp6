@@ -2,96 +2,80 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
 
 public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
-  static int size = 1;
+  int privacyNumber = 1;
   List<Manager> managerList;
 
   public PrivacyAddHandler(List<Privacy> privacyList, List<Manager> managerList) {
     super(privacyList);
     this.managerList = managerList;
-    Privacy privacy = new Privacy();
+    Privacy testprivacy = new Privacy();
+    Manager testmanager = new Manager();
 
-    privacy.setId("aa");
-    privacy.setPassword("aa");
-    privacy.setAuthority(1);
-    privacy.setName("aa");
-    privacy.setNickname("aa");
-    privacy.setEmail("aa");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("aa.gif");
-    privacy.setPhoneNumber("010-1111-1111");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    privacyList.add(privacy);
+    testprivacy.setNumber(privacyNumber++);
+    testprivacy.setId("aa");
+    testprivacy.setPassword("aa");
+    testprivacy.setAuthority(Menu.ACCESS_PRIVACY);
+    testprivacy.setName("aa");
+    testprivacy.setNickname("aa");
+    testprivacy.setEmail("aa");
+    testprivacy.setBirthday(Date.valueOf("2021-1-1"));
+    testprivacy.setPhoto("aa.gif");
+    testprivacy.setAddress("서울 강남구");
+    testprivacy.setPhoneNumber("010-1111-1111");
+    testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    privacyList.add(testprivacy);
 
-    privacy.setId("aa");
-    privacy.setPassword("aa");
-    privacy.setAuthority(1);
-    managerList.add(privacy);
+    testmanager.setId("aa");
+    testmanager.setPassword("aa");
+    testmanager.setAuthority(Menu.ACCESS_PRIVACY);
+    managerList.add(testmanager);
 
-    privacy = new Privacy();
-    privacy.setId("bb");
-    privacy.setPassword("bb");
-    privacy.setAuthority(1);
-    privacy.setName("bb");
-    privacy.setNickname("bb");
-    privacy.setEmail("bb");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("bb.gif");
-    privacy.setPhoneNumber("010-2222-2222");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    privacyList.add(privacy);
+    //일반회원을 생성할때 일반회원의 예약목록들을 저장할 list를 생성함.
+    BookingList testBookingList = new BookingList();
+    testBookingList.setId(testprivacy.getId());
+    App.allBookingList.add(testBookingList);
 
-    privacy.setId("bb");
-    privacy.setPassword("bb");
-    privacy.setAuthority(1);
-    managerList.add(privacy);
+    testprivacy = new Privacy();
 
-    privacy = new Privacy();
-    privacy.setId("cc");
-    privacy.setPassword("cc");
-    privacy.setAuthority(1);
-    privacy.setName("cc");
-    privacy.setNickname("cc");
-    privacy.setEmail("cc");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("cc.gif");
-    privacy.setPhoneNumber("010-3333-3333");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    privacyList.add(privacy);
+    testprivacy.setNumber(privacyNumber++);
+    testprivacy.setId("a");
+    testprivacy.setPassword("a");
+    testprivacy.setAuthority(Menu.ACCESS_PRIVACY);
+    testprivacy.setName("a");
+    testprivacy.setNickname("a");
+    testprivacy.setEmail("a");
+    testprivacy.setBirthday(Date.valueOf("2021-1-3"));
+    testprivacy.setPhoto("aa.gif");
+    testprivacy.setAddress("서울 동작구");
+    testprivacy.setPhoneNumber("010-1111-1113");
+    testprivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    privacyList.add(testprivacy);
 
-    privacy.setId("cc");
-    privacy.setPassword("cc");
-    privacy.setAuthority(1);
-    managerList.add(privacy);
+    testmanager = new Manager();
 
-    privacy = new Privacy();
-    privacy.setId("dd");
-    privacy.setPassword("dd");
-    privacy.setAuthority(1);
-    privacy.setName("dd");
-    privacy.setNickname("dd");
-    privacy.setEmail("dd");
-    privacy.setBirthday(Date.valueOf("2021-1-1"));
-    privacy.setPhoto("dd.gif");
-    privacy.setPhoneNumber("010-4444-4444");
-    privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    privacyList.add(privacy);
+    testmanager.setId("a");
+    testmanager.setPassword("a");
+    testmanager.setAuthority(Menu.ACCESS_PRIVACY);
+    managerList.add(testmanager);
 
-    privacy.setId("dd");
-    privacy.setPassword("dd");
-    privacy.setAuthority(1);
-    managerList.add(privacy);
+    testBookingList = new BookingList();
+    testBookingList.setId(testprivacy.getId());
+    App.allBookingList.add(testBookingList);
+
   }
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != 0) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
@@ -99,15 +83,15 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     System.out.println("\n[회원 등록]");
 
     Privacy privacy = new Privacy();
-    privacy.setAuthority(1);
-    privacy.setNumber(size++);
+    privacy.setAuthority(Menu.ACCESS_PRIVACY);
+    privacy.setNumber(privacyNumber++);
 
     //아이디가 중복되면 다시 아이디 재설정.
-    String id = Prompt.inputString("아이디를 입력해주세요: ");
+    String id = Prompt.inputString("등록할 아이디: ");
 
-    int size = managerList.size();
+    int listSize = managerList.size();
 
-    for (int i=0; i<size; i++) {
+    for (int i=0; i<listSize; i++) {
 
       if (managerList.get(i).getId().equals(id)) {
         System.out.println("중복되는 아이디입니다.");
@@ -116,13 +100,15 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     }
 
     privacy.setId(id);
-    privacy.setName(Prompt.inputString("이름을 입력해주세요: "));
-    privacy.setNickname(Prompt.inputString("닉네임을 입력해주세요: "));
-    privacy.setEmail(Prompt.inputString("이메일을 입력해주세요: "));
-    privacy.setBirthday(Prompt.inputDate("생일을 입력해주세요: "));
-    privacy.setPassword(Prompt.inputString("암호를 입력해주세요: "));
-    privacy.setPhoto(Prompt.inputString("사진을 등록해주세요: "));
-    privacy.setPhoneNumber(Prompt.inputString("전화를 입력해주세요: "));
+
+    privacy.setName(Prompt.inputString("이름: "));
+    privacy.setNickname(Prompt.inputString("닉네임: "));
+    privacy.setEmail(Prompt.inputString("이메일: "));
+    privacy.setBirthday(Prompt.inputDate("생일: "));
+    privacy.setPassword(Prompt.inputString("암호: "));
+    privacy.setPhoto(Prompt.inputString("사진: "));
+    privacy.setPhoneNumber(Prompt.inputString("전화: "));
+    privacy.setAddress(Prompt.inputString("주소: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     privacyList.add(privacy);

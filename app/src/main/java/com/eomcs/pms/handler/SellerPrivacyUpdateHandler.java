@@ -1,61 +1,77 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyUpdateHandler extends AbstractSellerPrivacyHandler {
 
-  public SellerPrivacyUpdateHandler(List<SellerPrivacy> memberList) {
-    super(memberList);
+  public SellerPrivacyUpdateHandler(List<SellerPrivacy> sellerList) {
+    super(sellerList);
   }
 
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
       return;
     }
-    System.out.println("\n[판매자 변경]");
-    String id = Prompt.inputString("번호를 입력하세요: ");
 
-    SellerPrivacy member = findById(id);
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
+      System.out.println("\n[개인정보 변경]");
 
-    if (member == null) {
-      System.out.println("해당 번호의 회원이 없습니다.");
-      return;
-    }
+      SellerPrivacy member = findById(App.getLoginUser().getId());
 
-    String name = Prompt.inputString("변경 후의 이름(" + member.getName()  + ")를 입력해주세요: ");
-    String nickName = Prompt.inputString("변경 후의 닉네임(" + member.getNickname()  + ")를 입력해주세요: ");
-    String email = Prompt.inputString("변경 후의 이메일(" + member.getEmail() + ")를 입력해주세요: ");
-    Date birthDay = Prompt.inputDate("변경 후의 생일(" + member.getBirthday() + ")를 입력해주세요: ");
-    String password = Prompt.inputString("변경 후의 암호를 입력해주세요: ");
-    String photo = Prompt.inputString("변경 후의 사진(" + member.getPhoto() + ")를 입력해주세요: ");
-    String tel = Prompt.inputString("변경 후의 전화(" + member.getPhoneNumber() + ")를 입력해주세요: ");
-    String bussinessNo = Prompt.inputString("변경 후의 사업자번호(" + member.getBusinessNumber() + ")를 입력해주세요: ");
-    String bussinessAddress = Prompt.inputString("변경 후의 사업장주소(" + member.getBusinessAddress() + ")를 입력해주세요: ");
-    String bussinessTel = Prompt.inputString("변경 후의 사업장번호(" + member.getBusinessPlaceNumber() + ")를 입력해주세요: ");
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", member.getNickname()));
+      String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", member.getEmail()));
+      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", member.getName()));
+      String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", member.getPhoto()));
+      String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", member.getPhoneNumber()));
+      String bussinessName = Prompt.inputString(String.format("가게명(변경 전 : %s) : ", member.getBusinessName()));
+      String bussinessNo = Prompt.inputString(String.format("사업자번호(변경 전 : %s) : ", member.getBusinessNumber()));
+      String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", member.getBusinessAddress()));
+      String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", member.getBusinessPlaceNumber()));
 
-    if (input.equalsIgnoreCase("y")) {     
-      member.setName(name);
-      member.setNickname(nickName);
-      member.setEmail(email);
-      member.setBirthday(birthDay);
-      member.setPassword(password);
-      member.setPhoto(photo);
-      member.setPhoneNumber(tel);
-      member.setBusinessNumber(bussinessNo);
-      member.setBusinessAddress(bussinessAddress);
-      member.setBusinessPlaceNumber(bussinessTel);  
-      System.out.println("판매자 정보를 변경하였습니다.");
-      return;
+      String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+
+      if (input.equalsIgnoreCase("y")) {     
+        member.setNickname(nickName);
+        member.setEmail(email);
+        member.setPassword(password);
+        member.setPhoto(photo);
+        member.setPhoneNumber(tel);
+        member.setBusinessName(bussinessName);
+        member.setBusinessNumber(bussinessNo);
+        member.setBusinessAddress(bussinessAddress);
+        member.setBusinessPlaceNumber(bussinessTel);  
+        System.out.println("개인 정보를 변경하였습니다.");
+        return;
+      } else {
+        System.out.println("개인 정보 변경을 취소하였습니다.");
+        return;
+      }
     } else {
-      System.out.println("판매자 정보 변경을 취소하였습니다.");
+      System.out.println("\n[판매자 변경]");
+      String id = Prompt.inputString("변경할 판매자 아이디: ");
+
+      SellerPrivacy member = findById(id);
+
+      if (member == null) {
+        System.out.println("해당 아이디의 회원이 없습니다.");
+        return;
+      }
+      int level = Prompt.inputInt(String.format("등급(변경 전 : %d)", member.getLevel()));
+
+      String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+      if (input.equalsIgnoreCase("y")) {
+        member.setLevel(level);
+        System.out.println("회원 변경을 완료하였습니다.");
+        return;
+      }
+      System.out.println("회원 변경을 취소하였습니다.");
       return;
     }
   }

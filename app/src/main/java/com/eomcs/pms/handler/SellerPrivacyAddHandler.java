@@ -2,122 +2,111 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
+
+  int sellerPrivacyNumber = 1;
   List<Manager> managerList;
-  public SellerPrivacyAddHandler(List<SellerPrivacy> memberList, List<Manager> managerList) {
-    super(memberList);
+
+  public SellerPrivacyAddHandler(List<SellerPrivacy> sellerList, List<Manager> managerList) {
+    super(sellerList);
     this.managerList = managerList;
+    SellerPrivacy testsellerPrivacy = new SellerPrivacy();
+    Manager testmanager = new Manager();
 
-    SellerPrivacy sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("aaaa");
-    sellerPrivacy.setPassword("aaaa");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("aaaa");
-    sellerPrivacy.setNickname("aaaa");
-    sellerPrivacy.setEmail("aaaa");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("aaaa.gif");
-    sellerPrivacy.setPhoneNumber("010-1111-1111");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("aaaa");
-    sellerPrivacy.setBusinessAddress("aaaa");
-    sellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
+    testsellerPrivacy.setNumber(sellerPrivacyNumber++);
+    testsellerPrivacy.setId("aaaa");
+    testsellerPrivacy.setPassword("aaaa");
+    testsellerPrivacy.setAuthority(Menu.ACCESS_SELLER);
+    testsellerPrivacy.setName("aaaa");
+    testsellerPrivacy.setNickname("aaaa");
+    testsellerPrivacy.setEmail("aaaa");
+    testsellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
+    testsellerPrivacy.setPhoto("aaaa.gif");
+    testsellerPrivacy.setPhoneNumber("010-1111-1111");
+    testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testsellerPrivacy.setBusinessName("오늘와인한잔");
+    testsellerPrivacy.setBusinessNumber("aaaa");
+    testsellerPrivacy.setBusinessAddress("aaaa");
+    testsellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
 
-    memberList.add(sellerPrivacy);
+    sellerList.add(testsellerPrivacy);
 
-    sellerPrivacy.setId("aaaa");
-    sellerPrivacy.setPassword("aaaa");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    testmanager.setId("aaaa");
+    testmanager.setPassword("aaaa");
+    testmanager.setAuthority(Menu.ACCESS_SELLER);
+    managerList.add(testmanager);
 
-    sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("bbbb");
-    sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("bbbb");
-    sellerPrivacy.setNickname("bbbb");
-    sellerPrivacy.setEmail("bbbb");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("bbbb.gif");
-    sellerPrivacy.setPhoneNumber("010-2222-2222");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("bbbb");
-    sellerPrivacy.setBusinessAddress("bbbb");
-    sellerPrivacy.setBusinessPlaceNumber("010-2222-2222");
-    memberList.add(sellerPrivacy);
+    //판매자를 생성할때 판매자의 재고목록들을 저장할 list를 생성함.
+    StockList testStockList = new StockList();
+    testStockList.setId(testsellerPrivacy.getId());
+    App.allStockList.add(testStockList);
 
-    sellerPrivacy.setId("bbbb");
-    sellerPrivacy.setPassword("bbbb");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    //판매자를 생성할때 판매자의 예약목록들을 저장할 list를 생성함.
+    BookingList testBookingList = new BookingList();
+    testBookingList.setId(testsellerPrivacy.getId());
+    App.allBookingList.add(testBookingList);
 
-    sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("cccc");
-    sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("cccc");
-    sellerPrivacy.setNickname("cccc");
-    sellerPrivacy.setEmail("cccc");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("cccc.gif");
-    sellerPrivacy.setPhoneNumber("010-3333-3333");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("cccc");
-    sellerPrivacy.setBusinessAddress("cccc");
-    sellerPrivacy.setBusinessPlaceNumber("010-3333-3333");
-    memberList.add(sellerPrivacy);
+    testsellerPrivacy = new SellerPrivacy();
 
-    sellerPrivacy.setId("cccc");
-    sellerPrivacy.setPassword("cccc");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    testsellerPrivacy.setNumber(sellerPrivacyNumber++);
+    testsellerPrivacy.setId("aaa");
+    testsellerPrivacy.setPassword("aaa");
+    testsellerPrivacy.setAuthority(Menu.ACCESS_SELLER);
+    testsellerPrivacy.setName("aaa");
+    testsellerPrivacy.setNickname("aaa");
+    testsellerPrivacy.setEmail("aaa");
+    testsellerPrivacy.setBirthday(Date.valueOf("2021-1-2"));
+    testsellerPrivacy.setPhoto("aaaa.gif");
+    testsellerPrivacy.setPhoneNumber("010-1111-1112");
+    testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
+    testsellerPrivacy.setBusinessName("비올땐막걸리");
+    testsellerPrivacy.setBusinessNumber("aaa");
+    testsellerPrivacy.setBusinessAddress("aaa");
+    testsellerPrivacy.setBusinessPlaceNumber("010-1111-1112");
 
-    sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setId("dddd");
-    sellerPrivacy.setPassword("dddd");
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setName("dddd");
-    sellerPrivacy.setNickname("dddd");
-    sellerPrivacy.setEmail("dddd");
-    sellerPrivacy.setBirthday(Date.valueOf("2021-1-1"));
-    sellerPrivacy.setPhoto("dddd.gif");
-    sellerPrivacy.setPhoneNumber("010-4444-4444");
-    sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerPrivacy.setBusinessNumber("dddd");
-    sellerPrivacy.setBusinessAddress("dddd");
-    sellerPrivacy.setBusinessPlaceNumber("010-4444-4444");
-    memberList.add(sellerPrivacy);
+    sellerList.add(testsellerPrivacy);
 
-    sellerPrivacy.setId("dddd");
-    sellerPrivacy.setPassword("dddd");
-    sellerPrivacy.setAuthority(2);
-    managerList.add(sellerPrivacy);
+    testmanager = new Manager();
+    testmanager.setId("aaa");
+    testmanager.setPassword("aaa");
+    testmanager.setAuthority(Menu.ACCESS_SELLER);
+    managerList.add(testmanager);
+
+    testStockList = new StockList();
+    testStockList.setId(testsellerPrivacy.getId());
+    App.allStockList.add(testStockList);
+
+    testBookingList = new BookingList();
+    testBookingList.setId(testsellerPrivacy.getId());
+    App.allBookingList.add(testBookingList);
   }
 
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 1 || App.getLoginUser().getAuthority() == 2 
-        || App.getLoginUser().getAuthority() == 3) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_LOGOUT) {
       System.out.println("해당 메뉴는 로그아웃 후 가능합니다.");
       return;
     }
     System.out.println("\n[판매자 등록]");
 
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
-    sellerPrivacy.setAuthority(2);
-    sellerPrivacy.setNumber(size++);
+    sellerPrivacy.setAuthority(0x04);
+    sellerPrivacy.setNumber(sellerPrivacyNumber++);
 
-    String id = Prompt.inputString("아이디를 입력하세요: ");
+    String id = Prompt.inputString("등록할 아이디: ");
 
-    int size = managerList.size();
+    int listSize = managerList.size();
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < listSize; i++) {
       if (managerList.get(i).getId().equals(id)) {
         System.out.println("중복되는 아이디입니다.");
         return;
@@ -126,19 +115,25 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
 
     sellerPrivacy.setId(id);
 
-    sellerPrivacy.setName(Prompt.inputString("이름을 입력하세요: "));
-    sellerPrivacy.setNickname(Prompt.inputString("닉네임을 입력하세요: "));
-    sellerPrivacy.setEmail(Prompt.inputString("이메일을 입력하세요: "));
-    sellerPrivacy.setBirthday(Prompt.inputDate("생일을 입력하세요: "));
-    sellerPrivacy.setPassword(Prompt.inputString("암호를 입력하세요: "));
-    sellerPrivacy.setPhoto(Prompt.inputString("사진을 등록하세요: "));
-    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화를 입력하세요: "));
-    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호를 입력하세요: "));
-    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소를 입력하세요: "));
-    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호를 입력하세요: "));
+    sellerPrivacy.setName(Prompt.inputString("이름 : "));
+    sellerPrivacy.setNickname(Prompt.inputString("닉네임 : "));
+    sellerPrivacy.setEmail(Prompt.inputString("이메일 : "));
+    sellerPrivacy.setBirthday(Prompt.inputDate("생일 : "));
+    sellerPrivacy.setPassword(Prompt.inputString("암호 : "));
+    sellerPrivacy.setPhoto(Prompt.inputString("사진 : "));
+    sellerPrivacy.setPhoneNumber(Prompt.inputString("전화 : "));
+    sellerPrivacy.setBusinessName(Prompt.inputString("가게명 : "));
+    sellerPrivacy.setBusinessNumber(Prompt.inputString("사업자번호 : "));
+    sellerPrivacy.setBusinessAddress(Prompt.inputString("사업장주소 : "));
+    sellerPrivacy.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     sellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(sellerPrivacy);
+    sellerList.add(sellerPrivacy);
     managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));
+
+    StockList StockList = new StockList();
+    //stockList.setId(new List<>());
+    StockList.setId(sellerPrivacy.getId());
+    App.allStockList.add(StockList);
   }
 }
 

@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
@@ -13,12 +14,12 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == 0) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
       System.out.println("권한이 없습니다.\n로그인해주세요...");
       return;
     }
     System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("번호를 입력해주세요: ");
+    int no = Prompt.inputInt("변경할 게시글 번호 : ");
 
     Board board = findByNo(no);
 
@@ -27,9 +28,9 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
       return;
     }
 
-    String title = Prompt.inputString(String.format("변경 후의 제목(%s)을 입력해주세요: ", board.getTitle()));
-    String content = Prompt.inputString(String.format("변경 후의 내용(%s)을 입력해주세요: ", board.getContent()));
-    String tag = Prompt.inputString(String.format("변경 후의 태그(%s)를 입력해주세요: ", board.getTag()));
+    String title = Prompt.inputString(String.format("제목(변경 전 : %s) : ", board.getTitle()));
+    String content = Prompt.inputString(String.format("내용(변경 전 : %s) : ", board.getContent()));
+    String tag = Prompt.inputString(String.format("태그(변경 전 : %s) : ", board.getTag()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {

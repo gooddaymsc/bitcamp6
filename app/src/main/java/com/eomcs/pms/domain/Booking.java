@@ -4,9 +4,14 @@ import java.sql.Date;
 
 public class Booking {
   public Cart cart;
-  private int bookingNumber; //예약번호
-  private String reservation; //예약일시
-  private Date registeredDate; //등록일시
+  private int bookingNumber;     //예약번호
+  private Date bookingDate;      //예약날짜
+  private int bookingHour;      
+  private int bookingMinute;
+  private String bookingTime;    //예약시간
+  private Date registeredDate;   //등록일시
+
+
   public Cart getCart() {
     return cart;
   }
@@ -19,11 +24,29 @@ public class Booking {
   public void setBookingNumber(int bookingNumber) {
     this.bookingNumber = bookingNumber;
   }
-  public String getReservation() {
-    return reservation;
+  public Date getBookingDate() {
+    return bookingDate;
   }
-  public void setReservation(String reservation) {
-    this.reservation = reservation;
+  public void setBookingDate(Date bookingDate) {
+    this.bookingDate = bookingDate;
+  }
+  public int getBookingHour() {
+    return bookingHour;
+  }
+  public void setBookingHour(int bookingHour) {
+    this.bookingHour = bookingHour;
+  }
+  public int getBookingMinute() {
+    return bookingMinute;
+  }
+  public void setBookingMinute(int bookingMinute) {
+    this.bookingMinute = bookingMinute;
+  }
+  public String getBookingTime() {
+    return bookingTime;
+  }
+  public void setBookingTime(String bookingTime) {
+    this.bookingTime = bookingTime;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -31,6 +54,7 @@ public class Booking {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
 
 
 

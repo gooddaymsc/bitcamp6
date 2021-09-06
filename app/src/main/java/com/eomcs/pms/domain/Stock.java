@@ -3,10 +3,11 @@ package com.eomcs.pms.domain;
 
 public class Stock {
 
-  public Product product;
+  private Product product;
   private int stockNumber;            //재고번호
   private int stocks;                 //재고 수량
   private int price;                  //가격
+
 
   public Product getProduct() {
     return product;

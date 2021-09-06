@@ -1,29 +1,12 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
-import com.eomcs.pms.domain.Stock;
-
 public abstract class AbstractStockHandler implements Command {
 
-  List<Stock> stockList;
+  // Stock findByStock(String ProductName) 과 StockList findById(String id) 
+  // => StockPrompt 에 있음.
+  StockPrompt stockPrompt;
 
-  public AbstractStockHandler(List<Stock> stockList) {
-    this.stockList = stockList;
+  public AbstractStockHandler(StockPrompt stockPrompt) {
+    this.stockPrompt = stockPrompt;
   }
-
-  protected Stock findByStock (String ProductName) {
-    for (Stock stock : stockList) {
-      if (stock.product.getProductName().equals(ProductName)) {
-        return stock;
-      }
-    }
-    return null;
-  } 
-
 }
-
-
-
-
-
-

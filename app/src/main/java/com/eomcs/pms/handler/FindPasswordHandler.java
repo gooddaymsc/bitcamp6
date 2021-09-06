@@ -25,62 +25,77 @@ public class FindPasswordHandler {
     }
 
     if (buyerSeller == 1) {
-      String id = Prompt.inputString("아이디를 입력하세요: ");
+      String name = Prompt.inputString("이름을 입력하세요: ");
 
-      if (id == null) {
+      if (name.equals("")) {
         System.out.println("다시 입력해주세요.");
         return;
       }
       for (Privacy s : memberList) {
-        if (id.equals(s.getId())) {
-          String email = Prompt.inputString("이메일을 입력해주세요: ");
-
-          if (email.equals(s.getEmail())) {
-            System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
-            return;
-
-          } else {
-            System.out.println("해당되는 이메일이 없습니다.");
+        if (s.getName().equals(name)) {
+          String id = Prompt.inputString("아이디를 입력해주세요: ");
+          if (name.equals("")) {
+            System.out.println("다시 입력해주세요.");
             return;
           }
-        } else {
-          System.out.println("가입하신 아이디를 확인해주세요.");
-          return;          
+          if (s.getId().equals(id)) {
+            String phoneOrEmail = Prompt.inputString("전화번호 또는 이메일을 입력하세요: ");
+            if (id.equals("")) {
+              System.out.println("다시 입력해주세요.");
+              return;
+            }
+            if (s.getPhoneNumber().equals(phoneOrEmail) || (s.getEmail().equals(phoneOrEmail))) {
+              System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
+              return;
+            } else {
+              System.out.println("입력하신 전화번호 또는 이메일에 해당하는 회원이 없습니다.");
+              return;
+            }
+          } else {
+            System.out.println("아이디를 확인해주세요.");
+            return;           
+          }
         }
       }
+      System.out.println("회원이 아닙니다.");
+      return;
     }
 
     if (buyerSeller == 2) {
-      String id = Prompt.inputString("아이디를 입력하세요: ");
-      if (id == null) {
+      String name = Prompt.inputString("이름을 입력하세요: ");
+
+      if (name.equals("")) {
         System.out.println("다시 입력해주세요.");
         return;
       }
       for (SellerPrivacy s : sellerList) {
-        if (id.equals(s.getId())) {
-          String email = Prompt.inputString("이메일을 입력해주세요: ");
-
-          if (email.equals(s.getEmail())) {
-            String businessNumber = Prompt.inputString("사업자번호를 입력해주세요: ");
-
-            if (businessNumber.equals(s.getBusinessNumber())) {
+        if (s.getName().equals(name)) {
+          String id = Prompt.inputString("아이디를 입력해주세요: ");
+          if (name.equals("")) {
+            System.out.println("다시 입력해주세요.");
+            return;
+          }
+          if (s.getId().equals(id)) {
+            String phoneOrEmail = Prompt.inputString("전화번호 또는 이메일을 입력하세요: ");
+            if (id.equals("")) {
+              System.out.println("다시 입력해주세요.");
+              return;
+            }
+            if (s.getPhoneNumber().equals(phoneOrEmail) || (s.getEmail().equals(phoneOrEmail))) {
               System.out.printf("회원의 비밀번호는 %s 입니다.\n", s.getPassword());
               return;
             } else {
-              System.out.println("해당되는 사업자번호가 없습니다.");
-              return;              
+              System.out.println("입력하신 전화번호 또는 이메일에 해당하는 회원이 없습니다.");
+              return;
             }
-
           } else {
-            System.out.println("해당되는 이메일이 없습니다.");
-            return;
+            System.out.println("아이디를 확인해주세요.");
+            return;           
           }
-
-        } else {
-          System.out.println("가입하신 아이디를 확인해주세요.");
-          return;
         }
       }
+      System.out.println("회원이 아닙니다.");
+      return;
     }
   }
 }

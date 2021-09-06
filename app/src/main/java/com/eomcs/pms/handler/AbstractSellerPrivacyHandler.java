@@ -5,17 +5,16 @@ import com.eomcs.pms.domain.SellerPrivacy;
 
 public abstract class AbstractSellerPrivacyHandler implements Command {
 
-  protected List<SellerPrivacy> memberList;
+  protected List<SellerPrivacy> sellerList;
   int size=1;
 
-  public AbstractSellerPrivacyHandler(List<SellerPrivacy> memberList) {
-    this.memberList = memberList;
+  public AbstractSellerPrivacyHandler(List<SellerPrivacy> sellerList) {
+    this.sellerList = sellerList;
   }
 
   protected SellerPrivacy findById(String id) {
-    SellerPrivacy[] arr = memberList.toArray(new SellerPrivacy[0]);
-    for (SellerPrivacy member : arr) {
-      if (member.getId() == id) {
+    for (SellerPrivacy member : sellerList) {
+      if (member.getId().equals(id)) {
         return member;
       }
     }
