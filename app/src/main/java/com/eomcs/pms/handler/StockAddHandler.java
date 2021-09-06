@@ -35,8 +35,8 @@ public class StockAddHandler extends AbstractStockHandler {
     testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
     testStock.setProduct(productHandler.productList.get(0));
-    testStock.setStocks(3);
-    testStock.setPrice(38000);
+    testStock.setStocks(2);
+    testStock.setPrice(23000);
 
     App.allStockList.get(1).getSellerStock().add(testStock);
 
