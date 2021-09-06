@@ -13,7 +13,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     super(productList);
 
     Product testProduct = new Product();
-
+    testProduct = new Product();
     testProduct.setProductNumber(productNumber++);
     testProduct.setProductName("쇼비뇽");
     testProduct.setProductType("와인");
@@ -23,6 +23,19 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setSugerLevel(2);
     testProduct.setAcidity(2);
     testProduct.setWeight(3);
+
+    productList.add(testProduct);
+
+    testProduct = new Product();
+    testProduct.setProductNumber(productNumber++);
+    testProduct.setProductName("쇼비뇽");
+    testProduct.setProductType("전통주");
+    testProduct.setCountryOrigin("한국");
+    testProduct.setVariety("-");
+    testProduct.setAlcoholLevel(3);
+    testProduct.setSugerLevel(1);
+    testProduct.setAcidity(2);
+    testProduct.setWeight(1);
 
     productList.add(testProduct);
 

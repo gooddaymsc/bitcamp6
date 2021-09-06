@@ -18,6 +18,7 @@ import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.ProductList;
 import com.eomcs.pms.domain.SellerPrivacy;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
@@ -49,6 +50,7 @@ import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
+import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.SellerPrivacyAddHandler;
 import com.eomcs.pms.handler.SellerPrivacyDeleteHandler;
@@ -77,7 +79,8 @@ public class App {
   List<Stock> stockList = new ArrayList<>();
   // 판매자
   List<Product> productList = new ArrayList<>();
-  //  List<Cart> sellerCartList = new ArrayList<>();
+
+  public static List<ProductList> allProductList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
   public static List<CartList> allCartList = new ArrayList<>();
@@ -146,6 +149,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
     commandMap.put("/product/list",   new ProductListHandler(productList, stockPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productList, sellerPrivacyList));
     commandMap.put("/product/detail", new ProductDetailHandler(productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productList));
     commandMap.put("/product/delete", new ProductDeleteHandler(productList));
@@ -234,7 +238,6 @@ public class App {
     boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    //    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY | ACCESS_SELLER, "/board/like"));
     boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
@@ -268,6 +271,7 @@ public class App {
 
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
+    productMenu.add(new MenuItem("상품검색",  "/product/search"));
     productMenu.add(new MenuItem("상세보기", "/product/detail"));
     productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
     productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
