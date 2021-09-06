@@ -55,7 +55,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     Cart bookingProduct = CartListHandler.findByCart(Prompt.inputString("상품명 : "));
     if (bookingProduct == null) {
-      System.out.println("해당 상품이 없습니다.");
+      System.out.println("해당 상품이 장바구니에 담겨있지 않습니다.");
       return;
     }
     booking.setCart(bookingProduct);

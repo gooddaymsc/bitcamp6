@@ -37,6 +37,12 @@ public class StockPrompt {
 
   //--------상품 검색시 판매자정보 반환
   protected HashMap<String, Stock> findBySellerId (String StockName) {
+    //    Stock stockName = findByStock(StockName);
+    //    if (stockName==null) {
+    //      System.out.println("존재하지 않는 상품입니다.");
+    //      return null;
+    //    }
+
     HashMap<String, Stock> hashStock= new HashMap<>();
     for (StockList stockList : App.allStockList) {
       for (Stock stock : stockList.getSellerStock()) {

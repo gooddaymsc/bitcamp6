@@ -30,6 +30,7 @@ public class Product {
     return productType;
   }
   public void setProductType(String productType) {
+    //조건문
     this.productType = productType;
   }
   public String getCountryOrigin() {
