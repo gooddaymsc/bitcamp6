@@ -19,8 +19,8 @@ public class CartAddHandler extends AbstractCartHandler {
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
     testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(0));
     testCart.setCartNumber(1);
-    testCart.setCartPrice(100);
     testCart.setCartStocks(1);
+    testCart.setCartPrice(stockPrompt.findStockListById("aaaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
     testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     App.allCartList.get(0).getPrivacyCart().add(testCart);
@@ -30,8 +30,8 @@ public class CartAddHandler extends AbstractCartHandler {
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
     testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(1));
     testCart.setCartNumber(2);
-    testCart.setCartPrice(200);
     testCart.setCartStocks(2);
+    testCart.setCartPrice(stockPrompt.findStockListById("aaaa").getSellerStock().get(1).getPrice()*testCart.getCartStocks());
     testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     App.allCartList.get(0).getPrivacyCart().add(testCart);
@@ -41,8 +41,8 @@ public class CartAddHandler extends AbstractCartHandler {
     testCart.setCartNumber(testCartList.getPrivacyCart().size());
     testCart.setStock(stockPrompt.findStockListById("aaa").getSellerStock().get(0));
     testCart.setCartNumber(1);
-    testCart.setCartPrice(100);
     testCart.setCartStocks(1);
+    testCart.setCartPrice(stockPrompt.findStockListById("aaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
     testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     App.allCartList.get(1).getPrivacyCart().add(testCart);
@@ -73,7 +73,9 @@ public class CartAddHandler extends AbstractCartHandler {
     String storeName = Prompt.inputString("가게명을 선택하세요 > ");
 
     cart.setStock(hashStock.get(storeName));
-    cart.setCartStocks(Prompt.inputInt("수량 : "));
+    int stockNumber = Prompt.inputInt("수량 : ");
+    cart.setCartStocks(stockNumber);
+    cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
     cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
     cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));

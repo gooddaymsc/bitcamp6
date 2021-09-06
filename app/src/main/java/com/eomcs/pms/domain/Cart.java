@@ -12,26 +12,30 @@ public class Cart {
 
 
 
-  public int getCartPrice() {
-    return cartPrice;
-  }
-  public void setCartPrice(int cartPrice) {
-    if (stock != null) {
-      cartPrice = stock.getPrice()*getCartStocks();
-    }
-    this.cartPrice = cartPrice;
-  }
+
   public int getCartStocks() {
     return cartStocks;
   }
   public void setCartStocks(int cartStocks) {
     this.cartStocks = cartStocks;
   }
+
+
   public Stock getStock() {
     return stock;
   }
   public void setStock(Stock stock) {
     this.stock = stock;
+  }
+
+  public int getCartPrice() {
+    return cartPrice;
+  }
+  public void setCartPrice(int cartPrice) {
+    //    if (stock != null) {
+    //      cartPrice = (stock.getPrice())*getCartStocks();
+    //    }
+    this.cartPrice = cartPrice;
   }
   public int getCartNumber() {
     return cartNumber;
