@@ -46,13 +46,13 @@ public class FindIdHandler {
         System.out.println("다시 입력해주세요.");
         return;
       }
-      for (Privacy s : sellerList) {
+      for (SellerPrivacy s : sellerList) {
         if (phoneNumber.equals(s.getPhoneNumber())) {
           System.out.printf("회원의 아이디는 %s 입니다.\n", s.getId());
           return;
         }
       }
-      System.out.println("입력하신 전화번호는 회원이 아닙니다.");
+      System.out.println("입력하신 전화번호는 회원111이 아닙니다.");
       return;
     }
   }
