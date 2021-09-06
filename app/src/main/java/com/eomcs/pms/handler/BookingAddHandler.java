@@ -62,10 +62,12 @@ public class BookingAddHandler extends AbstractBookingHandler {
     BookingList bookingList = findById(App.getLoginUser().getId());
     booking.setBookingNumber(bookingList.getBooking().size());
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
-    booking.setBookingHour(Prompt.inputInt("픽업시간(시): "));
-    booking.setBookingMinute(Prompt.inputInt("픽업시간(분): "));
+    booking.setBookingHour(checkHour("픽업시간(시): "));
+    booking.setBookingMinute(checkMinute("픽업시간(분): "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
+
     bookingList.getBooking().add(booking);
+
     System.out.println("픽업예약을 완료하였습니다.");
   }
 

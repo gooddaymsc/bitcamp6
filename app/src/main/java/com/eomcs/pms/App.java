@@ -161,10 +161,9 @@ public class App {
     commandMap.put("/cart/delete", new CartDeleteHandler());
 
     commandMap.put("/booking/add",    new BookingAddHandler(new CartListHandler(stockPrompt)));
-    commandMap.put("/booking/list",   new BookingListHandler());
+    commandMap.put("/booking/list",   new BookingListHandler(new ProductListHandler(productList, stockPrompt)));
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());
-
 
   }
 
