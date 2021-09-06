@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
+import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
@@ -58,17 +59,27 @@ public class CartAddHandler extends AbstractCartHandler {
     }
     System.out.println("\n[장바구니 등록]");
     Cart cart = new Cart();
-    Stock cartProduct = stockPrompt.findByStock(Prompt.inputString("상품명 : "));
-    if (cartProduct == null) {
+    HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
+    if (hashStock == null) {
       System.out.println("해당 상품이 없습니다.");
       return;
     }
-    cart.setStock(cartProduct);
-    CartList cartList = findById(App.getLoginUser().getId());
-    cart.setCartNumber(cartList.getPrivacyCart().size());
+
+    if (hashStock.size() == 0) {
+      System.out.println("해당 상품을 갖는 판매자가 없습니다.");
+      return;
+    }
+
+    //----------장바구니 추가
+    String storeName = Prompt.inputString("가게명을 선택하세요 > ");
+
+    cart.setStock(hashStock.get(storeName));
     cart.setCartStocks(Prompt.inputInt("수량 : "));
+    cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
+    cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
-    cartList.getPrivacyCart().add(cart);
     System.out.println("장바구니가 등록되었습니다.");
+    CartList cartList = findCartListById(App.getLoginUser().getId());
+    cartList.getPrivacyCart().add(cart);
   }
 }

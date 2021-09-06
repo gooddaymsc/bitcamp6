@@ -20,7 +20,7 @@ public class StockListHandler extends AbstractStockHandler {
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
       System.out.println("[재고 목록]");
-      StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
+      StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
 
       if (stockList.getSellerStock().size() == 0) {
         System.out.println("아직 추가한 상품이 없습니다.");
