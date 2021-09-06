@@ -1,17 +1,12 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
-
-  public BookingUpdateHandler(List<Booking> bookingList) {
-    super(bookingList);
-  }
 
   @Override
   public void execute() {
@@ -29,8 +24,8 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
     }
 
     Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") ");
-    int reservationHour = Prompt.inputInt("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ")");
-    int reservationMinute = Prompt.inputInt("픽업시간 변경 (기존 : " + booking.getBookingHour() + "분"+ ")");
+    int reservationHour = checkHour("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ")");
+    int reservationMinute = checkMinute("픽업시간 변경 (기존 : " + booking.getBookingHour() + "분"+ ")");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 

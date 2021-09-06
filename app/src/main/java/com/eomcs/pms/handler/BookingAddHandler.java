@@ -1,43 +1,46 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.util.Prompt;
 
 public class BookingAddHandler extends AbstractBookingHandler {
 
-  int bookingNumber = 1;
-  AbstractCartHandler abstractCartHandler;
+  //  int bookingNumber = 1;
+  CartListHandler CartListHandler;
 
-  public BookingAddHandler(List<Booking> bookList , AbstractCartHandler abstractCartHandler) {
-    super(bookList);
-    this.abstractCartHandler = abstractCartHandler;
+  public BookingAddHandler(CartListHandler CartListHandler) {
+    //    super(bookList);
+    this.CartListHandler = CartListHandler;
 
+    //    BookingList testbookingList = findById("aaaa");
     //    Booking testBooking = new Booking();
-    //    testBooking.setBookingNumber(bookingNumber++);
-    //    testBooking.setCart(abstractCartHandler.cartList.get(0));
+    //    testBooking.setBookingNumber(testbookingList.getBooking().size());
+    //    testBooking.setCart(CartListHandler.cartList.get(0));
     //    testBooking.setBookingNumber(11);
     //    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
     //    testBooking.setBookingHour(19);
     //    testBooking.setBookingMinute(25);   
     //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
     //
-    //    bookingList.add(testBooking);
+    //    App.allBookingList.get(0).getBooking().add(testBooking);
     //
+    //    testbookingList = findById("aaa");
     //    testBooking = new Booking();
-    //    testBooking.setBookingNumber(bookingNumber++);
-    //    testBooking.setCart(abstractCartHandler.cartList.get(1));
+    //    testBooking.setBookingNumber(testbookingList.getBooking().size());
+    //    testBooking.setCart(CartListHandler.cartList.get(0));
     //    testBooking.setBookingNumber(22);
     //    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
     //    testBooking.setBookingHour(10);
     //    testBooking.setBookingMinute(30);   
     //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
     //
-    //    bookingList.add(testBooking);
+    //    App.allBookingList.get(1).getBooking().add(testBooking);
+
   }
 
   @Override
@@ -50,21 +53,21 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     Booking booking = new Booking();
 
-    booking.setBookingNumber(bookingNumber++);
-
-    Cart bookingProduct = abstractCartHandler.findByCart(Prompt.inputString("상품명 : "));
+    Cart bookingProduct = CartListHandler.findByCart(Prompt.inputString("상품명 : "));
     if (bookingProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;
     }
     booking.setCart(bookingProduct);
+    BookingList bookingList = findById(App.getLoginUser().getId());
+    booking.setBookingNumber(bookingList.getBooking().size());
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
-    booking.setBookingHour(Prompt.inputInt("픽업시간(시): "));
-    booking.setBookingMinute(Prompt.inputInt("픽업시간(분): "));
+    booking.setBookingHour(checkHour("픽업시간(시): "));
+    booking.setBookingMinute(checkMinute("픽업시간(분): "));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
+    bookingList.getBooking().add(booking);
 
-    bookingList.add(booking);
     System.out.println("픽업예약을 완료하였습니다.");
   }
 

@@ -7,6 +7,10 @@ import com.eomcs.pms.domain.StockList;
 
 public class StockListHandler extends AbstractStockHandler {
 
+  public StockListHandler(StockPrompt stockPrompt) {
+    super(stockPrompt);
+  }
+
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
@@ -16,16 +20,14 @@ public class StockListHandler extends AbstractStockHandler {
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
       System.out.println("[재고 목록]");
-      StockList stockList = findById(App.getLoginUser().getId());
+      StockList stockList = stockPrompt.findById(App.getLoginUser().getId());
 
       if (stockList.getSellerStock().size() == 0) {
         System.out.println("아직 추가한 상품이 없습니다.");
         return;
       }
-      int i = 1;
       for (Stock stock : stockList.getSellerStock()) {
-        System.out.printf("%d, %s, %d, %d\n", 
-            i++,
+        System.out.printf("%s, %d, %d\n", 
             stock.getProduct().getProductName(), 
             stock.getPrice(), 
             stock.getStocks());

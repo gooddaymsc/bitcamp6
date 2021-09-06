@@ -18,11 +18,11 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setProductName("쇼비뇽");
     testProduct.setProductType("와인");
     testProduct.setCountryOrigin("프랑스");
-    testProduct.setVariety("1");
-    testProduct.setAlcoholLevel(1);
-    testProduct.setSugerLevel(1);
-    testProduct.setAcidity(1);
-    testProduct.setWeight(1);
+    testProduct.setVariety("3");
+    testProduct.setAlcoholLevel(10);
+    testProduct.setSugerLevel(2);
+    testProduct.setAcidity(2);
+    testProduct.setWeight(3);
 
     productList.add(testProduct);
 
@@ -32,9 +32,35 @@ public class ProductAddHandler extends AbstractProductHandler {
     testProduct.setProductType("보트카");
     testProduct.setCountryOrigin("스웨덴");
     testProduct.setVariety("2");
+    testProduct.setAlcoholLevel(40);
+    testProduct.setSugerLevel(1);
+    testProduct.setAcidity(1);
+    testProduct.setWeight(3);
+
+    productList.add(testProduct);
+
+    testProduct = new Product();
+    testProduct.setProductNumber(productNumber++);
+    testProduct.setProductName("와인");
+    testProduct.setProductType("와인");
+    testProduct.setCountryOrigin("프랑스");
+    testProduct.setVariety("18");
     testProduct.setAlcoholLevel(2);
-    testProduct.setSugerLevel(2);
-    testProduct.setAcidity(2);
+    testProduct.setSugerLevel(3);
+    testProduct.setAcidity(1);
+    testProduct.setWeight(2);
+
+    productList.add(testProduct);
+
+    testProduct = new Product();
+    testProduct.setProductNumber(productNumber++);
+    testProduct.setProductName("사케");
+    testProduct.setProductType("사케");
+    testProduct.setCountryOrigin("일본");
+    testProduct.setVariety("32");
+    testProduct.setAlcoholLevel(5);
+    testProduct.setSugerLevel(4);
+    testProduct.setAcidity(3);
     testProduct.setWeight(2);
 
     productList.add(testProduct);
