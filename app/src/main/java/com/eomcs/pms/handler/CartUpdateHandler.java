@@ -23,11 +23,11 @@ public class CartUpdateHandler extends AbstractCartHandler {
       }
 
       int cartstocks = Prompt.inputInt(String.format("수량(변경 전 : %d) : ", cart.getCartStocks()));
-      int cartPrice = cart.getCartPrice();
+      //      int cartPrice = cart.getCartPrice();
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         cart.setCartStocks(cartstocks);
-        cart.setCartPrice(cartPrice);
+        cart.setCartPrice(cart.getStock().getPrice()*cartstocks);
         System.out.println("장바구니를 변경하였습니다.");
         return;
       } else {
