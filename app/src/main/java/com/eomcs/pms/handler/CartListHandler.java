@@ -19,16 +19,14 @@ public class CartListHandler extends AbstractCartHandler {
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_PRIVACY) {
       System.out.println("[장바구니 목록]");
-      CartList cartList = findById(App.getLoginUser().getId());
+      CartList cartList = findCartListById(App.getLoginUser().getId());
 
       if (cartList.getPrivacyCart().size() == 0) {
         System.out.println("아직 추가한 장바구니가 없습니다.");
         return;
       }
-      int i = 1;
       for (Cart cart : cartList.getPrivacyCart()) {
         System.out.printf("%d, %s, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
-            i++,
             cart.getCartNumber(), 
             cart.getStock().getProduct().getProductName(), 
             cart.getCartStocks(), 

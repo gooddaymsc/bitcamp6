@@ -5,6 +5,7 @@ import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.util.Prompt;
@@ -41,7 +42,10 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
 
     //일반회원을 생성할때 일반회원의 예약목록들을 저장할 list를 생성함.
     BookingList testBookingList = new BookingList();
+    CartList testCartList = new CartList();
     testBookingList.setId(testprivacy.getId());
+    App.allCartList.add(testCartList);
+    testCartList.setId(testprivacy.getId());
     App.allBookingList.add(testBookingList);
 
     testprivacy = new Privacy();
@@ -67,9 +71,13 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     testmanager.setAuthority(Menu.ACCESS_PRIVACY);
     managerList.add(testmanager);
 
+    testCartList = new CartList();
     testBookingList = new BookingList();
     testBookingList.setId(testprivacy.getId());
     App.allBookingList.add(testBookingList);
+    testCartList.setId(testprivacy.getId());
+    App.allCartList.add(testCartList);
+
 
   }
 
@@ -110,7 +118,10 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setPhoneNumber(Prompt.inputString("전화: "));
     privacy.setAddress(Prompt.inputString("주소: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
+    BookingList BookingList = new BookingList();
+    CartList CartList = new CartList();
+    App.allBookingList.add(BookingList);
+    App.allCartList.add(CartList);
     privacyList.add(privacy);
     managerList.add(new Manager(privacy.getId(), privacy.getPassword(), privacy.getAuthority()));
   }

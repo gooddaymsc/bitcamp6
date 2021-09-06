@@ -76,7 +76,6 @@ public class App {
   List<Stock> stockList = new ArrayList<>();
   // 판매자
   List<Product> productList = new ArrayList<>();
-  //  List<Cart> sellerCartList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
   public static List<CartList> allCartList = new ArrayList<>();
@@ -87,7 +86,7 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler(managerList);
-  StockPrompt stockPrompt = new StockPrompt();
+  StockPrompt stockPrompt = new StockPrompt(sellerPrivacyList);
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 
@@ -232,7 +231,6 @@ public class App {
     boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    //    boardMenu.add(new MenuItem("좋아요", ACCESS_PRIVACY | ACCESS_SELLER, "/board/like"));
     boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
 
