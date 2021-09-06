@@ -61,9 +61,20 @@ public class BookingAddHandler extends AbstractBookingHandler {
     booking.setCart(bookingProduct);
     BookingList bookingList = findById(App.getLoginUser().getId());
     booking.setBookingNumber(bookingList.getBooking().size()+1);
+
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     booking.setBookingHour(checkHour("픽업시간(시): "));
     booking.setBookingMinute(checkMinute("픽업시간(분): "));
+
+    //    while(true) {
+    //      if (pickUptime.equals(pickUptime)) {
+    //        booking.setBookingTime(pickUptime);
+    //        break;
+    //      } else {
+    //        System.out.println("영업시간이 아닙니다.");
+    //      }
+    //    }
+
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     bookingList.getBooking().add(booking);
