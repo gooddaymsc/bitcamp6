@@ -10,43 +10,42 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class CartAddHandler extends AbstractCartHandler {
-  //  int cartNumber = 1;
   StockPrompt stockPrompt;
   public CartAddHandler(StockPrompt stockPrompt) {
-    //    super(cartList);
     this.stockPrompt = stockPrompt;
-    //    CartList testCartList = findById("aa");
-    //    Cart testCart = new Cart();
-    //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    //    testCart.setStock(stockListHandler.stockList.get(0));
-    //    testCart.setCartNumber(1);
-    //    testCart.setCartPrice(100);
-    //    testCart.setCartStocks(1);
-    //    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-    //
-    //    App.allCartList.get(0).getPrivacyCart().add(testCart);
-    //
-    //    testCartList = findById("aa");
-    //    testCart = new Cart();
-    //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    //    testCart.setStock(stockListHandler.stockList.get(1));
-    //    testCart.setCartNumber(2);
-    //    testCart.setCartPrice(200);
-    //    testCart.setCartStocks(2);
-    //    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-    //
-    //    App.allCartList.get(0).getPrivacyCart().add(testCart);
-    //
-    //    testCartList = findById("a");
-    //    testCart = new Cart();
-    //    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    //    testCart.setStock(stockListHandler.stockList.get(0));
-    //    testCart.setCartNumber(1);
-    //    testCart.setCartPrice(100);
-    //    testCart.setCartStocks(1);
-    //    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-    //
-    //    App.allCartList.get(1).getPrivacyCart().add(testCart);
+
+    CartList testCartList = findCartListById("aa");
+    Cart testCart = new Cart();
+    testCart.setCartNumber(testCartList.getPrivacyCart().size());
+    testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(0));
+    testCart.setCartNumber(1);
+    testCart.setCartPrice(100);
+    testCart.setCartStocks(1);
+    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+
+    App.allCartList.get(0).getPrivacyCart().add(testCart);
+
+    testCartList = findCartListById("aa");
+    testCart = new Cart();
+    testCart.setCartNumber(testCartList.getPrivacyCart().size());
+    testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(1));
+    testCart.setCartNumber(2);
+    testCart.setCartPrice(200);
+    testCart.setCartStocks(2);
+    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+
+    App.allCartList.get(0).getPrivacyCart().add(testCart);
+
+    testCartList = findCartListById("a");
+    testCart = new Cart();
+    testCart.setCartNumber(testCartList.getPrivacyCart().size());
+    testCart.setStock(stockPrompt.findStockListById("aaa").getSellerStock().get(0));
+    testCart.setCartNumber(1);
+    testCart.setCartPrice(100);
+    testCart.setCartStocks(1);
+    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
+
+    App.allCartList.get(1).getPrivacyCart().add(testCart);
 
   }
 
