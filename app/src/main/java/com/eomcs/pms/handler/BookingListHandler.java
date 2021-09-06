@@ -9,10 +9,10 @@ import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
-  AbstractProductHandler abstractProductHandler;
+  ProductPrompt productPrompt;
 
-  public BookingListHandler(AbstractProductHandler abstractProductHandler) {
-    this.abstractProductHandler = abstractProductHandler;
+  public BookingListHandler(ProductPrompt productPrompt) {
+    this.productPrompt = productPrompt;
   }
 
 
@@ -51,7 +51,7 @@ public class BookingListHandler extends AbstractBookingHandler{
 
         System.out.println("==================================");
         String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >>");
-        Product bookingProduct = abstractProductHandler.findByProduct(Prompt.inputString("상품명 : "));
+        Product bookingProduct = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
         if (bookingProduct == null) {
           System.out.println("해당 상품이 없습니다.");
           return;

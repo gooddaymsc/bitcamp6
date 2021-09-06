@@ -1,15 +1,13 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
-import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public abstract class AbstractProductHandler implements Command {
 
-  List<Product> productList;
+  ProductPrompt productPrompt;
 
-  public AbstractProductHandler(List<Product> productList) {
-    this.productList = productList;
+  public AbstractProductHandler(ProductPrompt productPrompt) {
+    this.productPrompt= productPrompt;
   }
 
   protected int checkNum(String label) {
@@ -22,16 +20,6 @@ public abstract class AbstractProductHandler implements Command {
       return num;       
     }
   }
-
-  protected Product findByProduct (String ProductName) {
-    for (Product product : productList) {
-      if (product.getProductName().equals(ProductName)) {
-        return product;
-      }
-    }
-    return null;
-  }
-
 }
 
 

@@ -11,11 +11,11 @@ import com.eomcs.util.Prompt;
 public class BookingAddHandler extends AbstractBookingHandler {
 
   //  int bookingNumber = 1;
-  CartListHandler CartListHandler;
+  CartPrompt cartPrompt;
 
-  public BookingAddHandler(CartListHandler CartListHandler) {
+  public BookingAddHandler(CartPrompt cartPrompt) {
     //    super(bookList);
-    this.CartListHandler = CartListHandler;
+    this.cartPrompt = cartPrompt;
 
     //    BookingList testbookingList = findById("aaaa");
     //    Booking testBooking = new Booking();
@@ -53,7 +53,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     Booking booking = new Booking();
 
-    Cart bookingProduct = CartListHandler.findByCart(Prompt.inputString("상품명 : "));
+    Cart bookingProduct = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
     if (bookingProduct == null) {
       System.out.println("해당 상품이 없습니다.");
       return;

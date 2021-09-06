@@ -7,7 +7,8 @@ import com.eomcs.pms.domain.CartList;
 
 public class CartListHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
-  public CartListHandler(StockPrompt stockPrompt) {
+  public CartListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
+    super(cartPrompt);
     this.stockPrompt = stockPrompt;
   }
   @Override
@@ -19,7 +20,7 @@ public class CartListHandler extends AbstractCartHandler {
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_PRIVACY) {
       System.out.println("[장바구니 목록]");
-      CartList cartList = findCartListById(App.getLoginUser().getId());
+      CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
 
       if (cartList.getPrivacyCart().size() == 0) {
         System.out.println("아직 추가한 장바구니가 없습니다.");

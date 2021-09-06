@@ -8,15 +8,15 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
-  AbstractProductHandler productHandler;
-  public StockAddHandler(StockPrompt stockPrompt, AbstractProductHandler productHandler) {
+  ProductPrompt productPrompt;
+  public StockAddHandler(StockPrompt stockPrompt, ProductPrompt productPrompt) {
     super(stockPrompt);
-    this.productHandler = productHandler;
+    this.productPrompt = productPrompt;
 
     StockList teststockList = stockPrompt.findStockListById("aaaa");
     Stock testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
-    testStock.setProduct(productHandler.productList.get(0));
+    testStock.setProduct(productPrompt.productList.get(0));
     testStock.setStocks(3);
     testStock.setPrice(38000);
 
@@ -25,7 +25,7 @@ public class StockAddHandler extends AbstractStockHandler {
     teststockList = stockPrompt.findStockListById("aaaa");
     testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
-    testStock.setProduct(productHandler.productList.get(1));
+    testStock.setProduct(productPrompt.productList.get(1));
     testStock.setStocks(4);
     testStock.setPrice(52000);
 
@@ -34,7 +34,7 @@ public class StockAddHandler extends AbstractStockHandler {
     teststockList = stockPrompt.findStockListById("aaa");
     testStock = new Stock();
     testStock.setStockNumber(teststockList.getSellerStock().size()+1);
-    testStock.setProduct(productHandler.productList.get(0));
+    testStock.setProduct(productPrompt.productList.get(0));
     testStock.setStocks(2);
     testStock.setPrice(23000);
 
@@ -54,7 +54,7 @@ public class StockAddHandler extends AbstractStockHandler {
     System.out.println("\n[재고등록]");
     Stock stock = new Stock(); 
     String productName = Prompt.inputString("상품명 : ");
-    Product product = productHandler.findByProduct(productName);
+    Product product = productPrompt.findByProduct(productName);
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;

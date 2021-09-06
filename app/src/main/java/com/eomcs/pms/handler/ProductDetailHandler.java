@@ -1,20 +1,19 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductDetailHandler extends AbstractProductHandler {
-
-  public ProductDetailHandler(List<Product> alcoholList) {
-    super(alcoholList);
+  ProductPrompt productPrompt;
+  public ProductDetailHandler(ProductPrompt productPrompt) {
+    super(productPrompt);
   }
 
   @Override
   public void execute() {
     System.out.println("[상품 상세보기]");
 
-    Product product = findByProduct(Prompt.inputString("상품명 : "));
+    Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
 
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
