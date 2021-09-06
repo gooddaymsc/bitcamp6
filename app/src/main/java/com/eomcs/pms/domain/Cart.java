@@ -3,7 +3,8 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 
 public class Cart {
-  public Stock stock; // 장바구니 담을 상품
+  private String id; // 판매자
+  private Stock stock; // 장바구니 담을 상품
   private int cartStocks; // 장바구니상품의 갯수
   private int cartPrice; // 총액
   private int cartNumber; //장바구니번호
@@ -11,6 +12,12 @@ public class Cart {
 
 
 
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
   public int getCartPrice() {
     return cartPrice;
   }

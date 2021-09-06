@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartList {
-  private String id;
+  private String id; //구매자 ID
   private List<Cart> privacyCart = new ArrayList<>();
 
   public String getId() {
