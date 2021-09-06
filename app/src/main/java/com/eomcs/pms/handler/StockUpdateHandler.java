@@ -33,7 +33,7 @@ public class StockUpdateHandler extends AbstractStockHandler {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        stock.setPrice(stocks);
+        stock.setStocks(stocks);
         stock.setPrice(price);
         System.out.println("재고정보를 변경하였습니다.");
         return;
