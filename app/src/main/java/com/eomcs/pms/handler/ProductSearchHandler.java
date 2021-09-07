@@ -22,10 +22,10 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     Product productName /* = indByProduct(Prompt.inputString("상품입력")) */;
 
-    if (productName == null) {
-      System.out.println("입력하신 상품이 없습니다.");
-      return;
-    }
+    //    if (productName == null) {
+    //      System.out.println("입력하신 상품이 없습니다.");
+    //      return;
+    //    }
 
     //    for(Product productName : productList) {
     //      System.out.printf("상품명: %s\n", productName.getProductName());

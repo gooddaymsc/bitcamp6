@@ -66,14 +66,14 @@ public class BookingListHandler extends AbstractBookingHandler{
 
       while(true) {
 
-        String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >> \n 상품명 : ");
+        //        String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >> \n 상품명 : ");
         if (input.equals("0")) {
           return;
         } else {
-          Product bookingProduct = abstractProductHandler.findByProduct(input);
+          bookingProduct = productPrompt.findByProduct(input);
 
           if (bookingProduct == null) {
-            System.out.println("해당 상품이 없습니다.");å
+            System.out.println("해당 상품이 없습니다.");
             return;
           }
 

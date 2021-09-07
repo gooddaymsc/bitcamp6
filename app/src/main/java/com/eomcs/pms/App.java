@@ -79,7 +79,7 @@ public class App {
 
   List<Stock> stockList = new ArrayList<>();
   // 판매자
-  List<Product> productList = new ArrayList<>();
+  public static List<Product> productList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
   public static List<CartList> allCartList = new ArrayList<>();
@@ -179,6 +179,8 @@ public class App {
 
     createMenu().execute();
     Prompt.close();
+
+
   }
 
   Menu createMenu() {

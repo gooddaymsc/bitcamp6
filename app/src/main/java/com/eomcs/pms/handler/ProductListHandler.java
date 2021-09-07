@@ -26,7 +26,7 @@ public class ProductListHandler extends AbstractProductHandler {
   public void execute() {
 
     System.out.println("[상품 목록]");
-    for (Product product : productPrompt.productList) {
+    for (Product product : App.productList) {
       System.out.printf("%d, %s, %s, %s, %s, %.2f, %d, %d, %d \n", 
           product.getProductNumber(), 
           product.getProductName(), 
@@ -70,7 +70,7 @@ public class ProductListHandler extends AbstractProductHandler {
       System.out.println("\n[재고등록]");
       Stock stock = new Stock(); 
       String productName = Prompt.inputString("상품명 : ");
-      Product product = productPrompt.findByProduct(productName);
+      Product product = ProductPrompt.findByProduct(productName);
 
 
       if (product == null) {

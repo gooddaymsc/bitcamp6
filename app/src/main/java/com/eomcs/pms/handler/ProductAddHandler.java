@@ -6,11 +6,13 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductAddHandler extends AbstractProductHandler {
-
-  int productNumber = 1;
   ProductPrompt productPrompt;
+  int productNumber = 1;
+
   public ProductAddHandler(ProductPrompt productPrompt) {
     super(productPrompt);
+
+    //    List<Product> testProductList = productPrompt.productList;
 
     Product testProduct = new Product();
     testProduct = new Product();
@@ -115,8 +117,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     product.setSugerLevel(checkNum("당도(1-5) : "));
     product.setAcidity(checkNum("산도(1-5) : "));
     product.setWeight(checkNum("바디감(1-5) : "));
-
-    productPrompt.productList.add(product);
+    App.productList.add(product);
     System.out.println("상품을 등록하였습니다.");
   }
 
