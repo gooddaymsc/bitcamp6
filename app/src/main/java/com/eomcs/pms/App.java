@@ -71,26 +71,19 @@ import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
-  // 7개 CRUD 
-  // 개인회원 정보
   List<Privacy> privacyList = new LinkedList<>();
   List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
-  // 일반회원
   List<Board> boardList = new ArrayList<>();
-
   List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
-
   List<Stock> stockList = new ArrayList<>();
-  // 판매자
+
   public static List<Product> productList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
   public static List<CartList> allCartList = new ArrayList<>();
 
-  // 관리자
   List<Manager> managerList = new ArrayList<>();
-
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler(managerList);
@@ -132,9 +125,13 @@ public class App {
 
 
   public App() {
+    loadPrivacys();
+    loadSellerPrivacys();
+    loadManagers();
     loadProducts();
     loadStocks();
     loadStockLists();
+
     commandMap.put("/privacy/add",    new PrivacyAddHandler(privacyList, managerList));
     commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList));
     commandMap.put("/privacy/detail", new PrivacyDetailHandler(privacyList));
@@ -187,10 +184,75 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
+    savePrivacys();
+    saveSellerPrivacys();
+    saveManagers();
     saveBoards();
     saveProducts();
     saveStocks();
     saveStockLists();
+  }
+  @SuppressWarnings("unchecked")
+  private void loadPrivacys() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("privacy.data"))) {
+      privacyList.addAll((List<Privacy>) in.readObject());
+      System.out.println("회원(구매자) 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void savePrivacys() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("privacy.data"))) {
+      out.writeObject(privacyList);
+      System.out.println("회원(구매자) 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 회원(구매자) 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadSellerPrivacys() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("sellerPrivacy.data"))) {
+      sellerPrivacyList.addAll((List<SellerPrivacy>) in.readObject());
+      System.out.println("판매자 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveSellerPrivacys() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("sellerPrivacy.data"))) {
+      out.writeObject(sellerPrivacyList);
+      System.out.println("판매자 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 판매자 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadManagers() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
+      managerList.addAll((List<Manager>) in.readObject());
+      System.out.println("관리자 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveManagers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("manager.data"))) {
+      out.writeObject(managerList);
+      System.out.println("관리자 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 관리자 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   @SuppressWarnings("unchecked")

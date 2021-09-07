@@ -2,6 +2,7 @@ package com.eomcs.pms.domain;
 
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class SellerPrivacy extends Privacy {
   private String businessName;
   private String businessNumber;

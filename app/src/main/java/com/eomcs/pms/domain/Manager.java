@@ -1,6 +1,9 @@
 package com.eomcs.pms.domain;
 
-public class Manager {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Manager implements Serializable {
   private String id;
   private String password;
   private int authority;
