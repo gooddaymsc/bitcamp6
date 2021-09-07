@@ -89,7 +89,6 @@ public class BookingAddHandler extends AbstractBookingHandler {
       System.out.println("재고가 부족합니다. 구매 수량을 확인해주세요.");
       return;
     }
-    sellerStock.setStocks(sellerStock.getStocks() - bookingProduct.getCartStocks());
 
     booking.setCart(bookingProduct);
     BookingList bookingList = findById(App.getLoginUser().getId());
@@ -111,6 +110,8 @@ public class BookingAddHandler extends AbstractBookingHandler {
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     bookingList.getBooking().add(booking);
+    sellerStock.setStocks(sellerStock.getStocks() - bookingProduct.getCartStocks());
+    cartPrompt.findCartListById(App.getLoginUser().getId()).getPrivacyCart().remove(bookingProduct);
     System.out.println("픽업예약을 완료하였습니다.");
   }
 

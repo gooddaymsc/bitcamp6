@@ -5,8 +5,6 @@ import com.eomcs.pms.domain.Product;
 
 public class ProductPrompt {
   List<Product> productList;
-
-
   public ProductPrompt(List<Product> productList) {
     this.productList = productList;
   }
