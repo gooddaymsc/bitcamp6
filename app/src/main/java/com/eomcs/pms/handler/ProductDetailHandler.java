@@ -13,7 +13,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
   public void execute() {
     System.out.println("[상품 상세보기]");
 
-    Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
+    Product product = ProductPrompt.findByProduct(Prompt.inputString("상품명 : "));
 
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
