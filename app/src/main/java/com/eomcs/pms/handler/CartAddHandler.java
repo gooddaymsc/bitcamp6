@@ -73,9 +73,19 @@ public class CartAddHandler extends AbstractCartHandler {
     String storeName = Prompt.inputString("가게명을 선택하세요 > ");
 
     cart.setStock(hashStock.get(storeName));
-    int stockNumber = Prompt.inputInt("수량 : ");
-    cart.setCartStocks(stockNumber);
-    cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
+
+    int stocks = Prompt.inputInt("수량 : ");
+    while(true) {
+      if (stocks <= hashStock.get(storeName).getStocks()) {
+        cart.setCartStocks(stocks);
+        break;
+      } else {
+        System.out.println("주문수량이 재고를 초과하였습니다.");
+        return;
+      }
+    }
+
+    cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
     cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
