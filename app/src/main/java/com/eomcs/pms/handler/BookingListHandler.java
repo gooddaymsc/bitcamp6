@@ -73,7 +73,7 @@ public class BookingListHandler extends AbstractBookingHandler{
           Product bookingProduct = abstractProductHandler.findByProduct(input);
 
           if (bookingProduct == null) {
-            System.out.println("해당 상품이 없습니다.");å
+            System.out.println("해당 상품이 없습니다.");
             return;
           }
 
