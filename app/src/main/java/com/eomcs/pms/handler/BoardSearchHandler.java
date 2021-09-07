@@ -6,6 +6,7 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardSearchHandler extends AbstractBoardHandler {
+
   public BoardSearchHandler(List<Board> boardList) {
     super(boardList);
   }

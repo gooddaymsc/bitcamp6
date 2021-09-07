@@ -8,10 +8,8 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
-  ProductPrompt productPrompt;
-  public StockAddHandler(StockPrompt stockPrompt, ProductPrompt productPrompt) {
+  public StockAddHandler(StockPrompt stockPrompt) {
     super(stockPrompt);
-    this.productPrompt = productPrompt;
 
   }
 

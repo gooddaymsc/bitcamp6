@@ -8,8 +8,7 @@ import com.eomcs.util.Prompt;
 public class ProductSearchHandler extends AbstractProductHandler {
 
   List<SellerPrivacy> sellerList;
-  public ProductSearchHandler(ProductPrompt productList, List<SellerPrivacy> sellerList) {
-    super(productList);
+  public ProductSearchHandler(List<SellerPrivacy> sellerList) {
     this.sellerList = sellerList;
   }
 

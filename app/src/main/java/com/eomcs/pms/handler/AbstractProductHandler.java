@@ -4,12 +4,6 @@ import com.eomcs.util.Prompt;
 
 public abstract class AbstractProductHandler implements Command {
 
-  ProductPrompt productPrompt;
-
-  public AbstractProductHandler(ProductPrompt productPrompt) {
-    this.productPrompt= productPrompt;
-  }
-
   protected int checkNum(String label) {
     while(true) {
       int num = Prompt.inputInt(label);

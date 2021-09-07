@@ -8,13 +8,6 @@ import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
-  ProductPrompt productPrompt;
-
-  public BookingListHandler(ProductPrompt productPrompt) {
-    this.productPrompt = productPrompt;
-  }
-
-
   @Override
   public void execute() {
     System.out.println("\n[내 픽업 예약 목록]");

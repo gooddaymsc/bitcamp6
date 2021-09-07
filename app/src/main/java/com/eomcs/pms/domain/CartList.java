@@ -1,9 +1,11 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartList {
+@SuppressWarnings("serial")
+public class CartList implements Serializable {
   private String id; //구매자 id
   private List<Cart> privacyCart = new ArrayList<>();
 

@@ -13,11 +13,9 @@ import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
   StockPrompt stockPrompt;
-  ProductPrompt productPrompt;
   CartPrompt cartPrompt;
   static int stockNumber = 1;
-  public ProductListHandler(ProductPrompt productPrompt, StockPrompt stockPrompt, CartPrompt cartPrompt) {
-    super(productPrompt);
+  public ProductListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
     this.stockPrompt = stockPrompt;
     this.cartPrompt = cartPrompt;
   }

@@ -88,7 +88,7 @@ public class App {
 
   LoginHandler loginHandler = new LoginHandler(managerList);
   StockPrompt stockPrompt = new StockPrompt(sellerPrivacyList);
-  ProductPrompt productPrompt = new ProductPrompt(productList);
+  ProductPrompt productPrompt = new ProductPrompt();
   CartPrompt cartPrompt = new CartPrompt(stockPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
@@ -131,6 +131,8 @@ public class App {
     loadProducts();
     loadStocks();
     loadStockLists();
+    loadCart();
+    loadCartLists();
 
     commandMap.put("/privacy/add",    new PrivacyAddHandler(privacyList, managerList));
     commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList));
@@ -151,14 +153,14 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler(productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(productPrompt, stockPrompt, cartPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, sellerPrivacyList));
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
-    commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
-    commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt));
+    commandMap.put("/product/add",    new ProductAddHandler());
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, cartPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(sellerPrivacyList));
+    commandMap.put("/product/detail", new ProductDetailHandler());
+    commandMap.put("/product/update", new ProductUpdateHandler());
+    commandMap.put("/product/delete", new ProductDeleteHandler());
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt, productPrompt));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt));
     commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
     commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
@@ -171,7 +173,7 @@ public class App {
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
     commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt, stockPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(productPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler());
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());
 
@@ -191,6 +193,8 @@ public class App {
     saveProducts();
     saveStocks();
     saveStockLists();
+    saveCart();
+    saveCartLists();
   }
   @SuppressWarnings("unchecked")
   private void loadPrivacys() {
@@ -332,6 +336,48 @@ public class App {
   private void saveStockLists() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stockList.data"))) {
       out.writeObject(allStockList);
+      System.out.println("재고리스트 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고리스트 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCart() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stock.data"))) {
+      stockList.addAll((List<Stock>) in.readObject());
+      System.out.println("재고 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCart() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cart.data"))) {
+      out.writeObject(cartList);
+      System.out.println("재고 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCartLists() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cartList.data"))) {
+      allCartList.addAll((List<CartList>) in.readObject());
+      System.out.println("재고리스트 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCartLists() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cartList.data"))) {
+      out.writeObject(allCartList);
       System.out.println("재고리스트 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 재고리스트 데이터를 저장하는 중 오류 발생!");

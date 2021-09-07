@@ -4,10 +4,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductDetailHandler extends AbstractProductHandler {
-  ProductPrompt productPrompt;
-  public ProductDetailHandler(ProductPrompt productPrompt) {
-    super(productPrompt);
-  }
 
   @Override
   public void execute() {
