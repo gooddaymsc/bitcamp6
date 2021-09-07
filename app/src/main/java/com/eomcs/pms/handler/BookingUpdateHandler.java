@@ -23,9 +23,9 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
       return;
     }
 
-    Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") ");
-    int reservationHour = checkHour("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ")");
-    int reservationMinute = checkMinute("픽업시간 변경 (기존 : " + booking.getBookingHour() + "분"+ ")");
+    Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") : ");
+    int reservationHour = checkHour("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ") : ");
+    int reservationMinute = checkMinute("픽업시간 변경 (기존 : " + booking.getBookingHour() + "분"+ ") : ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 

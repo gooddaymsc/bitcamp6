@@ -73,7 +73,7 @@ public class StockPrompt {
     return hashStock;
   }
 
-  private SellerPrivacy findBySellerInfo (String SellerId) {
+  public SellerPrivacy findBySellerInfo (String SellerId) {
     for (SellerPrivacy member : sellerPrivacyList) {
       if (member.getName().equals(SellerId)){
         return member;

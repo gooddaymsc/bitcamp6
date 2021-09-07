@@ -92,7 +92,7 @@ public class App {
   LoginHandler loginHandler = new LoginHandler(managerList);
   StockPrompt stockPrompt = new StockPrompt(sellerPrivacyList);
   ProductPrompt productPrompt = new ProductPrompt(productList);
-  CartPrompt cartPrompt = new CartPrompt();
+  CartPrompt cartPrompt = new CartPrompt(stockPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 

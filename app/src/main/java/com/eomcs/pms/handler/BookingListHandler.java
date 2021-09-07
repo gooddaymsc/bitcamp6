@@ -17,7 +17,7 @@ public class BookingListHandler extends AbstractBookingHandler{
 
   @Override
   public void execute() {
-    System.out.println("[내 픽업 예약 목록]");
+    System.out.println("\n[내 픽업 예약 목록]");
     BookingList bookingList = findById(App.getLoginUser().getId());
 
     if (bookingList.getBooking().size() == 0) {
@@ -36,60 +36,30 @@ public class BookingListHandler extends AbstractBookingHandler{
 
     }
 
-    String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >> \n 상품명 : ");
-    if (input.equals("0")) {
-      return;
-    } else {
-      Product bookingProduct = productPrompt.findByProduct(input);
+    while(true) {
 
+      String input = Prompt.inputString("\n상품 상세정보 보기(이전메뉴:0) \n>> 상품명 : ");
+      if (input.equals("0")) {
+        return;
+      } else {
+        Product bookingProduct = ProductPrompt.findByProduct(input);
 
-      System.out.println("==================================");
-
-      //        String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >>");
-      //        Product bookingProduct = abstractProductHandler.findByProduct(Prompt.inputString("상품명 : "));
-      //        if (bookingProduct == null) {
-      //          System.out.println("해당 상품이 없습니다.");
-      //          return;
-      //        }
-      //
-      //        if (!input.equals("0")) {
-      //          System.out.printf("주종: %s\n",  bookingProduct.getProductType());
-      //          System.out.printf("원산지: %s\n", bookingProduct.getCountryOrigin());
-      //          System.out.printf("품종: %s\n",  bookingProduct.getVariety());
-      //          System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());
-      //          System.out.printf("당도: %d\n",  bookingProduct.getSugerLevel());
-      //          System.out.printf("산도: %d\n",  bookingProduct.getAcidity());
-      //          return;
-      //        } else {
-      //          return;
-      //        }
-
-      while(true) {
-
-        //        String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >> \n 상품명 : ");
-        if (input.equals("0")) {
+        if (bookingProduct == null) {
+          System.out.println("해당 상품이 없습니다.");
           return;
-        } else {
-          bookingProduct = productPrompt.findByProduct(input);
-
-          if (bookingProduct == null) {
-            System.out.println("해당 상품이 없습니다.");
-            return;
-          }
-
-          System.out.printf("주종: %s\n",  bookingProduct.getProductType());
-          System.out.printf("원산지: %s\n", bookingProduct.getCountryOrigin());
-          System.out.printf("품종: %s\n",  bookingProduct.getVariety());
-          System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());
-          System.out.printf("당도: %d\n",  bookingProduct.getSugerLevel());
-          System.out.printf("산도: %d\n",  bookingProduct.getAcidity());
-
         }
+
+        System.out.printf("주종: %s\n",  bookingProduct.getProductType());
+        System.out.printf("원산지: %s\n", bookingProduct.getCountryOrigin());
+        System.out.printf("품종: %s\n",  bookingProduct.getVariety());
+        System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());
+        System.out.printf("당도: %d\n",  bookingProduct.getSugerLevel());
+        System.out.printf("산도: %d\n",  bookingProduct.getAcidity());
+
       }
     }
   }
 }
-
 
 
 
