@@ -1,9 +1,11 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingList {
+@SuppressWarnings("serial")
+public class BookingList implements Serializable {
   private String id;
   private List<Booking> booking = new ArrayList<>();
 
