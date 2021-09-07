@@ -12,54 +12,6 @@ public class BoardAddHandler extends AbstractBoardHandler {
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
 
-    Board testBoard = new Board();
-    testBoard.setNumber(boardNunmber++);
-    testBoard.setTitle("와인찾아요");
-    testBoard.setContent("스파클링, 드라이");
-    testBoard.setWriter("11");
-    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
-    testBoard.setViews(11);
-    testBoard.setTag("와인, 추천");
-    testBoard.setLikes(11);
-
-    boardList.add(testBoard);
-
-    testBoard = new Board();
-    testBoard.setNumber(boardNunmber++);
-    testBoard.setTitle("양주 도수 높은순서");
-    testBoard.setContent("헤네시, 블랙라벨, 잭다니엘");
-    testBoard.setWriter("22");
-    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
-    testBoard.setViews(22);
-    testBoard.setTag("양주, 도수");
-    testBoard.setLikes(22);
-
-    boardList.add(testBoard);
-
-    testBoard = new Board();
-    testBoard.setNumber(boardNunmber++);
-    testBoard.setTitle("숙취심한술");
-    testBoard.setContent("와인이나 막걸리가 숙취가 심한거 같아요.");
-    testBoard.setWriter("33");
-    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
-    testBoard.setViews(33);
-    testBoard.setTag("숙취, 와인, 막걸리");
-    testBoard.setLikes(33);
-
-    boardList.add(testBoard);
-
-    testBoard = new Board();
-    testBoard.setNumber(boardNunmber++);
-    testBoard.setTitle("오늘 비가오네요");
-    testBoard.setContent("비오는날에는 파전에 막걸리죠");
-    testBoard.setWriter("44");
-    testBoard.setRegistrationDate(new Date(System.currentTimeMillis()));
-    testBoard.setViews(44);
-    testBoard.setTag("비, 안주, 파전, 막걸리");
-    testBoard.setLikes(44);
-
-    boardList.add(testBoard);
-
   }
 
 

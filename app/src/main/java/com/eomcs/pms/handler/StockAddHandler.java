@@ -13,34 +13,6 @@ public class StockAddHandler extends AbstractStockHandler {
     super(stockPrompt);
     this.productPrompt = productPrompt;
 
-    StockList teststockList = stockPrompt.findStockListById("aaaa");
-    Stock testStock = new Stock();
-    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
-    testStock.setProduct(productPrompt.productList.get(0));
-    testStock.setStocks(3);
-    testStock.setPrice(38000);
-
-    App.allStockList.get(0).getSellerStock().add(testStock);
-
-    teststockList = stockPrompt.findStockListById("aaaa");
-    testStock = new Stock();
-    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
-    testStock.setProduct(productPrompt.productList.get(1));
-    testStock.setStocks(4);
-    testStock.setPrice(52000);
-
-    App.allStockList.get(0).getSellerStock().add(testStock);
-
-    teststockList = stockPrompt.findStockListById("aaa");
-    testStock = new Stock();
-    testStock.setStockNumber(teststockList.getSellerStock().size()+1);
-    testStock.setProduct(productPrompt.productList.get(0));
-    testStock.setStocks(2);
-    testStock.setPrice(23000);
-
-    App.allStockList.get(1).getSellerStock().add(testStock);
-
-
   }
 
   @Override
@@ -54,7 +26,7 @@ public class StockAddHandler extends AbstractStockHandler {
     System.out.println("\n[재고등록]");
     Stock stock = new Stock(); 
     String productName = Prompt.inputString("상품명 : ");
-    Product product = productPrompt.findByProduct(productName);
+    Product product = ProductPrompt.findByProduct(productName);
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;

@@ -1,7 +1,9 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 
-public class Product {
+@SuppressWarnings("serial")
+public class Product implements Serializable{
 
   private int productNumber;        //상품번
   private String productName;       //상품명

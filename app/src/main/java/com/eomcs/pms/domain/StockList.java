@@ -1,9 +1,11 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StockList {
+@SuppressWarnings("serial")
+public class StockList implements Serializable{
   private String id;
   private List<Stock> sellerStock = new ArrayList<>();
 
