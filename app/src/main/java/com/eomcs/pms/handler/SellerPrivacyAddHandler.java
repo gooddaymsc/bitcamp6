@@ -15,7 +15,6 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
   @Override
   public void execute() {
     System.out.println("\n[판매자 등록]");
-
     SellerPrivacy sellerPrivacy = new SellerPrivacy();
     sellerPrivacy.setAuthority(0x04);
     sellerPrivacy.setNumber(sellerPrivacyNumber++);
@@ -48,11 +47,10 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     App.managerList.add(new Manager(sellerPrivacy.getId(), sellerPrivacy.getPassword(), sellerPrivacy.getAuthority()));
 
     StockList StockList = new StockList();
-    //stockList.setId(new List<>());
     StockList.setId(sellerPrivacy.getId());
     App.allStockList.add(StockList);
     BookingList BookingList = new BookingList();
-    BookingList.setId(App.getLoginUser().getId());
+    BookingList.setId(sellerPrivacy.getId());
     App.allBookingList.add(BookingList);
   }
 }

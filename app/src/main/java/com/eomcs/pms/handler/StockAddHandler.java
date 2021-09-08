@@ -1,10 +1,8 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
-import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
@@ -15,11 +13,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {   
-    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER ) {
-
-      System.out.println("해당 메뉴는 판매자 권한입니다.");
-      return;
-    }
+    String nowLoginId = App.getLoginUser().getId();
 
     System.out.println("\n[재고등록]");
     Stock stock = new Stock(); 
@@ -30,17 +24,19 @@ public class StockAddHandler extends AbstractStockHandler {
       return;
     }
 
-    if (stockPrompt.findByStock(productName) != null) {
+    if (stockPrompt.findByStock(productName, nowLoginId)) {
       System.out.println("이미 추가된 상품입니다.");
       return;
     }
 
     stock.setProduct(product);
-    StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
-    stock.setStockNumber(stockList.getSellerStock().size()+1);
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
-    stockList.getSellerStock().add(stock);
+
+    int[] sizeIndex = stockPrompt.getStockListSizeById(nowLoginId);
+    stock.setStockNumber(sizeIndex[0]);
+    App.allStockList.get(sizeIndex[1]).getSellerStock().add(stock);
+
     System.out.println("재고 등록을 완료하였습니다.");
   }
 

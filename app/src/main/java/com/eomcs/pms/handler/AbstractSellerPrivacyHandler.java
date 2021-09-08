@@ -16,17 +16,18 @@ public abstract class AbstractSellerPrivacyHandler implements Command {
     return null;
   }
   //--------상품 검색시 판매자정보 반환
-  @SuppressWarnings("unlikely-arg-type")
-  protected SellerPrivacy findBySellerId (String StockName) {
-    for (SellerPrivacy member : App.sellerPrivacyList) {
-      if (member.getStockList().equals(StockName)){
-        System.out.printf("판매자번호-%d\n", 
-            member.getBusinessNumber());
-        return member;
-      }
-    }
-    return null;
-  }
+  //  @SuppressWarnings("unlikely-arg-type")
+  //  protected SellerPrivacy findBySellerId (String StockName) {
+  //    for (SellerPrivacy member : App.sellerPrivacyList) {
+  //      if (member.getStockList().equals(StockName)){
+  //        System.out.printf("판매자번호-%d\n", 
+  //            member.getBusinessNumber());
+  //        return member;
+  //      }
+  //    }
+  //    return null;
+  //  }
+
   protected int removeSellerPrivateById(String id) {
     //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
     for (int i=0; i<App.sellerPrivacyList.size(); i++) {

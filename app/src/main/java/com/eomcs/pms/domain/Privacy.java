@@ -1,7 +1,6 @@
 package com.eomcs.pms.domain;
 
 import java.sql.Date;
-import java.util.List;
 
 @SuppressWarnings("serial")
 public class Privacy extends Manager {
@@ -15,8 +14,8 @@ public class Privacy extends Manager {
   private String address;
   private Date registeredDate;
   private int level;
-  private List<Cart> cartList;  //
-  private List<Booking> bookingList;
+  //  private List<Cart> cartList;  //
+  //  private List<Booking> bookingList;
 
   public int getNumber() {
     return number;
@@ -81,17 +80,17 @@ public class Privacy extends Manager {
     this.level = level;
   }
 
-  public List<Cart> getCartList() {
-    return cartList;
-  }
-  public void setCartList(List<Cart> cartList) {
-    this.cartList = cartList;
-  }
-  public List<Booking> getBookingList() {
-    return bookingList;
-  }
-  public void setBookingList(List<Booking> bookingList) {
-    this.bookingList = bookingList;
-  }
+  //  public List<Cart> getCartList() {
+  //    return cartList;
+  //  }
+  //  public void setCartList(List<Cart> cartList) {
+  //    this.cartList = cartList;
+  //  }
+  //  public List<Booking> getBookingList() {
+  //    return bookingList;
+  //  }
+  //  public void setBookingList(List<Booking> bookingList) {
+  //    this.bookingList = bookingList;
+  //  }
 
 }

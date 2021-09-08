@@ -13,14 +13,10 @@ public class StockListHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
-      return;
-    }
-
+    String nowLoginId = App.getLoginUser().getId();
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
       System.out.println("[재고 목록]");
-      StockList stockList = stockPrompt.findStockListById(App.getLoginUser().getId());
+      StockList stockList = App.allStockList.get(stockPrompt.findStockListById(nowLoginId));
 
       if (stockList.getSellerStock().size() == 0) {
         System.out.println("아직 추가한 상품이 없습니다.");

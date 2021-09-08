@@ -13,7 +13,7 @@ public class StockList implements Serializable{
     return id;
   }
   public void setId(String id) {
-    this.id = id;
+    this.id = id; //판매자
   }
   public List<Stock> getSellerStock() {
     return sellerStock;

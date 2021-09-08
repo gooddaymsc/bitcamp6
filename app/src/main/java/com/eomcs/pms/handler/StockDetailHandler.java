@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
@@ -12,12 +11,10 @@ public class StockDetailHandler extends AbstractStockHandler {
   }
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
-      return;
-    }
+    String nowLoginId = App.getLoginUser().getId();
+
     System.out.println("[재고 상세보기]");
-    Stock stock = stockPrompt.findByStock(Prompt.inputString("상품명 : "));
+    Stock stock = stockPrompt.findStockById(nowLoginId, Prompt.inputString("상품명 : "));
 
     if (stock == null) {
       System.out.println("해당 상품의 재고가 없습니다.");

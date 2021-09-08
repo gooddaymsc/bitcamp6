@@ -85,7 +85,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
     booking.setBuyerId(App.getLoginUser().getId());
     // 구매자 bookingList에서 booking 추가
-    bookingList.getBooking().add(booking);
+    //bookingList.getBooking().add(booking);
     // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기
     sellerStock.setStocks(sellerStock.getStocks() - bookingProduct.getCartStocks());
     // 구매자 장바구니에서 예약(결제)한 상품 빼기

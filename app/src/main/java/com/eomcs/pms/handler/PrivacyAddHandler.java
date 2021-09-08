@@ -45,11 +45,11 @@ public class PrivacyAddHandler extends AbstractPrivacyHandler {
     privacy.setAddress(Prompt.inputString("주소: "));
     privacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     BookingList BookingList = new BookingList();
-    BookingList.setId(App.getLoginUser().getId());
+    BookingList.setId(privacy.getId());
     App.allBookingList.add(BookingList);
 
     CartList CartList = new CartList();
-    CartList.setId(App.getLoginUser().getId());
+    CartList.setId(privacy.getId());
     App.allCartList.add(CartList);
 
     App.privacyList.add(privacy);

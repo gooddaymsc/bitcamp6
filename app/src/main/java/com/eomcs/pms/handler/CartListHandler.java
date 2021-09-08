@@ -27,8 +27,9 @@ public class CartListHandler extends AbstractCartHandler {
         return;
       }
       for (Cart cart : cartList.getPrivacyCart()) {
-        System.out.printf("%d, %s, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
+        System.out.printf("%d, %s, %s, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
             cart.getCartNumber(), 
+            findSellerInfo(cart.getSellerId()).getBusinessName(),
             cart.getStock().getProduct().getProductName(), 
             cart.getCartStocks(), 
             cart.getCartPrice(),

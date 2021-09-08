@@ -18,6 +18,7 @@ public class CartAddHandler extends AbstractCartHandler {
 
   @Override
   public void execute() {
+    String nowLoginId = App.getLoginUser().getId();
     System.out.println("\n[장바구니 등록]");
     Cart cart = new Cart();
     HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
@@ -50,9 +51,7 @@ public class CartAddHandler extends AbstractCartHandler {
 
     cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     // 체크!!!
-    System.out.println(App.getLoginUser().getId());
-    System.out.println(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
-    cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
+    cart.setCartNumber(stockPrompt.findCartListById(nowLoginId));
     cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
     System.out.println("장바구니가 등록되었습니다.");

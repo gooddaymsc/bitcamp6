@@ -36,7 +36,7 @@ public class CartPrompt {
     for (Cart cart : cartList.getPrivacyCart()) {
       if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
         SellerPrivacy sellerInfo = stockPrompt.findBySellerInfo(cart.getSellerId());
-        System.out.printf("가게명 : %s, 담은 갯수 : %s\n" ,
+        System.out.printf(">> 가게명 : %s, 담은 갯수 : %s\n" ,
             sellerInfo.getBusinessName(),
             cart.getCartStocks());
         hashStock.put(cart, sellerInfo);
