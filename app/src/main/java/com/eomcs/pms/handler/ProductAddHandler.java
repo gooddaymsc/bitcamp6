@@ -6,13 +6,8 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductAddHandler extends AbstractProductHandler {
-  ProductPrompt productPrompt;
   int productNumber = 1;
 
-  public ProductAddHandler(ProductPrompt productPrompt) {
-    super(productPrompt);
-
-  }
 
   @Override
   public void execute() {

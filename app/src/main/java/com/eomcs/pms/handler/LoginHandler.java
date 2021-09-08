@@ -1,16 +1,10 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.util.Prompt;
 
 public class LoginHandler {
-  List<Manager> managerList;
-
-  public LoginHandler(List<Manager> managerList) {
-    this.managerList = managerList;
-  }
-
 
   public Manager InputId() {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
@@ -20,7 +14,7 @@ public class LoginHandler {
       return null;
     }
 
-    for (Manager s : managerList) {
+    for (Manager s : App.managerList) {
       if (id.equals(s.getId())) {
         String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 

@@ -3,6 +3,7 @@ package com.eomcs.pms.domain;
 import java.sql.Date;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Privacy extends Manager {
   private int number;
   private String name;

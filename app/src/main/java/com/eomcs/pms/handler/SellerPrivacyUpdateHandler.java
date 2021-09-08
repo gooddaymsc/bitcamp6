@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.SellerPrivacy;
@@ -8,18 +7,8 @@ import com.eomcs.util.Prompt;
 
 public class SellerPrivacyUpdateHandler extends AbstractSellerPrivacyHandler {
 
-  public SellerPrivacyUpdateHandler(List<SellerPrivacy> sellerList) {
-    super(sellerList);
-  }
-
-
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-      System.out.println("해당 메뉴는 로그인 후 사용가능합니다.\n로그인 후 사용해주세요.");
-      return;
-    }
-
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[개인정보 변경]");
 

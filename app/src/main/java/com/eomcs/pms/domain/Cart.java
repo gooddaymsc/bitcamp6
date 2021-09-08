@@ -1,9 +1,11 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Cart {
-  public Stock stock; // 장바구니 담을 상품
+@SuppressWarnings("serial")
+public class Cart implements Serializable {
+  private Stock stock; // 장바구니 담을 상품
   private int cartStocks; // 장바구니상품의 갯수
   private int cartPrice; // 총액
   private int cartNumber; //장바구니번호

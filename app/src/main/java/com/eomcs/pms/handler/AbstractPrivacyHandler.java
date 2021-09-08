@@ -1,20 +1,12 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Privacy;
 
 public abstract class AbstractPrivacyHandler implements Command {
 
-  protected List<Privacy> privacyList;
-
-  int size = 1;
-
-  public AbstractPrivacyHandler (List<Privacy> privacyList) {
-    this.privacyList = privacyList;
-  }
-
   protected Privacy findById(String id) {
-    Privacy[] arr = privacyList.toArray(new Privacy[0]);
+    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
     for (Privacy member : arr) {
       if (member.getId().equals(id)) {
         return member;
@@ -23,6 +15,24 @@ public abstract class AbstractPrivacyHandler implements Command {
     return null;
   }
 
+  protected int removePrivateById(String id) {
+    //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
+    for (int i=0; i<App.privacyList.size(); i++) {
+      if (App.privacyList.get(i).getId().equals(id)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  protected int removemanagerById(String id) {
+    //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
+    for (int i=0; i<App.managerList.size(); i++) {
+      if (App.managerList.get(i).getId().equals(id)) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
 
 

@@ -13,11 +13,9 @@ import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
   StockPrompt stockPrompt;
-  ProductPrompt productPrompt;
   CartPrompt cartPrompt;
   static int stockNumber = 1;
-  public ProductListHandler(ProductPrompt productPrompt, StockPrompt stockPrompt, CartPrompt cartPrompt) {
-    super(productPrompt);
+  public ProductListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
     this.stockPrompt = stockPrompt;
     this.cartPrompt = cartPrompt;
   }
@@ -56,9 +54,19 @@ public class ProductListHandler extends AbstractProductHandler {
 
       cart.setStock(hashStock.get(storeName));
       int stockNumber = Prompt.inputInt("수량 : ");
-      cart.setCartStocks(stockNumber);
+
+      while(true) {
+        if (stockNumber <= hashStock.get(storeName).getStocks()) {
+          cart.setCartStocks(stockNumber);
+          break;
+        } else {
+          System.out.println("주문수량이 재고를 초과하였습니다.");
+          return;
+        }
+      }
+      //      cart.setCartStocks(stockNumber);
       cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
-      cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
+      //      cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
       cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
       cart.setRegistrationDate(new Date(System.currentTimeMillis()));
       System.out.println("장바구니가 등록되었습니다.");

@@ -7,12 +7,6 @@ import com.eomcs.util.Prompt;
 
 public class ProductUpdateHandler extends AbstractProductHandler {
 
-  ProductPrompt productPrompt;
-
-  public ProductUpdateHandler(ProductPrompt productPrompt) {
-    super(productPrompt);
-  }
-
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER  ) {
@@ -22,7 +16,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
     while(true) {
       System.out.println("[상품 변경]");
 
-      Product product = productPrompt.findByProduct(Prompt.inputString("변경할 상품명 : "));
+      Product product = ProductPrompt.findByProduct(Prompt.inputString("변경할 상품명 : "));
 
       if (product == null) {
         System.out.println("해당 상품이 존재하지 않습니다.");

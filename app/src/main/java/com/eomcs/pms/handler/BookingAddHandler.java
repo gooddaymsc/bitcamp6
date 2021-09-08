@@ -13,36 +13,11 @@ import com.eomcs.util.Prompt;
 
 public class BookingAddHandler extends AbstractBookingHandler {
 
-  //  int bookingNumber = 1;
   CartPrompt cartPrompt;
   StockPrompt stockPrompt;
-  public BookingAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt) {
-    //    super(bookList);
+  public BookingAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt) { 
     this.cartPrompt = cartPrompt;
     this.stockPrompt = stockPrompt;
-    //    BookingList testbookingList = findById("aaaa");
-    //    Booking testBooking = new Booking();
-    //    testBooking.setBookingNumber(testbookingList.getBooking().size());
-    //    testBooking.setCart(CartListHandler.cartList.get(0));
-    //    testBooking.setBookingNumber(11);
-    //    testBooking.setBookingDate(Date.valueOf("2021-03-02"));
-    //    testBooking.setBookingHour(19);
-    //    testBooking.setBookingMinute(25);   
-    //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //
-    //    App.allBookingList.get(0).getBooking().add(testBooking);
-    //
-    //    testbookingList = findById("aaa");
-    //    testBooking = new Booking();
-    //    testBooking.setBookingNumber(testbookingList.getBooking().size());
-    //    testBooking.setCart(CartListHandler.cartList.get(0));
-    //    testBooking.setBookingNumber(22);
-    //    testBooking.setBookingDate(Date.valueOf("2021-01-01"));
-    //    testBooking.setBookingHour(10);
-    //    testBooking.setBookingMinute(30);   
-    //    testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //
-    //    App.allBookingList.get(1).getBooking().add(testBooking);
 
   }
 
@@ -108,10 +83,17 @@ public class BookingAddHandler extends AbstractBookingHandler {
     //    }
 
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
-
+    booking.setBuyerId(App.getLoginUser().getId());
+    // 구매자 bookingList에서 booking 추가
     bookingList.getBooking().add(booking);
+    // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기
     sellerStock.setStocks(sellerStock.getStocks() - bookingProduct.getCartStocks());
+    // 구매자 장바구니에서 예약(결제)한 상품 빼기
     cartPrompt.findCartListById(App.getLoginUser().getId()).getPrivacyCart().remove(bookingProduct);
+    // All.allBookingList에 구매자의 Id에 예약내역 추가.
+    putBookingListById(App.getLoginUser().getId(), booking);
+    // All.allBookingList에 판매자의 Id에 예약내역 추가.
+    putBookingListById(sellerId, booking);
     System.out.println("픽업예약을 완료하였습니다.");
   }
 

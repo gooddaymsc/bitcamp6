@@ -8,10 +8,8 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardAddHandler extends AbstractBoardHandler {
-  int boardNunmber = 1;
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
-
   }
 
 
@@ -24,7 +22,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     System.out.println("[새 게시글]");
     Board board = new Board();
 
-    board.setNumber(boardNunmber++);
+    board.setNumber(boardList.size() +1);
     board.setTitle(Prompt.inputString("제목 : "));
     board.setContent(Prompt.inputString("내용 : "));
     board.setWriter(App.getLoginUser().getId());

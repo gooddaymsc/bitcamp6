@@ -6,10 +6,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductDeleteHandler extends AbstractProductHandler {
-  ProductPrompt productPrompt;
-  public ProductDeleteHandler(ProductPrompt productPrompt) {
-    super(productPrompt);
-  }
 
   @Override
   public void execute() {

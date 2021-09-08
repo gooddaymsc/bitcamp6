@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
@@ -71,6 +72,15 @@ public class StockPrompt {
       }
     }
     return hashStock;
+  }
+
+  public String findStoreName(Set<String> keySet, String storeName) {
+    for (String str : keySet) {
+      if (str.equals(storeName)) {
+        return storeName;
+      }
+    }
+    return null;
   }
 
   public SellerPrivacy findBySellerInfo (String SellerId) {

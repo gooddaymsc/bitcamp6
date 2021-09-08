@@ -1,9 +1,12 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Booking {
+@SuppressWarnings("serial")
+public class Booking implements Serializable {
   public Cart cart;
+  private String buyerId;
   private int bookingNumber;     //예약번호
   private Date bookingDate;      //예약날짜
   private int bookingHour;      
@@ -17,6 +20,13 @@ public class Booking {
   }
   public void setCart(Cart cart) {
     this.cart = cart;
+  }
+
+  public String getBuyerId() {
+    return buyerId;
+  }
+  public void setBuyerId(String buyerId) {
+    this.buyerId = buyerId;
   }
   public int getBookingNumber() {
     return bookingNumber;

@@ -27,6 +27,16 @@ public abstract class AbstractBookingHandler implements Command {
     return null;
   }
 
+  protected BookingList putBookingListById(String id, Booking buyerBooking) {
+    for (BookingList bookingList : App.allBookingList) {
+      if (bookingList.getId().equals(id)) {
+        bookingList.getBooking().add(buyerBooking);
+        return bookingList;
+      }
+    }
+    return null;
+  }
+
   protected int checkHour (String label) {
     while(true) {
       int num = Prompt.inputInt(label);
