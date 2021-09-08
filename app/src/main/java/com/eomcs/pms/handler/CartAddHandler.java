@@ -14,40 +14,6 @@ public class CartAddHandler extends AbstractCartHandler {
   public CartAddHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
     super(cartPrompt);
     this.stockPrompt = stockPrompt;
-
-    CartList testCartList = cartPrompt.findCartListById("aa");
-    Cart testCart = new Cart();
-    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(0));
-    testCart.setCartNumber(1);
-    testCart.setCartStocks(1);
-    testCart.setCartPrice(stockPrompt.findStockListById("aaaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
-    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-    App.allCartList.get(0).getPrivacyCart().add(testCart);
-
-    testCartList = cartPrompt.findCartListById("aa");
-    testCart = new Cart();
-    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(stockPrompt.findStockListById("aaaa").getSellerStock().get(1));
-    testCart.setCartNumber(2);
-    testCart.setCartStocks(2);
-    testCart.setCartPrice(stockPrompt.findStockListById("aaaa").getSellerStock().get(1).getPrice()*testCart.getCartStocks());
-    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-    App.allCartList.get(0).getPrivacyCart().add(testCart);
-
-    testCartList = cartPrompt.findCartListById("a");
-    testCart = new Cart();
-    testCart.setCartNumber(testCartList.getPrivacyCart().size());
-    testCart.setStock(stockPrompt.findStockListById("aaa").getSellerStock().get(0));
-    testCart.setCartNumber(1);
-    testCart.setCartStocks(1);
-    testCart.setCartPrice(stockPrompt.findStockListById("aaa").getSellerStock().get(0).getPrice()*testCart.getCartStocks());
-    testCart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-    App.allCartList.get(1).getPrivacyCart().add(testCart);
-
   }
 
   @Override
@@ -60,10 +26,6 @@ public class CartAddHandler extends AbstractCartHandler {
     System.out.println("\n[장바구니 등록]");
     Cart cart = new Cart();
     HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
-    if (hashStock == null) {
-      System.out.println("해당 상품이 없습니다.");
-      return;
-    }
 
     if (hashStock.size() == 0) {
       System.out.println("해당 상품을 갖는 판매자가 없습니다.");
@@ -74,9 +36,19 @@ public class CartAddHandler extends AbstractCartHandler {
     String storeName = Prompt.inputString("가게명을 선택하세요 > ");
 
     cart.setStock(hashStock.get(storeName));
-    int stockNumber = Prompt.inputInt("수량 : ");
-    cart.setCartStocks(stockNumber);
-    cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
+
+    int stocks = Prompt.inputInt("수량 : ");
+    while(true) {
+      if (stocks <= hashStock.get(storeName).getStocks()) {
+        cart.setCartStocks(stocks);
+        break;
+      } else {
+        System.out.println("주문수량이 재고를 초과하였습니다.");
+        return;
+      }
+    }
+
+    cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     cart.setCartNumber(stockPrompt.findCartListById(App.getLoginUser().getId()).size()+1);
     cart.setSellerId(stockPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));

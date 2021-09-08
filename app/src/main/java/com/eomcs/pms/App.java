@@ -4,6 +4,10 @@ import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
 import static com.eomcs.menu.Menu.ACCESS_PRIVACY;
 import static com.eomcs.menu.Menu.ACCESS_SELLER;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -51,6 +55,7 @@ import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
+import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.SellerPrivacyAddHandler;
 import com.eomcs.pms.handler.SellerPrivacyDeleteHandler;
@@ -66,32 +71,25 @@ import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
-  // 7개 CRUD 
-  // 개인회원 정보
   List<Privacy> privacyList = new LinkedList<>();
   List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
-  // 일반회원
   List<Board> boardList = new ArrayList<>();
-
   List<Booking> bookingList = new LinkedList<>();
   List<Cart> cartList = new ArrayList<>();
-
   List<Stock> stockList = new ArrayList<>();
-  // 판매자
-  List<Product> productList = new ArrayList<>();
+
+  public static List<Product> productList = new ArrayList<>();
   public static List<StockList> allStockList = new ArrayList<>();
   public static List<BookingList> allBookingList = new ArrayList<>();
   public static List<CartList> allCartList = new ArrayList<>();
 
-  // 관리자
   List<Manager> managerList = new ArrayList<>();
-
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler(managerList);
   StockPrompt stockPrompt = new StockPrompt(sellerPrivacyList);
-  ProductPrompt productPrompt = new ProductPrompt(productList);
-  CartPrompt cartPrompt = new CartPrompt();
+  ProductPrompt productPrompt = new ProductPrompt();
+  CartPrompt cartPrompt = new CartPrompt(stockPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
 
@@ -127,6 +125,17 @@ public class App {
 
 
   public App() {
+    loadPrivacys();
+    loadSellerPrivacys();
+    loadManagers();
+    loadProducts();
+    loadStocks();
+    loadStockLists();
+    loadCart();
+    loadCartLists();
+    loadBoards();
+    loadBookings(); 
+    loadBookingLists();
 
     commandMap.put("/privacy/add",    new PrivacyAddHandler(privacyList, managerList));
     commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList));
@@ -147,13 +156,14 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler(productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(productPrompt, stockPrompt, cartPrompt));
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
-    commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
-    commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt));
+    commandMap.put("/product/add",    new ProductAddHandler());
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, cartPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(sellerPrivacyList));
+    commandMap.put("/product/detail", new ProductDetailHandler());
+    commandMap.put("/product/update", new ProductUpdateHandler());
+    commandMap.put("/product/delete", new ProductDeleteHandler());
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt, productPrompt));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt));
     commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
     commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
@@ -165,8 +175,8 @@ public class App {
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(productPrompt));
+    commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt, stockPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler());
     commandMap.put("/booking/update", new BookingUpdateHandler());
     commandMap.put("/booking/delete", new BookingDeleteHandler());
 
@@ -174,9 +184,253 @@ public class App {
 
   void service() {
     managerList.add(new Manager("관리자","1234", Menu.ACCESS_ADMIN));
+    loadBoards();
 
     createMenu().execute();
     Prompt.close();
+
+    savePrivacys();
+    saveSellerPrivacys();
+    saveManagers();
+    saveBoards();
+    saveProducts();
+    saveStocks();
+    saveStockLists();
+    saveCart();
+    saveCartLists();
+    saveBookings();
+    saveBookingLists();
+  }
+  @SuppressWarnings("unchecked")
+  private void loadPrivacys() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("privacy.data"))) {
+      privacyList.addAll((List<Privacy>) in.readObject());
+      System.out.println("회원(구매자) 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void savePrivacys() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("privacy.data"))) {
+      out.writeObject(privacyList);
+      System.out.println("회원(구매자) 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 회원(구매자) 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadSellerPrivacys() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("sellerPrivacy.data"))) {
+      sellerPrivacyList.addAll((List<SellerPrivacy>) in.readObject());
+      System.out.println("판매자 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveSellerPrivacys() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("sellerPrivacy.data"))) {
+      out.writeObject(sellerPrivacyList);
+      System.out.println("판매자 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 판매자 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadManagers() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
+      managerList.addAll((List<Manager>) in.readObject());
+      System.out.println("관리자 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveManagers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("manager.data"))) {
+      out.writeObject(managerList);
+      System.out.println("관리자 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 관리자 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadBoards() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
+      boardList.addAll((List<Board>) in.readObject());
+      System.out.println("게시글 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveBoards() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("board.data"))) {
+      out.writeObject(boardList);
+      System.out.println("게시글 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadProducts() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("product.data"))) {
+      productList.addAll((List<Product>) in.readObject());
+      System.out.println("상품 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 상품 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveProducts() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("product.data"))) {
+      out.writeObject(productList);
+      System.out.println("상품 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 상품 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadStocks() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stock.data"))) {
+      stockList.addAll((List<Stock>) in.readObject());
+      System.out.println("재고 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveStocks() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stock.data"))) {
+      out.writeObject(stockList);
+      System.out.println("재고 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadStockLists() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stockList.data"))) {
+      allStockList.addAll((List<StockList>) in.readObject());
+      System.out.println("재고리스트 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveStockLists() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stockList.data"))) {
+      out.writeObject(allStockList);
+      System.out.println("재고리스트 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고리스트 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCart() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stock.data"))) {
+      stockList.addAll((List<Stock>) in.readObject());
+      System.out.println("장바구니 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 장바구니 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCart() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cart.data"))) {
+      out.writeObject(cartList);
+      System.out.println("장바구니 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 장바구니 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCartLists() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cartList.data"))) {
+      allCartList.addAll((List<CartList>) in.readObject());
+      System.out.println("장바구니리스트 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 장바구니리스트 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCartLists() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cartList.data"))) {
+      out.writeObject(allCartList);
+      System.out.println("장바구니 리스트 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 장바구니 리스트 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadBookings() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("booking.data"))) {
+      bookingList.addAll((List<Booking>) in.readObject());
+      System.out.println("예약 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 예약 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveBookings() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("booking.data"))) {
+      out.writeObject(bookingList);
+      System.out.println("예약 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 예약 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+
+  @SuppressWarnings("unchecked")
+  private void loadBookingLists() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookingList.data"))) {
+      allBookingList.addAll((List<BookingList>) in.readObject());
+      System.out.println("예약리스트 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 예약리스트 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveBookingLists() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("bookingList.data"))) {
+      out.writeObject(allBookingList);
+      System.out.println("예약리스트 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 예약리스트 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   Menu createMenu() {
@@ -270,6 +524,7 @@ public class App {
 
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
+    productMenu.add(new MenuItem("상품검색",  "/product/search"));
     productMenu.add(new MenuItem("상세보기", "/product/detail"));
     productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
     productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));

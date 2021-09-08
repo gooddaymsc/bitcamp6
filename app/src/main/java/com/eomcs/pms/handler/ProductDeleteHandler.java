@@ -6,10 +6,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductDeleteHandler extends AbstractProductHandler {
-  ProductPrompt productPrompt;
-  public ProductDeleteHandler(ProductPrompt productPrompt) {
-    super(productPrompt);
-  }
 
   @Override
   public void execute() {
@@ -21,7 +17,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
     while(true) {
       System.out.println("[상품 삭제]");
 
-      Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
+      Product product = ProductPrompt.findByProduct(Prompt.inputString("상품명 : "));
 
       if (product == null) {
         System.out.println("해당 상품이 존재하지 않습니다.");
@@ -31,7 +27,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
       String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         System.out.println("상품을 삭제하였습니다.");
-        productPrompt.productList.remove(product);
+        App.productList.remove(product);
         return;
       } else {
         System.out.println("상품 삭제를 취소하였습니다.");

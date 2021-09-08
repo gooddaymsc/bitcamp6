@@ -1,8 +1,10 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Booking {
+@SuppressWarnings("serial")
+public class Booking implements Serializable {
   public Cart cart;
   private int bookingNumber;     //예약번호
   private Date bookingDate;      //예약날짜

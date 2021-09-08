@@ -1,7 +1,9 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 
-public class Product {
+@SuppressWarnings("serial")
+public class Product implements Serializable{
 
   private int productNumber;        //상품번
   private String productName;       //상품명
@@ -30,6 +32,7 @@ public class Product {
     return productType;
   }
   public void setProductType(String productType) {
+    //조건문
     this.productType = productType;
   }
   public String getCountryOrigin() {

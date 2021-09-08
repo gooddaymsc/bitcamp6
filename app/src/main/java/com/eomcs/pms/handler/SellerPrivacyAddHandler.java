@@ -34,7 +34,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     testsellerPrivacy.setBusinessName("오늘와인한잔");
     testsellerPrivacy.setBusinessNumber("aaaa");
-    testsellerPrivacy.setBusinessAddress("aaaa");
+    testsellerPrivacy.setBusinessAddress("서울시 강남구 논현동 200");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1111");
 
     sellerList.add(testsellerPrivacy);
@@ -69,7 +69,7 @@ public class SellerPrivacyAddHandler extends AbstractSellerPrivacyHandler {
     testsellerPrivacy.setRegisteredDate(new Date(System.currentTimeMillis()));
     testsellerPrivacy.setBusinessName("비올땐막걸리");
     testsellerPrivacy.setBusinessNumber("aaa");
-    testsellerPrivacy.setBusinessAddress("aaa");
+    testsellerPrivacy.setBusinessAddress("경기도 안양시 만안구 219");
     testsellerPrivacy.setBusinessPlaceNumber("010-1111-1112");
 
     sellerList.add(testsellerPrivacy);

@@ -25,6 +25,16 @@ public class StockPrompt {
     return null;
   }
 
+  public Stock findStockById(String id, String stockName) {
+    StockList stockList = findStockListById(id);
+    for (Stock stock : stockList.getSellerStock()) {
+      if (stock.getProduct().getProductName().equals(stockName)) {
+        return stock;
+      }
+    }
+    return null;
+  }
+
   public Stock findByStock (String ProductName) {
     StockList stockList = findStockListById(App.getLoginUser().getId());
     for (Stock stock : stockList.getSellerStock()) {
@@ -37,6 +47,12 @@ public class StockPrompt {
 
   //--------상품 검색시 판매자정보 반환
   protected HashMap<String, Stock> findBySellerId (String StockName) {
+    //    Stock stockName = findByStock(StockName);
+    //    if (stockName==null) {
+    //      System.out.println("존재하지 않는 상품입니다.");
+    //      return null;
+    //    }
+
     HashMap<String, Stock> hashStock= new HashMap<>();
     for (StockList stockList : App.allStockList) {
       for (Stock stock : stockList.getSellerStock()) {
@@ -57,7 +73,7 @@ public class StockPrompt {
     return hashStock;
   }
 
-  private SellerPrivacy findBySellerInfo (String SellerId) {
+  public SellerPrivacy findBySellerInfo (String SellerId) {
     for (SellerPrivacy member : sellerPrivacyList) {
       if (member.getName().equals(SellerId)){
         return member;

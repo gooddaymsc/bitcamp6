@@ -8,16 +8,9 @@ import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
-  ProductPrompt productPrompt;
-
-  public BookingListHandler(ProductPrompt productPrompt) {
-    this.productPrompt = productPrompt;
-  }
-
-
   @Override
   public void execute() {
-    System.out.println("[내 픽업 예약 목록]");
+    System.out.println("\n[내 픽업 예약 목록]");
     BookingList bookingList = findById(App.getLoginUser().getId());
 
     if (bookingList.getBooking().size() == 0) {
@@ -38,11 +31,11 @@ public class BookingListHandler extends AbstractBookingHandler{
 
     while(true) {
 
-      String input = Prompt.inputString("상품 상세정보 보기(이전메뉴:0) >> \n 상품명 : ");
+      String input = Prompt.inputString("\n상품 상세정보 보기(이전메뉴:0) \n>> 상품명 : ");
       if (input.equals("0")) {
         return;
       } else {
-        Product bookingProduct = productPrompt.findByProduct(input);
+        Product bookingProduct = ProductPrompt.findByProduct(input);
 
         if (bookingProduct == null) {
           System.out.println("해당 상품이 없습니다.");
@@ -55,11 +48,11 @@ public class BookingListHandler extends AbstractBookingHandler{
         System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());
         System.out.printf("당도: %d\n",  bookingProduct.getSugerLevel());
         System.out.printf("산도: %d\n",  bookingProduct.getAcidity());
+
       }
     }
   }
 }
-
 
 
 

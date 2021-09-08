@@ -1,7 +1,9 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 
-public class Stock {
+@SuppressWarnings("serial")
+public class Stock implements Serializable{
 
   private Product product;
   private int stockNumber;            //재고번호
