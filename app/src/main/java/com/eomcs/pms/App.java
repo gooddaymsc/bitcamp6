@@ -131,11 +131,11 @@ public class App {
     loadProducts();
     loadStocks();
     loadStockLists();
-    loadCart();
-    loadCartLists();
+    //    loadCart();
+    //    loadCartLists();
     loadBoards();
-    loadBookings(); 
-    loadBookingLists();
+    //    loadBookings(); 
+    //    loadBookingLists();
 
     commandMap.put("/privacy/add",    new PrivacyAddHandler(privacyList, managerList));
     commandMap.put("/privacy/list",   new PrivacyListHandler(privacyList));
@@ -198,8 +198,8 @@ public class App {
     saveStockLists();
     saveCart();
     saveCartLists();
-    saveBookings();
-    saveBookingLists();
+    //    saveBookings();
+    //    saveBookingLists();
   }
   @SuppressWarnings("unchecked")
   private void loadPrivacys() {
