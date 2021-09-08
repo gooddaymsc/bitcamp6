@@ -100,4 +100,38 @@ public class StockPrompt {
     return null;
   }
 
+
+  //입력한 문자열을 포함하면 adress 리턴.
+  public HashMap<String, SellerPrivacy> findByAdress (String adress) {
+    HashMap<String, SellerPrivacy> hashMap = new HashMap<>();
+    for (SellerPrivacy member : sellerPrivacyList) {
+      if((member.getBusinessAddress()).contains(adress)) {
+        hashMap.put(member.getId(), member);
+      }
+    }
+    return hashMap;
+  }
+
+
+  //  HashMap<String, Stock> hashStock= new HashMap<>();
+  //  for (StockList stockList : App.allStockList) {
+  //    for (Stock stock : stockList.getSellerStock()) {
+  //      if (stock.getProduct().getProductName().equals(StockName)) {
+  //        //          isStock = true;
+  //        SellerPrivacy sellerInfo = findBySellerInfo(stockList.getId());
+  //        System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
+  //            sellerInfo.getBusinessName(),
+  //            stockList.getId(),
+  //            stock.getStocks(),
+  //            stock.getPrice(),
+  //            sellerInfo.getBusinessAddress(),
+  //            sellerInfo.getBusinessPlaceNumber());
+  //        hashStock.put(sellerInfo.getBusinessName(), stock);
+  //      }
+  //    }
+  //  }
+  //  return hashStock;
+  //}
+
+
 }
