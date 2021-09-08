@@ -19,29 +19,6 @@ public class BookingAddHandler extends AbstractBookingHandler {
     this.cartPrompt = cartPrompt;
     this.stockPrompt = stockPrompt;
 
-    //        BookingList testbookingList = findById("aaaa");
-    //        Booking testBooking = new Booking();
-    //        testBooking.setBookingNumber(testbookingList.getBooking().size());
-    //        testBooking.setCart(CartListHandler.cartList.get(0));
-    //        testBooking.setBookingNumber(11);
-    //        testBooking.setBookingDate(Date.valueOf("2021-03-02"));
-    //        testBooking.setBookingHour(19);
-    //        testBooking.setBookingMinute(25);   
-    //        testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //    
-    //        App.allBookingList.get(0).getBooking().add(testBooking);
-    //    
-    //        testbookingList = findById("aaa");
-    //        testBooking = new Booking();
-    //        testBooking.setBookingNumber(testbookingList.getBooking().size());
-    //        testBooking.setCart(CartListHandler.cartList.get(0));
-    //        testBooking.setBookingNumber(22);
-    //        testBooking.setBookingDate(Date.valueOf("2021-01-01"));
-    //        testBooking.setBookingHour(10);
-    //        testBooking.setBookingMinute(30);   
-    //        testBooking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //    
-    //        App.allBookingList.get(1).getBooking().add(testBooking);
   }
 
   @Override
