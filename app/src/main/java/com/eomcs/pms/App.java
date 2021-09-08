@@ -350,8 +350,8 @@ public class App {
 
   @SuppressWarnings("unchecked")
   private void loadCart() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stock.data"))) {
-      stockList.addAll((List<Stock>) in.readObject());
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cart.data"))) {
+      cartList.addAll((List<Cart>) in.readObject());
       System.out.println("장바구니 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 장바구니 데이터를 읽어오는 중 오류 발생!");
