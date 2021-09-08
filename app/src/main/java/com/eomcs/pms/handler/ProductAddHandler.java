@@ -6,8 +6,6 @@ import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductAddHandler extends AbstractProductHandler {
-  int productNumber = 1;
-
 
   @Override
   public void execute() {
@@ -21,7 +19,7 @@ public class ProductAddHandler extends AbstractProductHandler {
 
     Product product = new Product();
 
-    product.setProductNumber(productNumber++);
+    product.setProductNumber(App.productList.size() +1);
     product.setProductName(Prompt.inputString("상품명 : "));
     product.setProductType(checkType("주종 : "));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
