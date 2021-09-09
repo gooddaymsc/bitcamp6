@@ -4,9 +4,8 @@ import java.util.List;
 import com.eomcs.pms.domain.Buyer;
 
 public class BuyerListHandler extends AbstractBuyerHandler {
-  List<Buyer> buyerList;
   public BuyerListHandler(List<Buyer> buyerList) {
-    this.buyerList = buyerList;
+    super(buyerList);
   }
 
   @Override

@@ -1,7 +1,8 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import com.eomcs.pms.App;
+import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
@@ -10,21 +11,31 @@ import com.eomcs.util.Prompt;
 
 public class SellerAddHandler extends AbstractSellerHandler {
 
+  List<StockList> allStockList;
+  List<BookingList> allBookingList;
+
+  public SellerAddHandler(List<Seller> sellerList, List<Member> memberList, 
+      List<StockList> allStockList, List<BookingList> allBookingList) {
+    super(sellerList, memberList);
+    this.allStockList = allStockList;
+    this.allBookingList = allBookingList;
+  }
+
   int sellerPrivacyNumber = 1;
 
   @Override
   public void execute() {
     System.out.println("\n[판매자 등록]");
     Seller seller = new Seller();
-    seller.setAuthority(0x04);
+    seller.setAuthority(Menu.ACCESS_SELLER);
     seller.setNumber(sellerPrivacyNumber++);
 
     String id = Prompt.inputString("등록할 아이디: ");
 
-    int listSize = App.memberList.size();
+    int listSize = memberList.size();
 
     for (int i = 0; i < listSize; i++) {
-      if (App.memberList.get(i).getId().equals(id)) {
+      if (memberList.get(i).getId().equals(id)) {
         System.out.println("중복되는 아이디입니다.");
         return;
       }
@@ -43,16 +54,16 @@ public class SellerAddHandler extends AbstractSellerHandler {
     seller.setBusinessAddress(Prompt.inputString("사업장주소 : "));
     seller.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
-    App.sellerList.add(seller);
-    App.memberList.add(new Member(seller.getId(), seller.getPassword(), seller.getAuthority()));
+    sellerList.add(seller);
+    memberList.add(new Member(seller.getId(), seller.getPassword(), seller.getAuthority()));
 
     StockList StockList = new StockList();
     StockList.setId(seller.getId());
-    App.allStockList.add(StockList);
+    allStockList.add(StockList);
 
     BookingList BookingList = new BookingList();
     BookingList.setId(seller.getId());
-    App.allBookingList.add(BookingList);
+    allBookingList.add(BookingList);
   }
 }
 

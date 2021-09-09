@@ -1,11 +1,15 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.util.Prompt;
 
 public class BuyerUpdateHandler extends AbstractBuyerHandler {
+  public BuyerUpdateHandler(List<Buyer> buyerList) {
+    super(buyerList);
+  }
 
   @Override
   public void execute() {

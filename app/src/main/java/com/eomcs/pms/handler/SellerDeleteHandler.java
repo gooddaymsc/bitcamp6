@@ -1,12 +1,18 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
+
 public class SellerDeleteHandler extends AbstractSellerHandler{
+
+  public SellerDeleteHandler(List<Seller> sellerList, List<Member> memberList) {
+    super(sellerList, memberList);
+  }
 
   @Override
   public void execute() {
@@ -17,8 +23,8 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        App.sellerList.remove(removeSellerPrivateById(nowLoginId));
-        App.memberList.remove(removemanagerById(nowLoginId));
+        sellerList.remove(removeSellerPrivateById(nowLoginId));
+        memberList.remove(removeManagerById(nowLoginId));
         System.out.println("탈퇴가 완료되었습니다.");
         App.loginMember = new Member();
         return;
@@ -37,8 +43,8 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        App.sellerList.remove(removeSellerPrivateById(id));
-        App.memberList.remove(removemanagerById(id));
+        sellerList.remove(removeSellerPrivateById(id));
+        memberList.remove(removeManagerById(id));
         System.out.println("판매자를 탈퇴시켰습니다.");
         return;
       }
