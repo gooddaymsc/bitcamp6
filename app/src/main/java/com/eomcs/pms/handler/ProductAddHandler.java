@@ -1,11 +1,18 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
 public class ProductAddHandler extends AbstractProductHandler {
+
+  List<Product> productList;
+
+  public ProductAddHandler (  List<Product> productList ) {
+    this.productList = productList;
+  }
 
   @Override
   public void execute() {
@@ -19,7 +26,7 @@ public class ProductAddHandler extends AbstractProductHandler {
 
     Product product = new Product();
 
-    product.setProductNumber(App.productList.size() +1);
+    product.setProductNumber(productList.size() +1);
     product.setProductName(Prompt.inputString("상품명 : "));
     product.setProductType(checkType("주종 : "));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
@@ -28,7 +35,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     product.setSugerLevel(checkNum("당도(1-5) : "));
     product.setAcidity(checkNum("산도(1-5) : "));
     product.setWeight(checkNum("바디감(1-5) : "));
-    App.productList.add(product);
+    productList.add(product);
     System.out.println("상품을 등록하였습니다.");
   }
 

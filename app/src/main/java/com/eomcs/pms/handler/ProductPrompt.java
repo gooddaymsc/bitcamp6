@@ -1,12 +1,18 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.App;
+import java.util.List;
 import com.eomcs.pms.domain.Product;
 
 public class ProductPrompt {
 
-  protected static Product findByProduct (String ProductName) {
-    for (Product product : App.productList) {
+  List<Product> productList;
+
+  public ProductPrompt (List<Product> productList) {
+    this.productList = productList;
+  }
+
+  protected Product findByProduct (String ProductName) {
+    for (Product product : productList) {
       if (product.getProductName().equals(ProductName)) {
         return product;
       }

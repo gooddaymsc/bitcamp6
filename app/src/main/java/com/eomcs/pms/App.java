@@ -84,8 +84,8 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler();
-  StockPrompt stockPrompt = new StockPrompt();
-  ProductPrompt productPrompt = new ProductPrompt();
+  StockPrompt stockPrompt = new StockPrompt(allStockList, sellerList, allCartList);
+  ProductPrompt productPrompt = new ProductPrompt(productList);
   CartPrompt cartPrompt = new CartPrompt(stockPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(buyerList, sellerList);
@@ -152,14 +152,14 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler());
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, cartPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList));
+    commandMap.put("/product/add",    new ProductAddHandler(productList));
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, cartPrompt, productList, allStockList));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList));
     commandMap.put("/product/detail", new ProductDetailHandler());
     commandMap.put("/product/update", new ProductUpdateHandler());
-    commandMap.put("/product/delete", new ProductDeleteHandler());
+    commandMap.put("/product/delete", new ProductDeleteHandler(productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt, allStockList));
     commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
     commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));

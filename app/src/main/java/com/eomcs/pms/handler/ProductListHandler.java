@@ -2,28 +2,35 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
   StockPrompt stockPrompt;
   CartPrompt cartPrompt;
+  List<Product> productList;
+  List<StockList> allStockList;
+
   static int stockNumber = 1;
-  public ProductListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
+  public ProductListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt, List<Product> productList, List<StockList> allStockList) {
     this.stockPrompt = stockPrompt;
     this.cartPrompt = cartPrompt;
+    this.productList = productList;
+    this.allStockList = allStockList;
   }
 
   @Override
   public void execute() {
     String nowLoginId = App.getLoginUser().getId();
     System.out.println("[상품 목록]");
-    for (Product product : App.productList) {
+    for (Product product : productList) {
       System.out.printf("%d, %s, %s, %s, %s, %.2f, %d, %d, %d \n", 
           product.getProductNumber(), 
           product.getProductName(), 
@@ -94,7 +101,7 @@ public class ProductListHandler extends AbstractProductHandler {
       if (input.equalsIgnoreCase("y")) {
         stock.setProduct(product);
         stock.setStockNumber(stockPrompt.getStockListSizeById(nowLoginId)[0]);
-        App.allStockList.get(stockPrompt.getStockListSizeById(nowLoginId)[1]).getSellerStock().add(stock);
+        allStockList.get(stockPrompt.getStockListSizeById(nowLoginId)[1]).getSellerStock().add(stock);
 
         System.out.println("재고 등록을 완료하였습니다.");
         return;
