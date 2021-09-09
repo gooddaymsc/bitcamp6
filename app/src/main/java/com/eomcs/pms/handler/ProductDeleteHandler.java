@@ -1,8 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.menu.Menu;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
@@ -17,11 +15,6 @@ public class ProductDeleteHandler extends AbstractProductHandler {
   }
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER 
-        && App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("해당 메뉴 권한이 없습니다.");
-      return;
-    }
     while(true) {
       System.out.println("[상품 삭제]");
 
