@@ -8,11 +8,10 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerDeleteHandler extends AbstractBuyerHandler {
-  List<Buyer> buyerList;
-  List<Member> memberList;
-  public BuyerDeleteHandler(List<Buyer> buyerList, List<Member> memberList) {
-    this.buyerList = buyerList;
-    this.memberList = memberList;
+  MemberPrompt memberPrompt;
+  public BuyerDeleteHandler(List<Buyer> buyerList, MemberPrompt memberPrompt) {
+    super(buyerList);
+    this.memberPrompt = memberPrompt;
   }
   @Override
   public void execute() {
@@ -24,7 +23,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
 
       if (input.equalsIgnoreCase("y")) {
         buyerList.remove(removePrivateById(nowLoginId));
-        memberList.remove(removemanagerById(nowLoginId));
+        memberPrompt.removeMemberById(nowLoginId);
         System.out.println("탈퇴가 완료되었습니다.");
         // 현재로그인 상태 초기화
         App.loginMember = new Member();
@@ -45,7 +44,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyerList.remove(removePrivateById(id));
-        memberList.remove(removemanagerById(id));
+        memberPrompt.removeMemberById(id);
         System.out.println("회원을 탈퇴시켰습니다.");
         return;
       }

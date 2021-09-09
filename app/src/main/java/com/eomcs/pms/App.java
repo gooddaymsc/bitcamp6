@@ -47,6 +47,7 @@ import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
+import com.eomcs.pms.handler.MemberPrompt;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -83,14 +84,15 @@ public class App {
   List<Member> memberList = new ArrayList<>();
   HashMap<String, Command> commandMap = new HashMap<>();
 
-  LoginHandler loginHandler = new LoginHandler();
+  LoginHandler loginHandler = new LoginHandler(memberList);
+  MemberPrompt memberPrompt = new MemberPrompt(memberList);
   StockPrompt stockPrompt = new StockPrompt();
   ProductPrompt productPrompt = new ProductPrompt();
   CartPrompt cartPrompt = new CartPrompt(stockPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(buyerList, sellerList);
 
-  class MenuItem extends Menu{
+  class MenuItem extends Menu {
     String menuId;
 
     public MenuItem(String title, String menuId) {
@@ -134,10 +136,10 @@ public class App {
     //    loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, allCartList, allBookingList));
-    commandMap.put("/buyer/list",   new BuyerListHandler());
-    commandMap.put("/buyer/detail", new BuyerDetailHandler());
-    commandMap.put("/buyer/update", new BuyerUpdateHandler());
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler());
+    commandMap.put("/buyer/list",   new BuyerListHandler(buyerList));
+    commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerList));
+    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerList));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerList, memberPrompt));
 
     commandMap.put("/seller/add",    new SellerAddHandler());
     commandMap.put("/seller/list",   new SellerListHandler());
