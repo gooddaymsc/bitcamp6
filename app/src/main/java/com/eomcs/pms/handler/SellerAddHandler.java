@@ -21,14 +21,14 @@ public class SellerAddHandler extends AbstractSellerHandler {
     this.allBookingList = allBookingList;
   }
 
-  int sellerPrivacyNumber = 1;
+  public static int sellerNumber = 1;
 
   @Override
   public void execute() {
     System.out.println("\n[판매자 등록]");
     Seller seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
-    seller.setNumber(sellerPrivacyNumber++);
+    seller.setNumber(sellerNumber++);
 
     String id = Prompt.inputString("등록할 아이디: ");
 

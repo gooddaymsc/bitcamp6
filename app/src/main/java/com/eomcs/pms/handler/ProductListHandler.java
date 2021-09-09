@@ -20,7 +20,6 @@ public class ProductListHandler extends AbstractProductHandler {
   List<StockList> allStockList;
   SellerPrompt sellerPrompt;
 
-  static int stockNumber = 1;
   public ProductListHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, CartPrompt cartPrompt, List<Product> productList, List<StockList> allStockList, SellerPrompt sellerPrompt) {
     this.stockPrompt = stockPrompt;
     this.productPrompt = productPrompt;

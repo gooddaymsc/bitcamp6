@@ -18,7 +18,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     this.bookingPrompt = bookingPrompt;
     this.memberList = memberList;
   }
-  int buyerNumber = 1;
+  public static int buyerNumber = 1;
 
   @Override
   public void execute() {
@@ -31,13 +31,15 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     //아이디가 중복되면 다시 아이디 재설정.
     String id = Prompt.inputString("등록할 아이디: ");
 
-    int listSize = memberList.size();
+    if (memberList != null) {
+      int listSize = memberList.size();
 
-    for (int i=0; i<listSize; i++) {
+      for (int i=0; i<listSize; i++) {
 
-      if (memberList.get(i).getId().equals(id)) {
-        System.out.println("중복되는 아이디입니다.");
-        return;
+        if (memberList.get(i).getId().equals(id)) {
+          System.out.println("중복되는 아이디입니다.");
+          return;
+        }
       }
     }
 

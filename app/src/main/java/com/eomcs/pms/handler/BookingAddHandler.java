@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.HashMap;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
-import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
@@ -20,6 +19,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
   }
 
+  public static int bookingNumber = 1;
   @Override
   public void execute() {
     System.out.println("[예약 등록]");
@@ -61,8 +61,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     }
 
     booking.setCart(bookingProduct);
-    BookingList bookingList = findById(App.getLoginUser().getId());
-    booking.setBookingNumber(bookingList.getBooking().size()+1);
+    booking.setBookingNumber(bookingNumber++);
 
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     booking.setBookingHour(checkHour("픽업시간(시): "));
