@@ -1,11 +1,18 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class SellerDetailHandler extends AbstractSellerHandler{
+
+  public SellerDetailHandler(List<Seller> sellerList, List<Member> memberList) {
+    super(sellerList, memberList);
+  }
+
 
   @Override
   public void execute() {

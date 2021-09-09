@@ -89,7 +89,7 @@ public class App {
   LoginHandler loginHandler = new LoginHandler(memberList);
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
   SellerPrompt sellerPrompt = new SellerPrompt(sellerList);
-  StockPrompt stockPrompt = new StockPrompt(allStockList);
+  StockPrompt stockPrompt = new StockPrompt(allStockList, sellerPrompt);
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   ProductPrompt productPrompt = new ProductPrompt();
   CartPrompt cartPrompt = new CartPrompt(allCartList, sellerPrompt);
@@ -145,11 +145,11 @@ public class App {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerList));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerList, memberPrompt, cartPrompt, bookingPrompt));
 
-    commandMap.put("/seller/add",    new SellerAddHandler());
-    commandMap.put("/seller/list",   new SellerListHandler());
-    commandMap.put("/seller/detail", new SellerDetailHandler());
-    commandMap.put("/seller/update", new SellerUpdateHandler());
-    commandMap.put("/seller/delete", new SellerDeleteHandler());
+    commandMap.put("/seller/add",    new SellerAddHandler(sellerList, memberList, allStockList, allBookingList));
+    commandMap.put("/seller/list",   new SellerListHandler(sellerList, memberList));
+    commandMap.put("/seller/detail", new SellerDetailHandler(sellerList, memberList));
+    commandMap.put("/seller/update", new SellerUpdateHandler(sellerList, memberList));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerList, memberList));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));

@@ -9,8 +9,10 @@ import com.eomcs.pms.domain.StockList;
 
 public class StockPrompt {
   List<StockList> allStockList;
-  public StockPrompt(List<StockList> allStockList) {
+  SellerPrompt sellerPrompt;
+  public StockPrompt(List<StockList> allStockList, SellerPrompt sellerPrompt) {
     this.allStockList = allStockList;
+    this.sellerPrompt = sellerPrompt;
   }
 
   protected boolean removeStockById(String stockName, String id) {
@@ -38,7 +40,7 @@ public class StockPrompt {
   }
 
   public int findStockListById(String id) {
-    for (int i=0; i<allStockList.size(); i++) {
+    for (int i=0; i< allStockList.size(); i++) {
       if (allStockList.get(i).getId().equals(id)) {
         return i;
       }
@@ -57,7 +59,7 @@ public class StockPrompt {
   }
 
   public boolean findByStock (String ProductName, String nowLoginId) {
-    for (int i=0; i<allStockList.size(); i++) {
+    for (int i=0; i< allStockList.size(); i++) {
       if (allStockList.get(i).getId().equals(nowLoginId)) {
         for (Stock stock : allStockList.get(i).getSellerStock()) {
           if (stock.getProduct().getProductName().equals(ProductName)) {
@@ -83,7 +85,7 @@ public class StockPrompt {
       for (Stock stock : stockList.getSellerStock()) {
         if (stock.getProduct().getProductName().equals(StockName)) {
           //          isStock = true;
-          Seller sellerInfo = findBySellerInfo(stockList.getId());
+          Seller sellerInfo = sellerPrompt.findBySellerInfo(stockList.getId());
           System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
               sellerInfo.getBusinessName(),
               stockList.getId(),
@@ -106,28 +108,25 @@ public class StockPrompt {
     }
     return null;
   }
-
-
-
-  //  HashMap<String, Stock> hashStock= new HashMap<>();
-  //  for (StockList stockList : App.allStockList) {
-  //    for (Stock stock : stockList.getSellerStock()) {
-  //      if (stock.getProduct().getProductName().equals(StockName)) {
-  //        //          isStock = true;
-  //        seller sellerInfo = findBySellerInfo(stockList.getId());
-  //        System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
-  //            sellerInfo.getBusinessName(),
-  //            stockList.getId(),
-  //            stock.getStocks(),
-  //            stock.getPrice(),
-  //            sellerInfo.getBusinessAddress(),
-  //            sellerInfo.getBusinessPlaceNumber());
-  //        hashStock.put(sellerInfo.getBusinessName(), stock);
-  //      }
-  //    }
-  //  }
-  //  return hashStock;
-  //}
-
-
 }
+
+//  HashMap<String, Stock> hashStock= new HashMap<>();
+//  for (StockList stockList : App.allStockList) {
+//    for (Stock stock : stockList.getSellerStock()) {
+//      if (stock.getProduct().getProductName().equals(StockName)) {
+//        //          isStock = true;
+//        seller sellerInfo = findBySellerInfo(stockList.getId());
+//        System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
+//            sellerInfo.getBusinessName(),
+//            stockList.getId(),
+//            stock.getStocks(),
+//            stock.getPrice(),
+//            sellerInfo.getBusinessAddress(),
+//            sellerInfo.getBusinessPlaceNumber());
+//        hashStock.put(sellerInfo.getBusinessName(), stock);
+//      }
+//    }
+//  }
+//  return hashStock;
+//}
+
