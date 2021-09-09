@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
@@ -13,26 +12,29 @@ public class ProductSearchHandler extends AbstractProductHandler {
   StockPrompt stockPrompt;
   ProductPrompt productPrompt;
   List<Seller> sellerPrivacyList;
-
-  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<Seller> sellerPrivacyList) {
+  List<Product> productList;
+  SellerPrompt sellerPrompt;
+  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<Seller> sellerPrivacyList,  List<Product> productList, SellerPrompt sellerPrompt) {
     this.productPrompt = productPrompt;
     this.stockPrompt = stockPrompt;
     this.sellerPrivacyList = sellerPrivacyList;
+    this.productList = productList;
+    this.sellerPrompt = sellerPrompt;
   }
 
   @Override
   public void execute() {
     System.out.println("[상품검색]");
 
-    HashMap<String, Seller> sellerInfo = stockPrompt.findByAdress(Prompt.inputString("주소입력: "));   
+    HashMap<String, Seller> sellerInfo = sellerPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
-    Product productName  = ProductPrompt.findByProduct(Prompt.inputString("상품입력: "));   
+    Product productName  = productPrompt.findByProduct(Prompt.inputString("상품입력: "));   
 
     System.out.println("==========상품 목록==========");
 
     while(true) {
       int size = 1;
-      for(Product product : App.productList) {
+      for(Product product : productList) {
         if(product.getProductName().equals(productName.getProductName())) {
           System.out.printf("상품번호: %d \n", size++);
           System.out.printf("상품명: %s\n", product.getProductName());

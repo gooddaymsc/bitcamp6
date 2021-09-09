@@ -59,6 +59,7 @@ public class StockPrompt {
   }
 
   public boolean findByStock (String ProductName, String nowLoginId) {
+
     for (int i=0; i< allStockList.size(); i++) {
       if (allStockList.get(i).getId().equals(nowLoginId)) {
         for (Stock stock : allStockList.get(i).getSellerStock()) {

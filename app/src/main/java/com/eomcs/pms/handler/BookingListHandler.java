@@ -9,6 +9,11 @@ import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
+  ProductPrompt productPrompt;
+
+  public BookingListHandler(ProductPrompt productPrompt) {
+    this.productPrompt = productPrompt;
+  }
   @Override
   public void execute() {
 
@@ -59,7 +64,7 @@ public class BookingListHandler extends AbstractBookingHandler{
       if (input.equals("0")) {
         return;
       } else {
-        Product bookingProduct = ProductPrompt.findByProduct(input);
+        Product bookingProduct = productPrompt.findByProduct(input);
 
         if (bookingProduct == null) {
           System.out.println("해당 상품이 없습니다.");
