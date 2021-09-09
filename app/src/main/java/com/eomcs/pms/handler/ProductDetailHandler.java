@@ -5,11 +5,16 @@ import com.eomcs.util.Prompt;
 
 public class ProductDetailHandler extends AbstractProductHandler {
 
+  ProductPrompt productPrompt;
+
+  public ProductDetailHandler (ProductPrompt productPrompt) {
+    this.productPrompt = productPrompt;
+  }
   @Override
   public void execute() {
     System.out.println("[상품 상세보기]");
 
-    Product product = ProductPrompt.findByProduct(Prompt.inputString("상품명 : "));
+    Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
 
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");

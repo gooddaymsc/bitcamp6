@@ -9,8 +9,10 @@ import com.eomcs.util.Prompt;
 public class ProductDeleteHandler extends AbstractProductHandler {
 
   List<Product> productList;
+  ProductPrompt productPrompt;
 
-  public ProductDeleteHandler( List<Product> productList) {
+  public ProductDeleteHandler(ProductPrompt productPrompt, List<Product> productList) {
+    this.productPrompt = productPrompt;
     this.productList = productList;
   }
   @Override
@@ -23,7 +25,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
     while(true) {
       System.out.println("[상품 삭제]");
 
-      Product product = ProductPrompt.findByProduct(Prompt.inputString("상품명 : "));
+      Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
 
       if (product == null) {
         System.out.println("해당 상품이 존재하지 않습니다.");

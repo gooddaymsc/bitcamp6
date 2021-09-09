@@ -10,7 +10,7 @@ public class ProductAddHandler extends AbstractProductHandler {
 
   List<Product> productList;
 
-  public ProductAddHandler (  List<Product> productList ) {
+  public ProductAddHandler (List<Product> productList ) {
     this.productList = productList;
   }
 

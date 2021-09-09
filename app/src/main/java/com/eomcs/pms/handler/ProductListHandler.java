@@ -14,13 +14,15 @@ import com.eomcs.util.Prompt;
 
 public class ProductListHandler extends AbstractProductHandler {
   StockPrompt stockPrompt;
+  ProductPrompt productPrompt;
   CartPrompt cartPrompt;
   List<Product> productList;
   List<StockList> allStockList;
 
   static int stockNumber = 1;
-  public ProductListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt, List<Product> productList, List<StockList> allStockList) {
+  public ProductListHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, CartPrompt cartPrompt, List<Product> productList, List<StockList> allStockList) {
     this.stockPrompt = stockPrompt;
+    this.productPrompt = productPrompt;
     this.cartPrompt = cartPrompt;
     this.productList = productList;
     this.allStockList = allStockList;
@@ -82,7 +84,7 @@ public class ProductListHandler extends AbstractProductHandler {
       Stock stock = new Stock(); 
       String productName = Prompt.inputString("상품명 : ");
 
-      Product product = ProductPrompt.findByProduct(productName);
+      Product product = productPrompt.findByProduct(productName);
       if (product == null) {
         System.out.println("입력하신 상품이 없습니다.");
         return;

@@ -9,9 +9,11 @@ import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
 
+  ProductPrompt productPrompt;
   List<StockList> allStockList;
-  public StockAddHandler(StockPrompt stockPrompt, List<StockList> allStockList) {
+  public StockAddHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, List<StockList> allStockList) {
     super(stockPrompt);
+    this.productPrompt = productPrompt;
     this.allStockList = allStockList;
   }
 
@@ -22,7 +24,7 @@ public class StockAddHandler extends AbstractStockHandler {
     System.out.println("\n[재고등록]");
     Stock stock = new Stock(); 
     String productName = Prompt.inputString("상품명 : ");
-    Product product = ProductPrompt.findByProduct(productName);
+    Product product = productPrompt.findByProduct(productName);
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.");
       return;

@@ -27,7 +27,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     HashMap<String, Seller> sellerInfo = stockPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
-    Product productName  = findByProduct(Prompt.inputString("상품입력: "));   
+    Product productName  = productPrompt.findByProduct(Prompt.inputString("상품입력: "));   
 
     System.out.println("==========상품 목록==========");
 

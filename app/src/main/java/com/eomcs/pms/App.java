@@ -153,13 +153,13 @@ public class App {
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, cartPrompt, productList, allStockList));
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList));
-    commandMap.put("/product/detail", new ProductDetailHandler());
-    commandMap.put("/product/update", new ProductUpdateHandler());
-    commandMap.put("/product/delete", new ProductDeleteHandler(productList));
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
+    commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
+    commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt, allStockList));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt,productPrompt,allStockList));
     commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
     commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
