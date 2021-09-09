@@ -19,6 +19,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
   @Override
   public void execute() {   
+
     String nowLoginId = App.getLoginUser().getId();
 
     System.out.println("\n[재고등록]");
@@ -38,6 +39,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stock.setProduct(product);
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
+
 
     int[] sizeIndex = stockPrompt.getStockListSizeById(nowLoginId);
     stock.setStockNumber(sizeIndex[0]);
