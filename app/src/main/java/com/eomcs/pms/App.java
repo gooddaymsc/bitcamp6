@@ -15,12 +15,15 @@ import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Manager;
 import com.eomcs.pms.domain.Privacy;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
@@ -127,11 +130,11 @@ public class App {
     //    loadManagers();
     loadProducts();
     //    loadStocks();
-    //    loadStockLists();
-    //    //    loadCart();
-    //    loadCartLists();
-    //    //    loadBookings(); 
-    //    loadBookingLists();
+    //    //    loadStockLists();
+    //    loadCart();
+    //    //    loadCartLists();
+    //    loadBookings(); 
+    //    //    loadBookingLists();
 
     commandMap.put("/privacy/add",    new PrivacyAddHandler());
     commandMap.put("/privacy/list",   new PrivacyListHandler());
@@ -180,7 +183,7 @@ public class App {
 
   void service() {
     managerList.add(new Manager("관리자","1234", Menu.ACCESS_ADMIN));
-    //    loadBoards();
+    loadBoards();
 
     createMenu().execute();
     Prompt.close();
@@ -194,16 +197,16 @@ public class App {
     saveCartLists();
     saveBookingLists();
   }
-  //  @SuppressWarnings("unchecked")
-  //  private void loadPrivacys() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("privacy.data"))) {
-  //      privacyList.addAll((List<Privacy>) in.readObject());
-  //      System.out.println("회원(구매자) 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+  @SuppressWarnings("unchecked")
+  private void loadPrivacys() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("privacy.data"))) {
+      privacyList.addAll((List<Privacy>) in.readObject());
+      System.out.println("회원(구매자) 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   private void savePrivacys() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("privacy.data"))) {
@@ -215,16 +218,16 @@ public class App {
     }
   }
 
-  //  @SuppressWarnings("unchecked")
-  //  private void loadSellerPrivacys() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("sellerPrivacy.data"))) {
-  //      sellerPrivacyList.addAll((List<SellerPrivacy>) in.readObject());
-  //      System.out.println("판매자 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+  @SuppressWarnings("unchecked")
+  private void loadSellerPrivacys() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("sellerPrivacy.data"))) {
+      sellerPrivacyList.addAll((List<SellerPrivacy>) in.readObject());
+      System.out.println("판매자 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   private void saveSellerPrivacys() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("sellerPrivacy.data"))) {
@@ -236,16 +239,16 @@ public class App {
     }
   }
 
-  //  @SuppressWarnings("unchecked")
-  //  private void loadManagers() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
-  //      managerList.addAll((List<Manager>) in.readObject());
-  //      System.out.println("관리자 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+  @SuppressWarnings("unchecked")
+  private void loadManagers() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
+      managerList.addAll((List<Manager>) in.readObject());
+      System.out.println("관리자 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   private void saveManagers() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("manager.data"))) {
@@ -257,16 +260,16 @@ public class App {
     }
   }
 
-  //  @SuppressWarnings("unchecked")
-  //  private void loadBoards() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
-  //      boardList.addAll((List<Board>) in.readObject());
-  //      System.out.println("게시글 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+  @SuppressWarnings("unchecked")
+  private void loadBoards() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
+      boardList.addAll((List<Board>) in.readObject());
+      System.out.println("게시글 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   private void saveBoards() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("board.data"))) {
@@ -298,27 +301,27 @@ public class App {
       e.printStackTrace();
     }
   }
-  //
-  //  @SuppressWarnings("unchecked")
-  //  private void loadStocks() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stock.data"))) {
-  //      stockList.addAll((List<Stock>) in.readObject());
-  //      System.out.println("재고 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 재고 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
-  //
-  //  private void saveStocks() {
-  //    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stock.data"))) {
-  //      out.writeObject(stockList);
-  //      System.out.println("재고 데이터 저장 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 재고 데이터를 저장하는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+
+  @SuppressWarnings("unchecked")
+  private void loadStocks() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stock.data"))) {
+      stockList.addAll((List<Stock>) in.readObject());
+      System.out.println("재고 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveStocks() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stock.data"))) {
+      out.writeObject(stockList);
+      System.out.println("재고 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 재고 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   //  @SuppressWarnings("unchecked")
   //  private void loadStockLists() {
@@ -341,26 +344,26 @@ public class App {
     }
   }
 
-  //  @SuppressWarnings("unchecked")
-  //  private void loadCart() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cart.data"))) {
-  //      cartList.addAll((List<Cart>) in.readObject());
-  //      System.out.println("장바구니 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 장바구니 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
-  //
-  //  private void saveCart() {
-  //    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cart.data"))) {
-  //      out.writeObject(cartList);
-  //      System.out.println("장바구니 데이터 저장 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 장바구니 데이터를 저장하는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+  @SuppressWarnings("unchecked")
+  private void loadCart() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cart.data"))) {
+      cartList.addAll((List<Cart>) in.readObject());
+      System.out.println("장바구니 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 장바구니 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCart() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cart.data"))) {
+      out.writeObject(cartList);
+      System.out.println("장바구니 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 장바구니 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
   //  @SuppressWarnings("unchecked")
   //  private void loadCartLists() {
@@ -383,26 +386,26 @@ public class App {
     }
   }
   //
-  //  @SuppressWarnings("unchecked")
-  //  private void loadBookings() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("booking.data"))) {
-  //      bookingList.addAll((List<Booking>) in.readObject());
-  //      System.out.println("예약 데이터 로딩 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 예약 데이터를 읽어오는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
-  //
-  //  private void saveBookings() {
-  //    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("booking.data"))) {
-  //      out.writeObject(bookingList);
-  //      System.out.println("예약 데이터 저장 완료!");
-  //    } catch (Exception e) {
-  //      System.out.println("파일에서 예약 데이터를 저장하는 중 오류 발생!");
-  //      e.printStackTrace();
-  //    }
-  //  }
+  @SuppressWarnings("unchecked")
+  private void loadBookings() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("booking.data"))) {
+      bookingList.addAll((List<Booking>) in.readObject());
+      System.out.println("예약 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 예약 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveBookings() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("booking.data"))) {
+      out.writeObject(bookingList);
+      System.out.println("예약 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 예약 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
 
 
   //  @SuppressWarnings("unchecked")
