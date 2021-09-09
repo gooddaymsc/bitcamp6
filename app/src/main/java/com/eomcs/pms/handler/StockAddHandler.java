@@ -1,13 +1,18 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
-  public StockAddHandler(StockPrompt stockPrompt) {
+  List<StockList> allStockList;
+
+  public StockAddHandler(List<StockList> allStockList, StockPrompt stockPrompt) {
     super(stockPrompt);
+    this.allStockList = allStockList;
 
   }
 
@@ -35,7 +40,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
     int[] sizeIndex = stockPrompt.getStockListSizeById(nowLoginId);
     stock.setStockNumber(sizeIndex[0]);
-    App.allStockList.get(sizeIndex[1]).getSellerStock().add(stock);
+    allStockList.get(sizeIndex[1]).getSellerStock().add(stock);
 
     System.out.println("재고 등록을 완료하였습니다.");
   }

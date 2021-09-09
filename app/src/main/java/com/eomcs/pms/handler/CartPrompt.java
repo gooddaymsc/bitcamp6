@@ -1,19 +1,23 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Seller;
 
 public class CartPrompt {
+  List<CartList> allCartList;
   StockPrompt stockPrompt;
-  public CartPrompt(StockPrompt stockPrompt) {
+
+  public CartPrompt(StockPrompt stockPrompt, List<CartList> allCartList) {
+    this.allCartList = allCartList;
     this.stockPrompt = stockPrompt;
   }
 
   public CartList findCartListById(String id) {
-    for (CartList cartList : App.allCartList) {
+    for (CartList cartList : allCartList) {
       if (cartList.getId().equals(id)) {
         return cartList;
       }

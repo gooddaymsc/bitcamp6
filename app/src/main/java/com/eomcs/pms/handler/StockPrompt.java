@@ -1,19 +1,23 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 
 public class StockPrompt {
+  List<CartList> allCartList;
+  List <Seller> sellerList;
+  List <StockList> allStockList;
+
   protected boolean removeStockById(String stockName, String id) {
-    StockList stockList = App.allStockList.get(findStockListById(id));
+    StockList stockList = allStockList.get(findStockListById(id));
     for (int i=0; i<stockList.getSellerStock().size(); i++) {
       if (stockList.getSellerStock().get(i).getProduct().getProductName().equals(stockName)) {
-        App.allStockList.get(findStockListById(id)).getSellerStock().remove(i);
+        allStockList.get(findStockListById(id)).getSellerStock().remove(i);
         return true;
       }
     }
@@ -23,9 +27,9 @@ public class StockPrompt {
   protected int[] getStockListSizeById(String nowLoginId) {
     int[] sizeIndex = new int[2];
     //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
-    for (int i=0; i<App.allStockList.size(); i++) {
-      if (App.allStockList.get(i).getId().equals(nowLoginId)) {
-        sizeIndex[0] = App.allStockList.get(i).getSellerStock().size()+1;
+    for (int i=0; i<allStockList.size(); i++) {
+      if (allStockList.get(i).getId().equals(nowLoginId)) {
+        sizeIndex[0] = allStockList.get(i).getSellerStock().size()+1;
         sizeIndex[1] = i;
         return sizeIndex;
       }
@@ -34,8 +38,8 @@ public class StockPrompt {
   }
 
   public int findStockListById(String id) {
-    for (int i=0; i<App.allStockList.size(); i++) {
-      if (App.allStockList.get(i).getId().equals(id)) {
+    for (int i=0; i< allStockList.size(); i++) {
+      if (allStockList.get(i).getId().equals(id)) {
         return i;
       }
     }
@@ -43,7 +47,7 @@ public class StockPrompt {
   }
 
   public Stock findStockById(String id, String stockName) {
-    StockList stockList = App.allStockList.get(findStockListById(id));
+    StockList stockList = allStockList.get(findStockListById(id));
     for (Stock stock : stockList.getSellerStock()) {
       if (stock.getProduct().getProductName().equals(stockName)) {
         return stock;
@@ -53,9 +57,9 @@ public class StockPrompt {
   }
 
   public boolean findByStock (String ProductName, String nowLoginId) {
-    for (int i=0; i<App.allStockList.size(); i++) {
-      if (App.allStockList.get(i).getId().equals(nowLoginId)) {
-        for (Stock stock : App.allStockList.get(i).getSellerStock()) {
+    for (int i=0; i< allStockList.size(); i++) {
+      if (allStockList.get(i).getId().equals(nowLoginId)) {
+        for (Stock stock : allStockList.get(i).getSellerStock()) {
           if (stock.getProduct().getProductName().equals(ProductName)) {
             return true;
           }
@@ -75,7 +79,7 @@ public class StockPrompt {
     //    }
 
     HashMap<String, Stock> hashStock= new HashMap<>();
-    for (StockList stockList : App.allStockList) {
+    for (StockList stockList : allStockList) {
       for (Stock stock : stockList.getSellerStock()) {
         if (stock.getProduct().getProductName().equals(StockName)) {
           //          isStock = true;
@@ -104,7 +108,7 @@ public class StockPrompt {
   }
 
   public Seller findBySellerInfo (String SellerId) {
-    for (Seller seller : App.sellerList) {
+    for (Seller seller : sellerList) {
       if (seller.getName().equals(SellerId)){
         return seller;
       }
@@ -113,7 +117,7 @@ public class StockPrompt {
   }
 
   public int findCartListById(String id) {
-    for (CartList cartList : App.allCartList) {
+    for (CartList cartList : allCartList) {
       if (cartList.getId().equals(id)) {
         return cartList.getPrivacyCart().size()+1;
       }
@@ -122,7 +126,7 @@ public class StockPrompt {
   }
 
   public Seller findByPlaceName (String storeName) {
-    for (Seller seller : App.sellerList) {
+    for (Seller seller : sellerList) {
       if (seller.getBusinessName().equals(storeName)){
         return seller;
       }
@@ -134,7 +138,7 @@ public class StockPrompt {
   //입력한 문자열을 포함하면 adress 리턴.
   public HashMap<String, Seller> findByAdress (String adress) {
     HashMap<String, Seller> hashMap = new HashMap<>();
-    for (Seller seller : App.sellerList) {
+    for (Seller seller : sellerList) {
       if((seller.getBusinessAddress()).contains(adress)) {
         hashMap.put(seller.getId(), seller);
       }
