@@ -128,13 +128,13 @@ public class App {
 
 
   public App() {
-    //    loadbuyers();
-    //    loadsellers();
-    //    loadManagers();
-    //    loadProducts();
-    //    loadStockLists();
-    //    loadCartLists();
-    //    loadBookingLists();
+    loadbuyers();
+    loadsellers();
+    loadManagers();
+    loadProducts();
+    loadStockLists();
+    loadCartLists();
+    loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, cartPrompt, bookingPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerList));
@@ -183,7 +183,7 @@ public class App {
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    //    loadBoards();
+    loadBoards();
 
     createMenu().execute();
     Prompt.close();
