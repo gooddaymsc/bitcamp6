@@ -10,14 +10,14 @@ public class BoardAddHandler extends AbstractBoardHandler {
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
   }
-
+  public static int boardNumber = 1;
   @Override
   public void execute() {
 
     System.out.println("[새 게시글]");
     Board board = new Board();
 
-    board.setNumber(boardList.size() +1);
+    board.setNumber(boardNumber++);
     board.setTitle(Prompt.inputString("제목 : "));
     board.setContent(Prompt.inputString("내용 : "));
     board.setWriter(App.getLoginUser().getId());
