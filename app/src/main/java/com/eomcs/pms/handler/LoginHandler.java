@@ -1,11 +1,15 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.App;
+import java.util.List;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class LoginHandler {
 
+  List<Member> memberList;
+  public LoginHandler(List<Member> memberList) {
+    this.memberList = memberList;
+  }
   public Member InputId() {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
 
@@ -14,7 +18,7 @@ public class LoginHandler {
       return null;
     }
 
-    for (Member member : App.memberList) {
+    for (Member member : memberList) {
       if (id.equals(member.getId())) {
         String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
