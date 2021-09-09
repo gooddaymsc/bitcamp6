@@ -1,8 +1,8 @@
 package com.eomcs.pms;
 
 import static com.eomcs.menu.Menu.ACCESS_ADMIN;
+import static com.eomcs.menu.Menu.ACCESS_BUYER;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
-import static com.eomcs.menu.Menu.ACCESS_PRIVACY;
 import static com.eomcs.menu.Menu.ACCESS_SELLER;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,11 +16,11 @@ import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.CartList;
-import com.eomcs.pms.domain.Manager;
-import com.eomcs.pms.domain.Privacy;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.StockList;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
@@ -32,6 +32,11 @@ import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingUpdateHandler;
+import com.eomcs.pms.handler.BuyerAddHandler;
+import com.eomcs.pms.handler.BuyerDeleteHandler;
+import com.eomcs.pms.handler.BuyerDetailHandler;
+import com.eomcs.pms.handler.BuyerListHandler;
+import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.CartAddHandler;
 import com.eomcs.pms.handler.CartDeleteHandler;
 import com.eomcs.pms.handler.CartDetailHandler;
@@ -42,11 +47,6 @@ import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
-import com.eomcs.pms.handler.PrivacyAddHandler;
-import com.eomcs.pms.handler.PrivacyDeleteHandler;
-import com.eomcs.pms.handler.PrivacyDetailHandler;
-import com.eomcs.pms.handler.PrivacyListHandler;
-import com.eomcs.pms.handler.PrivacyUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -54,11 +54,11 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
-import com.eomcs.pms.handler.SellerPrivacyAddHandler;
-import com.eomcs.pms.handler.SellerPrivacyDeleteHandler;
-import com.eomcs.pms.handler.SellerPrivacyDetailHandler;
-import com.eomcs.pms.handler.SellerPrivacyListHandler;
-import com.eomcs.pms.handler.SellerPrivacyUpdateHandler;
+import com.eomcs.pms.handler.SellerAddHandler;
+import com.eomcs.pms.handler.SellerDeleteHandler;
+import com.eomcs.pms.handler.SellerDetailHandler;
+import com.eomcs.pms.handler.SellerListHandler;
+import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
 import com.eomcs.pms.handler.StockDetailHandler;
@@ -68,33 +68,33 @@ import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
-  public static List<Privacy> privacyList = new LinkedList<>();
-  public static List<SellerPrivacy> sellerPrivacyList = new LinkedList<>();
-  public static List<Board> boardList = new ArrayList<>();
+  List<Buyer> buyerList = new LinkedList<>();
+  List<Seller> sellerList = new LinkedList<>();
+  List<Board> boardList = new ArrayList<>();
   //  List<Booking> bookingList = new LinkedList<>();
   //  List<Cart> cartList = new ArrayList<>();
   //  List<Stock> stockList = new ArrayList<>();
 
-  public static List<Product> productList = new ArrayList<>();
-  public static List<StockList> allStockList = new ArrayList<>();
-  public static List<BookingList> allBookingList = new ArrayList<>();
-  public static List<CartList> allCartList = new ArrayList<>();
+  List<Product> productList = new ArrayList<>();
+  List<StockList> allStockList = new ArrayList<>();
+  List<BookingList> allBookingList = new ArrayList<>();
+  List<CartList> allCartList = new ArrayList<>();
 
-  public static List<Manager> managerList = new ArrayList<>();
+  List<Member> memberList = new ArrayList<>();
   HashMap<String, Command> commandMap = new HashMap<>();
 
   LoginHandler loginHandler = new LoginHandler();
   StockPrompt stockPrompt = new StockPrompt();
   ProductPrompt productPrompt = new ProductPrompt();
   CartPrompt cartPrompt = new CartPrompt(stockPrompt);
-  FindIdHandler findIdHandler = new FindIdHandler(privacyList, sellerPrivacyList);
-  FindPasswordHandler findPasswordHandler = new FindPasswordHandler(privacyList, sellerPrivacyList);
+  FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
+  FindPasswordHandler findPasswordHandler = new FindPasswordHandler(buyerList, sellerList);
 
   class MenuItem extends Menu{
     String menuId;
 
     public MenuItem(String title, String menuId) {
-      this(title, ACCESS_LOGOUT | ACCESS_PRIVACY | ACCESS_SELLER | ACCESS_ADMIN , menuId);
+      this(title, ACCESS_LOGOUT | ACCESS_BUYER | ACCESS_SELLER | ACCESS_ADMIN , menuId);
     }
 
     public MenuItem(String title, int accessScope, String menuId) {
@@ -110,9 +110,9 @@ public class App {
     }
   }
 
-  public static Manager loginPrivacy = new Manager();
-  public static Manager getLoginUser() {
-    return loginPrivacy;
+  public static Member loginMember = new Member();
+  public static Member getLoginUser() {
+    return loginMember;
   }
 
   public static void main(String[] args) {
@@ -122,8 +122,8 @@ public class App {
 
 
   public App() {
-    //    loadPrivacys();
-    //    loadSellerPrivacys();
+    //    loadbuyers();
+    //    loadsellers();
     //    loadManagers();
     loadProducts();
     //    loadStocks();
@@ -133,17 +133,17 @@ public class App {
     //    //    loadBookings(); 
     //    loadBookingLists();
 
-    commandMap.put("/privacy/add",    new PrivacyAddHandler());
-    commandMap.put("/privacy/list",   new PrivacyListHandler());
-    commandMap.put("/privacy/detail", new PrivacyDetailHandler());
-    commandMap.put("/privacy/update", new PrivacyUpdateHandler());
-    commandMap.put("/privacy/delete", new PrivacyDeleteHandler());
+    commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, allCartList, allBookingList));
+    commandMap.put("/buyer/list",   new BuyerListHandler());
+    commandMap.put("/buyer/detail", new BuyerDetailHandler());
+    commandMap.put("/buyer/update", new BuyerUpdateHandler());
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler());
 
-    commandMap.put("/sellerprivacy/add",    new SellerPrivacyAddHandler());
-    commandMap.put("/sellerprivacy/list",   new SellerPrivacyListHandler());
-    commandMap.put("/sellerprivacy/detail", new SellerPrivacyDetailHandler());
-    commandMap.put("/sellerprivacy/update", new SellerPrivacyUpdateHandler());
-    commandMap.put("/sellerprivacy/delete", new SellerPrivacyDeleteHandler());
+    commandMap.put("/seller/add",    new SellerAddHandler());
+    commandMap.put("/seller/list",   new SellerListHandler());
+    commandMap.put("/seller/detail", new SellerDetailHandler());
+    commandMap.put("/seller/update", new SellerUpdateHandler());
+    commandMap.put("/seller/delete", new SellerDeleteHandler());
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
@@ -154,7 +154,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler());
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, cartPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerPrivacyList));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList));
     commandMap.put("/product/detail", new ProductDetailHandler());
     commandMap.put("/product/update", new ProductUpdateHandler());
     commandMap.put("/product/delete", new ProductDeleteHandler());
@@ -179,14 +179,14 @@ public class App {
   }
 
   void service() {
-    managerList.add(new Manager("관리자","1234", Menu.ACCESS_ADMIN));
+    memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
     //    loadBoards();
 
     createMenu().execute();
     Prompt.close();
 
-    savePrivacys();
-    saveSellerPrivacys();
+    savebuyers();
+    savesellers();
     saveManagers();
     saveBoards();
     saveProducts();
@@ -195,9 +195,9 @@ public class App {
     saveBookingLists();
   }
   //  @SuppressWarnings("unchecked")
-  //  private void loadPrivacys() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("privacy.data"))) {
-  //      privacyList.addAll((List<Privacy>) in.readObject());
+  //  private void loadbuyers() {
+  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("buyer.data"))) {
+  //      buyerList.addAll((List<buyer>) in.readObject());
   //      System.out.println("회원(구매자) 데이터 로딩 완료!");
   //    } catch (Exception e) {
   //      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
@@ -205,9 +205,9 @@ public class App {
   //    }
   //  }
 
-  private void savePrivacys() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("privacy.data"))) {
-      out.writeObject(privacyList);
+  private void savebuyers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("buyer.data"))) {
+      out.writeObject(buyerList);
       System.out.println("회원(구매자) 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 회원(구매자) 데이터를 저장하는 중 오류 발생!");
@@ -216,9 +216,9 @@ public class App {
   }
 
   //  @SuppressWarnings("unchecked")
-  //  private void loadSellerPrivacys() {
-  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("sellerPrivacy.data"))) {
-  //      sellerPrivacyList.addAll((List<SellerPrivacy>) in.readObject());
+  //  private void loadsellers() {
+  //    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("seller.data"))) {
+  //      sellerList.addAll((List<seller>) in.readObject());
   //      System.out.println("판매자 데이터 로딩 완료!");
   //    } catch (Exception e) {
   //      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
@@ -226,9 +226,9 @@ public class App {
   //    }
   //  }
 
-  private void saveSellerPrivacys() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("sellerPrivacy.data"))) {
-      out.writeObject(sellerPrivacyList);
+  private void savesellers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("seller.data"))) {
+      out.writeObject(sellerList);
       System.out.println("판매자 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 판매자 데이터를 저장하는 중 오류 발생!");
@@ -249,7 +249,7 @@ public class App {
 
   private void saveManagers() {
     try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("manager.data"))) {
-      out.writeObject(managerList);
+      out.writeObject(memberList);
       System.out.println("관리자 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 관리자 데이터를 저장하는 중 오류 발생!");
@@ -433,9 +433,9 @@ public class App {
     MenuGroup joinMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
     mainMenuGroup.add(joinMenu);
 
-    joinMenu.add(new MenuItem("일반회원", "/privacy/add"));
+    joinMenu.add(new MenuItem("일반회원", "/buyer/add"));
 
-    joinMenu.add(new MenuItem("판매자", "/sellerprivacy/add"));
+    joinMenu.add(new MenuItem("판매자", "/seller/add"));
 
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
@@ -457,19 +457,19 @@ public class App {
     mainMenuGroup.add(new Menu("로그인", ACCESS_LOGOUT) {
       @Override
       public void execute() {
-        Manager prv = loginHandler.InputId(); 
+        Member prv = loginHandler.InputId(); 
         if (prv==null) {
           System.out.println("다시 로그인 해주세요.");
         } else {
-          loginPrivacy = prv;
+          loginMember = prv;
         }
       }});
 
-    mainMenuGroup.add(new Menu("로그아웃", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER) {
+    mainMenuGroup.add(new Menu("로그아웃", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER) {
       @Override
       public void execute() {
-        if ( loginPrivacy.getAuthority()!= 0) {
-          loginPrivacy = new Manager(); 
+        if ( loginMember.getAuthority()!= 0) {
+          loginMember = new Member(); 
           System.out.println("로그아웃이 완료되었습니다."); 
         } else {
           System.out.println("로그인 후 사용해주세요");
@@ -481,16 +481,16 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new MenuItem("등록", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
+    boardMenu.add(new MenuItem("등록", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("변경", ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
-    boardMenu.add(new MenuItem("삭제",ACCESS_PRIVACY | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
+    boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
+    boardMenu.add(new MenuItem("삭제",ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
 
     ///////////////////////////////////////////
 
-    MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_PRIVACY );
+    MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_BUYER );
     mainMenuGroup.add(cartMenu);
 
     cartMenu.add(new MenuItem("등록", "/cart/add"));
@@ -502,13 +502,13 @@ public class App {
     ///////////////////////////////////////////
 
 
-    MenuGroup bookingMenu = new MenuGroup("픽업예약", ACCESS_PRIVACY | ACCESS_SELLER);
+    MenuGroup bookingMenu = new MenuGroup("픽업예약", ACCESS_BUYER | ACCESS_SELLER);
     mainMenuGroup.add(bookingMenu);
 
-    bookingMenu.add(new MenuItem("예약등록", ACCESS_PRIVACY, "/booking/add"));
-    bookingMenu.add(new MenuItem("예약내역",  ACCESS_PRIVACY | ACCESS_SELLER, "/booking/list"));
+    bookingMenu.add(new MenuItem("예약등록", ACCESS_BUYER, "/booking/add"));
+    bookingMenu.add(new MenuItem("예약내역",  ACCESS_BUYER | ACCESS_SELLER, "/booking/list"));
     bookingMenu.add(new MenuItem("예약변경", "/booking/update"));
-    bookingMenu.add(new MenuItem("예약취소", ACCESS_PRIVACY, "/booking/delete"));
+    bookingMenu.add(new MenuItem("예약취소", ACCESS_BUYER, "/booking/delete"));
 
     ///////////////////////////////////////////
 
@@ -524,23 +524,23 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup personMenu = new MenuGroup("프로필", ACCESS_PRIVACY | ACCESS_SELLER);
+    MenuGroup personMenu = new MenuGroup("프로필", ACCESS_BUYER | ACCESS_SELLER);
     mainMenuGroup.add(personMenu);
 
-    personMenu.add(new MenuItem("개인정보", ACCESS_PRIVACY, "/privacy/detail"));
-    personMenu.add(new MenuItem("개인정보 변경", ACCESS_PRIVACY, "/privacy/update"));
-    personMenu.add(new MenuItem("탈퇴", ACCESS_PRIVACY, "/privacy/delete"));
+    personMenu.add(new MenuItem("개인정보", ACCESS_BUYER, "/buyer/detail"));
+    personMenu.add(new MenuItem("개인정보 변경", ACCESS_BUYER, "/buyer/update"));
+    personMenu.add(new MenuItem("탈퇴", ACCESS_BUYER, "/buyer/delete"));
 
-    personMenu.add(new MenuItem("개인정보", ACCESS_SELLER, "/sellerprivacy/detail"));
-    personMenu.add(new MenuItem("개인정보 변경", ACCESS_SELLER, "/sellerprivacy/update"));
-    personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/sellerprivacy/delete"));
+    personMenu.add(new MenuItem("개인정보", ACCESS_SELLER, "/seller/detail"));
+    personMenu.add(new MenuItem("개인정보 변경", ACCESS_SELLER, "/seller/update"));
+    personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/seller/delete"));
 
     MenuGroup sellerStoreMenu = new MenuGroup("My Store", ACCESS_SELLER);
     personMenu.add(sellerStoreMenu);
     sellerStoreMenu.add(new MenuItem("가게 정보 및 재고", "/stock/list") {
       @Override
       public void execute() {
-        SellerPrivacy mine = findSellerById(App.getLoginUser().getId());
+        Seller mine = findSellerById(App.getLoginUser().getId());
         System.out.printf("\n가게명 : %s\n", mine.getBusinessName());
         System.out.printf("주소 : %s\n", mine.getBusinessAddress());
         System.out.printf("전화번호 : %s\n", mine.getBusinessPlaceNumber());
@@ -563,18 +563,18 @@ public class App {
     MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
     managerMenu.add(managerMemberMenu1);
 
-    managerMemberMenu1.add(new MenuItem("목록", "/privacy/list"));
-    managerMemberMenu1.add(new MenuItem("상세보기", "/privacy/detail"));
-    managerMemberMenu1.add(new MenuItem("변경", "/privacy/update"));
-    managerMemberMenu1.add(new MenuItem("삭제", "/privacy/delete"));
+    managerMemberMenu1.add(new MenuItem("목록", "/buyer/list"));
+    managerMemberMenu1.add(new MenuItem("상세보기", "/buyer/detail"));
+    managerMemberMenu1.add(new MenuItem("변경", "/buyer/update"));
+    managerMemberMenu1.add(new MenuItem("삭제", "/buyer/delete"));
 
     MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");  //2
     managerMenu.add(managerSellerMenu1);
 
-    managerSellerMenu1.add(new MenuItem("목록", "/sellerprivacy/list"));
-    managerSellerMenu1.add(new MenuItem("상세보기", "/sellerprivacy/detail"));
-    managerSellerMenu1.add(new MenuItem("변경", "/sellerprivacy/update"));
-    managerSellerMenu1.add(new MenuItem("삭제", "/sellerprivacy/delete"));
+    managerSellerMenu1.add(new MenuItem("목록", "/seller/list"));
+    managerSellerMenu1.add(new MenuItem("상세보기", "/seller/detail"));
+    managerSellerMenu1.add(new MenuItem("변경", "/seller/update"));
+    managerSellerMenu1.add(new MenuItem("삭제", "/seller/delete"));
 
     return mainMenuGroup;
   }
@@ -582,13 +582,13 @@ public class App {
   public static String level(int i) {
     switch (i) {
       case Menu.ACCESS_LOGOUT : return "비회원";
-      case Menu.ACCESS_PRIVACY : return "일반회원";
+      case Menu.ACCESS_BUYER : return "일반회원";
       case Menu.ACCESS_SELLER : return "판매자";
       default : return "관리자";
     }
   }
-  private SellerPrivacy findSellerById(String id) {
-    for (SellerPrivacy member : sellerPrivacyList) {
+  private Seller findSellerById(String id) {
+    for (Seller member : sellerList) {
       if (member.getId().equals(id)) {
         return member;
       }

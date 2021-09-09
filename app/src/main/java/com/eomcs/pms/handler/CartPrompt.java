@@ -4,7 +4,7 @@ import java.util.HashMap;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
-import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Seller;
 
 public class CartPrompt {
   StockPrompt stockPrompt;
@@ -30,12 +30,12 @@ public class CartPrompt {
     return null;
   }
 
-  protected HashMap<Cart, SellerPrivacy> findByCartList (String ProductName) {
-    HashMap<Cart, SellerPrivacy> hashStock= new HashMap<>();
+  protected HashMap<Cart, Seller> findByCartList (String ProductName) {
+    HashMap<Cart, Seller> hashStock= new HashMap<>();
     CartList cartList = findCartListById(App.getLoginUser().getId());
     for (Cart cart : cartList.getPrivacyCart()) {
       if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
-        SellerPrivacy sellerInfo = stockPrompt.findBySellerInfo(cart.getSellerId());
+        Seller sellerInfo = stockPrompt.findBySellerInfo(cart.getSellerId());
         System.out.printf(">> 가게명 : %s, 담은 갯수 : %s\n" ,
             sellerInfo.getBusinessName(),
             cart.getCartStocks());

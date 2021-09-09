@@ -1,14 +1,15 @@
 package com.eomcs.pms.domain;
 
+import java.util.List;
+
 @SuppressWarnings("serial")
-public class SellerPrivacy extends Privacy {
+public class Seller extends Member {
   private String businessName;
   private String businessNumber;
   private String businessAddress;
   private String businessPlaceNumber;
   //  private String businessHours;
-  //  private List<Stock> stockList;
-
+  private List<Stock> stockList;
 
   public String getBusinessName() {
     return businessName;
@@ -34,18 +35,11 @@ public class SellerPrivacy extends Privacy {
   public void setBusinessPlaceNumber(String businessPlaceNumber) {
     this.businessPlaceNumber = businessPlaceNumber;
   }
-  //  public List<Stock> getStockList() {
-  //    return stockList;
-  //  }
-  //  public void setStockList(List<Stock> stockList) {
-  //    this.stockList = stockList;
-  //  }
-  //  public String getBusinessHours() {
-  //    return businessHours;
-  //  }
-  //  public void setBusinessHours(String businessHours) {
-  //    this.businessHours = businessHours;
-  //  }
-
+  public List<Stock> getStockList() {
+    return stockList;
+  }
+  public void setStockList(List<Stock> stockList) {
+    this.stockList = stockList;
+  }
 
 }

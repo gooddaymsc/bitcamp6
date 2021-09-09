@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.CartList;
-import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 
@@ -79,7 +79,7 @@ public class StockPrompt {
       for (Stock stock : stockList.getSellerStock()) {
         if (stock.getProduct().getProductName().equals(StockName)) {
           //          isStock = true;
-          SellerPrivacy sellerInfo = findBySellerInfo(stockList.getId());
+          Seller sellerInfo = findBySellerInfo(stockList.getId());
           System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
               sellerInfo.getBusinessName(),
               stockList.getId(),
@@ -103,10 +103,10 @@ public class StockPrompt {
     return null;
   }
 
-  public SellerPrivacy findBySellerInfo (String SellerId) {
-    for (SellerPrivacy member : App.sellerPrivacyList) {
-      if (member.getName().equals(SellerId)){
-        return member;
+  public Seller findBySellerInfo (String SellerId) {
+    for (Seller seller : App.sellerList) {
+      if (seller.getName().equals(SellerId)){
+        return seller;
       }
     }
     return null;
@@ -121,10 +121,10 @@ public class StockPrompt {
     return -1;
   }
 
-  public SellerPrivacy findByPlaceName (String storeName) {
-    for (SellerPrivacy member : App.sellerPrivacyList) {
-      if (member.getBusinessName().equals(storeName)){
-        return member;
+  public Seller findByPlaceName (String storeName) {
+    for (Seller seller : App.sellerList) {
+      if (seller.getBusinessName().equals(storeName)){
+        return seller;
       }
     }
     return null;
@@ -132,11 +132,11 @@ public class StockPrompt {
 
 
   //입력한 문자열을 포함하면 adress 리턴.
-  public HashMap<String, SellerPrivacy> findByAdress (String adress) {
-    HashMap<String, SellerPrivacy> hashMap = new HashMap<>();
-    for (SellerPrivacy member : App.sellerPrivacyList) {
-      if((member.getBusinessAddress()).contains(adress)) {
-        hashMap.put(member.getId(), member);
+  public HashMap<String, Seller> findByAdress (String adress) {
+    HashMap<String, Seller> hashMap = new HashMap<>();
+    for (Seller seller : App.sellerList) {
+      if((seller.getBusinessAddress()).contains(adress)) {
+        hashMap.put(seller.getId(), seller);
       }
     }
     return hashMap;
@@ -148,7 +148,7 @@ public class StockPrompt {
   //    for (Stock stock : stockList.getSellerStock()) {
   //      if (stock.getProduct().getProductName().equals(StockName)) {
   //        //          isStock = true;
-  //        SellerPrivacy sellerInfo = findBySellerInfo(stockList.getId());
+  //        seller sellerInfo = findBySellerInfo(stockList.getId());
   //        System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
   //            sellerInfo.getBusinessName(),
   //            stockList.getId(),

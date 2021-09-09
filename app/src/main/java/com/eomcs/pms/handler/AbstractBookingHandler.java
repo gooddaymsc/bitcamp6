@@ -3,7 +3,7 @@ package com.eomcs.pms.handler;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
-import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 
@@ -60,10 +60,10 @@ public abstract class AbstractBookingHandler implements Command {
     }
   }
 
-  protected SellerPrivacy findSellerInfo(String sellerId) {
-    for (SellerPrivacy member : App.sellerPrivacyList) {
-      if (member.getName().equals(sellerId)){
-        return member;
+  protected Seller findSellerInfo(String sellerId) {
+    for (Seller seller : App.sellerList) {
+      if (seller.getName().equals(sellerId)){
+        return seller;
       }
     }
     return null;

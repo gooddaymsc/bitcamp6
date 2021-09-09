@@ -36,7 +36,7 @@ public class ProductListHandler extends AbstractProductHandler {
           product.getWeight());
     }
     // 상품 목록 확인 후 구매자는 장바구니에 등록 가능하게.
-    if (App.getLoginUser().getAuthority() == Menu.ACCESS_PRIVACY ) {
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
       System.out.println("\n[장바구니 등록]");
       Cart cart =new Cart();
       //HashMap<가게명, stock>
