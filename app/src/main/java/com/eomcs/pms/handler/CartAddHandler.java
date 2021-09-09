@@ -11,7 +11,7 @@ import com.eomcs.util.Prompt;
 public class CartAddHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
   SellerPrompt sellerPrompt;
-  public CartAddHandler(StockPrompt stockPrompt, CartPrompt cartPrompt, SellerPrompt sellerPrompt) {
+  public CartAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt, SellerPrompt sellerPrompt) {
     super(cartPrompt);
     this.stockPrompt = stockPrompt;
     this.sellerPrompt = sellerPrompt;

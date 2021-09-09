@@ -1,37 +1,35 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 
 public class CartListHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
-  public CartListHandler(StockPrompt stockPrompt, CartPrompt cartPrompt) {
+  public CartListHandler(CartPrompt cartPrompt, StockPrompt stockPrompt) {
     super(cartPrompt);
     this.stockPrompt = stockPrompt;
   }
   @Override
   public void execute() {
 
-    if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("[장바구니 목록]");
-      CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
+    System.out.println("[장바구니 목록]");
+    CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
 
-      if (cartList.getPrivacyCart().size() == 0) {
-        System.out.println("아직 추가한 장바구니가 없습니다.");
-        return;
-      }
-      for (Cart cart : cartList.getPrivacyCart()) {
-        System.out.printf("%d, %s, %s, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
-            cart.getCartNumber(), 
-            findSellerInfo(cart.getSellerId()).getBusinessName(),
-            cart.getStock().getProduct().getProductName(), 
-            cart.getCartStocks(), 
-            cart.getCartPrice(),
-            cart.getRegistrationDate());
-      }
+    if (cartList.getPrivacyCart().size() == 0) {
+      System.out.println("아직 추가한 장바구니가 없습니다.");
+      return;
+    }
+    for (Cart cart : cartList.getPrivacyCart()) {
+      System.out.printf(" %d, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
+          cart.getCartNumber(), 
+          //          findSellerInfo(cart.getSellerId()).getBusinessName(),
+          //          cart.getStock().getProduct().getProductName(), 
+          cart.getCartStocks(), 
+          cart.getCartPrice(),
+          cart.getRegistrationDate());
     }
   }
-
 }
+
+

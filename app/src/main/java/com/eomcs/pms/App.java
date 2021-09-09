@@ -157,7 +157,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler(productList));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, sellerPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList, sellerPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList, sellerPrompt, cartPrompt));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
@@ -168,8 +168,8 @@ public class App {
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(stockPrompt, cartPrompt, sellerPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(stockPrompt, cartPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, sellerPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, stockPrompt));
     commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));

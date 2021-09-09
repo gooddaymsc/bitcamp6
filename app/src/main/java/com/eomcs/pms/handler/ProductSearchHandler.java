@@ -1,7 +1,11 @@
 package com.eomcs.pms.handler;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+import com.eomcs.pms.App;
+import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
@@ -14,28 +18,35 @@ public class ProductSearchHandler extends AbstractProductHandler {
   List<Seller> sellerPrivacyList;
   List<Product> productList;
   SellerPrompt sellerPrompt;
-  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<Seller> sellerPrivacyList,  List<Product> productList, SellerPrompt sellerPrompt) {
+  CartPrompt cartPrompt;
+
+  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<Seller> sellerPrivacyList,  List<Product> productList, SellerPrompt sellerPrompt,  CartPrompt cartPrompt) {
     this.productPrompt = productPrompt;
     this.stockPrompt = stockPrompt;
     this.sellerPrivacyList = sellerPrivacyList;
     this.productList = productList;
     this.sellerPrompt = sellerPrompt;
+    this.cartPrompt = cartPrompt;
   }
 
   @Override
   public void execute() {
+    String storeName;
+    //String storeAdress;
+    String nowLoginId = App.getLoginUser().getId();
+
     System.out.println("[상품검색]");
 
     HashMap<String, Seller> sellerInfo = sellerPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
-    Product productName  = productPrompt.findByProduct(Prompt.inputString("상품입력: "));   
+    String productName  = productPrompt.findByProduct2(Prompt.inputString("상품입력: "));   
 
     System.out.println("==========상품 목록==========");
 
     while(true) {
       int size = 1;
       for(Product product : productList) {
-        if(product.getProductName().equals(productName.getProductName())) {
+        if(product.getProductName().equals(productName)) {
           System.out.printf("상품번호: %d \n", size++);
           System.out.printf("상품명: %s\n", product.getProductName());
           System.out.printf("주종: %s\n", product.getProductType());
@@ -46,38 +57,51 @@ public class ProductSearchHandler extends AbstractProductHandler {
         }
       }
 
-      System.out.println("===== 해당 주소 근처 판매처 ===== ");
+      System.out.println("\n[해당 주소 근처 판매처] ");
 
       for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
         System.out.printf("가게명 : %s, 가게주소 : %s", 
-            entry.getValue().getBusinessName(),
+            storeName = entry.getValue().getBusinessName(),
             entry.getValue().getBusinessAddress());
       }
 
       //구매자 id의 cartList에 상품 담기.
-      int stocks = Prompt.inputInt("수량 : ");
-      HashMap<String, Stock> hasoStock = stockPrompt.findBySellerId(Prompt.inputString("상품먕 : "));
+      System.out.println();
+      System.out.println("\n[장바구니 등록]");
+      Cart cart = new Cart();
+      HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(productName);
 
-      String storeName = Prompt.inputString("가게명을 선택하세요 >");
+      if(hashStock.size() == 0) {
+        System.out.println("해당상품을 갖는 판매자가 없습니다.");
+        return;
+      }
 
-
-      //      for(SellerPrivacy member : sellerPrivacyList) {
-      //        if(member.getStockList() == productName) {
-      //          System.out.printf("상점 이름 : %s \n", member.getBusinessName());
-      //          System.out.printf("상점 주소 : %s \n", member.getAddress());
-      //          //          System.out.printf("재고 수량 : %d개 \n", member.getStockList().stocks());
-      //          return;
-      //        }
-      //    }
-
-      //      if(member.getStockList() == null) {
-      //        System.out.println("해당 상품을 갖는 판매자가 없습니다.");
-      //        return;
-      //      }
-
+      storeName = Prompt.inputString("가게명을 선택하세요 >");
+      cart.setStock(hashStock.get(storeName));
+      int stockNumber = Prompt.inputInt("수량 : ");
+      while(true) {
+        if(stockNumber <= hashStock.get(storeName).getStocks()){
+          cart.setCartStocks(stockNumber);
+          break;
+        }
+        else {
+          System.out.println("주문수량이 재고를 초과하였습니다.");
+          return;
+        }
+      }
+      cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
+      cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
+      cart.setSellerId(sellerPrompt.findByPlaceName(storeName).getId());
+      cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+      System.out.println("장바구니가 등록되었습니다.");
+      CartList cartList = cartPrompt.findCartListById(nowLoginId);
+      cartList.getPrivacyCart().add(cart);
+      return;
     }
   }
 }
+
+
 
 
 

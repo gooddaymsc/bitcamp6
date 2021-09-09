@@ -20,4 +20,12 @@ public class ProductPrompt {
     return null;
   }
 
+  protected String findByProduct2 (String ProductName) {
+    for (Product product : productList) {
+      if (product.getProductName().equals(ProductName)) {
+        return ProductName;
+      }
+    }
+    return null;
+  }
 }

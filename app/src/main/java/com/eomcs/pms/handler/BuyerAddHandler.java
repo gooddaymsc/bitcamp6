@@ -16,6 +16,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     super(buyerList);
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
+    this.memberList = memberList;
   }
   int buyerNumber = 1;
 

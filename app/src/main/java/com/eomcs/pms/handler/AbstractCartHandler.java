@@ -11,13 +11,13 @@ public abstract class AbstractCartHandler implements Command {
     this.cartPrompt = cartPrompt;
   }
 
-  protected Seller findSellerInfo(String sellerId) {
-    for (Seller seller : sellerList) {
-      if (seller.getName().equals(sellerId)){
-        return seller;
-      }
-    }
-    return null;
-  }
+  //    protected Seller findSellerInfo(String sellerId) {
+  //      for (Seller seller : sellerList) {
+  //        if (seller.getName().equals(sellerId)){
+  //          return seller;
+  //        }
+  //      }
+  //      return null;
+  //    }
 
 }

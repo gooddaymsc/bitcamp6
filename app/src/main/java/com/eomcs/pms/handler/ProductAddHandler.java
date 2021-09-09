@@ -12,6 +12,8 @@ public class ProductAddHandler extends AbstractProductHandler {
     this.productList = productList;
   }
 
+  public static int productNumber = 1;
+
   @Override
   public void execute() {
 
@@ -19,7 +21,7 @@ public class ProductAddHandler extends AbstractProductHandler {
 
     Product product = new Product();
 
-    product.setProductNumber(productList.size() +1);
+    product.setProductNumber(productNumber++);
     product.setProductName(Prompt.inputString("상품명 : "));
     product.setProductType(checkType("주종 : "));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
