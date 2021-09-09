@@ -12,7 +12,7 @@ public class BookingListHandler extends AbstractBookingHandler{
   @Override
   public void execute() {
 
-    if (App.getLoginUser().getAuthority()==Menu.ACCESS_PRIVACY) {
+    if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
       System.out.println("\n[내 픽업 예약 목록]");
       BookingList bookingList = findById(App.getLoginUser().getId());
 

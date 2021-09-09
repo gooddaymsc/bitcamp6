@@ -7,7 +7,7 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Cart;
-import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
@@ -23,7 +23,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_BUYER) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
@@ -33,7 +33,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     // 해당 상품명이 장바구니에 담겨있는지 확인.
     String productName = Prompt.inputString("상품명 : ");
-    HashMap<Cart, SellerPrivacy> sellerInfo = cartPrompt.findByCartList(productName);
+    HashMap<Cart, Seller> sellerInfo = cartPrompt.findByCartList(productName);
 
     String sellerId = "";
     Cart bookingProduct = null;
@@ -45,7 +45,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     } else if (sellerInfo.size() > 1) {
       // 해당 상품이 내 장바구니에 여러개가 담겨있을때(판매자가 다름)
       String StoreName = Prompt.inputString("\n가게 선택 > ");
-      for (HashMap.Entry<Cart, SellerPrivacy> entry : sellerInfo.entrySet()) {
+      for (HashMap.Entry<Cart, Seller> entry : sellerInfo.entrySet()) {
         if (entry.getValue().getBusinessName().equals(StoreName)) {
           sellerId = entry.getKey().getSellerId();
           bookingProduct = entry.getKey();

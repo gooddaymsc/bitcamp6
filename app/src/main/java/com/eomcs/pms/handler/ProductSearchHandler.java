@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.pms.domain.SellerPrivacy;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
@@ -12,9 +12,9 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
   StockPrompt stockPrompt;
   ProductPrompt productPrompt;
-  List<SellerPrivacy> sellerPrivacyList;
+  List<Seller> sellerPrivacyList;
 
-  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<SellerPrivacy> sellerPrivacyList) {
+  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<Seller> sellerPrivacyList) {
     this.productPrompt = productPrompt;
     this.stockPrompt = stockPrompt;
     this.sellerPrivacyList = sellerPrivacyList;
@@ -24,7 +24,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
   public void execute() {
     System.out.println("[상품검색]");
 
-    HashMap<String, SellerPrivacy> sellerInfo = stockPrompt.findByAdress(Prompt.inputString("주소입력: "));   
+    HashMap<String, Seller> sellerInfo = stockPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
     Product productName  = ProductPrompt.findByProduct(Prompt.inputString("상품입력: "));   
 
@@ -46,7 +46,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
       System.out.println("===== 해당 주소 근처 판매처 ===== ");
 
-      for (HashMap.Entry<String, SellerPrivacy> entry : sellerInfo.entrySet()) {
+      for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
         System.out.printf("가게명 : %s, 가게주소 : %s", 
             entry.getValue().getBusinessName(),
             entry.getValue().getBusinessAddress());

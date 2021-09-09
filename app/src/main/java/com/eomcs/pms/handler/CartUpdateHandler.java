@@ -13,7 +13,7 @@ public class CartUpdateHandler extends AbstractCartHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
+    if (App.getLoginUser().getAuthority() != Menu.ACCESS_BUYER) {
       System.out.println("권한이 없습니다. 구매자 기능입니다.");
       return;
     }
