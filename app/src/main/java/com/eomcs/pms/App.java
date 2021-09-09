@@ -59,6 +59,7 @@ import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
+import com.eomcs.pms.handler.SellerPrompt;
 import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
@@ -86,9 +87,10 @@ public class App {
 
   LoginHandler loginHandler = new LoginHandler(memberList);
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
-  StockPrompt stockPrompt = new StockPrompt();
+  SellerPrompt sellerPrompt = new SellerPrompt(sellerList);
+  StockPrompt stockPrompt = new StockPrompt(allStockList);
   ProductPrompt productPrompt = new ProductPrompt();
-  CartPrompt cartPrompt = new CartPrompt(stockPrompt);
+  CartPrompt cartPrompt = new CartPrompt(allCartList, sellerPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
   FindPasswordHandler findPasswordHandler = new FindPasswordHandler(buyerList, sellerList);
 

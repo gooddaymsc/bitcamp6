@@ -9,9 +9,14 @@ import com.eomcs.util.Prompt;
 
 public class BuyerDeleteHandler extends AbstractBuyerHandler {
   MemberPrompt memberPrompt;
-  public BuyerDeleteHandler(List<Buyer> buyerList, MemberPrompt memberPrompt) {
+  CartPrompt cartPrompt;
+  BookingPrompt bookingPrompt;
+  public BuyerDeleteHandler(List<Buyer> buyerList, MemberPrompt memberPrompt,
+      CartPrompt cartPrompt, BookingPrompt bookingPrompt) {
     super(buyerList);
     this.memberPrompt = memberPrompt;
+    this.cartPrompt = cartPrompt;
+    this.bookingPrompt = bookingPrompt;
   }
   @Override
   public void execute() {
@@ -24,6 +29,8 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       if (input.equalsIgnoreCase("y")) {
         buyerList.remove(removePrivateById(nowLoginId));
         memberPrompt.removeMemberById(nowLoginId);
+        cartPrompt.removeCartListById(nowLoginId);
+        bookingPrompt.removeBookingListById(nowLoginId);
         System.out.println("탈퇴가 완료되었습니다.");
         // 현재로그인 상태 초기화
         App.loginMember = new Member();
@@ -45,6 +52,8 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       if (input.equalsIgnoreCase("y")) {
         buyerList.remove(removePrivateById(id));
         memberPrompt.removeMemberById(id);
+        cartPrompt.removeCartListById(id);
+        bookingPrompt.removeBookingListById(id);
         System.out.println("회원을 탈퇴시켰습니다.");
         return;
       }

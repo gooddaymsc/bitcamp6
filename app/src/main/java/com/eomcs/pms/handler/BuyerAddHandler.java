@@ -3,21 +3,19 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
-import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler extends AbstractBuyerHandler {
   List<Member> memberList;
-  List<CartList> allCartList;
-  List<BookingList> allBookingList;
+  CartPrompt cartPrompt;
+  BookingPrompt bookingPrompt;
   public BuyerAddHandler (List<Buyer> buyerList, List<Member> memberList, 
-      List<CartList> allCartList, List<BookingList> allBookingList) {
+      CartPrompt cartPrompt, BookingPrompt bookingPrompt) {
     super(buyerList);
-    this.allCartList = allCartList;
-    this.allBookingList = allBookingList;
+    this.cartPrompt = cartPrompt;
+    this.bookingPrompt = bookingPrompt;
   }
   int buyerNumber = 1;
 
@@ -53,13 +51,10 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setAddress(Prompt.inputString("주소: "));
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    BookingList BookingList = new BookingList();
-    BookingList.setId(buyer.getId());
-    allBookingList.add(BookingList);
-
-    CartList CartList = new CartList();
-    CartList.setId(buyer.getId());
-    allCartList.add(CartList);
+    // 예약리스트에 구매자 id를 갖는 bookingList add.
+    bookingPrompt.addBookingListById(buyer.getId());
+    // 장바구니리스트에 구매자 id를 갖는 cartList add.
+    cartPrompt.addCartListById(buyer.getId());
 
     buyerList.add(buyer);
     memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
