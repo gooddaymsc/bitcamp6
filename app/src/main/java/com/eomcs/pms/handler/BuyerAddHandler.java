@@ -10,14 +10,12 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler extends AbstractBuyerHandler {
-  List<Buyer> buyerList;
   List<Member> memberList;
   List<CartList> allCartList;
   List<BookingList> allBookingList;
   public BuyerAddHandler (List<Buyer> buyerList, List<Member> memberList, 
       List<CartList> allCartList, List<BookingList> allBookingList) {
-    this.buyerList = buyerList;
-    this.memberList = memberList;
+    super(buyerList);
     this.allCartList = allCartList;
     this.allBookingList = allBookingList;
   }
