@@ -31,6 +31,7 @@ import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
 import com.eomcs.pms.handler.BookingListHandler;
+import com.eomcs.pms.handler.BookingPrompt;
 import com.eomcs.pms.handler.BookingUpdateHandler;
 import com.eomcs.pms.handler.BuyerAddHandler;
 import com.eomcs.pms.handler.BuyerDeleteHandler;
@@ -89,6 +90,7 @@ public class App {
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
   SellerPrompt sellerPrompt = new SellerPrompt(sellerList);
   StockPrompt stockPrompt = new StockPrompt(allStockList);
+  BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   ProductPrompt productPrompt = new ProductPrompt();
   CartPrompt cartPrompt = new CartPrompt(allCartList, sellerPrompt);
   FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
@@ -137,11 +139,11 @@ public class App {
     //    //    loadBookings(); 
     //    loadBookingLists();
 
-    commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, allCartList, allBookingList));
+    commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, cartPrompt, bookingPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerList));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerList));
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerList));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerList, memberPrompt));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerList, memberPrompt, cartPrompt, bookingPrompt));
 
     commandMap.put("/seller/add",    new SellerAddHandler());
     commandMap.put("/seller/list",   new SellerListHandler());
