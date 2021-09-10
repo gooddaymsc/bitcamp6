@@ -11,6 +11,16 @@ public class BookingPrompt {
   public BookingPrompt(List<BookingList> allBookingList) {
     this.allBookingList = allBookingList;
   }
+  public Product findBookingByProduct(String productName, String nowLoginId) {
+    int index = getBookingIndexById(nowLoginId);
+    List<Booking> bookingList = allBookingList.get(index).getBooking();
+    for (Booking booking : bookingList) {
+      if (booking.getCart().getStock().getProduct().getProductName().equals(productName)) {
+        return booking.getCart().getStock().getProduct();
+      }
+    }
+    return null;
+  }
 
   public Product findBookingByProduct(String productName, String nowLoginId) {
     int index = getBookingIndexById(nowLoginId);
