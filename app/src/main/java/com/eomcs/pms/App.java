@@ -183,7 +183,7 @@ public class App {
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    //    loadBoards();
+    loadBoards();
 
     createMenu().execute();
     Prompt.close();
