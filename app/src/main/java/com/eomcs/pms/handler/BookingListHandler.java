@@ -12,10 +12,12 @@ import com.eomcs.util.Prompt;
 public class BookingListHandler extends AbstractBookingHandler{
 
   ProductPrompt productPrompt;
-
-  public BookingListHandler(List <Seller> sellerList, List <BookingList> allBookingList, ProductPrompt productPrompt) {
+  SellerPrompt sellerPrompt;
+  public BookingListHandler(List <Seller> sellerList, List <BookingList> allBookingList, 
+      ProductPrompt productPrompt, SellerPrompt sellerPrompt) {
     super(sellerList, allBookingList);
     this.productPrompt = productPrompt;
+    this.sellerPrompt = sellerPrompt;
   }
   @Override
   public void execute() {
@@ -31,10 +33,11 @@ public class BookingListHandler extends AbstractBookingHandler{
 
       for (Booking booking : bookingList.getBooking() ) {
         String sellerId = booking.getCart().getSellerId();
-        System.out.printf("가게명 : %s \n", findSellerInfo(sellerId).getBusinessName());
+        System.out.printf("가게명 : %s \n", sellerPrompt.findBySellerInfo(sellerId).getBusinessName());
         System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
         System.out.printf("예약일시 : %s \n", booking.getRegisteredDate());
         System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
+        System.out.printf("주문수량 : %s \n", booking.getCart().getCartStocks());
         System.out.printf("픽업 예약날짜 : %s\n", booking.getBookingDate());
         System.out.printf("픽업 예약시간: %d시 %d분 \n", booking.getBookingHour(), booking.getBookingMinute());
 
@@ -54,6 +57,7 @@ public class BookingListHandler extends AbstractBookingHandler{
         System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
         System.out.printf("예약일시 : %s \n", booking.getRegisteredDate());
         System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
+        System.out.printf("주문수량 : %s \n", booking.getCart().getCartStocks());
         System.out.printf("픽업 예약날짜 : %s\n", booking.getBookingDate());
         System.out.printf("픽업 예약시간: %d시 %d분 \n", booking.getBookingHour(), booking.getBookingMinute());
 

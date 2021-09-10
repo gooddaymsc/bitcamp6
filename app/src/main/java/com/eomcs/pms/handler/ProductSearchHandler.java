@@ -60,7 +60,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
       System.out.println("\n[해당 주소 근처 판매처] ");
 
       for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
-        System.out.printf("가게명 : %s, 가게주소 : %s", 
+        System.out.printf("가게명 : %s, 가게주소 : %s\n", 
             storeName = entry.getValue().getBusinessName(),
             entry.getValue().getBusinessAddress());
       }
