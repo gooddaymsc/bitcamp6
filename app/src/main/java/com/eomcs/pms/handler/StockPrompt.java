@@ -109,6 +109,25 @@ public class StockPrompt {
     }
     return null;
   }
+
+  public void addStockListById(String id) {
+    StockList StockList = new StockList();
+    StockList.setId(id);
+    allStockList.add(StockList);
+  }
+
+  protected int getStockIndexById(String id) {
+    for (int i=0; i< allStockList.size(); i++) {
+      if (allStockList.get(i).getId().equals(id)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public void removeStockListById(String nowLoginid) {
+    allStockList.remove(getStockIndexById(nowLoginid));
+  }
 }
 
 //  HashMap<String, Stock> hashStock= new HashMap<>();
@@ -130,4 +149,5 @@ public class StockPrompt {
 //  }
 //  return hashStock;
 //}
+
 

@@ -3,22 +3,19 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
-import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class SellerAddHandler extends AbstractSellerHandler {
 
-  List<StockList> allStockList;
-  List<BookingList> allBookingList;
-
+  BookingPrompt bookingPrompt;
+  StockPrompt stockPrompt;
   public SellerAddHandler(List<Seller> sellerList, List<Member> memberList, 
-      List<StockList> allStockList, List<BookingList> allBookingList) {
+      BookingPrompt bookingPrompt, StockPrompt stockPrompt) {
     super(sellerList, memberList);
-    this.allStockList = allStockList;
-    this.allBookingList = allBookingList;
+    this.bookingPrompt = bookingPrompt;
+    this.stockPrompt = stockPrompt;
   }
 
   public static int sellerNumber = 1;
@@ -57,13 +54,17 @@ public class SellerAddHandler extends AbstractSellerHandler {
     sellerList.add(seller);
     memberList.add(new Member(seller.getId(), seller.getPassword(), seller.getAuthority()));
 
-    StockList StockList = new StockList();
-    StockList.setId(seller.getId());
-    allStockList.add(StockList);
-
-    BookingList BookingList = new BookingList();
-    BookingList.setId(seller.getId());
-    allBookingList.add(BookingList);
+    //    StockList StockList = new StockList();
+    //    StockList.setId(seller.getId());
+    //    allStockList.add(StockList);
+    //
+    //    BookingList BookingList = new BookingList();
+    //    BookingList.setId(seller.getId());
+    //    allBookingList.add(BookingList);
+    // 예약리스트에 판매자 id를 갖는 bookingList add.
+    bookingPrompt.addBookingListById(seller.getId());
+    // 장바구니리스트에 판매자 id를 갖는 cartList add.
+    stockPrompt.addStockListById(seller.getId());
   }
 }
 

@@ -1,6 +1,8 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
@@ -23,6 +25,11 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
       return;
     }
 
+    if ((board.getWriter() != App.getLoginUser().getId()) &
+        (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN)) {
+      System.out.println("작성자가 아니므로 변경할 수 없습니다.");
+      return;
+    }
     String title = Prompt.inputString(String.format("제목(변경 전 : %s) : ", board.getTitle()));
     String content = Prompt.inputString(String.format("내용(변경 전 : %s) : ", board.getContent()));
     String tag = Prompt.inputString(String.format("태그(변경 전 : %s) : ", board.getTag()));

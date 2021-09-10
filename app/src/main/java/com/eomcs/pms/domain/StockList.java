@@ -6,7 +6,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class StockList implements Serializable{
-  private String id;
+  private String id; // 판매자
   private List<Stock> sellerStock = new ArrayList<>();
 
   public String getId() {
