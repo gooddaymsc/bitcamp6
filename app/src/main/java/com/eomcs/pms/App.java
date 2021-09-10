@@ -175,7 +175,7 @@ public class App {
     commandMap.put("/cart/delete", new CartDeleteHandler(allCartList, cartPrompt));
 
     commandMap.put("/booking/add",    new BookingAddHandler(sellerList, allBookingList, cartPrompt, stockPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(sellerList, allBookingList, productPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler(sellerList, allBookingList, productPrompt, sellerPrompt));
     commandMap.put("/booking/update", new BookingUpdateHandler(sellerList, allBookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(sellerList, allBookingList));
 
@@ -183,7 +183,7 @@ public class App {
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    //    loadBoards();
+    loadBoards();
 
     createMenu().execute();
     Prompt.close();

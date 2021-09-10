@@ -68,14 +68,6 @@ public abstract class AbstractBookingHandler implements Command {
     }
   }
 
-  protected Seller findSellerInfo(String sellerId) {
-    for (Seller seller : sellerList) {
-      if (seller.getName().equals(sellerId)){
-        return seller;
-      }
-    }
-    return null;
-  }
 }
 
 
