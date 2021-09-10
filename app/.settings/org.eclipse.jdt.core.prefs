@@ -1,6 +1,11 @@
 #
+<<<<<<< HEAD
 #Tue Aug 31 14:08:51 KST 2021
 org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
+=======
+#Thu Sep 09 14:31:53 KST 2021
+org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+>>>>>>> ed930c1701b24056f888aabe5ed1b937df81ca53
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.debug.localVariable=generate
 org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve

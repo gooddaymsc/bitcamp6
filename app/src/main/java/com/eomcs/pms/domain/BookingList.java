@@ -6,7 +6,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class BookingList implements Serializable {
-  private String id;
+  private String id; //본인
   private List<Booking> booking = new ArrayList<>();
 
   public String getId() {

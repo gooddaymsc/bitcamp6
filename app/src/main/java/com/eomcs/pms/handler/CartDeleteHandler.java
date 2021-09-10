@@ -1,6 +1,6 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.menu.Menu;
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
@@ -8,16 +8,12 @@ import com.eomcs.util.Prompt;
 
 public class CartDeleteHandler extends AbstractCartHandler {
 
-  public CartDeleteHandler(CartPrompt cartPrompt) {
-    super(cartPrompt);
+  public CartDeleteHandler(List<CartList> allCartList, CartPrompt cartPrompt) {
+    super(allCartList, cartPrompt);
   }
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() != Menu.ACCESS_PRIVACY) {
-      System.out.println("권한이 없습니다. 구매자 기능입니다.");
-      return;
-    }
     while(true) {
       System.out.println("[장바구니 삭제]");
 

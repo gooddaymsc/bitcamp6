@@ -5,7 +5,7 @@ import java.sql.Date;
 
 @SuppressWarnings("serial")
 public class Cart implements Serializable {
-  public Stock stock; // 장바구니 담을 상품
+  private Stock stock; // 장바구니 담을 상품
   private int cartStocks; // 장바구니상품의 갯수
   private int cartPrice; // 총액
   private int cartNumber; //장바구니번호

@@ -1,12 +1,21 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 
 public abstract class AbstractBookingHandler implements Command {
+
+  List <Seller> sellerList;
+  List <BookingList> allBookingList;
+  public AbstractBookingHandler(List <Seller> sellerList, List <BookingList> allBookingList) {
+    this.sellerList = sellerList;
+    this.allBookingList = allBookingList;
+  }
 
   protected Booking findBooking(String bookingName) {
     BookingList bookingList = findById(App.getLoginUser().getId());
@@ -19,8 +28,18 @@ public abstract class AbstractBookingHandler implements Command {
   }
 
   protected BookingList findById(String id) {
-    for (BookingList bookingList : App.allBookingList) {
+    for (BookingList bookingList : allBookingList) {
       if (bookingList.getId().equals(id)) {
+        return bookingList;
+      }
+    }
+    return null;
+  }
+
+  protected BookingList putBookingListById(String id, Booking buyerBooking) {
+    for (BookingList bookingList : allBookingList) {
+      if (bookingList.getId().equals(id)) {
+        bookingList.getBooking().add(buyerBooking);
         return bookingList;
       }
     }
@@ -47,6 +66,15 @@ public abstract class AbstractBookingHandler implements Command {
       }           
       return num;       
     }
+  }
+
+  protected Seller findSellerInfo(String sellerId) {
+    for (Seller seller : sellerList) {
+      if (seller.getName().equals(sellerId)){
+        return seller;
+      }
+    }
+    return null;
   }
 }
 

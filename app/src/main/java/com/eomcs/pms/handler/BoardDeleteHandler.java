@@ -1,8 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.menu.Menu;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
@@ -14,10 +12,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
 
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-      System.out.println("권한이 없습니다.\n로그인해주세요...");
-      return;
-    }
+
     System.out.println("[게시글 삭제]");
     int no = Prompt.inputInt("삭제할 게시글 번호 : ");
 

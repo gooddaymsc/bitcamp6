@@ -1,19 +1,19 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.menu.Menu;
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class BookingDeleteHandler extends AbstractBookingHandler {
 
+  public BookingDeleteHandler(List <Seller> sellerList, List <BookingList> allBookingList) {
+    super(sellerList, allBookingList);
+  }
   @Override
   public void execute() {
-    if (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT || App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
-      System.out.println("권한이 없습니다.구매자 또는 판매자 기능입니다.");
-      return;
-    }
     System.out.println("[예약 취소]");
 
     String productName = Prompt.inputString("예약 취소할 상품명 : ");
