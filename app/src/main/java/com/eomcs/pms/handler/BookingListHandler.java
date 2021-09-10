@@ -1,17 +1,20 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
   ProductPrompt productPrompt;
 
-  public BookingListHandler(ProductPrompt productPrompt) {
+  public BookingListHandler(List <Seller> sellerList, List <BookingList> allBookingList, ProductPrompt productPrompt) {
+    super(sellerList, allBookingList);
     this.productPrompt = productPrompt;
   }
   @Override

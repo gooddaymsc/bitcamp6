@@ -5,10 +5,10 @@ import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 
 public class CartListHandler extends AbstractCartHandler {
-  StockPrompt stockPrompt;
-  public CartListHandler(CartPrompt cartPrompt, StockPrompt stockPrompt) {
+  SellerPrompt sellerPrompt;
+  public CartListHandler(CartPrompt cartPrompt, SellerPrompt sellerPrompt) {
     super(cartPrompt);
-    this.stockPrompt = stockPrompt;
+    this.sellerPrompt = sellerPrompt;
   }
   @Override
   public void execute() {
@@ -23,8 +23,8 @@ public class CartListHandler extends AbstractCartHandler {
     for (Cart cart : cartList.getPrivacyCart()) {
       System.out.printf(" %d, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
           cart.getCartNumber(), 
-          //          findSellerInfo(cart.getSellerId()).getBusinessName(),
-          //          cart.getStock().getProduct().getProductName(), 
+          sellerPrompt.findBySellerInfo(cart.getSellerId()).getBusinessName(),
+          cart.getStock().getProduct().getProductName(), 
           cart.getCartStocks(), 
           cart.getCartPrice(),
           cart.getRegistrationDate());

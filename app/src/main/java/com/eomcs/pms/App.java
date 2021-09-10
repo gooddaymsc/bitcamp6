@@ -169,7 +169,7 @@ public class App {
     commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, sellerPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, stockPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, sellerPrompt));
     commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));

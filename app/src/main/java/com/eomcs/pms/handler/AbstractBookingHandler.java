@@ -12,6 +12,10 @@ public abstract class AbstractBookingHandler implements Command {
 
   List <Seller> sellerList;
   List <BookingList> allBookingList;
+  public AbstractBookingHandler(List <Seller> sellerList, List <BookingList> allBookingList) {
+    this.sellerList = sellerList;
+    this.allBookingList = allBookingList;
+  }
 
   protected Booking findBooking(String bookingName) {
     BookingList bookingList = findById(App.getLoginUser().getId());
