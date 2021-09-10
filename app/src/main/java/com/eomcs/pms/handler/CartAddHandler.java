@@ -51,7 +51,7 @@ public class CartAddHandler extends AbstractCartHandler {
         return;
       }
     }
-
+    cart.setStock(hashStock.get(storeName));
     cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     // 체크!!!
     cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
