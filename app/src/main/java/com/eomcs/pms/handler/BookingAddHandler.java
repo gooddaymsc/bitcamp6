@@ -2,8 +2,10 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
@@ -13,7 +15,8 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
   CartPrompt cartPrompt;
   StockPrompt stockPrompt;
-  public BookingAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt) { 
+  public BookingAddHandler(List <Seller> sellerList, List <BookingList> allBookingList, CartPrompt cartPrompt, StockPrompt stockPrompt) { 
+    super(sellerList, allBookingList);
     this.cartPrompt = cartPrompt;
     this.stockPrompt = stockPrompt;
 

@@ -1,23 +1,16 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Seller;
+import com.eomcs.pms.domain.CartList;
 
 public abstract class AbstractCartHandler implements Command {
   CartPrompt cartPrompt;
-  List <Seller> sellerList;
+  List<CartList> allCartList;
 
-  public AbstractCartHandler(CartPrompt cartPrompt) {
+  public AbstractCartHandler(List<CartList> allCartList, CartPrompt cartPrompt) {
     this.cartPrompt = cartPrompt;
+    this.allCartList = allCartList;
   }
 
-  //    protected Seller findSellerInfo(String sellerId) {
-  //      for (Seller seller : sellerList) {
-  //        if (seller.getName().equals(sellerId)){
-  //          return seller;
-  //        }
-  //      }
-  //      return null;
-  //    }
 
 }

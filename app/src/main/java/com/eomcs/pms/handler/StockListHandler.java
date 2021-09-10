@@ -7,9 +7,8 @@ import com.eomcs.pms.domain.StockList;
 
 public class StockListHandler extends AbstractStockHandler {
 
-  List<StockList> allStockList;
-  public StockListHandler(StockPrompt stockPrompt) {
-    super(stockPrompt);
+  public StockListHandler(List<StockList> allStockList, StockPrompt stockPrompt) {
+    super(stockPrompt, allStockList);
   }
 
   @Override

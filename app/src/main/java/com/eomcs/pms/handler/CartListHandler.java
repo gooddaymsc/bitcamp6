@@ -1,13 +1,14 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 
 public class CartListHandler extends AbstractCartHandler {
   SellerPrompt sellerPrompt;
-  public CartListHandler(CartPrompt cartPrompt, SellerPrompt sellerPrompt) {
-    super(cartPrompt);
+  public CartListHandler(List<CartList> allCartList, CartPrompt cartPrompt, SellerPrompt sellerPrompt) {
+    super(allCartList, cartPrompt);
     this.sellerPrompt = sellerPrompt;
   }
   @Override
@@ -21,7 +22,7 @@ public class CartListHandler extends AbstractCartHandler {
       return;
     }
     for (Cart cart : cartList.getPrivacyCart()) {
-      System.out.printf(" %d, %d, %d, %s\n", // 장바구니 번호, 상품명, 수량, 총액
+      System.out.printf("%d, %s, %s, %d, %d, %s\n", // 장바구니 번호, 가게명, 상품명, 수량, 총액, 등록일
           cart.getCartNumber(), 
           sellerPrompt.findBySellerInfo(cart.getSellerId()).getBusinessName(),
           cart.getStock().getProduct().getProductName(), 

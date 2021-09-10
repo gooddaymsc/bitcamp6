@@ -1,13 +1,15 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.util.Prompt;
 
 public class StockDetailHandler extends AbstractStockHandler {
 
-  public StockDetailHandler(StockPrompt stockPrompt) {
-    super(stockPrompt);
+  public StockDetailHandler(List<StockList> allStockList, StockPrompt stockPrompt ) {
+    super(stockPrompt, allStockList);
   }
   @Override
   public void execute() {

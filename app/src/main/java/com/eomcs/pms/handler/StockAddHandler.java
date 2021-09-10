@@ -10,11 +10,9 @@ import com.eomcs.util.Prompt;
 public class StockAddHandler extends AbstractStockHandler {
 
   ProductPrompt productPrompt;
-  List<StockList> allStockList;
-  public StockAddHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, List<StockList> allStockList) {
-    super(stockPrompt);
+  public StockAddHandler(List<StockList> allStockList, StockPrompt stockPrompt, ProductPrompt productPrompt) {
+    super(stockPrompt, allStockList);
     this.productPrompt = productPrompt;
-    this.allStockList = allStockList;
   }
 
   @Override

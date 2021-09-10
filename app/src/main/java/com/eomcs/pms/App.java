@@ -162,22 +162,22 @@ public class App {
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockPrompt,productPrompt,allStockList));
-    commandMap.put("/stock/list",   new StockListHandler(stockPrompt));
-    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
-    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
-    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(allStockList, stockPrompt,productPrompt));
+    commandMap.put("/stock/list",   new StockListHandler(allStockList, stockPrompt));
+    commandMap.put("/stock/detail", new StockDetailHandler(allStockList, stockPrompt));
+    commandMap.put("/stock/update", new StockUpdateHandler(allStockList, stockPrompt));
+    commandMap.put("/stock/delete", new StockDeleteHandler(allStockList, stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, sellerPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, sellerPrompt));
-    commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
-    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
-    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(allCartList, cartPrompt, stockPrompt, sellerPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(allCartList, cartPrompt, sellerPrompt));
+    commandMap.put("/cart/detail", new CartDetailHandler(allCartList, cartPrompt));
+    commandMap.put("/cart/update", new CartUpdateHandler(allCartList, cartPrompt));
+    commandMap.put("/cart/delete", new CartDeleteHandler(allCartList, cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(cartPrompt, stockPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(productPrompt));
-    commandMap.put("/booking/update", new BookingUpdateHandler());
-    commandMap.put("/booking/delete", new BookingDeleteHandler());
+    commandMap.put("/booking/add",    new BookingAddHandler(sellerList, allBookingList, cartPrompt, stockPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler(sellerList, allBookingList, productPrompt));
+    commandMap.put("/booking/update", new BookingUpdateHandler(sellerList, allBookingList));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(sellerList, allBookingList));
 
   }
 

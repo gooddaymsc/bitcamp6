@@ -51,6 +51,7 @@ public class ProductListHandler extends AbstractProductHandler {
       Cart cart =new Cart();
       //HashMap<가게명, stock>
       HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
+
       if (hashStock.size()==0) {
         System.out.println("해당 상품을 갖는 판매자가 없습니다.");
         return;

@@ -1,12 +1,17 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class BookingDeleteHandler extends AbstractBookingHandler {
 
+  public BookingDeleteHandler(List <Seller> sellerList, List <BookingList> allBookingList) {
+    super(sellerList, allBookingList);
+  }
   @Override
   public void execute() {
     System.out.println("[예약 취소]");
