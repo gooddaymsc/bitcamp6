@@ -1,13 +1,26 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Product;
 
 public class BookingPrompt {
 
   List<BookingList> allBookingList;
   public BookingPrompt(List<BookingList> allBookingList) {
     this.allBookingList = allBookingList;
+  }
+
+  public Product findBookingByProduct(String productName, String nowLoginId) {
+    int index = getBookingIndexById(nowLoginId);
+    List<Booking> bookingList = allBookingList.get(index).getBooking();
+    for (Booking booking : bookingList) {
+      if (booking.getCart().getStock().getProduct().getProductName().equals(productName)) {
+        return booking.getCart().getStock().getProduct();
+      }
+    }
+    return null;
   }
 
   public void addBookingListById(String id) {
