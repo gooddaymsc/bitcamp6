@@ -128,6 +128,7 @@ public class App {
 
 
   public App() {
+    loadBoards();
     loadbuyers();
     loadsellers();
     loadManagers();
@@ -155,7 +156,7 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler(productList));
+    commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, sellerPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList, sellerPrompt, cartPrompt));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
@@ -164,26 +165,30 @@ public class App {
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(allStockList, stockPrompt,productPrompt));
     commandMap.put("/stock/list",   new StockListHandler(allStockList, stockPrompt));
-    commandMap.put("/stock/detail", new StockDetailHandler(allStockList, stockPrompt));
-    commandMap.put("/stock/update", new StockUpdateHandler(allStockList, stockPrompt));
-    commandMap.put("/stock/delete", new StockDeleteHandler(allStockList, stockPrompt));
+    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(allCartList, cartPrompt, stockPrompt, sellerPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(allCartList, cartPrompt, sellerPrompt));
-    commandMap.put("/cart/detail", new CartDetailHandler(allCartList, cartPrompt));
-    commandMap.put("/cart/update", new CartUpdateHandler(allCartList, cartPrompt));
-    commandMap.put("/cart/delete", new CartDeleteHandler(allCartList, cartPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, sellerPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, sellerPrompt));
+    commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(sellerList, allBookingList, cartPrompt, stockPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(sellerList, allBookingList, bookingPrompt, sellerPrompt));
-    commandMap.put("/booking/update", new BookingUpdateHandler(sellerList, allBookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(sellerList, allBookingList));
+    commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, sellerPrompt, memberPrompt));
+    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList));
 
   }
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    loadBoards();
+
+    System.out.println();
+    System.out.println("   *****************      ");   
+    System.out.println("  | ALCOHOLE FINDER |     ");
+    System.out.println("   *****************      ");
 
     createMenu().execute();
     Prompt.close();
@@ -196,12 +201,13 @@ public class App {
     saveStockLists();
     saveCartLists();
     saveBookingLists();
+
   }
   @SuppressWarnings("unchecked")
   private void loadbuyers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("buyer.data"))) {
       buyerList.addAll((List<Buyer>) in.readObject());
-      System.out.println("회원(구매자) 데이터 로딩 완료!");
+      //  System.out.print("회원(구매자) 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -222,7 +228,7 @@ public class App {
   private void loadsellers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("seller.data"))) {
       sellerList.addAll((List<Seller>) in.readObject());
-      System.out.println("판매자 데이터 로딩 완료!");
+      // System.out.println("판매자 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -243,7 +249,7 @@ public class App {
   private void loadManagers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
       memberList.addAll((List<Member>) in.readObject());
-      System.out.println("관리자 데이터 로딩 완료!");
+      //   System.out.println("관리자 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -264,7 +270,7 @@ public class App {
   private void loadBoards() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
       boardList.addAll((List<Board>) in.readObject());
-      System.out.println("게시글 데이터 로딩 완료!");
+      //   System.out.println("게시글 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -285,7 +291,7 @@ public class App {
   private void loadProducts() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("product.data"))) {
       productList.addAll((List<Product>) in.readObject());
-      System.out.println("상품 데이터 로딩 완료!");
+      //  System.out.println("상품 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 상품 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -306,7 +312,7 @@ public class App {
   private void loadStockLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stockList.data"))) {
       allStockList.addAll((List<StockList>) in.readObject());
-      System.out.println("재고리스트 데이터 로딩 완료!");
+      //   System.out.println("재고리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -327,7 +333,7 @@ public class App {
   private void loadCartLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cartList.data"))) {
       allCartList.addAll((List<CartList>) in.readObject());
-      System.out.println("장바구니리스트 데이터 로딩 완료!");
+      //  System.out.println("장바구니리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 장바구니리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -348,7 +354,7 @@ public class App {
   private void loadBookingLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookingList.data"))) {
       allBookingList.addAll((List<BookingList>) in.readObject());
-      System.out.println("예약리스트 데이터 로딩 완료!");
+      //    System.out.println("예약리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 예약리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -366,6 +372,7 @@ public class App {
   }
 
   Menu createMenu() {
+
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
@@ -480,9 +487,9 @@ public class App {
       @Override
       public void execute() {
         Seller mine = findSellerById(App.getLoginUser().getId());
-        System.out.printf("\n가게명 : %s\n", mine.getBusinessName());
-        System.out.printf("주소 : %s\n", mine.getBusinessAddress());
-        System.out.printf("전화번호 : %s\n", mine.getBusinessPlaceNumber());
+        System.out.printf("\n> 가게명\t:\t%s\n", mine.getBusinessName());
+        System.out.printf("> 주소\t:\t%s\n", mine.getBusinessAddress());
+        System.out.printf("> 전화번호\t:\t%s\n", mine.getBusinessPlaceNumber());
         System.out.println("-----------------------------------------------");
         Command command  = commandMap.get(menuId);
         command.execute();

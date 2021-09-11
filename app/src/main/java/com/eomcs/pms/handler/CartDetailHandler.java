@@ -1,14 +1,12 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.pms.domain.Cart;
-import com.eomcs.pms.domain.CartList;
 import com.eomcs.util.Prompt;
 
 public class CartDetailHandler extends AbstractCartHandler {
 
-  public CartDetailHandler(List<CartList> allCartList, CartPrompt cartPrompt) {
-    super(allCartList, cartPrompt);
+  public CartDetailHandler(CartPrompt cartPrompt) {
+    super(cartPrompt);
   }
 
   @Override

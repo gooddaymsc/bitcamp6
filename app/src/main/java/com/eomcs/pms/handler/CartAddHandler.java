@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
@@ -12,8 +11,8 @@ import com.eomcs.util.Prompt;
 public class CartAddHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
   SellerPrompt sellerPrompt;
-  public CartAddHandler(List<CartList> allCartList, CartPrompt cartPrompt, StockPrompt stockPrompt, SellerPrompt sellerPrompt) {
-    super(allCartList, cartPrompt);
+  public CartAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt, SellerPrompt sellerPrompt) {
+    super(cartPrompt);
     this.stockPrompt = stockPrompt;
     this.sellerPrompt = sellerPrompt;
 

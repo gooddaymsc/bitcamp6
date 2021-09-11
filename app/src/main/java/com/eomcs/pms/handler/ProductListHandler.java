@@ -33,17 +33,20 @@ public class ProductListHandler extends AbstractProductHandler {
   public void execute() {
     String nowLoginId = App.getLoginUser().getId();
     System.out.println("[상품 목록]");
+    System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
+        "상품번호", "상품명", "주종", "원산지", "품종", "당도","산도","바디감", "도수");
+    System.out.println("--------------------------------------------------------------------------");
     for (Product product : productList) {
-      System.out.printf("%d, %s, %s, %s, %s, %.2f, %d, %d, %d \n", 
+      System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6d\t%-6.2f\n", 
           product.getProductNumber(), 
           product.getProductName(), 
           product.getProductType(), 
           product.getCountryOrigin(),
           product.getVariety(),
-          product.getAlcoholLevel(),
           product.getSugerLevel(),
           product.getAcidity(),
-          product.getWeight());
+          product.getWeight(),
+          product.getAlcoholLevel());
     }
     // 상품 목록 확인 후 구매자는 장바구니에 등록 가능하게.
     if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {

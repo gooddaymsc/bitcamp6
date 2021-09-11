@@ -20,6 +20,8 @@ public class Member implements Serializable {
   private int level;
   private int memberType;
   private List<Booking> bookingList;
+  private boolean bookingUpdate;
+
 
   public Member() {
     this("-","-",0x01);
@@ -112,6 +114,12 @@ public class Member implements Serializable {
   }
   public void setBookingList(List<Booking> bookingList) {
     this.bookingList = bookingList;
+  }
+  public boolean isBookingUpdate() {
+    return bookingUpdate;
+  }
+  public void setBookingUpdate(boolean bookingUpdate) {
+    this.bookingUpdate = bookingUpdate;
   }
 
 
