@@ -11,7 +11,7 @@ public class ProductPrompt {
     this.productList = productList;
   }
 
-  protected Product findByProduct (String ProductName) {
+  public Product findByProduct (String ProductName) {
     for (Product product : productList) {
       if (product.getProductName().equals(ProductName)) {
         return product;

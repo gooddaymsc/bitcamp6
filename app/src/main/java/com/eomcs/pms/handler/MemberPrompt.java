@@ -21,4 +21,19 @@ public class MemberPrompt {
     memberList.remove(getMemberIndexById(nowLoginid));
     return getMemberIndexById(nowLoginid);
   }
+
+  public void returnBookingUpdate(String sellerId) {
+    for (Member member : memberList) {
+      if (member.getId().equals(sellerId)) {
+        member.setBookingUpdate(false);
+      }
+    }
+  }
+  public void sendBookingUpdate(String sellerId) {
+    for (Member member : memberList) {
+      if (member.getId().equals(sellerId)) {
+        member.setBookingUpdate(true);
+      }
+    }
+  }
 }

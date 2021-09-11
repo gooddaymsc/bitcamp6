@@ -14,7 +14,11 @@ public class SellerListHandler extends AbstractSellerHandler {
   public void execute(){
     System.out.println("\n[판매자 목록]");
     for (Seller seller : sellerList) {
-      System.out.printf("판매자번호-%d, %s, %s, %s, %s, 등급[%d], %s\n", 
+      System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
+          "판매자번호", "아이디", "가게명", "이름", "닉네임", "등급","등록일");
+      System.out.println("--------------------------------------------------------------------------");
+
+      System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6d\t%-6s\n", 
           seller.getNumber(), 
           seller.getId(),
           seller.getBusinessName(),

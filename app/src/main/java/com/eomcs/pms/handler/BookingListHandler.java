@@ -6,20 +6,26 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class BookingListHandler extends AbstractBookingHandler{
 
   ProductPrompt productPrompt;
-
-  public BookingListHandler(List <Seller> sellerList, List <BookingList> allBookingList, ProductPrompt productPrompt) {
-    super(sellerList, allBookingList);
+  SellerPrompt sellerPrompt;
+  MemberPrompt memberPrompt;
+  public BookingListHandler(List <BookingList> allBookingList, ProductPrompt productPrompt, 
+      SellerPrompt sellerPrompt, MemberPrompt memberPrompt) {
+    super(allBookingList);
     this.productPrompt = productPrompt;
+    this.sellerPrompt = sellerPrompt;
+    this.memberPrompt = memberPrompt;
   }
   @Override
   public void execute() {
-
+    // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
+    if (App.getLoginUser().isBookingUpdate()) {
+      memberPrompt.returnBookingUpdate(App.getLoginUser().getId());
+    }
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
       System.out.println("\n[내 픽업 예약 목록]");
       BookingList bookingList = findById(App.getLoginUser().getId());
@@ -28,17 +34,21 @@ public class BookingListHandler extends AbstractBookingHandler{
         System.out.println("아직 예약한 상품이 없습니다.");
         return;
       }
+      System.out.printf("%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\n",
+          "예약번호", "가게명", "상품명", "예약일시", "픽업 예약날짜", "픽업 예약시간");
+      System.out.println("--------------------------------------------------------------------------");
 
       for (Booking booking : bookingList.getBooking() ) {
         String sellerId = booking.getCart().getSellerId();
-        System.out.printf("가게명 : %s \n", findSellerInfo(sellerId).getBusinessName());
-        System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
-        System.out.printf("예약일시 : %s \n", booking.getRegisteredDate());
-        System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
-        System.out.printf("픽업 예약날짜 : %s\n", booking.getBookingDate());
-        System.out.printf("픽업 예약시간: %d시 %d분 \n", booking.getBookingHour(), booking.getBookingMinute());
+        System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%d시 %d분\n",
+            booking.getBookingNumber(),
+            sellerPrompt.findBySellerInfo(sellerId).getBusinessName(),
+            booking.getCart().getStock().getProduct().getProductName(),
+            booking.getRegisteredDate(),
+            booking.getBookingDate(),
+            booking.getBookingHour(), booking.getBookingMinute()
+            );
 
-        System.out.println("==================================");
       }
     } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
       System.out.println("\n[고객 예약 목록]");
@@ -49,21 +59,25 @@ public class BookingListHandler extends AbstractBookingHandler{
         return;
       }
 
-      for (Booking booking : bookingList.getBooking() ) {
-        System.out.printf("예약자 : %s \n", booking.getBuyerId());
-        System.out.printf("예약번호 : %s \n", booking.getBookingNumber());
-        System.out.printf("예약일시 : %s \n", booking.getRegisteredDate());
-        System.out.printf("상품명 : %s \n", booking.getCart().getStock().getProduct().getProductName());
-        System.out.printf("픽업 예약날짜 : %s\n", booking.getBookingDate());
-        System.out.printf("픽업 예약시간: %d시 %d분 \n", booking.getBookingHour(), booking.getBookingMinute());
+      System.out.printf("%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\n",
+          "예약번호","예약자", "상품명", "예약일시",  "픽업 예약날짜", "픽업 예약시간");
+      System.out.println("--------------------------------------------------------------------------");
 
-        System.out.println("==================================");
+      for (Booking booking : bookingList.getBooking() ) {
+        System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%d시 %d분\n",
+            booking.getBookingNumber(),
+            booking.getBuyerId(),
+            booking.getCart().getStock().getProduct().getProductName(),
+            booking.getRegisteredDate(),
+            booking.getBookingDate(),
+            booking.getBookingHour(), booking.getBookingMinute()
+            );
+
       }
     }
 
     while(true) {
-
-      String input = Prompt.inputString("\n상품 상세정보 보기(이전메뉴:0) \n>> 상품명 : ");
+      String input = Prompt.inputString("\n상품 상세정보 보기 (이전메뉴:0) \n>> 상품명 : ");
       if (input.equals("0")) {
         return;
       } else {
@@ -74,7 +88,7 @@ public class BookingListHandler extends AbstractBookingHandler{
           return;
         }
 
-        System.out.printf("주종: %s\n",  bookingProduct.getProductType());
+        System.out.printf("\n주종: %s\n",  bookingProduct.getProductType());
         System.out.printf("원산지: %s\n", bookingProduct.getCountryOrigin());
         System.out.printf("품종: %s\n",  bookingProduct.getVariety());
         System.out.printf("알콜도수: %.2f\n",bookingProduct.getAlcoholLevel());

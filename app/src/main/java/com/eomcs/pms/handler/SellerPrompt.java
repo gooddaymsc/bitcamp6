@@ -12,13 +12,12 @@ public class SellerPrompt {
   }
   public Seller findBySellerInfo (String SellerId) {
     for (Seller seller : sellerList) {
-      if (seller.getName().equals(SellerId)){
+      if (seller.getId().equals(SellerId)){
         return seller;
       }
     }
     return null;
   }
-
 
 
   public Seller findByPlaceName (String storeName) {

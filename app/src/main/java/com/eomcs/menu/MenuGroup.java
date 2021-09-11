@@ -120,7 +120,7 @@ public class MenuGroup extends Menu {
 
   private void printBreadCrumbMenuTitle() {
     // 메모리누수문제?
-    System.out.println("\n--------------------------------------------------------------");
+    System.out.println("\n============================================================");
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
       System.out.printf("<< %s >>",App.level(App.getLoginUser().getAuthority()));
@@ -130,7 +130,12 @@ public class MenuGroup extends Menu {
           App.level(App.getLoginUser().getAuthority()));      
     }
     System.out.printf(" || [%s]\n", getBreadCrumb());
-    System.out.println("--------------------------------------------------------------");
+    if (App.getLoginUser().isBookingUpdate()) {
+      System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
+      System.out.println("| 새 예약알림이 있습니다 |");
+      System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
+    }
+    System.out.println("============================================================");
   }
 
   private void printMenuList(List<Menu> menuList) {

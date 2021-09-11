@@ -15,10 +15,13 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
   CartPrompt cartPrompt;
   StockPrompt stockPrompt;
-  public BookingAddHandler(List <Seller> sellerList, List <BookingList> allBookingList, CartPrompt cartPrompt, StockPrompt stockPrompt) { 
-    super(sellerList, allBookingList);
+  MemberPrompt memberPrompt;
+  public BookingAddHandler(List<BookingList> allBookingList, CartPrompt cartPrompt, 
+      StockPrompt stockPrompt, MemberPrompt memberPrompt) { 
+    super(allBookingList);
     this.cartPrompt = cartPrompt;
     this.stockPrompt = stockPrompt;
+    this.memberPrompt = memberPrompt;
 
   }
 
@@ -91,6 +94,8 @@ public class BookingAddHandler extends AbstractBookingHandler {
     putBookingListById(App.getLoginUser().getId(), booking);
     // All.allBookingList에 판매자의 Id에 예약내역 추가.
     putBookingListById(sellerId, booking);
+
+    memberPrompt.sendBookingUpdate(sellerId);
     System.out.println("픽업예약을 완료하였습니다.");
   }
 

@@ -6,9 +6,10 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 
 public class StockListHandler extends AbstractStockHandler {
-
+  List<StockList> allStockList;
   public StockListHandler(List<StockList> allStockList, StockPrompt stockPrompt) {
-    super(stockPrompt, allStockList);
+    super(stockPrompt);
+    this.allStockList = allStockList;
   }
 
   @Override
@@ -21,8 +22,13 @@ public class StockListHandler extends AbstractStockHandler {
       System.out.println("아직 추가한 상품이 없습니다.");
       return;
     }
+    System.out.printf("%-3s\t%-6s\t%-6s\t%-3s\n",
+        "번호", "상품명", "가격", "재고");
+    System.out.println("--------------------------------------------------------------------------");
+
     for (Stock stock : stockList.getSellerStock()) {
-      System.out.printf("%s, %d, %d\n", 
+      System.out.printf("%-3d\t%-6s\t%-6d\t%-3d\n", 
+          stock.getStockNumber(),
           stock.getProduct().getProductName(), 
           stock.getPrice(), 
           stock.getStocks());
