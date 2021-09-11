@@ -35,7 +35,12 @@ public class SellerPrompt {
     HashMap<String, Seller> hashMap = new HashMap<>();
     for (Seller seller : sellerList) {
       if((seller.getBusinessAddress()).contains(adress)) {
+        System.out.println("\n[해당 주소 근처 판매처] ");
         hashMap.put(seller.getId(), seller);
+      }
+      else if (!(seller.getBusinessAddress()).contains(adress)){
+        System.out.println("해당 지역에는 판매처가 없습니다.");
+        break;
       }
     }
     return hashMap;

@@ -15,7 +15,7 @@ public class StockListHandler extends AbstractStockHandler {
   @Override
   public void execute() {
     String nowLoginId = App.getLoginUser().getId();
-    System.out.println("[재고 목록]");
+    System.out.println("\n[재고 목록]");
     StockList stockList = allStockList.get(stockPrompt.findStockListById(nowLoginId));
 
     if (stockList.getSellerStock().size() == 0) {
