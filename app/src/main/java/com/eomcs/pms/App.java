@@ -185,6 +185,11 @@ public class App {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
     loadBoards();
 
+    System.out.println();
+    System.out.println("   *****************      ");   
+    System.out.println("  | ALCOHOLE FINDER |     ");
+    System.out.println("   *****************      ");
+
     createMenu().execute();
     Prompt.close();
 
@@ -196,12 +201,13 @@ public class App {
     saveStockLists();
     saveCartLists();
     saveBookingLists();
+
   }
   @SuppressWarnings("unchecked")
   private void loadbuyers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("buyer.data"))) {
       buyerList.addAll((List<Buyer>) in.readObject());
-      System.out.println("회원(구매자) 데이터 로딩 완료!");
+      //  System.out.print("회원(구매자) 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -222,7 +228,7 @@ public class App {
   private void loadsellers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("seller.data"))) {
       sellerList.addAll((List<Seller>) in.readObject());
-      System.out.println("판매자 데이터 로딩 완료!");
+      // System.out.println("판매자 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -243,7 +249,7 @@ public class App {
   private void loadManagers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
       memberList.addAll((List<Member>) in.readObject());
-      System.out.println("관리자 데이터 로딩 완료!");
+      //   System.out.println("관리자 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -264,7 +270,7 @@ public class App {
   private void loadBoards() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
       boardList.addAll((List<Board>) in.readObject());
-      System.out.println("게시글 데이터 로딩 완료!");
+      //   System.out.println("게시글 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -285,7 +291,7 @@ public class App {
   private void loadProducts() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("product.data"))) {
       productList.addAll((List<Product>) in.readObject());
-      System.out.println("상품 데이터 로딩 완료!");
+      //  System.out.println("상품 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 상품 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -306,7 +312,7 @@ public class App {
   private void loadStockLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stockList.data"))) {
       allStockList.addAll((List<StockList>) in.readObject());
-      System.out.println("재고리스트 데이터 로딩 완료!");
+      //   System.out.println("재고리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -327,7 +333,7 @@ public class App {
   private void loadCartLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cartList.data"))) {
       allCartList.addAll((List<CartList>) in.readObject());
-      System.out.println("장바구니리스트 데이터 로딩 완료!");
+      //  System.out.println("장바구니리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 장바구니리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -348,7 +354,7 @@ public class App {
   private void loadBookingLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookingList.data"))) {
       allBookingList.addAll((List<BookingList>) in.readObject());
-      System.out.println("예약리스트 데이터 로딩 완료!");
+      //    System.out.println("예약리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 예약리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();

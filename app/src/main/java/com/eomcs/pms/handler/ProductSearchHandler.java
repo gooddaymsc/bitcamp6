@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
@@ -37,9 +38,8 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     System.out.println("[상품검색]");
 
-    HashMap<String, Seller> sellerInfo = sellerPrompt.findByAdress(Prompt.inputString("주소입력: "));   
-
     String productName  = productPrompt.findByProduct2(Prompt.inputString("상품입력: "));   
+    HashMap<String, Seller> sellerInfo = sellerPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
     System.out.println("==========상품 목록==========");
 
@@ -57,11 +57,19 @@ public class ProductSearchHandler extends AbstractProductHandler {
         }
       }
 
-      System.out.println("\n[해당 주소 근처 판매처] ");
+
+
+
+
+
+      if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
+        System.out.println("로그인 후 이용가능합니다.");
+        return;
+      }
 
       for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
-        System.out.printf("가게명 : %s, 가게주소 : %s\n", 
-            storeName = entry.getValue().getBusinessName(),
+        System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
+            entry.getValue().getBusinessName(),
             entry.getValue().getBusinessAddress());
       }
 
@@ -100,6 +108,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
     }
   }
 }
+
 
 
 

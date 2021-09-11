@@ -86,7 +86,7 @@ public class MenuGroup extends Menu {
 
       } catch (Exception e) {
         System.out.println("--------------------------------------------------------------");
-        System.out.printf("오류 발생: %s\n", e.getClass().getName());
+        System.out.printf(" 오류 발생: %s\n", e.getClass().getName());
         e.printStackTrace();
         System.out.println("--------------------------------------------------------------");
       }
@@ -145,13 +145,16 @@ public class MenuGroup extends Menu {
   }
 
   private Menu selectMenu(List<Menu> menuList) {
+    System.out.println("--------------------------------------------------------------");
     int menuNo = Prompt.inputInt("선택> ");
+    System.out.println();
 
     if (menuNo < 0 || menuNo > menuList.size()) {
       return null;
     }
 
     if (menuNo == 0 && !disablePrevMenu) {
+
       return prevMenu; // 호출한 쪽에 '이전 메뉴' 선택을 알리게 위해 
     } 
 
