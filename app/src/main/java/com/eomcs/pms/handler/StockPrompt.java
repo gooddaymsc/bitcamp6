@@ -9,10 +9,10 @@ import com.eomcs.pms.domain.StockList;
 
 public class StockPrompt {
   List<StockList> allStockList;
-  SellerPrompt sellerPrompt;
-  public StockPrompt(List<StockList> allStockList, SellerPrompt sellerPrompt) {
+  MemberPrompt memberPrompt;
+  public StockPrompt(List<StockList> allStockList, MemberPrompt memberPrompt) {
     this.allStockList = allStockList;
-    this.sellerPrompt = sellerPrompt;
+    this.memberPrompt = memberPrompt;
   }
 
   protected boolean removeStockById(String stockName, String id) {
@@ -86,7 +86,7 @@ public class StockPrompt {
       for (Stock stock : stockList.getSellerStock()) {
         if (stock.getProduct().getProductName().equals(StockName)) {
           //          isStock = true;
-          Seller sellerInfo = sellerPrompt.findBySellerInfo(stockList.getId());
+          Seller sellerInfo = memberPrompt.findBySellerInfo(stockList.getId());
           System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
               sellerInfo.getBusinessName(),
               stockList.getId(),
