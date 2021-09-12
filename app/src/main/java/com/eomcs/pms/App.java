@@ -128,14 +128,14 @@ public class App {
 
 
   public App() {
-    loadBoards();
-    loadbuyers();
-    loadsellers();
-    loadManagers();
-    loadProducts();
-    loadStockLists();
-    loadCartLists();
-    loadBookingLists();
+    //    loadBoards();
+    //    loadbuyers();
+    //    loadsellers();
+    //    loadManagers();
+    //    loadProducts();
+    //    loadStockLists();
+    //    loadCartLists();
+    //    loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, cartPrompt, bookingPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerList));
