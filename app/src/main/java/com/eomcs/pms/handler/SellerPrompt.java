@@ -31,18 +31,22 @@ public class SellerPrompt {
 
 
   //입력한 문자열을 포함하면 adress 리턴.
+
   public HashMap<String, Seller> findByAdress (String adress) {
+
     HashMap<String, Seller> hashMap = new HashMap<>();
-    for (Seller seller : sellerList) {
-      if((seller.getBusinessAddress()).contains(adress)) {
+    String[] splitted = adress.split(" ");
+    for (Seller seller : sellerList) { 
+      if(splitted[2].equals(seller.getBusinessAddress()) && 
+          splitted[1].equals(seller.getBusinessAddress())) {
         System.out.println("\n[해당 주소 근처 판매처] ");
         hashMap.put(seller.getId(), seller);
-      }
-      else if (!(seller.getBusinessAddress()).contains(adress)){
-        System.out.println("해당 지역에는 판매처가 없습니다.");
         break;
       }
-    }
+      else {
+        return null;
+      }
+    }      
     return hashMap;
   }
 }

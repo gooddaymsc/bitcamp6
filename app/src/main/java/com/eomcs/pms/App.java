@@ -54,6 +54,7 @@ import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
+import com.eomcs.pms.handler.ProductRankingHandler;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
@@ -159,6 +160,7 @@ public class App {
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, sellerPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList, sellerPrompt, cartPrompt));
+    commandMap.put("/product/rank",new ProductRankingHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, sellerPrompt));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
@@ -464,6 +466,7 @@ public class App {
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
     productMenu.add(new MenuItem("상품검색",  "/product/search"));
+    productMenu.add(new MenuItem("이달의 술 ",  "/product/rank"));
     productMenu.add(new MenuItem("상세보기", "/product/detail"));
     productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
     productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));

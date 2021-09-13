@@ -14,6 +14,10 @@ public class Product implements Serializable{
   private int sugerLevel;           //당도
   private int acidity;              //산도
   private int weight;               //바디감
+  private float score;              //평점
+  //private float sunScore;           //점수 합
+  private String comment;           //상품평
+  private int participants = 1;         //상품평 등록자 수 
 
 
   public int getProductNumber() {
@@ -70,6 +74,24 @@ public class Product implements Serializable{
   }
   public void setWeight(int weight) {
     this.weight = weight;
+  }
+  public float getScore() {
+    return score;
+  }
+  public void setScore(float score) {
+    this.score = score ;
+  }
+  public String getComment() {
+    return comment;
+  }
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+  public int getParticipants() {
+    return participants;
+  }
+  public void setParticipants(int participants) {
+    this.participants = participants;
   }
 
 
