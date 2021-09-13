@@ -10,13 +10,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.BookingList;
-import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Product;
@@ -60,7 +58,6 @@ import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
-import com.eomcs.pms.handler.SellerPrompt;
 import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
@@ -71,34 +68,24 @@ import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
-  List<Buyer> buyerList = new LinkedList<>();
-  List<Seller> sellerList = new LinkedList<>();
   List<Board> boardList = new ArrayList<>();
-  //  List<Booking> bookingList = new LinkedList<>();
-  //  List<Cart> cartList = new ArrayList<>();
-  //  List<Stock> stockList = new ArrayList<>();
-
   List<Product> productList = new ArrayList<>();
   List<StockList> allStockList = new ArrayList<>();
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
-
   List<Member> memberList = new ArrayList<>();
-  HashMap<String, Command> commandMap = new HashMap<>();
 
+  HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
   LoginHandler loginHandler = new LoginHandler(memberList);
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
-  SellerPrompt sellerPrompt = new SellerPrompt(sellerList);
-  StockPrompt stockPrompt = new StockPrompt(allStockList, sellerPrompt);
+  StockPrompt stockPrompt = new StockPrompt(allStockList, memberPrompt);
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
-  CartPrompt cartPrompt = new CartPrompt(allCartList, sellerPrompt);
-  FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
-  FindPasswordHandler findPasswordHandler = new FindPasswordHandler(buyerList, sellerList);
+  CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
 
+  // 권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
     String menuId;
-
     public MenuItem(String title, String menuId) {
       this(title, ACCESS_LOGOUT | ACCESS_BUYER | ACCESS_SELLER | ACCESS_ADMIN , menuId);
     }
@@ -107,15 +94,14 @@ public class App {
       super(title, accessScope);
       this.menuId = menuId;
     }
-
     @Override
     public void execute() {
-
       Command command  = commandMap.get(menuId);
       command.execute();
     }
   }
 
+  // 현재 로그인한 정보를 저장 (id, pw, auth)
   public static Member loginMember = new Member();
   public static Member getLoginUser() {
     return loginMember;
@@ -126,28 +112,26 @@ public class App {
     app.service();
   }
 
-
   public App() {
+    // List load.
     //    loadBoards();
-    //    loadbuyers();
-    //    loadsellers();
     //    loadManagers();
     //    loadProducts();
     //    loadStockLists();
     //    loadCartLists();
     //    loadBookingLists();
 
-    commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, cartPrompt, bookingPrompt));
-    commandMap.put("/buyer/list",   new BuyerListHandler(buyerList));
-    commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerList));
-    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerList));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerList, memberPrompt, cartPrompt, bookingPrompt));
+    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
+    commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
+    commandMap.put("/buyer/detail", new BuyerDetailHandler(memberList));
+    commandMap.put("/buyer/update", new BuyerUpdateHandler(memberList));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, memberPrompt, cartPrompt, bookingPrompt));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(sellerList, memberList, bookingPrompt, stockPrompt));
-    commandMap.put("/seller/list",   new SellerListHandler(sellerList, memberList));
-    commandMap.put("/seller/detail", new SellerDetailHandler(sellerList, memberList));
-    commandMap.put("/seller/update", new SellerUpdateHandler(sellerList, memberList));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerList, memberList));
+    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt));
+    commandMap.put("/seller/list",   new SellerListHandler(memberList));
+    commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
+    commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
@@ -157,8 +141,8 @@ public class App {
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, sellerPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList, sellerPrompt, cartPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, productList, memberPrompt, cartPrompt));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
@@ -169,17 +153,19 @@ public class App {
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, sellerPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, sellerPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, memberPrompt));
     commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
     commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, memberPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, sellerPrompt, memberPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, memberPrompt));
     commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList));
 
+    commandMap.put("/findId", new FindIdHandler(memberPrompt));
+    commandMap.put("/findPassword", new FindPasswordHandler(memberPrompt));
   }
 
   void service() {
@@ -193,8 +179,7 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
-    savebuyers();
-    savesellers();
+    //List 저장
     saveManagers();
     saveBoards();
     saveProducts();
@@ -202,47 +187,6 @@ public class App {
     saveCartLists();
     saveBookingLists();
 
-  }
-  @SuppressWarnings("unchecked")
-  private void loadbuyers() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("buyer.data"))) {
-      buyerList.addAll((List<Buyer>) in.readObject());
-      //  System.out.print("회원(구매자) 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void savebuyers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("buyer.data"))) {
-      out.writeObject(buyerList);
-      System.out.println("회원(구매자) 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 회원(구매자) 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadsellers() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("seller.data"))) {
-      sellerList.addAll((List<Seller>) in.readObject());
-      // System.out.println("판매자 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void savesellers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("seller.data"))) {
-      out.writeObject(sellerList);
-      System.out.println("판매자 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 판매자 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
   }
 
   @SuppressWarnings("unchecked")
@@ -387,18 +331,9 @@ public class App {
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
     mainMenuGroup.add(findMenu);
 
-    findMenu.add(new Menu("아이디찾기") {
-      @Override
-      public void execute() {
-        findIdHandler.findId();
-      }});
+    findMenu.add(new MenuItem("아이디찾기", "/findId"));
 
-    findMenu.add(new Menu("비밀번호찾기") {
-      @Override
-      public void execute() {
-        findPasswordHandler.findPassword();
-      }});
-
+    findMenu.add(new MenuItem("비밀번호찾기", "/findPassword"));
 
     mainMenuGroup.add(new Menu("로그인", ACCESS_LOGOUT) {
       @Override
@@ -486,10 +421,10 @@ public class App {
     sellerStoreMenu.add(new MenuItem("가게 정보 및 재고", "/stock/list") {
       @Override
       public void execute() {
-        Seller mine = findSellerById(App.getLoginUser().getId());
-        System.out.printf("\n> 가게명\t:\t%s\n", mine.getBusinessName());
-        System.out.printf("> 주소\t:\t%s\n", mine.getBusinessAddress());
-        System.out.printf("> 전화번호\t:\t%s\n", mine.getBusinessPlaceNumber());
+        Member mine = memberPrompt.findById(App.getLoginUser().getId());
+        System.out.printf("\n> 가게명\t:\t%s\n", ((Seller) mine).getBusinessName());
+        System.out.printf("> 주소\t:\t%s\n", ((Seller) mine).getBusinessAddress());
+        System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
         System.out.println("-----------------------------------------------");
         Command command  = commandMap.get(menuId);
         command.execute();
@@ -533,12 +468,5 @@ public class App {
       default : return "관리자";
     }
   }
-  private Seller findSellerById(String id) {
-    for (Seller member : sellerList) {
-      if (member.getId().equals(id)) {
-        return member;
-      }
-    }
-    return null;
-  }
+
 }

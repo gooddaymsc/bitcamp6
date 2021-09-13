@@ -11,9 +11,9 @@ public class SellerAddHandler extends AbstractSellerHandler {
 
   BookingPrompt bookingPrompt;
   StockPrompt stockPrompt;
-  public SellerAddHandler(List<Seller> sellerList, List<Member> memberList, 
+  public SellerAddHandler(List<Member> memberList, 
       BookingPrompt bookingPrompt, StockPrompt stockPrompt) {
-    super(sellerList, memberList);
+    super(memberList);
     this.bookingPrompt = bookingPrompt;
     this.stockPrompt = stockPrompt;
   }
@@ -23,7 +23,7 @@ public class SellerAddHandler extends AbstractSellerHandler {
   @Override
   public void execute() {
     System.out.println("\n[판매자 등록]");
-    Seller seller = new Seller();
+    Member seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
     seller.setNumber(sellerNumber++);
 
@@ -46,21 +46,13 @@ public class SellerAddHandler extends AbstractSellerHandler {
     seller.setPassword(Prompt.inputString("암호 : "));
     seller.setPhoto(Prompt.inputString("사진 : "));
     seller.setPhoneNumber(Prompt.inputString("전화 : "));
-    seller.setBusinessName(Prompt.inputString("가게명 : "));
-    seller.setBusinessNumber(Prompt.inputString("사업자번호 : "));
-    seller.setBusinessAddress(Prompt.inputString("사업장주소 : "));
-    seller.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
+    ((Seller) seller).setBusinessName(Prompt.inputString("가게명 : "));
+    ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
+    ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
+    ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
-    sellerList.add(seller);
-    memberList.add(new Member(seller.getId(), seller.getPassword(), seller.getAuthority()));
+    memberList.add(seller);
 
-    //    StockList StockList = new StockList();
-    //    StockList.setId(seller.getId());
-    //    allStockList.add(StockList);
-    //
-    //    BookingList BookingList = new BookingList();
-    //    BookingList.setId(seller.getId());
-    //    allBookingList.add(BookingList);
     // 예약리스트에 판매자 id를 갖는 bookingList add.
     bookingPrompt.addBookingListById(seller.getId());
     // 장바구니리스트에 판매자 id를 갖는 cartList add.
