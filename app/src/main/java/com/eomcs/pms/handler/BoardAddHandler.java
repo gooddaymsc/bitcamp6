@@ -17,7 +17,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     System.out.println("[새 게시글]");
     Board board = new Board();
 
-    board.setNumber(boardNumber++);
+    board.setBoardNumber(boardNumber++);
     board.setTitle(Prompt.inputString("제목 : "));
     board.setContent(Prompt.inputString("내용 : "));
     board.setWriter(App.getLoginUser().getId());

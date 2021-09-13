@@ -22,7 +22,7 @@ public class BoardListHandler extends AbstractBoardHandler {
 
     for (Board board : boards) {
       System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
-          board.getNumber(), 
+          board.getBoardNumber(), 
           board.getTitle(), 
           board.getTag(),
           board.getWriter(),

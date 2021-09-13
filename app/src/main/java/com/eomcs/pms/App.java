@@ -24,6 +24,7 @@ import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
 import com.eomcs.pms.handler.BoardListHandler;
+import com.eomcs.pms.handler.BoardPrompt;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
@@ -74,6 +75,7 @@ public class App {
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
   List<Member> memberList = new ArrayList<>();
+  //  int[] totalNumber = {1,1,1}; // totalMemberNumber, totalBoardNumber, totalProductNumber
 
   HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
@@ -82,6 +84,7 @@ public class App {
   StockPrompt stockPrompt = new StockPrompt(allStockList, memberPrompt);
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
+  BoardPrompt boardPrompt = new BoardPrompt(boardList);
 
   // 권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -113,13 +116,13 @@ public class App {
   }
 
   public App() {
-    // List load.
-    //    loadBoards();
-    //    loadManagers();
-    //    loadProducts();
-    //    loadStockLists();
-    //    loadCartLists();
-    //    loadBookingLists();
+    // List Load.
+    loadBoards();
+    loadManagers();
+    loadProducts();
+    loadStockLists();
+    loadCartLists();
+    loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
@@ -135,7 +138,7 @@ public class App {
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
-    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardPrompt));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
