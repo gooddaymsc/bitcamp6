@@ -38,6 +38,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
     System.out.println("[상품검색]");
 
     String productName  = productPrompt.findByProduct2(Prompt.inputString("상품입력: "));   
+
     HashMap<String, Seller> sellerInfo = memberPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
     System.out.println("==========상품 목록==========");
@@ -53,23 +54,24 @@ public class ProductSearchHandler extends AbstractProductHandler {
           System.out.printf("품종: %s\n", product.getVariety());
           System.out.printf("알콜도수: %.2f\n", product.getAlcoholLevel()); 
           System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugerLevel(),product.getAcidity(),product.getWeight());
+          System.out.println("-----------------------------------------");
         }
       }
 
 
-
-
-
-
       if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
         System.out.println("로그인 후 이용가능합니다.");
-        return;
+      }
+
+      if(sellerInfo == null) {
+        System.out.println("해당 지역에는 판매처가 없습니다.");
       }
 
       for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
         System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
             entry.getValue().getBusinessName(),
             entry.getValue().getBusinessAddress());
+
       }
 
       //구매자 id의 cartList에 상품 담기.
@@ -78,7 +80,8 @@ public class ProductSearchHandler extends AbstractProductHandler {
       Cart cart = new Cart();
       HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(productName);
 
-      if(hashStock.size() == 0) {
+
+      if(hashStock.size() == 0 ) {
         System.out.println("해당상품을 갖는 판매자가 없습니다.");
         return;
       }

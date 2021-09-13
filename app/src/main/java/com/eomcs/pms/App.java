@@ -146,7 +146,8 @@ public class App {
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, productList, memberPrompt, cartPrompt));
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
+
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
 
