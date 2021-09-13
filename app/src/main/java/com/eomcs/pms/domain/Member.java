@@ -2,7 +2,7 @@ package com.eomcs.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import com.eomcs.menu.Menu;
 
 @SuppressWarnings("serial")
 public class Member implements Serializable {
@@ -18,13 +18,11 @@ public class Member implements Serializable {
   private String phoneNumber;
   private Date registeredDate;
   private int level;
-  private int memberType;
-  private List<Booking> bookingList;
   private boolean bookingUpdate;
 
 
   public Member() {
-    this("-","-",0x01);
+    this("-","-",Menu.ACCESS_LOGOUT);
   }
   public Member(String id, String password, int authority) {
     this.id = id;
@@ -102,18 +100,6 @@ public class Member implements Serializable {
   }
   public void setLevel(int level) {
     this.level = level;
-  }
-  public int getMemberType() {
-    return memberType;
-  }
-  public void setMemberType(int memberType) {
-    this.memberType = memberType;
-  }
-  public List<Booking> getBookingList() {
-    return bookingList;
-  }
-  public void setBookingList(List<Booking> bookingList) {
-    this.bookingList = bookingList;
   }
   public boolean isBookingUpdate() {
     return bookingUpdate;

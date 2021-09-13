@@ -11,13 +11,11 @@ import com.eomcs.util.Prompt;
 public class BookingListHandler extends AbstractBookingHandler{
 
   BookingPrompt bookingPrompt;
-  SellerPrompt sellerPrompt;
   MemberPrompt memberPrompt;
   public BookingListHandler(List <BookingList> allBookingList, BookingPrompt bookingPrompt, 
-      SellerPrompt sellerPrompt, MemberPrompt memberPrompt) {
+      MemberPrompt memberPrompt) {
     super(allBookingList);
     this.bookingPrompt = bookingPrompt;
-    this.sellerPrompt = sellerPrompt;
     this.memberPrompt = memberPrompt;
   }
   @Override
@@ -42,7 +40,7 @@ public class BookingListHandler extends AbstractBookingHandler{
         String sellerId = booking.getCart().getSellerId();
         System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%d시 %d분\n",
             booking.getBookingNumber(),
-            sellerPrompt.findBySellerInfo(sellerId).getBusinessName(),
+            memberPrompt.findBySellerInfo(sellerId).getBusinessName(),
             booking.getCart().getStock().getProduct().getProductName(),
             booking.getRegisteredDate(),
             booking.getBookingDate(),

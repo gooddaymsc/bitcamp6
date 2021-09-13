@@ -1,7 +1,5 @@
 package com.eomcs.pms.domain;
 
-import java.util.List;
-
 @SuppressWarnings("serial")
 public class Seller extends Member {
   private String businessName;
@@ -9,7 +7,6 @@ public class Seller extends Member {
   private String businessAddress;
   private String businessPlaceNumber;
   //  private String businessHours;
-  private List<Stock> stockList;
 
   public String getBusinessName() {
     return businessName;
@@ -34,12 +31,6 @@ public class Seller extends Member {
   }
   public void setBusinessPlaceNumber(String businessPlaceNumber) {
     this.businessPlaceNumber = businessPlaceNumber;
-  }
-  public List<Stock> getStockList() {
-    return stockList;
-  }
-  public void setStockList(List<Stock> stockList) {
-    this.stockList = stockList;
   }
 
 }
