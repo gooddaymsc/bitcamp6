@@ -4,18 +4,19 @@ import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerUpdateHandler extends AbstractBuyerHandler {
-  public BuyerUpdateHandler(List<Buyer> buyerList) {
-    super(buyerList);
+  public BuyerUpdateHandler(List<Member> memberList) {
+    super(memberList);
   }
 
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[개인정보 변경]");
-      Buyer buyer = findById(App.getLoginUser().getId());
+      Buyer buyer = (Buyer) findById(App.getLoginUser().getId());
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", buyer.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", buyer.getEmail()));
@@ -45,7 +46,7 @@ public class BuyerUpdateHandler extends AbstractBuyerHandler {
       System.out.println("\n[회원 변경]");
       String id = Prompt.inputString("변경할 아이디: ");
 
-      Buyer buyer = findById(id);
+      Buyer buyer = (Buyer) findById(id);
 
       if (buyer == null) {
         System.out.println("해당 아이디의 회원이 없습니다.");

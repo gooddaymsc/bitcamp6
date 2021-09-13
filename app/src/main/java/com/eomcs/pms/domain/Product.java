@@ -1,6 +1,8 @@
 package com.eomcs.pms.domain;
 
 import java.io.Serializable;
+import java.sql.Date;
+
 
 @SuppressWarnings("serial")
 public class Product implements Serializable{
@@ -15,10 +17,10 @@ public class Product implements Serializable{
   private int acidity;              //산도
   private int weight;               //바디감
   private float score;              //평점
-  //private float sunScore;           //점수 합
-  private String comment;           //상품평
-  private int participants = 1;         //상품평 등록자 수 
-
+  private String comment;           //코멘트        
+  private String reviewer;          //작성자    
+  private int reviewerNum;          //작성자 수
+  private Date RegisteredDate;      //등록일
 
   public int getProductNumber() {
     return productNumber;
@@ -75,11 +77,12 @@ public class Product implements Serializable{
   public void setWeight(int weight) {
     this.weight = weight;
   }
+
   public float getScore() {
     return score;
   }
   public void setScore(float score) {
-    this.score = score ;
+    this.score = score;
   }
   public String getComment() {
     return comment;
@@ -87,11 +90,23 @@ public class Product implements Serializable{
   public void setComment(String comment) {
     this.comment = comment;
   }
-  public int getParticipants() {
-    return participants;
+  public String getReviewer() {
+    return reviewer;
   }
-  public void setParticipants(int participants) {
-    this.participants = participants;
+  public void setReviewer(String reviewer) {
+    this.reviewer = reviewer;
+  }
+  public int getReviewerNum() {
+    return reviewerNum;
+  }
+  public void setReviewerNum(int reviewerNum) {
+    this.reviewerNum = reviewerNum;
+  }
+  public Date getRegisteredDate() {
+    return RegisteredDate;
+  }
+  public void setRegisteredDate(Date registeredDate) {
+    RegisteredDate = registeredDate;
   }
 
 

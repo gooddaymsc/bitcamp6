@@ -18,15 +18,16 @@ public class ProductListHandler extends AbstractProductHandler {
   CartPrompt cartPrompt;
   List<Product> productList;
   List<StockList> allStockList;
-  SellerPrompt sellerPrompt;
+  MemberPrompt memberPrompt;
 
-  public ProductListHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, CartPrompt cartPrompt, List<Product> productList, List<StockList> allStockList, SellerPrompt sellerPrompt) {
+  public ProductListHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, CartPrompt cartPrompt, 
+      List<Product> productList, List<StockList> allStockList, MemberPrompt memberPrompt) {
     this.stockPrompt = stockPrompt;
     this.productPrompt = productPrompt;
     this.cartPrompt = cartPrompt;
     this.productList = productList;
     this.allStockList = allStockList;
-    this.sellerPrompt = sellerPrompt;
+    this.memberPrompt = memberPrompt;
   }
 
   @Override
@@ -76,7 +77,7 @@ public class ProductListHandler extends AbstractProductHandler {
       }
       cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
       cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
-      cart.setSellerId(sellerPrompt.findByPlaceName(storeName).getId());
+      cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
       cart.setRegistrationDate(new Date(System.currentTimeMillis()));
       System.out.println("장바구니가 등록되었습니다.");
       CartList cartList = cartPrompt.findCartListById(nowLoginId);

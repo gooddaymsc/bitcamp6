@@ -10,11 +10,11 @@ import com.eomcs.util.Prompt;
 
 public class CartAddHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
-  SellerPrompt sellerPrompt;
-  public CartAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt, SellerPrompt sellerPrompt) {
+  MemberPrompt memberPrompt;
+  public CartAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt, MemberPrompt memberPrompt) {
     super(cartPrompt);
     this.stockPrompt = stockPrompt;
-    this.sellerPrompt = sellerPrompt;
+    this.memberPrompt = memberPrompt;
 
   }
 
@@ -56,7 +56,7 @@ public class CartAddHandler extends AbstractCartHandler {
     cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     // 체크!!!
     cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
-    cart.setSellerId(sellerPrompt.findByPlaceName(storeName).getId());
+    cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
     System.out.println("장바구니가 등록되었습니다.");
     CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());

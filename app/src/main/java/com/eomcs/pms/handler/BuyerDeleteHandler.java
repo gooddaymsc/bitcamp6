@@ -3,7 +3,6 @@ package com.eomcs.pms.handler;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
-import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
@@ -11,9 +10,9 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
   MemberPrompt memberPrompt;
   CartPrompt cartPrompt;
   BookingPrompt bookingPrompt;
-  public BuyerDeleteHandler(List<Buyer> buyerList, MemberPrompt memberPrompt,
+  public BuyerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt,
       CartPrompt cartPrompt, BookingPrompt bookingPrompt) {
-    super(buyerList);
+    super(memberList);
     this.memberPrompt = memberPrompt;
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
@@ -27,7 +26,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) "); 
 
       if (input.equalsIgnoreCase("y")) {
-        buyerList.remove(removePrivateById(nowLoginId));
+        memberList.remove(removePrivateById(nowLoginId));
         memberPrompt.removeMemberById(nowLoginId);
         cartPrompt.removeCartListById(nowLoginId);
         bookingPrompt.removeBookingListById(nowLoginId);
@@ -50,7 +49,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        buyerList.remove(removePrivateById(id));
+        memberList.remove(removePrivateById(id));
         memberPrompt.removeMemberById(id);
         cartPrompt.removeCartListById(id);
         bookingPrompt.removeBookingListById(id);

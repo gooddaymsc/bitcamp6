@@ -16,17 +16,16 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
   StockPrompt stockPrompt;
   ProductPrompt productPrompt;
-  List<Seller> sellerPrivacyList;
   List<Product> productList;
-  SellerPrompt sellerPrompt;
+  MemberPrompt memberPrompt;
   CartPrompt cartPrompt;
 
-  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, List<Seller> sellerPrivacyList,  List<Product> productList, SellerPrompt sellerPrompt,  CartPrompt cartPrompt) {
+  public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, 
+      List<Product> productList, MemberPrompt memberPrompt,  CartPrompt cartPrompt) {
     this.productPrompt = productPrompt;
     this.stockPrompt = stockPrompt;
-    this.sellerPrivacyList = sellerPrivacyList;
     this.productList = productList;
-    this.sellerPrompt = sellerPrompt;
+    this.memberPrompt = memberPrompt;
     this.cartPrompt = cartPrompt;
   }
 
@@ -39,7 +38,8 @@ public class ProductSearchHandler extends AbstractProductHandler {
     System.out.println("[상품검색]");
 
     String productName  = productPrompt.findByProduct2(Prompt.inputString("상품입력: "));   
-    HashMap<String, Seller> sellerInfo = sellerPrompt.findByAdress(Prompt.inputString("주소입력: "));  
+
+    HashMap<String, Seller> sellerInfo = memberPrompt.findByAdress(Prompt.inputString("주소입력: "));   
 
     System.out.println("==========상품 목록==========");
 
@@ -101,7 +101,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
       }
       cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
       cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
-      cart.setSellerId(sellerPrompt.findByPlaceName(storeName).getId());
+      cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
       cart.setRegistrationDate(new Date(System.currentTimeMillis()));
       System.out.println("장바구니가 등록되었습니다.");
       CartList cartList = cartPrompt.findCartListById(nowLoginId);
