@@ -95,7 +95,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     // All.allBookingList에 판매자의 Id에 예약내역 추가.
     putBookingListById(sellerId, booking);
 
-    memberPrompt.sendBookingUpdate(sellerId);
+    memberPrompt.changeBookingUpdate(sellerId, true);
     System.out.println("픽업예약을 완료하였습니다.");
   }
 
