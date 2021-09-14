@@ -19,6 +19,7 @@ public class Member implements Serializable {
   private Date registeredDate;
   private int level;
   private boolean bookingUpdate;
+  private boolean commentUpdate;
 
 
   public Member() {
@@ -106,6 +107,12 @@ public class Member implements Serializable {
   }
   public void setBookingUpdate(boolean bookingUpdate) {
     this.bookingUpdate = bookingUpdate;
+  }
+  public boolean isCommentUpdate() {
+    return commentUpdate;
+  }
+  public void setCommentUpdate(boolean commentUpdate) {
+    this.commentUpdate = commentUpdate;
   }
 
 

@@ -1,22 +1,28 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler extends AbstractBoardHandler {
 
   BoardPrompt boardPrompt;
-  public BoardDetailHandler(List<Board> boardList, BoardPrompt boardPrompt) {
+  MemberPrompt memberPrompt;
+  public BoardDetailHandler(List<Board> boardList, BoardPrompt boardPrompt, MemberPrompt memberPrompt) {
     super(boardList);
     this.boardPrompt = boardPrompt;
+    this.memberPrompt = memberPrompt;
   }
 
   @Override
   public void execute() {
-    System.out.println("[게시글 상세보기]");
+    System.out.println("[게시글 상세보기] || 0. 이전");
+    if (App.getLoginUser().isCommentUpdate()) {
+      memberPrompt.changeCommentUpdate(App.getLoginUser().getId(), false);
+    }
     int no = Prompt.inputInt("게시글 번호 : ");
-
+    if (no==0) { return; }
     Board board = findByNo(no);
 
     if (board == null) {
@@ -34,13 +40,16 @@ public class BoardDetailHandler extends AbstractBoardHandler {
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
       System.out.printf("태그 : %s\n", board.getTag());
       CommentListHandler.list(board.getBoardNumber(), boardPrompt);
-      System.out.println("\n< 0.이전 / 1.좋아요 / 2.댓글등록 / 3.댓글수정 / 4.댓글삭제 >");
+      System.out.println("\n< 1.좋아요 / 2.댓글등록 / 3.댓글수정 / 4.댓글삭제 >");
       int choose = Prompt.inputInt("선택 > ");
 
       switch (choose) {
         case 0 : return;
         case 1 : LikeHandler.like(board); continue;
-        case 2 : CommentAddHandler.add(board.getBoardNumber(), boardPrompt); continue;
+        case 2 : 
+          CommentAddHandler.add(board.getBoardNumber(), boardPrompt); 
+          memberPrompt.changeCommentUpdate(board.getWriter(), true);
+          continue;
         case 3 : CommentUpdateHandler.update(board.getBoardNumber(), boardPrompt); continue; 
         case 4 : CommentDeleteHandler.delete(board.getBoardNumber(), boardPrompt); continue;
         default : System.out.println("잘못입력하셨습니다."); continue;
