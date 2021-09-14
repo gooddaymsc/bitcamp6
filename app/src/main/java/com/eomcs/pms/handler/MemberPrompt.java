@@ -25,20 +25,23 @@ public class MemberPrompt {
     return getMemberIndexById(nowLoginid);
   }
 
-  public void returnBookingUpdate(String sellerId) {
+  public void changeBookingUpdate(String sellerId, boolean check) {
     for (Member member : memberList) {
       if (member.getId().equals(sellerId)) {
-        member.setBookingUpdate(false);
+        member.setBookingUpdate(check);
       }
     }
   }
-  public void sendBookingUpdate(String sellerId) {
+
+  public void changeCommentUpdate(String boardId, boolean check) {
     for (Member member : memberList) {
-      if (member.getId().equals(sellerId)) {
-        member.setBookingUpdate(true);
+      if (member.getId().equals(boardId)) {
+        member.setCommentUpdate(check);
       }
     }
   }
+
+
   public Member findIdByName(String Name) {
     for (Member member : memberList) {
       if (member instanceof Buyer || member instanceof Seller) {
