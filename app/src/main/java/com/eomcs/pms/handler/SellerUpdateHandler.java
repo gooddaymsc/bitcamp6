@@ -9,25 +9,25 @@ import com.eomcs.util.Prompt;
 
 public class SellerUpdateHandler extends AbstractSellerHandler {
 
-  public SellerUpdateHandler(List<Seller> sellerList, List<Member> memberList) {
-    super(sellerList, memberList);
+  public SellerUpdateHandler(List<Member> memberList) {
+    super(memberList);
   }  
   @Override
   public void execute() {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[개인정보 변경]");
 
-      Seller seller = findById(App.getLoginUser().getId());
+      Member seller = findById(App.getLoginUser().getId());
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", seller.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", seller.getEmail()));
       String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", seller.getName()));
       String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", seller.getPhoto()));
       String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", seller.getPhoneNumber()));
-      String bussinessName = Prompt.inputString(String.format("가게명(변경 전 : %s) : ", seller.getBusinessName()));
-      String bussinessNo = Prompt.inputString(String.format("사업자번호(변경 전 : %s) : ", seller.getBusinessNumber()));
-      String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", seller.getBusinessAddress()));
-      String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", seller.getBusinessPlaceNumber()));
+      String bussinessName = Prompt.inputString(String.format("가게명(변경 전 : %s) : ", ((Seller) seller).getBusinessName()));
+      String bussinessNo = Prompt.inputString(String.format("사업자번호(변경 전 : %s) : ", ((Seller) seller).getBusinessNumber()));
+      String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", ((Seller) seller).getBusinessAddress()));
+      String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", ((Seller) seller).getBusinessPlaceNumber()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
@@ -37,10 +37,10 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
         seller.setPassword(password);
         seller.setPhoto(photo);
         seller.setPhoneNumber(tel);
-        seller.setBusinessName(bussinessName);
-        seller.setBusinessNumber(bussinessNo);
-        seller.setBusinessAddress(bussinessAddress);
-        seller.setBusinessPlaceNumber(bussinessTel);  
+        ((Seller) seller).setBusinessName(bussinessName);
+        ((Seller) seller).setBusinessNumber(bussinessNo);
+        ((Seller) seller).setBusinessAddress(bussinessAddress);
+        ((Seller) seller).setBusinessPlaceNumber(bussinessTel);  
         System.out.println("개인 정보를 변경하였습니다.");
         return;
       } else {
@@ -51,7 +51,7 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
       System.out.println("\n[판매자 변경]");
       String id = Prompt.inputString("변경할 판매자 아이디: ");
 
-      Seller seller = findById(id);
+      Member seller = findById(id);
 
       if (seller == null) {
         System.out.println("해당 아이디의 회원이 없습니다.");

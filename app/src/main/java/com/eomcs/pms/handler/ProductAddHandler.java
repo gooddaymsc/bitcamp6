@@ -7,9 +7,10 @@ import com.eomcs.util.Prompt;
 public class ProductAddHandler extends AbstractProductHandler {
 
   List<Product> productList;
-
-  public ProductAddHandler (List<Product> productList ) {
+  ProductPrompt productPrompt;
+  public ProductAddHandler (List<Product> productList, ProductPrompt productPrompt) {
     this.productList = productList;
+    this.productPrompt = productPrompt;
   }
 
   public static int productNumber = 1;
@@ -22,7 +23,14 @@ public class ProductAddHandler extends AbstractProductHandler {
     Product product = new Product();
 
     product.setProductNumber(productNumber++);
-    product.setProductName(Prompt.inputString("상품명 : "));
+    String productName = Prompt.inputString("상품명 : ");
+
+
+    if (productPrompt.findByProduct(productName)!=null) {
+      System.out.println("이미 추가된 상품입니다.");
+      return;
+    }
+    product.setProductName(productName);
     product.setProductType(checkType("주종 : "));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
     product.setVariety(Prompt.inputString("품종 : "));

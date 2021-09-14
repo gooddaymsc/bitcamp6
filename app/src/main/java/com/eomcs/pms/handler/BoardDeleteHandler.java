@@ -25,8 +25,8 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
       return;
     }
 
-    if ((board.getWriter() != App.getLoginUser().getId()) &
-        (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN)) {
+    if (!((board.getWriter().equals(App.getLoginUser().getId())) ||
+        (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN))) {
       System.out.println("작성자가 아니므로 삭제할 수 없습니다.");
       return;
     }

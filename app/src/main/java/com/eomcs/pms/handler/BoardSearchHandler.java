@@ -24,13 +24,13 @@ public class BoardSearchHandler extends AbstractBoardHandler {
           continue;
         }
         System.out.printf("%d, %s, %s, \"%s\", %s, %s\n", 
-            board.getNumber(), 
+            board.getBoardNumber(), 
             board.getTitle(), 
             board.getContent(),
             board.getTag(),
             board.getWriter(),
             board.getRegistrationDate());
-        searchNo.add(board.getNumber());
+        searchNo.add(board.getBoardNumber());
       }
 
       int boardDetail = Prompt.inputInt("\n(뒤로가기 : 0) \n게시글 번호선택 > ");

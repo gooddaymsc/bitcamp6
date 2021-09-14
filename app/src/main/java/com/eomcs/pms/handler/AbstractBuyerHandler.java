@@ -1,18 +1,18 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 
 public abstract class AbstractBuyerHandler implements Command {
-  List<Buyer> buyerList;
+  List<Member> memberList;
 
-  public AbstractBuyerHandler(List<Buyer> buyerList) {
-    this.buyerList = buyerList;
+  public AbstractBuyerHandler(List<Member> memberList) {
+    this.memberList = memberList;
   }
 
-  protected Buyer findById(String id) {
-    Buyer[] arr = buyerList.toArray(new Buyer[0]);
-    for (Buyer buyer : arr) {
+  protected Member findById(String id) {
+    //    Buyer[] arr = memberList.toArray(new Buyer[0]);
+    for (Member buyer : memberList) {
       if (buyer.getId().equals(id)) {
         return buyer;
       }
@@ -22,8 +22,8 @@ public abstract class AbstractBuyerHandler implements Command {
 
   protected int removePrivateById(String id) {
     //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
-    for (int i=0; i< buyerList.size(); i++) {
-      if (buyerList.get(i).getId().equals(id)) {
+    for (int i=0; i< memberList.size(); i++) {
+      if (memberList.get(i).getId().equals(id)) {
         return i;
       }
     }

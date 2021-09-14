@@ -9,9 +9,9 @@ import com.eomcs.pms.domain.Seller;
 
 public class CartPrompt {
   List<CartList> allCartList;
-  SellerPrompt sellerPrompt;
-  public CartPrompt(List<CartList> allCartList, SellerPrompt sellerPrompt) {
-    this.sellerPrompt = sellerPrompt;
+  MemberPrompt memberPrompt;
+  public CartPrompt(List<CartList> allCartList, MemberPrompt memberPrompt) {
+    this.memberPrompt = memberPrompt;
     this.allCartList = allCartList;
   }
 
@@ -47,7 +47,7 @@ public class CartPrompt {
     CartList cartList = findCartListById(App.getLoginUser().getId());
     for (Cart cart : cartList.getPrivacyCart()) {
       if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
-        Seller sellerInfo = sellerPrompt.findBySellerInfo(cart.getSellerId());
+        Seller sellerInfo = memberPrompt.findBySellerInfo(cart.getSellerId());
         System.out.printf(">> 가게명 : %s, 담은 갯수 : %s\n" ,
             sellerInfo.getBusinessName(),
             cart.getCartStocks());

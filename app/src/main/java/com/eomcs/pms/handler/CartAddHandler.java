@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
@@ -11,11 +10,11 @@ import com.eomcs.util.Prompt;
 
 public class CartAddHandler extends AbstractCartHandler {
   StockPrompt stockPrompt;
-  SellerPrompt sellerPrompt;
-  public CartAddHandler(List<CartList> allCartList, CartPrompt cartPrompt, StockPrompt stockPrompt, SellerPrompt sellerPrompt) {
-    super(allCartList, cartPrompt);
+  MemberPrompt memberPrompt;
+  public CartAddHandler(CartPrompt cartPrompt, StockPrompt stockPrompt, MemberPrompt memberPrompt) {
+    super(cartPrompt);
     this.stockPrompt = stockPrompt;
-    this.sellerPrompt = sellerPrompt;
+    this.memberPrompt = memberPrompt;
 
   }
 
@@ -57,7 +56,7 @@ public class CartAddHandler extends AbstractCartHandler {
     cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     // 체크!!!
     cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
-    cart.setSellerId(sellerPrompt.findByPlaceName(storeName).getId());
+    cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
     System.out.println("장바구니가 등록되었습니다.");
     CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());

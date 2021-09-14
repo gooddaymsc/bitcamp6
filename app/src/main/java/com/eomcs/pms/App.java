@@ -10,13 +10,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.BookingList;
-import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Product;
@@ -26,6 +24,7 @@ import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
 import com.eomcs.pms.handler.BoardListHandler;
+import com.eomcs.pms.handler.BoardPrompt;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
@@ -60,7 +59,6 @@ import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
-import com.eomcs.pms.handler.SellerPrompt;
 import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
 import com.eomcs.pms.handler.StockDeleteHandler;
@@ -71,34 +69,26 @@ import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
-  List<Buyer> buyerList = new LinkedList<>();
-  List<Seller> sellerList = new LinkedList<>();
   List<Board> boardList = new ArrayList<>();
-  //  List<Booking> bookingList = new LinkedList<>();
-  //  List<Cart> cartList = new ArrayList<>();
-  //  List<Stock> stockList = new ArrayList<>();
-
   List<Product> productList = new ArrayList<>();
   List<StockList> allStockList = new ArrayList<>();
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
-
   List<Member> memberList = new ArrayList<>();
-  HashMap<String, Command> commandMap = new HashMap<>();
+  //  int[] totalNumber = {1,1,1}; // totalMemberNumber, totalBoardNumber, totalProductNumber
 
+  HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
   LoginHandler loginHandler = new LoginHandler(memberList);
   MemberPrompt memberPrompt = new MemberPrompt(memberList);
-  SellerPrompt sellerPrompt = new SellerPrompt(sellerList);
-  StockPrompt stockPrompt = new StockPrompt(allStockList, sellerPrompt);
+  StockPrompt stockPrompt = new StockPrompt(allStockList, memberPrompt);
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
-  CartPrompt cartPrompt = new CartPrompt(allCartList, sellerPrompt);
-  FindIdHandler findIdHandler = new FindIdHandler(buyerList, sellerList);
-  FindPasswordHandler findPasswordHandler = new FindPasswordHandler(buyerList, sellerList);
+  CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
+  BoardPrompt boardPrompt = new BoardPrompt(boardList);
 
+  // 권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
     String menuId;
-
     public MenuItem(String title, String menuId) {
       this(title, ACCESS_LOGOUT | ACCESS_BUYER | ACCESS_SELLER | ACCESS_ADMIN , menuId);
     }
@@ -107,15 +97,14 @@ public class App {
       super(title, accessScope);
       this.menuId = menuId;
     }
-
     @Override
     public void execute() {
-
       Command command  = commandMap.get(menuId);
       command.execute();
     }
   }
 
+  // 현재 로그인한 정보를 저장 (id, pw, auth)
   public static Member loginMember = new Member();
   public static Member getLoginUser() {
     return loginMember;
@@ -126,124 +115,89 @@ public class App {
     app.service();
   }
 
-
   public App() {
-    loadbuyers();
-    loadsellers();
+    // List Load.
+    loadBoards();
     loadManagers();
     loadProducts();
     loadStockLists();
     loadCartLists();
     loadBookingLists();
 
-    commandMap.put("/buyer/add",    new BuyerAddHandler(buyerList, memberList, cartPrompt, bookingPrompt));
-    commandMap.put("/buyer/list",   new BuyerListHandler(buyerList));
-    commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerList));
-    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerList));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerList, memberPrompt, cartPrompt, bookingPrompt));
+    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
+    commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
+    commandMap.put("/buyer/detail", new BuyerDetailHandler(memberList));
+    commandMap.put("/buyer/update", new BuyerUpdateHandler(memberList));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, memberPrompt, cartPrompt, bookingPrompt));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(sellerList, memberList, bookingPrompt, stockPrompt));
-    commandMap.put("/seller/list",   new SellerListHandler(sellerList, memberList));
-    commandMap.put("/seller/detail", new SellerDetailHandler(sellerList, memberList));
-    commandMap.put("/seller/update", new SellerUpdateHandler(sellerList, memberList));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerList, memberList));
+    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt));
+    commandMap.put("/seller/list",   new SellerListHandler(memberList));
+    commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
+    commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
-    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardPrompt));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler(productList));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, sellerPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, sellerList, productList, sellerPrompt, cartPrompt));
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
+    commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, productList, memberPrompt, cartPrompt));
+
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(allStockList, stockPrompt,productPrompt));
     commandMap.put("/stock/list",   new StockListHandler(allStockList, stockPrompt));
-    commandMap.put("/stock/detail", new StockDetailHandler(allStockList, stockPrompt));
-    commandMap.put("/stock/update", new StockUpdateHandler(allStockList, stockPrompt));
-    commandMap.put("/stock/delete", new StockDeleteHandler(allStockList, stockPrompt));
+    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(allCartList, cartPrompt, stockPrompt, sellerPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(allCartList, cartPrompt, sellerPrompt));
-    commandMap.put("/cart/detail", new CartDetailHandler(allCartList, cartPrompt));
-    commandMap.put("/cart/update", new CartUpdateHandler(allCartList, cartPrompt));
-    commandMap.put("/cart/delete", new CartDeleteHandler(allCartList, cartPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, memberPrompt));
+    commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(sellerList, allBookingList, cartPrompt, stockPrompt));
-    commandMap.put("/booking/list",   new BookingListHandler(sellerList, allBookingList, bookingPrompt, sellerPrompt));
-    commandMap.put("/booking/update", new BookingUpdateHandler(sellerList, allBookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(sellerList, allBookingList));
+    commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, memberPrompt));
+    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList));
 
+    commandMap.put("/findId", new FindIdHandler(memberPrompt));
+    commandMap.put("/findPassword", new FindPasswordHandler(memberPrompt));
   }
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    loadBoards();
+
+    System.out.println();
+    System.out.println("   *****************      ");   
+    System.out.println("  | ALCOHOLE FINDER |     ");
+    System.out.println("   *****************      ");
 
     createMenu().execute();
     Prompt.close();
 
-    savebuyers();
-    savesellers();
+    //List 저장
     saveManagers();
     saveBoards();
     saveProducts();
     saveStockLists();
     saveCartLists();
     saveBookingLists();
-  }
-  @SuppressWarnings("unchecked")
-  private void loadbuyers() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("buyer.data"))) {
-      buyerList.addAll((List<Buyer>) in.readObject());
-      System.out.println("회원(구매자) 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 회원(구매자) 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
 
-  private void savebuyers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("buyer.data"))) {
-      out.writeObject(buyerList);
-      System.out.println("회원(구매자) 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 회원(구매자) 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadsellers() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("seller.data"))) {
-      sellerList.addAll((List<Seller>) in.readObject());
-      System.out.println("판매자 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 판매자 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void savesellers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("seller.data"))) {
-      out.writeObject(sellerList);
-      System.out.println("판매자 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 판매자 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
   }
 
   @SuppressWarnings("unchecked")
   private void loadManagers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
       memberList.addAll((List<Member>) in.readObject());
-      System.out.println("관리자 데이터 로딩 완료!");
+      //   System.out.println("관리자 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -264,7 +218,7 @@ public class App {
   private void loadBoards() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
       boardList.addAll((List<Board>) in.readObject());
-      System.out.println("게시글 데이터 로딩 완료!");
+      //   System.out.println("게시글 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -285,7 +239,7 @@ public class App {
   private void loadProducts() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("product.data"))) {
       productList.addAll((List<Product>) in.readObject());
-      System.out.println("상품 데이터 로딩 완료!");
+      //  System.out.println("상품 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 상품 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -306,7 +260,7 @@ public class App {
   private void loadStockLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stockList.data"))) {
       allStockList.addAll((List<StockList>) in.readObject());
-      System.out.println("재고리스트 데이터 로딩 완료!");
+      //   System.out.println("재고리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -327,7 +281,7 @@ public class App {
   private void loadCartLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cartList.data"))) {
       allCartList.addAll((List<CartList>) in.readObject());
-      System.out.println("장바구니리스트 데이터 로딩 완료!");
+      //  System.out.println("장바구니리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 장바구니리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -348,7 +302,7 @@ public class App {
   private void loadBookingLists() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookingList.data"))) {
       allBookingList.addAll((List<BookingList>) in.readObject());
-      System.out.println("예약리스트 데이터 로딩 완료!");
+      //    System.out.println("예약리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 예약리스트 데이터를 읽어오는 중 오류 발생!");
       e.printStackTrace();
@@ -366,6 +320,7 @@ public class App {
   }
 
   Menu createMenu() {
+
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
@@ -380,18 +335,9 @@ public class App {
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
     mainMenuGroup.add(findMenu);
 
-    findMenu.add(new Menu("아이디찾기") {
-      @Override
-      public void execute() {
-        findIdHandler.findId();
-      }});
+    findMenu.add(new MenuItem("아이디찾기", "/findId"));
 
-    findMenu.add(new Menu("비밀번호찾기") {
-      @Override
-      public void execute() {
-        findPasswordHandler.findPassword();
-      }});
-
+    findMenu.add(new MenuItem("비밀번호찾기", "/findPassword"));
 
     mainMenuGroup.add(new Menu("로그인", ACCESS_LOGOUT) {
       @Override
@@ -479,10 +425,10 @@ public class App {
     sellerStoreMenu.add(new MenuItem("가게 정보 및 재고", "/stock/list") {
       @Override
       public void execute() {
-        Seller mine = findSellerById(App.getLoginUser().getId());
-        System.out.printf("\n가게명 : %s\n", mine.getBusinessName());
-        System.out.printf("주소 : %s\n", mine.getBusinessAddress());
-        System.out.printf("전화번호 : %s\n", mine.getBusinessPlaceNumber());
+        Member mine = memberPrompt.findById(App.getLoginUser().getId());
+        System.out.printf("\n> 가게명\t:\t%s\n", ((Seller) mine).getBusinessName());
+        System.out.printf("> 주소\t:\t%s\n", ((Seller) mine).getBusinessAddress());
+        System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
         System.out.println("-----------------------------------------------");
         Command command  = commandMap.get(menuId);
         command.execute();
@@ -526,12 +472,5 @@ public class App {
       default : return "관리자";
     }
   }
-  private Seller findSellerById(String id) {
-    for (Seller member : sellerList) {
-      if (member.getId().equals(id)) {
-        return member;
-      }
-    }
-    return null;
-  }
+
 }

@@ -8,39 +8,32 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler extends AbstractBuyerHandler {
-  List<Member> memberList;
   CartPrompt cartPrompt;
   BookingPrompt bookingPrompt;
-  public BuyerAddHandler (List<Buyer> buyerList, List<Member> memberList, 
-      CartPrompt cartPrompt, BookingPrompt bookingPrompt) {
-    super(buyerList);
+  MemberPrompt memberPrompt;
+  public BuyerAddHandler (List<Member> memberList, 
+      CartPrompt cartPrompt, BookingPrompt bookingPrompt,MemberPrompt memberPrompt) {
+    super(memberList);
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
-    this.memberList = memberList;
-  }
+    this.memberPrompt = memberPrompt;
+  } 
   public static int buyerNumber = 1;
 
   @Override
   public void execute() {
     System.out.println("\n[회원 등록]");
 
-    Buyer buyer = new Buyer();
+    Member buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);
     buyer.setNumber(buyerNumber++);
 
     //아이디가 중복되면 다시 아이디 재설정.
     String id = Prompt.inputString("등록할 아이디: ");
 
-    if (memberList != null) {
-      int listSize = memberList.size();
-
-      for (int i=0; i<listSize; i++) {
-
-        if (memberList.get(i).getId().equals(id)) {
-          System.out.println("중복되는 아이디입니다.");
-          return;
-        }
-      }
+    if (memberPrompt.findById(id)!=null) {
+      System.out.println("중복되는 아이디입니다.");
+      return;
     }
 
     buyer.setId(id);
@@ -51,7 +44,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setPassword(Prompt.inputString("암호: "));
     buyer.setPhoto(Prompt.inputString("사진: "));
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
-    buyer.setAddress(Prompt.inputString("주소: "));
+    ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     // 예약리스트에 구매자 id를 갖는 bookingList add.
@@ -59,8 +52,8 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     // 장바구니리스트에 구매자 id를 갖는 cartList add.
     cartPrompt.addCartListById(buyer.getId());
 
-    buyerList.add(buyer);
-    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
+    memberList.add(buyer);
+    //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
   }
 }
 

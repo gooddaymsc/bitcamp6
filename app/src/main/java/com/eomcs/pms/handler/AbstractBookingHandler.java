@@ -4,16 +4,13 @@ import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
-import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 
 public abstract class AbstractBookingHandler implements Command {
 
-  List <Seller> sellerList;
   List <BookingList> allBookingList;
-  public AbstractBookingHandler(List <Seller> sellerList, List <BookingList> allBookingList) {
-    this.sellerList = sellerList;
+  public AbstractBookingHandler(List <BookingList> allBookingList) {
     this.allBookingList = allBookingList;
   }
 
