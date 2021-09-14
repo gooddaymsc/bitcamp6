@@ -117,12 +117,12 @@ public class App {
 
   public App() {
     // List Load.
-    loadBoards();
-    loadManagers();
-    loadProducts();
-    loadStockLists();
-    loadCartLists();
-    loadBookingLists();
+    //    loadBoards();
+    //    loadManagers();
+    //    loadProducts();
+    //    loadStockLists();
+    //    loadCartLists();
+    //    loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
