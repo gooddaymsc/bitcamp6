@@ -11,6 +11,7 @@ public class BookingPrompt {
   public BookingPrompt(List<BookingList> allBookingList) {
     this.allBookingList = allBookingList;
   }
+
   public Product findBookingByProduct(String productName, String nowLoginId) {
     int index = getBookingIndexById(nowLoginId);
     List<Booking> bookingList = allBookingList.get(index).getBooking();
@@ -48,6 +49,7 @@ public class BookingPrompt {
     }
     return null;
   }
+
 
   public void removeBookingListById(String nowLoginid) {
     allBookingList.remove(getBookingIndexById(nowLoginid));
