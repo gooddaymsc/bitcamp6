@@ -10,10 +10,12 @@ import com.eomcs.pms.domain.StockList;
 public class StockPrompt {
   List<StockList> allStockList;
   MemberPrompt memberPrompt;
+
   public StockPrompt(List<StockList> allStockList, MemberPrompt memberPrompt) {
     this.allStockList = allStockList;
     this.memberPrompt = memberPrompt;
   }
+
 
   protected boolean removeStockById(String stockName, String id) {
     StockList stockList = allStockList.get(findStockListById(id));
@@ -27,13 +29,13 @@ public class StockPrompt {
   }
 
   protected int[] getStockListSizeById(String nowLoginId) {
-    int[] sizeIndex = new int[2];
+    int[] numberIndex = new int[2];
     //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
     for (int i=0; i<allStockList.size(); i++) {
       if (allStockList.get(i).getId().equals(nowLoginId)) {
-        sizeIndex[0] = allStockList.get(i).getSellerStock().size()+1;
-        sizeIndex[1] = i;
-        return sizeIndex;
+        numberIndex[0] = allStockList.get(i).getStockListNumber();
+        numberIndex[1] = i;
+        return numberIndex;
       }
     }
     return null;
@@ -41,7 +43,7 @@ public class StockPrompt {
 
   public int findStockListById(String id) {
     for (int i=0; i< allStockList.size(); i++) {
-      if (allStockList.get(i).getId().equals(id)) {
+      if (allStockList. get(i).getId().equals(id)) {
         return i;
       }
     }
@@ -124,6 +126,15 @@ public class StockPrompt {
     }
     return -1;
   }
+  //  protected StockList  getStockListById(String id) {
+  //    for (int i=0; i< allStockList.size(); i++) {
+  //      if (allStockList.get(i).getId().equals(id)) {
+  //        return sellerStock;
+  //      }
+  //    }
+  //    return null;
+  //  }
+
 
   public void removeStockListById(String nowLoginid) {
     allStockList.remove(getStockIndexById(nowLoginid));

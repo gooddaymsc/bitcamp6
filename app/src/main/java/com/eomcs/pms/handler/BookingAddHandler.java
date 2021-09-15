@@ -15,19 +15,21 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
   CartPrompt cartPrompt;
   StockPrompt stockPrompt;
+  BookingPrompt bookingPrompt;
   MemberPrompt memberPrompt;
   public BookingAddHandler(List<BookingList> allBookingList, CartPrompt cartPrompt, 
-      StockPrompt stockPrompt, MemberPrompt memberPrompt) { 
+      StockPrompt stockPrompt, BookingPrompt bookingPrompt, MemberPrompt memberPrompt) { 
     super(allBookingList);
     this.cartPrompt = cartPrompt;
     this.stockPrompt = stockPrompt;
     this.memberPrompt = memberPrompt;
+    this.bookingPrompt = bookingPrompt;
 
   }
 
-  public static int bookingNumber = 1;
   @Override
   public void execute() {
+    String nowLoginId = App.getLoginUser().getId();
     System.out.println("[예약 등록]");
 
     Booking booking = new Booking();
@@ -67,8 +69,6 @@ public class BookingAddHandler extends AbstractBookingHandler {
     }
 
     booking.setCart(bookingProduct);
-    booking.setBookingNumber(bookingNumber++);
-
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     booking.setBookingHour(checkHour("픽업시간(시): "));
     booking.setBookingMinute(checkMinute("픽업시간(분): "));
@@ -83,17 +83,34 @@ public class BookingAddHandler extends AbstractBookingHandler {
     //    }
 
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    booking.setBuyerId(App.getLoginUser().getId());
+    booking.setBuyerId(nowLoginId);
     // 구매자 bookingList에서 booking 추가
     //bookingList.getBooking().add(booking);
     // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기
     sellerStock.setStocks(sellerStock.getStocks() - bookingProduct.getCartStocks());
     // 구매자 장바구니에서 예약(결제)한 상품 빼기
-    cartPrompt.findCartListById(App.getLoginUser().getId()).getPrivacyCart().remove(bookingProduct);
+    cartPrompt.findCartListById(nowLoginId).getPrivacyCart().remove(bookingProduct);
     // All.allBookingList에 구매자의 Id에 예약내역 추가.
-    putBookingListById(App.getLoginUser().getId(), booking);
+    //    putBookingListById(nowLoginId, booking);
     // All.allBookingList에 판매자의 Id에 예약내역 추가.
-    putBookingListById(sellerId, booking);
+    //    putBookingListById(sellerId, booking);
+
+    //구매자의 예약 번호 증가
+    int bookingListNumber = bookingPrompt.getBookingListSizeById(nowLoginId)[0];
+    int bookingListIndex = bookingPrompt.getBookingListSizeById(nowLoginId)[1];
+
+    booking.setBookingNumber(bookingListNumber);
+    allBookingList.get(bookingListIndex).getBooking().add(booking);
+    allBookingList.get(bookingListIndex).setTotalBookingNumber(++bookingListNumber);
+
+
+    //판매자의 예약번호 증가
+    int sellerBookingListNumber = bookingPrompt.getBookingListSizeById(sellerId)[0];
+    int sellerBookingListIndex = bookingPrompt.getBookingListSizeById(sellerId)[1];
+
+    booking.setBookingNumber(sellerBookingListNumber);
+    allBookingList.get(sellerBookingListIndex).getBooking().add(booking);
+    allBookingList.get(sellerBookingListIndex).setTotalBookingNumber(++sellerBookingListNumber);
 
     memberPrompt.sendBookingUpdate(sellerId);
     System.out.println("픽업예약을 완료하였습니다.");

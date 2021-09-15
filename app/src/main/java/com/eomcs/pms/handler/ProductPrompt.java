@@ -11,6 +11,16 @@ public class ProductPrompt {
     this.productList = productList;
   }
 
+  protected int findProductIndex (String ProductName) {
+    for (int i = 1; i < productList.size(); i++) {
+      if (productList.get(i).getProductName().equals(ProductName)) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
   public Product findByProduct (String ProductName) {
     for (Product product : productList) {
       if (product.getProductName().equals(ProductName)) {

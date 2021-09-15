@@ -46,13 +46,13 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
     ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(buyer);
 
     // 예약리스트에 구매자 id를 갖는 bookingList add.
     bookingPrompt.addBookingListById(buyer.getId());
     // 장바구니리스트에 구매자 id를 갖는 cartList add.
     cartPrompt.addCartListById(buyer.getId());
 
-    memberList.add(buyer);
     //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
   }
 }
