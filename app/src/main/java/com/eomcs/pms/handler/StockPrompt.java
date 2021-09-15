@@ -28,17 +28,16 @@ public class StockPrompt {
     return false;
   }
 
-  protected int[] getStockListSizeById(String nowLoginId) {
-    int[] numberIndex = new int[2];
-    //    Privacy[] arr = App.privacyList.toArray(new Privacy[0]);
-    for (int i=0; i<allStockList.size(); i++) {
-      if (allStockList.get(i).getId().equals(nowLoginId)) {
-        numberIndex[0] = allStockList.get(i).getStockListNumber();
-        numberIndex[1] = i;
-        return numberIndex;
+  protected void putStockListById(String nowLoginId, Stock stock) {
+    for (StockList stockList : allStockList) {
+      if (stockList.getId().equals(nowLoginId)) {
+        int stockListNumber = stockList.getStockListNumber();
+        stock.setStockNumber(stockListNumber);
+        stockList.getSellerStock().add(stock);
+        stockList.setStockListNumber(++stockListNumber);
+        ;
       }
     }
-    return null;
   }
 
   public int findStockListById(String id) {

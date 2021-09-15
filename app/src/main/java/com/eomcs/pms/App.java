@@ -57,7 +57,6 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
-import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -148,7 +147,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
@@ -176,8 +175,6 @@ public class App {
 
     commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
-
-    commandMap.put("/ranking/list", new RankingHandler(productList));
   }
 
   void service() {
@@ -380,11 +377,6 @@ public class App {
     boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
-
-    ///////////////////////////////////////////
-    MenuGroup rankingMenu = new MenuGroup("이달의 술");
-    mainMenuGroup.add(rankingMenu);
-    rankingMenu.add(new MenuItem("이달의 술", "/ranking/list"));
 
     ///////////////////////////////////////////
 

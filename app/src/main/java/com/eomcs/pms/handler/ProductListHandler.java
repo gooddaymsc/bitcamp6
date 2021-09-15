@@ -80,13 +80,7 @@ public class ProductListHandler extends AbstractProductHandler {
       cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
       cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
       cart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
-      int cartListNumber = cartPrompt.getCartListSizeById(nowLoginId)[0];
-      int cartListIndex = cartPrompt.getCartListSizeById(nowLoginId)[1];
-
-      cart.setCartNumber(cartListNumber);
-      allCartList.get(cartListIndex).getPrivacyCart().add(cart);
-      allCartList.get(cartListIndex).setCartListNumber(++cartListNumber);
+      cartPrompt.putCartListById(nowLoginId, cart);
       System.out.println("장바구니가 등록되었습니다.");
       return;
 
@@ -114,14 +108,8 @@ public class ProductListHandler extends AbstractProductHandler {
 
       if (input.equalsIgnoreCase("y")) {
         stock.setProduct(product);
-        stock.setStockNumber(stockPrompt.getStockListSizeById(nowLoginId)[0]);
 
-        int stockListNumber = stockPrompt.getStockListSizeById(nowLoginId)[0];
-        int stockListIndex = stockPrompt.getStockListSizeById(nowLoginId)[1];
-
-        stock.setStockNumber(stockListNumber);
-        allStockList.get(stockListIndex).getSellerStock().add(stock);
-        allStockList.get(stockListIndex).setStockListNumber(++stockListNumber);
+        stockPrompt.putStockListById(nowLoginId, stock);
 
         System.out.println("재고 등록을 완료하였습니다.");
         return;
