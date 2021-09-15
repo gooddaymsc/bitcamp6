@@ -121,9 +121,9 @@ public class App {
     // List Load.
     loadBoards();
     loadManagers();
-    loadProducts();
-    loadStockLists();
-    loadCartLists();
+    //    loadProducts();
+    //    loadStockLists();
+    //    loadCartLists();
     loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
@@ -147,7 +147,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, productList, memberPrompt, cartPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
