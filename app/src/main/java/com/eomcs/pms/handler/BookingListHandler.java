@@ -22,7 +22,7 @@ public class BookingListHandler extends AbstractBookingHandler{
   public void execute() {
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
     if (App.getLoginUser().isBookingUpdate()) {
-      memberPrompt.returnBookingUpdate(App.getLoginUser().getId());
+      memberPrompt.changeCommentUpdate(App.getLoginUser().getId(), false);
     }
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
       System.out.println("\n[내 픽업 예약 목록]");

@@ -13,27 +13,39 @@ public class BoardSearchHandler extends AbstractBoardHandler {
 
   @Override
   public void execute() {
-    System.out.println("\n[게시글 검색]");
+    System.out.println("\n[게시글 검색] || 0. 이전");
+
     List<Integer> searchNo = new ArrayList<>();
     String input = Prompt.inputString("검색어 : ");
+    if (input.equals("0")) { return; }
     while(true) {
+      boolean resultSearch = false;
       for (Board board : boardList) {
         if (!board.getTitle().contains(input) &&
             !board.getContent().contains(input) &&
             !board.getTag().contains(input)) {
+
           continue;
         }
-        System.out.printf("%d, %s, %s, \"%s\", %s, %s\n", 
+        resultSearch = true;
+        System.out.printf("%-3s\t%-6s\t%-15s\t%-6s\t%-6s\n",
+            "번호", "제목", "내용", "태그", "등록일");
+        System.out.println("--------------------------------------------------------------------------");
+
+        System.out.printf("%-3d\t%-6s\t%-15s\t%-6s\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
             board.getContent(),
             board.getTag(),
-            board.getWriter(),
             board.getRegistrationDate());
         searchNo.add(board.getBoardNumber());
       }
+      if (!resultSearch) {
+        System.out.println("검색 결과가 없습니다.");
+        return;
+      }
 
-      int boardDetail = Prompt.inputInt("\n(뒤로가기 : 0) \n게시글 번호선택 > ");
+      int boardDetail = Prompt.inputInt("\n게시글 번호선택 > ");
       if (boardDetail == 0) {
         return;
       } else {
@@ -55,17 +67,7 @@ public class BoardSearchHandler extends AbstractBoardHandler {
         System.out.printf("좋아요 수 : %d\n", board.getLikes());
         System.out.printf("태그 : \"%s\"\n", board.getTag());
         System.out.println("");
-        System.out.println("[게시글 좋아요 누르기]");
 
-        String inputLike = Prompt.inputString("좋아요를 누르시겠습니까?(y/N) ");
-        if (inputLike.equalsIgnoreCase("y")) {
-          System.out.println("좋아요를 눌렀습니다.");
-          board.setLikes(board.getLikes() + 1);
-          System.out.printf("현재 좋아요 수: %d\n", board.getLikes());
-          return;
-        }
-        System.out.println("게시글 좋아요를 취소하였습니다.");
-        return;
       }
     }
   }

@@ -112,7 +112,7 @@ public class BookingAddHandler extends AbstractBookingHandler {
     allBookingList.get(sellerBookingListIndex).getBooking().add(booking);
     allBookingList.get(sellerBookingListIndex).setTotalBookingNumber(++sellerBookingListNumber);
 
-    memberPrompt.sendBookingUpdate(sellerId);
+    memberPrompt.changeBookingUpdate(sellerId, true);
     System.out.println("픽업예약을 완료하였습니다.");
   }
 

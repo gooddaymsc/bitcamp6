@@ -20,7 +20,7 @@ public class CommentUpdateHandler {
       return;
     }
 
-    if (comment.getId() != App.getLoginUser().getId()) {
+    if (!comment.getId().equals(App.getLoginUser().getId())) {
       System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
       return;
     }
