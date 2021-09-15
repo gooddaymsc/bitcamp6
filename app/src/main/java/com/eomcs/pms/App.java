@@ -146,7 +146,7 @@ public class App {
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, productList, memberPrompt, cartPrompt));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
@@ -159,13 +159,13 @@ public class App {
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, memberPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, memberPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(allCartList, cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(allCartList, cartPrompt, memberPrompt));
     commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, memberPrompt));
     commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList));

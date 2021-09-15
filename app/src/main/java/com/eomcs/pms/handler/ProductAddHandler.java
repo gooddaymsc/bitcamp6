@@ -13,7 +13,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     this.productPrompt = productPrompt;
   }
 
-  public static int productNumber = 1;
+  //  public static int productNumber = 1;
 
   @Override
   public void execute() {
@@ -22,7 +22,8 @@ public class ProductAddHandler extends AbstractProductHandler {
 
     Product product = new Product();
 
-    product.setProductNumber(productNumber++);
+    int productNumber = product.getProductNumber();
+    product.setProductNumber(++productNumber);
     String productName = Prompt.inputString("상품명 : ");
 
 

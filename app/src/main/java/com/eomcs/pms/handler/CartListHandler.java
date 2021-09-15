@@ -1,20 +1,23 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 
 public class CartListHandler extends AbstractCartHandler {
+  List<CartList> allCartList;
   MemberPrompt memberPrompt;
-  public CartListHandler(CartPrompt cartPrompt, MemberPrompt memberPrompt) {
+  public CartListHandler(List<CartList> allCartList, CartPrompt cartPrompt, MemberPrompt memberPrompt) {
     super(cartPrompt);
+    this.allCartList = allCartList;
     this.memberPrompt = memberPrompt;
   }
   @Override
   public void execute() {
-
+    String nowLoginId = App.getLoginUser().getId();
     System.out.println("\n[장바구니 목록]");
-    CartList cartList = cartPrompt.findCartListById(App.getLoginUser().getId());
+    CartList cartList = allCartList.get(cartPrompt.getCartIndexById(nowLoginId));
 
     if (cartList.getPrivacyCart().size() == 0) {
       System.out.println("아직 추가한 장바구니가 없습니다.");
