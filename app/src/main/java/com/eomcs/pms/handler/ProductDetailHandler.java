@@ -21,7 +21,6 @@ public class ProductDetailHandler extends AbstractProductHandler {
 
   @Override
   public void execute() {
-    //    String nowLoginId = App.getLoginUser().getId();
     System.out.println("[상품 상세보기]");
 
     Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
@@ -35,7 +34,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
 
     System.out.printf("상품명: %s\n", product.getProductName());
     System.out.printf("주종: %s\n", product.getProductType());
-    System.out.printf("평점: %.2f\n", product.getScore());
+    System.out.printf("평점: %.2f\n", product.getRate());
     System.out.printf("원산지: %s\n", product.getCountryOrigin());
     System.out.printf("품종: %s\n", product.getVariety());
     System.out.printf("알콜도수: %.1f\n", product.getAlcoholLevel());
@@ -65,32 +64,34 @@ public class ProductDetailHandler extends AbstractProductHandler {
     if(App.getLoginUser().getAuthority() != Menu.ACCESS_LOGOUT) {
       String input = Prompt.inputString("\n상품평 등록(y/N) >  ");
       if (input.equalsIgnoreCase("y")) {
-        if(App.getLoginUser().getId().equals(review.getReviewer())){
-          System.out.println("이미 상품폄을 등록하셨습니다.");
-          return;
-        } else {
-          float scores = checkNum("맛은 어떠셨나요?(1점-5점):");
-          review.setScore (scores); //개인별 평점
-          product.setScore((product.getScore()*review.getReviewerNum()+scores)/(review.getReviewerNum()+1)); //상품 총
-          review.setReviewerNum(review.getReviewerNum()+1);
+        //        if(null != productPrompt.findByReviwer(product)){
+        float scores = checkNum("맛은 어떠셨나요?(1점-5점):");
+        review.setScore(scores); //개인별 평점
+        product.setRate((product.getRate()*product.getReviewerNum()+scores)/(product.getReviewerNum()+1)); //상품 총점
+        System.out.println(product.getRate());
+        product.setReviewerNum(product.getReviewerNum()+1);
+        System.out.println(product.getReviewerNum());
 
-          review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
-          System.out.println("상품평 등록을 완료하였습니다.");
+        review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
+        System.out.println("상품평 등록을 완료하였습니다.");
 
-          review.setRegisteredDate(new Date(System.currentTimeMillis()));
-          review.setReviewer(App.getLoginUser().getId());
-          product.getReviewList().add(review);
-          System.out.println("등록 완료\n");
-          return;
-        }
-      } else {
-        System.out.println("상품평 등록을 취소하였습니다.");
+        review.setRegisteredDate(new Date(System.currentTimeMillis()));
+        review.setReviewer(App.getLoginUser().getId());
+        product.getReviewList().add(review);
         return;
       }
+      //        System.out.println("이미 상품평을 등록하셨습니다.");
+      //        return;
+      //      } 
+      else { 
+        System.out.println("상품평 등록을 취소하였습니다.");
+        return;
+      } 
     } else {
       System.out.println("로그인 후 등록가능합니다.");
-    }
+    } 
   }
+
 } 
 
 

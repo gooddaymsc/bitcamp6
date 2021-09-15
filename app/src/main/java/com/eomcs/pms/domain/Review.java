@@ -9,7 +9,6 @@ public class Review implements Serializable {
   private float score;              //평점
   private String comment;           //코멘트        
   private String reviewer;          //작성자    
-  private int reviewerNum;          //작성자 수
   private Date RegisteredDate;      //등록일
 
 
@@ -30,12 +29,6 @@ public class Review implements Serializable {
   }
   public void setReviewer(String reviewer) {
     this.reviewer = reviewer;
-  }
-  public int getReviewerNum() {
-    return reviewerNum;
-  }
-  public void setReviewerNum(int reviewerNum) {
-    this.reviewerNum = reviewerNum;
   }
   public Date getRegisteredDate() {
     return RegisteredDate;

@@ -17,7 +17,8 @@ public class Product implements Serializable{
   private int sugerLevel;           //당도
   private int acidity;              //산도
   private int weight;               //바디감
-  private float score;
+  private float rate;               //평점
+  private int reviewerNum;          //댓글 남긴 사람의 
 
   public int getProductNumber() {
     return productNumber;
@@ -80,12 +81,19 @@ public class Product implements Serializable{
   public void setReviewList(List<Review> reviewList) {
     this.reviewList = reviewList;
   }
-  public float getScore() {
-    return score;
+  public float getRate() {
+    return rate;
   }
-  public void setScore(float score) {
-    this.score = score;
+  public void setRate(float rate) {
+    this.rate = rate;
   }
+  public int getReviewerNum() {
+    return reviewerNum;
+  }
+  public void setReviewerNum(int reviewerNum) {
+    this.reviewerNum = reviewerNum;
+  }
+
 
 
 }

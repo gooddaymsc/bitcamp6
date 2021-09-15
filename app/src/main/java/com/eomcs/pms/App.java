@@ -57,6 +57,7 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -121,9 +122,9 @@ public class App {
     // List Load.
     loadBoards();
     loadManagers();
-    //    loadProducts();
-    //    loadStockLists();
-    //    loadCartLists();
+    loadProducts();
+    loadStockLists();
+    loadCartLists();
     loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
@@ -146,7 +147,7 @@ public class App {
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
@@ -159,13 +160,13 @@ public class App {
     commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartPrompt, stockPrompt, memberPrompt));
-    commandMap.put("/cart/list",   new CartListHandler(cartPrompt, memberPrompt));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(allCartList, cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/cart/list",   new CartListHandler(allCartList, cartPrompt, memberPrompt));
     commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
     commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, memberPrompt));
+    commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, memberPrompt));
     commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList));
     commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList));
@@ -175,6 +176,8 @@ public class App {
 
     commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
+
+    commandMap.put("/ranking/list", new RankingHandler(productList));
   }
 
   void service() {
@@ -377,6 +380,11 @@ public class App {
     boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
+
+    ///////////////////////////////////////////
+    MenuGroup rankingMenu = new MenuGroup("이달의 술");
+    mainMenuGroup.add(rankingMenu);
+    rankingMenu.add(new MenuItem("이달의 술", "/ranking/list"));
 
     ///////////////////////////////////////////
 

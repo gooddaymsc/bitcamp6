@@ -55,7 +55,7 @@ public class SellerAddHandler extends AbstractSellerHandler {
 
     // 예약리스트에 판매자 id를 갖는 bookingList add.
     bookingPrompt.addBookingListById(seller.getId());
-    // 장바구니리스트에 판매자 id를 갖는 cartList add.
+    // 재고 리스트에 판매자 id를 갖는 stockList add.
     stockPrompt.addStockListById(seller.getId());
   }
 }
