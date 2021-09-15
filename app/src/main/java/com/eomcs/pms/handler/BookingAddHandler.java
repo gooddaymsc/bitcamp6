@@ -80,8 +80,6 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
     // All.allBookingList에 구매자의 Id에 예약내역 추가.
     putBookingListById(nowLoginId, booking);
 
-    // 판매자용 booking 재생성. >> 기존 방식은 객체주소를 공유해서 넘버가 공유됨.
-    // 새 객체주소를 만들어서 넣어줘야함 >> 문제. 구매자가 예약변경 시 판매자의 예약을 바꿔주는 코드를 짜야함.
     Booking booking2 = new Booking();
     booking2.setCart(booking.getCart());
     booking2.setBookingDate(booking.getBookingDate());
