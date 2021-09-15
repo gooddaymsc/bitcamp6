@@ -2,10 +2,12 @@ package com.eomcs.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("serial")
-public class Board implements Serializable{
-  private int number;
+public class Board implements Serializable {
+  private int boardNumber;
   private String title;
   private String content;
   private String writer;
@@ -13,12 +15,15 @@ public class Board implements Serializable{
   private int views;
   private String tag;
   private int likes;
+  private List<String> likeMember = new ArrayList<>();
+  private int totalCommentNumber = 1;
+  private List<Comment> commentList = new ArrayList<>();
 
-  public int getNumber() {
-    return number;
+  public int getBoardNumber() {
+    return boardNumber;
   }
-  public void setNumber(int number) {
-    this.number = number;
+  public void setBoardNumber(int boardNumber) {
+    this.boardNumber = boardNumber;
   }
   public String getTitle() {
     return title;
@@ -61,6 +66,25 @@ public class Board implements Serializable{
   }
   public void setLikes(int likes) {
     this.likes = likes;
+  }
+
+  public int getTotalCommentNumber() {
+    return totalCommentNumber;
+  }
+  public void setTotalCommentNumber(int totalCommentNumber) {
+    this.totalCommentNumber = totalCommentNumber;
+  }
+  public List<Comment> getCommentList() {
+    return commentList;
+  }
+  public void setCommentList(List<Comment> commentList) {
+    this.commentList = commentList;
+  }
+  public List<String> getLikeMember() {
+    return likeMember;
+  }
+  public void setLikeMember(List<String> likeMember) {
+    this.likeMember = likeMember;
   }
 
 

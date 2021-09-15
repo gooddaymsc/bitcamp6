@@ -23,7 +23,9 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
+import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
+import com.eomcs.pms.handler.BoardPrompt;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
@@ -43,6 +45,7 @@ import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.CartPrompt;
 import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
+import com.eomcs.pms.handler.CommentFindHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
@@ -74,6 +77,7 @@ public class App {
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
   List<Member> memberList = new ArrayList<>();
+  //  int[] totalNumber = {1,1,1}; // totalMemberNumber, totalBoardNumber, totalProductNumber
 
   HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
@@ -82,6 +86,7 @@ public class App {
   StockPrompt stockPrompt = new StockPrompt(allStockList, memberPrompt);
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
+  BoardPrompt boardPrompt = new BoardPrompt(boardList);
 
   // 권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -113,13 +118,13 @@ public class App {
   }
 
   public App() {
-    // List load.
-    //    loadBoards();
-    //    loadManagers();
-    //    loadProducts();
-    //    loadStockLists();
-    //    loadCartLists();
-    //    loadBookingLists();
+    // List Load.
+    loadBoards();
+    loadManagers();
+    loadProducts();
+    loadStockLists();
+    loadCartLists();
+    loadBookingLists();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
@@ -135,7 +140,7 @@ public class App {
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
-    commandMap.put("/board/detail", new BoardDetailHandler(boardList));
+    commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
@@ -143,7 +148,8 @@ public class App {
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, memberPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, productList, memberPrompt, cartPrompt));
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
+
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
 
@@ -166,6 +172,9 @@ public class App {
 
     commandMap.put("/findId", new FindIdHandler(memberPrompt));
     commandMap.put("/findPassword", new FindPasswordHandler(memberPrompt));
+
+    commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
+    commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
   }
 
   void service() {
@@ -409,12 +418,14 @@ public class App {
     mainMenuGroup.add(personMenu);
 
     personMenu.add(new MenuItem("개인정보", ACCESS_BUYER, "/buyer/detail"));
-    personMenu.add(new MenuItem("개인정보 변경", ACCESS_BUYER, "/buyer/update"));
-    personMenu.add(new MenuItem("탈퇴", ACCESS_BUYER, "/buyer/delete"));
-
     personMenu.add(new MenuItem("개인정보", ACCESS_SELLER, "/seller/detail"));
+    personMenu.add(new MenuItem("개인정보 변경", ACCESS_BUYER, "/buyer/update"));
     personMenu.add(new MenuItem("개인정보 변경", ACCESS_SELLER, "/seller/update"));
+    personMenu.add(new MenuItem("내 게시글", "/findBoard"));
+    personMenu.add(new MenuItem("내 댓글", "/findComment"));
+    personMenu.add(new MenuItem("탈퇴", ACCESS_BUYER, "/buyer/delete"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/seller/delete"));
+
 
     MenuGroup sellerStoreMenu = new MenuGroup("My Store", ACCESS_SELLER);
     personMenu.add(sellerStoreMenu);

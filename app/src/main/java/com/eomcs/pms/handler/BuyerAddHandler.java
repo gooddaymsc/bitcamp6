@@ -17,7 +17,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
     this.memberPrompt = memberPrompt;
-  }
+  } 
   public static int buyerNumber = 1;
 
   @Override
