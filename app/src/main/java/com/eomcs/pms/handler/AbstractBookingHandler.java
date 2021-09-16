@@ -33,14 +33,15 @@ public abstract class AbstractBookingHandler implements Command {
     return null;
   }
 
-  protected BookingList putBookingListById(String id, Booking buyerBooking) {
+  protected void putBookingListById(String id, Booking buyerBooking) {
     for (BookingList bookingList : allBookingList) {
       if (bookingList.getId().equals(id)) {
+        int totalBookingNumber = bookingList.getTotalBookingNumber();
+        buyerBooking.setBookingNumber(totalBookingNumber);
         bookingList.getBooking().add(buyerBooking);
-        return bookingList;
+        bookingList.setTotalBookingNumber(++totalBookingNumber);
       }
     }
-    return null;
   }
 
   protected int checkHour (String label) {

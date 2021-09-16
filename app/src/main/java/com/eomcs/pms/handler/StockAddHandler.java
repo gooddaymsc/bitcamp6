@@ -22,7 +22,7 @@ public class StockAddHandler extends AbstractStockHandler {
     String nowLoginId = App.getLoginUser().getId();
 
     System.out.println("\n[재고등록]");
-    Stock stock = new Stock(); 
+    Stock stock = new Stock();
     String productName = Prompt.inputString("상품명 : ");
     Product product = productPrompt.findByProduct(productName);
     if (product == null) {
@@ -39,11 +39,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
 
-
-    int[] sizeIndex = stockPrompt.getStockListSizeById(nowLoginId);
-    stock.setStockNumber(sizeIndex[0]);
-    allStockList.get(sizeIndex[1]).getSellerStock().add(stock);
-
+    stockPrompt.putStockListById(nowLoginId, stock);
     System.out.println("재고 등록을 완료하였습니다.");
   }
 

@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
@@ -18,7 +19,6 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     this.bookingPrompt = bookingPrompt;
     this.memberPrompt = memberPrompt;
   } 
-  public static int buyerNumber = 1;
 
   @Override
   public void execute() {
@@ -26,7 +26,6 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
 
     Member buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);
-    buyer.setNumber(buyerNumber++);
 
     //아이디가 중복되면 다시 아이디 재설정.
     String id = Prompt.inputString("등록할 아이디: ");
@@ -46,13 +45,15 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
     ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
+    buyer.setNumber(App.totalNumberList.get(App.MEMBER_NUMBER_INDEX));
+    App.totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
+    memberList.add(buyer);
 
     // 예약리스트에 구매자 id를 갖는 bookingList add.
     bookingPrompt.addBookingListById(buyer.getId());
     // 장바구니리스트에 구매자 id를 갖는 cartList add.
     cartPrompt.addCartListById(buyer.getId());
 
-    memberList.add(buyer);
     //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
   }
 }

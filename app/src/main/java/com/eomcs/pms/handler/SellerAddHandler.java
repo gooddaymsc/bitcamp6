@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
@@ -18,14 +19,11 @@ public class SellerAddHandler extends AbstractSellerHandler {
     this.stockPrompt = stockPrompt;
   }
 
-  public static int sellerNumber = 1;
-
   @Override
   public void execute() {
     System.out.println("\n[판매자 등록]");
     Member seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
-    seller.setNumber(sellerNumber++);
 
     String id = Prompt.inputString("등록할 아이디: ");
 
@@ -51,11 +49,14 @@ public class SellerAddHandler extends AbstractSellerHandler {
     ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
     ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
+    seller.setNumber(App.totalNumberList.get(App.MEMBER_NUMBER_INDEX));
+    App.totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
+
     memberList.add(seller);
 
     // 예약리스트에 판매자 id를 갖는 bookingList add.
     bookingPrompt.addBookingListById(seller.getId());
-    // 장바구니리스트에 판매자 id를 갖는 cartList add.
+    // 재고 리스트에 판매자 id를 갖는 stockList add.
     stockPrompt.addStockListById(seller.getId());
   }
 }
