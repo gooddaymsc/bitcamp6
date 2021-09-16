@@ -71,13 +71,17 @@ import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
 
 public class App {
+  public static final int MEMBER_NUMBER_INDEX = 0;
+  public static final int BOARD_NUMBER_INDEX = 1;
+  public static final int PROUDCT_NUMBER_INDEX = 2;
+
   List<Board> boardList = new ArrayList<>();
   List<Product> productList = new ArrayList<>();
   List<StockList> allStockList = new ArrayList<>();
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
   List<Member> memberList = new ArrayList<>();
-  //  int[] totalNumber = {1,1,1}; // totalMemberNumber, totalBoardNumber, totalProductNumber
+  public static List<Integer> totalNumberList = new ArrayList<>();// totalMemberNumber, totalBoardNumber, totalProductNumber
 
   HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
@@ -125,6 +129,7 @@ public class App {
     loadStockLists();
     loadCartLists();
     loadBookingLists();
+    loadTotalNumbers();
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
@@ -179,6 +184,10 @@ public class App {
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
+    // 맨처음 데이터가 아예없을때 생성한 뒤 데이터 로드할땐 막아줌.
+    //    totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
+    //    totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
+    //    totalNumberList.add(PROUDCT_NUMBER_INDEX, 1); 
 
     System.out.println();
     System.out.println("   *****************      ");   
@@ -195,6 +204,7 @@ public class App {
     saveStockLists();
     saveCartLists();
     saveBookingLists();
+    saveTotalNumbers();
 
   }
 
@@ -320,6 +330,27 @@ public class App {
       System.out.println("예약리스트 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 예약리스트 데이터를 저장하는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadTotalNumbers() {
+    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("totalNumberList.data"))) {
+      totalNumberList.addAll((List<Integer>) in.readObject());
+      //    System.out.println("예약리스트 데이터 로딩 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 넘버링리스트 데이터를 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveTotalNumbers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("totalNumberList.data"))) {
+      out.writeObject(totalNumberList);
+      System.out.println("넘버링리스트 데이터 저장 완료!");
+    } catch (Exception e) {
+      System.out.println("파일에서 넘버링리스트 데이터를 저장하는 중 오류 발생!");
       e.printStackTrace();
     }
   }

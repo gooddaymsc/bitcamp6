@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
@@ -13,19 +14,12 @@ public class ProductAddHandler extends AbstractProductHandler {
     this.productPrompt = productPrompt;
   }
 
-  //  public static int productNumber = 1;
-
   @Override
   public void execute() {
 
     System.out.println("[상품 등록]");
-
     Product product = new Product();
-
-    int productNumber = product.getProductNumber();
-    product.setProductNumber(++productNumber);
     String productName = Prompt.inputString("상품명 : ");
-
 
     if (productPrompt.findByProduct(productName)!=null) {
       System.out.println("이미 추가된 상품입니다.");
@@ -39,7 +33,11 @@ public class ProductAddHandler extends AbstractProductHandler {
     product.setSugerLevel(checkNum("당도(1-5) : "));
     product.setAcidity(checkNum("산도(1-5) : "));
     product.setWeight(checkNum("바디감(1-5) : "));
+    product.setProductNumber(App.totalNumberList.get(App.PROUDCT_NUMBER_INDEX));
+    // Numbering은 마지막에
+    App.totalNumberList.set(App.PROUDCT_NUMBER_INDEX, product.getProductNumber()+1);
     productList.add(product);
+
     System.out.println("상품을 등록하였습니다.");
   }
 
