@@ -62,6 +62,7 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -194,6 +195,8 @@ public class App {
 
     commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
+
+    commandMap.put("/ranking/list", new RankingHandler(productList));
   }
 
   void service() {
@@ -370,6 +373,13 @@ public class App {
     productMenu.add(new MenuItem("상세보기", "/product/detail"));
     productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
     productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
+
+    ///////////////////////////////////////////
+
+    MenuGroup rankingMenu = new MenuGroup("이달의 술");
+    mainMenuGroup.add(rankingMenu);
+
+    rankingMenu.add(new MenuItem("이달의 술",  "/ranking/list"));
 
     ///////////////////////////////////////////
 
