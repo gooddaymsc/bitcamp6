@@ -4,17 +4,22 @@ import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_BUYER;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
 import static com.eomcs.menu.Menu.ACCESS_SELLER;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Product;
@@ -57,7 +62,6 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
-import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -70,15 +74,23 @@ import com.eomcs.pms.handler.StockListHandler;
 import com.eomcs.pms.handler.StockPrompt;
 import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.util.Prompt;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class App {
+  public static final int MEMBER_NUMBER_INDEX = 0;
+  public static final int BOARD_NUMBER_INDEX = 1;
+  public static final int PROUDCT_NUMBER_INDEX = 2;
+
   List<Board> boardList = new ArrayList<>();
   List<Product> productList = new ArrayList<>();
   List<StockList> allStockList = new ArrayList<>();
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
   List<Member> memberList = new ArrayList<>();
-  //  int[] totalNumber = {1,1,1}; // totalMemberNumber, totalBoardNumber, totalProductNumber
+  List<Buyer> buyerList = new ArrayList<>();
+  List<Seller> sellerList = new ArrayList<>();
+  public static List<Integer> totalNumberList = new ArrayList<>();// totalMemberNumber, totalBoardNumber, totalProductNumber
 
   HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
@@ -120,12 +132,18 @@ public class App {
 
   public App() {
     // List Load.
-    loadBoards();
-    loadManagers();
-    loadProducts();
-    loadStockLists();
-    loadCartLists();
-    loadBookingLists();
+    loadObjects("board.json", boardList, Board.class);
+    // seller와 buyer 정보를 따로 불러옴
+    loadObjects("buyer.json", buyerList, Buyer.class);
+    loadObjects("seller.json", sellerList, Seller.class);
+    // seller 와 buyer 정보를 memberList 에 저장
+    mergeMember(memberList, buyerList, sellerList);
+
+    loadObjects("product.json", productList, Product.class);
+    loadObjects("stock.json", allStockList, StockList.class);
+    loadObjects("cart.json", allCartList, CartList.class);
+    loadObjects("booking.json", allBookingList, BookingList.class);
+    loadObjects("totalNumber.json", totalNumberList, Integer.class);
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
@@ -148,7 +166,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
@@ -176,12 +194,15 @@ public class App {
 
     commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
-
-    commandMap.put("/ranking/list", new RankingHandler(productList));
   }
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
+    if (totalNumberList.size() == 0) {
+      totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
+      totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
+      totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
+    }
 
     System.out.println();
     System.out.println("   *****************      ");   
@@ -192,136 +213,72 @@ public class App {
     Prompt.close();
 
     //List 저장
-    saveManagers();
-    saveBoards();
-    saveProducts();
-    saveStockLists();
-    saveCartLists();
-    saveBookingLists();
+    saveObjects("board.json", boardList);
+    // memberList 를 buyerList, sellerList로 나눈다.
+    seperateMember(memberList, buyerList, sellerList);
+    // buyerList, sellerList 따로 저장한다.
+    saveObjects("buyer.json", buyerList);
+    saveObjects("seller.json", sellerList);
+
+    saveObjects("product.json", productList);
+    saveObjects("stock.json", allStockList);
+    saveObjects("cart.json", allCartList);
+    saveObjects("booking.json", allBookingList);
+    saveObjects("totalNumber.json", totalNumberList);
 
   }
-  @SuppressWarnings("unchecked")
-  private void loadManagers() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
-      memberList.addAll((List<Member>) in.readObject());
-      //   System.out.println("관리자 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+
+  private void mergeMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
+    for (Buyer buyer : buyerList) {
+      memberList.add(buyer);
+    }
+    for (Seller seller : sellerList) {
+      memberList.add(seller);
     }
   }
 
-  private void saveManagers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("manager.data"))) {
-      out.writeObject(memberList);
-      System.out.println("관리자 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 관리자 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+  private void seperateMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
+    for (Member member : memberList) {
+      if (member instanceof Buyer) {
+        buyerList.add((Buyer)member);   
+      } else if (member instanceof Seller) {
+        sellerList.add((Seller)member);
+      }
     }
   }
 
-  @SuppressWarnings("unchecked")
-  private void loadBoards() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("board.data"))) {
-      boardList.addAll((List<Board>) in.readObject());
-      //   System.out.println("게시글 데이터 로딩 완료!");
+  private <E> void loadObjects(String filepath, List<E> list, Class<E> domainType) {
+
+    try (BufferedReader in = new BufferedReader(
+        new FileReader(filepath, Charset.forName("UTF-8")))) {
+
+      StringBuilder strBuilder = new StringBuilder();
+      String str;
+      while ((str = in.readLine()) != null) {
+        strBuilder.append(str);
+      }
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
+      Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
+
+      list.addAll(collection);
+      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
+
     } catch (Exception e) {
-      System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
     }
   }
 
-  private void saveBoards() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("board.data"))) {
-      out.writeObject(boardList);
-      System.out.println("게시글 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 게시글 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
+  private void saveObjects(String filepath, List<?> list) {
+    try (PrintWriter out = new PrintWriter(
+        new BufferedWriter(
+            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
 
-  @SuppressWarnings("unchecked")
-  private void loadProducts() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("product.data"))) {
-      productList.addAll((List<Product>) in.readObject());
-      //  System.out.println("상품 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 상품 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
+      out.print(new Gson().toJson(list));
 
-  private void saveProducts() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("product.data"))) {
-      out.writeObject(productList);
-      System.out.println("상품 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 상품 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
+      System.out.printf("%s 데이터 출력 완료!\n", filepath);
 
-  @SuppressWarnings("unchecked")
-  private void loadStockLists() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("stockList.data"))) {
-      allStockList.addAll((List<StockList>) in.readObject());
-      //   System.out.println("재고리스트 데이터 로딩 완료!");
     } catch (Exception e) {
-      System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveStockLists() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stockList.data"))) {
-      out.writeObject(allStockList);
-      System.out.println("재고리스트 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 재고리스트 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCartLists() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("cartList.data"))) {
-      allCartList.addAll((List<CartList>) in.readObject());
-      //  System.out.println("장바구니리스트 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 장바구니리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCartLists() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("cartList.data"))) {
-      out.writeObject(allCartList);
-      System.out.println("장바구니 리스트 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 장바구니 리스트 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadBookingLists() {
-    try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("bookingList.data"))) {
-      allBookingList.addAll((List<BookingList>) in.readObject());
-      //    System.out.println("예약리스트 데이터 로딩 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 예약리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveBookingLists() {
-    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("bookingList.data"))) {
-      out.writeObject(allBookingList);
-      System.out.println("예약리스트 데이터 저장 완료!");
-    } catch (Exception e) {
-      System.out.println("파일에서 예약리스트 데이터를 저장하는 중 오류 발생!");
+      System.out.printf("%s 데이터 출력 오류!\n", filepath);
       e.printStackTrace();
     }
   }
@@ -379,11 +336,6 @@ public class App {
     boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
     boardMenu.add(new MenuItem("삭제",ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
     boardMenu.add(new MenuItem("검색", "/board/search"));
-
-    ///////////////////////////////////////////
-    MenuGroup rankingMenu = new MenuGroup("이달의 술");
-    mainMenuGroup.add(rankingMenu);
-    rankingMenu.add(new MenuItem("이달의 술", "/ranking/list"));
 
     ///////////////////////////////////////////
 

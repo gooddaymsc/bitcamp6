@@ -39,13 +39,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stock.setPrice(Prompt.inputInt("판매 가격 :"));
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
 
-    int stockListNumber = stockPrompt.getStockListSizeById(nowLoginId)[0];
-    int stockListIndex = stockPrompt.getStockListSizeById(nowLoginId)[1];
-
-    stock.setStockNumber(stockListNumber);
-    allStockList.get(stockListIndex).getSellerStock().add(stock);
-    allStockList.get(stockListIndex).setStockListNumber(++stockListNumber);
-
+    stockPrompt.putStockListById(nowLoginId, stock);
     System.out.println("재고 등록을 완료하였습니다.");
   }
 

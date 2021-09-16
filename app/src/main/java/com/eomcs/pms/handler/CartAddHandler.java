@@ -62,13 +62,7 @@ public class CartAddHandler extends AbstractCartHandler {
     cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
-    int cartListNumber = cartPrompt.getCartListSizeById(nowLoginId)[0];
-    int cartListIndex = cartPrompt.getCartListSizeById(nowLoginId)[1];
-
-    cart.setCartNumber(cartListNumber);
-    allCartList.get(cartListIndex).getPrivacyCart().add(cart);
-    allCartList.get(cartListIndex).setCartListNumber(++cartListNumber);
-
+    cartPrompt.putCartListById(nowLoginId, cart);
     System.out.println("장바구니가 등록되었습니다.");
   }
 }
