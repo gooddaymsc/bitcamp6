@@ -10,20 +10,19 @@ public class BoardAddHandler extends AbstractBoardHandler {
   public BoardAddHandler(List<Board> boardList) {
     super(boardList);
   }
-  public static int boardNumber = 1;
   @Override
   public void execute() {
 
     System.out.println("[새 게시글]");
     Board board = new Board();
-
-    board.setBoardNumber(boardNumber++);
     board.setTitle(Prompt.inputString("제목 : "));
     board.setContent(Prompt.inputString("내용 : "));
     board.setWriter(App.getLoginUser().getId());
     board.setRegistrationDate(new Date(System.currentTimeMillis()));
     board.setTag(Prompt.inputString("태그 : "));
-
+    // Numbering은 마지막에
+    board.setBoardNumber(App.totalNumberList.get(App.BOARD_NUMBER_INDEX));
+    App.totalNumberList.set(App.BOARD_NUMBER_INDEX, board.getBoardNumber()+1);
     boardList.add(board);
     System.out.println("게시글 등록을 완료하였습니다.");
   }

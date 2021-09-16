@@ -82,17 +82,16 @@ public class MemberPrompt {
   }
 
 
-  //입력한 문자열을 포함하면 adress 리턴.
   public HashMap<String, Seller> findByAdress (String adress) {
     HashMap<String, Seller> hashMap = new HashMap<>();
     for (Member seller : memberList) {
-      if((((Seller) seller).getBusinessAddress()).contains(adress)) {
-        System.out.println("\n[해당 주소 근처 판매처] ");
-        hashMap.put(seller.getId(), (Seller) seller);
-      }
-      else if (!(((Seller) seller).getBusinessAddress()).contains(adress)){
-        System.out.println("해당 지역에는 판매처가 없습니다.");
-        break;
+      if(seller instanceof Seller) {
+        String[] arr = adress.split(" ");
+        if(arr[2].equals(((Seller)seller).getBusinessAddress()) &&
+            arr[1].equals(((Seller) seller).getBusinessAddress())){
+          System.out.println("\n[해당 주소 근처 판매처] ");
+          hashMap.put(seller.getId(), (Seller) seller);
+        } 
       }
     }
     return hashMap;

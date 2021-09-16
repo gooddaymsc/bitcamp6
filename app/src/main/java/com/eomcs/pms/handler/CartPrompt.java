@@ -33,6 +33,17 @@ public class CartPrompt {
     return null;
   }
 
+  protected void putCartListById(String nowLoginId, Cart cart) {
+    for (CartList cartList : allCartList) {
+      if (cartList.getId().equals(nowLoginId)) {
+        int cartListNumber = cartList.getCartListNumber();
+        cart.setCartNumber(cartListNumber);
+        cartList.getPrivacyCart().add(cart);
+        cartList.setCartListNumber(++cartListNumber);
+        ;
+      }
+    }
+  }
   public int findCartListIndexById(String id) {
     for (CartList cartList : allCartList) {
       if (cartList.getId().equals(id)) {

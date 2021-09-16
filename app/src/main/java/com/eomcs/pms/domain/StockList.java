@@ -8,7 +8,14 @@ import java.util.List;
 public class StockList implements Serializable{
   private String id; // 판매자
   private List<Stock> sellerStock = new ArrayList<>();
+  private int stockListNumber = 1;
 
+  public int getStockListNumber() {
+    return stockListNumber;
+  }
+  public void setStockListNumber(int stockListNumber) {
+    this.stockListNumber = stockListNumber;
+  }
   public String getId() {
     return id;
   }

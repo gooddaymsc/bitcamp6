@@ -18,15 +18,17 @@ public class ProductListHandler extends AbstractProductHandler {
   CartPrompt cartPrompt;
   List<Product> productList;
   List<StockList> allStockList;
+  List<CartList> allCartList;
   MemberPrompt memberPrompt;
 
   public ProductListHandler(StockPrompt stockPrompt, ProductPrompt productPrompt, CartPrompt cartPrompt, 
-      List<Product> productList, List<StockList> allStockList, MemberPrompt memberPrompt) {
+      List<Product> productList, List<StockList> allStockList, List<CartList> allCartList, MemberPrompt memberPrompt) {
     this.stockPrompt = stockPrompt;
     this.productPrompt = productPrompt;
     this.cartPrompt = cartPrompt;
     this.productList = productList;
     this.allStockList = allStockList;
+    this.allCartList = allCartList;
     this.memberPrompt = memberPrompt;
   }
 
@@ -76,12 +78,10 @@ public class ProductListHandler extends AbstractProductHandler {
         }
       }
       cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
-      cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
       cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
       cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+      cartPrompt.putCartListById(nowLoginId, cart);
       System.out.println("장바구니가 등록되었습니다.");
-      CartList cartList = cartPrompt.findCartListById(nowLoginId);
-      cartList.getPrivacyCart().add(cart);
       return;
 
       // 상품 목록 후 판매자는 재고에 등록하게.
@@ -108,8 +108,8 @@ public class ProductListHandler extends AbstractProductHandler {
 
       if (input.equalsIgnoreCase("y")) {
         stock.setProduct(product);
-        stock.setStockNumber(stockPrompt.getStockListSizeById(nowLoginId)[0]);
-        allStockList.get(stockPrompt.getStockListSizeById(nowLoginId)[1]).getSellerStock().add(stock);
+
+        stockPrompt.putStockListById(nowLoginId, stock);
 
         System.out.println("재고 등록을 완료하였습니다.");
         return;

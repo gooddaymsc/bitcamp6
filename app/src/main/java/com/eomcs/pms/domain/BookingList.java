@@ -10,6 +10,13 @@ public class BookingList implements Serializable {
   private int totalBookingNumber = 1;
   private List<Booking> booking = new ArrayList<>();
 
+  public int getTotalBookingNumber() {
+    return totalBookingNumber;
+  }
+  public void setTotalBookingNumber(int totalBookingNumber) {
+    this.totalBookingNumber = totalBookingNumber;
+  }
+
   public String getId() {
     return id;
   }
