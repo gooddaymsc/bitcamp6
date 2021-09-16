@@ -200,7 +200,6 @@ public class App {
     saveBookingLists();
 
   }
-
   @SuppressWarnings("unchecked")
   private void loadManagers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("manager.data"))) {
