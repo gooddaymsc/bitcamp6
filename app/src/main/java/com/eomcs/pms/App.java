@@ -129,11 +129,8 @@ public class App {
     loadStockLists();
     loadCartLists();
     loadBookingLists();
-    if (!loadTotalNumbers()) {
-      totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
-      totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
-      totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
-    }
+    loadTotalNumbers();
+
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(memberList));
@@ -187,6 +184,11 @@ public class App {
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
+    if (totalNumberList.size() == 0) {
+      totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
+      totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
+      totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
+    }
 
     System.out.println();
     System.out.println("   *****************      ");   
