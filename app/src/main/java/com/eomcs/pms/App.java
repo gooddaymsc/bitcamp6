@@ -185,10 +185,11 @@ public class App {
 
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    // 맨처음 데이터가 아예없을때 생성한 뒤 데이터 로드할땐 막아줌.
-    //    totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
-    //    totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
-    //    totalNumberList.add(PROUDCT_NUMBER_INDEX, 1); 
+    if (totalNumberList.size() == 0) {
+      totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
+      totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
+      totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
+    }
 
     System.out.println();
     System.out.println("   *****************      ");   
@@ -216,7 +217,7 @@ public class App {
       //   System.out.println("관리자 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 관리자 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -226,7 +227,7 @@ public class App {
       System.out.println("관리자 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 관리자 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -237,7 +238,7 @@ public class App {
       //   System.out.println("게시글 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 게시글 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -247,7 +248,7 @@ public class App {
       System.out.println("게시글 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 게시글 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -258,7 +259,7 @@ public class App {
       //  System.out.println("상품 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 상품 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -268,7 +269,7 @@ public class App {
       System.out.println("상품 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 상품 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -279,7 +280,7 @@ public class App {
       //   System.out.println("재고리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 재고리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -289,7 +290,7 @@ public class App {
       System.out.println("재고리스트 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 재고리스트 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -300,7 +301,7 @@ public class App {
       //  System.out.println("장바구니리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 장바구니리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -310,7 +311,7 @@ public class App {
       System.out.println("장바구니 리스트 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 장바구니 리스트 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -321,7 +322,7 @@ public class App {
       //    System.out.println("예약리스트 데이터 로딩 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 예약리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
@@ -331,18 +332,20 @@ public class App {
       System.out.println("예약리스트 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 예약리스트 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
   @SuppressWarnings("unchecked")
-  private void loadTotalNumbers() {
+  private boolean loadTotalNumbers() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("totalNumberList.data"))) {
       totalNumberList.addAll((List<Integer>) in.readObject());
       //    System.out.println("예약리스트 데이터 로딩 완료!");
+      return true;
     } catch (Exception e) {
       System.out.println("파일에서 넘버링리스트 데이터를 읽어오는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
+      return false;
     }
   }
 
@@ -352,7 +355,7 @@ public class App {
       System.out.println("넘버링리스트 데이터 저장 완료!");
     } catch (Exception e) {
       System.out.println("파일에서 넘버링리스트 데이터를 저장하는 중 오류 발생!");
-      e.printStackTrace();
+      //      e.printStackTrace();
     }
   }
 
