@@ -10,7 +10,7 @@ public class StockDetailHandler extends AbstractStockHandler {
     super(stockPrompt);
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
 
     System.out.println("[재고 상세보기]");

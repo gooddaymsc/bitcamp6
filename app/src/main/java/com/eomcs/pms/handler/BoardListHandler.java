@@ -10,7 +10,7 @@ public class BoardListHandler extends AbstractBoardHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 목록]");
 
     Board[] boards = new Board[boardList.size()];
@@ -30,11 +30,7 @@ public class BoardListHandler extends AbstractBoardHandler {
           board.getLikes(),
           board.getRegistrationDate());
     }
+    request.getRequestDispatcher("/board/detail").forward(request);
   }
 }
-
-
-
-
-
 

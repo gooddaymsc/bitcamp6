@@ -9,7 +9,7 @@ public class StockDeleteHandler extends AbstractStockHandler {
     super(stockPrompt);
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
     while(true) {
       System.out.println("[재고 삭제]");

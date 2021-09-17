@@ -20,7 +20,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[상품 상세보기]");
 
     Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));

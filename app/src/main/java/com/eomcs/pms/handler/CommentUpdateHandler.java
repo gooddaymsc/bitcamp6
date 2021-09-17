@@ -5,13 +5,19 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
-public class CommentUpdateHandler {
+public class CommentUpdateHandler implements Command {
+  BoardPrompt boardPrompt;
 
-  public static void update(int boardNumber, BoardPrompt boardPrompt) {
+  public CommentUpdateHandler(BoardPrompt boardPrompt) {
+    this.boardPrompt = boardPrompt;
+  }
+  @Override
+  public void execute(CommandRequest request) {
 
     //    System.out.println("[댓글 변경]");
     int no = Prompt.inputInt("\n변경할 댓글 번호 : ");
 
+    int boardNumber = (int) request.getAttribute("no");
     Board board = boardPrompt.findBoardByNo(boardNumber);
     Comment comment = boardPrompt.findCommentByNo(no, board);
 

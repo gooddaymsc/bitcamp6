@@ -3,9 +3,15 @@ package com.eomcs.pms.handler;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 
-public class CommentListHandler {
+public class CommentListHandler implements Command {
+  BoardPrompt boardPrompt;
 
-  public static void list(int boardNumber, BoardPrompt boardPrompt) {
+  public CommentListHandler(BoardPrompt boardPrompt) {
+    this.boardPrompt = boardPrompt;
+  }
+  @Override
+  public void execute(CommandRequest request) {
+    int boardNumber = (int) request.getAttribute("no");
     Board board = boardPrompt.findBoardByNo(boardNumber);
 
     System.out.printf("\n%-3s\t%-6s\t%-15s\t%-6s\n",

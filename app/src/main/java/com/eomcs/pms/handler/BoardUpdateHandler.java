@@ -13,11 +13,10 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[게시글 변경]");
-    int no = Prompt.inputInt("변경할 게시글 번호 : ");
-
+    int no = (int) request.getAttribute("no");
     Board board = findByNo(no);
 
     if (board == null) {

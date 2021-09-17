@@ -12,7 +12,7 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
     super(allBookingList);
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[예약 취소]");
 
     String productName = Prompt.inputString("예약 취소할 상품명 : ");

@@ -14,7 +14,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_SELLER  ) {
       System.out.println("해당 메뉴는 판매자 권한입니다.");
       return;

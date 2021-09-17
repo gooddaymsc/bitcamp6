@@ -13,7 +13,7 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
     super(memberList);
   }  
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[개인정보 변경]");
 

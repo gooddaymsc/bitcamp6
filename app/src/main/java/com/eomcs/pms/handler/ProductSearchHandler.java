@@ -32,7 +32,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String storeName;
     //String storeAdress;
     String nowLoginId = App.getLoginUser().getId();
