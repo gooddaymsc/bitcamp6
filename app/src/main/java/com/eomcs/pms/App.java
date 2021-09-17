@@ -185,7 +185,7 @@ public class App {
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
@@ -304,6 +304,7 @@ public class App {
     }
   }
 
+
   Menu createMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("메인");
@@ -394,10 +395,10 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup rankingMenu = new MenuGroup("이달의 술");
+    MenuGroup rankingMenu = new MenuGroup("실시간 랭킹");
     mainMenuGroup.add(rankingMenu);
 
-    rankingMenu.add(new MenuItem("이달의 술",  "/ranking/list"));
+    rankingMenu.add(new MenuItem("실시간 랭킹",  "/ranking/list"));
 
     ///////////////////////////////////////////
 
