@@ -7,6 +7,7 @@ import com.eomcs.pms.domain.Product;
 public class ProductPrompt {
 
   List<Product> productList;
+
   public ProductPrompt (List<Product> productList) {
     this.productList = productList;
   }
@@ -38,4 +39,14 @@ public class ProductPrompt {
     }
     return null;
   }
+
+  //  protected Product findByReviwer (Product product) {
+  //    for(Review re : product.getReviewList()) {
+  //      if(!re.getReviewer().equals(App.getLoginUser().getId())){
+  //
+  //        return product; 
+  //      }
+  //    }
+  //    return null;
+  //  }
 }

@@ -42,7 +42,10 @@ public class BoardDetailHandler extends AbstractBoardHandler {
       CommentListHandler.list(board.getBoardNumber(), boardPrompt);
       System.out.println("\n< 1.좋아요 / 2.댓글등록 / 3.댓글수정 / 4.댓글삭제 >");
       int choose = Prompt.inputInt("선택 > ");
-
+      if (App.getLoginUser().getAuthority()==0x01) {
+        System.out.println("로그인 후 가능합니다.");
+        return;
+      }
       switch (choose) {
         case 0 : return;
         case 1 : LikeHandler.like(board); continue;

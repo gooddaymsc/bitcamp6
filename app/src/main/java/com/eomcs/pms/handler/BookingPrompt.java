@@ -11,6 +11,7 @@ public class BookingPrompt {
   public BookingPrompt(List<BookingList> allBookingList) {
     this.allBookingList = allBookingList;
   }
+
   public Product findBookingByProduct(String productName, String nowLoginId) {
     int index = getBookingIndexById(nowLoginId);
     List<Booking> bookingList = allBookingList.get(index).getBooking();
@@ -35,18 +36,6 @@ public class BookingPrompt {
       }
     }
     return -1;
-  }
-
-  protected int[] getBookingListSizeById(String nowLoginId) {
-    int[] numberIndex = new int[2];
-    for (int i=0; i<allBookingList.size(); i++) {
-      if (allBookingList.get(i).getId().equals(nowLoginId)) {
-        numberIndex[0] = allBookingList.get(i).getTotalBookingNumber();
-        numberIndex[1] = i;
-        return numberIndex;
-      }
-    }
-    return null;
   }
 
   public void removeBookingListById(String nowLoginid) {

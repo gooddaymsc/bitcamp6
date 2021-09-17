@@ -11,7 +11,7 @@ import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
-public class BookingAddHandler extends AbstractBookingHandler {
+public class BookingAddHandler extends AbstractBookingHandler implements Cloneable{
 
   CartPrompt cartPrompt;
   StockPrompt stockPrompt;
@@ -62,7 +62,6 @@ public class BookingAddHandler extends AbstractBookingHandler {
 
     // 판매자 id 를 넣었을때 해당되는 Stock 찾기
     Stock sellerStock = stockPrompt.findStockById(sellerId, productName);
-
     if (sellerStock.getStocks() - bookingProduct.getCartStocks()<0) {
       System.out.println("재고가 부족합니다. 구매 수량을 확인해주세요.");
       return;
@@ -72,45 +71,24 @@ public class BookingAddHandler extends AbstractBookingHandler {
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     booking.setBookingHour(checkHour("픽업시간(시): "));
     booking.setBookingMinute(checkMinute("픽업시간(분): "));
-
-    //    while(true) {
-    //      if (pickUptime.equals(pickUptime)) {
-    //        booking.setBookingTime(pickUptime);
-    //        break;
-    //      } else {
-    //        System.out.println("영업시간이 아닙니다.");
-    //      }
-    //    }
-
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
     booking.setBuyerId(nowLoginId);
-    // 구매자 bookingList에서 booking 추가
-    //bookingList.getBooking().add(booking);
     // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기
     sellerStock.setStocks(sellerStock.getStocks() - bookingProduct.getCartStocks());
     // 구매자 장바구니에서 예약(결제)한 상품 빼기
     cartPrompt.findCartListById(nowLoginId).getPrivacyCart().remove(bookingProduct);
     // All.allBookingList에 구매자의 Id에 예약내역 추가.
-    //    putBookingListById(nowLoginId, booking);
+    putBookingListById(nowLoginId, booking);
+
+    Booking booking2 = new Booking();
+    booking2.setCart(booking.getCart());
+    booking2.setBookingDate(booking.getBookingDate());
+    booking2.setBookingHour(booking.getBookingHour());
+    booking2.setBookingMinute(booking.getBookingMinute());
+    booking2.setRegisteredDate(booking.getRegisteredDate());
+    booking2.setBuyerId(booking.getBuyerId());
     // All.allBookingList에 판매자의 Id에 예약내역 추가.
-    //    putBookingListById(sellerId, booking);
-
-    //구매자의 예약 번호 증가
-    int bookingListNumber = bookingPrompt.getBookingListSizeById(nowLoginId)[0];
-    int bookingListIndex = bookingPrompt.getBookingListSizeById(nowLoginId)[1];
-
-    booking.setBookingNumber(bookingListNumber);
-    allBookingList.get(bookingListIndex).getBooking().add(booking);
-    allBookingList.get(bookingListIndex).setTotalBookingNumber(++bookingListNumber);
-
-
-    //판매자의 예약번호 증가
-    int sellerBookingListNumber = bookingPrompt.getBookingListSizeById(sellerId)[0];
-    int sellerBookingListIndex = bookingPrompt.getBookingListSizeById(sellerId)[1];
-
-    booking.setBookingNumber(sellerBookingListNumber);
-    allBookingList.get(sellerBookingListIndex).getBooking().add(booking);
-    allBookingList.get(sellerBookingListIndex).setTotalBookingNumber(++sellerBookingListNumber);
+    putBookingListById(sellerId, booking2);
 
     memberPrompt.changeBookingUpdate(sellerId, true);
     System.out.println("픽업예약을 완료하였습니다.");
