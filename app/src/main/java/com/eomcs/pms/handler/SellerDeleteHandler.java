@@ -14,7 +14,7 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
 
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {

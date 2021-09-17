@@ -20,7 +20,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[상품 상세보기]");
 
     Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
@@ -68,9 +68,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
         float scores = checkNum("맛은 어떠셨나요?(1점-5점):");
         review.setScore(scores); //개인별 평점
         product.setRate((product.getRate()*product.getReviewerNum()+scores)/(product.getReviewerNum()+1)); //상품 총점
-        System.out.println(product.getRate());
         product.setReviewerNum(product.getReviewerNum()+1);
-        System.out.println(product.getReviewerNum());
 
         review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
         System.out.println("상품평 등록을 완료하였습니다.");

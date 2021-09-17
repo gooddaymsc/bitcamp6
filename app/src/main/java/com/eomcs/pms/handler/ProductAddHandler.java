@@ -15,7 +15,7 @@ public class ProductAddHandler extends AbstractProductHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[상품 등록]");
     Product product = new Product();

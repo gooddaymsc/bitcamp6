@@ -17,7 +17,7 @@ public class StockAddHandler extends AbstractStockHandler {
   }
 
   @Override
-  public void execute() {   
+  public void execute(CommandRequest request) {   
 
     String nowLoginId = App.getLoginUser().getId();
 

@@ -50,9 +50,15 @@ import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.CartPrompt;
 import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
+import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.CommentAddHandler;
+import com.eomcs.pms.handler.CommentDeleteHandler;
 import com.eomcs.pms.handler.CommentFindHandler;
+import com.eomcs.pms.handler.CommentListHandler;
+import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
+import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MemberPrompt;
 import com.eomcs.pms.handler.ProductAddHandler;
@@ -116,7 +122,12 @@ public class App {
     @Override
     public void execute() {
       Command command  = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n",  menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -165,9 +176,16 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
+    commandMap.put("/comment/like",    new LikeHandler(boardPrompt));
+    commandMap.put("/comment/add",    new CommentAddHandler(boardPrompt));
+    commandMap.put("/comment/list",    new CommentListHandler(boardPrompt));
+    commandMap.put("/comment/update",    new CommentUpdateHandler(boardPrompt));
+    commandMap.put("/comment/delete",    new CommentDeleteHandler(boardPrompt));
+
+
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
 
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
@@ -286,6 +304,7 @@ public class App {
     }
   }
 
+
   Menu createMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("메인");
@@ -376,10 +395,10 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup rankingMenu = new MenuGroup("이달의 술");
+    MenuGroup rankingMenu = new MenuGroup("실시간 랭킹");
     mainMenuGroup.add(rankingMenu);
 
-    rankingMenu.add(new MenuItem("이달의 술",  "/ranking/list"));
+    rankingMenu.add(new MenuItem("실시간 랭킹",  "/ranking/list"));
 
     ///////////////////////////////////////////
 
@@ -407,7 +426,11 @@ public class App {
         System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
         System.out.println("-----------------------------------------------");
         Command command  = commandMap.get(menuId);
-        command.execute();
+        try {
+          command.execute(new CommandRequest(commandMap));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }});
 
 

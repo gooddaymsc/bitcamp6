@@ -12,7 +12,7 @@ public class CartDeleteHandler extends AbstractCartHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     while(true) {
       System.out.println("[장바구니 삭제]");
 

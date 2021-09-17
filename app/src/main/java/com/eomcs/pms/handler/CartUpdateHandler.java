@@ -10,7 +10,7 @@ public class CartUpdateHandler extends AbstractCartHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     while(true) {
       System.out.println("[장바구니 변경]");
       Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));

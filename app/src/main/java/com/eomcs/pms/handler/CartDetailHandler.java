@@ -10,7 +10,7 @@ public class CartDetailHandler extends AbstractCartHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[장바구니 상세보기]");
     Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
 

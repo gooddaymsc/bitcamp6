@@ -18,7 +18,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
     this.bookingPrompt = bookingPrompt;
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[탈퇴하기]");

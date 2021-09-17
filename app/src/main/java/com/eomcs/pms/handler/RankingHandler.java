@@ -16,7 +16,7 @@ public class RankingHandler implements Command {
   }
 
   @Override
-  public void execute() {  
+  public void execute(CommandRequest request) {  
 
     System.out.println("[이달의 술]\n");
 

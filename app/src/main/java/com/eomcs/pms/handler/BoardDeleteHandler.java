@@ -13,12 +13,12 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[게시글 삭제]");
-    int no = Prompt.inputInt("삭제할 게시글 번호 : ");
-
+    int no = (int) request.getAttribute("no");
     Board board = findByNo(no);
+
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");

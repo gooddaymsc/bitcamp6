@@ -14,7 +14,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
     this.productList = productList;
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     while(true) {
       System.out.println("[상품 삭제]");
 

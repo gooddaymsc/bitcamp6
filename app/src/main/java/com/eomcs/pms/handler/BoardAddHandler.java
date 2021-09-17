@@ -11,7 +11,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     super(boardList);
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[새 게시글]");
     Board board = new Board();

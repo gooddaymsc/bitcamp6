@@ -12,7 +12,7 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
     super(allBookingList);
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[예약 변경]");
 
     Booking booking = findBooking(Prompt.inputString("예약 변경할 상품명 : "));
