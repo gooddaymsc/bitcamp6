@@ -13,7 +13,7 @@ public class StockListHandler extends AbstractStockHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     String nowLoginId = App.getLoginUser().getId();
     System.out.println("\n[재고 목록]");
     StockList stockList = allStockList.get(stockPrompt.findStockListById(nowLoginId));
@@ -33,6 +33,7 @@ public class StockListHandler extends AbstractStockHandler {
           stock.getPrice(), 
           stock.getStocks());
     }
+    request.getRequestDispatcher("/stock/detail").forward(request);
   }
 }
 
