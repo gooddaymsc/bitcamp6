@@ -28,7 +28,7 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
     System.out.println("[예약 등록]");
 

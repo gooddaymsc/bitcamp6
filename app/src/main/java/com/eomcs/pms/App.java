@@ -50,9 +50,15 @@ import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.CartPrompt;
 import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
+import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.CommentAddHandler;
+import com.eomcs.pms.handler.CommentDeleteHandler;
 import com.eomcs.pms.handler.CommentFindHandler;
+import com.eomcs.pms.handler.CommentListHandler;
+import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
+import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MemberPrompt;
 import com.eomcs.pms.handler.ProductAddHandler;
@@ -62,6 +68,11 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.RankingHandler;
+import com.eomcs.pms.handler.ReviewAddHandler;
+import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewListHandler;
+import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -115,7 +126,12 @@ public class App {
     @Override
     public void execute() {
       Command command  = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n",  menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -164,13 +180,24 @@ public class App {
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
 
-    commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
-    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt));
+    commandMap.put("/comment/like",    new LikeHandler(boardPrompt));
+    commandMap.put("/comment/add",    new CommentAddHandler(boardPrompt));
+    commandMap.put("/comment/list",    new CommentListHandler(boardPrompt));
+    commandMap.put("/comment/update",    new CommentUpdateHandler(boardPrompt));
+    commandMap.put("/comment/delete",    new CommentDeleteHandler(boardPrompt));
 
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
+
+    commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(productList));
+    commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
+
+    commandMap.put("/review/add", new ReviewAddHandler(productPrompt));
+    commandMap.put("/review/list", new ReviewListHandler(productPrompt));
+    commandMap.put("/review/update", new ReviewUpdateHandler(productPrompt, productList));
+    commandMap.put("/review/delete", new ReviewDeleteHandler(productPrompt));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(allStockList, stockPrompt,productPrompt));
     commandMap.put("/stock/list",   new StockListHandler(allStockList, stockPrompt));
@@ -194,6 +221,8 @@ public class App {
 
     commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
+
+    commandMap.put("/ranking/list", new RankingHandler(productList));
   }
 
   void service() {
@@ -227,6 +256,7 @@ public class App {
     saveObjects("totalNumber.json", totalNumberList);
 
   }
+
   private void mergeMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
     for (Buyer buyer : buyerList) {
       memberList.add(buyer);
@@ -281,6 +311,7 @@ public class App {
       e.printStackTrace();
     }
   }
+
 
   Menu createMenu() {
 
@@ -366,9 +397,15 @@ public class App {
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
     productMenu.add(new MenuItem("상품검색",  "/product/search"));
-    productMenu.add(new MenuItem("상세보기", "/product/detail"));
-    productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
-    productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
+    //    productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
+    //    productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
+
+    ///////////////////////////////////////////
+
+    MenuGroup rankingMenu = new MenuGroup("실시간 랭킹");
+    mainMenuGroup.add(rankingMenu);
+
+    rankingMenu.add(new MenuItem("실시간 랭킹",  "/ranking/list"));
 
     ///////////////////////////////////////////
 
@@ -396,7 +433,11 @@ public class App {
         System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
         System.out.println("-----------------------------------------------");
         Command command  = commandMap.get(menuId);
-        command.execute();
+        try {
+          command.execute(new CommandRequest(commandMap));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }});
 
 

@@ -3,7 +3,6 @@ package com.eomcs.pms.handler;
 import com.eomcs.util.Prompt;
 
 public abstract class AbstractProductHandler implements Command {
-
   protected int checkNum(String label) {
     while(true) {
       int num = Prompt.inputInt(label);

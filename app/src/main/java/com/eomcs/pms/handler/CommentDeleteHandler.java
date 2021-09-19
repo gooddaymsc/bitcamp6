@@ -6,13 +6,19 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
-public class CommentDeleteHandler {
+public class CommentDeleteHandler extends AbstractCommentHandler {
 
-  public static void delete(int boardNumber, BoardPrompt boardPrompt) {
+  public CommentDeleteHandler(BoardPrompt boardPrompt) {
+    super(boardPrompt);
+  }
+
+  @Override
+  public void execute(CommandRequest request) {
 
     System.out.println("\n[댓글 삭제]");
     int no = Prompt.inputInt("삭제할 댓글 번호 : ");
 
+    int boardNumber = (int) request.getAttribute("no");
     Board board = boardPrompt.findBoardByNo(boardNumber);
     Comment comment = boardPrompt.findCommentByNo(no, board);
 

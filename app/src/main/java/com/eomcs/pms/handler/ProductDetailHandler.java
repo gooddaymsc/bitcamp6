@@ -1,27 +1,19 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ProductDetailHandler extends AbstractProductHandler {
-
   ProductPrompt productPrompt;
-  List<Product> productList;
-
-
-  public ProductDetailHandler (ProductPrompt productPrompt, List<Product> productList) {
+  public ProductDetailHandler (ProductPrompt productPrompt) {
     this.productPrompt = productPrompt;
-    this.productList = productList;
   }
 
   @Override
-  public void execute() {
-    System.out.println("[상품 상세보기]");
+  public void execute(CommandRequest request) throws Exception {
+    System.out.println("\n[상품 상세보기]");
 
     Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
 
@@ -29,8 +21,6 @@ public class ProductDetailHandler extends AbstractProductHandler {
       System.out.println("입력하신 상품이 없습니다.");
       return;
     }
-
-    Review review = new Review();
 
     System.out.printf("상품명: %s\n", product.getProductName());
     System.out.printf("주종: %s\n", product.getProductType());
@@ -41,59 +31,47 @@ public class ProductDetailHandler extends AbstractProductHandler {
     System.out.printf("당도: %d\n", product.getSugerLevel());
     System.out.printf("산도: %d\n", product.getAcidity());
     System.out.printf("바디감: %d\n", product.getWeight());
+    request.setAttribute("상품", product);
+    request.getRequestDispatcher("/review/list").forward(request);
 
-    System.out.println("\n[Reviews]");
-
-    Product[] products = new Product[productList.size()];
-    productList.toArray(products);
-
-    System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",
-        "평점", "코멘트", "작성자", "등록일");
-    System.out.println("--------------------------------------------------------------------------");
-
-
-    for(Review re : product.getReviewList()) {
-      System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",  
-          re.getScore(),
-          re.getComment(),
-          re.getReviewer(),
-          re.getRegisteredDate());
-    }
-
-
-    if(App.getLoginUser().getAuthority() != Menu.ACCESS_LOGOUT) {
-      String input = Prompt.inputString("\n상품평 등록(y/N) >  ");
-      if (input.equalsIgnoreCase("y")) {
-        //        if(null != productPrompt.findByReviwer(product)){
-        float scores = checkNum("맛은 어떠셨나요?(1점-5점):");
-        review.setScore(scores); //개인별 평점
-        product.setRate((product.getRate()*product.getReviewerNum()+scores)/(product.getReviewerNum()+1)); //상품 총점
-        System.out.println(product.getRate());
-        product.setReviewerNum(product.getReviewerNum()+1);
-        System.out.println(product.getReviewerNum());
-
-        review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
-        System.out.println("상품평 등록을 완료하였습니다.");
-
-        review.setRegisteredDate(new Date(System.currentTimeMillis()));
-        review.setReviewer(App.getLoginUser().getId());
-        product.getReviewList().add(review);
-        return;
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
+      System.out.println("\n1. 장바구니 등록 / 2. 이전(0)");
+      // 상품 목록 후 판매자는 재고에 등록하게.
+      int choose = Prompt.inputInt("선택 > ");
+      while (true) {
+        switch (choose) {
+          case 1 : request.getRequestDispatcher("/cart/add").forward(request); return;
+          case 0 : return;
+          default : System.out.println("다시 선택해 주세요"); continue;
+        }
       }
-      //        System.out.println("이미 상품평을 등록하셨습니다.");
-      //        return;
-      //      } 
-      else { 
-        System.out.println("상품평 등록을 취소하였습니다.");
-        return;
-      } 
-    } else {
-      System.out.println("로그인 후 등록가능합니다.");
-    } 
-  }
+    } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
+      System.out.println("\n1. 상품변경 / 2. 상품삭제 / 3. 재고등록 / 이전(0)");
+      int choose = Prompt.inputInt("선택 > ");
+      while (true) {
+        switch (choose) {
+          case 1 : request.getRequestDispatcher("/product/update").forward(request); return;
+          case 2 : request.getRequestDispatcher("/product/delete").forward(request); return;
+          case 3 : request.getRequestDispatcher("/stock/add").forward(request); return;
+          case 0 : return;
+          default : System.out.println("다시 선택해 주세요"); continue;
+        }
+      }
 
-} 
-
+    } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
+      System.out.println("\n1. 상품변경 / 2. 상품삭제 / 이전(0)");
+      int choose = Prompt.inputInt("선택 > ");
+      while (true) {
+        switch (choose) {
+          case 1 : request.getRequestDispatcher("/product/update").forward(request); return;
+          case 2 : request.getRequestDispatcher("/product/delete").forward(request); return;
+          case 0 : return;
+          default : System.out.println("다시 선택해 주세요"); continue;
+        }
+      }
+    }
+  } 
+}
 
 
 

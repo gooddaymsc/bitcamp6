@@ -13,26 +13,24 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class ProductSearchHandler extends AbstractProductHandler {
-
-  StockPrompt stockPrompt;
   ProductPrompt productPrompt;
+  StockPrompt stockPrompt;
   MemberPrompt memberPrompt;
   CartPrompt cartPrompt;
   List<Product> productList;
 
   public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, 
-      MemberPrompt memberPrompt,  CartPrompt cartPrompt 
-      /*,List<Product> productList */
+      MemberPrompt memberPrompt,  CartPrompt cartPrompt ,List<Product> productList 
       ) {
     this.productPrompt = productPrompt;
     this.stockPrompt = stockPrompt;
     this.memberPrompt = memberPrompt;
     this.cartPrompt = cartPrompt;
-    //    this.productList = productList;
+    this.productList = productList;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String storeName;
     //String storeAdress;
     String nowLoginId = App.getLoginUser().getId();

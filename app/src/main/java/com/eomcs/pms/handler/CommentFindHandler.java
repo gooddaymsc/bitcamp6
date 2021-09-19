@@ -5,18 +5,17 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 
-public class CommentFindHandler implements Command {
+public class CommentFindHandler extends AbstractCommentHandler {
   List<Board> boardList;
-  BoardPrompt boardPrompt;
   MemberPrompt memberPrompt;
   public CommentFindHandler(List<Board> boardList, BoardPrompt boardPrompt, MemberPrompt memberPrompt) {
+    super(boardPrompt);
     this.boardList = boardList;
-    this.boardPrompt = boardPrompt;
     this.memberPrompt = memberPrompt;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[내가 남긴 댓글 목록]");
     System.out.printf("%-3s\t%-10s\t%-15s\t%-6s\n",
         "번호","제목","내가남긴댓글","등록일");
@@ -34,8 +33,5 @@ public class CommentFindHandler implements Command {
 
       }
     }
-    System.out.println();
-    BoardDetailHandler boardDetailHandler = new BoardDetailHandler(boardList, boardPrompt, memberPrompt);
-    boardDetailHandler.execute();
   }
 }

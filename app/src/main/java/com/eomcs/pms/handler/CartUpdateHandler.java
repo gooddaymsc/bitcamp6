@@ -10,13 +10,17 @@ public class CartUpdateHandler extends AbstractCartHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     while(true) {
       System.out.println("[장바구니 변경]");
-      Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
+
+      String productName = (String)request.getAttribute("cart");
+      Cart cart = cartPrompt.findByCart(productName);
+
+      //Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
 
       if (cart == null) {
-        System.out.println("장바구니에 해당 상품이 없습니다.");
+        System.out.println("장바구니에 해당 상품이 없습니다.");  
         return;
       }
 

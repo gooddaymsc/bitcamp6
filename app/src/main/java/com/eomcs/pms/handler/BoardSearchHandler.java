@@ -12,7 +12,7 @@ public class BoardSearchHandler extends AbstractBoardHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("\n[게시글 검색] || 0. 이전");
 
     List<Integer> searchNo = new ArrayList<>();

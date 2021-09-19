@@ -35,5 +35,6 @@ application {
 eclipse {
     project {
         name = "AlchoholFinder"
+        
     }
 }

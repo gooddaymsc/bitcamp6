@@ -10,12 +10,12 @@ public class ProductAddHandler extends AbstractProductHandler {
   List<Product> productList;
   ProductPrompt productPrompt;
   public ProductAddHandler (List<Product> productList, ProductPrompt productPrompt) {
-    this.productList = productList;
     this.productPrompt = productPrompt;
+    this.productList = productList;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[상품 등록]");
     Product product = new Product();

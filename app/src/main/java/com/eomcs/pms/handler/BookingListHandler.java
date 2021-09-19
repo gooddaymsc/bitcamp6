@@ -19,7 +19,7 @@ public class BookingListHandler extends AbstractBookingHandler{
     this.memberPrompt = memberPrompt;
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
     if (App.getLoginUser().isBookingUpdate()) {
       memberPrompt.changeCommentUpdate(App.getLoginUser().getId(), false);

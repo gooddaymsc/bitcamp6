@@ -1,30 +1,39 @@
-//package com.eomcs.pms.handler;
-//
-//import com.eomcs.pms.domain.Product;
-//import com.eomcs.pms.domain.Review;
-//import com.eomcs.util.Prompt;
-//
-//public class ReviewListHandler  {
-//
-//  public void list(int reviewNumber, ProductPrompt productPrompt) {
-//    Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
-//
-//    if (product == null) {
-//      System.out.println("입력하신 상품이 없습니다.");
-//      return;
-//    }
-//
-//    System.out.println("[상품 리뷰]");
-//
-//    Review review = new Review();
-//
-//    for(Review review : reviewList) {
-//      review.getComment();
-//      review.getScore();
-//      review.getReviewer();
-//      review.getReviewerNum();
-//      review.getRegisteredDate();
-//    }
-//  }
-//}
-//
+package com.eomcs.pms.handler;
+
+import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.Review;
+
+public class ReviewListHandler extends AbstractReviewHandler {
+
+  ProductPrompt productPrompt;
+
+  public ReviewListHandler (ProductPrompt productPrompt) {
+    this.productPrompt = productPrompt;
+  }
+
+  @Override
+  public void execute(CommandRequest request) {
+    System.out.println("\n[Reviews]");
+
+    Product product = (Product) request.getAttribute("상품");
+
+    System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",
+        "평점", "코멘트", "작성자", "등록일");
+    System.out.println("--------------------------------------------------------------------------");
+
+
+    for(Review re : product.getReviewList()) {
+      System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",  
+          re.getScore(),
+          re.getComment(),
+          re.getId(),
+          re.getRegisteredDate());
+    }
+
+  }
+} 
+
+
+
+
+

@@ -6,12 +6,18 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
-public class CommentAddHandler {
+public class CommentAddHandler extends AbstractCommentHandler {
 
-  public static void add(int boardNumber, BoardPrompt boardPrompt) {
+  public CommentAddHandler(BoardPrompt boardPrompt) {
+    super(boardPrompt);
+  }
+
+  @Override
+  public void execute(CommandRequest request) {
 
     System.out.println("\n[댓글 달기]");
     Comment comment = new Comment();
+    int boardNumber = (int) request.getAttribute("no");
     Board board = boardPrompt.findBoardByNo(boardNumber);
     comment.setCommentNumber(board.getTotalCommentNumber()); 
     comment.setContent(Prompt.inputString("내용 : "));

@@ -12,13 +12,12 @@ public class CartDeleteHandler extends AbstractCartHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     while(true) {
       System.out.println("[장바구니 삭제]");
 
-      String ProductName = Prompt.inputString("상품명 : ");
-
-      Cart cart = cartPrompt.findByCart(ProductName);
+      String productName = (String)request.getAttribute("cart");
+      Cart cart = cartPrompt.findByCart(productName);
 
       if (cart == null) {
         System.out.println("장바구니에 해당 상품이 없습니다.");
