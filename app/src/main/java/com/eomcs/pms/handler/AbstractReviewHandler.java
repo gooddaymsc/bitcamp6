@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
@@ -24,6 +25,15 @@ public abstract class AbstractReviewHandler implements Command {
       }
     }
     return null;
+  }
+
+  protected boolean reviewIs(Product product) {
+    for (Review review : product.getReviewList()) {
+      if (review.getId().equals(App.getLoginUser().getId())) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

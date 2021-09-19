@@ -360,7 +360,6 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new MenuItem("등록", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
     boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
@@ -372,7 +371,7 @@ public class App {
     MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_BUYER );
     mainMenuGroup.add(cartMenu);
 
-    cartMenu.add(new MenuItem("등록", "/cart/add"));
+    //    cartMenu.add(new MenuItem("등록", "/cart/add"));
     cartMenu.add(new MenuItem("목록", "/cart/list"));
     cartMenu.add(new MenuItem("상세보기", "/cart/detail"));
     cartMenu.add(new MenuItem("변경", "/cart/update"));
@@ -440,8 +439,7 @@ public class App {
         }
       }});
 
-
-    sellerStoreMenu.add(new MenuItem("재고등록", "/stock/add"));
+    //    sellerStoreMenu.add(new MenuItem("재고등록", "/stock/add"));
     sellerStoreMenu.add(new MenuItem("상세보기", "/stock/detail"));
     sellerStoreMenu.add(new MenuItem("재고변경", "/stock/update"));
     sellerStoreMenu.add(new MenuItem("재고삭제", "/stock/delete"));

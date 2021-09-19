@@ -19,8 +19,8 @@ public class ReviewUpdateHandler extends AbstractReviewHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("\n[Reviews 변경]");
-    Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
+    System.out.println("[Reviews 변경]");
+    Product product = (Product) request.getAttribute("상품");
     Review review = findReviewById(product, App.getLoginUser().getId());
 
     if (review == null) {

@@ -16,9 +16,15 @@ public class ReviewAddHandler extends AbstractReviewHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("\n[Reviews 작성]");
+    System.out.println("[Reviews 작성]");
     Review review = new Review();
-    Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
+    Product product = (Product) request.getAttribute("상품");
+
+    if (reviewIs(product)) {
+      System.out.println("이미 등록한 리뷰가 있습니다.\n");
+      return;
+    }
+
 
     if(App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
       float scores = checkNum("맛은 어떠셨나요?(1점-5점):");

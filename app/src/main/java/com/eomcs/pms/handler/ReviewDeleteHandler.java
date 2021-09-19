@@ -15,9 +15,8 @@ public class ReviewDeleteHandler extends AbstractReviewHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("\n[Reviews 삭제]");
-    String name = Prompt.inputString("상품명 : ");
-    Product product = productPrompt.findByProduct(name);
+    System.out.println("[Reviews 삭제]");
+    Product product = (Product) request.getAttribute("상품");
 
     Review review = findReviewById(product, App.getLoginUser().getId());
     if (review == null) {
