@@ -69,6 +69,10 @@ import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.RankingHandler;
+import com.eomcs.pms.handler.ReviewAddHandler;
+import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewListHandler;
+import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -184,12 +188,16 @@ public class App {
 
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(stockPrompt, productPrompt, cartPrompt, productList, allStockList, allCartList, memberPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(productList));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
-
-    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt, productList));
+    commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
+
+    commandMap.put("/review/add", new ReviewAddHandler(productPrompt));
+    commandMap.put("/review/list", new ReviewListHandler(productPrompt));
+    commandMap.put("/review/update", new ReviewUpdateHandler(productPrompt, productList));
+    commandMap.put("/review/delete", new ReviewDeleteHandler(productPrompt));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(allStockList, stockPrompt,productPrompt));
     commandMap.put("/stock/list",   new StockListHandler(allStockList, stockPrompt));
@@ -352,7 +360,6 @@ public class App {
     MenuGroup boardMenu = new MenuGroup("게시판");
     mainMenuGroup.add(boardMenu);
 
-    boardMenu.add(new MenuItem("등록", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/add"));
     boardMenu.add(new MenuItem("목록", "/board/list"));
     boardMenu.add(new MenuItem("상세보기", "/board/detail"));
     boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
@@ -364,7 +371,7 @@ public class App {
     MenuGroup cartMenu = new MenuGroup("장바구니", ACCESS_BUYER );
     mainMenuGroup.add(cartMenu);
 
-    cartMenu.add(new MenuItem("등록", "/cart/add"));
+    //    cartMenu.add(new MenuItem("등록", "/cart/add"));
     cartMenu.add(new MenuItem("목록", "/cart/list"));
     cartMenu.add(new MenuItem("상세보기", "/cart/detail"));
     cartMenu.add(new MenuItem("변경", "/cart/update"));
@@ -389,9 +396,8 @@ public class App {
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
     productMenu.add(new MenuItem("상품검색",  "/product/search"));
-    productMenu.add(new MenuItem("상세보기", "/product/detail"));
-    productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
-    productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
+    //    productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
+    //    productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
 
     ///////////////////////////////////////////
 
@@ -433,8 +439,7 @@ public class App {
         }
       }});
 
-
-    sellerStoreMenu.add(new MenuItem("재고등록", "/stock/add"));
+    //    sellerStoreMenu.add(new MenuItem("재고등록", "/stock/add"));
     sellerStoreMenu.add(new MenuItem("상세보기", "/stock/detail"));
     sellerStoreMenu.add(new MenuItem("재고변경", "/stock/update"));
     sellerStoreMenu.add(new MenuItem("재고삭제", "/stock/delete"));

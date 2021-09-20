@@ -6,13 +6,10 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
-public class CommentAddHandler implements Command {
-
-  BoardPrompt boardPrompt;
+public class CommentAddHandler extends AbstractCommentHandler {
 
   public CommentAddHandler(BoardPrompt boardPrompt) {
-    this.boardPrompt = boardPrompt;
-
+    super(boardPrompt);
   }
 
   @Override

@@ -5,16 +5,12 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
-public class CommentUpdateHandler implements Command {
-  BoardPrompt boardPrompt;
-
+public class CommentUpdateHandler extends AbstractCommentHandler {
   public CommentUpdateHandler(BoardPrompt boardPrompt) {
-    this.boardPrompt = boardPrompt;
+    super(boardPrompt);
   }
   @Override
   public void execute(CommandRequest request) {
-
-    //    System.out.println("[댓글 변경]");
     int no = Prompt.inputInt("\n변경할 댓글 번호 : ");
 
     int boardNumber = (int) request.getAttribute("no");

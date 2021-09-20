@@ -3,11 +3,9 @@ package com.eomcs.pms.handler;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 
-public class CommentListHandler implements Command {
-  BoardPrompt boardPrompt;
-
+public class CommentListHandler extends AbstractCommentHandler {
   public CommentListHandler(BoardPrompt boardPrompt) {
-    this.boardPrompt = boardPrompt;
+    super(boardPrompt);
   }
   @Override
   public void execute(CommandRequest request) {

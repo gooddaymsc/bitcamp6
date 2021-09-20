@@ -5,14 +5,12 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 
-public class CommentFindHandler implements Command {
+public class CommentFindHandler extends AbstractCommentHandler {
   List<Board> boardList;
-  BoardPrompt boardPrompt;
   MemberPrompt memberPrompt;
-
   public CommentFindHandler(List<Board> boardList, BoardPrompt boardPrompt, MemberPrompt memberPrompt) {
+    super(boardPrompt);
     this.boardList = boardList;
-    this.boardPrompt = boardPrompt;
     this.memberPrompt = memberPrompt;
   }
 

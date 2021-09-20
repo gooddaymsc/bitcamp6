@@ -6,12 +6,12 @@ import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
-public class CommentDeleteHandler implements Command {
+public class CommentDeleteHandler extends AbstractCommentHandler {
 
-  BoardPrompt boardPrompt;
   public CommentDeleteHandler(BoardPrompt boardPrompt) {
-    this.boardPrompt = boardPrompt;
+    super(boardPrompt);
   }
+
   @Override
   public void execute(CommandRequest request) {
 
