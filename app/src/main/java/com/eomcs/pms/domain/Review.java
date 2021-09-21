@@ -6,12 +6,20 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class Review implements Serializable {
 
+  private int no;
   private float score;              //평점
   private String comment;           //코멘트        
-  private String id;          //작성자    
+  private String id;                //작성자    
   private Date RegisteredDate;      //등록일
 
 
+
+  public int getNo() {
+    return no;
+  }
+  public void setNo(int no) {
+    this.no = no;
+  }
   public float getScore() {
     return score;
   }

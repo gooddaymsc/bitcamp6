@@ -72,6 +72,7 @@ import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewFindHandler;
 import com.eomcs.pms.handler.ReviewListHandler;
 import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
@@ -223,6 +224,8 @@ public class App {
 
     commandMap.put("/findBoard", new BoardFindHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
+
+    commandMap.put("/findReview", new  ReviewFindHandler(productPrompt, productList));
 
     commandMap.put("/ranking/list", new RankingHandler(productList));
   }
@@ -399,6 +402,7 @@ public class App {
     productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
     productMenu.add(new MenuItem("목록", "/product/list"));
     productMenu.add(new MenuItem("상품검색",  "/product/search"));
+
     //    productMenu.add(new MenuItem("변경",  ACCESS_ADMIN | ACCESS_SELLER, "/product/update"));
     //    productMenu.add(new MenuItem("삭제", ACCESS_ADMIN | ACCESS_SELLER, "/product/delete"));
 
@@ -420,6 +424,7 @@ public class App {
     personMenu.add(new MenuItem("개인정보 변경", ACCESS_SELLER, "/seller/update"));
     personMenu.add(new MenuItem("내 게시글", "/findBoard"));
     personMenu.add(new MenuItem("내 댓글", "/findComment"));
+    personMenu.add(new MenuItem("내 리뷰", "/findReview"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_BUYER, "/buyer/delete"));
     personMenu.add(new MenuItem("탈퇴", ACCESS_SELLER, "/seller/delete"));
 

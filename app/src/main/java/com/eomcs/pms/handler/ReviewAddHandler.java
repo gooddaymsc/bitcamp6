@@ -34,7 +34,7 @@ public class ReviewAddHandler extends AbstractReviewHandler {
 
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
       System.out.println("상품평 등록을 완료하였습니다.");
-
+      review.setNo(review.getNo()+1);
       review.setRegisteredDate(new Date(System.currentTimeMillis()));
       review.setId(App.getLoginUser().getId());
       product.getReviewList().add(review);
