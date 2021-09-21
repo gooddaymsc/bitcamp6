@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Product;
@@ -18,6 +19,41 @@ public class BookingPrompt {
     for (Booking booking : bookingList) {
       if (booking.getCart().getStock().getProduct().getProductName().equals(productName)) {
         return booking.getCart().getStock().getProduct();
+      }
+    }
+    return null;
+  }
+
+  public BookingList findbookingListById(String id) {
+    for (BookingList bookingList : allBookingList) {
+      if (bookingList.getId().equals(id)) {
+        return bookingList;
+      }
+    }
+    return null;
+  }
+  protected Booking findByBooking (String ProductName) {
+    BookingList bookingList = findbookingListById(App.getLoginUser().getId());
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getCart().getStock().getProduct().getProductName().equals(ProductName)) {
+        return booking;
+      }
+    }
+    return null;
+  }
+  protected BookingList findById(String id) {
+    for (BookingList bookingList : allBookingList) {
+      if (bookingList.getId().equals(id)) {
+        return bookingList;
+      }
+    }
+    return null;
+  }
+  protected Booking findByNo(int no) {
+    BookingList bookingList = findById(App.getLoginUser().getId());
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == no) {
+        return booking;
       }
     }
     return null;

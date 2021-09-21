@@ -8,14 +8,17 @@ import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
 
-  public BookingUpdateHandler(List <BookingList> allBookingList) {
+  BookingPrompt bookingPrompt;
+  public BookingUpdateHandler(List <BookingList> allBookingList, BookingPrompt bookingPrompt) {
     super(allBookingList);
+    this.bookingPrompt = bookingPrompt;
   }
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[예약 변경]");
 
-    Booking booking = findBooking(Prompt.inputString("예약 변경할 상품명 : "));
+    String bookingName = (String) request.getAttribute("booking");
+    Booking booking = bookingPrompt.findByBooking(bookingName);
 
     if (booking == null) {
       System.out.println("예약이 없는 상품입니다.");
