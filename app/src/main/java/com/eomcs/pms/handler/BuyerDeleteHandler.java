@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
+import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
@@ -19,14 +20,15 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
   }
   @Override
   public void execute(CommandRequest request) {
-    String nowLoginId = App.getLoginUser().getId();
+
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[탈퇴하기]");
+      Member buyer = (Buyer) request.getAttribute("buyer");
+      String nowLoginId = buyer.getId();
 
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) "); 
 
       if (input.equalsIgnoreCase("y")) {
-        memberList.remove(removePrivateById(nowLoginId));
         memberPrompt.removeMemberById(nowLoginId);
         cartPrompt.removeCartListById(nowLoginId);
         bookingPrompt.removeBookingListById(nowLoginId);
@@ -40,19 +42,14 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       } 
     } else {
       System.out.println("[회원 탈퇴]");
-      String id = Prompt.inputString("삭제할 아이디: ");
-      Member member = findById(id);
-      if (member == null) {
-        System.out.println("해당 아이디의 회원이 없습니다.");
-        return;
-      }
+      Member buyer = (Buyer) request.getAttribute("buyer");
+      String buyerId = buyer.getId();
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        memberList.remove(removePrivateById(id));
-        memberPrompt.removeMemberById(id);
-        cartPrompt.removeCartListById(id);
-        bookingPrompt.removeBookingListById(id);
+        memberPrompt.removeMemberById(buyerId);
+        cartPrompt.removeCartListById(buyerId);
+        bookingPrompt.removeBookingListById(buyerId);
         System.out.println("회원을 탈퇴시켰습니다.");
         return;
       }

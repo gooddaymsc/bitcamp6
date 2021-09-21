@@ -17,7 +17,7 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("\n[개인정보 변경]");
 
-      Member seller = findById(App.getLoginUser().getId());
+      Member seller = (Seller) request.getAttribute("seller");
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", seller.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", seller.getEmail()));
@@ -49,9 +49,10 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
       }
     } else {
       System.out.println("\n[판매자 변경]");
-      String id = Prompt.inputString("변경할 판매자 아이디: ");
+      //      String id = Prompt.inputString("변경할 판매자 아이디: ");
+      //      Member seller = findById(id);
 
-      Member seller = findById(id);
+      Member seller = (Seller) request.getAttribute("seller");
 
       if (seller == null) {
         System.out.println("해당 아이디의 회원이 없습니다.");
