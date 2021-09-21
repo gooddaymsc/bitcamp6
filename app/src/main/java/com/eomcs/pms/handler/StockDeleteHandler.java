@@ -9,12 +9,12 @@ public class StockDeleteHandler extends AbstractStockHandler {
     super(stockPrompt);
   }
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     String nowLoginId = App.getLoginUser().getId();
     while(true) {
       System.out.println("[재고 삭제]");
 
-      String stockName = Prompt.inputString("삭제할 상품명 : ");
+      String stockName = (String)request.getAttribute("stock");
       if (!stockPrompt.findByStock(stockName, nowLoginId)) {
         System. out.println("해당 이름의 재고가 없습니다.");
         return;

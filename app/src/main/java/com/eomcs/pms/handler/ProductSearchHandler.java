@@ -13,9 +13,8 @@ import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class ProductSearchHandler extends AbstractProductHandler {
-
-  StockPrompt stockPrompt;
   ProductPrompt productPrompt;
+  StockPrompt stockPrompt;
   MemberPrompt memberPrompt;
   CartPrompt cartPrompt;
   List<Product> productList;

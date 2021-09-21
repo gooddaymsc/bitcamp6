@@ -10,8 +10,8 @@ public class ProductAddHandler extends AbstractProductHandler {
   List<Product> productList;
   ProductPrompt productPrompt;
   public ProductAddHandler (List<Product> productList, ProductPrompt productPrompt) {
-    this.productList = productList;
     this.productPrompt = productPrompt;
+    this.productList = productList;
   }
 
   @Override
