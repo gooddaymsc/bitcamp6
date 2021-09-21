@@ -22,8 +22,8 @@ public class BookingListHandler extends AbstractBookingHandler{
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("\n[내 픽업 예약 목록]");
-      BookingList bookingList = bookingPrompt.findById(App.getLoginUser().getId());
+      System.out.println("[내 픽업 예약 목록]");
+      BookingList bookingList = bookingPrompt.findBookingList(App.getLoginUser().getId());
 
       if (bookingList.getBooking().size() == 0) {
         System.out.println("아직 예약한 상품이 없습니다.");
@@ -61,8 +61,8 @@ public class BookingListHandler extends AbstractBookingHandler{
     } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
       memberPrompt.changeBookingUpdate(App.getLoginUser().getId(), false);
 
-      System.out.println("\n[고객 예약 목록]");
-      BookingList bookingList = bookingPrompt.findById(App.getLoginUser().getId());
+      System.out.println("[고객 예약 목록]");
+      BookingList bookingList = bookingPrompt.findBookingList(App.getLoginUser().getId());
 
       if (bookingList.getBooking().size() == 0) {
         System.out.println("아직 예약한 고객이 없습니다.");

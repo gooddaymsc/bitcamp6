@@ -30,14 +30,17 @@ public class CartDetailHandler extends AbstractCartHandler {
 
     while (true) {
 
-      String choose = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      String choose = Prompt.inputString("변경(U), 삭제(D), 예약(B), 이전(0)>");
+      System.out.println();
       switch(choose) {
         case "U" :
         case "u" :request.getRequestDispatcher("/cart/update").forward(request); return;
         case "D" :
         case "d" :request.getRequestDispatcher("/cart/delete").forward(request); return;
+        case "B" :
+        case "b" :request.getRequestDispatcher("/booking/add").forward(request); return;
         case "0" : return;
-        default : System.out.println("잘못입력하셨습니다"); continue;
+        default : System.out.println("잘못입력하셨습니다.\n"); continue;
       }
 
     }

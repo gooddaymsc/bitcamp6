@@ -1,7 +1,7 @@
 package com.eomcs.pms.handler;
 
+import java.util.ArrayList;
 import java.util.List;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Product;
@@ -24,36 +24,73 @@ public class BookingPrompt {
     return null;
   }
 
-  public BookingList findbookingListById(String id) {
-    for (BookingList bookingList : allBookingList) {
-      if (bookingList.getId().equals(id)) {
-        return bookingList;
+  // 먼저 buyer 기준으로만.
+  protected List<Booking> findBookingBuyer (int No, String firstId, String secondId, boolean delete) {
+    List<Booking> twoBookingList = new ArrayList<>();
+    BookingList bookingList = findBookingList(firstId);
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == No) {
+        twoBookingList.add(booking);
+        if (delete) {
+          bookingList.getBooking().remove(booking);
+        }
+        bookingList = findBookingList(secondId);
+        for (Booking booking2 : bookingList.getBooking()) {
+          if (booking2.getBuyerId().equals(firstId)
+              && booking2.getCart().getStock().getProduct().getProductName().equals(
+                  booking.getCart().getStock().getProduct().getProductName())) {
+            twoBookingList.add(booking2);
+            if (delete) {
+              bookingList.getBooking().remove(booking2);
+            }
+            return twoBookingList;
+          }
+        }
       }
     }
     return null;
   }
-  protected Booking findByBooking (String ProductName) {
-    BookingList bookingList = findbookingListById(App.getLoginUser().getId());
+
+  // 먼저 seller 기준으로만.
+  protected List<Booking> findBookingSeller (int No, String firstId, String secondId, boolean delete) {
+    List<Booking> twoBookingList = new ArrayList<>();
+    BookingList bookingList = findBookingList(firstId);
     for (Booking booking : bookingList.getBooking()) {
-      if (booking.getCart().getStock().getProduct().getProductName().equals(ProductName)) {
+      if (booking.getBookingNumber() == No) {
+        twoBookingList.add(booking);
+        if (delete) {
+          bookingList.getBooking().remove(booking);
+        }
+        bookingList = findBookingList(secondId);
+        for (Booking booking2 : bookingList.getBooking()) {
+          if (booking2.getCart().getSellerId().equals(firstId)
+              && booking2.getCart().getStock().getProduct().getProductName().equals(
+                  booking.getCart().getStock().getProduct().getProductName())) {
+            twoBookingList.add(booking2);
+            if (delete) {
+              bookingList.getBooking().remove(booking2);
+            }
+            return twoBookingList;
+          }
+        }
+      }
+    }
+    return null;
+  }
+  protected Booking findBookingByNo (int No, String id) {
+    BookingList bookingList = findBookingList(id);
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == No) {
         return booking;
       }
     }
     return null;
   }
-  protected BookingList findById(String id) {
+
+  protected BookingList findBookingList(String id) {
     for (BookingList bookingList : allBookingList) {
       if (bookingList.getId().equals(id)) {
         return bookingList;
-      }
-    }
-    return null;
-  }
-  protected Booking findByNo(int no) {
-    BookingList bookingList = findById(App.getLoginUser().getId());
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getBookingNumber() == no) {
-        return booking;
       }
     }
     return null;
