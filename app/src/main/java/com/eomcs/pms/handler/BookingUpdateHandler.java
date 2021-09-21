@@ -2,6 +2,8 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.menu.Menu;
+import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.util.Prompt;
@@ -16,13 +18,17 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[예약 변경]");
+    int No = (int) request.getAttribute("bookingNo");
+    Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
-    String bookingName = (String) request.getAttribute("booking");
-    Booking booking = bookingPrompt.findByBooking(bookingName);
+    List<Booking> bookingList = null;
+    if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) { 
+      bookingList = bookingPrompt.findBookingBuyer(
+          No, App.getLoginUser().getId(), booking.getCart().getSellerId(), false);
 
-    if (booking == null) {
-      System.out.println("예약이 없는 상품입니다.");
-      return;
+    } else {
+      bookingList = bookingPrompt.findBookingSeller(
+          No, App.getLoginUser().getId(), booking.getBuyerId(), false);
     }
 
     Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") : ");
@@ -32,9 +38,13 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
     if (input.equalsIgnoreCase("y")) {
-      booking.setBookingDate(reservationDate);
-      booking.setBookingHour(reservationHour);
-      booking.setBookingMinute(reservationMinute);
+      bookingList.get(0).setBookingDate(reservationDate);
+      bookingList.get(0).setBookingHour(reservationHour);
+      bookingList.get(0).setBookingMinute(reservationMinute);
+
+      bookingList.get(1).setBookingDate(reservationDate);
+      bookingList.get(1).setBookingHour(reservationHour);
+      bookingList.get(1).setBookingMinute(reservationMinute);
       System.out.println("픽업 예약을 변경하였습니다.");
       return;
     } else {

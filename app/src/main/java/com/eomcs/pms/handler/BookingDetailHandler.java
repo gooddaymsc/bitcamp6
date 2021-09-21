@@ -20,11 +20,11 @@ public class BookingDetailHandler extends AbstractBookingHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("\n[내 픽업 예약 상세보기]");
+      System.out.println("[내 픽업 예약 상세보기]");
 
-      String bookingName = Prompt.inputString("상품명 :");
-      if (bookingName == null) { return; }
-      Booking booking = bookingPrompt.findByBooking(bookingName);
+      int No = Prompt.inputInt("예약번호 :");
+      //      if (bookingName == null) { return; }
+      Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
       if (booking == null) {
         System.out.println("해당 상품의 예약이 없습니다.");
@@ -40,7 +40,7 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       System.out.printf("픽업 예약시간: %d시 %d분\n", booking.getBookingHour(), booking.getBookingMinute());
       System.out.println();
 
-      request.setAttribute("booking", bookingName);
+      request.setAttribute("bookingNo", No);
       while(true) {
         System.out.println("1. 예약변경 / 2. 예약취소 / 이전(0)");
         int choose = Prompt.inputInt("선택 > ");
@@ -53,11 +53,11 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       }
 
     } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
-      System.out.println("\n[고객 예약 상세보기]");
+      System.out.println("[고객 예약 상세보기]");
 
-      String bookingName = Prompt.inputString("상품명 :");
-      if (bookingName == null) { return; }
-      Booking booking = bookingPrompt.findByBooking(bookingName);
+      int No = Prompt.inputInt("예약번호 :");
+      //    if (bookingName == null) { return; }
+      Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
       if (booking == null) {
         System.out.println("해당 상품의 예약이 없습니다.");
@@ -72,8 +72,7 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       System.out.printf("픽업 예약시간: %d시 %d분\n", booking.getBookingHour(), booking.getBookingMinute());
       System.out.println();
 
-      request.setAttribute("booking", bookingName);
-      System.out.println();
+      request.setAttribute("bookingNo", No);
       while(true) {
         System.out.println("1. 예약변경 / 이전(0)");
         int choose = Prompt.inputInt("선택 > ");
