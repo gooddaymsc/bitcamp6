@@ -35,6 +35,7 @@ import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
+import com.eomcs.pms.handler.BookingDetailHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingPrompt;
 import com.eomcs.pms.handler.BookingUpdateHandler;
@@ -167,7 +168,7 @@ public class App {
     commandMap.put("/seller/list",   new SellerListHandler(memberList));
     commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
     commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, memberPrompt));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
@@ -205,8 +206,9 @@ public class App {
 
     commandMap.put("/booking/add",    new BookingAddHandler(allBookingList, cartPrompt, stockPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/booking/list",   new BookingListHandler(allBookingList, bookingPrompt, memberPrompt));
-    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList));
+    commandMap.put("/booking/detail",   new BookingDetailHandler(allBookingList, bookingPrompt, memberPrompt));
+    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList, bookingPrompt));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList, bookingPrompt));
 
     commandMap.put("/findId", new FindIdHandler(memberPrompt));
     commandMap.put("/findPassword", new FindPasswordHandler(memberPrompt));
@@ -378,8 +380,9 @@ public class App {
 
     bookingMenu.add(new MenuItem("예약등록", ACCESS_BUYER, "/booking/add"));
     bookingMenu.add(new MenuItem("예약내역",  ACCESS_BUYER | ACCESS_SELLER, "/booking/list"));
-    bookingMenu.add(new MenuItem("예약변경", "/booking/update"));
-    bookingMenu.add(new MenuItem("예약취소", ACCESS_BUYER, "/booking/delete"));
+    //    bookingMenu.add(new MenuItem("예약변경", "/booking/update"));
+    //    bookingMenu.add(new MenuItem("예약상세보기",ACCESS_BUYER | ACCESS_SELLER,  "/booking/detail"));
+    //    bookingMenu.add(new MenuItem("예약취소", ACCESS_BUYER, "/booking/delete"));
 
     ///////////////////////////////////////////
 
@@ -449,16 +452,16 @@ public class App {
 
     managerMemberMenu1.add(new MenuItem("목록", "/buyer/list"));
     managerMemberMenu1.add(new MenuItem("상세보기", "/buyer/detail"));
-    managerMemberMenu1.add(new MenuItem("변경", "/buyer/update"));
-    managerMemberMenu1.add(new MenuItem("삭제", "/buyer/delete"));
+    //    managerMemberMenu1.add(new MenuItem("변경", "/buyer/update"));
+    //    managerMemberMenu1.add(new MenuItem("삭제", "/buyer/delete"));
 
     MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");  //2
     managerMenu.add(managerSellerMenu1);
 
     managerSellerMenu1.add(new MenuItem("목록", "/seller/list"));
     managerSellerMenu1.add(new MenuItem("상세보기", "/seller/detail"));
-    managerSellerMenu1.add(new MenuItem("변경", "/seller/update"));
-    managerSellerMenu1.add(new MenuItem("삭제", "/seller/delete"));
+    //    managerSellerMenu1.add(new MenuItem("변경", "/seller/update"));
+    //    managerSellerMenu1.add(new MenuItem("삭제", "/seller/delete"));
 
     return mainMenuGroup;
   }
