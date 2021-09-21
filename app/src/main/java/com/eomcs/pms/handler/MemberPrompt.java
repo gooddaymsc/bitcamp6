@@ -81,12 +81,27 @@ public class MemberPrompt {
     return null;
   }
 
+  public void returnMessageUpdate(String memberId) {
+    for (Member member : memberList) {
+      if (member.getId().equals(memberId)) {
+        member.setMessageUpdate(false);
+      }
+    }
+  }
+  public void sendMessageUpdate(String memberId) {
+    for (Member member : memberList) {
+      if (member.getId().equals(memberId)) {
+        member.setMessageUpdate(true);
+      }
+    }
+  }
 
-  public HashMap<String, Seller> findByAdress (String adress) {
+
+  public HashMap<String, Seller> findByAdress (String address) {
     HashMap<String, Seller> hashMap = new HashMap<>();
     for (Member seller : memberList) {
       if(seller instanceof Seller) {
-        String[] arr = adress.split(" ");
+        String[] arr = address.split(" ");
         if(arr[2].equals(((Seller)seller).getBusinessAddress()) &&
             arr[1].equals(((Seller) seller).getBusinessAddress())){
           System.out.println("\n[해당 주소 근처 판매처] ");

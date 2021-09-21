@@ -130,13 +130,17 @@ public class MenuGroup extends Menu {
           App.level(App.getLoginUser().getAuthority()));      
     }
     System.out.printf(" || [%s]\n", getBreadCrumb());
-    if (App.getLoginUser().isBookingUpdate() || App.getLoginUser().isCommentUpdate()) {
+    if (App.getLoginUser().isBookingUpdate() || App.getLoginUser().isCommentUpdate()
+        || App.getLoginUser().isMessageUpdate()) {
       System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
       if (App.getLoginUser().isCommentUpdate()) {
         System.out.println("| 새 댓글알림이 있습니다 |");
       }
       if (App.getLoginUser().isBookingUpdate()) {
         System.out.println("| 새 예약알림이 있습니다 |");
+      }
+      if (App.getLoginUser().isMessageUpdate()) {
+        System.out.println("| 새로운 메세지가 있습니다 |");
       }
       System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
     }

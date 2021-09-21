@@ -35,7 +35,7 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
     Booking booking = new Booking();
 
     // 해당 상품명이 장바구니에 담겨있는지 확인.
-    String productName = Prompt.inputString("상품명 : ");
+    String productName = (String) request.getAttribute("cart");
     HashMap<Cart, Seller> sellerInfo = cartPrompt.findByCartList(productName);
 
     String sellerId = "";

@@ -1,6 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
@@ -17,22 +18,20 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
   public void execute(CommandRequest request) {
     System.out.println("[예약 취소]");
 
-    //    String productName = Prompt.inputString("예약 취소할 상품명 : ");
-
-    String bookingName = (String) request.getAttribute("booking");
-    Booking booking = bookingPrompt.findByBooking(bookingName);
-
-    if (booking == null) {
-      System.out.println("예약이 없는 상품입니다.");
-      return;
-    }
+    int No = (int) request.getAttribute("bookingNo");
+    Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
     String input = Prompt.inputString("정말 취소하시겠습니까?(y/N) ");
 
     if (input.equalsIgnoreCase("y")) {
-      BookingList bookingList = bookingPrompt.findById(App.getLoginUser().getId());
+      if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) { 
+        bookingPrompt.findBookingBuyer(
+            No, App.getLoginUser().getId(), booking.getCart().getSellerId(), true);
 
-      bookingList.getBooking().remove(booking);
+      } else {
+        bookingPrompt.findBookingSeller(
+            No, App.getLoginUser().getId(), booking.getBuyerId(), true);
+      }
       System.out.println("예약을 취소하였습니다.");
       return;
     } else {

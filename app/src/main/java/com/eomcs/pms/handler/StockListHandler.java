@@ -4,6 +4,7 @@ import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
+import com.eomcs.util.Prompt;
 
 public class StockListHandler extends AbstractStockHandler {
   List<StockList> allStockList;
@@ -15,7 +16,7 @@ public class StockListHandler extends AbstractStockHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     String nowLoginId = App.getLoginUser().getId();
-    System.out.println("\n[재고 목록]");
+    System.out.println("[재고 목록]");
     StockList stockList = allStockList.get(stockPrompt.findStockListById(nowLoginId));
 
     if (stockList.getSellerStock().size() == 0) {
@@ -33,8 +34,20 @@ public class StockListHandler extends AbstractStockHandler {
           stock.getPrice(), 
           stock.getStocks());
     }
-    request.getRequestDispatcher("/stock/detail").forward(request);
+    System.out.println();
+    while(true) {
+      System.out.println("1. 상세보기 / 이전(0)");
+      int choose = Prompt.inputInt("선택 > ");
+      System.out.println();
+      switch(choose) {
+        case 1 : 
+          request.getRequestDispatcher("/stock/detail").forward(request); return;
+        case 0 :
+          return;
+        default : 
+          System.out.println("다시 선택해 주세요."); continue;
+      }
+    }
   }
 }
-
 
