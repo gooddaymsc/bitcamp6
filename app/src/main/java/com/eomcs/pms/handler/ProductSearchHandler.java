@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
@@ -32,75 +33,69 @@ public class ProductSearchHandler extends AbstractProductHandler {
     HashMap<String, Seller> sellerInfo = null;   
     System.out.println("[상품검색]");
 
-    while (true) {
-      String input = Prompt.inputString("상품입력: ");
 
-      if (input.equals("")) {
-        System.out.println("잘못 입력하셨습니다.");
-        continue;
+    String input = Prompt.inputString("상품입력: ");
+
+    if (input.equals("")) {
+      System.out.println("잘못 입력하셨습니다.");
+      //      continue;
+    }     
+
+    String productName  = productPrompt.findByProduct2(input);   
+
+    System.out.println("==========상품 목록==========");
+
+    while(true) {
+      int size = 1;
+      for(Product product : productList) {
+        if(product.getProductName().equals(productName)) {
+          System.out.printf("상품번호: %d \n", size++);
+          System.out.printf("상품명: %s\n", product.getProductName());
+          System.out.printf("주종: %s\n", product.getProductType());
+          System.out.printf("원산지: %s\n", product.getCountryOrigin());
+          System.out.printf("품종: %s\n", product.getVariety());
+          System.out.printf("알콜도수: %.2f\n", product.getAlcoholLevel()); 
+          System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugerLevel(),product.getAcidity(),product.getWeight());
+          System.out.println("-----------------------------------------");
+        }
       }
 
-      String productName  = productPrompt.findByProduct2(input);
+      if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
+        System.out.println("로그인 후 이용가능합니다.");
+        return;
+      }
 
-      request.setAttribute("productName", productName); 
-      request.getRequestDispatcher("/product/list").forward(request);
-      // productList를 연결하면 모든 리스트가 뜨고
-      // productDetail을 연결하면 입력한 상품정보는 잘 뜨는데
-      // 다른기능들이 섞여 있고(상품평 등록) 그 이후에 필요로 하는
-      // 재고확인과 장바구니 등록은 productList에 메서드가 있음....
-      // 그래서 아래 원래의 코드를 사용해야 할듯.
+      System.out.println("[재고 찾기]");
 
-      // 재고찾기는 별도의 클래스로 분리해야 할듯.(또는 아래 코드 사용)
+      while(true) {
+        try {
+          sellerInfo = memberPrompt.findByAdress(Prompt.inputString("주소입력: ")); 
+          break;
 
+        } catch (Exception e) {
+          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동) ");
+        }
 
-      //      System.out.println("==========상품 목록==========");
-      //
-      //      while(true) {
-      //        int size = 1;
-      //        for(Product product : productList) {
-      //          if(product.getProductName().equals(productName)) {
-      //            System.out.printf("상품번호: %d \n", size++);
-      //            System.out.printf("상품명: %s\n", product.getProductName());
-      //            System.out.printf("주종: %s\n", product.getProductType());
-      //            System.out.printf("원산지: %s\n", product.getCountryOrigin());
-      //            System.out.printf("품종: %s\n", product.getVariety());
-      //            System.out.printf("알콜도수: %.2f\n", product.getAlcoholLevel()); 
-      //            System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugerLevel(),product.getAcidity(),product.getWeight());
-      //            System.out.println("-----------------------------------------");
-      //          }
-      //        }
-      //
+      }
+
+      if(sellerInfo == null) {
+        System.out.println("해당 위치에 판매처가 없습니다.");
+        return;
+      } else {
+        for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
+          System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
+              entry.getValue().getBusinessName(),
+              entry.getValue().getBusinessAddress());
+        }
+      }
 
 
 
-      //      if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-      //        System.out.println("로그인 후 이용가능합니다.");
-      //        return;
-      //      }
-      //
-      //      System.out.println("[재고 찾기]");
-      //
-      //      while(true) {
-      //        try {
-      //          sellerInfo = memberPrompt.findByAdress(Prompt.inputString("주소입력: ")); 
-      //          break;
-      //
-      //        } catch (Exception e) {
-      //          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동) ");
-      //        }
-      //      }
-      //
-      //      if(sellerInfo == null) {
-      //        System.out.println("해당 위치에 판매처가 없습니다.");
-      //        return;
-      //      }
-      //
-      //      for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
-      //        System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
-      //            entry.getValue().getBusinessName(),
-      //            entry.getValue().getBusinessAddress());
-      //
-      //      }
+      request.setAttribute("상품명", productName); 
+      request.getRequestDispatcher("/cart/add").forward(request);
+
+
+
 
       //      //구매자 id의 cartList에 상품 담기.
       //      System.out.println();
@@ -132,14 +127,13 @@ public class ProductSearchHandler extends AbstractProductHandler {
       //        cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
       //        cart.setRegistrationDate(new Date(System.currentTimeMillis()));
       //        System.out.println("장바구니가 등록되었습니다.");
-      //
-      //      CartList cartList = cartPrompt.findCartListById(nowLoginId);
-      //      cartList.getPrivacyCart().add(cart);
-      //      return;
+      //        CartList cartList = cartPrompt.findCartListById(nowLoginId);
+      //        cartList.getPrivacyCart().add(cart);
+      //        return;
+      //      }
     }
   }
 }
-
 
 
 

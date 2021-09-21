@@ -22,6 +22,7 @@ import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Message;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.StockList;
@@ -62,6 +63,9 @@ import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MemberPrompt;
+import com.eomcs.pms.handler.MessageAddHandler;
+import com.eomcs.pms.handler.MessageDeleteHandler;
+import com.eomcs.pms.handler.MessageListHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -102,6 +106,8 @@ public class App {
   List<Member> memberList = new ArrayList<>();
   List<Buyer> buyerList = new ArrayList<>();
   List<Seller> sellerList = new ArrayList<>();
+  List<Message> messageList = new ArrayList<>();
+
   public static List<Integer> totalNumberList = new ArrayList<>();// totalMemberNumber, totalBoardNumber, totalProductNumber
 
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -225,6 +231,10 @@ public class App {
     commandMap.put("/findComment", new CommentFindHandler(boardList, boardPrompt, memberPrompt));
 
     commandMap.put("/ranking/list", new RankingHandler(productList));
+
+    commandMap.put("/message/add",    new MessageAddHandler(messageList, memberPrompt));
+    commandMap.put("/message/list",   new MessageListHandler(messageList, memberPrompt));
+    commandMap.put("/message/delete", new MessageDeleteHandler(messageList));
   }
 
   void service() {
@@ -467,6 +477,13 @@ public class App {
     managerSellerMenu1.add(new MenuItem("상세보기", "/seller/detail"));
     //    managerSellerMenu1.add(new MenuItem("변경", "/seller/update"));
     //    managerSellerMenu1.add(new MenuItem("삭제", "/seller/delete"));
+
+    MenuGroup messageMenu = new MenuGroup("메세지", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER);
+    mainMenuGroup.add(messageMenu);
+
+    messageMenu.add(new MenuItem("보내기", "/message/add"));
+    messageMenu.add(new MenuItem("읽기", "/message/list"));
+    messageMenu.add(new MenuItem("삭제", "/message/delete"));
 
     return mainMenuGroup;
   }
