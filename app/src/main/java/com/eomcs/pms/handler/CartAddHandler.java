@@ -64,5 +64,6 @@ public class CartAddHandler extends AbstractCartHandler {
 
     cartPrompt.putCartListById(nowLoginId, cart);
     System.out.println("장바구니가 등록되었습니다.\n");
+    // 나가기.
   }
 }

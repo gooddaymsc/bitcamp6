@@ -38,13 +38,16 @@ public class MessageListHandler extends AbstractMessageHandler {
           System.out.printf("4. 보낸 날짜 :%s\n", message.getRegistrationDate());
           System.out.println("------------------------------------");
         }
+        //        request.setAttribute("writer", message.getWriter());
       }
-      System.out.println("\n< 1.답장 / 0.이전  >");
+
+      System.out.println("\n< 1.답장 / 2.삭제 / 0.이전  >");
       String choose = Prompt.inputString("선택 > ");
 
       switch (choose) {
         case "0" : return;
         case "1" : request.getRequestDispatcher("/message/add").forward(request); return;
+        //        case "2" : request.getRequestDispatcher("/message/delete").forward(request); return;
         default : System.out.println("잘못입력하셨습니다"); continue;
       }
     }

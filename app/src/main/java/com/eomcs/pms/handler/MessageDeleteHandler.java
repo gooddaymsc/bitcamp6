@@ -16,6 +16,7 @@ public class MessageDeleteHandler extends AbstractMessageHandler {
   public void execute(CommandRequest request) {
 
     System.out.println("[메세지 삭제]");
+    //    String writer = (String) request.getAttribute("writer");
     String writer = Prompt.inputString("메세지 삭제할 상대 아이디 : ");
 
     Message message = findMessageById(writer);
