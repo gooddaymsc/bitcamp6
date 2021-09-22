@@ -89,48 +89,8 @@ public class ProductSearchHandler extends AbstractProductHandler {
         }
       }
 
-
-
       request.setAttribute("상품명", productName); 
       request.getRequestDispatcher("/cart/add").forward(request);
-
-
-
-
-      //      //구매자 id의 cartList에 상품 담기.
-      //      System.out.println();
-      //      System.out.println("\n[장바구니 등록]");
-      //      Cart cart = new Cart();
-      //      HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(productName);
-      //
-      //      if(hashStock.size() == 0 ) {
-      //        System.out.println("해당상품을 갖는 판매자가 없습니다.");
-      //        return;
-      //      }
-      //
-      //      else {
-      //        storeName = Prompt.inputString("가게명을 선택하세요 >");
-      //        cart.setStock(hashStock.get(storeName));
-      //        int stockNumber = Prompt.inputInt("수량 : ");
-      //        while(true) {
-      //          if(stockNumber <= hashStock.get(storeName).getStocks()){
-      //            cart.setCartStocks(stockNumber);
-      //            break;
-      //          }
-      //          else {
-      //            System.out.println("주문수량이 재고를 초과하였습니다.");
-      //            return;
-      //          }
-      //        }
-      //        cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
-      //        cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
-      //        cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
-      //        cart.setRegistrationDate(new Date(System.currentTimeMillis()));
-      //        System.out.println("장바구니가 등록되었습니다.");
-      //        CartList cartList = cartPrompt.findCartListById(nowLoginId);
-      //        cartList.getPrivacyCart().add(cart);
-      //        return;
-      //      }
     }
   }
 }
