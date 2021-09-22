@@ -43,13 +43,13 @@ public class Message implements Serializable {
   public void setRegistrationDate(Date registrationDate) {
     this.registrationDate = registrationDate;
   }
-
   public String getRecipientId() {
     return recipientId;
   }
   public void setRecipientId(String recipientId) {
     this.recipientId = recipientId;
   }
+
 
 
 

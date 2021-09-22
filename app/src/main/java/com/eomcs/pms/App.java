@@ -22,7 +22,7 @@ import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.pms.domain.Message;
+import com.eomcs.pms.domain.MessageList;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.StockList;
@@ -107,7 +107,7 @@ public class App {
   List<Member> memberList = new ArrayList<>();
   List<Buyer> buyerList = new ArrayList<>();
   List<Seller> sellerList = new ArrayList<>();
-  List<Message> messageList = new ArrayList<>();
+  List<MessageList> allMessageList = new ArrayList<>();
 
   public static List<Integer> totalNumberList = new ArrayList<>();// totalMemberNumber, totalBoardNumber, totalProductNumber
 
@@ -235,9 +235,9 @@ public class App {
 
     commandMap.put("/ranking/list", new RankingHandler(productList));
 
-    commandMap.put("/message/add",    new MessageAddHandler(messageList, memberPrompt));
-    commandMap.put("/message/list",   new MessageListHandler(messageList, memberPrompt));
-    commandMap.put("/message/delete", new MessageDeleteHandler(messageList));
+    commandMap.put("/message/add",    new MessageAddHandler(allMessageList, memberPrompt));
+    commandMap.put("/message/list",   new MessageListHandler(allMessageList, memberPrompt));
+    commandMap.put("/message/delete", new MessageDeleteHandler(allMessageList));
   }
 
   void service() {
