@@ -40,21 +40,21 @@ public class ReviewFindHandler extends AbstractReviewHandler{
 
     if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
       System.out.println();
+      String productName = Prompt.inputString("상품명 : ");
+      request.setAttribute("productName", productName);
+
       System.out.println("1. 리뷰변경 / 2. 리뷰삭제 / 이전(0)");
       // 상품 목록 후 판매자는 재고에 등록하게.
       while (true) {
         int choose = Prompt.inputInt("선택 > ");
         System.out.println();
         switch (choose) {
-          case 1 :Product product = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
-          request.setAttribute("상품", product);
-          request.getRequestDispatcher("/review/update").forward(request);  
-          return;
-          case 2: Product product1 = productPrompt.findByProduct(Prompt.inputString("상품명 : "));
-          request.setAttribute("상품", product1); 
-          request.getRequestDispatcher("/review/delete").forward(request); 
-          return;
-          default : System.out.println("다시 선택해 주세요.\n"); continue;
+          case 1 :
+            request.getRequestDispatcher("/review/update").forward(request); return;
+          case 2: 
+            request.getRequestDispatcher("/review/delete").forward(request); return;
+          case 0 : return;
+          default : System.out.println("다시 선택해 주세요."); continue;
         }
       }
     } else {

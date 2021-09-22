@@ -26,7 +26,7 @@ public class CartDetailHandler extends AbstractCartHandler {
     System.out.printf("등록일: %s\n", cart.getRegistrationDate());
     System.out.println();
 
-    request.setAttribute("cart",  productName);
+    request.setAttribute("productName",  productName);
 
     while (true) {
 

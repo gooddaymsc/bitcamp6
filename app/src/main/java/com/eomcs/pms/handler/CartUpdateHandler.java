@@ -14,7 +14,7 @@ public class CartUpdateHandler extends AbstractCartHandler {
     while(true) {
       System.out.println("[장바구니 변경]");
 
-      String productName = (String)request.getAttribute("cart");
+      String productName = (String)request.getAttribute("productName");
       Cart cart = cartPrompt.findByCart(productName);
 
       //Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));

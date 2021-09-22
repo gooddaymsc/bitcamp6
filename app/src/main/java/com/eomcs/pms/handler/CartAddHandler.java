@@ -27,7 +27,7 @@ public class CartAddHandler extends AbstractCartHandler {
     String nowLoginId = App.getLoginUser().getId();
     System.out.println("[장바구니 등록]");
     Cart cart = new Cart();
-    HashMap<String, Stock> hashStock = stockPrompt.findBySellerId((String) request.getAttribute("상품명"));
+    HashMap<String, Stock> hashStock = stockPrompt.findBySellerId((String) request.getAttribute("productName"));
 
     if (hashStock.size() == 0) {
       System.out.println("해당 상품을 갖는 판매자가 없습니다.\n");
