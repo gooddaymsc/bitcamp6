@@ -31,9 +31,16 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
           No, App.getLoginUser().getId(), booking.getBuyerId(), false);
     }
 
+    int bookingstocks = Prompt.inputInt(String.format("수량(변경 전 : %d) :", booking.getBookingStocks()));
+    // 수량 변경시 판매자 재고를 넘지 않도록, 변경후 수량 반영
+    //    if (sellerStock.getStocks() - bookingstocks<0) {
+    //      System.out.println("재고가 부족합니다. 구매 수량을 확인해주세요.");
+    //      return;
+    //    }
     Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") : ");
     int reservationHour = checkHour("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ") : ");
     int reservationMinute = checkMinute("픽업시간 변경 (기존 : " + booking.getBookingMinute() + "분"+ ") : ");
+
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
@@ -41,10 +48,15 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
       bookingList.get(0).setBookingDate(reservationDate);
       bookingList.get(0).setBookingHour(reservationHour);
       bookingList.get(0).setBookingMinute(reservationMinute);
+      bookingList.get(0).setBookingStocks(bookingstocks);
+      bookingList.get(0).setBookingPrice(booking.getCart().getStock().getPrice()*bookingstocks);
+
 
       bookingList.get(1).setBookingDate(reservationDate);
       bookingList.get(1).setBookingHour(reservationHour);
       bookingList.get(1).setBookingMinute(reservationMinute);
+      bookingList.get(1).setBookingStocks(bookingstocks);
+      bookingList.get(1).setBookingPrice(booking.getCart().getStock().getPrice()*bookingstocks);
       System.out.println("픽업 예약을 변경하였습니다.");
       return;
     } else {

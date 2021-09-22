@@ -13,8 +13,23 @@ public class Booking implements Serializable {
   private int bookingMinute;
   private String bookingTime;    //예약시간
   private Date registeredDate;   //등록일시
+  private int bookingStocks; // 예약 상품의 갯수
+  private int bookingPrice; // 총액
 
 
+
+  public int getBookingStocks() {
+    return bookingStocks;
+  }
+  public void setBookingStocks(int bookingStocks) {
+    this.bookingStocks = bookingStocks;
+  }
+  public int getBookingPrice() {
+    return bookingPrice;
+  }
+  public void setBookingPrice(int bookingPrice) {
+    this.bookingPrice = bookingPrice;
+  }
   public Cart getCart() {
     return cart;
   }
