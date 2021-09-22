@@ -19,6 +19,9 @@ public abstract class AbstractReviewHandler implements Command {
   }
 
   protected Review findReviewById(Product product, String id) {
+    //    if (product.getReviewList().size()==0) {
+    //      return null;
+    //    }
     for (Review review : product.getReviewList()) {
       if (review.getId().equals(id)) {
         return review;

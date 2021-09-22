@@ -21,23 +21,23 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
 
 
     if (board == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 게시글이 없습니다.\n");
       return;
     }
 
     if (!((board.getWriter().equals(App.getLoginUser().getId())) ||
         (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN))) {
-      System.out.println("작성자가 아니므로 삭제할 수 없습니다.");
+      System.out.println("작성자가 아니므로 삭제할 수 없습니다.\n");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
       boardList.remove(board);
-      System.out.println("게시글을 삭제하였습니다.");
+      System.out.println("게시글을 삭제하였습니다.\n");
       return;
     }
-    System.out.println("게시글 삭제를 취소하였습니다.");
+    System.out.println("게시글 삭제를 취소하였습니다.\n");
     return;
   }
 

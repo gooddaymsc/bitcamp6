@@ -18,7 +18,7 @@ public class ReviewAddHandler extends AbstractReviewHandler {
   public void execute(CommandRequest request) {
     System.out.println("[Reviews 작성]");
     Review review = new Review();
-    Product product = (Product) request.getAttribute("상품");
+    Product product =  productPrompt.findByProduct((String) request.getAttribute("productName"));
 
     if (reviewIs(product)) {
       System.out.println("이미 등록한 리뷰가 있습니다.\n");
@@ -29,18 +29,17 @@ public class ReviewAddHandler extends AbstractReviewHandler {
     if(App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
       float scores = checkNum("맛은 어떠셨나요?(1점-5점):");
       review.setScore(scores); //개인별 평점
-      product.setRate((product.getRate()*product.getReviewerNum()+scores)/(product.getReviewerNum()+1)); //상품 총점
       product.setReviewerNum(product.getReviewerNum()+1);
 
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
-      System.out.println("상품평 등록을 완료하였습니다.");
+      System.out.println("상품평 등록을 완료하였습니다.\n");
       review.setNo(review.getNo()+1);
       review.setRegisteredDate(new Date(System.currentTimeMillis()));
       review.setId(App.getLoginUser().getId());
       product.getReviewList().add(review);
       return;
     } else {
-      System.out.println("구매자만 등록 가능합니다.");
+      System.out.println("구매자만 등록 가능합니다.\n");
     } 
   }
 } 

@@ -14,7 +14,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
   }
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("\n[상품 삭제]");
+    System.out.println("[상품 삭제]");
 
     Product product = (Product) request.getAttribute("상품");
 
@@ -25,11 +25,11 @@ public class ProductDeleteHandler extends AbstractProductHandler {
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      System.out.println("상품을 삭제하였습니다.");
+      System.out.println("상품을 삭제하였습니다.\n");
       productList.remove(product);
       return;
     } else {
-      System.out.println("상품 삭제를 취소하였습니다.");
+      System.out.println("상품 삭제를 취소하였습니다.\n");
       return;
     }
   }

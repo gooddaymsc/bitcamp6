@@ -16,11 +16,11 @@ public class ReviewDeleteHandler extends AbstractReviewHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[Reviews 삭제]");
-    Product product = (Product) request.getAttribute("상품");
+    Product product =  productPrompt.findByProduct((String) request.getAttribute("productName"));
 
     Review review = findReviewById(product, App.getLoginUser().getId());
     if (review == null) {
-      System.out.println("해당 상품에 작성하신 리뷰가 없습니다.");
+      System.out.println("해당 상품에 작성하신 리뷰가 없습니다.\n");
       return;
     }
 

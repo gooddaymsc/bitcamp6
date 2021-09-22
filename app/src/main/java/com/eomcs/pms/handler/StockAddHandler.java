@@ -23,7 +23,7 @@ public class StockAddHandler extends AbstractStockHandler {
 
     System.out.println("[재고등록]");
     Stock stock = new Stock();
-    String productName = (String) request.getAttribute("상품명");
+    String productName = (String) request.getAttribute("productName");
     Product product = productPrompt.findByProduct(productName);
     if (product == null) {
       System.out.println("입력하신 상품이 없습니다.\n");
