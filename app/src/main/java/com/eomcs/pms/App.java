@@ -282,6 +282,8 @@ public class App {
   }
 
   private void seperateMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
+    buyerList = new ArrayList<>();
+    sellerList = new ArrayList<>();
     for (Member member : memberList) {
       if (member instanceof Buyer) {
         buyerList.add((Buyer)member);   
