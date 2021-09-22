@@ -196,7 +196,7 @@ public class App {
 
 
     commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
-    commandMap.put("/product/list",   new ProductListHandler(productList));
+    commandMap.put("/product/list",   new ProductListHandler(productList, productPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));

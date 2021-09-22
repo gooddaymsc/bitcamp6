@@ -20,11 +20,11 @@ public class ReviewUpdateHandler extends AbstractReviewHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[Reviews 변경]");
-    Product product = (Product) request.getAttribute("상품");
+    Product product =  productPrompt.findByProduct((String) request.getAttribute("productName"));
     Review review = findReviewById(product, App.getLoginUser().getId());
 
     if (review == null) {
-      System.out.println("해당 상품에 작성하신 리뷰가 없습니다.");
+      System.out.println("해당 상품에 작성하신 리뷰가 없습니다.\n");
       return;
     }
 
@@ -35,7 +35,6 @@ public class ReviewUpdateHandler extends AbstractReviewHandler {
 
     float scores = checkNum("맛은 어떠셨나요?(1점-5점):");
     review.setScore(scores);
-    product.setRate((product.getRate()*product.getReviewerNum()+scores)/(product.getReviewerNum()+1)); //상품 총점
     String content = Prompt.inputString(String.format("내용(변경 전 : %s) : ", review.getComment()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");

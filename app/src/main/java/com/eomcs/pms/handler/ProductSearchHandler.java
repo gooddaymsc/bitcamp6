@@ -89,7 +89,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
         }
       }
 
-      request.setAttribute("상품명", productName); 
+      request.setAttribute("productName", productName); 
       request.getRequestDispatcher("/cart/add").forward(request);
     }
   }

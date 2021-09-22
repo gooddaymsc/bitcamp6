@@ -23,9 +23,6 @@ public class RankingHandler implements Command {
 
     HashMap <String, Float > map = new HashMap<>();
 
-
-    //   ArrayList<Float> arrayList = new ArrayList<Float>();
-
     for(Product product : productList) {  
       map.put(product.getProductName(),product.getRate());
     }

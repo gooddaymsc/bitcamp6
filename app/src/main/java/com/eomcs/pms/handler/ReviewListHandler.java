@@ -19,19 +19,20 @@ public class ReviewListHandler extends AbstractReviewHandler {
     Loop : while(true) {
       System.out.println("[Reviews]");
 
-      Product product = (Product) request.getAttribute("상품");
+      Product product = productPrompt.findByProduct((String) request.getAttribute("productName"));
 
       System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",
           "평점", "코멘트", "작성자", "등록일");
       System.out.println("--------------------------------------------------------------------------");
-
-
-      for(Review re : product.getReviewList()) {
-        System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",  
-            re.getScore(),
-            re.getComment(),
-            re.getId(),
-            re.getRegisteredDate());
+      if (product.getReviewList().size()==0) {
+      } else {
+        for(Review re : product.getReviewList()) {
+          System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",  
+              re.getScore(),
+              re.getComment(),
+              re.getId(),
+              re.getRegisteredDate());
+        }
       }
       System.out.println();
 
@@ -51,9 +52,17 @@ public class ReviewListHandler extends AbstractReviewHandler {
         }
       } else {
         return;
+        //        System.out.println("이전(0)");
+        //        while (true) {
+        //          int choose = Prompt.inputInt("선택 > ");
+        //          System.out.println();
+        //          switch (choose) {
+        //            case 0 : return;
+        //            default : System.out.println("다시 선택해 주세요.\n"); continue;
+        //          }
       }
     }
-  } 
+  }
 }
 
 

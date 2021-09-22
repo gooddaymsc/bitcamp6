@@ -22,7 +22,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("\n[회원 등록]");
+    System.out.println("[회원 등록]");
 
     Member buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);

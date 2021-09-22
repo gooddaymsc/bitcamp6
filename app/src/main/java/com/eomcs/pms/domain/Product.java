@@ -82,10 +82,16 @@ public class Product implements Serializable{
     this.reviewList = reviewList;
   }
   public float getRate() {
-    return rate;
-  }
-  public void setRate(float rate) {
-    this.rate = rate;
+    if (this.reviewList.size()==0) {
+      return 0;
+    } else {
+      int sum = 0;
+      for (Review review : this.reviewList) {
+        sum += review.getScore();
+      }
+      this.rate = (float) sum/(reviewList.size());
+      return this.rate;
+    }
   }
   public int getReviewerNum() {
     return reviewerNum;
