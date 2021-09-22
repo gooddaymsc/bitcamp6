@@ -52,14 +52,6 @@ public class ReviewListHandler extends AbstractReviewHandler {
         }
       } else {
         return;
-        //        System.out.println("이전(0)");
-        //        while (true) {
-        //          int choose = Prompt.inputInt("선택 > ");
-        //          System.out.println();
-        //          switch (choose) {
-        //            case 0 : return;
-        //            default : System.out.println("다시 선택해 주세요.\n"); continue;
-        //          }
       }
     }
   }

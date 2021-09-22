@@ -363,16 +363,11 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup boardMenu = new MenuGroup("게시판");
-    mainMenuGroup.add(boardMenu);
-
-    boardMenu.add(new MenuItem("목록", "/board/list"));
-    boardMenu.add(new MenuItem("상세보기", "/board/detail"));
-    boardMenu.add(new MenuItem("변경", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER,"/board/update"));
-    boardMenu.add(new MenuItem("삭제",ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/board/delete"));
-    boardMenu.add(new MenuItem("검색", "/board/search"));
+    //    MenuGroup boardMenu = new MenuGroup("게시판");
+    mainMenuGroup.add(new MenuItem("게시판", "/board/list"));
 
     ///////////////////////////////////////////
+
     MenuGroup productMenu = new MenuGroup("상품");
     mainMenuGroup.add(productMenu);
 
