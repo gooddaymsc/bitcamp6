@@ -32,7 +32,6 @@ public class BookingListHandler extends AbstractBookingHandler{
       System.out.printf("%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\n",
           "예약번호", "가게명", "상품명", "예약일시", "픽업 예약날짜", "픽업 예약시간");
       System.out.println("--------------------------------------------------------------------------");
-
       for (Booking booking : bookingList.getBooking() ) {
         String sellerId = booking.getCart().getSellerId();
         System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%d시 %d분\n",
@@ -41,8 +40,7 @@ public class BookingListHandler extends AbstractBookingHandler{
             booking.getCart().getStock().getProduct().getProductName(),
             booking.getRegisteredDate(),
             booking.getBookingDate(),
-            booking.getBookingHour(), booking.getBookingMinute()
-            );
+            booking.getBookingHour(), booking.getBookingMinute());
       }
 
       System.out.println();

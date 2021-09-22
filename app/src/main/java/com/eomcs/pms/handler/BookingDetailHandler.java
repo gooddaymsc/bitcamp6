@@ -5,6 +5,8 @@ import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
+import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class BookingDetailHandler extends AbstractBookingHandler {
@@ -23,7 +25,6 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       System.out.println("[내 픽업 예약 상세보기]");
 
       int No = Prompt.inputInt("예약번호 :");
-      //      if (bookingName == null) { return; }
       Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
       if (booking == null) {
@@ -32,12 +33,15 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       }
 
       String sellerId = booking.getCart().getSellerId();
-      System.out.printf( "예약번호: %d\n", booking.getBookingNumber());
-      System.out.printf("가게명: %s\n", memberPrompt.findBySellerInfo(sellerId).getBusinessName());
+      Seller seller = memberPrompt.findBySellerInfo(sellerId);
+
+      System.out.printf("가게명: %s\n", seller.getBusinessName());
+      System.out.printf("판매자: %s\n", seller.getNickname());
+      System.out.printf("가게주소: %s\n", seller.getBusinessAddress());
+      System.out.printf("가게번호: %s\n", seller.getBusinessPlaceNumber());
       System.out.printf("상품명: %s\n", booking.getCart().getStock().getProduct().getProductName());
-      System.out.printf("예약일시: %s\n", booking.getRegisteredDate());
-      System.out.printf("픽업 예약날짜: %s\n",  booking.getBookingDate());
-      System.out.printf("픽업 예약시간: %d시 %d분\n", booking.getBookingHour(), booking.getBookingMinute());
+      System.out.printf("수량: %d\n", booking.getBookingStocks());
+      System.out.printf("금액: %d원\n",  booking.getBookingPrice());
       System.out.println();
 
       request.setAttribute("bookingNo", No);
@@ -56,7 +60,6 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       System.out.println("[고객 예약 상세보기]");
 
       int No = Prompt.inputInt("예약번호 :");
-      //    if (bookingName == null) { return; }
       Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
       if (booking == null) {
@@ -64,13 +67,18 @@ public class BookingDetailHandler extends AbstractBookingHandler {
         return;
       }
 
-      System.out.printf( "예약번호: %d\n", booking.getBookingNumber());
+      Buyer buyer = memberPrompt.findByBuyerInfo(booking.getBuyerId());
+
       System.out.printf("예약자: %s\n", booking.getBuyerId());
+      System.out.printf("연락처: %s\n", buyer.getPhoneNumber());
       System.out.printf("상품명: %s\n", booking.getCart().getStock().getProduct().getProductName());
-      System.out.printf("예약일시: %s\n", booking.getRegisteredDate());
-      System.out.printf("픽업 예약날짜: %s\n",  booking.getBookingDate());
-      System.out.printf("픽업 예약시간: %d시 %d분\n", booking.getBookingHour(), booking.getBookingMinute());
+      System.out.printf("수량: %d\n", booking.getBookingStocks());
+      System.out.printf("금액: %d원\n",  booking.getBookingPrice());
+
       System.out.println();
+
+
+      System.out.println("");
 
       request.setAttribute("bookingNo", No);
       while(true) {
