@@ -33,8 +33,8 @@ public class MessageListHandler extends AbstractMessageHandler {
     }
 
     for (Message message : messageList.getMessage()) {
-      System.out.printf("1. 보낸사람 :%s\n", message.getWriter());
-      System.out.printf("2. 제목 :%s\n", message.getTitle());
+      //      System.out.printf("1. 보낸사람 :%s\n", message.getWriter());
+      //      System.out.printf("2. 제목 :%s\n", message.getTitle());
       System.out.printf("3. 내용 :%s\n", message.getContent());
       System.out.printf("4. 보낸 날짜 :%s\n", message.getRegistrationDate());
       System.out.println("------------------------------------");
