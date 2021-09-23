@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Message;
 import com.eomcs.pms.domain.MessageList;
 import com.eomcs.util.Prompt;

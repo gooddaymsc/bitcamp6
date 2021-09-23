@@ -9,9 +9,12 @@ public class ProductAddHandler extends AbstractProductHandler {
 
   List<Product> productList;
   ProductPrompt productPrompt;
-  public ProductAddHandler (List<Product> productList, ProductPrompt productPrompt) {
+  List<Integer> totalNumberList;
+  public ProductAddHandler (List<Product> productList, ProductPrompt productPrompt,
+      List<Integer> totalNumberList) {
     this.productPrompt = productPrompt;
     this.productList = productList;
+    this.totalNumberList = totalNumberList;
   }
 
   @Override
@@ -33,9 +36,9 @@ public class ProductAddHandler extends AbstractProductHandler {
     product.setSugerLevel(checkNum("당도(1-5) : "));
     product.setAcidity(checkNum("산도(1-5) : "));
     product.setWeight(checkNum("바디감(1-5) : "));
-    product.setProductNumber(App.totalNumberList.get(App.PROUDCT_NUMBER_INDEX));
+    product.setProductNumber(totalNumberList.get(App.PROUDCT_NUMBER_INDEX));
     // Numbering은 마지막에
-    App.totalNumberList.set(App.PROUDCT_NUMBER_INDEX, product.getProductNumber()+1);
+    totalNumberList.set(App.PROUDCT_NUMBER_INDEX, product.getProductNumber()+1);
     productList.add(product);
 
     System.out.println("상품을 등록하였습니다.");

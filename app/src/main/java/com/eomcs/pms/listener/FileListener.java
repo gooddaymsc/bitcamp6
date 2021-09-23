@@ -39,7 +39,7 @@ public class FileListener implements ApplicationContextListener {
     List<Buyer> buyerList = (List<Buyer>) params.get("buyerList");
     List<Seller> sellerList = (List<Seller>) params.get("sellerList");
     List<MessageList> allMessageList = (List<MessageList>) params.get("allMessageList");
-    //     List<Integer> totalNumberList = (List<Integer>) params.get("totalNumberList");
+    List<Integer> totalNumberList = (List<Integer>) params.get("totalNumberList");
 
     // List Load.
     loadObjects("board.json", boardList, Board.class);
@@ -53,7 +53,8 @@ public class FileListener implements ApplicationContextListener {
     loadObjects("stock.json", allStockList, StockList.class);
     loadObjects("cart.json", allCartList, CartList.class);
     loadObjects("booking.json", allBookingList, BookingList.class);
-    //    loadObjects("totalNumber.json", totalNumberList, Integer.class);
+    loadObjects("message.json", allMessageList, MessageList.class);
+    loadObjects("totalNumber.json", totalNumberList, Integer.class);
 
   }
   private <E> void loadObjects(String filepath, List<E> list, Class<E> domainType) {
@@ -86,24 +87,25 @@ public class FileListener implements ApplicationContextListener {
     List<BookingList> allBookingList = (List<BookingList>) params.get("allBookingList");
     List<CartList> allCartList = (List<CartList>) params.get("allCartList");
     List<Member> memberList = (List<Member>) params.get("memberList");
-    List<Buyer> buyerList = (List<Buyer>) params.get("buyerList");
-    List<Seller> sellerList = (List<Seller>) params.get("sellerList");
+    //    List<Buyer> buyerList = (List<Buyer>) params.get("buyerList");
+    //    List<Seller> sellerList = (List<Seller>) params.get("sellerList");
     List<MessageList> allMessageList = (List<MessageList>) params.get("allMessageList");
-    //   List<Integer> totalNumberList = (List<Integer>) params.get("totalNumberList");
+    List<Integer> totalNumberList = (List<Integer>) params.get("totalNumberList");
 
     //List 저장
     saveObjects("board.json", boardList);
     // memberList 를 buyerList, sellerList로 나눈다.
-    seperateMember(memberList, buyerList, sellerList);
+    //    seperateMember(memberList, buyerList, sellerList);
     // buyerList, sellerList 따로 저장한다.
-    saveObjects("buyer.json", buyerList);
-    saveObjects("seller.json", sellerList);
+    saveObjects("buyer.json", seperateBuyer(memberList));
+    saveObjects("seller.json", seperateSeller(memberList));
 
     saveObjects("product.json", productList);
     saveObjects("stock.json", allStockList);
     saveObjects("cart.json", allCartList);
     saveObjects("booking.json", allBookingList);
-    //    saveObjects("totalNumber.json", totalNumberList);
+    saveObjects("message.json", allMessageList);
+    saveObjects("totalNumber.json", totalNumberList);
   }
 
   private void saveObjects(String filepath, List<?> list) {
@@ -122,25 +124,31 @@ public class FileListener implements ApplicationContextListener {
   }
 
 
-  private void mergeMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
-    for (Buyer buyer : buyerList) {
-      memberList.add(buyer);
+  private void mergeMember(List<Member> memberList1, List<Buyer> buyerList1, List<Seller> sellerList1) {
+    for (Buyer buyer : buyerList1) {
+      memberList1.add(buyer);
     }
-    for (Seller seller : sellerList) {
-      memberList.add(seller);
+    for (Seller seller : sellerList1) {
+      memberList1.add(seller);
     }
   }
 
-  private void seperateMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
-    buyerList = new ArrayList<>();
-    sellerList = new ArrayList<>();
+  private List<Buyer> seperateBuyer(List<Member> memberList) {
+    List<Buyer> buyerList1 = new ArrayList<>();
     for (Member member : memberList) {
       if (member instanceof Buyer) {
-        buyerList.add((Buyer)member);   
-      } else if (member instanceof Seller) {
-        sellerList.add((Seller)member);
+        buyerList1.add((Buyer)member);   
+      } 
+    }
+    return buyerList1;
+  }
+  private List<Seller> seperateSeller(List<Member> memberList) {
+    List<Seller> sellerList1 = new ArrayList<>();
+    for (Member member : memberList) {
+      if (member instanceof Seller) {
+        sellerList1.add((Seller)member);
       }
     }
+    return sellerList1;
   }
-
 }
