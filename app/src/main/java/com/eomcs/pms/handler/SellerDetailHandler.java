@@ -15,9 +15,9 @@ public class SellerDetailHandler extends AbstractSellerHandler{
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("\n[개인정보 상세보기]");
+      System.out.println("[개인정보 상세보기]");
 
       Member seller = findById(App.getLoginUser().getId());
 
@@ -32,7 +32,19 @@ public class SellerDetailHandler extends AbstractSellerHandler{
       System.out.printf("사업장주소 : %s\n", ((Seller) seller).getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", ((Seller) seller).getBusinessPlaceNumber());
       System.out.printf("등록일 : %s\n", seller.getRegisteredDate());
-      System.out.printf("권한등급 : %d", seller.getAuthority());
+      System.out.printf("권한등급 : %d\n", seller.getAuthority());
+      System.out.println();
+      request.setAttribute("seller", seller);
+
+      while(true) {
+        System.out.println(" 1. 개인정보변경 / 2. 회원탈퇴 / 이전(0)");
+        int choose = Prompt.inputInt("선택 > ");
+        switch (choose) {
+          case 1: request.getRequestDispatcher("/seller/update").forward(request); return;
+          case 2: request.getRequestDispatcher("/seller/delete").forward(request); return;
+          case 0: return;
+        }
+      }
     } else {
       System.out.println("\n[판매자 상세보기]");
 
@@ -52,6 +64,18 @@ public class SellerDetailHandler extends AbstractSellerHandler{
       System.out.printf("사업자번호 : %s\n", ((Seller) seller).getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", ((Seller) seller).getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", ((Seller) seller).getBusinessPlaceNumber());
+      System.out.println();
+      request.setAttribute("seller", seller);
+
+      while(true) {
+        System.out.println(" 1. 등급변경 / 2. 회원탈퇴 / 이전(0)");
+        int choose = Prompt.inputInt("선택 > ");
+        switch (choose) {
+          case 1: request.getRequestDispatcher("/seller/update").forward(request); return;
+          case 2: request.getRequestDispatcher("/seller/delete").forward(request); return;
+          case 0: return;
+        }
+      }
     }
   }
 }

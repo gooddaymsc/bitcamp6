@@ -14,9 +14,9 @@ public class CartListHandler extends AbstractCartHandler {
     this.memberPrompt = memberPrompt;
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception{
     String nowLoginId = App.getLoginUser().getId();
-    System.out.println("\n[장바구니 목록]");
+    System.out.println("[장바구니 목록]");
     CartList cartList = allCartList.get(cartPrompt.getCartIndexById(nowLoginId));
 
     if (cartList.getPrivacyCart().size() == 0) {
@@ -38,6 +38,8 @@ public class CartListHandler extends AbstractCartHandler {
       total += cart.getCartPrice();
     }
     System.out.printf("\n>>> 총 금액 : %d원\n", total);
+    System.out.println();
+    request.getRequestDispatcher("/cart/detail").forward(request);
   }
 }
 

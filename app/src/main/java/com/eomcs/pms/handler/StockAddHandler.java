@@ -17,21 +17,21 @@ public class StockAddHandler extends AbstractStockHandler {
   }
 
   @Override
-  public void execute() {   
+  public void execute(CommandRequest request) {   
 
     String nowLoginId = App.getLoginUser().getId();
 
-    System.out.println("\n[재고등록]");
+    System.out.println("[재고등록]");
     Stock stock = new Stock();
-    String productName = Prompt.inputString("상품명 : ");
+    String productName = (String) request.getAttribute("productName");
     Product product = productPrompt.findByProduct(productName);
     if (product == null) {
-      System.out.println("입력하신 상품이 없습니다.");
+      System.out.println("입력하신 상품이 없습니다.\n");
       return;
     }
 
     if (stockPrompt.findByStock(productName, nowLoginId)) {
-      System.out.println("이미 추가된 상품입니다.");
+      System.out.println("이미 추가된 상품입니다.\n");
       return;
     }
 
@@ -40,7 +40,7 @@ public class StockAddHandler extends AbstractStockHandler {
     stock.setStocks(Prompt.inputInt("재고 수량 :"));
 
     stockPrompt.putStockListById(nowLoginId, stock);
-    System.out.println("재고 등록을 완료하였습니다.");
+    System.out.println("재고 등록을 완료하였습니다.\n");
   }
 
 }

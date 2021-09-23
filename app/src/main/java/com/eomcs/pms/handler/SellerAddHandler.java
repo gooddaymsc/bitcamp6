@@ -20,8 +20,8 @@ public class SellerAddHandler extends AbstractSellerHandler {
   }
 
   @Override
-  public void execute() {
-    System.out.println("\n[판매자 등록]");
+  public void execute(CommandRequest request) {
+    System.out.println("[판매자 등록]");
     Member seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
 

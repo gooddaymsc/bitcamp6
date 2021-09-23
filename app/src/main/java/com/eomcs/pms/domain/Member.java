@@ -20,7 +20,7 @@ public class Member implements Serializable {
   private int level;
   private boolean bookingUpdate;
   private boolean commentUpdate;
-
+  private boolean MessageUpdate;
 
   public Member() {
     this("-","-",Menu.ACCESS_LOGOUT);
@@ -113,6 +113,12 @@ public class Member implements Serializable {
   }
   public void setCommentUpdate(boolean commentUpdate) {
     this.commentUpdate = commentUpdate;
+  }
+  public boolean isMessageUpdate() {
+    return MessageUpdate;
+  }
+  public void setMessageUpdate(boolean MessageUpdate) {
+    this.MessageUpdate = MessageUpdate;
   }
 
 

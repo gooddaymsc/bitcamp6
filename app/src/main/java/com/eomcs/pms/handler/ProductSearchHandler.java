@@ -1,38 +1,32 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
-import com.eomcs.pms.domain.Cart;
-import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class ProductSearchHandler extends AbstractProductHandler {
-
-  StockPrompt stockPrompt;
   ProductPrompt productPrompt;
+  StockPrompt stockPrompt;
   MemberPrompt memberPrompt;
   CartPrompt cartPrompt;
   List<Product> productList;
 
   public ProductSearchHandler(ProductPrompt productPrompt,  StockPrompt stockPrompt, 
-      MemberPrompt memberPrompt,  CartPrompt cartPrompt 
-      /*,List<Product> productList */
+      MemberPrompt memberPrompt,  CartPrompt cartPrompt ,List<Product> productList 
       ) {
     this.productPrompt = productPrompt;
     this.stockPrompt = stockPrompt;
     this.memberPrompt = memberPrompt;
     this.cartPrompt = cartPrompt;
-    //    this.productList = productList;
+    this.productList = productList;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     String storeName;
     //String storeAdress;
     String nowLoginId = App.getLoginUser().getId();
@@ -40,7 +34,14 @@ public class ProductSearchHandler extends AbstractProductHandler {
     System.out.println("[상품검색]");
 
 
-    String productName  = productPrompt.findByProduct2(Prompt.inputString("상품입력: "));   
+    String input = Prompt.inputString("상품입력: ");
+
+    if (input.equals("")) {
+      System.out.println("잘못 입력하셨습니다.");
+      //      continue;
+    }     
+
+    String productName  = productPrompt.findByProduct2(input);   
 
     System.out.println("==========상품 목록==========");
 
@@ -74,58 +75,26 @@ public class ProductSearchHandler extends AbstractProductHandler {
         } catch (Exception e) {
           System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동) ");
         }
+
       }
 
       if(sellerInfo == null) {
         System.out.println("해당 위치에 판매처가 없습니다.");
         return;
-      }
-
-      for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
-        System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
-            entry.getValue().getBusinessName(),
-            entry.getValue().getBusinessAddress());
-
-      }
-
-      //구매자 id의 cartList에 상품 담기.
-      System.out.println();
-      System.out.println("\n[장바구니 등록]");
-      Cart cart = new Cart();
-      HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(productName);
-
-      if(hashStock.size() == 0 ) {
-        System.out.println("해당상품을 갖는 판매자가 없습니다.");
-        return;
-      }
-
-      else {
-        storeName = Prompt.inputString("가게명을 선택하세요 >");
-        cart.setStock(hashStock.get(storeName));
-        int stockNumber = Prompt.inputInt("수량 : ");
-        while(true) {
-          if(stockNumber <= hashStock.get(storeName).getStocks()){
-            cart.setCartStocks(stockNumber);
-            break;
-          }
-          else {
-            System.out.println("주문수량이 재고를 초과하였습니다.");
-            return;
-          }
+      } else {
+        for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
+          System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
+              entry.getValue().getBusinessName(),
+              entry.getValue().getBusinessAddress());
+          // 재고수량...
         }
-        cart.setCartPrice(hashStock.get(storeName).getPrice()*stockNumber);
-        cart.setCartNumber(cartPrompt.findCartListIndexById(nowLoginId));
-        cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
-        cart.setRegistrationDate(new Date(System.currentTimeMillis()));
-        System.out.println("장바구니가 등록되었습니다.");
-        CartList cartList = cartPrompt.findCartListById(nowLoginId);
-        cartList.getPrivacyCart().add(cart);
-        return;
       }
+
+      request.setAttribute("productName", productName); 
+      request.getRequestDispatcher("/cart/add").forward(request);
     }
   }
 }
-
 
 
 

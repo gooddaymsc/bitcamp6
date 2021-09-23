@@ -11,7 +11,7 @@ public class FindIdHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     while(true) {
       String name = Prompt.inputString("이름을 입력하세요(취소 > 0): ");
       if (name.equals("0")) {

@@ -14,9 +14,9 @@ public class BuyerDetailHandler extends AbstractBuyerHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     if (App.getLoginUser().getAuthority()!=Menu.ACCESS_ADMIN) {
-      System.out.println("\n[개인정보 상세보기]");
+      System.out.println("[개인정보 상세보기]");
 
       Buyer buyer = (Buyer) findById(App.getLoginUser().getId());
       System.out.printf("이름 : %s\n", buyer.getName());
@@ -27,7 +27,20 @@ public class BuyerDetailHandler extends AbstractBuyerHandler {
       System.out.printf("전화 : %s\n", buyer.getPhoneNumber());
       System.out.printf("주소 : %s\n", buyer.getAddress());
       System.out.printf("등록일 : %s\n", buyer.getRegisteredDate());
-      System.out.printf("권한등급 : %d", buyer.getAuthority());
+      System.out.printf("권한등급 : %d\n", buyer.getAuthority());
+      System.out.println();
+      request.setAttribute("buyer", buyer);
+
+      while(true) {
+        System.out.println(" 1. 개인정보변경 / 2. 회원탈퇴 / 이전(0)");
+        int choose = Prompt.inputInt("선택 > ");
+        switch (choose) {
+          case 1: request.getRequestDispatcher("/buyer/update").forward(request);return;
+          case 2: request.getRequestDispatcher("/buyer/delete").forward(request);return;
+          case 0: return;
+        }
+      }
+
     } else {
       System.out.println("\n[회원 상세보기]");
 
@@ -46,6 +59,18 @@ public class BuyerDetailHandler extends AbstractBuyerHandler {
       System.out.printf("전화 : %s\n", buyer.getPhoneNumber());
       System.out.printf("주소 : %s\n", buyer.getAddress());
       System.out.printf("등록일 : %s\n", buyer.getRegisteredDate());
+      System.out.println();
+      request.setAttribute("buyer", buyer);
+
+      while(true) {
+        System.out.println(" 1. 등급변경 / 2. 회원탈퇴 / 이전(0)");
+        int choose = Prompt.inputInt("선택 > ");
+        switch (choose) {
+          case 1: request.getRequestDispatcher("/buyer/update").forward(request); return;
+          case 2: request.getRequestDispatcher("/buyer/delete").forward(request); return;
+          case 0: return;
+        }
+      }
     }
   }
 }

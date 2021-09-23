@@ -1,7 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.util.Prompt;
@@ -12,25 +11,6 @@ public abstract class AbstractBookingHandler implements Command {
   List <BookingList> allBookingList;
   public AbstractBookingHandler(List <BookingList> allBookingList) {
     this.allBookingList = allBookingList;
-  }
-
-  protected Booking findBooking(String bookingName) {
-    BookingList bookingList = findById(App.getLoginUser().getId());
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getCart().getStock().getProduct().getProductName().equals(bookingName)) {
-        return booking;
-      }
-    }
-    return null;
-  }
-
-  protected BookingList findById(String id) {
-    for (BookingList bookingList : allBookingList) {
-      if (bookingList.getId().equals(id)) {
-        return bookingList;
-      }
-    }
-    return null;
   }
 
   protected void putBookingListById(String id, Booking buyerBooking) {

@@ -11,7 +11,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     super(boardList);
   }
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[새 게시글]");
     Board board = new Board();
@@ -24,7 +24,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
     board.setBoardNumber(App.totalNumberList.get(App.BOARD_NUMBER_INDEX));
     App.totalNumberList.set(App.BOARD_NUMBER_INDEX, board.getBoardNumber()+1);
     boardList.add(board);
-    System.out.println("게시글 등록을 완료하였습니다.");
+    System.out.println("게시글 등록을 완료하였습니다.\n");
   }
 }
 

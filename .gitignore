@@ -10,12 +10,12 @@ tmp/
 *.bak
 *.swp
 *~.nib
-*.data
 local.properties
 .settings/
 .loadpath
 .recommenders
 *.data
+*.json
 
 # External tool builders
 .externalToolBuilders/
