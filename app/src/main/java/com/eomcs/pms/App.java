@@ -155,19 +155,19 @@ public class App {
   }
 
   public App() {
-    // List Load.
-    loadObjects("board.json", boardList, Board.class);
-    // seller와 buyer 정보를 따로 불러옴
-    loadObjects("buyer.json", buyerList, Buyer.class);
-    loadObjects("seller.json", sellerList, Seller.class);
-    // seller 와 buyer 정보를 memberList 에 저장
-    mergeMember(memberList, buyerList, sellerList);
-
-    loadObjects("product.json", productList, Product.class);
-    loadObjects("stock.json", allStockList, StockList.class);
-    loadObjects("cart.json", allCartList, CartList.class);
-    loadObjects("booking.json", allBookingList, BookingList.class);
-    loadObjects("totalNumber.json", totalNumberList, Integer.class);
+    //    // List Load.
+    //    loadObjects("board.json", boardList, Board.class);
+    //    // seller와 buyer 정보를 따로 불러옴
+    //    loadObjects("buyer.json", buyerList, Buyer.class);
+    //    loadObjects("seller.json", sellerList, Seller.class);
+    //    // seller 와 buyer 정보를 memberList 에 저장
+    //    mergeMember(memberList, buyerList, sellerList);
+    //
+    //    loadObjects("product.json", productList, Product.class);
+    //    loadObjects("stock.json", allStockList, StockList.class);
+    //    loadObjects("cart.json", allCartList, CartList.class);
+    //    loadObjects("booking.json", allBookingList, BookingList.class);
+    //    loadObjects("totalNumber.json", totalNumberList, Integer.class);
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
