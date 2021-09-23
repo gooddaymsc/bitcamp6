@@ -86,6 +86,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
           System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
               entry.getValue().getBusinessName(),
               entry.getValue().getBusinessAddress());
+          // 재고수량...
         }
       }
 

@@ -4,20 +4,23 @@ import java.sql.Date;
 import java.util.List;
 import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Message;
+import com.eomcs.pms.domain.MessageList;
 import com.eomcs.util.Prompt;
 
 public class MessageAddHandler extends AbstractMessageHandler {
 
   MemberPrompt memberPrompt;
 
-  public MessageAddHandler(List<Message> messageList, MemberPrompt memberPrompt) {
-    super(messageList);
+  public MessageAddHandler(List<MessageList> allMessageList, MemberPrompt memberPrompt) {
+    super(allMessageList);
     this.memberPrompt = memberPrompt;
   }
 
   public static int messageNumber = 1;
   @Override
   public void execute(CommandRequest request) {
+
+    //    String nowLoginId = App.getLoginUser().getId();
 
     System.out.println("[새 메세지]");
 
@@ -32,7 +35,9 @@ public class MessageAddHandler extends AbstractMessageHandler {
     message.setWriter(App.getLoginUser().getId());
     message.setRegistrationDate(new Date(System.currentTimeMillis()));
 
-    messageList.add(message);
+
+    //    messageList.add(message);
+    putMessageListById(memberId, message);
     memberPrompt.sendMessageUpdate(memberId);
     System.out.println("메세지를 보냈습니다.");
   }
