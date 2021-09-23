@@ -12,12 +12,14 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
   CartPrompt cartPrompt;
   BookingPrompt bookingPrompt;
   MemberPrompt memberPrompt;
-  public BuyerAddHandler (List<Member> memberList, 
-      CartPrompt cartPrompt, BookingPrompt bookingPrompt,MemberPrompt memberPrompt) {
+  List<Integer> totalNumberList;
+  public BuyerAddHandler (List<Member> memberList, CartPrompt cartPrompt, 
+      BookingPrompt bookingPrompt,MemberPrompt memberPrompt, List<Integer> totalNumberList) {
     super(memberList);
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
     this.memberPrompt = memberPrompt;
+    this.totalNumberList = totalNumberList;
   } 
 
   @Override
@@ -45,8 +47,8 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
     ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
-    buyer.setNumber(App.totalNumberList.get(App.MEMBER_NUMBER_INDEX));
-    App.totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
+    buyer.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
+    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
     memberList.add(buyer);
 
     // 예약리스트에 구매자 id를 갖는 bookingList add.

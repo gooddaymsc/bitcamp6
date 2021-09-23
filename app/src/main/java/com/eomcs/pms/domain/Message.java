@@ -6,11 +6,10 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class Message implements Serializable {
   private int messageNumber;
-  private String title;
+  private String allContent;
   private String content;
-  private String writer;
   private Date registrationDate;
-  private String recipientId;
+  private String recipientId; // 대화상대.
 
 
   public int getMessageNumber() {
@@ -19,23 +18,21 @@ public class Message implements Serializable {
   public void setMessageNumber(int messageNumber) {
     this.messageNumber = messageNumber;
   }
-  public String getTitle() {
-    return title;
-  }
-  public void setTitle(String title) {
-    this.title = title;
-  }
+
   public String getContent() {
     return content;
   }
   public void setContent(String content) {
+
     this.content = content;
   }
-  public String getWriter() {
-    return writer;
+
+  public String getAllContent() {
+    return allContent;
   }
-  public void setWriter(String writer) {
-    this.writer = writer;
+  public void setAllContent(String content) {
+    this.allContent +=  "/" + content;
+    //    this.allContent = allContent;
   }
   public Date getRegistrationDate() {
     return registrationDate;
