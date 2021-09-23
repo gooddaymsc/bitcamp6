@@ -262,6 +262,7 @@ public class App {
     params.put("buyerList", buyerList);
     params.put("sellerList", sellerList);
     params.put("allMessageList", allMessageList);
+    params.put("totalNumberList", totalNumberList);
 
 
     for (ApplicationContextListener listener : listeners) {
