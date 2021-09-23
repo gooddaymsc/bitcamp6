@@ -13,13 +13,15 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
   BookingPrompt bookingPrompt;
   MemberPrompt memberPrompt;
   List<Integer> totalNumberList;
+  MessagePrompt messagePrompt;
   public BuyerAddHandler (List<Member> memberList, CartPrompt cartPrompt, 
-      BookingPrompt bookingPrompt,MemberPrompt memberPrompt, List<Integer> totalNumberList) {
+      BookingPrompt bookingPrompt,MemberPrompt memberPrompt, List<Integer> totalNumberList, MessagePrompt messagePrompt) {
     super(memberList);
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
     this.memberPrompt = memberPrompt;
     this.totalNumberList = totalNumberList;
+    this.messagePrompt = messagePrompt;
   } 
 
   @Override
@@ -56,6 +58,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     // 장바구니리스트에 구매자 id를 갖는 cartList add.
     cartPrompt.addCartListById(buyer.getId());
 
+    messagePrompt.addMessageListById(buyer.getId());
     //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
   }
 }

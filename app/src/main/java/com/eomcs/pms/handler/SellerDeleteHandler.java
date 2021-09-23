@@ -11,10 +11,17 @@ import com.eomcs.util.Prompt;
 public class SellerDeleteHandler extends AbstractSellerHandler{
 
   MemberPrompt memberPrompt;
-
-  public SellerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt) {
+  BookingPrompt bookingPrompt;
+  StockPrompt stockPrompt;
+  MessagePrompt messagePrompt;
+  public SellerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt, 
+      BookingPrompt bookingPrompt, StockPrompt stockPrompt, MessagePrompt messagePrompt) {
     super(memberList);
     this.memberPrompt = memberPrompt;
+    this.bookingPrompt = bookingPrompt;
+    this.stockPrompt = stockPrompt;
+    this.messagePrompt = messagePrompt;
+
   }
 
   @Override
@@ -29,6 +36,9 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
 
       if (input.equalsIgnoreCase("y")) {
         memberPrompt.removeMemberById(nowLoginId);
+        bookingPrompt.removeBookingListById(nowLoginId);
+        stockPrompt.removeStockListById(nowLoginId);
+        messagePrompt.removeMessageListById(nowLoginId);
         System.out.println("탈퇴가 완료되었습니다.");
         App.loginMember = new Member();
         return;
@@ -44,6 +54,9 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         memberPrompt.removeMemberById(sellerId);
+        bookingPrompt.removeBookingListById(sellerId);
+        stockPrompt.removeStockListById(sellerId);
+        messagePrompt.removeMessageListById(sellerId);
         System.out.println("판매자를 탈퇴시켰습니다.");
         return;
       }

@@ -12,51 +12,23 @@ public abstract class AbstractMessageHandler implements Command {
     this.allMessageList = allMessageList;
   }
 
-  protected void addMessageListById(String memberId) {
-    MessageList messageList = new MessageList();
-    messageList.setReceivedId(memberId);
-    allMessageList.add(messageList);
-  }
-
-  protected void putMessageListById(String memberId, Message message) {
+  public MessageList findMessageListById(String id) {
     for (MessageList messageList : allMessageList) {
-      if (messageList.getReceivedId().equals(memberId)) {
-        int messageListNumber = messageList.getMessageListNumber();
-        message.setMessageNumber(messageListNumber);
-        messageList.getMessage().add(message);
-        messageList.setMessageListNumber(++messageListNumber);
+      if (messageList.getId().equals(id)) {
+        return messageList;
       }
     }
+    return null;
   }
 
-  protected int findMessageById(String id) {
-    for (int i = 0; i < allMessageList.size(); i++) {
-      if (allMessageList.get(i).getReceivedId().equalsIgnoreCase(id)) {
-        return i;
+  public Message findMessageById(MessageList messageList, String id) {
+    //id 는 받는사람.
+    for (Message message : messageList.getMessage()) {
+      if (message.getTheOtherId().equals(id)) {
+        return message;
       }
     }
-    return -1;
+    return null;
   }
-
-  //  protected Message checkMessageById(String id) {
-  //    for (MessageList messageList : allMessageList) {
-  //      if (messageList.getReceivedId().equals(id)) {
-  //        return messageList;
-  //      }
-  //    }
-  //    return null;
-  //  }
-
-  protected boolean removeMessageById(String id, String memberId) {
-    MessageList messageList = allMessageList.get(findMessageById(memberId));
-    for (int i = 0; i < messageList.getMessage().size(); i++) {
-      if (messageList.getMessage().get(i).getRecipientId().equals(memberId)) {
-        allMessageList.get(findMessageById(id)).getMessage().remove(i);
-        return true;
-      }
-    }
-    return false;
-  }
-
 
 }

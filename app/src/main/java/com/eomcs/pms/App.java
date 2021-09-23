@@ -58,7 +58,10 @@ import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MemberPrompt;
 import com.eomcs.pms.handler.MessageAddHandler;
 import com.eomcs.pms.handler.MessageDeleteHandler;
+import com.eomcs.pms.handler.MessageDetailHandler;
 import com.eomcs.pms.handler.MessageListHandler;
+import com.eomcs.pms.handler.MessagePrompt;
+import com.eomcs.pms.handler.MessageUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -111,7 +114,7 @@ public class App {
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
   BoardPrompt boardPrompt = new BoardPrompt(boardList);
-
+  MessagePrompt messagePrompt = new MessagePrompt(allMessageList);
   // 리스너
   List<ApplicationContextListener> listeners = new ArrayList<>();
 
@@ -161,17 +164,17 @@ public class App {
 
   public App() {
 
-    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt,totalNumberList));
+    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt,totalNumberList ,messagePrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(memberList));
     commandMap.put("/buyer/update", new BuyerUpdateHandler(memberList));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, memberPrompt, cartPrompt, bookingPrompt));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, memberPrompt, cartPrompt, bookingPrompt, messagePrompt));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt, totalNumberList));
+    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt, totalNumberList, messagePrompt));
     commandMap.put("/seller/list",   new SellerListHandler(memberList));
     commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
     commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, memberPrompt));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, memberPrompt, bookingPrompt, stockPrompt, messagePrompt));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList, totalNumberList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
@@ -228,7 +231,9 @@ public class App {
     commandMap.put("/ranking/list", new RankingHandler(productList, productPrompt));
 
     commandMap.put("/message/add",    new MessageAddHandler(allMessageList, memberPrompt));
+    commandMap.put("/message/update",    new MessageUpdateHandler(allMessageList, memberPrompt));
     commandMap.put("/message/list",   new MessageListHandler(allMessageList, memberPrompt));
+    commandMap.put("/message/detail", new MessageDetailHandler(allMessageList));
     commandMap.put("/message/delete", new MessageDeleteHandler(allMessageList));
   }
 
@@ -404,12 +409,8 @@ public class App {
     managerSellerMenu1.add(new MenuItem("목록", "/seller/list"));
     managerSellerMenu1.add(new MenuItem("상세보기", "/seller/detail"));
 
-    MenuGroup messageMenu = new MenuGroup("메세지", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER);
-    mainMenuGroup.add(messageMenu);
-
-    messageMenu.add(new MenuItem("보내기", "/message/add"));
-    messageMenu.add(new MenuItem("읽기", "/message/list"));
-    messageMenu.add(new MenuItem("삭제", "/message/delete"));
+    //    MenuGroup messageMenu = new MenuGroup("메세지", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER);
+    mainMenuGroup.add(new MenuItem("메세지", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/message/list"));
 
     return mainMenuGroup;
   }

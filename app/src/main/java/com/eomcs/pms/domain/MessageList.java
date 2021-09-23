@@ -10,11 +10,10 @@ public class MessageList extends Message implements Serializable {
   private List<Message> message = new ArrayList<>();
   private int messageListNumber = 1;
 
-
-  public String getReceivedId() {
+  public String getId() {
     return id;
   }
-  public void setReceivedId(String id) {
+  public void setId(String id) {
     this.id = id;
   }
   public List<Message> getMessage() {
@@ -29,9 +28,5 @@ public class MessageList extends Message implements Serializable {
   public void setMessageListNumber(int messageListNumber) {
     this.messageListNumber = messageListNumber;
   }
-
-
-
-
 
 }

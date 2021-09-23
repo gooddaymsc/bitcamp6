@@ -13,12 +13,14 @@ public class SellerAddHandler extends AbstractSellerHandler {
   BookingPrompt bookingPrompt;
   StockPrompt stockPrompt;
   List<Integer> totalNumberList;
+  MessagePrompt messagePrompt;
   public SellerAddHandler(List<Member> memberList, 
-      BookingPrompt bookingPrompt, StockPrompt stockPrompt, List<Integer> totalNumberList) {
+      BookingPrompt bookingPrompt, StockPrompt stockPrompt, List<Integer> totalNumberList, MessagePrompt messagePrompt) {
     super(memberList);
     this.bookingPrompt = bookingPrompt;
     this.stockPrompt = stockPrompt;
     this.totalNumberList = totalNumberList;
+    this.messagePrompt = messagePrompt;
   }
 
   @Override
@@ -60,6 +62,8 @@ public class SellerAddHandler extends AbstractSellerHandler {
     bookingPrompt.addBookingListById(seller.getId());
     // 재고 리스트에 판매자 id를 갖는 stockList add.
     stockPrompt.addStockListById(seller.getId());
+
+    messagePrompt.addMessageListById(seller.getId());
   }
 }
 

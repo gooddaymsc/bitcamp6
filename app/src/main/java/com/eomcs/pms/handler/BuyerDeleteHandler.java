@@ -11,12 +11,14 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
   MemberPrompt memberPrompt;
   CartPrompt cartPrompt;
   BookingPrompt bookingPrompt;
+  MessagePrompt messagePrompt;
   public BuyerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt,
-      CartPrompt cartPrompt, BookingPrompt bookingPrompt) {
+      CartPrompt cartPrompt, BookingPrompt bookingPrompt, MessagePrompt messagePrompt) {
     super(memberList);
     this.memberPrompt = memberPrompt;
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
+    this.messagePrompt = messagePrompt;
   }
   @Override
   public void execute(CommandRequest request) {
@@ -32,6 +34,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
         memberPrompt.removeMemberById(nowLoginId);
         cartPrompt.removeCartListById(nowLoginId);
         bookingPrompt.removeBookingListById(nowLoginId);
+        messagePrompt.removeMessageListById(nowLoginId);
         System.out.println("탈퇴가 완료되었습니다.");
         // 현재로그인 상태 초기화
         App.loginMember = new Member();
@@ -50,6 +53,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
         memberPrompt.removeMemberById(buyerId);
         cartPrompt.removeCartListById(buyerId);
         bookingPrompt.removeBookingListById(buyerId);
+        messagePrompt.removeMessageListById(buyerId);
         System.out.println("회원을 탈퇴시켰습니다.");
         return;
       }
