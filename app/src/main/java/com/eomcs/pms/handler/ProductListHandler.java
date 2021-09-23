@@ -56,10 +56,6 @@ public class ProductListHandler extends AbstractProductHandler {
           System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 장바구니 등록 / 0.이전");
           // 상품 목록 후 판매자는 재고에 등록하게.
           String choose = Prompt.inputString("선택 > ");
-          //          String str = Prompt.inputString("선택 (상품명/선택) > ");
-          //          String[] str2 = str.split("/");
-          //          request.setAttribute("productName", str2[0]);
-          //          String choose = str2[1];
           System.out.println();
           switch (choose) {
             case "1" : request.getRequestDispatcher("/product/detail").forward(request); continue;
@@ -83,10 +79,9 @@ public class ProductListHandler extends AbstractProductHandler {
             case "a" :
             case "A" : request.getRequestDispatcher("/product/add").forward(request); continue Loop;
             case "u" :
-            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
+            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue Loop;
             case "d" :
-            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue;
-
+            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue Loop;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
@@ -104,16 +99,15 @@ public class ProductListHandler extends AbstractProductHandler {
             case "a" :
             case "A" : request.getRequestDispatcher("/product/add").forward(request); continue Loop;
             case "u" :
-            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
+            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue Loop;
             case "d" :
-            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue;
-
+            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue Loop;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
       } else {
         while (true) {
-          System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 검색 ");
+          System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 검색 / 0.이전");
           String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose) {

@@ -13,7 +13,8 @@ public class ProductUpdateHandler extends AbstractProductHandler {
   public void execute(CommandRequest request) {
     System.out.println("\n[상품 변경]");
 
-    Product product = (Product) request.getAttribute("상품");
+    String productName = (String) request.getAttribute("productName");
+    Product product =  productPrompt.findByProduct(productName);
 
     if (product == null) {
       System.out.println("해당 상품이 존재하지 않습니다.");
