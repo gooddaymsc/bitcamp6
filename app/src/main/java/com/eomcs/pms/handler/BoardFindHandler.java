@@ -15,7 +15,7 @@ public class BoardFindHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[내가 남긴 게시글 목록]");
     System.out.printf("%-3s\t%-10s\t%-3s\t%-6s\n",
         "번호","제목","댓글수","등록일");
@@ -30,8 +30,5 @@ public class BoardFindHandler implements Command {
             board.getRegistrationDate());
       }
     }
-    System.out.println();
-    BoardDetailHandler boardDetailHandler = new BoardDetailHandler(boardList, boardPrompt, memberPrompt);
-    boardDetailHandler.execute();
   }
 }

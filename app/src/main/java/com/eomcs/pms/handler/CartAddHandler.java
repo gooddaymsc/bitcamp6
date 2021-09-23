@@ -23,14 +23,14 @@ public class CartAddHandler extends AbstractCartHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
-    System.out.println("\n[장바구니 등록]");
+    System.out.println("[장바구니 등록]");
     Cart cart = new Cart();
-    HashMap<String, Stock> hashStock = stockPrompt.findBySellerId(Prompt.inputString("상품명 : "));
+    HashMap<String, Stock> hashStock = stockPrompt.findBySellerId((String) request.getAttribute("productName"));
 
     if (hashStock.size() == 0) {
-      System.out.println("해당 상품을 갖는 판매자가 없습니다.");
+      System.out.println("해당 상품을 갖는 판매자가 없습니다.\n");
       return;
     }
     String storeName = "";
@@ -42,7 +42,7 @@ public class CartAddHandler extends AbstractCartHandler {
 
       // 가게명이 유효하지 않을때 에러메세지 구현해야함
       if (storeName==null) {
-        System.out.println("가게명을 다시 입력해주세요.");
+        System.out.println("가게명을 다시 입력해주세요.\n");
         continue;
       }
 
@@ -51,7 +51,7 @@ public class CartAddHandler extends AbstractCartHandler {
         cart.setCartStocks(stocks);
         break;
       } else {
-        System.out.println("주문수량이 재고를 초과하였습니다.");
+        System.out.println("주문수량이 재고를 초과하였습니다.\n");
         return;
       }
 
@@ -63,6 +63,7 @@ public class CartAddHandler extends AbstractCartHandler {
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     cartPrompt.putCartListById(nowLoginId, cart);
-    System.out.println("장바구니가 등록되었습니다.");
+    System.out.println("장바구니가 등록되었습니다.\n");
+    // 나가기.
   }
 }

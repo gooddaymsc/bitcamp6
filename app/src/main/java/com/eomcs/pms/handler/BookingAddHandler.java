@@ -28,14 +28,14 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     String nowLoginId = App.getLoginUser().getId();
     System.out.println("[예약 등록]");
 
     Booking booking = new Booking();
 
     // 해당 상품명이 장바구니에 담겨있는지 확인.
-    String productName = Prompt.inputString("상품명 : ");
+    String productName = (String) request.getAttribute("productName");
     HashMap<Cart, Seller> sellerInfo = cartPrompt.findByCartList(productName);
 
     String sellerId = "";
@@ -66,8 +66,11 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
       System.out.println("재고가 부족합니다. 구매 수량을 확인해주세요.");
       return;
     }
-
     booking.setCart(bookingProduct);
+
+    booking.setBookingStocks(bookingProduct.getCartStocks());
+    booking.setBookingPrice(bookingProduct.getCartPrice());
+
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     booking.setBookingHour(checkHour("픽업시간(시): "));
     booking.setBookingMinute(checkMinute("픽업시간(분): "));
@@ -82,6 +85,10 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
 
     Booking booking2 = new Booking();
     booking2.setCart(booking.getCart());
+
+    booking2.setBookingStocks(booking.getBookingStocks());
+    booking2.setBookingPrice(booking.getBookingPrice());
+
     booking2.setBookingDate(booking.getBookingDate());
     booking2.setBookingHour(booking.getBookingHour());
     booking2.setBookingMinute(booking.getBookingMinute());
