@@ -7,21 +7,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.util.Prompt;
 
 public class RankingHandler implements Command {
 
   List<Product> productList;
-  public RankingHandler(List<Product> productList) {
+  ProductPrompt productPrompt;
+
+  public RankingHandler(List<Product> productList, ProductPrompt productPrompt) {
     this.productList = productList;
+    this.productPrompt = productPrompt;
   }
 
   @Override
-  public void execute(CommandRequest request) {  
+  public void execute(CommandRequest request) throws Exception {  
 
-    System.out.println("[이달의 술]\n");
+    System.out.println("[실시간 랭킹]\n");
 
 
     HashMap <String, Float > map = new HashMap<>();
+    HashMap <Integer, String> numberMap = new HashMap<>();
 
     for(Product product : productList) {  
       map.put(product.getProductName(),product.getRate());
@@ -37,7 +42,6 @@ public class RankingHandler implements Command {
       }
     });
 
-
     int no = 1;
     for(Entry<String, Float> entry : entries) {
       System.out.printf(" * %d위 %s (평점: %.2f점) * \n", no++, entry.getKey(), entry.getValue());
@@ -48,10 +52,25 @@ public class RankingHandler implements Command {
           System.out.printf("원산지 : %s\n", product.getCountryOrigin());
           System.out.printf("알콜도수 : %.2f\n", product.getAlcoholLevel());
           System.out.println("---------------------------------------");
+          numberMap.put(no-1, product.getProductName());
         }
       }
       if(no == 6) {break;}
-
+    }
+    while(true) {
+      System.out.println();
+      System.out.println("1. 상품 상세정보 보기 / 0. 이전 ");
+      int choose = Prompt.inputInt("선택 > ");
+      switch (choose) {
+        case 1 : 
+          int chooseNum = productPrompt.checkNum("선택(1-5위) > ");
+          System.out.printf("\n # 상품명 : %s \n", numberMap.get(chooseNum));
+          request.setAttribute("productName", numberMap.get(chooseNum));
+          System.out.println();
+          request.getRequestDispatcher("/product/detail").forward(request); continue;
+        case 0 : return;
+        default : System.out.println("다시 선택해 주세요."); continue;
+      }
     }
   }
 }

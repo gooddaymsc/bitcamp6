@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.util.Prompt;
 
 
 public class ProductPrompt {
@@ -39,5 +40,17 @@ public class ProductPrompt {
     }
     return null;
   }
+
+  protected int checkNum(String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 5) {  
+        System.out.println("1-5 사이 수를 입력해주세요!"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
 
 }

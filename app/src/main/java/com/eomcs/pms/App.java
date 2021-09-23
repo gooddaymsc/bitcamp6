@@ -226,7 +226,7 @@ public class App {
 
     commandMap.put("/findReview", new  ReviewFindHandler(productPrompt, productList));
 
-    commandMap.put("/ranking/list", new RankingHandler(productList));
+    commandMap.put("/ranking/list", new RankingHandler(productList, productPrompt));
 
     commandMap.put("/message/add",    new MessageAddHandler(allMessageList, memberPrompt));
     commandMap.put("/message/list",   new MessageListHandler(allMessageList, memberPrompt));
