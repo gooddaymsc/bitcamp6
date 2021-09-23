@@ -9,10 +9,11 @@ import com.eomcs.pms.domain.BookingList;
 import com.eomcs.util.Prompt;
 
 public class BookingUpdateHandler extends AbstractBookingHandler {
-
+  StockPrompt stockPrompt;
   BookingPrompt bookingPrompt;
-  public BookingUpdateHandler(List <BookingList> allBookingList, BookingPrompt bookingPrompt) {
+  public BookingUpdateHandler(List <BookingList> allBookingList, BookingPrompt bookingPrompt, StockPrompt stockPrompt) {
     super(allBookingList);
+    this.stockPrompt = stockPrompt;
     this.bookingPrompt = bookingPrompt;
   }
   @Override
@@ -30,13 +31,15 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
       bookingList = bookingPrompt.findBookingSeller(
           No, App.getLoginUser().getId(), booking.getBuyerId(), false);
     }
-
+    //    String sellerId = booking.getCart().getSellerId();
+    int sellerStock = booking.getCart().getStock().getStocks();
+    sellerStock = booking.getCart().getStock().getStocks() + booking.getBookingStocks();
     int bookingstocks = Prompt.inputInt(String.format("수량(변경 전 : %d) :", booking.getBookingStocks()));
     // 수량 변경시 판매자 재고를 넘지 않도록, 변경후 수량 반영
-    //    if (sellerStock.getStocks() - bookingstocks<0) {
-    //      System.out.println("재고가 부족합니다. 구매 수량을 확인해주세요.");
-    //      return;
-    //    }
+    if (sellerStock - bookingstocks<0) {
+      System.out.println("재고가 부족합니다. 구매 수량을 확인해주세요.");
+      return;
+    }
     Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") : ");
     int reservationHour = checkHour("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ") : ");
     int reservationMinute = checkMinute("픽업시간 변경 (기존 : " + booking.getBookingMinute() + "분"+ ") : ");
