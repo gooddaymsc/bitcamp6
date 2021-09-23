@@ -4,17 +4,10 @@ import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_BUYER;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
 import static com.eomcs.menu.Menu.ACCESS_SELLER;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Board;
@@ -90,9 +83,9 @@ import com.eomcs.pms.handler.StockDetailHandler;
 import com.eomcs.pms.handler.StockListHandler;
 import com.eomcs.pms.handler.StockPrompt;
 import com.eomcs.pms.handler.StockUpdateHandler;
+import com.eomcs.pms.listener.AppInitListener;
+import com.eomcs.pms.listener.FileListener;
 import com.eomcs.util.Prompt;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class App {
   public static final int MEMBER_NUMBER_INDEX = 0;
@@ -119,6 +112,16 @@ public class App {
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
   BoardPrompt boardPrompt = new BoardPrompt(boardList);
+
+  // 리스너
+  List<ApplicationContextListener> listeners = new ArrayList<>();
+
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.add(listener);
+  }
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.remove(listener);
+  }
 
   // 권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -151,23 +154,13 @@ public class App {
 
   public static void main(String[] args) {
     App app = new App(); 
+
+    app.addApplicationContextListener(new AppInitListener());
+    app.addApplicationContextListener(new FileListener());
     app.service();
   }
 
   public App() {
-    //    // List Load.
-    //    loadObjects("board.json", boardList, Board.class);
-    //    // seller와 buyer 정보를 따로 불러옴
-    //    loadObjects("buyer.json", buyerList, Buyer.class);
-    //    loadObjects("seller.json", sellerList, Seller.class);
-    //    // seller 와 buyer 정보를 memberList 에 저장
-    //    mergeMember(memberList, buyerList, sellerList);
-    //
-    //    loadObjects("product.json", productList, Product.class);
-    //    loadObjects("stock.json", allStockList, StockList.class);
-    //    loadObjects("cart.json", allCartList, CartList.class);
-    //    loadObjects("booking.json", allBookingList, BookingList.class);
-    //    loadObjects("totalNumber.json", totalNumberList, Integer.class);
 
     commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
@@ -240,6 +233,42 @@ public class App {
     commandMap.put("/message/delete", new MessageDeleteHandler(allMessageList));
   }
 
+  private void notifyOnApplicationStarted() {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("boardList", boardList);
+    params.put("productList", productList);
+    params.put("allStockList", allStockList);
+    params.put("allBookingList", allBookingList);
+    params.put("allCartList", allCartList);
+    params.put("memberList", memberList);
+    params.put("buyerList", buyerList);
+    params.put("sellerList", sellerList);
+    params.put("allMessageList", allMessageList);
+
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
+  private void notifyOnApplicationEnded() {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("boardList", boardList);
+    params.put("productList", productList);
+    params.put("allStockList", allStockList);
+    params.put("allBookingList", allBookingList);
+    params.put("allCartList", allCartList);
+    params.put("memberList", memberList);
+    params.put("buyerList", buyerList);
+    params.put("sellerList", sellerList);
+    params.put("allMessageList", allMessageList);
+
+
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed(params);
+    }
+  }
+
   void service() {
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
     if (totalNumberList.size() == 0) {
@@ -248,86 +277,18 @@ public class App {
       totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
     }
 
+    notifyOnApplicationStarted();
     System.out.println();
-    System.out.println("   *****************      ");   
-    System.out.println("  | ALCOHOLE FINDER |     ");
-    System.out.println("   *****************      ");
 
     createMenu().execute();
     Prompt.close();
 
-    //List 저장
-    saveObjects("board.json", boardList);
-    // memberList 를 buyerList, sellerList로 나눈다.
-    seperateMember(memberList, buyerList, sellerList);
-    // buyerList, sellerList 따로 저장한다.
-    saveObjects("buyer.json", buyerList);
-    saveObjects("seller.json", sellerList);
-
-    saveObjects("product.json", productList);
-    saveObjects("stock.json", allStockList);
-    saveObjects("cart.json", allCartList);
-    saveObjects("booking.json", allBookingList);
-    saveObjects("totalNumber.json", totalNumberList);
+    notifyOnApplicationEnded();
 
   }
 
-  private void mergeMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
-    for (Buyer buyer : buyerList) {
-      memberList.add(buyer);
-    }
-    for (Seller seller : sellerList) {
-      memberList.add(seller);
-    }
-  }
 
-  private void seperateMember(List<Member> memberList, List<Buyer> buyerList, List<Seller> sellerList) {
-    buyerList = new ArrayList<>();
-    sellerList = new ArrayList<>();
-    for (Member member : memberList) {
-      if (member instanceof Buyer) {
-        buyerList.add((Buyer)member);   
-      } else if (member instanceof Seller) {
-        sellerList.add((Seller)member);
-      }
-    }
-  }
 
-  private <E> void loadObjects(String filepath, List<E> list, Class<E> domainType) {
-
-    try (BufferedReader in = new BufferedReader(
-        new FileReader(filepath, Charset.forName("UTF-8")))) {
-
-      StringBuilder strBuilder = new StringBuilder();
-      String str;
-      while ((str = in.readLine()) != null) {
-        strBuilder.append(str);
-      }
-      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
-      Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
-
-      list.addAll(collection);
-      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
-
-    } catch (Exception e) {
-      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
-    }
-  }
-
-  private void saveObjects(String filepath, List<?> list) {
-    try (PrintWriter out = new PrintWriter(
-        new BufferedWriter(
-            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
-
-      out.print(new Gson().toJson(list));
-
-      System.out.printf("%s 데이터 출력 완료!\n", filepath);
-
-    } catch (Exception e) {
-      System.out.printf("%s 데이터 출력 오류!\n", filepath);
-      e.printStackTrace();
-    }
-  }
 
 
   Menu createMenu() {

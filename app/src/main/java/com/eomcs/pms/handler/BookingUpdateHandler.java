@@ -32,12 +32,14 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
       bookingList = bookingPrompt.findBookingSeller(
           No, App.getLoginUser().getId(), booking.getBuyerId(), false);
     }
+
     String sellerId = booking.getCart().getSellerId();
     String productName = booking.getCart().getStock().getProduct().getProductName();
     Stock sellerStock = stockPrompt.findStockById(sellerId, productName);
 
     int sellerStocks = booking.getCart().getStock().getStocks();
     sellerStocks = booking.getCart().getStock().getStocks() + booking.getBookingStocks();
+
     int bookingstocks = Prompt.inputInt(String.format("수량(변경 전 : %d) :", booking.getBookingStocks()));
     // 수량 변경시 판매자 재고를 넘지 않도록, 변경후 수량 반영
     if (sellerStocks - bookingstocks<0) {
