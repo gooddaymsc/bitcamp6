@@ -12,11 +12,13 @@ public class SellerAddHandler extends AbstractSellerHandler {
 
   BookingPrompt bookingPrompt;
   StockPrompt stockPrompt;
+  List<Integer> totalNumberList;
   public SellerAddHandler(List<Member> memberList, 
-      BookingPrompt bookingPrompt, StockPrompt stockPrompt) {
+      BookingPrompt bookingPrompt, StockPrompt stockPrompt, List<Integer> totalNumberList) {
     super(memberList);
     this.bookingPrompt = bookingPrompt;
     this.stockPrompt = stockPrompt;
+    this.totalNumberList = totalNumberList;
   }
 
   @Override
@@ -49,8 +51,8 @@ public class SellerAddHandler extends AbstractSellerHandler {
     ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
     ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
-    seller.setNumber(App.totalNumberList.get(App.MEMBER_NUMBER_INDEX));
-    App.totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
+    seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
+    totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
 
     memberList.add(seller);
 

@@ -103,7 +103,6 @@ public class MemberPrompt {
     }
   }
 
-
   public HashMap<String, Seller> findByAdress (String address) {
     HashMap<String, Seller> hashMap = new HashMap<>();
     for (Member seller : memberList) {
