@@ -38,7 +38,7 @@ public abstract class AbstractBookingHandler implements Command {
   protected int checkMinute (String label) {
     while(true) {
       int num = Prompt.inputInt(label);
-      if(num < 1 || num > 60) {  
+      if(num < 0 || num > 59) {  
         System.out.println("입력하신 수는 유효하지 않습니다"); 
         continue;
       }           
