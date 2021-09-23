@@ -12,9 +12,15 @@ public abstract class AbstractMessageHandler implements Command {
     this.allMessageList = allMessageList;
   }
 
+  protected void addMessageListById(String memberId) {
+    MessageList messageList = new MessageList();
+    messageList.setReceivedId(memberId);
+    allMessageList.add(messageList);
+  }
+
   protected void putMessageListById(String memberId, Message message) {
     for (MessageList messageList : allMessageList) {
-      if (messageList.getRecipientId().equals(memberId)) {
+      if (messageList.getReceivedId().equals(memberId)) {
         int messageListNumber = messageList.getMessageListNumber();
         message.setMessageNumber(messageListNumber);
         messageList.getMessage().add(message);
@@ -23,35 +29,26 @@ public abstract class AbstractMessageHandler implements Command {
     }
   }
 
-  public int findMessageById(String id) {
-
+  protected int findMessageById(String id) {
     for (int i = 0; i < allMessageList.size(); i++) {
-      if (allMessageList.get(i).getRecipientId().equalsIgnoreCase(id)) {
+      if (allMessageList.get(i).getReceivedId().equalsIgnoreCase(id)) {
         return i;
       }
     }
     return -1;
-
-    //    for (MessageList message : allMessageList) {
-    //      if (message.getRecipientId().equalsIgnoreCase(id)) {
-    //        return message;
-    //      }
-    //    }
-    //    return null;
   }
 
-  //  public Message findByWriter(String writer) {
-  //
-  //    for (Message message : allMessageList) {
-  //      if (message.getWriter() == writer) {
-  //        return message;
+  //  protected Message checkMessageById(String id) {
+  //    for (MessageList messageList : allMessageList) {
+  //      if (messageList.getReceivedId().equals(id)) {
+  //        return messageList;
   //      }
   //    }
   //    return null;
   //  }
 
   protected boolean removeMessageById(String id, String memberId) {
-    MessageList messageList = allMessageList.get(findMessageById(id));
+    MessageList messageList = allMessageList.get(findMessageById(memberId));
     for (int i = 0; i < messageList.getMessage().size(); i++) {
       if (messageList.getMessage().get(i).getRecipientId().equals(memberId)) {
         allMessageList.get(findMessageById(id)).getMessage().remove(i);

@@ -37,6 +37,8 @@ public class MessageAddHandler extends AbstractMessageHandler {
 
 
     //    messageList.add(message);
+
+    addMessageListById(memberId);
     putMessageListById(memberId, message);
     memberPrompt.sendMessageUpdate(memberId);
     System.out.println("메세지를 보냈습니다.");

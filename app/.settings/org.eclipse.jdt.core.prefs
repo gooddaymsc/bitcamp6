@@ -1,14 +1,14 @@
 #
-#Fri Sep 17 09:26:13 KST 2021
+#Thu Sep 23 09:45:31 KST 2021
 =\=\=\=\=\=\=
 org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.debug.localVariable=generate
 org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
 eclipse.preferences.version=1
->>>>>>>=1f1a9a3edd5fb826a8892ffbee776e7fc65295f1
-org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures=disabled
+>>>>>>>=afed51651b9a66bc11454d49c012c79c56659c4c
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures=disabled
 org.eclipse.jdt.core.compiler.debug.sourceFile=generate
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11
