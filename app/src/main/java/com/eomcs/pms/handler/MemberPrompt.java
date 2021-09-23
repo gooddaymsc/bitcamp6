@@ -68,7 +68,14 @@ public class MemberPrompt {
     }
     return null;
   }
-
+  public Buyer findByBuyerInfo (String Id) {
+    for (Member seller : memberList) {
+      if (seller.getId().equals(Id)){
+        return (Buyer) seller;
+      }
+    }
+    return null;
+  }
 
   public Seller findByPlaceName (String storeName) {
     for (Member seller : memberList) {

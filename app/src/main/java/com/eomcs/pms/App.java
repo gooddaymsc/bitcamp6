@@ -288,7 +288,7 @@ public class App {
       if (member instanceof Buyer) {
         buyerList.add((Buyer)member);   
       } else if (member instanceof Seller) {
-        sellerList.add((Seller)member);
+        sel0st.add((Seller)member);
       }
     }
   }
