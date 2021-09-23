@@ -294,7 +294,6 @@ public class App {
 
   }
 
-
   Menu createMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("메인");
@@ -335,12 +334,14 @@ public class App {
 
     ///////////////////////////////////////////
 
-    MenuGroup productMenu = new MenuGroup("상품");
-    mainMenuGroup.add(productMenu);
+    mainMenuGroup.add(new MenuItem("상품", "/product/list"));
 
-    productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
-    productMenu.add(new MenuItem("목록", "/product/list"));
-    productMenu.add(new MenuItem("상품검색",  "/product/search"));
+    //    MenuGroup productMenu = new MenuGroup("상품");
+    //    mainMenuGroup.add(productMenu);
+    //
+    //    productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
+    //    productMenu.add(new MenuItem("상품", "/product/list"));
+    //    productMenu.add(new MenuItem("상품검색",  "/product/search"));
 
     ///////////////////////////////////////////
 

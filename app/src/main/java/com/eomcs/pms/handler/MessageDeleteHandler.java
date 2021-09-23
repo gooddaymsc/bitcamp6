@@ -22,24 +22,20 @@ public class MessageDeleteHandler extends AbstractMessageHandler {
 
     MessageList messageList = findMessageListById(nowLoginId);
 
-    while(true) {
-      for (Message message : messageList.getMessage()) {
-        if (message.getMessageNumber()==No) {
-          String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-          if (input.equalsIgnoreCase("y")) {
-            messageList.getMessage().remove(message);
-            MessageList messageList1 = findMessageListById(message.getTheOtherId());
-            Message message1 = findMessageById(messageList1, nowLoginId);
-            messageList1.getMessage().remove(message1);
-            System.out.println("메세지를 삭제하였습니다.\n");
-            return;
-          }
-          System.out.println("메세지 삭제를 취소하였습니다.\n");
+    for (Message message : messageList.getMessage()) {
+      if (message.getMessageNumber()==No) {
+        String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+        if (input.equalsIgnoreCase("y")) {
+          messageList.getMessage().remove(message);
+          MessageList messageList1 = findMessageListById(message.getTheOtherId());
+          Message message1 = findMessageById(messageList1, nowLoginId);
+          messageList1.getMessage().remove(message1);
+          System.out.println("메세지를 삭제하였습니다.\n");
           return;
         }
+        System.out.println("메세지 삭제를 취소하였습니다.\n");
+        return;
       }
-      System.out.println("해당 번호의 대화내용이 없습니다.\n");
-      return;
     }
   }
 }

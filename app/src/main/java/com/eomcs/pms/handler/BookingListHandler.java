@@ -51,7 +51,14 @@ public class BookingListHandler extends AbstractBookingHandler{
         System.out.println();
         switch(choose) {
           case 1 : request.getRequestDispatcher("/booking/detail").forward(request); return;
-          case 2 : request.getRequestDispatcher("/product/detail").forward(request); return;
+          case 2 : 
+            String productName = Prompt.inputString("\n상품명 선택 (0.이전) > ");
+            if (productName.equals("0")) {
+              return;
+            } else {
+              request.setAttribute("productName", productName);
+            }
+            request.getRequestDispatcher("/product/detail").forward(request); break;
           case 0 : return;
         }
       }

@@ -33,7 +33,8 @@ public class MessageListHandler extends AbstractMessageHandler {
       }
 
       for (Message message : messageList.getMessage()) {
-        System.out.printf("No : %d\tID : %-6s\tRecentDate : %s\n", message.getMessageNumber(), message.getTheOtherId(), message.getRegistrationDate());
+        System.out.printf("No : %d\tID : %-6s\tRecentDate : %s\n", 
+            message.getMessageNumber(), message.getTheOtherId(), message.getRegistrationDate());
       }
       System.out.println();
       while(true) {
