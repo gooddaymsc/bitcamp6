@@ -101,8 +101,7 @@ public class App {
   List<Buyer> buyerList = new ArrayList<>();
   List<Seller> sellerList = new ArrayList<>();
   List<MessageList> allMessageList = new ArrayList<>();
-
-  public static List<Integer> totalNumberList = new ArrayList<>();// totalMemberNumber, totalBoardNumber, totalProductNumber
+  List<Integer> totalNumberList = new ArrayList<>();// totalMemberNumber, totalBoardNumber, totalProductNumber
 
   HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
@@ -162,19 +161,19 @@ public class App {
 
   public App() {
 
-    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt));
+    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt,totalNumberList));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(memberList));
     commandMap.put("/buyer/update", new BuyerUpdateHandler(memberList));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, memberPrompt, cartPrompt, bookingPrompt));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt));
+    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt, totalNumberList));
     commandMap.put("/seller/list",   new SellerListHandler(memberList));
     commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
     commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
     commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, memberPrompt));
 
-    commandMap.put("/board/add",    new BoardAddHandler(boardList));
+    commandMap.put("/board/add",    new BoardAddHandler(boardList, totalNumberList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
     commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardPrompt, memberPrompt));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
@@ -188,7 +187,7 @@ public class App {
     commandMap.put("/comment/delete",    new CommentDeleteHandler(boardPrompt));
 
 
-    commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt));
+    commandMap.put("/product/add",    new ProductAddHandler(productList, productPrompt, totalNumberList));
     commandMap.put("/product/list",   new ProductListHandler(productList, productPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
@@ -244,6 +243,7 @@ public class App {
     params.put("buyerList", buyerList);
     params.put("sellerList", sellerList);
     params.put("allMessageList", allMessageList);
+    params.put("totalNumberList", totalNumberList);
 
 
     for (ApplicationContextListener listener : listeners) {
@@ -270,6 +270,8 @@ public class App {
   }
 
   void service() {
+    notifyOnApplicationStarted();
+
     memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
     if (totalNumberList.size() == 0) {
       totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
@@ -277,7 +279,6 @@ public class App {
       totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
     }
 
-    notifyOnApplicationStarted();
     System.out.println();
 
     createMenu().execute();
@@ -286,9 +287,6 @@ public class App {
     notifyOnApplicationEnded();
 
   }
-
-
-
 
 
   Menu createMenu() {

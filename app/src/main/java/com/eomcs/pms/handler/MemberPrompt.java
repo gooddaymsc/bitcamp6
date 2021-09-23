@@ -68,7 +68,14 @@ public class MemberPrompt {
     }
     return null;
   }
-
+  public Buyer findByBuyerInfo (String Id) {
+    for (Member seller : memberList) {
+      if (seller.getId().equals(Id)){
+        return (Buyer) seller;
+      }
+    }
+    return null;
+  }
 
   public Seller findByPlaceName (String storeName) {
     for (Member seller : memberList) {
@@ -95,16 +102,6 @@ public class MemberPrompt {
       }
     }
   }
-
-  public Buyer findByBuyerInfo (String BuyerId) {
-    for (Member buyer : memberList) {
-      if (buyer.getId().equals(BuyerId)){
-        return (Buyer) buyer;
-      }
-    }
-    return null;
-  }
-
 
   public HashMap<String, Seller> findByAdress (String address) {
     HashMap<String, Seller> hashMap = new HashMap<>();
