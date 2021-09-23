@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Message;
 import com.eomcs.pms.domain.MessageList;
 import com.eomcs.util.Prompt;
@@ -30,9 +29,9 @@ public class MessageAddHandler extends AbstractMessageHandler {
     message.setRecipientId(memberId);
 
     message.setMessageNumber(messageNumber++);
-    message.setTitle(Prompt.inputString("제목 : "));
+    //    message.setTitle(Prompt.inputString("제목 : "));
     message.setContent(Prompt.inputString("내용 : "));
-    message.setWriter(App.getLoginUser().getId());
+    //    message.setWriter(App.getLoginUser().getId());
     message.setRegistrationDate(new Date(System.currentTimeMillis()));
 
 
