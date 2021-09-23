@@ -27,11 +27,10 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    String storeName;
-    //String storeAdress;
-    String nowLoginId = App.getLoginUser().getId();
-    HashMap<String, Seller> sellerInfo = null;   
-    System.out.println("[상품검색]");
+    //String nowLoginId = App.getLoginUser().getId();
+    HashMap<String, Seller> map = new HashMap<>();
+
+    System.out.println("[상품검색] \n");
 
 
     String input = Prompt.inputString("상품입력: ");
@@ -69,29 +68,39 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
       while(true) {
         try {
-          sellerInfo = memberPrompt.findByAdress(Prompt.inputString("주소입력: ")); 
+          String adress = Prompt.inputString("주소입력: ");
+          if(adress.equals("0")){
+            return;
+          }
+          map = memberPrompt.findByAdress(adress); 
           break;
 
         } catch (Exception e) {
-          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동) ");
+          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
         }
 
       }
 
-      if(sellerInfo == null) {
+      if(map == null) {
         System.out.println("해당 위치에 판매처가 없습니다.");
         return;
       } else {
-        for (HashMap.Entry<String, Seller> entry : sellerInfo.entrySet()) {
-          System.out.printf("가게명 : %s, 가게주소 : %s\n, 재고수량 : %d",
+        System.out.println("[현재 상품 판매처]");
+        for (HashMap.Entry<String, Seller> entry : map.entrySet()) {
+          System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "주소", "연락처", "재고수량");
+          System.out.println("--------------------------------------------------------------------------");
+          System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n", 
               entry.getValue().getBusinessName(),
-              entry.getValue().getBusinessAddress());
-          // 재고수량...
+              entry.getValue().getBusinessAddress(),
+              entry.getValue().getBusinessPlaceNumber(),
+              stockPrompt.findStockById(entry.getValue().getId(),input).getStocks());
         }
       }
 
+      System.out.println("--------------------------------------------------------------------------");
       request.setAttribute("productName", productName); 
       request.getRequestDispatcher("/cart/add").forward(request);
+      break;
     }
   }
 }

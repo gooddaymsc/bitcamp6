@@ -1,2 +1,1 @@
-
-[{"id":"sung1","privacyCart":[],"cartListNumber":1},{"id":"sin","privacyCart":[],"cartListNumber":1},{"id":"sin2","privacyCart":[],"cartListNumber":1}]
+[{"id":"sung1","privacyCart":[{"stock":{"product":{"reviewList":[{"no":1,"score":4.0,"comment":"맛이 좋아요","id":"sin2","RegisteredDate":"9월 21, 2021"}],"productNumber":5,"productName":"쇼비뇽","productType":"와인","countryOrigin":"프랑스","variety":"청포도","alcoholLevel":7.0,"sugerLevel":4,"acidity":3,"weight":5,"rate":4.0,"reviewerNum":1},"stockNumber":1,"stocks":1,"price":10000},"cartStocks":0,"cartPrice":0,"cartNumber":1,"sellerId":"son3","registeredDate":"9월 23, 2021"}],"cartListNumber":2},{"id":"sin","privacyCart":[],"cartListNumber":1},{"id":"sin2","privacyCart":[],"cartListNumber":1}]
