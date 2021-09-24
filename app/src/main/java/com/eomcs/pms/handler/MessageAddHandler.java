@@ -17,7 +17,7 @@ public class MessageAddHandler extends AbstractMessageHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[새 메세지]");
 
@@ -34,6 +34,7 @@ public class MessageAddHandler extends AbstractMessageHandler {
     // 없으면
     if (messageIs!=null) {
       System.out.println("이미 있는 대화방입니다.\n");
+      request.getRequestDispatcher("/message/list").forward(request);
       return;
     }
     Message message = new Message();
