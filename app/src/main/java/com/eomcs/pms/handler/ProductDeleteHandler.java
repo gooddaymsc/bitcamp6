@@ -21,7 +21,7 @@ public class ProductDeleteHandler extends AbstractProductHandler {
 
 
     if (product == null) {
-      System.out.println("해당 상품이 존재하지 않습니다.");
+      System.out.println("해당 상품이 존재하지 않습니다.\n");
       return;
     }
 

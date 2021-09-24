@@ -59,12 +59,12 @@ public class ProductSearchHandler extends AbstractProductHandler {
         }
       }
 
+      System.out.println("[재고 찾기]");
+
       if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-        System.out.println("로그인 후 이용가능합니다.");
+        System.out.println("로그인 후 이용가능합니다.\n");
         return;
       }
-
-      System.out.println("[재고 찾기]");
 
       while(true) {
         try {
@@ -82,11 +82,11 @@ public class ProductSearchHandler extends AbstractProductHandler {
       }
 
       if(map == null) {
-        System.out.println("해당 위치에 판매처가 없습니다.");
+        System.out.println("해당 위치에 판매처가 없습니다.\n");
         return;
       } else {
         System.out.println("[현재 상품 판매처]");
-        for (HashMap.Entry<String, Seller> entry : map.entrySet()) {
+        for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
           System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "주소", "연락처", "재고수량");
           System.out.println("--------------------------------------------------------------------------");
           System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n", 
@@ -99,24 +99,9 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
       System.out.println("--------------------------------------------------------------------------");
       request.setAttribute("productName", productName); 
+      // 새 메세지 , 장바구니 담기
       request.getRequestDispatcher("/cart/add").forward(request);
       break;
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

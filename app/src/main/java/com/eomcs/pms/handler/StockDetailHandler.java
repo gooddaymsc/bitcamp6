@@ -30,7 +30,7 @@ public class StockDetailHandler extends AbstractStockHandler {
     request.setAttribute("stock", stockName);
 
     while(true) {
-      String choose = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      String choose = Prompt.inputString("재고변경(U) / 재고삭제(D) / 이전(0)>");
       System.out.println();
       switch(choose) {
         case "U":
@@ -38,7 +38,7 @@ public class StockDetailHandler extends AbstractStockHandler {
         case "D":
         case "d":request.getRequestDispatcher("/stock/delete").forward(request); return;
         case "0":return;
-        default : System.out.println("잘못입력하셨습니다.\n"); continue;
+        default : System.out.println("잘못입력하셨습니다."); continue;
 
       }
     }

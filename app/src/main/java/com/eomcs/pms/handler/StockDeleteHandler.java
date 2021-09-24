@@ -16,7 +16,7 @@ public class StockDeleteHandler extends AbstractStockHandler {
 
       String stockName = (String)request.getAttribute("stock");
       if (!stockPrompt.findByStock(stockName, nowLoginId)) {
-        System. out.println("해당 이름의 재고가 없습니다.");
+        System. out.println("해당 이름의 재고가 없습니다.\n");
         return;
       }
 
@@ -24,13 +24,13 @@ public class StockDeleteHandler extends AbstractStockHandler {
 
       if (input.equalsIgnoreCase("y")) {
         if (!stockPrompt.removeStockById(stockName, nowLoginId)) {
-          System.out.println("삭제가 제대로 이뤄지지 않음");
+          System.out.println("삭제가 제대로 이뤄지지 않음.\n");
           return;
         }
-        System.out.println("상품을 삭제하였습니다.");
+        System.out.println("상품을 삭제하였습니다.\n");
         return;
       } else {
-        System.out.println("삭제를 취소하였습니다.");
+        System.out.println("삭제를 취소하였습니다.\n");
         return;
       }
     }

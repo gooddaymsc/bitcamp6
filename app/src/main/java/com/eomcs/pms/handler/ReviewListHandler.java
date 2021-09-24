@@ -37,17 +37,20 @@ public class ReviewListHandler extends AbstractReviewHandler {
       System.out.println();
 
       if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
-        System.out.println("1. 리뷰작성 / 2. 리뷰변경 / 3. 리뷰삭제 / 이전(0)");
+        System.out.println("리뷰작성(C) / 리뷰변경(U) / 리뷰삭제(D) / 이전(0)");
         // 상품 목록 후 판매자는 재고에 등록하게.
         while (true) {
-          int choose = Prompt.inputInt("선택 > ");
+          String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose) {
-            case 1 : request.getRequestDispatcher("/review/add").forward(request); continue Loop;
-            case 2 : request.getRequestDispatcher("/review/update").forward(request); continue Loop;
-            case 3 : request.getRequestDispatcher("/review/delete").forward(request); continue Loop;
-            case 0 : return;
-            default : System.out.println("다시 선택해 주세요.\n"); continue;
+            case "C" :
+            case "c" : request.getRequestDispatcher("/review/add").forward(request); continue Loop;
+            case "U" :
+            case "u" : request.getRequestDispatcher("/review/update").forward(request); continue Loop;
+            case "D" :
+            case "d" : request.getRequestDispatcher("/review/delete").forward(request); continue Loop;
+            case "0" : return;
+            default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
       } else {
