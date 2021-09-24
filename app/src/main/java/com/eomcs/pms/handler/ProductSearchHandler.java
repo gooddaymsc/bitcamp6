@@ -41,8 +41,6 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     String productName  = productPrompt.findByProduct2(input);   
 
-    //System.out.println("[상품 상세정보]");
-
     while(true) {
       int size = 1;
       for(Product product : productList) {

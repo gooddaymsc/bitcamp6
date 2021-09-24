@@ -24,7 +24,7 @@ public class ProductListHandler extends AbstractProductHandler {
       } else {
         System.out.println(" || 이전(0)\n");
       }
-      System.out.printf("\n%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
+      System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
           "상품번호", "상품명", "주종", "원산지", "품종", "당도","산도","바디감", "도수");
       System.out.println("--------------------------------------------------------------------------");
       if (productList.size()==0) {
@@ -55,7 +55,7 @@ public class ProductListHandler extends AbstractProductHandler {
           switch (choose) {
             case "0" : return;
             case "r" : 
-            case "R" : request.getRequestDispatcher("/product/detail").forward(request); continue;
+            case "R" : request.getRequestDispatcher("/product/detail").forward(request); continue Loop;
             case "1" : request.getRequestDispatcher("/product/search").forward(request); continue Loop;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
@@ -63,7 +63,7 @@ public class ProductListHandler extends AbstractProductHandler {
       } else if ((App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER) ||
           (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN)){
         while (true) {
-          System.out.println("상세정보보기(R) /  검색(1)");
+          System.out.println("상세정보보기(R) / 검색(1)");
           String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose) {
@@ -72,7 +72,7 @@ public class ProductListHandler extends AbstractProductHandler {
             case "a" :
             case "A" : request.getRequestDispatcher("/product/add").forward(request); continue Loop;
             case "r" :
-            case "R" : request.getRequestDispatcher("/product/detail").forward(request); continue;
+            case "R" : request.getRequestDispatcher("/product/detail").forward(request); continue Loop;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
