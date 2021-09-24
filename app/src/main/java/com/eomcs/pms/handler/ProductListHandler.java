@@ -24,14 +24,14 @@ public class ProductListHandler extends AbstractProductHandler {
       } else {
         System.out.println(" || 이전(0)\n");
       }
-      System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
+      System.out.printf("%-6s\t%-8s\t%-8s\t%-8s\t%-8s\t%-6s\t%-6s\t%-6s\t%-6s\n",
           "상품번호", "상품명", "주종", "원산지", "품종", "당도","산도","바디감", "도수");
-      System.out.println("--------------------------------------------------------------------------");
+      System.out.println("--------------------------------------------------------------------------------------------------------");
       if (productList.size()==0) {
         System.out.println("등록된 상품이 없습니다.\n");
       }
       for (Product product : productList) {
-        System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6d\t%-6.2f\n", 
+        System.out.printf(" %-6d\t%-8s\t%-8s\t%-8s\t%-8s\t%-6d\t%-6d\t%-6d\t%-6.2f\n", 
             product.getProductNumber(), 
             product.getProductName(), 
             product.getProductType(), 

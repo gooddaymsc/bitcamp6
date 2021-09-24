@@ -47,7 +47,7 @@ public class BookingListHandler extends AbstractBookingHandler{
       System.out.println();
 
       while(true) {
-        System.out.println("\\n 예약 상세보기(U) / 상품 상세정보 보기(1) / 판매자에게 문의하기(2) / 이전(0)");
+        System.out.println("\n 예약 상세보기(U) / 상품 상세정보 보기(1) / 판매자에게 문의하기(2) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch(choose) {
