@@ -87,10 +87,11 @@ public class ProductSearchHandler extends AbstractProductHandler {
       } else {
         System.out.println("[현재 상품 판매처]");
         for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
-          System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "주소", "연락처", "재고수량");
+          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "판매자", "주소", "연락처", "재고수량");
           System.out.println("--------------------------------------------------------------------------");
-          System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n", 
+          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n", 
               entry.getValue().getBusinessName(),
+              entry.getValue().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
               stockPrompt.findStockById(entry.getValue().getId(),input).getStocks());
@@ -98,10 +99,18 @@ public class ProductSearchHandler extends AbstractProductHandler {
       }
 
       System.out.println("--------------------------------------------------------------------------");
+
       request.setAttribute("productName", productName); 
-      // 새 메세지 , 장바구니 담기
-      request.getRequestDispatcher("/cart/add").forward(request);
-      break;
+      while(true) {
+        System.out.println("1. 장바구니 담기 / 2. 판매자에게 문의하기 / 이전(0)");
+        int choose = Prompt.inputInt("선택 > ");
+        System.out.println();
+        switch(choose) {
+          case 1 : request.getRequestDispatcher("/cart/add").forward(request); return;
+          case 2 : request.getRequestDispatcher("/message/add").forward(request); break;
+          case 0 : return;
+        }
+      }
     }
   }
 }
