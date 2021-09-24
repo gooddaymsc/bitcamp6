@@ -43,7 +43,7 @@ public class CartListHandler extends AbstractCartHandler {
     System.out.println();
 
     while(true) {
-      System.out.println("1. 장바구니 상세보기 / 2. 판매자에게 메세지 보내기 / 이전(0)");
+      System.out.println("1. 장바구니 상세보기 / 2. 판매자에게 문의하기 / 이전(0)");
       int choose = Prompt.inputInt("선택 > ");
       System.out.println();
       switch(choose) {

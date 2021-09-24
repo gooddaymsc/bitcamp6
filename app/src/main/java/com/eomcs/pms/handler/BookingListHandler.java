@@ -47,7 +47,7 @@ public class BookingListHandler extends AbstractBookingHandler{
       System.out.println();
 
       while(true) {
-        System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 3. 판매자에게 메세지 보내기 / 이전(0)");
+        System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 3. 판매자에게 문의하기 / 이전(0)");
         int choose = Prompt.inputInt("선택 > ");
         System.out.println();
         switch(choose) {
@@ -93,7 +93,7 @@ public class BookingListHandler extends AbstractBookingHandler{
     }
     System.out.println();
     while(true) {
-      System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 3. 예약자에게 메세지 보내기 / 이전(0)");
+      System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 3. 예약자와 대화하기 / 이전(0)");
       int choose = Prompt.inputInt("선택 > ");
       System.out.println();
       switch(choose) {
