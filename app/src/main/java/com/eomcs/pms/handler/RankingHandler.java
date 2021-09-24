@@ -58,7 +58,7 @@ public class RankingHandler implements Command {
       if(no == 6) {break;}
     }
     System.out.println();
-    System.out.println("1. 상품 상세정보 보기 / 0. 이전 ");
+    System.out.println("상품 상세정보(1) / 이전(0) ");
     while(true) {
       int choose = Prompt.inputInt("선택 > ");
       switch (choose) {

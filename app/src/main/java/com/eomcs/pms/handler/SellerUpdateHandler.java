@@ -15,7 +15,7 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
   @Override
   public void execute(CommandRequest request) {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("\n[개인정보 변경]");
+      System.out.println("[개인정보 변경]");
 
       Member seller = (Seller) request.getAttribute("seller");
 
@@ -41,10 +41,10 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
         ((Seller) seller).setBusinessNumber(bussinessNo);
         ((Seller) seller).setBusinessAddress(bussinessAddress);
         ((Seller) seller).setBusinessPlaceNumber(bussinessTel);  
-        System.out.println("개인 정보를 변경하였습니다.");
+        System.out.println("개인 정보를 변경하였습니다.\n");
         return;
       } else {
-        System.out.println("개인 정보 변경을 취소하였습니다.");
+        System.out.println("개인 정보 변경을 취소하였습니다.\n");
         return;
       }
     } else {
@@ -55,7 +55,7 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
       Member seller = (Seller) request.getAttribute("seller");
 
       if (seller == null) {
-        System.out.println("해당 아이디의 회원이 없습니다.");
+        System.out.println("해당 아이디의 회원이 없습니다.\n");
         return;
       }
       int level = Prompt.inputInt(String.format("등급(변경 전 : %d)", seller.getLevel()));
@@ -63,10 +63,10 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         seller.setLevel(level);
-        System.out.println("회원 변경을 완료하였습니다.");
+        System.out.println("회원 변경을 완료하였습니다.\n");
         return;
       }
-      System.out.println("회원 변경을 취소하였습니다.");
+      System.out.println("회원 변경을 취소하였습니다.\n");
       return;
     }
   }

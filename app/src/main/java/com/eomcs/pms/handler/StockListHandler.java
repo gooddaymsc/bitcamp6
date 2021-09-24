@@ -20,7 +20,7 @@ public class StockListHandler extends AbstractStockHandler {
     StockList stockList = allStockList.get(stockPrompt.findStockListById(nowLoginId));
 
     if (stockList.getSellerStock().size() == 0) {
-      System.out.println("아직 추가한 상품이 없습니다.");
+      System.out.println("아직 추가한 상품이 없습니다.\n");
       return;
     }
     System.out.printf("%-3s\t%-6s\t%-6s\t%-3s\n",
@@ -36,13 +36,14 @@ public class StockListHandler extends AbstractStockHandler {
     }
     System.out.println();
     while(true) {
-      System.out.println("1. 상세보기 / 이전(0)");
-      int choose = Prompt.inputInt("선택 > ");
+      System.out.println("상세보기(R) / 이전(0)");
+      String choose = Prompt.inputString("선택 > ");
       System.out.println();
       switch(choose) {
-        case 1 : 
+        case "r":
+        case "R" : 
           request.getRequestDispatcher("/stock/detail").forward(request); return;
-        case 0 :
+        case "0" :
           return;
         default : 
           System.out.println("다시 선택해 주세요."); continue;

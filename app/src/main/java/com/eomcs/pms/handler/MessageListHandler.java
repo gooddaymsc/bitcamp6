@@ -38,13 +38,15 @@ public class MessageListHandler extends AbstractMessageHandler {
       }
       System.out.println();
       while(true) {
-        System.out.println("< 1. 새 메세지 / 2. 대화보기 / 이전(0) >");
+        System.out.println("새 메세지(A) / 대화보기(R) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch (choose) {
           case "0" : return;
-          case "1" : request.getRequestDispatcher("/message/add").forward(request); continue Loop;
-          case "2" : request.getRequestDispatcher("/message/detail").forward(request); continue Loop;
+          case "A":
+          case "a" : request.getRequestDispatcher("/message/add").forward(request); continue Loop;
+          case "R":
+          case "r" : request.getRequestDispatcher("/message/detail").forward(request); continue Loop;
           default : System.out.println("잘못입력하셨습니다"); continue;
         }
       }

@@ -28,7 +28,7 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
   public void execute(CommandRequest request) {
 
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("\n[탈퇴하기]");
+      System.out.println("[탈퇴하기]");
       Member seller = (Seller) request.getAttribute("seller");
       String nowLoginId = seller.getId();
 
@@ -39,11 +39,11 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
         bookingPrompt.removeBookingListById(nowLoginId);
         stockPrompt.removeStockListById(nowLoginId);
         messagePrompt.removeMessageListById(nowLoginId);
-        System.out.println("탈퇴가 완료되었습니다.");
+        System.out.println("탈퇴가 완료되었습니다.\n");
         App.loginMember = new Member();
         return;
       } else {
-        System.out.println("탈퇴를 취소하였습니다.");
+        System.out.println("탈퇴를 취소하였습니다.\n");
         return;
       } 
     } else {
@@ -57,10 +57,10 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
         bookingPrompt.removeBookingListById(sellerId);
         stockPrompt.removeStockListById(sellerId);
         messagePrompt.removeMessageListById(sellerId);
-        System.out.println("판매자를 탈퇴시켰습니다.");
+        System.out.println("판매자를 탈퇴시켰습니다.\n");
         return;
       }
-      System.out.println("판매자 탈퇴를 취소하였습니다.");
+      System.out.println("판매자 탈퇴를 취소하였습니다.\n");
       return;
     }
   }

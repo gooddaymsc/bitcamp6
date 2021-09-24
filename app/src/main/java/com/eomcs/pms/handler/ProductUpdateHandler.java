@@ -17,7 +17,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
     Product product =  productPrompt.findByProduct(productName);
 
     if (product == null) {
-      System.out.println("해당 상품이 존재하지 않습니다.");
+      System.out.println("해당 상품이 존재하지 않습니다.\n");
       return;
     }
 
@@ -42,10 +42,10 @@ public class ProductUpdateHandler extends AbstractProductHandler {
       product.setAcidity(acidic);
       product.setWeight(body);
 
-      System.out.println("상품정보를 변경하였습니다.");
+      System.out.println("상품정보를 변경하였습니다.\n");
       return;
     } else {
-      System.out.println("상품정보 변경을 취소하였습니다.");
+      System.out.println("상품정보 변경을 취소하였습니다.\n");
       return;
     }
   }
