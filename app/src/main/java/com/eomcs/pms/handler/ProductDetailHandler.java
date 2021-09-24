@@ -42,8 +42,8 @@ public class ProductDetailHandler extends AbstractProductHandler {
           int choose1 = Prompt.inputInt("선택 > ");
           System.out.println();
           switch (choose1) {
-            case 1 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 2 : request.getRequestDispatcher("/cart/add").forward(request); continue Loop;
+            case 1 : request.getRequestDispatcher("/review/list").forward(request); return;
+            case 2 : request.getRequestDispatcher("/cart/add").forward(request); return;
             case 0 : return;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
@@ -54,8 +54,8 @@ public class ProductDetailHandler extends AbstractProductHandler {
           String choose2 = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose2) {
-            case "1" : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case "2" : request.getRequestDispatcher("/stock/add").forward(request); continue Loop;
+            case "1" : request.getRequestDispatcher("/review/list").forward(request); return;
+            case "2" : request.getRequestDispatcher("/stock/add").forward(request); return;
             case "u":
             case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
             case "d" :
@@ -70,7 +70,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
           String choose3 = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose3) {
-            case "1" : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
+            case "1" : request.getRequestDispatcher("/review/list").forward(request); return;
             case "u":
             case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
             case "d" :
@@ -85,7 +85,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
           int choose4 = Prompt.inputInt("선택 > ");
           System.out.println();
           switch (choose4) {
-            case 1 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
+            case 1 : request.getRequestDispatcher("/review/list").forward(request); return;
             case 0 : return;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
