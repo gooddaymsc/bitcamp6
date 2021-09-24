@@ -16,7 +16,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
     Loop : while(true) {
       System.out.println("[상품 상세보기]");
 
-      Product product = productPrompt.findByProduct((String) request.getAttribute("productName"));
+      Product product = productPrompt.findByProduct(Prompt.inputString("\n상품명 > "));
 
       if (product == null) {
         System.out.println("입력하신 상품이 없습니다.\n");
@@ -32,7 +32,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
       System.out.printf("산도: %d\n", product.getAcidity());
       System.out.printf("바디감: %d\n", product.getWeight());
       System.out.println();
-
+      request.setAttribute("productName", product.getProductName());
       //장바구니 등록 / 재고등록 / 리뷰보기(CRUD) 
 
       if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
