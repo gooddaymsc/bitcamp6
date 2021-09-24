@@ -67,8 +67,8 @@ public class ProductSearchHandler extends AbstractProductHandler {
         try {
           String adress = Prompt.inputString("주소입력: ");
           if(adress.equals("0")){
-            return;
-          }
+            return; }
+
           map = memberPrompt.findByAdress(adress); 
           break;
 
@@ -76,12 +76,11 @@ public class ProductSearchHandler extends AbstractProductHandler {
           System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
         }
 
-      }
-
-      if(map == null) {
+      } if(map == null) {
         System.out.println("해당 위치에 판매처가 없습니다.\n");
-        return;
+        break;
       } else {
+        System.out.println();
         System.out.println("[현재 상품 판매처]");
         for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
           System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "판매자", "주소", "연락처", "재고수량");
