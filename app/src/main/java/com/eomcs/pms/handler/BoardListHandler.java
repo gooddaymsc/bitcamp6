@@ -15,7 +15,7 @@ public class BoardListHandler extends AbstractBoardHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     Loop : while(true) {
-      System.out.printf("[게시글 목록] ");
+      System.out.printf("[게시글 목록]");
       if (App.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
         System.out.println("|| 게시글 등록(A) / 이전(0)\n");
       } else {
@@ -39,7 +39,7 @@ public class BoardListHandler extends AbstractBoardHandler {
             board.getRegistrationDate());
       }
       if (App.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
-        System.out.println("\n1. 상세보기 / 2. 검색");
+        System.out.println("\n 상세보기(R) / 검색(1)");
         while (true) {
           String choose = Prompt.inputString("선택 > ");
           System.out.println();
@@ -47,20 +47,22 @@ public class BoardListHandler extends AbstractBoardHandler {
             case "0" : return;
             case "a" :
             case "A" : System.out.println("로그인 후 가능합니다.\n"); return;
-            case "1" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
-            case "2" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
+            case "r" :
+            case "R" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
+            case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
             default : System.out.println("잘못입력하셨습니다."); continue;
           }
         }
       } else {
-        System.out.println("\n1. 상세보기 / 2. 검색");
+        System.out.println("\n 상세보기(R) / 검색(1)");
         while (true) {
           String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose) {
             case "0" : return;
-            case "1" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
-            case "2" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
+            case "r" :
+            case "R" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
+            case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
             case "a" :
             case "A" : request.getRequestDispatcher("/board/add").forward(request); continue Loop;
             default : System.out.println("잘못입력하셨습니다."); continue;

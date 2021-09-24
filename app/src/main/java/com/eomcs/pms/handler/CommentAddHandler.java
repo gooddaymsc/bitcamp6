@@ -15,7 +15,7 @@ public class CommentAddHandler extends AbstractCommentHandler {
   @Override
   public void execute(CommandRequest request) {
 
-    System.out.println("\n[댓글 달기]");
+    System.out.println("[댓글 달기]");
     Comment comment = new Comment();
     int boardNumber = (int) request.getAttribute("no");
     Board board = boardPrompt.findBoardByNo(boardNumber);

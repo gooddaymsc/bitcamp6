@@ -28,7 +28,7 @@ public class BoardDetailHandler extends AbstractBoardHandler {
     }
     System.out.println();
     Loop : while(true) {
-      System.out.printf("[게시글 상세보기] ");
+      System.out.printf("[게시글 상세보기]");
       if (App.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
         System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
       } else {
@@ -52,7 +52,7 @@ public class BoardDetailHandler extends AbstractBoardHandler {
       request.setAttribute("no", no);
       request.getRequestDispatcher("/comment/list").forward(request);
 
-      System.out.println("\n< 1.좋아요 / 2.댓글등록 / 3.댓글수정 / 4.댓글삭제 >");
+      System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");
       if (App.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
         System.out.println("로그인 후 가능합니다.\n");
         return;

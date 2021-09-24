@@ -18,7 +18,7 @@ public class BoardFindHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     Loop : while(true) {
-      System.out.println("[내가 남긴 게시글 목록]");
+      System.out.println("[내가 남긴 게시글 목록]\n");
       System.out.printf("%-3s\t%-10s\t%-3s\t%-6s\n",
           "번호","제목","댓글수","등록일");
       System.out.println("--------------------------------------------------------------------------");
@@ -33,7 +33,7 @@ public class BoardFindHandler implements Command {
         }
       }
 
-      System.out.println("\n1. 상세보기 / 2. 검색 / 이전(0)");
+      System.out.println("\n 상세보기(1) / 검색(2) / 이전(0)");
       while (true) {
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
