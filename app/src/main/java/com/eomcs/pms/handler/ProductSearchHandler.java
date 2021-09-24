@@ -30,15 +30,14 @@ public class ProductSearchHandler extends AbstractProductHandler {
     //String nowLoginId = App.getLoginUser().getId();
     HashMap<String, Seller> map = new HashMap<>();
 
-    System.out.println("[상품 판매처 검색]");
+    System.out.println("[상품검색]");
+    String input = Prompt.inputString("\n상품입력: ");
 
-
-    String input = (String) request.getAttribute("productName");
-
-    if (input.equals("")) {
-      System.out.println("잘못 입력하셨습니다.");
-      //      continue;
-    }     
+    Product productIs = productPrompt.findByProduct(input);
+    if (productIs == null) {
+      System.out.println("입력하신 상품이 없습니다.\n");
+      return;
+    }
 
     String productName  = productPrompt.findByProduct2(input);   
 
