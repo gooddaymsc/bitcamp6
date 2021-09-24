@@ -37,7 +37,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
 
       if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
         while (true) {
-          System.out.println("1. 리뷰보기 / 2. 장바구니 등록 / 이전(0)");
+          System.out.println("리뷰보기(1) / 장바구니 등록(2) / 이전(0)");
           // 상품 목록 후 판매자는 재고에 등록하게.
           int choose1 = Prompt.inputInt("선택 > ");
           System.out.println();
@@ -50,34 +50,38 @@ public class ProductDetailHandler extends AbstractProductHandler {
         }
       } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
         while (true) {
-          System.out.println("1. 리뷰보기 / 2. 상품변경 / 3. 상품삭제 / 4. 재고등록 / 이전(0)");
-          int choose2 = Prompt.inputInt("선택 > ");
+          System.out.println("상품변경(U) / 상품삭제(D) / 리뷰보기(1) / 재고등록(2) / 이전(0)");
+          String choose2 = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose2) {
-            case 1 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 2 : request.getRequestDispatcher("/product/update").forward(request); continue;
-            case 3 : request.getRequestDispatcher("/product/delete").forward(request); continue;
-            case 4 : request.getRequestDispatcher("/stock/add").forward(request); continue Loop;
-            case 0 : return;
+            case "1" : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
+            case "2" : request.getRequestDispatcher("/stock/add").forward(request); continue Loop;
+            case "u":
+            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
+            case "d" :
+            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue;
+            case "0" : return;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
       } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
         while (true) {
-          System.out.println("1. 리뷰보기 / 2. 상품변경 / 3. 상품삭제 / 이전(0)");
-          int choose3 = Prompt.inputInt("선택 > ");
+          System.out.println("상품변경(U) / 상품삭제(D) / 리뷰보기(1) / 이전(0)");
+          String choose3 = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose3) {
-            case 1 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 2 : request.getRequestDispatcher("/product/update").forward(request); continue;
-            case 3 : request.getRequestDispatcher("/product/delete").forward(request); continue;
-            case 0 : return;
+            case "1" : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
+            case "u":
+            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
+            case "d" :
+            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue;
+            case "0" : return;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
       } else {
         while (true) {
-          System.out.println("1. 리뷰보기 / 이전(0)");
+          System.out.println("리뷰보기(1) / 이전(0)");
           int choose4 = Prompt.inputInt("선택 > ");
           System.out.println();
           switch (choose4) {

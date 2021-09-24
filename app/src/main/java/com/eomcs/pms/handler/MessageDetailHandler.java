@@ -39,13 +39,15 @@ public class MessageDetailHandler extends AbstractMessageHandler {
       request.setAttribute("MessageNo", No);
       System.out.println();
       while(true) {
-        System.out.println("< 1. 답장 / 2. 삭제 / 이전(0) >");
+        System.out.println("답장(U) / 삭제(D) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch (choose) {
           case "0" : return;
-          case "1" : request.getRequestDispatcher("/message/update").forward(request); continue Loop;
-          case "2" : request.getRequestDispatcher("/message/delete").forward(request); return;
+          case "U":
+          case "u" : request.getRequestDispatcher("/message/update").forward(request); continue Loop;
+          case "D":
+          case "d" : request.getRequestDispatcher("/message/delete").forward(request); return;
           default : System.out.println("잘못입력하셨습니다"); continue;
         }
       }

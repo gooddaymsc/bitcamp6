@@ -25,7 +25,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     String productName = Prompt.inputString("상품명 : ");
 
     if (productPrompt.findByProduct(productName)!=null) {
-      System.out.println("이미 추가된 상품입니다.");
+      System.out.println("이미 추가된 상품입니다.\n");
       return;
     }
     product.setProductName(productName);
@@ -41,7 +41,7 @@ public class ProductAddHandler extends AbstractProductHandler {
     totalNumberList.set(App.PROUDCT_NUMBER_INDEX, product.getProductNumber()+1);
     productList.add(product);
 
-    System.out.println("상품을 등록하였습니다.");
+    System.out.println("상품을 등록하였습니다.\n");
   }
 
 }

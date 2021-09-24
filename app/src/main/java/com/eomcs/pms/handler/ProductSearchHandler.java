@@ -62,7 +62,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
       System.out.println("[재고 찾기]");
 
       if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-        System.out.println("로그인 후 이용가능합니다.");
+        System.out.println("로그인 후 이용가능합니다.\n");
         return;
       }
 
@@ -82,7 +82,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
       }
 
       if(map == null) {
-        System.out.println("해당 위치에 판매처가 없습니다.");
+        System.out.println("해당 위치에 판매처가 없습니다.\n");
         return;
       } else {
         System.out.println("[현재 상품 판매처]");

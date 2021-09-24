@@ -30,7 +30,7 @@ public class ReviewFindHandler extends AbstractReviewHandler{
       for (Review review : product.getReviewList()) {
         if(review.getId().equals(App.getLoginUser().getId()))
 
-          System.out.printf(" %-5s\t%-4s\t%-8s\t%-6s\n", 
+          System.out.printf("%-5s\t%-4s\t%-8s\t%-6s\n", 
               product.getProductName(),
               review.getScore(),
               review.getComment(),
@@ -43,17 +43,19 @@ public class ReviewFindHandler extends AbstractReviewHandler{
       String productName = Prompt.inputString("상품명 : ");
       request.setAttribute("productName", productName);
 
-      System.out.println("1. 리뷰변경 / 2. 리뷰삭제 / 이전(0)");
+      System.out.println("리뷰변경(U) / 리뷰삭제(D) / 이전(0)");
       // 상품 목록 후 판매자는 재고에 등록하게.
       while (true) {
-        int choose = Prompt.inputInt("선택 > ");
+        String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch (choose) {
-          case 1 :
+          case "u" :
+          case "U" :
             request.getRequestDispatcher("/review/update").forward(request); return;
-          case 2: 
+          case "d":
+          case "D":
             request.getRequestDispatcher("/review/delete").forward(request); return;
-          case 0 : return;
+          case "0" : return;
           default : System.out.println("다시 선택해 주세요."); continue;
         }
       }
