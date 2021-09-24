@@ -59,7 +59,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
             case "u":
             case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
             case "d" :
-            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue;
+            case "D" : request.getRequestDispatcher("/product/delete").forward(request); return;
             case "0" : return;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
@@ -74,7 +74,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
             case "u":
             case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
             case "d" :
-            case "D" : request.getRequestDispatcher("/product/delete").forward(request); continue;
+            case "D" : request.getRequestDispatcher("/product/delete").forward(request); return;
             case "0" : return;
             default : System.out.println("다시 선택해 주세요."); continue;
           }

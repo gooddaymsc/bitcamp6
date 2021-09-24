@@ -11,7 +11,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("\n[상품 변경]");
+    System.out.println("[상품 변경]");
 
     String productName = (String) request.getAttribute("productName");
     Product product =  productPrompt.findByProduct(productName);
