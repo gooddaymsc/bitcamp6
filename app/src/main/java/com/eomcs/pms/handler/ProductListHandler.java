@@ -25,7 +25,7 @@ public class ProductListHandler extends AbstractProductHandler {
           request.getRequestDispatcher("/product/add").forward(request);
         }
       }
-      System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
+      System.out.printf("\n%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
           "상품번호", "상품명", "주종", "원산지", "품종", "당도","산도","바디감", "도수");
       System.out.println("--------------------------------------------------------------------------");
       for (Product product : productList) {
@@ -51,6 +51,9 @@ public class ProductListHandler extends AbstractProductHandler {
           continue Loop;
         }
       }
+
+      // buyer-비회원 : 상세정보, 검색 / seller - admin : 상세정보, 등록, 검색
+
       if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
         while (true) {
           System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 장바구니 등록 / 0.이전");
