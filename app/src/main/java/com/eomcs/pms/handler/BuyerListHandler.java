@@ -11,7 +11,7 @@ public class BuyerListHandler extends AbstractBuyerHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[회원 목록]");
+    System.out.println("[회원 목록]\n");
     System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
         "회원번호", "아이디", "이름", "닉네임", "등급","등록일");
     System.out.println("--------------------------------------------------------------------------");

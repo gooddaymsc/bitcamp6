@@ -22,7 +22,7 @@ public class BookingDetailHandler extends AbstractBookingHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("[내 픽업 예약 상세보기]");
+      System.out.println("[내 픽업 예약 상세보기]\n");
 
       int No = Prompt.inputInt("예약번호 :");
       Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
@@ -46,18 +46,20 @@ public class BookingDetailHandler extends AbstractBookingHandler {
 
       request.setAttribute("bookingNo", No);
       while(true) {
-        System.out.println("1. 예약변경 / 2. 예약취소 / 이전(0)");
-        int choose = Prompt.inputInt("선택 > ");
+        System.out.println("\n 예약변경(R) / 예약취소(D) / 이전(0)");
+        String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch(choose) {
-          case 1 : request.getRequestDispatcher("/booking/update").forward(request); return;
-          case 2 : request.getRequestDispatcher("/booking/delete").forward(request); return;
-          case 0 : return;
+          case "r" :
+          case "R" : request.getRequestDispatcher("/booking/update").forward(request); return;
+          case "d" :
+          case "D" : request.getRequestDispatcher("/booking/delete").forward(request); return;
+          case "0" : return;
         }
       }
 
     } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
-      System.out.println("[고객 예약 상세보기]");
+      System.out.println("[고객 예약 상세보기]\n");
 
       int No = Prompt.inputInt("예약번호 :");
       Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
@@ -82,12 +84,13 @@ public class BookingDetailHandler extends AbstractBookingHandler {
 
       request.setAttribute("bookingNo", No);
       while(true) {
-        System.out.println("1. 예약변경 / 이전(0)");
-        int choose = Prompt.inputInt("선택 > ");
+        System.out.println("\n 예약변경(U) / 이전(0)");
+        String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch(choose) {
-          case 1 : request.getRequestDispatcher("/booking/update").forward(request); return;
-          case 0 : return;
+          case "u" :
+          case "U" : request.getRequestDispatcher("/booking/update").forward(request); return;
+          case "0" : return;
         }
       }
     }

@@ -24,7 +24,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
   public void execute(CommandRequest request) {
 
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("\n[탈퇴하기]");
+      System.out.println("[탈퇴하기]\n");
       Member buyer = (Buyer) request.getAttribute("buyer");
       String nowLoginId = buyer.getId();
 

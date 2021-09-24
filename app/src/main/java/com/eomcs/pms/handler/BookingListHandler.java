@@ -22,7 +22,7 @@ public class BookingListHandler extends AbstractBookingHandler{
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
 
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("[내 픽업 예약 목록]");
+      System.out.println("[내 픽업 예약 목록]\n");
       BookingList bookingList = bookingPrompt.findBookingList(App.getLoginUser().getId());
 
       if (bookingList.getBooking().size() == 0) {
@@ -46,27 +46,28 @@ public class BookingListHandler extends AbstractBookingHandler{
       System.out.println();
 
       while(true) {
-        System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 이전(0)");
-        int choose = Prompt.inputInt("선택 > ");
+        System.out.println("\n 예약 상세보기(U) / 상품 상세정보 보기(1) / 이전(0)");
+        String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch(choose) {
-          case 1 : request.getRequestDispatcher("/booking/detail").forward(request); return;
-          case 2 : 
-            String productName = Prompt.inputString("\n상품명 선택 (0.이전) > ");
+          case "u" :
+          case "U" : request.getRequestDispatcher("/booking/detail").forward(request); return;
+          case "1" : 
+            String productName = Prompt.inputString("\n상품명 선택 / 이전(0) > ");
             if (productName.equals("0")) {
               return;
             } else {
               request.setAttribute("productName", productName);
             }
             request.getRequestDispatcher("/product/detail").forward(request); break;
-          case 0 : return;
+          case "0" : return;
         }
       }
 
     } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
       memberPrompt.changeBookingUpdate(App.getLoginUser().getId(), false);
 
-      System.out.println("[고객 예약 목록]");
+      System.out.println("[고객 예약 목록]\n");
       BookingList bookingList = bookingPrompt.findBookingList(App.getLoginUser().getId());
 
       if (bookingList.getBooking().size() == 0) {
@@ -91,13 +92,14 @@ public class BookingListHandler extends AbstractBookingHandler{
     }
     System.out.println();
     while(true) {
-      System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 이전(0)");
-      int choose = Prompt.inputInt("선택 > ");
+      System.out.println("\n 예약 상세보기(U) / 상품 상세정보 보기(U) / 이전(0)");
+      String choose = Prompt.inputString("선택 > ");
       System.out.println();
       switch(choose) {
-        case 1 : request.getRequestDispatcher("/booking/detail").forward(request); return;
-        case 2 : request.getRequestDispatcher("/product/detail").forward(request); return;
-        case 0 : return;
+        case "u" : 
+        case "U" : request.getRequestDispatcher("/booking/detail").forward(request); return;
+        case "1" : request.getRequestDispatcher("/product/detail").forward(request); return;
+        case "0" : return;
       }
     }
 

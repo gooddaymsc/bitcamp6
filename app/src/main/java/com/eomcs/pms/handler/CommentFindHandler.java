@@ -18,7 +18,7 @@ public class CommentFindHandler extends AbstractCommentHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     Loop : while(true) {
-      System.out.println("[내가 남긴 댓글 목록]");
+      System.out.println("[내가 남긴 댓글 목록]\n");
       System.out.printf("%-3s\t%-10s\t%-15s\t%-6s\n",
           "번호","제목","내가남긴댓글","등록일");
       System.out.println("--------------------------------------------------------------------------");

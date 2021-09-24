@@ -14,7 +14,7 @@ public class CartDeleteHandler extends AbstractCartHandler {
   @Override
   public void execute(CommandRequest request) {
     while(true) {
-      System.out.println("[장바구니 삭제]");
+      System.out.println("[장바구니 삭제]\n");
 
       String productName = (String)request.getAttribute("productName");
       Cart cart = cartPrompt.findByCart(productName);

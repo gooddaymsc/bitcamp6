@@ -15,7 +15,7 @@ public class CommentDeleteHandler extends AbstractCommentHandler {
   @Override
   public void execute(CommandRequest request) {
 
-    System.out.println("\n[댓글 삭제]");
+    System.out.println("[댓글 삭제]\n");
     int no = Prompt.inputInt("삭제할 댓글 번호 : ");
 
     int boardNumber = (int) request.getAttribute("no");

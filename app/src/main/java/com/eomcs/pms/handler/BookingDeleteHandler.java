@@ -16,7 +16,7 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
   }
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[예약 취소]");
+    System.out.println("[예약 취소]\n");
 
     int No = (int) request.getAttribute("bookingNo");
     Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());

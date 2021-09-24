@@ -24,7 +24,10 @@ public class RankingHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {  
 
-    System.out.println("[실시간 랭킹]\n");
+    //    System.out.println("[실시간 랭킹]\n");
+    System.out.println("  -----------   ");
+    System.out.println(" |  RANKING  |   ");
+    System.out.println("  -----------  \n ");
 
 
     HashMap <String, Float > map = new HashMap<>();
@@ -46,14 +49,14 @@ public class RankingHandler implements Command {
 
     int no = 1;
     for(Entry<String, Float> entry : entries) {
-      System.out.printf(" * %d위 %s (평점: %.2f점) * \n", no++, entry.getKey(), entry.getValue());
+      System.out.printf(" * %d위 %s *  (평점: %.2f점)  \n", no++, entry.getKey(), entry.getValue());
       for(Product product : productList)
       {
         if(entry.getKey().equals(product.getProductName())){ 
-          System.out.printf("주종 : %s\n", product.getProductType());
-          System.out.printf("원산지 : %s\n", product.getCountryOrigin());
-          System.out.printf("알콜도수 : %.2f\n", product.getAlcoholLevel());
-          System.out.println("---------------------------------------");
+          System.out.printf("- 주종 : %s\n", product.getProductType());
+          System.out.printf("- 원산지 : %s\n", product.getCountryOrigin());
+          System.out.printf("- 알콜도수 : %.2f\n", product.getAlcoholLevel());
+          System.out.println("-----------------------------------------------");
           numberMap.put(no-1, product.getProductName());
         }
       }
@@ -65,7 +68,7 @@ public class RankingHandler implements Command {
       int choose = Prompt.inputInt("선택 > ");
       switch (choose) {
         case 1 : 
-          int chooseNum = productPrompt.checkNum("선택(1-5위) > ");
+          int chooseNum = productPrompt.checkNum("상품선택(1-5위) > ");
           System.out.printf("\n # 상품명 : %s \n", numberMap.get(chooseNum));
           request.setAttribute("productName", numberMap.get(chooseNum));
           System.out.println();

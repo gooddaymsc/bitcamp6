@@ -26,7 +26,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[회원 등록]");
+    System.out.println("[회원 등록]\n");
 
     Member buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);
