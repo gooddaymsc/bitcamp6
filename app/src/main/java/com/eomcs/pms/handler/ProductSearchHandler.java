@@ -31,8 +31,6 @@ public class ProductSearchHandler extends AbstractProductHandler {
     HashMap<String, Seller> map = new HashMap<>();
 
     System.out.println("[상품검색]");
-
-
     String input = Prompt.inputString("\n상품입력: ");
 
     Product productIs = productPrompt.findByProduct(input);
@@ -43,7 +41,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     String productName  = productPrompt.findByProduct2(input);   
 
-    System.out.println("==========상품 목록==========");
+    //System.out.println("[상품 상세정보]");
 
     while(true) {
       int size = 1;
