@@ -19,6 +19,9 @@ public class BoardSearchHandler extends AbstractBoardHandler {
     String input = Prompt.inputString("검색어 : ");
     System.out.println();
     if (input.equals("0")) { return; }
+    System.out.printf("%-3s\t%-15s\t%-15s\t%-6s\t%-6s\n",
+        "번호", "제목", "내용", "태그", "등록일");
+    System.out.println("--------------------------------------------------------------------------");
     while(true) {
       boolean resultSearch = false;
       for (Board board : boardList) {
@@ -29,11 +32,8 @@ public class BoardSearchHandler extends AbstractBoardHandler {
           continue;
         }
         resultSearch = true;
-        System.out.printf("%-3s\t%-6s\t%-15s\t%-6s\t%-6s\n",
-            "번호", "제목", "내용", "태그", "등록일");
-        System.out.println("--------------------------------------------------------------------------");
 
-        System.out.printf("%-3d\t%-6s\t%-15s\t%-6s\t%-6s\n", 
+        System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
             board.getContent(),
@@ -47,6 +47,7 @@ public class BoardSearchHandler extends AbstractBoardHandler {
       }
       System.out.println();
       request.getRequestDispatcher("/board/detail").forward(request);
+      return;
 
     }
   }

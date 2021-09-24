@@ -11,7 +11,7 @@ public class CommentUpdateHandler extends AbstractCommentHandler {
   }
   @Override
   public void execute(CommandRequest request) {
-    int no = Prompt.inputInt("\n변경할 댓글 번호 : ");
+    int no = Prompt.inputInt("변경할 댓글 번호 : ");
 
     int boardNumber = (int) request.getAttribute("no");
     Board board = boardPrompt.findBoardByNo(boardNumber);
