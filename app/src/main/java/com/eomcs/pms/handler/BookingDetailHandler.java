@@ -22,7 +22,7 @@ public class BookingDetailHandler extends AbstractBookingHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("[내 픽업 예약 상세보기]\n");
+      System.out.println("[내 픽업 예약 상세보기]");
 
       int No = Prompt.inputInt("예약번호 :");
       Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
@@ -59,7 +59,7 @@ public class BookingDetailHandler extends AbstractBookingHandler {
       }
 
     } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
-      System.out.println("[고객 예약 상세보기]\n");
+      System.out.println("[고객 예약 상세보기]");
 
       int No = Prompt.inputInt("예약번호 :");
       Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());

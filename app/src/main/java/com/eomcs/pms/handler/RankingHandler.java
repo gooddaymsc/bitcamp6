@@ -22,7 +22,6 @@ public class RankingHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {  
 
-    //    System.out.println("[실시간 랭킹]\n");
     System.out.println("  -----------   ");
     System.out.println(" |  RANKING  |   ");
     System.out.println("  -----------  \n ");

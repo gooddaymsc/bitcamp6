@@ -19,7 +19,7 @@ public class BookingUpdateHandler extends AbstractBookingHandler {
   }
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[예약 변경]\n");
+    System.out.println("[예약 변경]");
     int No = (int) request.getAttribute("bookingNo");
     Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 

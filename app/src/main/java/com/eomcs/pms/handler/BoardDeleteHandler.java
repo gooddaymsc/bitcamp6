@@ -15,7 +15,7 @@ public class BoardDeleteHandler extends AbstractBoardHandler {
   @Override
   public void execute(CommandRequest request) {
 
-    System.out.println("[게시글 삭제]\n");
+    System.out.println("[게시글 삭제]");
     int no = (int) request.getAttribute("no");
     Board board = findByNo(no);
 

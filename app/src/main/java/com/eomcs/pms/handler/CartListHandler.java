@@ -16,7 +16,7 @@ public class CartListHandler extends AbstractCartHandler {
   @Override
   public void execute(CommandRequest request) throws Exception{
     String nowLoginId = App.getLoginUser().getId();
-    System.out.println("[장바구니 목록]\n");
+    System.out.println("[장바구니 목록]");
     CartList cartList = allCartList.get(cartPrompt.getCartIndexById(nowLoginId));
 
     if (cartList.getPrivacyCart().size() == 0) {

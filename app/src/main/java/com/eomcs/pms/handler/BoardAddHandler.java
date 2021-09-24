@@ -15,7 +15,7 @@ public class BoardAddHandler extends AbstractBoardHandler {
   @Override
   public void execute(CommandRequest request) {
 
-    System.out.println("[새 게시글]\n");
+    System.out.println("[새 게시글]");
     Board board = new Board();
     board.setTitle(Prompt.inputString("제목 : "));
     board.setContent(Prompt.inputString("내용 : "));

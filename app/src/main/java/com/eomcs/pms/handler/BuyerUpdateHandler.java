@@ -15,7 +15,7 @@ public class BuyerUpdateHandler extends AbstractBuyerHandler {
   @Override
   public void execute(CommandRequest request) {
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("[개인정보 변경]\n");
+      System.out.println("[개인정보 변경]");
       Buyer buyer = (Buyer) request.getAttribute("buyer");
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", buyer.getNickname()));

@@ -11,7 +11,7 @@ public class CartDetailHandler extends AbstractCartHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception{
-    System.out.println("[장바구니 상세보기]\n");
+    System.out.println("[장바구니 상세보기]");
     String productName = Prompt.inputString("상품명 :");
     Cart cart = cartPrompt.findByCart(productName);
 

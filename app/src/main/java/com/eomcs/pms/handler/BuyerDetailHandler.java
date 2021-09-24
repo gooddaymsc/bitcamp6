@@ -16,7 +16,7 @@ public class BuyerDetailHandler extends AbstractBuyerHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (App.getLoginUser().getAuthority()!=Menu.ACCESS_ADMIN) {
-      System.out.println("[개인정보 상세보기]\n");
+      System.out.println("[개인정보 상세보기]");
 
       Buyer buyer = (Buyer) findById(App.getLoginUser().getId());
       System.out.printf("이름 : %s\n", buyer.getName());
@@ -44,7 +44,7 @@ public class BuyerDetailHandler extends AbstractBuyerHandler {
       }
 
     } else {
-      System.out.println("[회원 상세보기]\n");
+      System.out.println("[회원 상세보기]");
 
       Buyer buyer = (Buyer) findById(Prompt.inputString("상세보기할 아이디: "));
 

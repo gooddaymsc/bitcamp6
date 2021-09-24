@@ -14,7 +14,7 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
   @Override
   public void execute(CommandRequest request) {
 
-    System.out.println("[게시글 변경]\n");
+    System.out.println("[게시글 변경]");
     int no = (int) request.getAttribute("no");
     Board board = findByNo(no);
 
