@@ -86,7 +86,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
         return;
       } else {
         System.out.println("[현재 상품 판매처]");
-        for (HashMap.Entry<String, Seller> entry : map.entrySet()) {
+        for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
           System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "주소", "연락처", "재고수량");
           System.out.println("--------------------------------------------------------------------------");
           System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n", 
