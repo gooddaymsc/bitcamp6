@@ -30,10 +30,10 @@ public class ProductSearchHandler extends AbstractProductHandler {
     //String nowLoginId = App.getLoginUser().getId();
     HashMap<String, Seller> map = new HashMap<>();
 
-    System.out.println("[상품검색] \n");
+    System.out.println("[상품 판매처 검색]");
 
 
-    String input = Prompt.inputString("상품입력: ");
+    String input = (String) request.getAttribute("productName");
 
     if (input.equals("")) {
       System.out.println("잘못 입력하셨습니다.");
@@ -42,7 +42,7 @@ public class ProductSearchHandler extends AbstractProductHandler {
 
     String productName  = productPrompt.findByProduct2(input);   
 
-    System.out.println("==========상품 목록==========");
+    //System.out.println("[상품 상세정보]");
 
     while(true) {
       int size = 1;
