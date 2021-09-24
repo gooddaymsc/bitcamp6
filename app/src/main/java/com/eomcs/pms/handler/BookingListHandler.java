@@ -29,14 +29,15 @@ public class BookingListHandler extends AbstractBookingHandler{
         System.out.println("아직 예약한 상품이 없습니다.");
         return;
       }
-      System.out.printf("%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\n",
-          "예약번호", "가게명", "상품명", "예약일시", "픽업 예약날짜", "픽업 예약시간");
+      System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\n",
+          "예약번호", "가게명", "판매자", "상품명", "예약일시", "픽업 예약날짜", "픽업 예약시간");
       System.out.println("--------------------------------------------------------------------------");
       for (Booking booking : bookingList.getBooking() ) {
         String sellerId = booking.getCart().getSellerId();
-        System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%d시 %d분\n",
+        System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%d시 %d분\n",
             booking.getBookingNumber(),
             memberPrompt.findBySellerInfo(sellerId).getBusinessName(),
+            booking.getCart().getSellerId(),
             booking.getCart().getStock().getProduct().getProductName(),
             booking.getRegisteredDate(),
             booking.getBookingDate(),
@@ -46,7 +47,7 @@ public class BookingListHandler extends AbstractBookingHandler{
       System.out.println();
 
       while(true) {
-        System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 이전(0)");
+        System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 3. 판매자에게 메세지 보내기 / 이전(0)");
         int choose = Prompt.inputInt("선택 > ");
         System.out.println();
         switch(choose) {
@@ -59,6 +60,7 @@ public class BookingListHandler extends AbstractBookingHandler{
               request.setAttribute("productName", productName);
             }
             request.getRequestDispatcher("/product/detail").forward(request); break;
+          case 3 : request.getRequestDispatcher("/message/add").forward(request); break;
           case 0 : return;
         }
       }
@@ -91,12 +93,20 @@ public class BookingListHandler extends AbstractBookingHandler{
     }
     System.out.println();
     while(true) {
-      System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 이전(0)");
+      System.out.println("1. 예약 상세보기 / 2. 상품 상세정보 보기 / 3. 예약자에게 메세지 보내기 / 이전(0)");
       int choose = Prompt.inputInt("선택 > ");
       System.out.println();
       switch(choose) {
         case 1 : request.getRequestDispatcher("/booking/detail").forward(request); return;
-        case 2 : request.getRequestDispatcher("/product/detail").forward(request); return;
+        case 2 : 
+          String productName = Prompt.inputString("\n상품명 선택 (0.이전) > ");
+          if (productName.equals("0")) {
+            return;
+          } else {
+            request.setAttribute("productName", productName);
+          }
+          request.getRequestDispatcher("/product/detail").forward(request); break;
+        case 3 : request.getRequestDispatcher("/message/add").forward(request); break;
         case 0 : return;
       }
     }
