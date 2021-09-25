@@ -30,6 +30,13 @@ public abstract class AbstractBuyerHandler implements Command {
     return -1;
   }
 
+  protected boolean checkLevel(int i) {
+    if (i<1 || i>5) {
+      System.out.println("잘못된 등급입니다.\n1부터 5사이 값으로 입력해주세요.\n");
+      return false;
+    }
+    return true;
+  }
 }
 
 
