@@ -65,6 +65,7 @@ import com.eomcs.pms.handler.MessageUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
+import com.eomcs.pms.handler.ProductDetailHandler2;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
@@ -194,6 +195,8 @@ public class App {
     commandMap.put("/product/list",   new ProductListHandler(productList, productPrompt));
     commandMap.put("/product/search", new ProductSearchHandler(productPrompt, stockPrompt, memberPrompt, cartPrompt, productList));
     commandMap.put("/product/detail", new ProductDetailHandler(productPrompt));
+    commandMap.put("/product/detail2", new ProductDetailHandler2(productPrompt));
+
     commandMap.put("/product/update", new ProductUpdateHandler(productPrompt));
     commandMap.put("/product/delete", new ProductDeleteHandler(productPrompt, productList));
 
@@ -398,17 +401,11 @@ public class App {
     MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN );
     mainMenuGroup.add(managerMenu);
 
-    MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
-    managerMenu.add(managerMemberMenu1);
+    //    MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
+    managerMenu.add(new MenuItem("일반회원관리", "/buyer/list"));
 
-    managerMemberMenu1.add(new MenuItem("목록", "/buyer/list"));
-    managerMemberMenu1.add(new MenuItem("상세보기", "/buyer/detail"));
-
-    MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");  //2
-    managerMenu.add(managerSellerMenu1);
-
-    managerSellerMenu1.add(new MenuItem("목록", "/seller/list"));
-    managerSellerMenu1.add(new MenuItem("상세보기", "/seller/detail"));
+    //    MenuGroup managerSellerMenu1 = new MenuGroup("판매자관리");  //2
+    managerMenu.add(new MenuItem("판매자관리", "/seller/list"));
 
     //    MenuGroup messageMenu = new MenuGroup("메세지", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER);
     mainMenuGroup.add(new MenuItem("메세지", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER, "/message/list"));

@@ -14,7 +14,7 @@ public class LoginHandler {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
 
     if (id == null) {
-      System.out.println("다시 입력해주세요.");
+      System.out.println("다시 입력해주세요.\n");
       return null;
     }
 
@@ -23,15 +23,15 @@ public class LoginHandler {
         String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
         if (password.equals(member.getPassword())) {
-          System.out.println("로그인이 완료되었습니다.");
+          System.out.println("로그인이 완료되었습니다.\n");
           return member;
         } else {
-          System.out.println("비밀번호가 일치하지 않습니다.");
+          System.out.println("비밀번호가 일치하지 않습니다.\n");
           return null;
         }
       }
     }
-    System.out.println("해당 아이디는 없는 아이디입니다.");
+    System.out.println("해당 아이디는 없는 아이디입니다.\n");
     return null;
   }
 }

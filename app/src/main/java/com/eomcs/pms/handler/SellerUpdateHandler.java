@@ -48,17 +48,14 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
         return;
       }
     } else {
-      System.out.println("\n[판매자 변경]");
-      //      String id = Prompt.inputString("변경할 판매자 아이디: ");
-      //      Member seller = findById(id);
-
+      System.out.println("[판매자 변경]");
       Member seller = (Seller) request.getAttribute("seller");
 
       if (seller == null) {
         System.out.println("해당 아이디의 회원이 없습니다.\n");
         return;
       }
-      int level = Prompt.inputInt(String.format("등급(변경 전 : %d)", seller.getLevel()));
+      int level = Prompt.inputInt(String.format("등급(변경 전 : %d) : ", seller.getLevel()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
