@@ -29,9 +29,13 @@ public class ProductAddHandler extends AbstractProductHandler {
       return;
     }
     product.setProductName(productName);
-    product.setProductType(checkType("주종 : "));
+    product.setProductType(productPrompt.checkType("주종 : "));
+    product.setProductSubType(productPrompt.checkSubType("상세주종 : ",product));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
-    product.setVariety(Prompt.inputString("품종 : "));
+    if(product.getProductType().equals("와인")) {
+      product.setVariety(Prompt.inputString("품종 : "));
+    }
+    product.setVolume(Prompt.inputInt("용량 : "));
     product.setAlcoholLevel(Prompt.inputFloat("알콜도수 : ")); 
     product.setSugerLevel(checkNum("당도(1-5) : "));
     product.setAcidity(checkNum("산도(1-5) : "));
