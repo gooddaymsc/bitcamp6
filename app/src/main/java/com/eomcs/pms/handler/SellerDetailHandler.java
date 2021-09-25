@@ -38,19 +38,20 @@ public class SellerDetailHandler extends AbstractSellerHandler{
 
       while(true) {
         System.out.println("개인정보변경(U) / 회원탈퇴(D) / 이전(0)");
-        int choose = Prompt.inputInt("선택 > ");
+        String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch (choose) {
-          case 1: request.getRequestDispatcher("/seller/update").forward(request); return;
-          case 2: request.getRequestDispatcher("/seller/delete").forward(request); return;
-          case 0: return;
+          case "U":
+          case "u": request.getRequestDispatcher("/seller/update").forward(request); return;
+          case "D":
+          case "d": request.getRequestDispatcher("/seller/delete").forward(request); return;
+          case "0": return;
         }
       }
     } else {
-      System.out.println("[판매자 상세보기]");
+      System.out.println("[판매자 상세보기] || 이전(0)");
 
-      Member seller = findById(Prompt.inputString("상세보기할 판매자 아이디: "));
-
+      Member seller = findById((String)request.getAttribute("Id"));
       if (seller == null) {
         System.out.println("해당 아이디의 판매자가 없습니다.\n");
         return;
@@ -65,11 +66,10 @@ public class SellerDetailHandler extends AbstractSellerHandler{
       System.out.printf("사업자번호 : %s\n", ((Seller) seller).getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", ((Seller) seller).getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", ((Seller) seller).getBusinessPlaceNumber());
-      System.out.println();
       request.setAttribute("seller", seller);
 
       while(true) {
-        System.out.println("등급변경(U) / 회원탈퇴(D) / 이전(0)");
+        System.out.println("\n등급변경(U) / 회원탈퇴(D)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch (choose) {

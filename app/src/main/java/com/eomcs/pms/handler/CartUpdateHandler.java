@@ -17,14 +17,12 @@ public class CartUpdateHandler extends AbstractCartHandler {
       String productName = (String)request.getAttribute("productName");
       Cart cart = cartPrompt.findByCart(productName);
 
-      //Cart cart = cartPrompt.findByCart(Prompt.inputString("상품명 : "));
-
       if (cart == null) {
         System.out.println("장바구니에 해당 상품이 없습니다.");  
         return;
       }
 
-      int cartstocks = Prompt.inputInt(String.format("수량(변경 전 : %d) : ", cart.getCartStocks()));
+      int cartstocks = checkNum(String.format("수량(변경 전 : %d) : ", cart.getCartStocks()));
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         cart.setCartStocks(cartstocks);
