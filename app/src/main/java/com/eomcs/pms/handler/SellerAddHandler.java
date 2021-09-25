@@ -45,7 +45,10 @@ public class SellerAddHandler extends AbstractSellerHandler {
     seller.setNickname(Prompt.inputString("닉네임 : "));
     seller.setEmail(Prompt.inputString("이메일 : "));
     seller.setBirthday(Prompt.inputDate("생일 : "));
-    seller.setPassword(Prompt.inputString("암호 : "));
+
+    String passWord = checkPassword("암호 : ");
+    seller.setPassword(passWord);
+
     seller.setPhoto(Prompt.inputString("사진 : "));
     seller.setPhoneNumber(Prompt.inputString("전화 : "));
     ((Seller) seller).setBusinessName(Prompt.inputString("가게명 : "));
@@ -68,6 +71,7 @@ public class SellerAddHandler extends AbstractSellerHandler {
     stockPrompt.addStockListById(seller.getId());
 
     messagePrompt.addMessageListById(seller.getId());
+
   }
 }
 

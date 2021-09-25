@@ -74,7 +74,8 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
 
     booking.setBookingHour(memberPrompt.checkHours(("픽업시간(시): "), sellerId));
-    booking.setBookingMinute(memberPrompt.checkMinutes(("픽업시간(분): "), sellerId));
+    booking.setBookingMinute(memberPrompt.checkMinutes(("픽업시간(분): "), 
+        booking.getBookingHour(), sellerId));
 
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
     booking.setBuyerId(nowLoginId);
