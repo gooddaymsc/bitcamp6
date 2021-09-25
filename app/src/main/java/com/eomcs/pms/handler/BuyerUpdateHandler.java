@@ -52,14 +52,8 @@ public class BuyerUpdateHandler extends AbstractBuyerHandler {
         return;
       }
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      int level;
-      while(true) {
-        level = Prompt.inputInt(String.format("등급(변경 전 : %d) : ", buyer.getLevel()));
-        if (!checkLevel(level)) {
-          continue; 
-        }
-        break;
-      }
+      int level = checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 
+
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);

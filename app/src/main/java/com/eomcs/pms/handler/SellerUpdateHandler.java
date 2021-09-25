@@ -55,14 +55,8 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
         System.out.println("해당 아이디의 회원이 없습니다.\n");
         return;
       }
-      int level;
-      while(true) {
-        level = Prompt.inputInt(String.format("등급(변경 전 : %d) : ", seller.getLevel()));
-        if (!checkLevel(level)) {
-          continue; 
-        }
-        break;
-      }
+      int level = checkLevel(String.format("등급(변경 전 : %d) : ", seller.getLevel())); 
+
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         seller.setLevel(level);
