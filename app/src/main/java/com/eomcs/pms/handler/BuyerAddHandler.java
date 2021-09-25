@@ -44,7 +44,10 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setNickname(Prompt.inputString("닉네임: "));
     buyer.setEmail(Prompt.inputString("이메일: "));
     buyer.setBirthday(Prompt.inputDate("생일: "));
-    buyer.setPassword(Prompt.inputString("암호: "));
+
+    String passWord = checkPassword("암호 : ");
+    buyer.setPassword(passWord);
+
     buyer.setPhoto(Prompt.inputString("사진: "));
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
     ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
