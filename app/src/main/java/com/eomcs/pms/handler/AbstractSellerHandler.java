@@ -32,6 +32,29 @@ public abstract class AbstractSellerHandler implements Command {
       return level;
     }
   }
+
+  protected int checkHour (String label) { 
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 24) {  
+        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
+  protected int checkMinute (String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 0 || num > 59) {  
+        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
 }
 
 

@@ -52,6 +52,10 @@ public class SellerAddHandler extends AbstractSellerHandler {
     ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
     ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
     ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
+    ((Seller) seller).setBusinessOpeningHours(checkHour("시작시간(시) : "));
+    ((Seller) seller).setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
+    ((Seller) seller).setBusinessClosingHours(checkHour("종료시간(시) : "));
+    ((Seller) seller).setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
     totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);

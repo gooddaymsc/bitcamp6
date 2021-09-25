@@ -21,7 +21,7 @@ public class SellerListHandler extends AbstractSellerHandler {
 
       for (Member seller : memberList) {
         if (seller instanceof Seller) {
-          System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6d\t%-6s\n", 
+          System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n", 
               seller.getNumber(), 
               seller.getId(),
               ((Seller) seller).getBusinessName(),
