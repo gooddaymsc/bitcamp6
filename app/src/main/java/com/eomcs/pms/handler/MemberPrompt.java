@@ -110,12 +110,11 @@ public class MemberPrompt {
         String[] arr = address.split(" ");
         if((((Seller)seller).getBusinessAddress().contains(arr[2])) && 
             (((Seller)seller).getBusinessAddress().contains(arr[1]))) {
-          hashMap.put(seller.getId(), (Seller) seller);
-          break;
+          hashMap.put(((Seller)seller).getId(), (Seller) seller);
+          return hashMap;
         } 
-        return null;
       }
     }
-    return hashMap;
+    return null;
   }
 }

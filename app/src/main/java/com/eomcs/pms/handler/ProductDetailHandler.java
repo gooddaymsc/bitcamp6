@@ -13,7 +13,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    Loop : while(true) {
+    while(true) {
       System.out.println("[상품 상세보기]");
 
       Product product = productPrompt.findByProduct(Prompt.inputString("\n상품명 > "));
@@ -23,10 +23,12 @@ public class ProductDetailHandler extends AbstractProductHandler {
         return;
       }
 
-      System.out.printf("주종: %s\n", product.getProductType());
+      System.out.printf("주종: %s - %s\n", product.getProductType(),product.getProductSubType());
       System.out.printf("평점: %.2f\n", product.getRate());
       System.out.printf("원산지: %s\n", product.getCountryOrigin());
-      System.out.printf("품종: %s\n", product.getVariety());
+      if(product.getProductType().equals("와인")){
+        System.out.printf("품종: %s\n", product.getVariety());  }
+      System.out.printf("용량: %d\n", product.getVolume());
       System.out.printf("알콜도수: %.1f\n", product.getAlcoholLevel());
       System.out.printf("당도: %d\n", product.getSugerLevel());
       System.out.printf("산도: %d\n", product.getAcidity());
