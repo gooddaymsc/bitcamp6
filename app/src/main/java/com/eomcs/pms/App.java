@@ -22,6 +22,7 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
+import com.eomcs.pms.handler.BoardDetailHandler2;
 import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardPrompt;
@@ -181,6 +182,7 @@ public class App {
     commandMap.put("/board/add",    new BoardAddHandler(boardList, totalNumberList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
     commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardPrompt, memberPrompt));
+    commandMap.put("/board/detail2", new BoardDetailHandler2(boardList, boardPrompt, memberPrompt));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
@@ -309,7 +311,7 @@ public class App {
       public void execute() {
         Member prv = loginHandler.InputId(); 
         if (prv==null) {
-          System.out.println("다시 로그인 해주세요.");
+          System.out.println("아이디(비밀번호)를 다시 확인하시기 바랍니다.");
         } else {
           loginMember = prv;
         }

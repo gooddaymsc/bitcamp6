@@ -29,6 +29,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
     if(type.equals("와인")) {
       grapes = Prompt.inputString("품종(" + product.getVariety() + ")? ");
     }
+    int volumes = Prompt.inputInt("용량(" + product.getVolume() +")?");
     float abv = Prompt.inputFloat("알콜도수(" + product.getAlcoholLevel() + ")? ");
     int sweet = checkNum("당도(" + product.getSugerLevel() + ")? ");
     int acidic = checkNum("산도(" + product.getAcidity() + ")? ");
@@ -45,6 +46,7 @@ public class ProductUpdateHandler extends AbstractProductHandler {
         product.setVariety(grapes);
       }
       product.setVariety(null);
+      product.setVolume(volumes);
       product.setAlcoholLevel(abv);
       product.setSugerLevel(sweet);
       product.setAcidity(acidic);

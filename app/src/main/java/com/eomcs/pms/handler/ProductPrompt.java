@@ -73,11 +73,11 @@ public class ProductPrompt {
         System.out.println(" < 레드와인(1) / 화이트와인(2) / 로제와인(3) / 스위트와인(4) / 스파클링와인(5) >");  
         String productType2 = Prompt.inputString(label);
         switch(productType2){
-          case("1") : return "레드";
-          case("2") : return "화이트";
-          case("3") : return "로제";
-          case("4") : return "스위트";
-          case("5") : return "스파클링";
+          case("1") : return "레드와인";
+          case("2") : return "화이트와인";
+          case("3") : return "로제와인";
+          case("4") : return "스위트와인";
+          case("5") : return "스파클링와인";
           default : System.out.println("정확한 주종을 입력하세요"); continue;
         }
       } if(product.getProductType().equals("위스키")) {
