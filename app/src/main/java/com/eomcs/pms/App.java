@@ -103,6 +103,7 @@ public class App {
   List<BookingList> allBookingList = new ArrayList<>();
   List<CartList> allCartList = new ArrayList<>();
   List<Member> memberList = new ArrayList<>();
+  List<Member> deletedMemberList = new ArrayList<>();
   List<Buyer> buyerList = new ArrayList<>();
   List<Seller> sellerList = new ArrayList<>();
   List<MessageList> allMessageList = new ArrayList<>();
@@ -111,7 +112,7 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
   ProductPrompt productPrompt = new ProductPrompt(productList);
   LoginHandler loginHandler = new LoginHandler(memberList);
-  MemberPrompt memberPrompt = new MemberPrompt(memberList);
+  MemberPrompt memberPrompt = new MemberPrompt(memberList, deletedMemberList);
   StockPrompt stockPrompt = new StockPrompt(allStockList, memberPrompt);
   BookingPrompt bookingPrompt = new BookingPrompt(allBookingList);
   CartPrompt cartPrompt = new CartPrompt(allCartList, memberPrompt);
@@ -166,17 +167,17 @@ public class App {
 
   public App() {
 
-    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, cartPrompt, bookingPrompt, memberPrompt,totalNumberList ,messagePrompt));
+    commandMap.put("/buyer/add",    new BuyerAddHandler(memberList, deletedMemberList, cartPrompt, bookingPrompt, memberPrompt,totalNumberList ,messagePrompt));
     commandMap.put("/buyer/list",   new BuyerListHandler(memberList));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(memberList));
     commandMap.put("/buyer/update", new BuyerUpdateHandler(memberList));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, memberPrompt, cartPrompt, bookingPrompt, messagePrompt));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(memberList, deletedMemberList, memberPrompt, cartPrompt, bookingPrompt, messagePrompt));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(memberList, bookingPrompt, stockPrompt, totalNumberList, messagePrompt));
+    commandMap.put("/seller/add",    new SellerAddHandler(memberList, deletedMemberList, memberPrompt, bookingPrompt, stockPrompt, totalNumberList, messagePrompt));
     commandMap.put("/seller/list",   new SellerListHandler(memberList));
     commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
     commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, memberPrompt, bookingPrompt, stockPrompt, messagePrompt));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, deletedMemberList, memberPrompt, bookingPrompt, stockPrompt, messagePrompt));
 
     commandMap.put("/board/add",    new BoardAddHandler(boardList, totalNumberList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
@@ -310,7 +311,7 @@ public class App {
       public void execute() {
         Member prv = loginHandler.InputId(); 
         if (prv==null) {
-          System.out.println("아이디(비밀번호)를 다시 확인하시기 바랍니다.");
+          System.out.println("다시 로그인 해주세요.");
         } else {
           loginMember = prv;
         }

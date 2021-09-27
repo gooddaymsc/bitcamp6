@@ -12,13 +12,15 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
   CartPrompt cartPrompt;
   BookingPrompt bookingPrompt;
   MessagePrompt messagePrompt;
-  public BuyerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt,
+  List<Member> deleteMemberList;
+  public BuyerDeleteHandler(List<Member> memberList, List<Member> deleteMemberList, MemberPrompt memberPrompt,
       CartPrompt cartPrompt, BookingPrompt bookingPrompt, MessagePrompt messagePrompt) {
     super(memberList);
     this.memberPrompt = memberPrompt;
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
     this.messagePrompt = messagePrompt;
+    this.deleteMemberList = deleteMemberList;
   }
   @Override
   public void execute(CommandRequest request) {
@@ -31,6 +33,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) "); 
 
       if (input.equalsIgnoreCase("y")) {
+        deleteMemberList.add(buyer);
         memberPrompt.removeMemberById(nowLoginId);
         cartPrompt.removeCartListById(nowLoginId);
         bookingPrompt.removeBookingListById(nowLoginId);
@@ -50,6 +53,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
+        deleteMemberList.add(buyer);
         memberPrompt.removeMemberById(buyerId);
         cartPrompt.removeCartListById(buyerId);
         bookingPrompt.removeBookingListById(buyerId);
