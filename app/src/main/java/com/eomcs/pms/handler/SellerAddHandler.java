@@ -55,10 +55,12 @@ public class SellerAddHandler extends AbstractSellerHandler {
 
     seller.setPhoto(Prompt.inputString("사진 : "));
     seller.setPhoneNumber(Prompt.inputString("전화 : "));
-    if (deletedMemberList.get(memberPrompt.findDeletedByName(seller.getName())).getPhoneNumber().equals(seller.getPhoneNumber()) && 
-        deletedMemberList.get(memberPrompt.findDeletedByName(seller.getName())).getName().equals(seller.getName())) {
-      System.out.println("탈퇴한 회원입니다. 7일후 재가입해주세요.");
-      return;
+    if (memberPrompt.findDeletedByName(seller.getName()) != -1) {
+      if (deletedMemberList.get(memberPrompt.findDeletedByName(seller.getName())).getPhoneNumber().equals(seller.getPhoneNumber()) && 
+          deletedMemberList.get(memberPrompt.findDeletedByName(seller.getName())).getName().equals(seller.getName())) {
+        System.out.println("탈퇴한 회원입니다. 7일후 재가입해주세요.");
+        return;
+      }
     }
     ((Seller) seller).setBusinessName(Prompt.inputString("가게명 : "));
     ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
