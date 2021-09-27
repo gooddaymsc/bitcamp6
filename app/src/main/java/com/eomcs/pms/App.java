@@ -308,7 +308,7 @@ public class App {
       public void execute() {
         Member prv = loginHandler.InputId(); 
         if (prv==null) {
-          System.out.println("다시 로그인 해주세요.");
+          System.out.println("아이디(비밀번호)를 다시 확인하시기 바랍니다.");
         } else {
           loginMember = prv;
         }
