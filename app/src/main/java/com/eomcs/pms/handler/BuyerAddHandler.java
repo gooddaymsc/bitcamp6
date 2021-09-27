@@ -14,9 +14,11 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
   MemberPrompt memberPrompt;
   List<Integer> totalNumberList;
   MessagePrompt messagePrompt;
-  public BuyerAddHandler (List<Member> memberList, CartPrompt cartPrompt, 
+  List<Member> deletedMemberList;
+  public BuyerAddHandler (List<Member> memberList, List<Member> deletedMemberList, CartPrompt cartPrompt, 
       BookingPrompt bookingPrompt,MemberPrompt memberPrompt, List<Integer> totalNumberList, MessagePrompt messagePrompt) {
     super(memberList);
+    this.deletedMemberList = deletedMemberList;
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
     this.memberPrompt = memberPrompt;
@@ -44,13 +46,18 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setNickname(Prompt.inputString("닉네임: "));
     buyer.setEmail(Prompt.inputString("이메일: "));
     buyer.setBirthday(Prompt.inputDate("생일: "));
-
     String passWord = checkPassword("암호 : ");
     buyer.setPassword(passWord);
-
     buyer.setPhoto(Prompt.inputString("사진: "));
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
+    if (deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getPhoneNumber().equals(buyer.getPhoneNumber()) && 
+        deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getName().equals(buyer.getName())) {
+      System.out.println("탈퇴한 회원입니다. 7일후 재가입해주세요.");
+      return;
+    }
     ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
+
+    //    System.out.printf("이름 : %s\n", memberPrompt.findById(id).getName());
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
     buyer.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
     totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
