@@ -22,6 +22,7 @@ import com.eomcs.pms.domain.StockList;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
+import com.eomcs.pms.handler.BoardDetailHandler2;
 import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardPrompt;
@@ -180,6 +181,7 @@ public class App {
     commandMap.put("/board/add",    new BoardAddHandler(boardList, totalNumberList));
     commandMap.put("/board/list",   new BoardListHandler(boardList));
     commandMap.put("/board/detail", new BoardDetailHandler(boardList, boardPrompt, memberPrompt));
+    commandMap.put("/board/detail2", new BoardDetailHandler2(boardList, boardPrompt, memberPrompt));
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
