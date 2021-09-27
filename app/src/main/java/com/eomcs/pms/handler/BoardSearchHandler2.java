@@ -5,9 +5,9 @@ import java.util.List;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardSearchHandler extends AbstractBoardHandler {
+public class BoardSearchHandler2 extends AbstractBoardHandler {
 
-  public BoardSearchHandler(List<Board> boardList) {
+  public BoardSearchHandler2(List<Board> boardList) {
     super(boardList);
   }
 
