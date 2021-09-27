@@ -46,7 +46,7 @@ public class CartAddHandler extends AbstractCartHandler {
         continue;
       }
 
-      stocks = Prompt.inputInt("수량 : ");
+      stocks = checkNum("수량 : ");
       if (stocks <= hashStock.get(storeName).getStocks()) {
         cart.setCartStocks(stocks);
         break;

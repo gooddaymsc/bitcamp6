@@ -17,88 +17,63 @@ public class ProductListHandler extends AbstractProductHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     Loop : while(true) {
-      System.out.println("[상품 목록]");
+      System.out.printf("[상품 목록]");
+      if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER ||
+          App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
+        System.out.println(" || 상품 등록(A) / 이전(0)\n");
+      } else {
+        System.out.println(" || 이전(0)\n");
+      }
+      System.out.printf("%-6s\t%-8s\t%-15s\t%-8s\t%-6s\t%-6s\t%-3s\t%-3s\t%-3s\n",
+          "상품번호", "상품명", "주종 - 상세주종", "원산지", "용량", "당도", "산도", "바디감", "도수");
+      System.out.println("--------------------------------------------------------------------------------------------------------");
       if (productList.size()==0) {
         System.out.println("등록된 상품이 없습니다.\n");
       }
-      System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
-          "상품번호", "상품명", "주종", "원산지", "품종", "당도","산도","바디감", "도수");
-      System.out.println("--------------------------------------------------------------------------");
       for (Product product : productList) {
-        System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6d\t%-6.2f\n", 
+        System.out.printf(" %-6d\t%-11s\t%-4s-%s\t%-9s\t%-6d\t%-6d\t%-3d\t%-3d\t%-3.2f\n", 
             product.getProductNumber(), 
             product.getProductName(), 
             product.getProductType(), 
+            product.getProductSubType(),
             product.getCountryOrigin(),
-            product.getVariety(),
+            product.getVolume(),
             product.getSugerLevel(),
             product.getAcidity(),
             product.getWeight(),
             product.getAlcoholLevel());
       }
-      String productName = Prompt.inputString("\n상품명 선택 (0.이전) > ");
-      if (productName.equals("0")) {
-        return;
-      } else {
-        request.setAttribute("productName", productName);
-        if (productPrompt.findByProduct2(productName)==null) {
-          System.out.println("목록에 없는 상품입니다.\n");
-          continue Loop;
-        }
-      }
-      if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
-        while (true) {
-          System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 장바구니 등록 / 이전(0)");
-          // 상품 목록 후 판매자는 재고에 등록하게.
-          int choose = Prompt.inputInt("선택 > ");
-          System.out.println();
-          switch (choose) {
-            case 1 : request.getRequestDispatcher("/product/detail").forward(request); continue;
-            case 2 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 3 : request.getRequestDispatcher("/cart/add").forward(request); continue Loop;
-            case 0 : return;
-            default : System.out.println("다시 선택해 주세요."); continue;
-          }
-        }
-      } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
-        while (true) {
-          System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 상품변경 / 4. 상품삭제 / 5. 재고등록 / 이전(0)");
-          int choose = Prompt.inputInt("선택 > ");
-          System.out.println();
-          switch (choose) {
-            case 1 : request.getRequestDispatcher("/product/detail").forward(request); continue;
-            case 2 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 3 : request.getRequestDispatcher("/product/update").forward(request); continue;
-            case 4 : request.getRequestDispatcher("/product/delete").forward(request); continue;
-            case 5 : request.getRequestDispatcher("/stock/add").forward(request); continue Loop;
-            case 0 : return;
-            default : System.out.println("다시 선택해 주세요."); continue;
-          }
-        }
+      System.out.println();
+      // buyer-비회원 : 상세정보, 검색 / seller - admin : 상세정보, 등록, 검색
 
-      } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
+      if ((App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) ||
+          (App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT)) {
         while (true) {
-          System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 3. 상품변경 / 4. 상품삭제 / 이전(0)");
-          int choose = Prompt.inputInt("선택 > ");
+          System.out.println("상세정보보기(R) / 검색(1)");
+          // 상품 목록 후 판매자는 재고에 등록하게.
+          String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose) {
-            case 1 : request.getRequestDispatcher("/product/detail").forward(request); continue;
-            case 2 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 3 : request.getRequestDispatcher("/product/update").forward(request); continue;
-            case 4 : request.getRequestDispatcher("/product/delete").forward(request); continue;
-            case 0 : return;
+            case "0" : return;
+            case "r" : 
+            case "R" : request.getRequestDispatcher("/product/detail").forward(request); continue Loop;
+            case "1" : request.getRequestDispatcher("/product/search").forward(request); continue Loop;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
-      } else {
+      } else if ((App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER) ||
+          (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN)){
         while (true) {
-          System.out.println("1. 상세정보보기 / 2. 리뷰보기 / 이전(0)");
-          int choose = Prompt.inputInt("선택 > ");
+          System.out.println("상세정보보기(R) / 검색(1)");
+          String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch (choose) {
-            case 1 : request.getRequestDispatcher("/product/detail").forward(request); continue;
-            case 2 : request.getRequestDispatcher("/review/list").forward(request); continue Loop;
-            case 0 : return;
+            case "0" : return;
+            case "1" : request.getRequestDispatcher("/product/search").forward(request); continue Loop;
+            case "a" :
+            case "A" : request.getRequestDispatcher("/product/add").forward(request); continue Loop;
+            case "r" :
+            case "R" : request.getRequestDispatcher("/product/detail").forward(request); continue Loop;
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }

@@ -11,8 +11,10 @@ public class Product implements Serializable{
   private int productNumber;        //상품번
   private String productName;       //상품명
   private String productType;       //주종
+  private String productSubType;    //세부주종    
   private String countryOrigin;     //원산지
   private String variety;           //품종
+  private int volume;               //용량 
   private float alcoholLevel;       //알콜도수
   private int sugerLevel;           //당도
   private int acidity;              //산도
@@ -39,6 +41,12 @@ public class Product implements Serializable{
     //조건문
     this.productType = productType;
   }
+  public String getProductSubType() {
+    return productSubType;
+  }
+  public void setProductSubType(String productSubType) {
+    this.productSubType = productSubType;
+  }
   public String getCountryOrigin() {
     return countryOrigin;
   }
@@ -50,6 +58,12 @@ public class Product implements Serializable{
   }
   public void setVariety(String variety) {
     this.variety = variety;
+  }
+  public int getVolume() {
+    return volume;
+  }
+  public void setVolume(int volume) {
+    this.volume = volume;
   }
   public float getAlcoholLevel() {
     return alcoholLevel;

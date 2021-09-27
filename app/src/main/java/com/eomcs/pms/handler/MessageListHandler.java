@@ -18,38 +18,37 @@ public class MessageListHandler extends AbstractMessageHandler {
   public static int messageNumber = 1;
   @Override
   public void execute(CommandRequest request) throws Exception {
-    if (App.getLoginUser().isMessageUpdate()) {
-      memberPrompt.returnMessageUpdate(App.getLoginUser().getId());
-    }
+    Loop : while(true) {
+      if (App.getLoginUser().isMessageUpdate()) {
+        memberPrompt.returnMessageUpdate(App.getLoginUser().getId());
+      }
 
-    String nowLoginId = App.getLoginUser().getId();
-    System.out.println("[메세지 확인]");
+      String nowLoginId = App.getLoginUser().getId();
+      System.out.println("[메세지 확인]");
 
-    MessageList messageList = allMessageList.get(findMessageById(nowLoginId));
+      MessageList messageList = findMessageListById(nowLoginId);
 
-    if (messageList.getMessage().size() == 0) {
-      System.out.println("받은 메세지가 없습니다.");
-      return;
-    }
+      if (messageList.getMessage().size() == 0) {
+        System.out.println("받은 메세지가 없습니다.");
+      }
 
-    for (Message message : messageList.getMessage()) {
-      System.out.printf("1. 보낸사람 :%s\n", message.getWriter());
-      System.out.printf("2. 제목 :%s\n", message.getTitle());
-      System.out.printf("3. 내용 :%s\n", message.getContent());
-      System.out.printf("4. 보낸 날짜 :%s\n", message.getRegistrationDate());
-      System.out.println("------------------------------------");
-    }
-    System.out.println();
-
-    while(true) {
-      System.out.println("\n< 1.답장 / 2.삭제 / 0.이전  >");
-      String choose = Prompt.inputString("선택 > ");
-
-      switch (choose) {
-        case "0" : return;
-        case "1" : request.getRequestDispatcher("/message/add").forward(request); return;
-        case "2" : request.getRequestDispatcher("/message/delete").forward(request); return;
-        default : System.out.println("잘못입력하셨습니다"); continue;
+      for (Message message : messageList.getMessage()) {
+        System.out.printf("No : %d\tID : %-6s\tRecentDate : %s\n", 
+            message.getMessageNumber(), message.getTheOtherId(), message.getRegistrationDate());
+      }
+      System.out.println();
+      while(true) {
+        System.out.println("새 메세지(A) / 대화보기(R) / 이전(0)");
+        String choose = Prompt.inputString("선택 > ");
+        System.out.println();
+        switch (choose) {
+          case "0" : return;
+          case "A":
+          case "a" : request.getRequestDispatcher("/message/add").forward(request); continue Loop;
+          case "R":
+          case "r" : request.getRequestDispatcher("/message/detail").forward(request); continue Loop;
+          default : System.out.println("잘못입력하셨습니다"); continue;
+        }
       }
     }
   }

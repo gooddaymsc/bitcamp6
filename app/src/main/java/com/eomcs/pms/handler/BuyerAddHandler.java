@@ -12,12 +12,16 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
   CartPrompt cartPrompt;
   BookingPrompt bookingPrompt;
   MemberPrompt memberPrompt;
-  public BuyerAddHandler (List<Member> memberList, 
-      CartPrompt cartPrompt, BookingPrompt bookingPrompt,MemberPrompt memberPrompt) {
+  List<Integer> totalNumberList;
+  MessagePrompt messagePrompt;
+  public BuyerAddHandler (List<Member> memberList, CartPrompt cartPrompt, 
+      BookingPrompt bookingPrompt,MemberPrompt memberPrompt, List<Integer> totalNumberList, MessagePrompt messagePrompt) {
     super(memberList);
     this.cartPrompt = cartPrompt;
     this.bookingPrompt = bookingPrompt;
     this.memberPrompt = memberPrompt;
+    this.totalNumberList = totalNumberList;
+    this.messagePrompt = messagePrompt;
   } 
 
   @Override
@@ -40,13 +44,16 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     buyer.setNickname(Prompt.inputString("닉네임: "));
     buyer.setEmail(Prompt.inputString("이메일: "));
     buyer.setBirthday(Prompt.inputDate("생일: "));
-    buyer.setPassword(Prompt.inputString("암호: "));
+
+    String passWord = checkPassword("암호 : ");
+    buyer.setPassword(passWord);
+
     buyer.setPhoto(Prompt.inputString("사진: "));
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
     ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
-    buyer.setNumber(App.totalNumberList.get(App.MEMBER_NUMBER_INDEX));
-    App.totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
+    buyer.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
+    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
     memberList.add(buyer);
 
     // 예약리스트에 구매자 id를 갖는 bookingList add.
@@ -54,6 +61,7 @@ public class BuyerAddHandler extends AbstractBuyerHandler {
     // 장바구니리스트에 구매자 id를 갖는 cartList add.
     cartPrompt.addCartListById(buyer.getId());
 
+    messagePrompt.addMessageListById(buyer.getId());
     //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
   }
 }

@@ -12,11 +12,15 @@ public class SellerAddHandler extends AbstractSellerHandler {
 
   BookingPrompt bookingPrompt;
   StockPrompt stockPrompt;
+  List<Integer> totalNumberList;
+  MessagePrompt messagePrompt;
   public SellerAddHandler(List<Member> memberList, 
-      BookingPrompt bookingPrompt, StockPrompt stockPrompt) {
+      BookingPrompt bookingPrompt, StockPrompt stockPrompt, List<Integer> totalNumberList, MessagePrompt messagePrompt) {
     super(memberList);
     this.bookingPrompt = bookingPrompt;
     this.stockPrompt = stockPrompt;
+    this.totalNumberList = totalNumberList;
+    this.messagePrompt = messagePrompt;
   }
 
   @Override
@@ -41,16 +45,23 @@ public class SellerAddHandler extends AbstractSellerHandler {
     seller.setNickname(Prompt.inputString("닉네임 : "));
     seller.setEmail(Prompt.inputString("이메일 : "));
     seller.setBirthday(Prompt.inputDate("생일 : "));
-    seller.setPassword(Prompt.inputString("암호 : "));
+
+    String passWord = checkPassword("암호 : ");
+    seller.setPassword(passWord);
+
     seller.setPhoto(Prompt.inputString("사진 : "));
     seller.setPhoneNumber(Prompt.inputString("전화 : "));
     ((Seller) seller).setBusinessName(Prompt.inputString("가게명 : "));
     ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
     ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
     ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
+    ((Seller) seller).setBusinessOpeningHours(checkHour("시작시간(시) : "));
+    ((Seller) seller).setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
+    ((Seller) seller).setBusinessClosingHours(checkHour("종료시간(시) : "));
+    ((Seller) seller).setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
-    seller.setNumber(App.totalNumberList.get(App.MEMBER_NUMBER_INDEX));
-    App.totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
+    seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
+    totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
 
     memberList.add(seller);
 
@@ -58,6 +69,9 @@ public class SellerAddHandler extends AbstractSellerHandler {
     bookingPrompt.addBookingListById(seller.getId());
     // 재고 리스트에 판매자 id를 갖는 stockList add.
     stockPrompt.addStockListById(seller.getId());
+
+    messagePrompt.addMessageListById(seller.getId());
+
   }
 }
 

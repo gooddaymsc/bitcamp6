@@ -6,11 +6,11 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardDetailHandler extends AbstractBoardHandler {
+public class BoardDetailHandler2 extends AbstractBoardHandler {
 
   BoardPrompt boardPrompt;
   MemberPrompt memberPrompt;
-  public BoardDetailHandler(List<Board> boardList, BoardPrompt boardPrompt, MemberPrompt memberPrompt) {
+  public BoardDetailHandler2(List<Board> boardList, BoardPrompt boardPrompt, MemberPrompt memberPrompt) {
     super(boardList);
     this.boardPrompt = boardPrompt;
     this.memberPrompt = memberPrompt;
@@ -18,8 +18,19 @@ public class BoardDetailHandler extends AbstractBoardHandler {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    int no = Prompt.inputInt("게시글 번호 : ");
-    if (no==0) { return; }
+    @SuppressWarnings("unchecked")
+    List<Integer> boardNumList = (List<Integer>) request.getAttribute("boardNumList");
+    int no;
+    while(true) {
+      no = Prompt.inputInt("게시글 번호 : ");
+
+      if (!boardNumList.contains(no)) {
+        System.out.println("목록에서 선택하여주세요.\n");
+        continue; 
+      } else {
+        break;
+      }
+    }
     Board board = findByNo(no);
 
     if (board == null) {

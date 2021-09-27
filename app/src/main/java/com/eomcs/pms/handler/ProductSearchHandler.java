@@ -30,19 +30,16 @@ public class ProductSearchHandler extends AbstractProductHandler {
     //String nowLoginId = App.getLoginUser().getId();
     HashMap<String, Seller> map = new HashMap<>();
 
-    System.out.println("[상품검색] \n");
+    System.out.println("[상품검색]");
+    String input = Prompt.inputString("\n상품입력: ");
 
-
-    String input = Prompt.inputString("상품입력: ");
-
-    if (input.equals("")) {
-      System.out.println("잘못 입력하셨습니다.");
-      //      continue;
-    }     
+    Product productIs = productPrompt.findByProduct(input);
+    if (productIs == null) {
+      System.out.println("입력하신 상품이 없습니다.\n");
+      return;
+    }
 
     String productName  = productPrompt.findByProduct2(input);   
-
-    System.out.println("==========상품 목록==========");
 
     while(true) {
       int size = 1;
@@ -59,19 +56,19 @@ public class ProductSearchHandler extends AbstractProductHandler {
         }
       }
 
+      System.out.println("[재고 찾기]");
+
       if(App.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
-        System.out.println("로그인 후 이용가능합니다.");
+        System.out.println("로그인 후 이용가능합니다.\n");
         return;
       }
-
-      System.out.println("[재고 찾기]");
 
       while(true) {
         try {
           String adress = Prompt.inputString("주소입력: ");
           if(adress.equals("0")){
-            return;
-          }
+            return; }
+
           map = memberPrompt.findByAdress(adress); 
           break;
 
@@ -79,18 +76,18 @@ public class ProductSearchHandler extends AbstractProductHandler {
           System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
         }
 
-      }
-
-      if(map == null) {
-        System.out.println("해당 위치에 판매처가 없습니다.");
-        return;
+      } if(map == null) {
+        System.out.println("해당 위치에 판매처가 없습니다.\n");
+        break;
       } else {
+        System.out.println();
         System.out.println("[현재 상품 판매처]");
-        for (HashMap.Entry<String, Seller> entry : map.entrySet()) {
-          System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "주소", "연락처", "재고수량");
+        for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
+          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "판매자", "주소", "연락처", "재고수량");
           System.out.println("--------------------------------------------------------------------------");
-          System.out.printf("%-6s\t%-19s\t%-12s\t%-4s\n", 
+          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n", 
               entry.getValue().getBusinessName(),
+              entry.getValue().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
               stockPrompt.findStockById(entry.getValue().getId(),input).getStocks());
@@ -98,25 +95,18 @@ public class ProductSearchHandler extends AbstractProductHandler {
       }
 
       System.out.println("--------------------------------------------------------------------------");
+
       request.setAttribute("productName", productName); 
-      request.getRequestDispatcher("/cart/add").forward(request);
-      break;
+      while(true) {
+        System.out.println("1. 장바구니 담기 / 2. 판매자에게 문의하기 / 이전(0)");
+        int choose = Prompt.inputInt("선택 > ");
+        System.out.println();
+        switch(choose) {
+          case 1 : request.getRequestDispatcher("/cart/add").forward(request); return;
+          case 2 : request.getRequestDispatcher("/message/add").forward(request); break;
+          case 0 : return;
+        }
+      }
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

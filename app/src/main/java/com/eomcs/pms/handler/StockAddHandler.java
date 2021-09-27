@@ -5,7 +5,6 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
-import com.eomcs.util.Prompt;
 
 public class StockAddHandler extends AbstractStockHandler {
   List<StockList> allStockList;
@@ -36,8 +35,8 @@ public class StockAddHandler extends AbstractStockHandler {
     }
 
     stock.setProduct(product);
-    stock.setPrice(Prompt.inputInt("판매 가격 :"));
-    stock.setStocks(Prompt.inputInt("재고 수량 :"));
+    stock.setPrice(checkPrice("판매 가격 : "));
+    stock.setStocks(checkNum("재고 수량 : "));
 
     stockPrompt.putStockListById(nowLoginId, stock);
     System.out.println("재고 등록을 완료하였습니다.\n");

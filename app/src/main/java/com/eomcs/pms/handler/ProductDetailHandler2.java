@@ -5,30 +5,28 @@ import com.eomcs.pms.App;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
-public class ProductDetailHandler extends AbstractProductHandler {
+public class ProductDetailHandler2 extends AbstractProductHandler {
   ProductPrompt productPrompt;
-  public ProductDetailHandler (ProductPrompt productPrompt) {
+  public ProductDetailHandler2 (ProductPrompt productPrompt) {
     this.productPrompt = productPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    while(true) {
+    Loop : while(true) {
       System.out.println("[상품 상세보기]");
 
-      Product product = productPrompt.findByProduct(Prompt.inputString("\n상품명 > "));
+      Product product = productPrompt.findByProduct((String) request.getAttribute("productName"));
 
       if (product == null) {
         System.out.println("입력하신 상품이 없습니다.\n");
         return;
       }
 
-      System.out.printf("주종: %s - %s\n", product.getProductType(),product.getProductSubType());
+      System.out.printf("주종: %s\n", product.getProductType());
       System.out.printf("평점: %.2f\n", product.getRate());
       System.out.printf("원산지: %s\n", product.getCountryOrigin());
-      if(product.getProductType().equals("와인")){
-        System.out.printf("품종: %s\n", product.getVariety());  }
-      System.out.printf("용량: %d\n", product.getVolume());
+      System.out.printf("품종: %s\n", product.getVariety());
       System.out.printf("알콜도수: %.1f\n", product.getAlcoholLevel());
       System.out.printf("당도: %d\n", product.getSugerLevel());
       System.out.printf("산도: %d\n", product.getAcidity());
@@ -59,7 +57,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
             case "1" : request.getRequestDispatcher("/review/list").forward(request); return;
             case "2" : request.getRequestDispatcher("/stock/add").forward(request); return;
             case "u":
-            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
+            case "U" : request.getRequestDispatcher("/product/update").forward(request); return;
             case "d" :
             case "D" : request.getRequestDispatcher("/product/delete").forward(request); return;
             case "0" : return;
@@ -74,7 +72,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
           switch (choose3) {
             case "1" : request.getRequestDispatcher("/review/list").forward(request); return;
             case "u":
-            case "U" : request.getRequestDispatcher("/product/update").forward(request); continue;
+            case "U" : request.getRequestDispatcher("/product/update").forward(request); return;
             case "d" :
             case "D" : request.getRequestDispatcher("/product/delete").forward(request); return;
             case "0" : return;

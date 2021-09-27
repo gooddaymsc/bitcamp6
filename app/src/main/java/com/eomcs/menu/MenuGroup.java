@@ -140,7 +140,7 @@ public class MenuGroup extends Menu {
         System.out.println("| 새 예약알림이 있습니다 |");
       }
       if (App.getLoginUser().isMessageUpdate()) {
-        System.out.println("| 새로운 메세지가 있습니다 |");
+        System.out.println("| 새 메세지가 있습니다  |");
       }
       System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
     }

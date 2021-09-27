@@ -11,17 +11,24 @@ import com.eomcs.util.Prompt;
 public class SellerDeleteHandler extends AbstractSellerHandler{
 
   MemberPrompt memberPrompt;
-
-  public SellerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt) {
+  BookingPrompt bookingPrompt;
+  StockPrompt stockPrompt;
+  MessagePrompt messagePrompt;
+  public SellerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt, 
+      BookingPrompt bookingPrompt, StockPrompt stockPrompt, MessagePrompt messagePrompt) {
     super(memberList);
     this.memberPrompt = memberPrompt;
+    this.bookingPrompt = bookingPrompt;
+    this.stockPrompt = stockPrompt;
+    this.messagePrompt = messagePrompt;
+
   }
 
   @Override
   public void execute(CommandRequest request) {
 
     if (App.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-      System.out.println("\n[탈퇴하기]");
+      System.out.println("[탈퇴하기]");
       Member seller = (Seller) request.getAttribute("seller");
       String nowLoginId = seller.getId();
 
@@ -29,11 +36,14 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
 
       if (input.equalsIgnoreCase("y")) {
         memberPrompt.removeMemberById(nowLoginId);
-        System.out.println("탈퇴가 완료되었습니다.");
+        bookingPrompt.removeBookingListById(nowLoginId);
+        stockPrompt.removeStockListById(nowLoginId);
+        messagePrompt.removeMessageListById(nowLoginId);
+        System.out.println("탈퇴가 완료되었습니다.\n");
         App.loginMember = new Member();
         return;
       } else {
-        System.out.println("탈퇴를 취소하였습니다.");
+        System.out.println("탈퇴를 취소하였습니다.\n");
         return;
       } 
     } else {
@@ -44,10 +54,13 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         memberPrompt.removeMemberById(sellerId);
-        System.out.println("판매자를 탈퇴시켰습니다.");
+        bookingPrompt.removeBookingListById(sellerId);
+        stockPrompt.removeStockListById(sellerId);
+        messagePrompt.removeMessageListById(sellerId);
+        System.out.println("판매자를 탈퇴시켰습니다.\n");
         return;
       }
-      System.out.println("판매자 탈퇴를 취소하였습니다.");
+      System.out.println("판매자 탈퇴를 취소하였습니다.\n");
       return;
     }
   }
