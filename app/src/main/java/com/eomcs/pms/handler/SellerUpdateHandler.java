@@ -29,6 +29,12 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", ((Seller) seller).getBusinessAddress()));
       String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", ((Seller) seller).getBusinessPlaceNumber()));
 
+
+      int BusinessOpeningHours = Prompt.inputInt(String.format("영업시간(시)(변경 전 : %s) : ", ((Seller) seller).getBusinessOpeningHours()));
+      int BusinessOpeningMinutes= Prompt.inputInt(String.format("영업시간(분)(변경 전 : %s) : ", ((Seller) seller).getBusinessOpeningMinutes()));
+      int BusinessClosingHours = Prompt.inputInt(String.format("마감시간(시)(변경 전 : %s) : ", ((Seller) seller).getBusinessClosingHours()));
+      int BusinessClosingMinutes= Prompt.inputInt(String.format("마감시간(분)(변경 전 : %s) : ", ((Seller) seller).getBusinessClosingMinutes()));
+
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {     
@@ -41,6 +47,10 @@ public class SellerUpdateHandler extends AbstractSellerHandler {
         ((Seller) seller).setBusinessNumber(bussinessNo);
         ((Seller) seller).setBusinessAddress(bussinessAddress);
         ((Seller) seller).setBusinessPlaceNumber(bussinessTel);  
+        ((Seller) seller).setBusinessOpeningHours(BusinessOpeningHours);  
+        ((Seller) seller).setBusinessOpeningMinutes(BusinessOpeningMinutes);  
+        ((Seller) seller).setBusinessClosingHours(BusinessClosingHours);  
+        ((Seller) seller).setBusinessClosingMinutes(BusinessClosingMinutes);  
         System.out.println("개인 정보를 변경하였습니다.\n");
         return;
       } else {

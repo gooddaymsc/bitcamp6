@@ -5,6 +5,7 @@ import java.util.List;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
+import com.eomcs.util.Prompt;
 
 public class MemberPrompt {
   List<Member> memberList;
@@ -68,6 +69,8 @@ public class MemberPrompt {
     }
     return null;
   }
+
+
   public Buyer findByBuyerInfo (String Id) {
     for (Member seller : memberList) {
       if (seller.getId().equals(Id)){
@@ -77,6 +80,51 @@ public class MemberPrompt {
     return null;
   }
 
+  // 판매자의 아이디를 이용해 영업시간 알아내서 시 비교하기
+  protected int checkHours (String label, String sellerId) {
+    Seller seller = findBySellerInfo(sellerId);
+    while(true) {
+      int hours = Prompt.inputInt(label);
+      if(hours < seller.getBusinessOpeningHours() || hours > seller.getBusinessClosingHours()) {  
+        System.out.println("영업시간이 아닙니다.\n"); 
+        System.out.printf("오픈시간: %s시 %s분\n", 
+            seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
+        System.out.printf("마감시간: %s시 %s분\n", 
+            seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
+        continue;
+      }           
+      return hours;       
+    }
+  }
+
+  // 판매자의 아이디를 이용해 영업시간 알아내서 분 비교하기
+  protected int checkMinutes (String label, int hours, String sellerId) {
+    Seller seller = findBySellerInfo(sellerId);
+    while(true) {
+      int minutes = Prompt.inputInt(label);
+      if (hours == seller.getBusinessOpeningHours()) {
+        if((minutes < seller.getBusinessOpeningMinutes() || minutes > 59)) {
+          System.out.println("영업시간이 아닙니다.\n"); 
+          System.out.printf("오픈시간: %s시 %s분\n", 
+              seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
+          System.out.printf("마감시간: %s시 %s분\n", 
+              seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
+          continue;
+        } 
+      }
+      if (hours == seller.getBusinessClosingHours()) {
+        if (minutes > seller.getBusinessClosingMinutes() || minutes <0) {
+          System.out.println("영업시간이 아닙니다.\n"); 
+          System.out.printf("오픈시간: %s시 %s분\n", 
+              seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
+          System.out.printf("마감시간: %s시 %s분\n", 
+              seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
+          continue;
+        }
+      }
+      return minutes;
+    }
+  }
   public Seller findByPlaceName (String storeName) {
     for (Member seller : memberList) {
       if (seller instanceof Seller) {

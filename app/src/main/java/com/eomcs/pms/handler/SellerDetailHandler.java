@@ -31,6 +31,10 @@ public class SellerDetailHandler extends AbstractSellerHandler{
       System.out.printf("사업자번호 : %s\n", ((Seller) seller).getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", ((Seller) seller).getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", ((Seller) seller).getBusinessPlaceNumber());
+      System.out.printf("오픈시간: %s시 %s분\n", 
+          ((Seller) seller).getBusinessOpeningHours(), ((Seller) seller).getBusinessOpeningMinutes());
+      System.out.printf("마감시간: %s시 %s분\n", 
+          ((Seller) seller).getBusinessClosingHours() ,((Seller) seller).getBusinessClosingMinutes());
       System.out.printf("등록일 : %s\n", seller.getRegisteredDate());
       System.out.printf("권한등급 : %d\n", seller.getAuthority());
       System.out.println();
@@ -66,6 +70,11 @@ public class SellerDetailHandler extends AbstractSellerHandler{
       System.out.printf("사업자번호 : %s\n", ((Seller) seller).getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", ((Seller) seller).getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", ((Seller) seller).getBusinessPlaceNumber());
+      System.out.printf("오픈시간: %s시 %s분\n", 
+          ((Seller) seller).getBusinessOpeningHours(), ((Seller) seller).getBusinessOpeningMinutes());
+      System.out.printf("마감시간: %s시 %s분\n", 
+          ((Seller) seller).getBusinessClosingHours() ,((Seller) seller).getBusinessClosingMinutes());
+
       request.setAttribute("seller", seller);
 
       while(true) {

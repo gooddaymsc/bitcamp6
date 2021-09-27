@@ -72,8 +72,11 @@ public class BookingAddHandler extends AbstractBookingHandler implements Cloneab
     booking.setBookingPrice(bookingProduct.getCartPrice());
 
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
-    booking.setBookingHour(checkHour("픽업시간(시): "));
-    booking.setBookingMinute(checkMinute("픽업시간(분): "));
+
+    booking.setBookingHour(memberPrompt.checkHours(("픽업시간(시): "), sellerId));
+    booking.setBookingMinute(memberPrompt.checkMinutes(("픽업시간(분): "), 
+        booking.getBookingHour(), sellerId));
+
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
     booking.setBuyerId(nowLoginId);
     // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기
