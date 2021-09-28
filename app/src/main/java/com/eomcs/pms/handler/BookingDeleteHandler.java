@@ -21,7 +21,7 @@ public class BookingDeleteHandler extends AbstractBookingHandler {
     int No = (int) request.getAttribute("bookingNo");
     Booking booking = bookingPrompt.findBookingByNo(No, App.getLoginUser().getId());
 
-    String input = Prompt.inputString("정말 취소하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 취소하시겠습니까(y/N)");
 
     if (input.equalsIgnoreCase("y")) {
       if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) { 
