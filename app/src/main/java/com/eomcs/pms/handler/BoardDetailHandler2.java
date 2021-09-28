@@ -23,8 +23,9 @@ public class BoardDetailHandler2 extends AbstractBoardHandler {
     int no;
     while(true) {
       no = Prompt.inputInt("게시글 번호 : ");
-
-      if (!boardNumList.contains(no)) {
+      if (no == 0) {
+        return;
+      } else if (!boardNumList.contains(no)) {
         System.out.println("목록에서 선택하여주세요.\n");
         continue; 
       } else {

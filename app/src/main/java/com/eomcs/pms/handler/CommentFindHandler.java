@@ -24,7 +24,7 @@ public class CommentFindHandler extends AbstractCommentHandler {
           "번호","제목","내가남긴댓글","등록일");
       System.out.println("--------------------------------------------------------------------------");
       List<Integer> boardNumList = new ArrayList<>();
-
+      List<Board> boardMyList = new ArrayList<>();
       for (Board board : boardList) {
         for (Comment comment : board.getCommentList()) {
           if (comment.getId().equals(App.getLoginUser().getId())) {
@@ -34,6 +34,7 @@ public class CommentFindHandler extends AbstractCommentHandler {
                 comment.getContent(),
                 comment.getRegistrationDate());
             boardNumList.add(board.getBoardNumber());
+            boardMyList.add(board);
           }
         }
       }
@@ -42,14 +43,16 @@ public class CommentFindHandler extends AbstractCommentHandler {
         return;
       }
       request.setAttribute("boardNumList", boardNumList);
-      System.out.println("\n1. 상세보기 / 2. 검색 / 이전(0)");
+      request.setAttribute("boardMyList", boardMyList);
+
+      System.out.println("\n1. 상세보기 / 이전(0)");
       while (true) {
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch (choose) {
           case "0" : return;
           case "1" : request.getRequestDispatcher("/board/detail2").forward(request); continue Loop;
-          case "2" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
+          //          case "2" : request.getRequestDispatcher("/board/search2").forward(request); continue Loop;
           default : System.out.println("잘못입력하셨습니다."); continue;
         }
       }

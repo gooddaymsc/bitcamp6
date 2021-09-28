@@ -27,6 +27,7 @@ import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardPrompt;
 import com.eomcs.pms.handler.BoardSearchHandler;
+import com.eomcs.pms.handler.BoardSearchHandler2;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
@@ -186,6 +187,7 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
+    commandMap.put("/board/search2", new BoardSearchHandler2(boardList));
 
     commandMap.put("/comment/like",    new LikeHandler(boardPrompt));
     commandMap.put("/comment/add",    new CommentAddHandler(boardPrompt));
