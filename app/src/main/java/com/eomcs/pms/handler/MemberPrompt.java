@@ -9,12 +9,24 @@ import com.eomcs.util.Prompt;
 
 public class MemberPrompt {
   List<Member> memberList;
-  public MemberPrompt(List<Member> memberList) {
+  List<Member> deleteMemberList;
+  public MemberPrompt(List<Member> memberList,  List<Member> deleteMemberList) {
     this.memberList = memberList;
+    this.deleteMemberList = deleteMemberList;
   }
   protected int getMemberIndexById(String id) {
     for (int i=0; i< memberList.size(); i++) {
       if (memberList.get(i).getId().equals(id)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  //---------삭제된 회원 찾기
+  public int findDeletedByName(String name) {
+    for (int i=0; i< deleteMemberList.size(); i++) {
+      if (deleteMemberList.get(i).getName().equals(name)) {
         return i;
       }
     }
@@ -61,6 +73,7 @@ public class MemberPrompt {
     }
     return null;
   }
+
   public Seller findBySellerInfo (String SellerId) {
     for (Member seller : memberList) {
       if (seller.getId().equals(SellerId)){

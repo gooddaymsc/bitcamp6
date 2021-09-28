@@ -12,7 +12,13 @@ public class Prompt {
   // => 다른 패키지에서도 접근할 수 있도록 하려면 public 으로 공개해야 한다.
   public static String inputString(String title) {
     System.out.print(title);
-    return keyboardScan.nextLine();
+    //    while(true)
+    //      if (keyboardScan.nextLine()!="\n") {
+    //        return keyboardScan.nextLine();
+    //      } else {
+    //        System.out.println("공백이 입력됐습니다.\n");
+    //      }
+    return check(keyboardScan.nextLine());
   }
 
   public static int inputInt(String title) {
@@ -31,7 +37,15 @@ public class Prompt {
   public static float inputFloat(String title) {
     return Float.parseFloat(inputString(title));
   }  
+  private static String check(String input) {
+    if ("\n".equals(input)) {
+      System.out.println("공백이 들어갔다.");
+      return "공백";
+    } else {
+      return input;
+    }
 
+  }
 }
 
 

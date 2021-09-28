@@ -15,15 +15,14 @@ public class BoardSearchHandler extends AbstractBoardHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 검색] || 이전(0)");
 
-    List<Integer> searchNo = new ArrayList<>();
     String input = Prompt.inputString("검색어 : ");
     System.out.println();
     if (input.equals("0")) { return; }
+    List<Integer> boardNumList = new ArrayList<>();
     System.out.printf("%-3s\t%-15s\t%-15s\t%-6s\t%-6s\n",
         "번호", "제목", "내용", "태그", "등록일");
     System.out.println("--------------------------------------------------------------------------");
     while(true) {
-      boolean resultSearch = false;
       for (Board board : boardList) {
         if (!board.getTitle().contains(input) &&
             !board.getContent().contains(input) &&
@@ -31,7 +30,6 @@ public class BoardSearchHandler extends AbstractBoardHandler {
 
           continue;
         }
-        resultSearch = true;
 
         System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-6s\n", 
             board.getBoardNumber(), 
@@ -39,14 +37,15 @@ public class BoardSearchHandler extends AbstractBoardHandler {
             board.getContent(),
             board.getTag(),
             board.getRegistrationDate());
-        searchNo.add(board.getBoardNumber());
+        boardNumList.add(board.getBoardNumber());
       }
-      if (!resultSearch) {
+      if (boardNumList.size()==0) {
         System.out.println("검색 결과가 없습니다.\n");
         return;
       }
       System.out.println();
-      request.getRequestDispatcher("/board/detail").forward(request);
+      request.setAttribute("boardNumList", boardNumList);
+      request.getRequestDispatcher("/board/detail2").forward(request);
       return;
 
     }

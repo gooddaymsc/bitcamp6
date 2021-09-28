@@ -14,9 +14,12 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
   BookingPrompt bookingPrompt;
   StockPrompt stockPrompt;
   MessagePrompt messagePrompt;
-  public SellerDeleteHandler(List<Member> memberList, MemberPrompt memberPrompt, 
+  List<Member> deleteMemberList;
+
+  public SellerDeleteHandler(List<Member> memberList,   List<Member> deleteMemberList, MemberPrompt memberPrompt, 
       BookingPrompt bookingPrompt, StockPrompt stockPrompt, MessagePrompt messagePrompt) {
     super(memberList);
+    this.deleteMemberList = deleteMemberList;
     this.memberPrompt = memberPrompt;
     this.bookingPrompt = bookingPrompt;
     this.stockPrompt = stockPrompt;
@@ -35,6 +38,7 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
+        deleteMemberList.add(seller);
         memberPrompt.removeMemberById(nowLoginId);
         bookingPrompt.removeBookingListById(nowLoginId);
         stockPrompt.removeStockListById(nowLoginId);
@@ -53,6 +57,7 @@ public class SellerDeleteHandler extends AbstractSellerHandler{
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
+        deleteMemberList.add(seller);
         memberPrompt.removeMemberById(sellerId);
         bookingPrompt.removeBookingListById(sellerId);
         stockPrompt.removeStockListById(sellerId);
