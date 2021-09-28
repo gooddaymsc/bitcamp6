@@ -24,6 +24,7 @@ public class BoardFindHandler implements Command {
           "번호","제목","댓글수","등록일");
       System.out.println("--------------------------------------------------------------------------");
       List<Integer> boardNumList = new ArrayList<>();
+      List<Board> boardMyList = new ArrayList<>();
 
       for (Board board : boardList) {
         if (board.getWriter().equals(App.getLoginUser().getId())) {
@@ -33,9 +34,11 @@ public class BoardFindHandler implements Command {
               board.getCommentList().size(),
               board.getRegistrationDate());
           boardNumList.add(board.getBoardNumber());
+          boardMyList.add(board);
         }
       }
       request.setAttribute("boardNumList", boardNumList);
+      request.setAttribute("boardMyList", boardMyList);
       if (boardNumList.size()==0) {
         System.out.println("남긴 게시글이 없습니다.\n");
         return;
@@ -47,7 +50,7 @@ public class BoardFindHandler implements Command {
         switch (choose) {
           case "0" : return;
           case "1" : request.getRequestDispatcher("/board/detail2").forward(request); continue Loop;
-          case "2" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
+          case "2" : request.getRequestDispatcher("/board/search2").forward(request); continue Loop;
           default : System.out.println("잘못입력하셨습니다."); continue;
         }
       }

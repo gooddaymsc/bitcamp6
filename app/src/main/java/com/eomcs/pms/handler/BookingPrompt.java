@@ -114,4 +114,16 @@ public class BookingPrompt {
   public void removeBookingListById(String nowLoginid) {
     allBookingList.remove(getBookingIndexById(nowLoginid));
   }
+
+  public String bookingStatue(Booking booking) {
+    String statue ;
+    if(booking.isConfirm() == true) {
+      statue = "픽업완료";
+    }
+    else {
+      statue = "픽업예정";
+    }
+    return statue;
+  }
+
 }
