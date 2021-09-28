@@ -44,9 +44,9 @@ public class LoginHandler {
           System.out.println("비밀번호를 5회이상 틀리셨습니다.\n");
           return null;
         }
-        System.out.println("가입된 아이디가 아닙니다.");
-        return null;
       }
+      System.out.println("가입된 아이디가 아닙니다.");
+      return null;
     }
   }
 }
