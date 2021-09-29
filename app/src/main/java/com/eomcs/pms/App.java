@@ -27,6 +27,7 @@ import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardPrompt;
 import com.eomcs.pms.handler.BoardSearchHandler;
+import com.eomcs.pms.handler.BoardSearchHandler2;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
@@ -186,6 +187,7 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateHandler(boardList));
     commandMap.put("/board/delete", new BoardDeleteHandler(boardList));
     commandMap.put("/board/search", new BoardSearchHandler(boardList));
+    commandMap.put("/board/search2", new BoardSearchHandler2(boardList));
 
     commandMap.put("/comment/like",    new LikeHandler(boardPrompt));
     commandMap.put("/comment/add",    new CommentAddHandler(boardPrompt));
@@ -311,7 +313,7 @@ public class App {
       public void execute() {
         Member prv = loginHandler.InputId(); 
         if (prv==null) {
-          System.out.println("다시 로그인 해주세요.");
+          System.out.println("아이디(비밀번호)를 다시 확인하시기 바랍니다.");
         } else {
           loginMember = prv;
         }
