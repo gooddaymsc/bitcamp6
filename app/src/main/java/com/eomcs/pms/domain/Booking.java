@@ -13,8 +13,9 @@ public class Booking implements Serializable {
   private int bookingMinute;
   private String bookingTime;    //예약시간
   private Date registeredDate;   //등록일시
-  private int bookingStocks; // 예약 상품의 갯수
-  private int bookingPrice; // 총액
+  private int bookingStocks;     // 예약 상품의 갯수
+  private int bookingPrice;      // 총액
+  private boolean confirm;        //픽업확정여부
 
 
 
@@ -79,8 +80,12 @@ public class Booking implements Serializable {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
-
+  public boolean isConfirm() {
+    return confirm;
+  }
+  public void setConfirm(boolean confirm) {
+    this.confirm = confirm;
+  }
 
 
 }
