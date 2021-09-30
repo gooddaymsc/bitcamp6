@@ -1,9 +1,6 @@
 package com.eomcs.pms.handler;
 
-import java.util.Collection;
 import java.util.HashMap;
-import com.eomcs.menu.Menu;
-import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -11,7 +8,6 @@ import com.eomcs.util.Prompt;
 public class BoardDetailHandler implements Command {
 
   RequestAgent requestAgent;
-  Collection<Board> boardList;
 
   public BoardDetailHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
@@ -33,11 +29,14 @@ public class BoardDetailHandler implements Command {
 
     Loop : while(true) {
       System.out.printf("[게시글 상세보기]");
-      if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
-        System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
-      } else {
-        System.out.println("|| 이전(0)\n");
-      }
+      System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
+
+      //      if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
+      //        System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
+      //      } else {
+      //        System.out.println("|| 이전(0)\n");
+      //      }
+
 
       //      if (ClientApp.getLoginUser().isCommentUpdate()) {
       //        memberPrompt.changeCommentUpdate(ClientApp.getLoginUser().getId(), false);
