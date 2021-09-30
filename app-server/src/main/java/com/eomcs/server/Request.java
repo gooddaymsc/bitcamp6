@@ -25,6 +25,7 @@ public class Request {
     return new Gson().fromJson(jsonData, type);
   }
 
+  @SuppressWarnings("unchecked")
   public String getParameter(String name) {
     try {
       if (params == null) {

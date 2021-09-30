@@ -19,6 +19,11 @@ import com.eomcs.pms.handler.BuyerListHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.SellerAddHandler;
+import com.eomcs.pms.handler.SellerDeleteHandler;
+import com.eomcs.pms.handler.SellerDetailHandler;
+import com.eomcs.pms.handler.SellerListHandler;
+import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -84,11 +89,11 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
 
-    //    commandMap.put("/seller/add",    new SellerAddHandler(memberList, deletedMemberList, memberPrompt, bookingPrompt, stockPrompt, totalNumberList, messagePrompt));
-    //    commandMap.put("/seller/list",   new SellerListHandler(memberList));
-    //    commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
-    //    commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
-    //    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, deletedMemberList, memberPrompt, bookingPrompt, stockPrompt, messagePrompt));
+    commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
+    commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
+    commandMap.put("/seller/detail", new SellerDetailHandler(requestAgent));
+    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(requestAgent));
 
   }
 
