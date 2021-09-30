@@ -14,6 +14,7 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardListHandler;
+import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BuyerAddHandler;
 import com.eomcs.pms.handler.BuyerDeleteHandler;
 import com.eomcs.pms.handler.BuyerDetailHandler;
@@ -101,6 +102,8 @@ public class ClientApp {
 
     commandMap.put("/board/add",    new BoardAddHandler(requestAgent));
     commandMap.put("/board/list",   new BoardListHandler(requestAgent));
+    //    commandMap.put("/board/detail", new BoardDetailHandler(requestAgent));
+    commandMap.put("/board/update", new BoardUpdateHandler(requestAgent));
 
     commandMap.put("/product/add",   new ProductAddHandler(requestAgent));
     commandMap.put("/product/list",   new ProductListHandler(requestAgent));

@@ -1,29 +1,34 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
-import com.eomcs.pms.App;
+import java.util.HashMap;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
-public class BoardUpdateHandler extends AbstractBoardHandler  {
+public class BoardUpdateHandler implements Command {
 
-  public BoardUpdateHandler(List<Board> boardList) {
-    super(boardList);
+  RequestAgent requestAgent;
+  public BoardUpdateHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[게시글 변경]");
-    int no = (int) request.getAttribute("no");
-    Board board = findByNo(no);
+    String no = Integer.toString(Prompt.inputInt("게시글 번호> ")); 
+    HashMap<String, String> params = new HashMap<>();
+    params.put("no", no);
 
-    if (board == null) {
+    requestAgent.request("board.selectOne", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.\n");
       return;
     }
+    Board board = requestAgent.getObject(Board.class);
 
-    if (!board.getWriter().equals(App.getLoginUser().getId())) {
+    if (!board.getWriter().equals(ClientApp.getLoginUser().getId())) {
       System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
       return;
     }
@@ -36,23 +41,18 @@ public class BoardUpdateHandler extends AbstractBoardHandler  {
       board.setTitle(title);
       board.setContent(content);
       board.setTag(tag);
-      System.out.println("게시글을 변경하였습니다.\n");
-      return;
-    }
 
+      requestAgent.request("board.update", board);
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println("게시글 변경 실패!");
+        System.out.println(requestAgent.getObject(String.class));
+      }
+      System.out.println("게시글을 변경하였습니다.\n");
+    }
     System.out.println("게시글 변경을 취소하였습니다.\n");
     return;
   }
-  
-  protected Board findByNo(int no) {
 
-    for (Board board : boardList) {
-      if (board.getBoardNumber() == no) {
-        return board;
-      }
-    }
-    return null;
-  }
 }
 
 

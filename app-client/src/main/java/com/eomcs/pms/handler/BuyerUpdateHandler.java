@@ -37,7 +37,6 @@ public class BuyerUpdateHandler implements Command {
       String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", buyer.getPhoneNumber()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-
       if (input.equalsIgnoreCase("y")) {
         buyer.setNickname(nickName);
         buyer.setEmail(email);
@@ -47,7 +46,6 @@ public class BuyerUpdateHandler implements Command {
         buyer.setPhoneNumber(tel);
 
         requestAgent.request("buyer.update", buyer);
-
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 변경 실패!");
           System.out.println(requestAgent.getObject(String.class));
@@ -55,6 +53,7 @@ public class BuyerUpdateHandler implements Command {
         }
         System.out.println("개인정보를 변경하였습니다.\n");
       } 
+      System.out.println("개인정보 변경을 취소하였습니다.\n");
     } else {
       System.out.println("[회원 변경]\n");
       String id = Prompt.inputString("아이디 >");
