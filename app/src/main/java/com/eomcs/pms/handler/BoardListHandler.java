@@ -26,7 +26,7 @@ public class BoardListHandler extends AbstractBoardHandler {
       boardList.toArray(boards);
       System.out.printf("%-3s\t%-15s\t%-15s\t%-6s\t%-3s\t%-3s\t%-6s\n",
           "번호", "제목", "태그", "작성자", "조회수","좋아요", "등록일");
-      System.out.println("--------------------------------------------------------------------------");
+      System.out.println("-------------------------------------------------------------------------------------");
 
       for (Board board : boards) {
         System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
