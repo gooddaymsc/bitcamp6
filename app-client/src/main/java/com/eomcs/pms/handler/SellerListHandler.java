@@ -14,7 +14,7 @@ public class SellerListHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
+  public void execute(CommandRequest request) throws Exception{
     Loop : while(true) {
       System.out.println("[판매자 목록] || 이전(0)\n");
       System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
@@ -53,7 +53,6 @@ public class SellerListHandler implements Command {
     }
   }
 }
-
 
 
 

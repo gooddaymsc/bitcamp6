@@ -11,9 +11,8 @@ import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class SellerAddHandler implements Command {
-
-  RequestAgent requestAgent;
   Collection<Seller> sellerList;
+  RequestAgent requestAgent;
   public SellerAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
@@ -21,6 +20,7 @@ public class SellerAddHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[판매자 등록]");
+
     Member seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
 
@@ -34,7 +34,6 @@ public class SellerAddHandler implements Command {
     //        return;
     //      }
     //    }
-
     seller.setId(id);
 
     seller.setName(Prompt.inputString("이름 : "));
@@ -58,66 +57,29 @@ public class SellerAddHandler implements Command {
     ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
     ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
     ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
-    ((Seller) seller).setBusinessOpeningHours(checkHour("시작시간(시) : "));
-    ((Seller) seller).setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
-    ((Seller) seller).setBusinessClosingHours(checkHour("종료시간(시) : "));
-    ((Seller) seller).setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
+    //    ((Seller) seller).setBusinessOpeningHours(memberPrompt.checkHour("시작시간(시) : "));
+    //    ((Seller) seller).setBusinessOpeningMinutes(memberPrompt.checkMinute("시작시간(분) : "));
+    //    ((Seller) seller).setBusinessClosingHours(memberPrompt.checkHour("종료시간(시) : "));
+    //    ((Seller) seller).setBusinessClosingMinutes(memberPrompt.checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
     //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
 
-    requestAgent.request("seller.insert", seller);
     //    memberList.add(seller);
 
     //    // 예약리스트에 판매자 id를 갖는 bookingList add.
     //    bookingPrompt.addBookingListById(seller.getId());
     //    // 재고 리스트에 판매자 id를 갖는 stockList add.
     //    stockPrompt.addStockListById(seller.getId());
-    //
+
     //    messagePrompt.addMessageListById(seller.getId());
-
-  }
-
-  protected Member findById(String id) {
-    for (Seller seller : sellerList) {
-      if (seller.getId().equals(id)) {
-        return seller;
-      }
+    requestAgent.request("seller.insert", seller);
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("회원을 등록했습니다.");
+    } else {
+      System.out.println("회원 등록 실패");
     }
-    return null;
-  }
 
-  protected int checkLevel(String label) {
-    while(true) {
-      int level = Prompt.inputInt(label);
-      if (level<1 || level>5) {
-        System.out.println("잘못된 등급입니다.\n1부터 5사이 값으로 입력해주세요.\n");
-        continue;
-      }
-      return level;
-    }
-  }
-
-  protected int checkHour (String label) { 
-    while(true) {
-      int num = Prompt.inputInt(label);
-      if(num < 1 || num > 24) {  
-        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
-        continue;
-      }           
-      return num;       
-    }
-  }
-
-  protected int checkMinute (String label) {
-    while(true) {
-      int num = Prompt.inputInt(label);
-      if(num < 0 || num > 59) {  
-        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
-        continue;
-      }           
-      return num;       
-    }
   }
 
   protected String checkPassword(String label) {
@@ -152,8 +114,9 @@ public class SellerAddHandler implements Command {
       return passWord;
     }
   }
-}
 
+
+}
 
 
 

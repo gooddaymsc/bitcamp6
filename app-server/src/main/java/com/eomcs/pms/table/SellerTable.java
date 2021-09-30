@@ -48,10 +48,9 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
       response.setValue("해당 아이디의 회원이 없습니다.");
     }
   }
-
+  //
   private void update(Request request, Response response) throws Exception {
     Seller seller = request.getObject(Seller.class);
-
     int index = indexOf(seller.getId());
 
     if (index == -1) {
@@ -62,7 +61,7 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
     list.set(index, seller);
     response.setStatus(Response.SUCCESS);
   }
-
+  //
   private void delete(Request request, Response response) throws Exception {
     Seller seller = request.getObject(Seller.class);
     int index = indexOf(seller.getId());
@@ -85,7 +84,7 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
     }
     return null;
   }
-
+  //
   private int indexOf(String id) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getId().equals(id)) {
