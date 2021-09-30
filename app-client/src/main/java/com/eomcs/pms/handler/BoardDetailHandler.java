@@ -59,6 +59,7 @@ public class BoardDetailHandler implements Command {
       //      if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
       //        System.out.println("로그인 후 가능합니다.\n");
       //        return;
+      System.out.println("\n< 변경(U) / 삭제(D) / 이전(0) >");
       //      }
       while(true) {
         String choose2 = Prompt.inputString("선택 > ");
