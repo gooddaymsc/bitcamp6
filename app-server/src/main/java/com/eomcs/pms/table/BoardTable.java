@@ -48,7 +48,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
       response.setValue("해당 번호의 게시글이 없습니다.");
     }
   }
-  //
+
   private void update(Request request, Response response) throws Exception {
     Board board = request.getObject(Board.class);
 
@@ -78,7 +78,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
   //  }
   //
 
-  protected Board findByNo(int no) {
+  private Board findByNo(int no) {
     for (Board board : list) {
       if (board.getBoardNumber() == no) {
         return board;

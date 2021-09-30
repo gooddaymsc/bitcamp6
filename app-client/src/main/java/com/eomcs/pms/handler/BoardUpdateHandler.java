@@ -48,6 +48,7 @@ public class BoardUpdateHandler implements Command {
         System.out.println(requestAgent.getObject(String.class));
       }
       System.out.println("게시글을 변경하였습니다.\n");
+      return;
     }
     System.out.println("게시글 변경을 취소하였습니다.\n");
     return;
