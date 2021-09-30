@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
+import com.eomcs.pms.table.BoardTable;
 import com.eomcs.pms.table.BuyerTable;
 import com.eomcs.pms.table.JsonDataTable;
 import com.eomcs.pms.table.SellerTable;
@@ -24,6 +25,7 @@ public class ServerApp {
 
     dataProcessorMap.put("buyer.", new BuyerTable());
     dataProcessorMap.put("seller.", new SellerTable());
+    dataProcessorMap.put("board.", new BoardTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();
