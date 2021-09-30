@@ -7,8 +7,8 @@ public class AppInitListener implements ApplicationContextListener {
 
   @Override
   public void contextInitialized(Map<String, Object> params) {
-    System.out.println("   _________________       ");
-    System.out.println("   |  ༼༽  ༼༽  ༼༽  ༼༽ |      ");   
+    System.out.println("   __________________       ");
+    System.out.println("   |  ༼༽  ༼༽  ༼༽  ༼༽ |       ");   
     System.out.println("    ALCOHOLE FINDER        ");
     System.out.println("   ++++++++++++++++++      ");
 
@@ -16,8 +16,8 @@ public class AppInitListener implements ApplicationContextListener {
   }
   @Override
   public void contextDestroyed(Map<String, Object> params) {
-    System.out.println("   _________________       ");
-    System.out.println("   |  ༼༽  ༼༽  ༼༽  ༼༽ |      ");   
+    System.out.println("   __________________       ");
+    System.out.println("   |  ༼༽  ༼༽  ༼༽  ༼༽ |       ");   
     System.out.println("       (っ °Д °;)っ ~ ALCOHOLE FINDER        ");
     System.out.println("   ++++++++++++++++++      ");
 
