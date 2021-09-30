@@ -38,7 +38,7 @@ public class ProductListHandler implements Command {
       Collection<Product> productList = requestAgent.getObjects(Product.class);
 
       for (Product product : productList) {
-        System.out.printf(" %-6d\t%-8s\t%-4s-%s\t%-9s\t%-6d\t%-6d\t%-3d\t%-3d\t%-3.2f\n", 
+        System.out.printf(" %-8d\t%-8s\t%-4s-%s\t%-9s\t%-6d\t%-6d\t%-3d\t%-3d\t%-3.2f\n", 
             product.getProductNumber(), 
             product.getProductName(), 
             product.getProductType(), 

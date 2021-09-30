@@ -21,6 +21,7 @@ import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.ProductAddHandler;
+import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
@@ -103,6 +104,7 @@ public class ClientApp {
 
     commandMap.put("/product/add",   new ProductAddHandler(requestAgent));
     commandMap.put("/product/list",   new ProductListHandler(requestAgent));
+    commandMap.put("/product/delete",   new ProductDeleteHandler(requestAgent));
   }
 
   //  MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
@@ -151,14 +153,17 @@ public class ClientApp {
 
     ///////////////////////////////////////////
 
-    mainMenuGroup.add(new MenuItem("상품", "/product/list"));
+    //  mainMenuGroup.add(new MenuItem("상품", "/product/list"));
 
-    //  MenuGroup productMenu = new MenuGroup("상품");
-    //    mainMenuGroup.add(productMenu);
-    //
-    //    productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
-    //    productMenu.add(new MenuItem("상품", "/product/list"));
-    //    productMenu.add(new MenuItem("상품검색",  "/product/search"));
+    MenuGroup productMenu = new MenuGroup("상품");
+    mainMenuGroup.add(productMenu);
+
+    productMenu.add(new MenuItem("상품등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
+    productMenu.add(new MenuItem("상품검색",  "/product/search"));
+    productMenu.add(new MenuItem("상품목록", "/product/list"));
+    productMenu.add(new MenuItem("상품상세", "/product/detail"));
+    productMenu.add(new MenuItem("상품변경", "/product/update"));
+    productMenu.add(new MenuItem("상품삭제",  "/product/delete"));
 
     ///////////////////////////////////////////
 
