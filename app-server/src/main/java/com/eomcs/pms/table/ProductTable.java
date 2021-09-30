@@ -16,7 +16,8 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     // TODO Auto-generated method stub
     switch (request.getCommand()) {
       case "product.insert" : insert(request, response); break;
-      default :
+      case "product.selectList" : selectList(request, response); break;
+      default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
@@ -26,6 +27,11 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     Product product = request.getObject(Product.class);
     list.add(product);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception{
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
   }
 
 }
