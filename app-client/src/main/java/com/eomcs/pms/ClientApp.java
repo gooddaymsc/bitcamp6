@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.menu.Menu;
+import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
@@ -19,6 +20,12 @@ import com.eomcs.pms.handler.BuyerListHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.LoginHandler;
+import com.eomcs.pms.handler.SellerAddHandler;
+import com.eomcs.pms.handler.SellerDeleteHandler;
+import com.eomcs.pms.handler.SellerDetailHandler;
+import com.eomcs.pms.handler.SellerListHandler;
+import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -26,6 +33,7 @@ import com.eomcs.util.Prompt;
 public class ClientApp {
   RequestAgent requestAgent;
   HashMap<String, Command> commandMap = new HashMap<>();
+  static List<Member> memberList = new ArrayList<>();
 
   //권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -84,36 +92,33 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
 
-    //    commandMap.put("/seller/add",    new SellerAddHandler(memberList, deletedMemberList, memberPrompt, bookingPrompt, stockPrompt, totalNumberList, messagePrompt));
-    //    commandMap.put("/seller/list",   new SellerListHandler(memberList));
-    //    commandMap.put("/seller/detail", new SellerDetailHandler(memberList));
-    //    commandMap.put("/seller/update", new SellerUpdateHandler(memberList));
-    //    commandMap.put("/seller/delete", new SellerDeleteHandler(memberList, deletedMemberList, memberPrompt, bookingPrompt, stockPrompt, messagePrompt));
+    commandMap.put("/login", new LoginHandler(requestAgent));
+
+    commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
+    commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
+    commandMap.put("/seller/detail", new SellerDetailHandler(requestAgent));
+    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(requestAgent));
 
   }
 
-  //  MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
+  MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;
+
   public static Member loginMember = new Member();
   public static Member getLoginUser() {
     return loginMember;
   }
+
+
   Menu createMainMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("메인");
+    mainMenuGroup.setMenuFilter(menuFilter);
+
     mainMenuGroup.setPrevMenuTitle("종료");
 
 
-    mainMenuGroup.add(new Menu("로그인", ACCESS_LOGOUT) {
-      @Override
-      public void execute() {
-        Member prv = new Member();
-        //        Member prv = loginHandler.InputId(); 
-        if (prv==null) {
-          System.out.println("아이디(비밀번호)를 다시 확인하시기 바랍니다.");
-        } else {
-          loginMember = prv;
-        }
-      }});
+    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/login"));
 
     mainMenuGroup.add(new Menu("로그아웃", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER) {
       @Override
@@ -217,10 +222,20 @@ public class ClientApp {
 
   void service() throws Exception {
     notifyOnApplicationStarted();
+    // 관리자 계정 생성
+    Member root = new Member();
+    root.setId("admin");
+    root.setPassword("0000");
+    root.setAuthority(Menu.ACCESS_ADMIN);
+    requestAgent.request("buyer.insert", root);
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      //      System.out.println("관리자 계정 추가!");
+    } else {
+      System.out.println("관리자 등록 실패");
+    }
 
     createMainMenu().execute();
 
-    //    memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
     //    if (totalNumberList.size() == 0) {
     //      totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
     //      totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
@@ -240,5 +255,13 @@ public class ClientApp {
     app.addApplicationContextListener(new AppInitListener());
     app.service();
     Prompt.close();
+  }
+  public static String level(int i) {
+    switch (i) {
+      case Menu.ACCESS_LOGOUT : return "비회원";
+      case Menu.ACCESS_BUYER : return "일반회원";
+      case Menu.ACCESS_SELLER : return "판매자";
+      default : return "관리자";
+    }
   }
 }

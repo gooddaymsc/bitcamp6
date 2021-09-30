@@ -3,6 +3,7 @@ package com.eomcs.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.util.Prompt;
 
 public class MenuGroup extends Menu {
@@ -32,12 +33,10 @@ public class MenuGroup extends Menu {
     super(title, accessScope);
   }
 
-
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
   }
-
 
   public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
     super(title, accessScope);
@@ -123,33 +122,32 @@ public class MenuGroup extends Menu {
   }
 
   private void printBreadCrumbMenuTitle() {
-    System.out.printf("\n[%s]\n",getBreadCrumb());
-    // 메모리누수문제?
-    //    System.out.println("\n============================================================");
+    //    System.out.printf("\n[%s]\n",getBreadCrumb());
+    System.out.println("\n============================================================");
 
-    //    if (App.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
-    //      System.out.printf("<< %s >>",App.level(App.getLoginUser().getAuthority()));
-    //    } else {
-    //      System.out.printf("<< %s (%s) >>",
-    //          App.getLoginUser().getId(),
-    //          App.level(App.getLoginUser().getAuthority()));      
-    //    }
-    //    System.out.printf(" || [%s]\n", getBreadCrumb());
-    //    if (App.getLoginUser().isBookingUpdate() || App.getLoginUser().isCommentUpdate()
-    //        || App.getLoginUser().isMessageUpdate()) {
-    //      System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
-    //      if (App.getLoginUser().isCommentUpdate()) {
-    //        System.out.println("| 새 댓글알림이 있습니다 |");
-    //      }
-    //      if (App.getLoginUser().isBookingUpdate()) {
-    //        System.out.println("| 새 예약알림이 있습니다 |");
-    //      }
-    //      if (App.getLoginUser().isMessageUpdate()) {
-    //        System.out.println("| 새 메세지가 있습니다  |");
-    //      }
-    //      System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
-    //    }
-    //    System.out.println("============================================================");
+    if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
+      System.out.printf("<< %s >>",ClientApp.level(ClientApp.getLoginUser().getAuthority()));
+    } else {
+      System.out.printf("<< %s (%s) >>",
+          ClientApp.getLoginUser().getId(),
+          ClientApp.level(ClientApp.getLoginUser().getAuthority()));      
+    }
+    System.out.printf(" || [%s]\n", getBreadCrumb());
+    if (ClientApp.getLoginUser().isBookingUpdate() || ClientApp.getLoginUser().isCommentUpdate()
+        || ClientApp.getLoginUser().isMessageUpdate()) {
+      System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
+      if (ClientApp.getLoginUser().isCommentUpdate()) {
+        System.out.println("| 새 댓글알림이 있습니다 |");
+      }
+      if (ClientApp.getLoginUser().isBookingUpdate()) {
+        System.out.println("| 새 예약알림이 있습니다 |");
+      }
+      if (ClientApp.getLoginUser().isMessageUpdate()) {
+        System.out.println("| 새 메세지가 있습니다  |");
+      }
+      System.out.println("+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ+");
+    }
+    System.out.println("============================================================");
   }
 
   private void printMenuList(List<Menu> menuList) {

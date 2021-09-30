@@ -1,27 +1,27 @@
 package com.eomcs.pms.table;
 
-import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.Request;
 import com.eomcs.server.Response;
 
-public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
+public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
 
-  public BuyerTable() {
-    super("buyer.json", Buyer.class);
+  public SellerTable() {
+    super("seller.json", Seller.class);
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
     // TODO Auto-generated method stub
     switch (request.getCommand()) {
-      case "buyer.insert" : insert(request, response); break;
-      case "buyer.checkDuplicate" : checkDuplicate(request, response); break;
-      case "buyer.selectList" : selectList(request, response); break;
-      case "buyer.selectOne" : selectOne(request, response); break;
-      case "buyer.selectOneByLogin" : selectOneByLogin(request, response); break;
-      case "buyer.update" : update(request, response); break;
-      case "buyer.delete" : delete(request, response); break;
+      case "seller.insert" : insert(request, response); break;
+      case "seller.checkDuplicate" : checkDuplicate(request, response); break;
+      case "seller.selectList" : selectList(request, response); break;
+      case "seller.selectOne" : selectOne(request, response); break;
+      case "seller.selectOneByLogin" : selectOneByLogin(request, response); break;
+      case "seller.update" : update(request, response); break;
+      case "seller.delete" : delete(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -29,8 +29,8 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
   }
 
   private void insert(Request request, Response response) throws Exception {
-    Buyer buyer = request.getObject(Buyer.class);
-    list.add(buyer);
+    Seller seller = request.getObject(Seller.class);
+    list.add(seller);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -49,10 +49,10 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
 
   private void selectOne(Request request, Response response) throws Exception {
     String id = request.getParameter("id");
-    Buyer buyer = findById(id);
-    if (buyer != null) {
+    Seller seller = findById(id);
+    if (seller != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(buyer);
+      response.setValue(seller);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 아이디의 회원이 없습니다.");
@@ -62,8 +62,8 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
     String id = request.getParameter("id");
     String password = request.getParameter("password");
 
-    Buyer member = null;
-    for (Buyer m : list) {
+    Seller member = null;
+    for (Seller m : list) {
       if (m.getId().equals(id) && m.getPassword().equals(password)) {
         member = m;
         response.setStatus(Response.SUCCESS);
@@ -82,22 +82,22 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
   }
 
   private void update(Request request, Response response) throws Exception {
-    Buyer buyer = request.getObject(Buyer.class);
+    Seller seller = request.getObject(Seller.class);
 
-    int index = indexOf(buyer.getId());
+    int index = indexOf(seller.getId());
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 아이디의 회원이 없습니다.");
       return;
     } 
-    list.set(index, buyer);
+    list.set(index, seller);
     response.setStatus(Response.SUCCESS);
   }
 
   private void delete(Request request, Response response) throws Exception {
-    Buyer buyer = request.getObject(Buyer.class);
-    int index = indexOf(buyer.getId());
+    Seller seller = request.getObject(Seller.class);
+    int index = indexOf(seller.getId());
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
@@ -109,8 +109,8 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
     response.setStatus(Response.SUCCESS);
   }
 
-  private Buyer findById(String id) {
-    for (Buyer m : list) {
+  private Seller findById(String id) {
+    for (Seller m : list) {
       if (m.getId().equals(id)) {
         return m;
       }
