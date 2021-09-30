@@ -61,7 +61,7 @@ public class BuyerUpdateHandler implements Command {
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
-      requestAgent.request("buyer.update", params);
+      requestAgent.request("buyer.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("해당 번호의 회원이 없습니다.");
         return;

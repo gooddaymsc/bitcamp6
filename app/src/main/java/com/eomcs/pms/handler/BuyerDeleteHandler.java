@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.App;
@@ -54,6 +55,7 @@ public class BuyerDeleteHandler extends AbstractBuyerHandler {
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         deleteMemberList.add(buyer);
+        buyer.setRegisteredDate(Date.valueOf("2020-1-1"));
         memberPrompt.removeMemberById(buyerId);
         cartPrompt.removeCartListById(buyerId);
         bookingPrompt.removeBookingListById(buyerId);

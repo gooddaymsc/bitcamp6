@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import com.eomcs.pms.table.BuyerTable;
 import com.eomcs.pms.table.JsonDataTable;
+import com.eomcs.pms.table.SellerTable;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.RequestProcessor;
 
@@ -22,6 +23,7 @@ public class ServerApp {
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
     dataProcessorMap.put("buyer.", new BuyerTable());
+    dataProcessorMap.put("seller.", new SellerTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();
