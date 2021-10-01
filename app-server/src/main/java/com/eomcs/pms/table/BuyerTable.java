@@ -20,6 +20,7 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
       case "buyer.selectOne" : selectOne(request, response); break;
       case "buyer.update" : update(request, response); break;
       case "buyer.delete" : delete(request, response); break;
+      case "buyer.Login" : selectOneByLogin(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -93,5 +94,28 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
       }
     }
     return -1;
+  }
+
+  private void selectOneByLogin(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    String password = request.getParameter("password");
+
+    Buyer buyer = null;
+    for (Buyer b : list) {
+      if (b.getId().equals(id) && b.getPassword().equals(password)) {
+        buyer = b;
+        response.setStatus(Response.SUCCESS);
+        response.setValue(buyer);
+        return;
+      } else if (b.getId().equals(id) && !b.getPassword().equals(password)) {
+        response.setStatus(Response.FAIL);
+        response.setValue("암호가 틀립니다.");
+        return;
+      } else {
+        response.setStatus(Response.FAIL);
+        response.setValue("가입되어 있지 않은 아이디입니다.");
+        return;
+      }
+    } 
   }
 }

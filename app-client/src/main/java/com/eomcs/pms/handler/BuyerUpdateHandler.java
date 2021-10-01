@@ -17,9 +17,10 @@ public class BuyerUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
-      String id = Prompt.inputString("아이디 >");
+      //tring id = Prompt.inputString("아이디 >")Buyer buyer = (Buyer) request.getAttribute("Id");
+
       HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
+      params.put("id", (String)request.getAttribute("Id"));
 
       requestAgent.request("buyer.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

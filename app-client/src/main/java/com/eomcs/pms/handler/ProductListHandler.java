@@ -25,7 +25,7 @@ public class ProductListHandler implements Command {
       } else {
         System.out.println(" || 이전(0)\n");
       }
-      System.out.printf("%-6s\t%-8s\t%-15s\t%-8s\t%-6s\t%-6s\t%-3s\t%-3s\t%-3s\n",
+      System.out.printf("%-4s\t%-6s\t%-13s\t%-6s\t%-4s\t%-4s\t%-1s\t%-1s\t%-1s\n",
           "상품번호", "상품명", "주종 - 상세주종", "원산지", "용량", "당도", "산도", "바디감", "도수");
       System.out.println("--------------------------------------------------------------------------------------------------------");
 
@@ -38,7 +38,7 @@ public class ProductListHandler implements Command {
       Collection<Product> productList = requestAgent.getObjects(Product.class);
 
       for (Product product : productList) {
-        System.out.printf(" %-8d\t%-8s\t%-4s-%s\t%-9s\t%-6d\t%-6d\t%-3d\t%-3d\t%-3.2f\n", 
+        System.out.printf(" %-6d\t%-6s\t%-2s-%s\t%-7s\t%-4d\t%-4d\t%-1d\t%-1d\t%-1.2f\n", 
             product.getProductNumber(), 
             product.getProductName(), 
             product.getProductType(), 
