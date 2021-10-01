@@ -1,7 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
@@ -31,14 +30,14 @@ public class SellerAddHandler implements Command {
     String id = Prompt.inputString("등록할 아이디: ");
 
     //중복체크
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-
-    requestAgent.request("member.checkDuplicate", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    //    HashMap<String, String> params = new HashMap<>();
+    //    params.put("id", id);
+    //
+    //    requestAgent.request("member.checkDuplicate", params);
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println(requestAgent.getObject(String.class));
+    //      return;
+    //    }
 
     seller.setId(id);
 

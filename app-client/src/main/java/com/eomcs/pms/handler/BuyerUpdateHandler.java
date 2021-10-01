@@ -76,7 +76,7 @@ public class BuyerUpdateHandler implements Command {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
-        requestAgent.request("member.update", buyer);
+        requestAgent.request("buyer.update", buyer);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 변경 실패!");
