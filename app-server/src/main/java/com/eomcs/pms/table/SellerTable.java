@@ -93,4 +93,27 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
     }
     return -1;
   }
+
+  private void selectOneByLogin(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    String password = request.getParameter("password");
+
+    Seller seller = null;
+    for (Seller m : list) {
+      if (m.getId().equals(id) && m.getPassword().equals(password)) {
+        seller = m;
+        response.setStatus(Response.SUCCESS);
+        response.setValue(seller);
+        return;
+      } else if (m.getId().equals(id) && !m.getPassword().equals(password)) {
+        response.setStatus(Response.FAIL);
+        response.setValue("암호가 틀립니다.");
+        return;
+      } else {
+        response.setStatus(Response.FAIL);
+        response.setValue("가입되어 있지 않은 아이디입니다.");
+        return;
+      }
+    } 
+  }
 }
