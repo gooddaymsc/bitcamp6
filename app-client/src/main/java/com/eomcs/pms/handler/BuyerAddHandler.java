@@ -30,7 +30,7 @@ public class BuyerAddHandler implements Command {
     HashMap<String, String> params = new HashMap<>();
     params.put("id", id);
 
-    requestAgent.request("buyer.checkDuplicate", params);
+    requestAgent.request("member.checkDuplicate", params);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(requestAgent.getObject(String.class));
       return;
@@ -79,7 +79,7 @@ public class BuyerAddHandler implements Command {
     //    }
     //    messagePrompt.addMessageListById(buyer.getId());
     //    //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
-    requestAgent.request("buyer.insert", buyer);
+    requestAgent.request("member.buyer.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("회원을 등록했습니다.");
     } else {

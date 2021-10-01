@@ -8,13 +8,13 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
-public class LoginHandler implements Command {
+public class LogoutHandler implements Command {
   // 횟수 관련 메서드 구현해야함.
   public static final int CHANCE_LOG = 5; //로그인 기회
 
   RequestAgent requestAgent;
   List<Buyer> memberList;
-  public LoginHandler(RequestAgent requestAgent) {
+  public LogoutHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

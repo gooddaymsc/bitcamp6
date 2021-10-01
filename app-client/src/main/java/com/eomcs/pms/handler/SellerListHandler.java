@@ -20,7 +20,7 @@ public class SellerListHandler implements Command {
           "판매자번호", "아이디", "가게명", "이름", "닉네임", "등급","등록일");
       System.out.println("--------------------------------------------------------------------------");
 
-      requestAgent.request("seller.selectList", null);
+      requestAgent.request("member.selectList", null);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("목록조회실패!");
         return;

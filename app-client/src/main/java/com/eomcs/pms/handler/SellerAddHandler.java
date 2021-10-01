@@ -28,7 +28,7 @@ public class SellerAddHandler implements Command {
     HashMap<String, String> params = new HashMap<>();
     params.put("id", id);
 
-    requestAgent.request("seller.checkDuplicate", params);
+    requestAgent.request("member.checkDuplicate", params);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(requestAgent.getObject(String.class));
       return;
@@ -73,7 +73,7 @@ public class SellerAddHandler implements Command {
     //    stockPrompt.addStockListById(seller.getId());
     //
     //    messagePrompt.addMessageListById(seller.getId());
-    requestAgent.request("seller.insert", seller);
+    requestAgent.request("member.seller.insert", seller);
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("회원을 등록했습니다.");
     } else {

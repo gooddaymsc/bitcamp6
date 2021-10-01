@@ -32,7 +32,7 @@ public class BuyerDeleteHandler implements Command {
         //        cartPrompt.removeCartListById(nowLoginId);
         //        bookingPrompt.removeBookingListById(nowLoginId);
         //        messagePrompt.removeMessageListById(nowLoginId);
-        requestAgent.request("buyer.delete", params);
+        requestAgent.request("member.delete", params);
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("탈퇴 실패!");
           System.out.println(requestAgent.getObject(String.class));
@@ -51,7 +51,7 @@ public class BuyerDeleteHandler implements Command {
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        requestAgent.request("buyer.delete", params);
+        requestAgent.request("member.delete", params);
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 삭제 실패!");
           System.out.println(requestAgent.getObject(String.class));

@@ -23,7 +23,7 @@ public class SellerDetailHandler implements Command {
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
-      requestAgent.request("seller.selectOne", params);
+      requestAgent.request("member.seller.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("해당 아이디의 회원이 없습니다.");
         return;
@@ -69,7 +69,7 @@ public class SellerDetailHandler implements Command {
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
-      requestAgent.request("seller.selectOne", params);
+      requestAgent.request("member.seller.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("해당 아이디의 회원이 없습니다.");
         return;

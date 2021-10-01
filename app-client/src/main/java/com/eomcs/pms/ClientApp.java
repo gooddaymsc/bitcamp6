@@ -117,7 +117,6 @@ public class ClientApp {
 
     mainMenuGroup.setPrevMenuTitle("종료");
 
-
     mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/login"));
 
     mainMenuGroup.add(new Menu("로그아웃", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER) {
@@ -166,6 +165,7 @@ public class ClientApp {
 
     MenuGroup joinMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
     mainMenuGroup.add(joinMenu);
+    joinMenu.setMenuFilter(menuFilter);
 
     joinMenu.add(new MenuItem("일반회원", "/buyer/add"));
     joinMenu.add(new MenuItem("판매자", "/seller/add"));
@@ -180,6 +180,7 @@ public class ClientApp {
 
     MenuGroup personMenu = new MenuGroup("프로필", ACCESS_BUYER | ACCESS_SELLER);
     mainMenuGroup.add(personMenu);
+    personMenu.setMenuFilter(menuFilter);
 
     personMenu.add(new MenuItem("My Store", ACCESS_SELLER, "/stock/list") {
       @Override
@@ -223,16 +224,6 @@ public class ClientApp {
   void service() throws Exception {
     notifyOnApplicationStarted();
     // 관리자 계정 생성
-    Member root = new Member();
-    root.setId("admin");
-    root.setPassword("0000");
-    root.setAuthority(Menu.ACCESS_ADMIN);
-    requestAgent.request("buyer.insert", root);
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      //      System.out.println("관리자 계정 추가!");
-    } else {
-      System.out.println("관리자 등록 실패");
-    }
 
     createMainMenu().execute();
 

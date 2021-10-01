@@ -52,7 +52,7 @@ public class SellerUpdateHandler implements Command {
         ((Seller) seller).setBusinessClosingHours(BusinessClosingHours);  
         ((Seller) seller).setBusinessClosingMinutes(BusinessClosingMinutes);  
 
-        requestAgent.request("seller.update", seller);
+        requestAgent.request("member.update", seller);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("개인정보 변경 실패!");
@@ -70,7 +70,7 @@ public class SellerUpdateHandler implements Command {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         seller.setLevel(level);
-        requestAgent.request("seller.update", seller);
+        requestAgent.request("member.update", seller);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 변경 실패!");

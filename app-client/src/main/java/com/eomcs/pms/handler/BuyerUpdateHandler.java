@@ -36,7 +36,7 @@ public class BuyerUpdateHandler implements Command {
         buyer.setAddress(address);
         buyer.setPhoneNumber(tel);
 
-        requestAgent.request("buyer.update", buyer);
+        requestAgent.request("member.update", buyer);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("개인정보 변경 실패!");
@@ -54,7 +54,7 @@ public class BuyerUpdateHandler implements Command {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
-        requestAgent.request("buyer.update", buyer);
+        requestAgent.request("member.update", buyer);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 변경 실패!");
