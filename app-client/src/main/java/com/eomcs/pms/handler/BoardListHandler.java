@@ -54,8 +54,7 @@ public class BoardListHandler implements Command {
           switch (choose) {
             case "0" : return;
             case "a" :
-            case "A" : request.getRequestDispatcher("/board/add").forward(request); continue Loop;
-            //            case "A" : System.out.println("로그인 후 가능합니다.\n"); return;
+            case "A" : System.out.println("로그인 후 가능합니다.\n"); return;
             case "r" :
             case "R" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
             case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop ;

@@ -26,7 +26,7 @@ public class BoardDetailHandler implements Command {
       return;
     }
     Board board = requestAgent.getObject(Board.class);
-
+    request.setAttribute("boardNo", board.getBoardNumber());
     Loop : while(true) {
       System.out.printf("[게시글 상세보기]");
       System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
