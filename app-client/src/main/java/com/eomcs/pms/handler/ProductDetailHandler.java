@@ -22,10 +22,12 @@ public class ProductDetailHandler implements Command {
 
       Product product = productPrompt.findByProduct(Prompt.inputString("\n상품명 > "));
 
-      if (product == null) {
-        System.out.println("입력하신 상품이 없습니다.\n");
-        return;
-      }
+      request.setAttribute("productName", product.getProductName());
+
+      //      if (product == null) {
+      //        System.out.println("입력하신 상품이 없습니다.\n");
+      //        return;
+      //      }
 
       System.out.printf("주종: %s - %s\n", product.getProductType(),product.getProductSubType());
       //      System.out.printf("평점: %.2f\n", product.getRate());

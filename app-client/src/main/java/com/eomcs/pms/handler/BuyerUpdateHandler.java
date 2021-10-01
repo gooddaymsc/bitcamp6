@@ -18,10 +18,10 @@ public class BuyerUpdateHandler implements Command {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
 
-      String id = ClientApp.getLoginUser().getId();
+      //      tring id = Prompt.inputString("아이디 >")Buyer buyer = (Buyer) request.getAttribute("Id");
 
       HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
+      params.put("id", (String)request.getAttribute("Id"));
 
       requestAgent.request("buyer.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -76,7 +76,7 @@ public class BuyerUpdateHandler implements Command {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
-        requestAgent.request("buyer.update", buyer);
+        requestAgent.request("member.update", buyer);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 변경 실패!");
