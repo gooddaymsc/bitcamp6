@@ -16,6 +16,7 @@ public class SellerAddHandler extends AbstractSellerHandler {
   MessagePrompt messagePrompt;
   MemberPrompt memberPrompt;
   List<Member> deletedMemberList;
+
   public SellerAddHandler(List<Member> memberList,   List<Member> deletedMemberList, MemberPrompt memberPrompt,
       BookingPrompt bookingPrompt, StockPrompt stockPrompt, List<Integer> totalNumberList, MessagePrompt messagePrompt) {
     super(memberList);

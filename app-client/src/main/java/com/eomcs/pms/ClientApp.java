@@ -13,19 +13,21 @@ import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.pms.handler.BuyerAddHandler;
-import com.eomcs.pms.handler.BuyerDeleteHandler;
-import com.eomcs.pms.handler.BuyerDetailHandler;
-import com.eomcs.pms.handler.BuyerListHandler;
-import com.eomcs.pms.handler.BuyerUpdateHandler;
+import com.eomcs.pms.handler.BoardAddHandler;
+import com.eomcs.pms.handler.BoardDeleteHandler;
+import com.eomcs.pms.handler.BoardDetailHandler;
+import com.eomcs.pms.handler.BoardListHandler;
+import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.LoginHandler;
-import com.eomcs.pms.handler.SellerAddHandler;
-import com.eomcs.pms.handler.SellerDeleteHandler;
-import com.eomcs.pms.handler.SellerDetailHandler;
-import com.eomcs.pms.handler.SellerListHandler;
-import com.eomcs.pms.handler.SellerUpdateHandler;
+import com.eomcs.pms.handler.ProductAddHandler;
+import com.eomcs.pms.handler.ProductDeleteHandler;
+import com.eomcs.pms.handler.ProductDetailHandler;
+import com.eomcs.pms.handler.ProductListHandler;
+import com.eomcs.pms.handler.ProductPrompt;
+import com.eomcs.pms.handler.ProductSearchHandler;
+import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -86,19 +88,34 @@ public class ClientApp {
 
     requestAgent = new RequestAgent("127.0.0.1",8888);
 
-    commandMap.put("/buyer/add", new BuyerAddHandler(requestAgent));
-    commandMap.put("/buyer/list",   new BuyerListHandler(requestAgent));
-    commandMap.put("/buyer/detail", new BuyerDetailHandler(requestAgent));
-    commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
+    //    commandMap.put("/buyer/add", new BuyerAddHandler(requestAgent));
+    //    commandMap.put("/buyer/list",   new BuyerListHandler(requestAgent));
+    //    commandMap.put("/buyer/detail", new BuyerDetailHandler(requestAgent));
+    //    commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
+    //    commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
 
     commandMap.put("/login", new LoginHandler(requestAgent));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
-    commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
-    commandMap.put("/seller/detail", new SellerDetailHandler(requestAgent));
-    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(requestAgent));
+    //    commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
+    //    commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
+    //    commandMap.put("/seller/detail", new SellerDetailHandler(requestAgent));
+    //    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
+    //    commandMap.put("/seller/delete", new SellerDeleteHandler(requestAgent));
+
+    commandMap.put("/board/add",    new BoardAddHandler(requestAgent));
+    commandMap.put("/board/list",   new BoardListHandler(requestAgent));
+    commandMap.put("/board/update",   new BoardUpdateHandler(requestAgent));
+    commandMap.put("/board/detail",   new BoardDetailHandler(requestAgent));
+    commandMap.put("/board/update",   new BoardUpdateHandler(requestAgent));
+    commandMap.put("/board/delete",   new BoardDeleteHandler(requestAgent));
+
+    ProductPrompt productPrompt = new ProductPrompt(requestAgent);
+    commandMap.put("/product/add",   new ProductAddHandler(requestAgent));
+    commandMap.put("/product/list",   new ProductListHandler(requestAgent));
+    commandMap.put("/product/search", new ProductSearchHandler(requestAgent, productPrompt));
+    commandMap.put("/product/detail", new ProductDetailHandler(requestAgent, productPrompt));
+    commandMap.put("/product/update", new ProductUpdateHandler(requestAgent, productPrompt));
+    commandMap.put("/product/delete",   new ProductDeleteHandler(requestAgent));
 
   }
 
@@ -142,14 +159,17 @@ public class ClientApp {
 
     ///////////////////////////////////////////
 
-    mainMenuGroup.add(new MenuItem("상품", "/product/list"));
+    //  mainMenuGroup.add(new MenuItem("상품", "/product/list"));
 
-    //    MenuGroup productMenu = new MenuGroup("상품");
-    //    mainMenuGroup.add(productMenu);
-    //
-    //    productMenu.add(new MenuItem("등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
-    //    productMenu.add(new MenuItem("상품", "/product/list"));
-    //    productMenu.add(new MenuItem("상품검색",  "/product/search"));
+    MenuGroup productMenu = new MenuGroup("상품");
+    mainMenuGroup.add(productMenu);
+
+    productMenu.add(new MenuItem("상품등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
+    productMenu.add(new MenuItem("상품검색",  "/product/search"));
+    productMenu.add(new MenuItem("상품목록", "/product/list"));
+    productMenu.add(new MenuItem("상품상세", "/product/detail"));
+    productMenu.add(new MenuItem("상품변경", "/product/update"));
+    productMenu.add(new MenuItem("상품삭제",  "/product/delete"));
 
     ///////////////////////////////////////////
 

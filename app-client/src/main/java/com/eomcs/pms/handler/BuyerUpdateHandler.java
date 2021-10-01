@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.domain.Buyer;
@@ -27,7 +28,6 @@ public class BuyerUpdateHandler implements Command {
       String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", buyer.getPhoneNumber()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-
       if (input.equalsIgnoreCase("y")) {
         buyer.setNickname(nickName);
         buyer.setEmail(email);
@@ -36,8 +36,7 @@ public class BuyerUpdateHandler implements Command {
         buyer.setAddress(address);
         buyer.setPhoneNumber(tel);
 
-        requestAgent.request("member.update", buyer);
-
+        requestAgent.request("buyer.update", buyer);
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("개인정보 변경 실패!");
           System.out.println(requestAgent.getObject(String.class));
@@ -45,9 +44,21 @@ public class BuyerUpdateHandler implements Command {
         }
         System.out.println("개인정보를 변경하였습니다.\n");
       } 
+      System.out.println("개인정보 변경을 취소하였습니다.\n");
     } else {
       System.out.println("[회원 변경]\n");
-      Buyer buyer = (Buyer) request.getAttribute("buyer");
+      //      Buyer buyer = (Buyer) request.getAttribute("buyer");
+      String id = Prompt.inputString("아이디 >");
+      HashMap<String, String> params = new HashMap<>();
+      params.put("id", id);
+
+      requestAgent.request("buyer.selectOne", params);
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println("해당 번호의 회원이 없습니다.");
+        return;
+      }
+
+      Buyer buyer = requestAgent.getObject(Buyer.class);
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
       int level = checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 

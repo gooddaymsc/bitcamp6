@@ -1,12 +1,11 @@
 package com.eomcs.pms.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @SuppressWarnings("serial")
 public class Product implements Serializable{
-  private List<Review> reviewList = new ArrayList<>();
+  //  private List<Review> reviewList = new ArrayList<>();
   private int productNumber;        //상품번
   private String productName;       //상품명
   private String productType;       //주종
@@ -88,7 +87,6 @@ public class Product implements Serializable{
   public void setWeight(int weight) {
     this.weight = weight;
   }
-
   //  public List<Review> getReviewList() {
   //    return reviewList;
   //  }

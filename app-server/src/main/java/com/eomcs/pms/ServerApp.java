@@ -4,9 +4,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
+import com.eomcs.pms.table.BoardTable;
 import com.eomcs.pms.table.BuyerTable;
 import com.eomcs.pms.table.JsonDataTable;
-import com.eomcs.pms.table.JsonDataTable2;
+import com.eomcs.pms.table.ProductTable;
+import com.eomcs.pms.table.SellerTable;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.RequestProcessor;
 
@@ -22,13 +24,11 @@ public class ServerApp {
 
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
-    dataProcessorMap.put("member.", new BuyerTable());
-    //    dataProcessorMap.put("seller.", new SellerTable());
-    //    dataProcessorMap.put("totalNumber.", new TotalNumberTable());
-    //    dataProcessorMap.put("cart.", new CartTable());
-    //    dataProcessorMap.put("booking.", new BookingTable());
-    //    dataProcessorMap.put("message.", new MessageTable());
-
+    //    dataProcessorMap.put("member.", new BuyerTable());
+    dataProcessorMap.put("buyer.", new BuyerTable());
+    dataProcessorMap.put("seller.", new SellerTable());
+    dataProcessorMap.put("board.", new BoardTable());
+    dataProcessorMap.put("product", new ProductTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();
@@ -38,9 +38,10 @@ public class ServerApp {
     for (DataProcessor dataProcessor : dataProcessors) {
       if (dataProcessor instanceof JsonDataTable) {
         ((JsonDataTable<?>)dataProcessor).save();
-      } else if (dataProcessor instanceof JsonDataTable2) {
-        ((JsonDataTable2)dataProcessor).save();
-      }
+      } 
+      //      else if (dataProcessor instanceof JsonDataTable2) {
+      //        ((JsonDataTable2)dataProcessor).save();
+      //      }
     }
 
     System.out.println("서버종료");

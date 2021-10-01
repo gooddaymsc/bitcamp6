@@ -8,9 +8,10 @@ import com.eomcs.util.Prompt;
 
 public class SellerListHandler implements Command {
   RequestAgent requestAgent;
+
   public SellerListHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
-  }  
+  }
 
   @Override
   public void execute(CommandRequest request) throws Exception{
@@ -20,7 +21,7 @@ public class SellerListHandler implements Command {
           "판매자번호", "아이디", "가게명", "이름", "닉네임", "등급","등록일");
       System.out.println("--------------------------------------------------------------------------");
 
-      requestAgent.request("member.selectList", null);
+      requestAgent.request("seller.selectList", null);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("목록조회실패!");
         return;
@@ -52,10 +53,5 @@ public class SellerListHandler implements Command {
     }
   }
 }
-
-
-
-
-
 
 

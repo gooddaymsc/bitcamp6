@@ -17,17 +17,24 @@ public class BuyerTable extends JsonDataTable2 implements DataProcessor{
   public void execute(Request request, Response response) throws Exception {
     // TODO Auto-generated method stub
     switch (request.getCommand()) {
-      case "member.selectList" : selectList(request, response); break;
-      case "member.selectOneByLogin" : selectOneByLogin(request, response); break;
-      case "member.insert" : memberinsert(request, response); break;
-      case "member.delete" : delete(request, response); break;
-      case "member.checkDuplicate" : checkDuplicate(request, response); break;
-      case "member.update" : update(request, response); break;
-
-      case "member.buyer.selectOne" : buyerselectOne(request, response); break;
-      case "member.seller.selectOne" : sellerselectOne(request, response); break;
-      case "member.buyer.insert" : buyerinsert(request, response); break;
-      case "member.seller.insert" : sellerinsert(request, response); break;
+      //      case "member.selectList" : selectList(request, response); break;
+      //      case "member.selectOneByLogin" : selectOneByLogin(request, response); break;
+      //      case "member.insert" : memberinsert(request, response); break;
+      //      case "member.delete" : delete(request, response); break;
+      //      case "member.checkDuplicate" : checkDuplicate(request, response); break;
+      //      case "member.update" : update(request, response); break;
+      //
+      //      case "member.buyer.selectOne" : buyerselectOne(request, response); break;
+      //      case "member.seller.selectOne" : sellerselectOne(request, response); break;
+      //      case "member.buyer.insert" : buyerinsert(request, response); break;
+      //      case "member.seller.insert" : sellerinsert(request, response); break;
+      case "buyer.insert" : insert(request, response); break;
+      case "buyer.checkDuplicate" : checkDuplicate(request, response); break;
+      case "buyer.selectList" : selectList(request, response); break;
+      case "buyer.selectOne" : selectOne(request, response); break;
+      case "buyer.selectOneByLogin" : selectOneByLogin(request, response); break;
+      case "buyer.update" : update(request, response); break;
+      case "buyer.delete" : delete(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");

@@ -16,9 +16,15 @@ public class SellerAddHandler implements Command {
     this.requestAgent = requestAgent;
   }  
 
+  //  @Override
+  //  public void execute(CommandRequest request) throws Exception{
+  //    System.out.println("[판매자 등록]");
+  //  Collection<Seller> sellerList;
+
   @Override
-  public void execute(CommandRequest request) throws Exception{
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[판매자 등록]");
+
     Member seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
 
@@ -71,9 +77,9 @@ public class SellerAddHandler implements Command {
     //    bookingPrompt.addBookingListById(seller.getId());
     //    // 재고 리스트에 판매자 id를 갖는 stockList add.
     //    stockPrompt.addStockListById(seller.getId());
-    //
+
     //    messagePrompt.addMessageListById(seller.getId());
-    requestAgent.request("member.seller.insert", seller);
+    requestAgent.request("seller.insert", seller);
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("회원을 등록했습니다.");
     } else {
@@ -137,11 +143,4 @@ public class SellerAddHandler implements Command {
   }
 
 }
-
-
-
-
-
-
-
 
