@@ -20,6 +20,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
       case "board.selectOne" : selectOne(request, response); break;
       case "board.update" : update(request, response); break;
       case "board.delete" : delete(request, response); break;
+      //      case "board.search" : search(request, response); break;
 
       default :
         response.setStatus(Response.FAIL);
@@ -96,4 +97,16 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
     }
     return -1;
   }
+
+  //  private void search(Request request, Response response) throws Exception {
+  //    int no = Integer.parseInt(request.getParameter("no"));
+  //    Board board = findByNo(no);
+  //    if (board != null) {
+  //      response.setStatus(Response.SUCCESS);
+  //      response.setValue(board);
+  //    } else {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 번호의 게시글이 없습니다.");
+  //    }
+  //  }
 }
