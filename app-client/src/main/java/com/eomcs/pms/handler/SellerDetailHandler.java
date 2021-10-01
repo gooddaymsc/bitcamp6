@@ -18,8 +18,7 @@ public class SellerDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 상세보기]");
-      //      String id = ClientApp.getLoginUser().getId();
-      String id = Prompt.inputString("아이디> ");
+      String id = ClientApp.getLoginUser().getId();
 
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
@@ -66,8 +65,7 @@ public class SellerDetailHandler implements Command {
       }
     } else {
       System.out.println("[판매자 상세보기] || 이전(0)");
-      //      String id = (String)request.getAttribute("Id");
-      String id = Prompt.inputString("아이디> ");
+      String id = (String)request.getAttribute("Id");
 
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
