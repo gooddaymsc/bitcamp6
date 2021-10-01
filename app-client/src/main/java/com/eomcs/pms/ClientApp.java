@@ -277,8 +277,6 @@ public class ClientApp {
 
     // memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
 
-    requestAgent.request("quit", null);
-
     Prompt.close();
 
     notifyOnApplicationEnded();
