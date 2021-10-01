@@ -9,3 +9,5 @@
 
 rootProject.name = 'AlcoholFinder'
 include('app')
+include('app-client')
+include('app-server')
