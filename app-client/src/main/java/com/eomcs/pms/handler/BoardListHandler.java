@@ -58,7 +58,7 @@ public class BoardListHandler implements Command {
             //            case "A" : System.out.println("로그인 후 가능합니다.\n"); return;
             case "r" :
             case "R" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
-            case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
+            case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop ;
             default : System.out.println("잘못입력하셨습니다."); continue;
           }
         }
