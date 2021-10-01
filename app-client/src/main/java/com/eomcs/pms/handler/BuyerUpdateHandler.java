@@ -21,7 +21,7 @@ public class BuyerUpdateHandler implements Command {
       String id = ClientApp.getLoginUser().getId();
 
       HashMap<String, String> params = new HashMap<>();
-      params.put("id", (String)request.getAttribute("Id"));
+      params.put("id", id);
 
       requestAgent.request("buyer.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
