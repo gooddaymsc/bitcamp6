@@ -18,7 +18,7 @@ public class BuyerUpdateHandler implements Command {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
 
-      //tring id = Prompt.inputString("아이디 >")Buyer buyer = (Buyer) request.getAttribute("Id");
+      String id = ClientApp.getLoginUser().getId();
 
       HashMap<String, String> params = new HashMap<>();
       params.put("id", (String)request.getAttribute("Id"));

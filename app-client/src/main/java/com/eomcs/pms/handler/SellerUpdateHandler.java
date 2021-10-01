@@ -17,9 +17,8 @@ public class SellerUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
+      String id = ClientApp.getLoginUser().getId();
 
-      //      Member seller = (Seller) request.getAttribute("seller");
-      String id = Prompt.inputString("아이디> ");
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
@@ -76,8 +75,8 @@ public class SellerUpdateHandler implements Command {
 
     } else {
       System.out.println("[판매자 변경]");
-      //        Member seller = (Seller) request.getAttribute("seller");
-      String id = Prompt.inputString("아이디 >");
+      Seller seller1 = (Seller) request.getAttribute("seller");
+      String id = seller1.getId();
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
