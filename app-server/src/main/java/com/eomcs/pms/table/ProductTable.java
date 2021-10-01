@@ -18,6 +18,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
       case "product.insert" : insertProduct(request, response); break;
       case "product.selectOne" : selectOne(request, response); break;
       case "product.selectList" : selectList(request, response); break;
+      case "product.update" : update(request, response); break;
       case "product.delete" : deleteProduct(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
@@ -47,6 +48,19 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
       response.setValue("해당 상품이 없습니다.");
     }
   }
+  private void update(Request request, Response response) throws Exception {
+    Product product = request.getObject(Product.class);
+
+    int index = indexOf(product.getProductName());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 이름의 상품명이 없습니다.");
+      return;
+    } 
+    list.set(index, product);
+    response.setStatus(Response.SUCCESS);
+  }
 
   private void deleteProduct(Request request, Response response) throws Exception {
     Product product = request.getObject(Product.class);
@@ -69,5 +83,12 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     }
     return null;
   }
-
+  private int indexOf(String productName) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getProductName().equals(productName)) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }

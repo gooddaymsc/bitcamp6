@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
@@ -17,30 +18,23 @@ public class BuyerAddHandler implements Command {
     this.requestAgent = requestAgent;
   } 
 
-  @SuppressWarnings("unused")
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 등록]");
-
     Member buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);
 
-    //아이디가 중복되면 다시 아이디 재설정.
     String id = Prompt.inputString("등록할 아이디: ");
 
-    //    requestAgent.request("buyer.selectList", null);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("목록조회실패!");
-    //      return;
-    //    }
+    //중복체크
+    HashMap<String, String> params = new HashMap<>();
+    params.put("id", id);
 
-    //    Collection<Buyer> buyerList = requestAgent.getObjects(Buyer.class);
-
-    //    if (findById(id)) {
-    //      System.out.println("중복되는 아이디입니다.");
-    //      return;
-    //    }
-
+    requestAgent.request("member.checkDuplicate", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
 
     buyer.setId(id);
     buyer.setName(Prompt.inputString("이름: "));
@@ -66,28 +60,31 @@ public class BuyerAddHandler implements Command {
     //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
     //    memberList.add(buyer);
 
-    //    // 예약리스트에 구매자 id를 갖는 bookingList add.
-    //    bookingPrompt.addBookingListById(buyer.getId());
-    //    // 장바구니리스트에 구매자 id를 갖는 cartList add.
-    //    cartPrompt.addCartListById(buyer.getId());
-    //
+    //    //    // 예약리스트에 구매자 id를 갖는 bookingList add.
+    //    requestAgent.request("cart.insert", buyer.getId());
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("장바구니 생성 실패!");
+    //      return;
+    //    }
+    //    //    // 장바구니리스트에 구매자 id를 갖는 cartList add.
+    //    requestAgent.request("booking.insert", buyer.getId());
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("예약 생성 실패!");
+    //      return;
+    //    }
+    //    requestAgent.request("message.insert", buyer.getId());
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("메신저 생성 실패!");
+    //      return;
+    //    }
     //    messagePrompt.addMessageListById(buyer.getId());
     //    //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
-    requestAgent.request("buyer.insert", buyer);
+    requestAgent.request("member.buyer.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("회원을 등록했습니다.");
     } else {
       System.out.println("회원 등록 실패");
     }
-  }
-
-  private boolean findById(String id) {
-    for (Buyer buyer : buyerList) {
-      if (buyer.getId().equals(id)) {
-        return true;
-      }
-    }
-    return false;
   }
 
   protected String checkPassword(String label) {

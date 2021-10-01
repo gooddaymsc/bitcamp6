@@ -9,16 +9,16 @@ import com.eomcs.util.Prompt;
 
 public class SellerUpdateHandler implements Command {
   RequestAgent requestAgent;
-
-
   public SellerUpdateHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
-
   }  
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
+
+      //      Member seller = (Seller) request.getAttribute("seller");
       String id = Prompt.inputString("아이디> ");
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
@@ -41,11 +41,10 @@ public class SellerUpdateHandler implements Command {
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", seller.getBusinessAddress()));
       String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", seller.getBusinessPlaceNumber()));
 
-
-      //      int BusinessOpeningHours = Prompt.inputInt(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
-      //      int BusinessOpeningMinutes= Prompt.inputInt(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
-      //      int BusinessClosingHours = Prompt.inputInt(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
-      //      int BusinessClosingMinutes= Prompt.inputInt(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
+      int BusinessOpeningHours = Prompt.inputInt(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
+      int BusinessOpeningMinutes= Prompt.inputInt(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
+      int BusinessClosingHours = Prompt.inputInt(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
+      int BusinessClosingMinutes= Prompt.inputInt(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
@@ -59,21 +58,25 @@ public class SellerUpdateHandler implements Command {
         seller.setBusinessNumber(bussinessNo);
         seller.setBusinessAddress(bussinessAddress);
         seller.setBusinessPlaceNumber(bussinessTel);  
-        //        seller.setBusinessOpeningHours(BusinessOpeningHours);  
-        //        seller.setBusinessOpeningMinutes(BusinessOpeningMinutes);  
-        //        seller.setBusinessClosingHours(BusinessClosingHours);  
-        //        seller.setBusinessClosingMinutes(BusinessClosingMinutes);  
-        requestAgent.request("seller.update", seller);
+        seller.setBusinessOpeningHours(BusinessOpeningHours);  
+        seller.setBusinessOpeningMinutes(BusinessOpeningMinutes);  
+        seller.setBusinessClosingHours(BusinessClosingHours);  
+        seller.setBusinessClosingMinutes(BusinessClosingMinutes);  
+
+        requestAgent.request("member.update", seller);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("개인 정보 변경을 취소하였습니다.\n");
+          System.out.println("개인 정보 변경 실패!\n");
           System.out.println(requestAgent.getObject(String.class));
           return;
         }
         System.out.println("개인 정보를 변경하였습니다.\n");
-      }        
+      }
+      System.out.println("개인 정보 변경을 취소하였습니다.\n");
+
     } else {
       System.out.println("[판매자 변경]");
+      //        Member seller = (Seller) request.getAttribute("seller");
       String id = Prompt.inputString("아이디 >");
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
@@ -86,10 +89,6 @@ public class SellerUpdateHandler implements Command {
 
       Seller seller = requestAgent.getObject(Seller.class);
 
-      if (seller == null) {
-        System.out.println("해당 아이디의 회원이 없습니다.\n");
-        return;
-      }
       int level = checkLevel(String.format("등급(변경 전 : %d) : ", seller.getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
@@ -102,10 +101,10 @@ public class SellerUpdateHandler implements Command {
           return;
         }
         System.out.println("회원 변경을 완료하였습니다.\n");
+        return;
       }
     }
   }
-
 
   private int checkLevel(String label) {
     while(true) {
@@ -118,9 +117,3 @@ public class SellerUpdateHandler implements Command {
     }
   }
 }
-
-
-
-
-
-

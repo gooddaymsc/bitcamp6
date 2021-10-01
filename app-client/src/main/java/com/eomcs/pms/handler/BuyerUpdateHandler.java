@@ -17,6 +17,7 @@ public class BuyerUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
+
       //tring id = Prompt.inputString("아이디 >")Buyer buyer = (Buyer) request.getAttribute("Id");
 
       HashMap<String, String> params = new HashMap<>();
@@ -28,7 +29,7 @@ public class BuyerUpdateHandler implements Command {
         return;
       }
 
-      Buyer buyer = requestAgent.getObject(Buyer.class);
+      Buyer buyer = (Buyer) request.getAttribute("buyer");
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", buyer.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", buyer.getEmail()));
@@ -48,7 +49,7 @@ public class BuyerUpdateHandler implements Command {
 
         requestAgent.request("buyer.update", buyer);
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("회원 변경 실패!");
+          System.out.println("개인정보 변경 실패!");
           System.out.println(requestAgent.getObject(String.class));
           return;
         }
@@ -57,6 +58,7 @@ public class BuyerUpdateHandler implements Command {
       System.out.println("개인정보 변경을 취소하였습니다.\n");
     } else {
       System.out.println("[회원 변경]\n");
+      //      Buyer buyer = (Buyer) request.getAttribute("buyer");
       String id = Prompt.inputString("아이디 >");
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
@@ -69,17 +71,12 @@ public class BuyerUpdateHandler implements Command {
 
       Buyer buyer = requestAgent.getObject(Buyer.class);
 
-      //      Buyer buyer = (Buyer) request.getAttribute("buyer");
-      //      if (buyer == null) {
-      //        System.out.println("해당 아이디의 회원이 없습니다.\n");
-      //        return;
-      //      }
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
       int level = checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
-        requestAgent.request("buyer.update", buyer);
+        requestAgent.request("member.update", buyer);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 변경 실패!");

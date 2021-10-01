@@ -21,6 +21,14 @@ public class SellerDeleteHandler implements Command {
 
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[탈퇴하기]");
+      //      String id = ((Seller) request.getAttribute("seller")).getId();
+      //      //      String nowLoginId = seller.getId();
+      //      HashMap<String, String> params = new HashMap<>();
+      //      params.put("id", id);
+      //
+      //      String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
+      //
+      //      if (input.equalsIgnoreCase("y")) {
 
       String id = Prompt.inputString("아이디> ");
       HashMap<String, String> params = new HashMap<>();
@@ -48,16 +56,26 @@ public class SellerDeleteHandler implements Command {
         //        bookingPrompt.removeBookingListById(nowLoginId);
         //        stockPrompt.removeStockListById(nowLoginId);
         //        messagePrompt.removeMessageListById(nowLoginId);
+        //        requestAgent.request("member.delete", params);
         System.out.println("탈퇴가 완료되었습니다.\n");
         ClientApp.loginMember = new Member();
         return;
-      } 
-      System.out.println("탈퇴를 취소하였습니다.\n");
-
+      }
     } else {
       System.out.println("[회원 탈퇴]");
+      //      String id = ((Seller) request.getAttribute("seller")).getId();
+      //      String nowLoginId = seller.getId();
+      //        requestAgent.request("member.delete", params);
+      String id = Prompt.inputString("아이디> ");
+      HashMap<String, String> params = new HashMap<>();
+      params.put("id", id);
+
+      requestAgent.request("seller.selectOne", params);
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println("해당 번호의 회원이 없습니다.");
+        return;
+      }
       Member seller = (Seller) request.getAttribute("seller");
-      String sellerId = seller.getId();
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
@@ -66,6 +84,14 @@ public class SellerDeleteHandler implements Command {
         //        bookingPrompt.removeBookingListById(sellerId);
         //        stockPrompt.removeStockListById(sellerId);
         //        messagePrompt.removeMessageListById(sellerId);
+        requestAgent.request("seller.delete", seller);
+
+        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+          System.out.println("회원 삭제 실패");
+          System.out.println(requestAgent.getObject(String.class));
+          return;
+        }
+
         System.out.println("판매자를 탈퇴시켰습니다.\n");
         return;
       }
@@ -73,7 +99,6 @@ public class SellerDeleteHandler implements Command {
       return;
     }
   }
-
 }
 
 
