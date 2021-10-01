@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
@@ -27,14 +26,14 @@ public class BuyerAddHandler implements Command {
     String id = Prompt.inputString("등록할 아이디: ");
 
     //중복체크
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
+    //    HashMap<String, String> params = new HashMap<>();
+    //    params.put("id", id);
 
-    requestAgent.request("member.checkDuplicate", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    //    requestAgent.request("member.checkDuplicate", params);
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println(requestAgent.getObject(String.class));
+    //      return;
+    //    }
 
     buyer.setId(id);
     buyer.setName(Prompt.inputString("이름: "));
@@ -78,8 +77,8 @@ public class BuyerAddHandler implements Command {
     //      return;
     //    }
     //    messagePrompt.addMessageListById(buyer.getId());
-    //    //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
-    requestAgent.request("member.buyer.insert", buyer);
+    //            memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
+    requestAgent.request("buyer.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("회원을 등록했습니다.");
     } else {
