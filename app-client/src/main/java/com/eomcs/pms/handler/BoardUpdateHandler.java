@@ -17,9 +17,11 @@ public class BoardUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[게시글 변경]");
-    String no = Integer.toString(Prompt.inputInt("게시글 번호> ")); 
+    int no = (int) request.getAttribute("no");
+
+    //    String no = Integer.toString(Prompt.inputInt("게시글 번호> ")); 
     HashMap<String, String> params = new HashMap<>();
-    params.put("no", no);
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("board.selectOne", params);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

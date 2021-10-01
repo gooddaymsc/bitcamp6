@@ -18,8 +18,8 @@ public class BuyerDeleteHandler implements Command {
 
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[탈퇴하기]");
+      String id = ClientApp.getLoginUser().getId();
 
-      String id = ((Buyer) request.getAttribute("buyer")).getId();
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
       //      String nowLoginId = buyer.getId();

@@ -21,7 +21,7 @@ public class SellerDeleteHandler implements Command {
 
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[탈퇴하기]");
-      //      String id = ((Seller) request.getAttribute("seller")).getId();
+      String id = ClientApp.getLoginUser().getId();
       //      //      String nowLoginId = seller.getId();
       //      HashMap<String, String> params = new HashMap<>();
       //      params.put("id", id);
@@ -30,7 +30,6 @@ public class SellerDeleteHandler implements Command {
       //
       //      if (input.equalsIgnoreCase("y")) {
 
-      String id = Prompt.inputString("아이디> ");
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
@@ -63,10 +62,10 @@ public class SellerDeleteHandler implements Command {
       }
     } else {
       System.out.println("[회원 탈퇴]");
-      //      String id = ((Seller) request.getAttribute("seller")).getId();
+      String id = ((Seller) request.getAttribute("seller")).getId();
       //      String nowLoginId = seller.getId();
       //        requestAgent.request("member.delete", params);
-      String id = Prompt.inputString("아이디> ");
+      //      String id = Prompt.inputString("아이디> ");
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
