@@ -64,14 +64,14 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
 
   private void deleteProduct(Request request, Response response) throws Exception {
     Product product = request.getObject(Product.class);
-    Product name = findByProduct(product.getProductName());
+    int index = indexOf(product.getProductName());
 
-    if(name.equals(null)) {
+    if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 상품을 찾을 수 업습니다.");
+      response.setValue("해당 상품을 찾을 수 없습니다.");
       return;
     }
-    list.remove(name);
+    list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
 
