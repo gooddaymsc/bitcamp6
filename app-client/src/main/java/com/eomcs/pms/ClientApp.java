@@ -28,9 +28,14 @@ import com.eomcs.pms.handler.BuyerLoginHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
+import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
+import com.eomcs.pms.handler.ProductPrompt;
+import com.eomcs.pms.handler.ProductSearchHandler;
+import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -44,6 +49,7 @@ import com.eomcs.util.Prompt;
 public class ClientApp {
   RequestAgent requestAgent;
   HashMap<String, Command> commandMap = new HashMap<>();
+  static List<Member> memberList = new ArrayList<>();
 
   //권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -96,14 +102,17 @@ public class ClientApp {
 
     requestAgent = new RequestAgent("127.0.0.1",8888);
 
-    commandMap.put("/buyer/buyerlogin", new BuyerLoginHandler(requestAgent));
-    commandMap.put("/buyer/sellerlogin", new SellerLoginHandler(requestAgent));
+
+    commandMap.put("/buyer/login", new BuyerLoginHandler(requestAgent));
+    commandMap.put("/seller/login", new SellerLoginHandler(requestAgent));
 
     commandMap.put("/buyer/add", new BuyerAddHandler(requestAgent));
     commandMap.put("/buyer/list",   new BuyerListHandler(requestAgent));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(requestAgent));
     commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
+
+    commandMap.put("/login", new LoginHandler(requestAgent));
 
     commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
     commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
@@ -120,38 +129,38 @@ public class ClientApp {
     commandMap.put("/board/delete",   new BoardDeleteHandler(requestAgent));
     commandMap.put("/board/search",   new BoardSearchHandler(requestAgent));
 
+    ProductPrompt productPrompt = new ProductPrompt(requestAgent);
     commandMap.put("/product/add",   new ProductAddHandler(requestAgent));
     commandMap.put("/product/list",   new ProductListHandler(requestAgent));
+    commandMap.put("/product/search", new ProductSearchHandler(requestAgent, productPrompt));
+    commandMap.put("/product/detail", new ProductDetailHandler(requestAgent, productPrompt));
+    commandMap.put("/product/update", new ProductUpdateHandler(requestAgent, productPrompt));
     commandMap.put("/product/delete",   new ProductDeleteHandler(requestAgent));
+
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;
+
   public static Member loginMember = new Member();
   public static Member getLoginUser() {
     return loginMember;
   }
+
+
   Menu createMainMenu() {
 
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setMenuFilter(menuFilter);
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    MenuGroup menuGroup = new MenuGroup("로그인");
-    menuGroup.setMenuFilter(menuFilter);
-
-    mainMenuGroup.add(new Menu("로그인", ACCESS_LOGOUT) {
-      @Override
-      public void execute() {
-        //        Member prv = new Member();
-        Member prv = loginHandler.InputId(); 
-        if (prv==null) {
-          System.out.println("아이디(비밀번호)를 다시 확인하시기 바랍니다.");
-        } else {
-          loginMember = prv;
-        }
-      }});
+    MenuGroup loginGroup = new MenuGroup("로그인",ACCESS_LOGOUT);
+    loginGroup.setMenuFilter(menuFilter);
+    mainMenuGroup.add(loginGroup);
+    loginGroup.add(new MenuItem("일반회원", ACCESS_LOGOUT, "/buyer/login"));
+    loginGroup.add(new MenuItem("판매자", ACCESS_LOGOUT, "/seller/login"));
 
     mainMenuGroup.add(new Menu("로그아웃", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER) {
+
       @Override
       public void execute() {
         if (loginMember.getAuthority()!= 0) {
@@ -176,17 +185,15 @@ public class ClientApp {
 
     //  mainMenuGroup.add(new MenuItem("상품", "/product/list"));
 
-    MenuGroup productMenu = new MenuGroup("상품");
-    productMenu.setMenuFilter(menuFilter);
+    //MenuGroup productMenu = new MenuGroup("상품");
+    //productMenu.setMenuFilter(menuFilter);
+    //mainMenuGroup.add(productMenu);
 
-    mainMenuGroup.add(productMenu);
+    mainMenuGroup.add(new MenuItem("상품", "/product/list"));
 
-    productMenu.add(new MenuItem("상품등록", ACCESS_ADMIN | ACCESS_SELLER, "/product/add"));
-    productMenu.add(new MenuItem("상품검색",  "/product/search"));
-    productMenu.add(new MenuItem("상품목록", "/product/list"));
-    productMenu.add(new MenuItem("상품상세", "/product/detail"));
-    productMenu.add(new MenuItem("상품변경", "/product/update"));
-    productMenu.add(new MenuItem("상품삭제",  "/product/delete"));
+    //    productMenu.add(new MenuItem("상품상세", "/product/detail"));
+    //    productMenu.add(new MenuItem("상품변경", "/product/update"));
+    //    productMenu.add(new MenuItem("상품삭제",  "/product/delete"));
 
     ///////////////////////////////////////////
 
@@ -202,15 +209,14 @@ public class ClientApp {
 
     MenuGroup joinMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
     joinMenu.setMenuFilter(menuFilter);
-
     mainMenuGroup.add(joinMenu);
+    joinMenu.setMenuFilter(menuFilter);
 
     joinMenu.add(new MenuItem("일반회원", "/buyer/add"));
     joinMenu.add(new MenuItem("판매자", "/seller/add"));
 
     MenuGroup findMenu = new MenuGroup("아이디/비번 찾기", ACCESS_LOGOUT);
-    mainMenuGroup.setMenuFilter(menuFilter);
-
+    findMenu.setMenuFilter(menuFilter);
     mainMenuGroup.add(findMenu);
 
     findMenu.add(new MenuItem("아이디찾기", "/findId"));
@@ -220,8 +226,8 @@ public class ClientApp {
 
     MenuGroup personMenu = new MenuGroup("프로필", ACCESS_BUYER | ACCESS_SELLER);
     personMenu.setMenuFilter(menuFilter);
-
     mainMenuGroup.add(personMenu);
+    personMenu.setMenuFilter(menuFilter);
 
     personMenu.add(new MenuItem("My Store", ACCESS_SELLER, "/stock/list") {
       @Override
@@ -249,7 +255,6 @@ public class ClientApp {
 
     MenuGroup managerMenu = new MenuGroup("관리자모드", ACCESS_ADMIN );
     managerMenu.setMenuFilter(menuFilter);
-
     mainMenuGroup.add(managerMenu);
 
     //    MenuGroup managerMemberMenu1 = new MenuGroup("일반회원관리"); //1
@@ -266,15 +271,12 @@ public class ClientApp {
 
   void service() throws Exception {
     notifyOnApplicationStarted();
+    // 관리자 계정 생성
 
     createMainMenu().execute();
 
-    memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-    //    if (totalNumberList.size() == 0) {
-    //      totalNumberList.add(MEMBER_NUMBER_INDEX, 1); 
-    //      totalNumberList.add(BOARD_NUMBER_INDEX, 1); 
-    //      totalNumberList.add(PROUDCT_NUMBER_INDEX, 1);
-    //    }
+    // memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
+
     requestAgent.request("quit", null);
 
     Prompt.close();
@@ -289,5 +291,13 @@ public class ClientApp {
     app.addApplicationContextListener(new AppInitListener());
     app.service();
     Prompt.close();
+  }
+  public static String level(int i) {
+    switch (i) {
+      case Menu.ACCESS_LOGOUT : return "비회원";
+      case Menu.ACCESS_BUYER : return "일반회원";
+      case Menu.ACCESS_SELLER : return "판매자";
+      default : return "관리자";
+    }
   }
 }

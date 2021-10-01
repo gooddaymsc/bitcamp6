@@ -1,18 +1,20 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
-public class BuyerLoginHandler implements Command {
+public class LogoutHandler implements Command {
   // 횟수 관련 메서드 구현해야함.
   public static final int CHANCE_LOG = 5; //로그인 기회
 
   RequestAgent requestAgent;
-
-  public BuyerLoginHandler(RequestAgent requestAgent) {
+  List<Buyer> memberList;
+  public LogoutHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
@@ -26,10 +28,10 @@ public class BuyerLoginHandler implements Command {
     params.put("id", id);
     params.put("password", password);
 
-    requestAgent.request("buyer.Login", params);
+    requestAgent.request("member.selectOneByLogin", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      Buyer member = requestAgent.getObject(Buyer.class);
+      Member member = requestAgent.getObject(Member.class);
       System.out.printf("%s님 환영합니다!\n", member.getId());
       ClientApp.loginMember = member;
     } else {

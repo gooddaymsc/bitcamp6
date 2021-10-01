@@ -24,6 +24,7 @@ public class ServerApp {
 
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
+    //    dataProcessorMap.put("member.", new BuyerTable());
     dataProcessorMap.put("buyer.", new BuyerTable());
     dataProcessorMap.put("seller.", new SellerTable());
     dataProcessorMap.put("board.", new BoardTable());
@@ -37,7 +38,10 @@ public class ServerApp {
     for (DataProcessor dataProcessor : dataProcessors) {
       if (dataProcessor instanceof JsonDataTable) {
         ((JsonDataTable<?>)dataProcessor).save();
-      }
+      } 
+      //      else if (dataProcessor instanceof JsonDataTable2) {
+      //        ((JsonDataTable2)dataProcessor).save();
+      //      }
     }
 
     System.out.println("서버종료");

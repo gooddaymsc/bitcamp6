@@ -20,6 +20,7 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
       case "buyer.selectOne" : selectOne(request, response); break;
       case "buyer.update" : update(request, response); break;
       case "buyer.delete" : delete(request, response); break;
+      case "buyer.Login" : selectOneByLogin(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -100,13 +101,13 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
     String password = request.getParameter("password");
 
     Buyer buyer = null;
-    for (Buyer m : list) {
-      if (m.getId().equals(id) && m.getPassword().equals(password)) {
-        buyer = m;
+    for (Buyer b : list) {
+      if (b.getId().equals(id) && b.getPassword().equals(password)) {
+        buyer = b;
         response.setStatus(Response.SUCCESS);
         response.setValue(buyer);
         return;
-      } else if (m.getId().equals(id) && !m.getPassword().equals(password)) {
+      } else if (b.getId().equals(id) && !b.getPassword().equals(password)) {
         response.setStatus(Response.FAIL);
         response.setValue("암호가 틀립니다.");
         return;
@@ -118,3 +119,4 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
     } 
   }
 }
+

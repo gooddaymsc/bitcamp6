@@ -17,14 +17,14 @@ public class BuyerDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 상세보기]");
-      String id = Prompt.inputString("아이디> ");
+      String id = ClientApp.getLoginUser().getId();
 
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
-      requestAgent.request("buyer.selectOne", params);
+      requestAgent.request("member.buyer.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 아이디의 회원이 없습니다.");
+        System.out.println(requestAgent.getObject(String.class));
         return;
       }
 
@@ -57,24 +57,19 @@ public class BuyerDetailHandler implements Command {
 
     } else {
       System.out.println("[구매자 상세보기] || 이전(0)");
-      String id = Prompt.inputString("아이디> ");
+      String id = (String)request.getAttribute("Id");
 
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
 
-      requestAgent.request("buyer.selectOne", params);
+      requestAgent.request("member.buyer.selectOne", params);
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
+        System.out.println("해당 아이디의 회원이 없습니다.");
         return;
       }
 
       Buyer buyer = requestAgent.getObject(Buyer.class);
 
-      //      Buyer buyer = (Buyer) findById((String)request.getAttribute("Id"));
-      //      if (buyer == null) {
-      //        System.out.println("해당 아이디의 회원이 없습니다.\n");
-      //        return;
-      //      }
       System.out.printf("회원번호 : %s\n", buyer.getNumber());
       System.out.printf("이름 : %s\n", buyer.getName());
       System.out.printf("닉네임 : %s\n", buyer.getNickname());

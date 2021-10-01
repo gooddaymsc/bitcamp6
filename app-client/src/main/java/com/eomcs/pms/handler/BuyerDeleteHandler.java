@@ -3,6 +3,7 @@ package com.eomcs.pms.handler;
 import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -18,16 +19,9 @@ public class BuyerDeleteHandler implements Command {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[탈퇴하기]");
 
-      String id = Prompt.inputString("아이디 >");
+      String id = ((Buyer) request.getAttribute("buyer")).getId();
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
-
-      requestAgent.request("buyer.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
-        return;
-      }
-      //      Member buyer = (Buyer) request.getAttribute("buyer");
       //      String nowLoginId = buyer.getId();
 
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) "); 
@@ -38,9 +32,9 @@ public class BuyerDeleteHandler implements Command {
         //        cartPrompt.removeCartListById(nowLoginId);
         //        bookingPrompt.removeBookingListById(nowLoginId);
         //        messagePrompt.removeMessageListById(nowLoginId);
-        requestAgent.request("buyer.delete", params);
+        requestAgent.request("member.delete", params);
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("회원 삭제 실패!");
+          System.out.println("탈퇴 실패!");
           System.out.println(requestAgent.getObject(String.class));
           return;
         }
@@ -50,21 +44,14 @@ public class BuyerDeleteHandler implements Command {
       } 
     } else {
       System.out.println("[회원 탈퇴]");
-      String id = Prompt.inputString("아이디 >");
+      String id = ((Buyer) request.getAttribute("buyer")).getId();
       HashMap<String, String> params = new HashMap<>();
       params.put("id", id);
-
-      requestAgent.request("buyer.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
-        return;
-      }
-      //      Member buyer = (Buyer) request.getAttribute("buyer");
       //      String buyerId = buyer.getId();
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        requestAgent.request("buyer.delete", params);
+        requestAgent.request("member.delete", params);
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("회원 삭제 실패!");
           System.out.println(requestAgent.getObject(String.class));

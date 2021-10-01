@@ -1,13 +1,17 @@
 package com.eomcs.pms.handler;
 
 import com.eomcs.menu.Menu;
-import com.eomcs.pms.App;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
-public class ProductDetailHandler extends AbstractProductHandler {
+public class ProductDetailHandler implements Command {
+
+  RequestAgent requestAgent;
   ProductPrompt productPrompt;
-  public ProductDetailHandler (ProductPrompt productPrompt) {
+  public ProductDetailHandler (RequestAgent requestAgent, ProductPrompt productPrompt) {
+    this.requestAgent = requestAgent;
     this.productPrompt = productPrompt;
   }
 
@@ -18,16 +22,13 @@ public class ProductDetailHandler extends AbstractProductHandler {
 
       Product product = productPrompt.findByProduct(Prompt.inputString("\n상품명 > "));
 
-      request.setAttribute("name", product);
-
       if (product == null) {
         System.out.println("입력하신 상품이 없습니다.\n");
         return;
       }
 
-
       System.out.printf("주종: %s - %s\n", product.getProductType(),product.getProductSubType());
-      System.out.printf("평점: %.2f\n", product.getRate());
+      //      System.out.printf("평점: %.2f\n", product.getRate());
       System.out.printf("원산지: %s\n", product.getCountryOrigin());
       if(product.getProductType().equals("와인")){
         System.out.printf("품종: %s\n", product.getVariety());  }
@@ -40,7 +41,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
       request.setAttribute("productName", product.getProductName());
       //장바구니 등록 / 재고등록 / 리뷰보기(CRUD) 
 
-      if (App.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
+      if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
         while (true) {
           System.out.println("리뷰보기(1) / 장바구니 등록(2) / 이전(0)");
           // 상품 목록 후 판매자는 재고에 등록하게.
@@ -53,7 +54,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
-      } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
+      } else if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_SELLER){
         while (true) {
           System.out.println("상품변경(U) / 상품삭제(D) / 리뷰보기(1) / 재고등록(2) / 이전(0)");
           String choose2 = Prompt.inputString("선택 > ");
@@ -69,7 +70,7 @@ public class ProductDetailHandler extends AbstractProductHandler {
             default : System.out.println("다시 선택해 주세요."); continue;
           }
         }
-      } else if (App.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
+      } else if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
         while (true) {
           System.out.println("상품변경(U) / 상품삭제(D) / 리뷰보기(1) / 이전(0)");
           String choose3 = Prompt.inputString("선택 > ");

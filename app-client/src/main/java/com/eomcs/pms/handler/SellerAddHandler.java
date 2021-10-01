@@ -1,7 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
@@ -11,11 +11,15 @@ import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class SellerAddHandler implements Command {
-  Collection<Seller> sellerList;
   RequestAgent requestAgent;
   public SellerAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
-  }
+  }  
+
+  //  @Override
+  //  public void execute(CommandRequest request) throws Exception{
+  //    System.out.println("[판매자 등록]");
+  //  Collection<Seller> sellerList;
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -26,14 +30,16 @@ public class SellerAddHandler implements Command {
 
     String id = Prompt.inputString("등록할 아이디: ");
 
-    //    int listSize = memberList.size();
-    //
-    //    for (int i = 0; i < listSize; i++) {
-    //      if (memberList.get(i).getId().equals(id)) {
-    //        System.out.println("중복되는 아이디입니다.");
-    //        return;
-    //      }
-    //    }
+    //중복체크
+    HashMap<String, String> params = new HashMap<>();
+    params.put("id", id);
+
+    requestAgent.request("member.checkDuplicate", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+
     seller.setId(id);
 
     seller.setName(Prompt.inputString("이름 : "));
@@ -57,10 +63,10 @@ public class SellerAddHandler implements Command {
     ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
     ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
     ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
-    //    ((Seller) seller).setBusinessOpeningHours(memberPrompt.checkHour("시작시간(시) : "));
-    //    ((Seller) seller).setBusinessOpeningMinutes(memberPrompt.checkMinute("시작시간(분) : "));
-    //    ((Seller) seller).setBusinessClosingHours(memberPrompt.checkHour("종료시간(시) : "));
-    //    ((Seller) seller).setBusinessClosingMinutes(memberPrompt.checkMinute("종료시간(분) : "));
+    ((Seller) seller).setBusinessOpeningHours(checkHour("시작시간(시) : "));
+    ((Seller) seller).setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
+    ((Seller) seller).setBusinessClosingHours(checkHour("종료시간(시) : "));
+    ((Seller) seller).setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
     //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
@@ -79,7 +85,6 @@ public class SellerAddHandler implements Command {
     } else {
       System.out.println("회원 등록 실패");
     }
-
   }
 
   protected String checkPassword(String label) {
@@ -115,12 +120,27 @@ public class SellerAddHandler implements Command {
     }
   }
 
+  protected int checkHour (String label) { 
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 1 || num > 24) {  
+        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
+
+  protected int checkMinute (String label) {
+    while(true) {
+      int num = Prompt.inputInt(label);
+      if(num < 0 || num > 59) {  
+        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
+        continue;
+      }           
+      return num;       
+    }
+  }
 
 }
-
-
-
-
-
-
 

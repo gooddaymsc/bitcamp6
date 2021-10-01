@@ -20,6 +20,8 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
       case "seller.selectOne" : selectOne(request, response); break;
       case "seller.update" : update(request, response); break;
       case "seller.delete" : delete(request, response); break;
+      case "seller.Login" : selectOneByLogin(request, response); break;
+
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -99,13 +101,13 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
     String password = request.getParameter("password");
 
     Seller seller = null;
-    for (Seller m : list) {
-      if (m.getId().equals(id) && m.getPassword().equals(password)) {
-        seller = m;
+    for (Seller s : list) {
+      if (s.getId().equals(id) && s.getPassword().equals(password)) {
+        seller = s;
         response.setStatus(Response.SUCCESS);
         response.setValue(seller);
         return;
-      } else if (m.getId().equals(id) && !m.getPassword().equals(password)) {
+      } else if (s.getId().equals(id) && !s.getPassword().equals(password)) {
         response.setStatus(Response.FAIL);
         response.setValue("암호가 틀립니다.");
         return;
