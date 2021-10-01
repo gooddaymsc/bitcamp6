@@ -11,6 +11,8 @@ import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
+import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.handler.BoardAddHandler;
@@ -100,16 +102,15 @@ public class ClientApp {
   public ClientApp() throws Exception {
 
     requestAgent = new RequestAgent("127.0.0.1",8888);
-
-
-    commandMap.put("/buyer/login", new BuyerLoginHandler(requestAgent));
+    BuyerDao buyerDao = new NetBuyerDao(requestAgent);
+    commandMap.put("/buyer/login", new BuyerLoginHandler(buyerDao));
     commandMap.put("/seller/login", new SellerLoginHandler(requestAgent));
 
-    commandMap.put("/buyer/add", new BuyerAddHandler(requestAgent));
-    commandMap.put("/buyer/list",   new BuyerListHandler(requestAgent));
-    commandMap.put("/buyer/detail", new BuyerDetailHandler(requestAgent));
-    commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
+    commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
+    commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
+    commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerDao));
+    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
     //    commandMap.put("/login", new LoginHandler(requestAgent));
 

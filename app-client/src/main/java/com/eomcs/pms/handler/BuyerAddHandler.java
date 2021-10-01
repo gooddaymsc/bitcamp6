@@ -4,15 +4,14 @@ import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
+import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler implements Command {
-  RequestAgent requestAgent;
-  //  Collection<Buyer> buyerList;
-  public BuyerAddHandler (RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BuyerDao buyerDao;
+  public BuyerAddHandler (BuyerDao buyerDao) {
+    this.buyerDao = buyerDao;
   } 
 
   @Override
@@ -76,19 +75,16 @@ public class BuyerAddHandler implements Command {
     //    }
     //    messagePrompt.addMessageListById(buyer.getId());
     //    //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
-    requestAgent.request("buyer.insert", buyer);
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("회원을 등록했습니다.");
-    } else {
-      System.out.println("회원 등록 실패");
-    }
+
+    buyerDao.insert(buyer);
+    System.out.println("회원가입이 완료되었습니다.");
   }
 
   protected String checkPassword(String label) {
 
     while(true) {
 
-      String passWord = Prompt.inputString(label);
+      String passWord = Prompt.inputString(label);  
 
       String regExp_symbol = "([0-9].*[!,@,#,$,%,^,&,*,(,)])|([!,@,#,$,%,^,&,*,(,)].*[0-9])";
       String regExp_alpha = "([a-z].*[A-Z])|([A-Z].*[a-z])";

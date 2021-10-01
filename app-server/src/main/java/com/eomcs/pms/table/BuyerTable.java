@@ -65,8 +65,8 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
   }
 
   private void delete(Request request, Response response) throws Exception {
-    Buyer buyer = request.getObject(Buyer.class);
-    int index = indexOf(buyer.getId());
+    String id = request.getParameter("id");
+    int index = indexOf(id);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);

@@ -1,16 +1,16 @@
 package com.eomcs.pms.handler;
 
 import java.util.Collection;
+import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BuyerListHandler implements Command {
-  RequestAgent requestAgent;
-  public BuyerListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }
+  BuyerDao buyerDao;
+  public BuyerListHandler (BuyerDao buyerDao) {
+    this.buyerDao = buyerDao;
+  } 
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -20,13 +20,7 @@ public class BuyerListHandler implements Command {
           "회원번호", "아이디", "이름", "닉네임", "등급","등록일");
       System.out.println("--------------------------------------------------------------------------");
 
-      requestAgent.request("buyer.selectList", null);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("목록조회실패!");
-        return;
-      }
-
-      Collection<Buyer> buyerList = requestAgent.getObjects(Buyer.class);
+      Collection<Buyer> buyerList =  buyerDao.findAll();
 
       for (Member buyer : buyerList) {
         if (buyer instanceof Buyer) {
@@ -41,10 +35,10 @@ public class BuyerListHandler implements Command {
       }
       System.out.println();
       while (true) {
-        String choose = Prompt.inputString("선택할 아이디 : ");
+        String id = Prompt.inputString("선택할 아이디 : ");
         System.out.println();
-        request.setAttribute("Id", choose);
-        if (choose.equals("0")) {return;}
+        request.setAttribute("id", id);
+        if (id.equals("0")) {return;}
         request.getRequestDispatcher("/buyer/detail").forward(request);
         continue Loop;
       }
