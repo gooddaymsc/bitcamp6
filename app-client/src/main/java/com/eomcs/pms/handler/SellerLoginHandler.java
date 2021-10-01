@@ -1,9 +1,7 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.ClientApp;
-import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -13,7 +11,6 @@ public class SellerLoginHandler implements Command {
   public static final int CHANCE_LOG = 5; //로그인 기회
 
   RequestAgent requestAgent;
-  List<Buyer> memberList;
   public SellerLoginHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }

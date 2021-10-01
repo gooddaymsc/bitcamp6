@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -24,7 +23,7 @@ public class SellerAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[판매자 등록]");
 
-    Member seller = new Seller();
+    Seller seller = new Seller();
     seller.setAuthority(Menu.ACCESS_SELLER);
 
     String id = Prompt.inputString("등록할 아이디: ");
@@ -58,14 +57,14 @@ public class SellerAddHandler implements Command {
     //        return;
     //      }
     //    }
-    ((Seller) seller).setBusinessName(Prompt.inputString("가게명 : "));
-    ((Seller) seller).setBusinessNumber(Prompt.inputString("사업자번호 : "));
-    ((Seller) seller).setBusinessAddress(Prompt.inputString("사업장주소 : "));
-    ((Seller) seller).setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
-    ((Seller) seller).setBusinessOpeningHours(checkHour("시작시간(시) : "));
-    ((Seller) seller).setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
-    ((Seller) seller).setBusinessClosingHours(checkHour("종료시간(시) : "));
-    ((Seller) seller).setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
+    seller.setBusinessName(Prompt.inputString("가게명 : "));
+    seller.setBusinessNumber(Prompt.inputString("사업자번호 : "));
+    seller.setBusinessAddress(Prompt.inputString("사업장주소 : "));
+    seller.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
+    seller.setBusinessOpeningHours(checkHour("시작시간(시) : "));
+    seller.setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
+    seller.setBusinessClosingHours(checkHour("종료시간(시) : "));
+    seller.setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
     //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);

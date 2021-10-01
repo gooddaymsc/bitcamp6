@@ -1,18 +1,16 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler implements Command {
   RequestAgent requestAgent;
-  Collection<Buyer> buyerList;
+  //  Collection<Buyer> buyerList;
   public BuyerAddHandler (RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   } 
@@ -20,7 +18,7 @@ public class BuyerAddHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 등록]");
-    Member buyer = new Buyer();
+    Buyer buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);
 
     String id = Prompt.inputString("등록할 아이디: ");
@@ -51,7 +49,7 @@ public class BuyerAddHandler implements Command {
     //        return;
     //      }
     //    }
-    ((Buyer) buyer).setAddress(Prompt.inputString("주소: "));
+    buyer.setAddress(Prompt.inputString("주소: "));
 
     //    System.out.printf("이름 : %s\n", memberPrompt.findById(id).getName());
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));

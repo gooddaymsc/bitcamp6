@@ -106,18 +106,17 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
         buyer = b;
         response.setStatus(Response.SUCCESS);
         response.setValue(buyer);
-        return;
-      } else if (b.getId().equals(id) && !b.getPassword().equals(password)) {
-        response.setStatus(Response.FAIL);
-        response.setValue("암호가 틀립니다.");
-        return;
-      } else {
-        response.setStatus(Response.FAIL);
-        response.setValue("가입되어 있지 않은 아이디입니다.");
-        return;
+        break;
       }
-    } 
-  }
+    }
+    if (buyer != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(buyer);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 이메일과 암호를 가진 회원을 찾을 수 없습니다.");
+    }
+  } 
 }
 
 
