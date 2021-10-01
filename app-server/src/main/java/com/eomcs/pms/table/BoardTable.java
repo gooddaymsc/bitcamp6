@@ -39,6 +39,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
     response.setValue(list);
   }
 
+
   private void selectOne(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
     Board board = findByNo(no);

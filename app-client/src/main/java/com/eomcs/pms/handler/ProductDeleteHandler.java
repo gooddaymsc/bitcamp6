@@ -17,12 +17,11 @@ public class ProductDeleteHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상품 삭제]");
-    //Product productName = (Product) request.getAttribute("productName");
-
-    String productName = Prompt.inputString("상품명 >");
+    //String productName = Prompt.inputString("상품명 >");
+    Product productName = (Product) request.getAttribute("productName");
     HashMap<String, String> params = new HashMap<>();
 
-    params.put("productName", productName);
+    params.put("productName", productName.getProductName());
     requestAgent.request("product.selectOne", params);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -30,10 +29,12 @@ public class ProductDeleteHandler implements Command {
       return;
     }
 
+    productName = requestAgent.getObject(Product.class);
+
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
       System.out.println("상품을 삭제하였습니다.\n");
-      requestAgent.request("product.delete", params);
+      requestAgent.request("product.delete", productName);
       if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("상품 삭제 실패");
         System.out.println(requestAgent.getObject(String.class));

@@ -58,7 +58,7 @@ public class ProductListHandler implements Command {
         while (true) {
           System.out.println("상세정보보기(R) / 검색(1)");
           // 상품 목록 후 판매자는 재고에 등록하게.
-          String choose = Prompt.inputString("선택 > ");
+          String choose = Prompt.inputString("선택 >");
           System.out.println();
           switch (choose) {
             case "0" : return;
@@ -72,7 +72,7 @@ public class ProductListHandler implements Command {
           (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN)){
         while (true) {
           System.out.println("상세정보보기(R) / 검색(1)");
-          String choose = Prompt.inputString("선택 > ");
+          String choose = Prompt.inputString("선택 >");
           System.out.println();
           switch (choose) {
             case "0" : return;

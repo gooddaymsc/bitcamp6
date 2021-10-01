@@ -16,8 +16,8 @@ public class ProductUpdateHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상품 변경]");
-    String productName = Prompt.inputString("\n상품명 > ");
-    //    String productName = (String) request.getAttribute("productName");
+    // String productName = Prompt.inputString("\n상품명 > ");
+    String productName = (String) request.getAttribute("productName");
     Product product =  productPrompt.findByProduct(productName);
 
     if (product == null) {
