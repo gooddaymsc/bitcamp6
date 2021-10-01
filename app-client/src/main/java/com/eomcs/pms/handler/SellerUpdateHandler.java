@@ -63,7 +63,7 @@ public class SellerUpdateHandler implements Command {
         seller.setBusinessClosingHours(BusinessClosingHours);  
         seller.setBusinessClosingMinutes(BusinessClosingMinutes);  
 
-        requestAgent.request("member.update", seller);
+        requestAgent.request("seller.update", seller);
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println("개인 정보 변경 실패!\n");
