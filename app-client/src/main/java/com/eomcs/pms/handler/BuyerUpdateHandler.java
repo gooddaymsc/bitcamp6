@@ -36,6 +36,7 @@ public class BuyerUpdateHandler implements Command {
         buyer.setPhoneNumber(tel);
         buyerDao.update(buyer);
         System.out.println("개인정보를 변경하였습니다.\n");
+        return;
       } 
       System.out.println("개인정보 변경을 취소하였습니다.\n");
     } else {
@@ -52,6 +53,7 @@ public class BuyerUpdateHandler implements Command {
         buyer.setLevel(level);
         buyerDao.update(buyer);
         System.out.println("회원정보를 변경했습니다.");
+        return;
       }
       System.out.println("회원정보 변경을 취소하였습니다.");
     }

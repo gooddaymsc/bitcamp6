@@ -30,6 +30,7 @@ public class BuyerDeleteHandler implements Command {
         System.out.println("탈퇴가 완료되었습니다.\n");
         // 현재로그인 상태 초기화
         ClientApp.loginMember = new Member();
+        return;
       } 
       System.out.println("탈퇴를 취소하였습니다.\n");
     } else {
@@ -48,6 +49,7 @@ public class BuyerDeleteHandler implements Command {
         System.out.println("회원을 탈퇴시켰습니다.\n");
         return;
       }
+      System.out.println("회원탈퇴를 취소하였습니다.\n");
     }
   }
 }

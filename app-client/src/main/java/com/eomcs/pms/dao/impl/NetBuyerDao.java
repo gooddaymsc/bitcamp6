@@ -41,6 +41,7 @@ public class NetBuyerDao implements BuyerDao {
     requestAgent.request("buyer.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
       return null;
     }
 
@@ -49,11 +50,6 @@ public class NetBuyerDao implements BuyerDao {
 
   @Override
   public void update(Buyer buyer) throws Exception {
-    requestAgent.request("buyer.update", buyer);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("회원 변경 실패!");
-    }
   }
 
   @Override
@@ -71,16 +67,6 @@ public class NetBuyerDao implements BuyerDao {
 
   @Override
   public Buyer login(String id, String password) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("password", password);
-
-    requestAgent.request("buyer.Login", params);
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("구매자 로그인 실패!");
-    }
-    return requestAgent.getObject(Buyer.class);
+    return null;
   }
 }
