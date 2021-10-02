@@ -1,17 +1,18 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class SellerUpdateHandler implements Command {
-  RequestAgent requestAgent;
-  public SellerUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }  
+  SellerDao sellerDao;
+
+  public SellerUpdateHandler(SellerDao sellerDao) {
+    this.sellerDao = sellerDao;
+  }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -19,20 +20,11 @@ public class SellerUpdateHandler implements Command {
       System.out.println("[개인정보 변경]");
       String id = ClientApp.getLoginUser().getId();
 
-      HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
-
-      requestAgent.request("seller.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
-        return;
-      }
-
-      Seller seller = requestAgent.getObject(Seller.class);
+      Seller seller = sellerDao.findById(id);
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", seller.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", seller.getEmail()));
-      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", seller.getName()));
+      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", seller.getPassword()));
       String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", seller.getPhoto()));
       String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", seller.getPhoneNumber()));
       String bussinessName = Prompt.inputString(String.format("가게명(변경 전 : %s) : ", seller.getBusinessName()));
@@ -61,47 +53,26 @@ public class SellerUpdateHandler implements Command {
         seller.setBusinessOpeningMinutes(BusinessOpeningMinutes);  
         seller.setBusinessClosingHours(BusinessClosingHours);  
         seller.setBusinessClosingMinutes(BusinessClosingMinutes);  
-
-        requestAgent.request("seller.update", seller);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("개인 정보 변경 실패!\n");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
+        sellerDao.update(seller);
         System.out.println("개인 정보를 변경하였습니다.\n");
-      }
-      System.out.println("개인 정보 변경을 취소하였습니다.\n");
-
-    } else {
-      System.out.println("[판매자 변경]");
-      Seller seller1 = (Seller) request.getAttribute("seller");
-      String id = seller1.getId();
-      HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
-
-      requestAgent.request("seller.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
         return;
       }
+      System.out.println("개인 정보 변경을 취소하였습니다.\n");
+    } else {
+      System.out.println("[판매자 변경]");
+      String id = (String) request.getAttribute("id");
 
-      Seller seller = requestAgent.getObject(Seller.class);
+      Seller seller = sellerDao.findById(id);
 
       int level = checkLevel(String.format("등급(변경 전 : %d) : ", seller.getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         seller.setLevel(level);
-        requestAgent.request("seller.update", seller);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("회원 변경을 취소하였습니다.\n");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
-        System.out.println("회원 변경을 완료하였습니다.\n");
+        sellerDao.update(seller);
+        System.out.println("회원정보를 변경했습니다.\n");
         return;
       }
+      System.out.println("회원정보 변경을 취소하였습니다.\n");
     }
   }
 

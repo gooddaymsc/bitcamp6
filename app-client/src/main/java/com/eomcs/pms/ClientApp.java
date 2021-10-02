@@ -13,8 +13,10 @@ import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
+import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.handler.BoardAddHandler;
@@ -105,8 +107,10 @@ public class ClientApp {
     //requestAgent = new RequestAgent("192.168.0.122",8888);
     requestAgent = new RequestAgent("127.0.0.1",8888);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
+    SellerDao sellerDao = new NetSellerDao(requestAgent);
+
     commandMap.put("/buyer/login", new BuyerLoginHandler(buyerDao));
-    commandMap.put("/seller/login", new SellerLoginHandler(requestAgent));
+    commandMap.put("/seller/login", new SellerLoginHandler(sellerDao));
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -114,13 +118,14 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
+    commandMap.put("/seller/login", new SellerLoginHandler(sellerDao));
     //    commandMap.put("/login", new LoginHandler(requestAgent));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
-    commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
-    commandMap.put("/seller/detail", new SellerDetailHandler(requestAgent));
-    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(requestAgent));
+    commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
+    commandMap.put("/seller/list",   new SellerListHandler(sellerDao));
+    commandMap.put("/seller/detail", new SellerDetailHandler(sellerDao));
+    commandMap.put("/seller/update", new SellerUpdateHandler(sellerDao));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerDao));
 
     commandMap.put("/board/add",    new BoardAddHandler(requestAgent));
     commandMap.put("/board/list",   new BoardListHandler(requestAgent));
