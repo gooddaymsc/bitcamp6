@@ -16,6 +16,10 @@ public class NetSellerDao implements SellerDao {
 
   @Override
   public void insert(Seller seller) throws Exception {
+    requestAgent.request("addNumber.member", null);
+    int no = requestAgent.getObject(Integer.class);
+    seller.setNumber(no);
+
     requestAgent.request("seller.insert", seller);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 데이터 저장 실패!");

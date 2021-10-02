@@ -17,6 +17,10 @@ public class NetBuyerDao implements BuyerDao {
 
   @Override
   public void insert(Buyer buyer) throws Exception {
+    requestAgent.request("addNumber.member", null);
+    int no = requestAgent.getObject(Integer.class);
+    buyer.setNumber(no);
+
     requestAgent.request("buyer.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 데이터 저장 실패!");

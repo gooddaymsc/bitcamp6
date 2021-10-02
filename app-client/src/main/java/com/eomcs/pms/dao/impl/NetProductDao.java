@@ -17,6 +17,10 @@ public class NetProductDao implements ProductDao{
 
   @Override
   public void insert(Product product) throws Exception {
+    requestAgent.request("addNumber.product", null);
+    int no = requestAgent.getObject(Integer.class);
+    product.setProductNumber(no);
+
     requestAgent.request("product.insert", product);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       throw new Exception("상품 데이터 저장 실패");

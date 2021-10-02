@@ -7,6 +7,7 @@ import com.eomcs.pms.table.BoardTable;
 import com.eomcs.pms.table.BuyerTable;
 import com.eomcs.pms.table.ProductTable;
 import com.eomcs.pms.table.SellerTable;
+import com.eomcs.pms.table.TotalNumberTable;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.RequestProcessor;
 
@@ -26,6 +27,8 @@ public class ServerApp {
     dataProcessorMap.put("seller.", new SellerTable());
     dataProcessorMap.put("board.", new BoardTable());
     dataProcessorMap.put("product", new ProductTable());
+    dataProcessorMap.put("addNumber", new TotalNumberTable());
+
 
     while(true) {
       Socket socket = serverSocket.accept();
