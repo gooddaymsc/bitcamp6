@@ -79,7 +79,7 @@ public class NetBuyerDao implements BuyerDao {
 
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("구매자 로그인 실패!");
+      throw new Exception("회원 로그인 실패!");
     }
     return requestAgent.getObject(Buyer.class);
   }

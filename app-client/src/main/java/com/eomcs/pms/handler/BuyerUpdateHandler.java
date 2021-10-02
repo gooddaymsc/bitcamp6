@@ -52,12 +52,13 @@ public class BuyerUpdateHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
         buyerDao.update(buyer);
-        System.out.println("회원정보를 변경했습니다.");
+        System.out.println("회원정보를 변경했습니다.\n");
         return;
       }
-      System.out.println("회원정보 변경을 취소하였습니다.");
+      System.out.println("회원정보 변경을 취소하였습니다.\n");
     }
   }
+
   private int checkLevel(String label) {
     while(true) {
       int level = Prompt.inputInt(label);

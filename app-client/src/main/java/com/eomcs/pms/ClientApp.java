@@ -43,6 +43,7 @@ import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
+import com.eomcs.pms.handler.SellerLoginHandler;
 import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
@@ -115,12 +116,13 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
+    commandMap.put("/seller/login", new SellerLoginHandler(sellerDao));
     //    commandMap.put("/login", new LoginHandler(requestAgent));
 
     commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
     commandMap.put("/seller/list",   new SellerListHandler(sellerDao));
     commandMap.put("/seller/detail", new SellerDetailHandler(sellerDao));
-    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
+    commandMap.put("/seller/update", new SellerUpdateHandler(sellerDao));
     commandMap.put("/seller/delete", new SellerDeleteHandler(sellerDao));
 
     commandMap.put("/board/add",    new BoardAddHandler(requestAgent));

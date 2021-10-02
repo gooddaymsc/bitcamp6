@@ -23,7 +23,7 @@ public class BuyerLoginHandler implements Command {
 
 
     Buyer buyer = buyerDao.login(id, password);
-    if (buyer==null) {
+    if (buyer == null) {
       return;
     }
     System.out.printf("%s님 환영합니다!\n", buyer.getId());
