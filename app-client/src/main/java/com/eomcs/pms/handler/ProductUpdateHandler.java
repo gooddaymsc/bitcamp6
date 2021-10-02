@@ -1,26 +1,28 @@
 package com.eomcs.pms.handler;
 
+import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProductUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  ProductDao productDao;
   ProductPrompt productPrompt;
-  public ProductUpdateHandler(RequestAgent requestAgent, ProductPrompt productPrompt) {
-    this.requestAgent = requestAgent;
+
+  public ProductUpdateHandler (ProductDao productDao,  ProductPrompt productPrompt) {
+    this.productDao = productDao;
     this.productPrompt = productPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상품 변경]");
-    // String productName = Prompt.inputString("\n상품명 > ");
-    String productName = (String) request.getAttribute("productName");
-    Product product =  productPrompt.findByProduct(productName);
 
-    if (product == null) {
+    String productName = (String) request.getAttribute("productName");
+
+    Product product =  productDao.findByProduct(productName);
+
+    if (product.equals(null)) {
       System.out.println("해당 상품이 존재하지 않습니다.\n");
       return;
     }
@@ -55,13 +57,9 @@ public class ProductUpdateHandler implements Command {
       product.setSugerLevel(sweet);
       product.setAcidity(acidic);
       product.setWeight(body);
-      requestAgent.request("product.update", product);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("상품변경실패!");
-        return;
-      }
+
+      productDao.update(product);
       System.out.println("상품정보를 변경하였습니다.\n");
-      return;
     } else {
       System.out.println("상품정보 변경을 취소하였습니다.\n");
       return;

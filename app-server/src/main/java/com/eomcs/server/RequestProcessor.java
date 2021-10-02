@@ -13,16 +13,12 @@ import com.google.gson.Gson;
 public class RequestProcessor extends Thread {
 
   Socket socket;
-
   Map<String,DataProcessor> dataProcessorMap;
 
   public RequestProcessor(Socket socket, Map<String,DataProcessor> dataProcessorMap) throws Exception {
     this.socket = socket;
-    new PrintWriter(socket.getOutputStream());
-    new BufferedReader(new InputStreamReader(socket.getInputStream()));
     this.dataProcessorMap = dataProcessorMap; 
   }
-
   //  @Override
   //  public void close() {
   //    try {out.close();} catch (Exception e) {}
@@ -35,6 +31,7 @@ public class RequestProcessor extends Thread {
     try( Socket socket = this.socket;
         PrintWriter out = new PrintWriter(socket.getOutputStream());
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));)  {
+
       // 데이터 처리 담당자의 이름 목록 가져오기
       Set<String> dataProcessorNames = dataProcessorMap.keySet();
 
@@ -46,6 +43,7 @@ public class RequestProcessor extends Thread {
         response.setStatus(Response.SUCCESS);
         response.setValue("goodbye");
         sendResult(response,out);
+
         return;
       } 
 
@@ -73,19 +71,19 @@ public class RequestProcessor extends Thread {
 
       System.out.println("클라이언트 접속 종료");
     } catch(Exception e) {
-      System.out.println("클라이언트 요청 처리 중 오류 발상!");
+      System.out.println("클라이언트 요청 처리 중 오류 발생!");
     }
   }
 
   private void saveData() throws Exception {
     Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
+
     for(DataProcessor dataProcessor : dataProcessors) {
       if(dataProcessor instanceof JsonDataTable) {
         ((JsonDataTable<?>)dataProcessor).save();
       }
     }
   }
-
   private void sendResult(Response response, PrintWriter out) throws Exception {
     // Response 객체에 보관된 실행 결과를 클라이언트에게 보낸다.
     out.println(response.status);

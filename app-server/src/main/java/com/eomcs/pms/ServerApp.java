@@ -15,10 +15,12 @@ public class ServerApp {
     System.out.println("[PMS 서버]");
 
     System.out.println("서버 실행중");
+    @SuppressWarnings("resource")
     ServerSocket serverSocket = new ServerSocket(8888);
 
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
+    // => 데이터 처리 담당자를 등록한다.
     //    dataProcessorMap.put("member.", new BuyerTable());
     dataProcessorMap.put("buyer.", new BuyerTable());
     dataProcessorMap.put("seller.", new SellerTable());
@@ -27,11 +29,15 @@ public class ServerApp {
 
     while(true) {
       Socket socket = serverSocket.accept();
-      System.out.println("클라이언트 접속");
+
+      System.out.println("클라이언트가 접속했음");
 
       RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
 
       requestProcessor.start();
     }
+    //    System.out.println("서버종료");
+    //    serverSocket.close();
   }
 }
+
