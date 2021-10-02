@@ -108,7 +108,7 @@ public class ClientApp {
     SellerDao sellerDao = new NetSellerDao(requestAgent);
 
     commandMap.put("/buyer/login", new BuyerLoginHandler(buyerDao));
-    commandMap.put("/seller/login", new SellerLoginHandler(requestAgent));
+    commandMap.put("/seller/login", new SellerLoginHandler(sellerDao));
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -116,7 +116,6 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
-    commandMap.put("/seller/login", new SellerLoginHandler(sellerDao));
     //    commandMap.put("/login", new LoginHandler(requestAgent));
 
     commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
