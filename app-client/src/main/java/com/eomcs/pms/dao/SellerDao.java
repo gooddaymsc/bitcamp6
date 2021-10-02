@@ -5,7 +5,6 @@ import com.eomcs.pms.domain.Seller;
 
 public interface SellerDao {
   void insert(Seller seller) throws Exception;
-  Seller login(String id, String password) throws Exception;
   List<Seller> findAll() throws Exception;
   Seller findById(String id) throws Exception;
   void update(Seller seller) throws Exception;

@@ -20,7 +20,6 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
       case "buyer.selectOne" : selectOne(request, response); break;
       case "buyer.update" : update(request, response); break;
       case "buyer.delete" : delete(request, response); break;
-      case "buyer.Login" : selectOneByLogin(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -52,7 +51,6 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
 
   private void update(Request request, Response response) throws Exception {
     Buyer buyer = request.getObject(Buyer.class);
-
     int index = indexOf(buyer.getId());
 
     if (index == -1) {
@@ -96,27 +94,6 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
     return -1;
   }
 
-  private void selectOneByLogin(Request request, Response response) throws Exception {
-    String id = request.getParameter("id");
-    String password = request.getParameter("password");
-
-    Buyer buyer = null;
-    for (Buyer b : list) {
-      if (b.getId().equals(id) && b.getPassword().equals(password)) {
-        buyer = b;
-        response.setStatus(Response.SUCCESS);
-        response.setValue(buyer);
-        break;
-      }
-    }
-    if (buyer != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(buyer);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 이메일과 암호를 가진 회원을 찾을 수 없습니다.");
-    }
-  } 
 }
 
 

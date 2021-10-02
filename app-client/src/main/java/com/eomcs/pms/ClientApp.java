@@ -30,10 +30,10 @@ import com.eomcs.pms.handler.BuyerAddHandler;
 import com.eomcs.pms.handler.BuyerDeleteHandler;
 import com.eomcs.pms.handler.BuyerDetailHandler;
 import com.eomcs.pms.handler.BuyerListHandler;
-import com.eomcs.pms.handler.BuyerLoginHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -44,7 +44,6 @@ import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
-import com.eomcs.pms.handler.SellerLoginHandler;
 import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
@@ -53,7 +52,6 @@ import com.eomcs.util.Prompt;
 public class ClientApp {
   RequestAgent requestAgent;
   HashMap<String, Command> commandMap = new HashMap<>();
-  static List<Member> memberList = new ArrayList<>();
 
   //권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -106,11 +104,10 @@ public class ClientApp {
 
     //requestAgent = new RequestAgent("192.168.0.122",8888);
     requestAgent = new RequestAgent("127.0.0.1",8888);
+    requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
+
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
-
-    commandMap.put("/buyer/login", new BuyerLoginHandler(buyerDao));
-    commandMap.put("/seller/login", new SellerLoginHandler(sellerDao));
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -118,7 +115,7 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
-    //    commandMap.put("/login", new LoginHandler(requestAgent));
+    commandMap.put("/login", new LoginHandler(requestAgent));
 
     commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
     commandMap.put("/seller/list",   new SellerListHandler(sellerDao));
@@ -160,11 +157,7 @@ public class ClientApp {
     mainMenuGroup.setMenuFilter(menuFilter);
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    MenuGroup loginGroup = new MenuGroup("로그인",ACCESS_LOGOUT);
-    loginGroup.setMenuFilter(menuFilter);
-    mainMenuGroup.add(loginGroup);
-    loginGroup.add(new MenuItem("일반회원", ACCESS_LOGOUT, "/buyer/login"));
-    loginGroup.add(new MenuItem("판매자", ACCESS_LOGOUT, "/seller/login"));
+    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/login"));
 
     mainMenuGroup.add(new Menu("로그아웃", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER) {
 
@@ -279,6 +272,7 @@ public class ClientApp {
   void service() throws Exception {
     notifyOnApplicationStarted();
     // 관리자 계정 생성
+    //    requestAgent.request("member.insert", new Member("관리자","1234", Menu.ACCESS_ADMIN));
 
     createMainMenu().execute();
 

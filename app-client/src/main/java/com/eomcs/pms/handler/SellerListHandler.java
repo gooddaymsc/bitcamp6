@@ -2,7 +2,6 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.dao.SellerDao;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
@@ -23,17 +22,15 @@ public class SellerListHandler implements Command {
 
       List<Seller> sellerList = sellerDao.findAll();
 
-      for (Member seller : sellerList) {
-        if (seller instanceof Seller) {
-          System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n", 
-              seller.getNumber(), 
-              seller.getId(),
-              ((Seller) seller).getBusinessName(),
-              seller.getName(), 
-              seller.getNickname(),
-              seller.getLevel(),
-              seller.getRegisteredDate());
-        }
+      for (Seller seller : sellerList) {
+        System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n", 
+            seller.getNumber(), 
+            seller.getId(),
+            seller.getBusinessName(),
+            seller.getName(), 
+            seller.getNickname(),
+            seller.getLevel(),
+            seller.getRegisteredDate());
       }
       System.out.println();
       while (true) {

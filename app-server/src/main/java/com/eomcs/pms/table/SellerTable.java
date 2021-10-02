@@ -20,7 +20,6 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
       case "seller.selectOne" : selectOne(request, response); break;
       case "seller.update" : update(request, response); break;
       case "seller.delete" : delete(request, response); break;
-      case "seller.Login" : selectOneByLogin(request, response); break;
 
       default :
         response.setStatus(Response.FAIL);
@@ -65,8 +64,8 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
   }
   //
   private void delete(Request request, Response response) throws Exception {
-    Seller seller = request.getObject(Seller.class);
-    int index = indexOf(seller.getId());
+    String id = request.getParameter("id");
+    int index = indexOf(id);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
@@ -96,25 +95,4 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
     return -1;
   }
 
-  private void selectOneByLogin(Request request, Response response) throws Exception {
-    String id = request.getParameter("id");
-    String password = request.getParameter("password");
-
-    Seller seller = null;
-    for (Seller s : list) {
-      if (s.getId().equals(id) && s.getPassword().equals(password)) {
-        seller = s;
-        response.setStatus(Response.SUCCESS);
-        response.setValue(seller);
-        break;
-      }
-    }
-    if (seller != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(seller);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 이메일과 암호를 가진 회원을 찾을 수 없습니다.");
-    }
-  }
 }

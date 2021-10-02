@@ -28,7 +28,7 @@ public class LoginHandler implements Command {
     params.put("id", id);
     params.put("password", password);
 
-    requestAgent.request("member.selectOneByLogin", params);
+    requestAgent.request("member.Login", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Member member = requestAgent.getObject(Member.class);
