@@ -49,11 +49,6 @@ public class NetSellerDao implements SellerDao {
 
   @Override
   public void update(Seller seller) throws Exception {
-    requestAgent.request("seller.update", seller);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("회원 변경 실패!");
-    }
   }
 
   @Override
@@ -71,18 +66,6 @@ public class NetSellerDao implements SellerDao {
 
   @Override
   public Seller login(String id, String password) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("password", password);
-
-    requestAgent.request("seller.Login", params);
-
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return null;
-    }
-    return requestAgent.getObject(Seller.class);
+    return null;
   }
-
 }
