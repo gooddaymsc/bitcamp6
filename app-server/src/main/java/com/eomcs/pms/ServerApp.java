@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import com.eomcs.pms.table.BoardTable;
 import com.eomcs.pms.table.BuyerTable;
+import com.eomcs.pms.table.CommentTable;
 import com.eomcs.pms.table.MemberTable;
 import com.eomcs.pms.table.ProductTable;
 import com.eomcs.pms.table.SellerTable;
@@ -25,9 +26,11 @@ public class ServerApp {
     // => 데이터 처리 담당자를 등록한다.
     BuyerTable buyerTable = new BuyerTable();
     SellerTable sellerTable = new SellerTable();
+    BoardTable boardTable = new BoardTable();
     dataProcessorMap.put("buyer.", buyerTable);
     dataProcessorMap.put("seller.", sellerTable);
     dataProcessorMap.put("board.", new BoardTable());
+    dataProcessorMap.put("comment.", new CommentTable(boardTable));
     dataProcessorMap.put("product.", new ProductTable());
     dataProcessorMap.put("member.", new MemberTable(buyerTable, sellerTable));
     dataProcessorMap.put("addNumber.", new TotalNumberTable());

@@ -68,9 +68,9 @@ public class BoardDetailHandler2  implements Command {
       System.out.printf("조회수 : %d\n", board.getViews());
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
       System.out.printf("태그 : %s\n", board.getTag());
-      //      commentListHandler.list(board.getBoardNumber(), boardPrompt);
+      //            commentListHandler.list(board.getBoardNumber(), boardPrompt);
       request.setAttribute("no", no);
-      //      request.getRequestDispatcher("/comment/list").forward(request);
+      request.getRequestDispatcher("/comment/list").forward(request);
 
       System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");
       //      if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {

@@ -45,9 +45,9 @@ public class BoardDetailHandler implements Command {
       System.out.printf("태그 : %s\n", board.getTag());
       //      commentListHandler.list(board.getBoardNumber(), boardPrompt);
       request.setAttribute("no", board.getBoardNumber());
-      //      request.getRequestDispatcher("/comment/list").forward(request);
+      request.getRequestDispatcher("/comment/list").forward(request);
       //
-      //      System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");
+      System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");
       //      if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
       //        System.out.println("로그인 후 가능합니다.\n");
       //        return;
@@ -58,8 +58,8 @@ public class BoardDetailHandler implements Command {
         System.out.println();
         switch (choose2) {
           case "0" : return;
-          //          case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
-          //          case "2" : request.getRequestDispatcher("/comment/add").forward(request); continue Loop;
+          //                    case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
+          case "2" : request.getRequestDispatcher("/comment/add").forward(request); continue Loop;
           //          case "3" : request.getRequestDispatcher("/comment/update").forward(request); continue Loop;
           //          case "4" : request.getRequestDispatcher("/comment/delete").forward(request); continue Loop;
           case "u": 
