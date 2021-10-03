@@ -9,5 +9,5 @@ public interface BoardDao {
   Board findByNo(int no) throws Exception;
   Board findByBoard(String name) throws Exception;
   void update(Board board) throws Exception;
-  void delete(Board board) throws Exception;
+  void delete(int no) throws Exception;
 }

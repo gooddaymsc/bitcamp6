@@ -17,6 +17,10 @@ public class NetBoardDao implements BoardDao{
 
   @Override
   public void insert(Board board) throws Exception {
+    requestAgent.request("addNumber.board", null);
+    int no = requestAgent.getObject(Integer.class);
+    board.setBoardNumber(no);
+
     requestAgent.request("board.insert", board);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       throw new Exception("게시글 데이터 저장 실패");
@@ -67,11 +71,11 @@ public class NetBoardDao implements BoardDao{
   }
 
   @Override
-  public void delete(Board board) throws Exception {    
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("name", product.getProductName());
+  public void delete(int no) throws Exception {    
+    HashMap<String, String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    requestAgent.request("board.delete", board);
+    requestAgent.request("board.delete", params);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("게시글 데이터 삭제 실패");

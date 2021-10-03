@@ -23,7 +23,6 @@ public class BoardListHandler implements Command {
         System.out.println("|| 게시글 등록(A) / 이전(0)\n");
       } else {
         System.out.println("|| 이전(0)\n");
-        return;
       }
 
       Collection<Board> boardList = boardDao.findAll();

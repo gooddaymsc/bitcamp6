@@ -61,11 +61,6 @@ public class SellerAddHandler implements Command {
     seller.setBusinessClosingHours(checkHour("종료시간(시) : "));
     seller.setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
-    //    seller.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
-    //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, seller.getNumber()+1);
-
-    //    memberList.add(seller);
-
     //    // 예약리스트에 판매자 id를 갖는 bookingList add.
     //    bookingPrompt.addBookingListById(seller.getId());
     //    // 재고 리스트에 판매자 id를 갖는 stockList add.
