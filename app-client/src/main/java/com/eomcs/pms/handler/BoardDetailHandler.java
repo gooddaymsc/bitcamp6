@@ -1,31 +1,22 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  BoardDao boardDao;
 
-  public BoardDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public BoardDetailHandler(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    int no = Prompt.inputInt("게시글 번호 : ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Board board = boardDao.findByNo(Prompt.inputInt("게시글 번호 : "));
 
-    requestAgent.request("board.selectOne", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 조회 실패");
-      return;
-    }
-    Board board = requestAgent.getObject(Board.class);
     request.setAttribute("boardNo", board.getBoardNumber());
     Loop : while(true) {
       System.out.printf("[게시글 상세보기]");
@@ -52,7 +43,7 @@ public class BoardDetailHandler implements Command {
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
       System.out.printf("태그 : %s\n", board.getTag());
       //      commentListHandler.list(board.getBoardNumber(), boardPrompt);
-      request.setAttribute("no", no);
+      request.setAttribute("no", board.getBoardNumber());
       //      request.getRequestDispatcher("/comment/list").forward(request);
       //
       //      System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");

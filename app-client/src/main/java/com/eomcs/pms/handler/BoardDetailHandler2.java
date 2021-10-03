@@ -1,17 +1,16 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler2  implements Command {
 
-  RequestAgent requestAgent;
+  BoardDao boardDao;
 
-  public BoardDetailHandler2(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public BoardDetailHandler2(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
 
   @Override
@@ -30,15 +29,18 @@ public class BoardDetailHandler2  implements Command {
         break;
       }
     }
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
 
-    requestAgent.request("board.selectOne", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 조회 실패");
-      return;
-    }
-    Board board = requestAgent.getObject(Board.class);
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
+    //
+    //
+    //    requestAgent.request("board.selectOne", params);
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("게시글 조회 실패");
+    //      return;
+    //    }
+
+    Board board = boardDao.findByNo(no);
 
     if (board == null) {
       System.out.println("해당 번호의 게시글이 없습니다.\n");

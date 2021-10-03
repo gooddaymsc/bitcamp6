@@ -4,40 +4,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardSearchHandler implements Command {
-  RequestAgent requestAgent;
+  BoardDao boardDao;
 
-  public BoardSearchHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public BoardSearchHandler(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 검색] || 이전(0)");
 
-    requestAgent.request("board.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록조회실패!");
-      return;
-    }
+    //1. 게시판리스트 출력
 
-    Collection<Board> boardList = requestAgent.getObjects(Board.class);
+    Collection<Board> boardList = boardDao.findAll();
 
     String keyword = Prompt.inputString("검색어 : ");
     HashMap<String, String> params = new HashMap<>();
     params.put("keyword", keyword);
 
     System.out.println();
-    //    requestAgent.request("board.search", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 검색어의 글이 없습니다.");
-      return;
-    }
-    //    Collection<Board> searchedBoardList = requestAgent.getObjects(Board.class);
 
     if (keyword.equals("0")) { return; }
     List<Integer> boardNumList = new ArrayList<>();

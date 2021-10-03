@@ -1,35 +1,23 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BuyerUpdateHandler implements Command {
-  RequestAgent requestAgent;
-  public BuyerUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }
-
+  BuyerDao buyerDao;
+  public BuyerUpdateHandler (BuyerDao buyerDao) {
+    this.buyerDao = buyerDao;
+  } 
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[개인정보 변경]");
+      String id = ClientApp.getLoginUser().getId();
 
-      //      tring id = Prompt.inputString("아이디 >")Buyer buyer = (Buyer) request.getAttribute("Id");
-
-      HashMap<String, String> params = new HashMap<>();
-      params.put("id", (String)request.getAttribute("Id"));
-
-      requestAgent.request("buyer.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
-        return;
-      }
-
-      Buyer buyer = (Buyer) request.getAttribute("buyer");
+      Buyer buyer = buyerDao.findById(id);
 
       String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", buyer.getNickname()));
       String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", buyer.getEmail()));
@@ -46,47 +34,31 @@ public class BuyerUpdateHandler implements Command {
         buyer.setPhoto(photo);
         buyer.setAddress(address);
         buyer.setPhoneNumber(tel);
-
-        requestAgent.request("buyer.update", buyer);
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("개인정보 변경 실패!");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
+        buyerDao.update(buyer);
         System.out.println("개인정보를 변경하였습니다.\n");
+        return;
       } 
       System.out.println("개인정보 변경을 취소하였습니다.\n");
     } else {
       System.out.println("[회원 변경]\n");
-      //      Buyer buyer = (Buyer) request.getAttribute("buyer");
-      String id = Prompt.inputString("아이디 >");
-      HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
+      String id = (String) request.getAttribute("id");
 
-      requestAgent.request("buyer.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 번호의 회원이 없습니다.");
-        return;
-      }
+      Buyer buyer = buyerDao.findById(id);
 
-      Buyer buyer = requestAgent.getObject(Buyer.class);
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
       int level = checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
-        requestAgent.request("member.update", buyer);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("회원 변경 실패!");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
-        System.out.println("회원정보를 변경했습니다.");
+        buyerDao.update(buyer);
+        System.out.println("회원정보를 변경했습니다.\n");
+        return;
       }
+      System.out.println("회원정보 변경을 취소하였습니다.\n");
     }
   }
+
   private int checkLevel(String label) {
     while(true) {
       int level = Prompt.inputInt(label);

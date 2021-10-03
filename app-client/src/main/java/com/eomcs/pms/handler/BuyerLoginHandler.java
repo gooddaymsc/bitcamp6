@@ -1,19 +1,18 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BuyerLoginHandler implements Command {
   // 횟수 관련 메서드 구현해야함.
   public static final int CHANCE_LOG = 5; //로그인 기회
 
-  RequestAgent requestAgent;
+  BuyerDao buyerDao;
 
-  public BuyerLoginHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public BuyerLoginHandler(BuyerDao buyerDao) {
+    this.buyerDao = buyerDao;
   }
 
   @Override
@@ -22,18 +21,13 @@ public class BuyerLoginHandler implements Command {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
     String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("password", password);
 
-    requestAgent.request("buyer.Login", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      Buyer member = requestAgent.getObject(Buyer.class);
-      System.out.printf("%s님 환영합니다!\n", member.getId());
-      ClientApp.loginMember = member;
-    } else {
-      System.out.println(requestAgent.getObject(String.class));
+    Buyer buyer = buyerDao.login(id, password);
+    if (buyer == null) {
+      return;
     }
+    System.out.printf("%s님 환영합니다!\n", buyer.getId());
+    ClientApp.loginMember = buyer;
   }
+
 }

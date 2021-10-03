@@ -4,20 +4,15 @@ import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
+import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class SellerAddHandler implements Command {
-  RequestAgent requestAgent;
-  public SellerAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  SellerDao sellerDao;
+  public SellerAddHandler(SellerDao sellerDao) {
+    this.sellerDao = sellerDao;
   }  
-
-  //  @Override
-  //  public void execute(CommandRequest request) throws Exception{
-  //    System.out.println("[판매자 등록]");
-  //  Collection<Seller> sellerList;
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -77,12 +72,9 @@ public class SellerAddHandler implements Command {
     //    stockPrompt.addStockListById(seller.getId());
 
     //    messagePrompt.addMessageListById(seller.getId());
-    requestAgent.request("seller.insert", seller);
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("회원을 등록했습니다.");
-    } else {
-      System.out.println("회원 등록 실패");
-    }
+    sellerDao.insert(seller);
+    System.out.println("회원가입이 완료되었습니다.");
+
   }
 
   protected String checkPassword(String label) {
