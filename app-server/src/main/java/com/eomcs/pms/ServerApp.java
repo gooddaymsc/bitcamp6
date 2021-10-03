@@ -18,7 +18,7 @@ public class ServerApp {
 
     System.out.println("서버 실행중");
     @SuppressWarnings("resource")
-    ServerSocket serverSocket = new ServerSocket(8888);
+    ServerSocket serverSocket = new ServerSocket(8889);
 
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
