@@ -81,7 +81,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
   }
   //
 
-  private Board findByNo(int no) {
+  protected Board findByNo(int no) {
     for (Board board : list) {
       if (board.getBoardNumber() == no) {
         return board;
