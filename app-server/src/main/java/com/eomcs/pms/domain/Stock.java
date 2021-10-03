@@ -9,7 +9,14 @@ public class Stock implements Serializable{
   private int stockNumber;            //재고번호
   private int stocks;                 //재고 수량
   private int price;                  //가격
+  private String id;
 
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public Product getProduct() {
     return product;

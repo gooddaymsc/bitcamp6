@@ -1,5 +1,6 @@
 package com.eomcs.pms.table;
 
+import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.Request;
@@ -17,9 +18,9 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     switch (request.getCommand()) {
       //로딩오류가 나면 새로 생성하기.
       case "stock.List.insert" : insertList(request, response); break;
-      //      case "stock.insert" : insert(request, response); break;
-      //      case "stock.selectList" : selectList(request, response); break;
-      //      case "stock.selectOne" : selectOne(request, response); break;
+      case "stock.insert" : insert(request, response); break;
+      case "stock.selectList" : selectList(request, response); break;
+      case "stock.selectOne" : selectOne(request, response); break;
       //      case "stock.update" : update(request, response); break;
       //      case "stock.delete" : delete(request, response); break;
       case "stock.List.delete" : deleteList(request, response); break;
@@ -44,7 +45,7 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
+      response.setValue("해당 회원의 재고목록을 삭제할 수 없습니다.");
       return;
     }
 
@@ -52,10 +53,52 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     response.setStatus(Response.SUCCESS);
   }
 
+  private void insert(Request request, Response response) throws Exception {
+    Stock stock = request.getObject(Stock.class);
+    StockList stockList = findById(stock.getId());
+    // stock numbering
+    stock.setStockNumber(stockList.getStockListNumber());
+    stockList.setStockListNumber(stock.getStockNumber()+1);
+    stockList.getSellerStock().add(stock);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception{
+    String id = request.getParameter("id");
+    StockList stockList = findById(id);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(stockList);
+  }
+
+
+  private void selectOne(Request request, Response response) throws Exception {
+    String productName = request.getParameter("productName");
+    String id = request.getParameter("id");
+
+    Stock stock = findByNameId(productName, id);
+    if (stock != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(stock);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 상품이 없습니다.");
+    }
+  }
+
   private StockList findById(String id) {
     for (StockList stockList : list) {
       if (stockList.getId().equals(id)) {
         return stockList;
+      }
+    }
+    return null;
+  }
+
+  private Stock findByNameId(String name, String id) {
+    StockList stockList = findById(id);
+    for (Stock stock : stockList.getSellerStock()) {
+      if (stock.getProduct().getProductName().equals(name)) {
+        return stock;
       }
     }
     return null;

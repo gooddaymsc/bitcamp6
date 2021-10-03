@@ -16,13 +16,14 @@ import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.NetBoardDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCommentDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
+import com.eomcs.pms.dao.impl.NetStockDao;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
@@ -51,6 +52,8 @@ import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
 import com.eomcs.pms.handler.SellerUpdateHandler;
+import com.eomcs.pms.handler.StockAddHandler;
+import com.eomcs.pms.handler.StockListHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -116,6 +119,7 @@ public class ClientApp {
     SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new NetBoardDao(requestAgent);
     CommentDao commentDao = new NetCommentDao(requestAgent);
+    StockDao stockDao = new NetStockDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -152,6 +156,11 @@ public class ClientApp {
     commandMap.put("/product/update", new ProductUpdateHandler(productDao, productPrompt));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
 
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
+    commandMap.put("/stock/list",   new StockListHandler(stockDao));
+    //    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
+    //    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
+    //    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;
@@ -240,23 +249,7 @@ public class ClientApp {
     mainMenuGroup.add(personMenu);
     personMenu.setMenuFilter(menuFilter);
 
-    personMenu.add(new MenuItem("My Store", ACCESS_SELLER, "/stock/list") {
-      @Override
-      public void execute() {
-        //        Member mine = memberPrompt.findById(App.getLoginUser().getId());
-        Member mine = new Member();
-        System.out.printf("<<\t%s\t>>\n", ((Seller) mine).getBusinessName());
-        System.out.printf("> 주소\t:\t%s\n", ((Seller) mine).getBusinessAddress());
-        System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
-        System.out.println();
-        Command command  = commandMap.get(menuId);
-        try {
-          command.execute(new CommandRequest(commandMap));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }});
-
+    personMenu.add(new MenuItem("My Store", ACCESS_SELLER, "/stock/list"));
     personMenu.add(new MenuItem("개인정보", ACCESS_BUYER, "/buyer/detail"));
     personMenu.add(new MenuItem("개인정보", ACCESS_SELLER, "/seller/detail"));
     personMenu.add(new MenuItem("내 게시글", "/findBoard"));
