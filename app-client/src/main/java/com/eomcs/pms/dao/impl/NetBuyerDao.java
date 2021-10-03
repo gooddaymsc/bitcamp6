@@ -24,12 +24,24 @@ public class NetBuyerDao implements BuyerDao {
 
     requestAgent.request("buyer.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("회원 데이터 저장 실패!");
+      throw new Exception("구매자 데이터 저장 실패!");
     }
 
     requestAgent.request("member.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 데이터 저장 실패!");
+    }
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("id", buyer.getId());
+    requestAgent.request("cart.List.insert", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("장바구니리스트 데이터 저장 실패!");
+    }
+
+    requestAgent.request("booking.List.insert", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("예약리스트 데이터 저장 실패!");
     }
   }
 
@@ -84,6 +96,6 @@ public class NetBuyerDao implements BuyerDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 삭제 실패!");
     }
-
   }
+
 }

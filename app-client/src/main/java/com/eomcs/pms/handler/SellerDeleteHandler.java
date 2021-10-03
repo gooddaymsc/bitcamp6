@@ -29,7 +29,6 @@ public class SellerDeleteHandler implements Command {
         //        bookingPrompt.removeBookingListById(nowLoginId);
         //        stockPrompt.removeStockListById(nowLoginId);
         //        messagePrompt.removeMessageListById(nowLoginId);
-        //        requestAgent.request("member.delete", params);
         System.out.println("탈퇴가 완료되었습니다.\n");
         ClientApp.loginMember = new Member();
         return;

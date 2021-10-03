@@ -45,6 +45,8 @@ public class BoardDetailHandler implements Command {
       System.out.printf("태그 : %s\n", board.getTag());
       //      commentListHandler.list(board.getBoardNumber(), boardPrompt);
       request.setAttribute("no", board.getBoardNumber());
+      request.setAttribute("no", board.getBoardNumber());
+
       //      request.getRequestDispatcher("/comment/list").forward(request);
       //
       //      System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");

@@ -28,6 +28,17 @@ public class NetSellerDao implements SellerDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 데이터 저장 실패!");
     }
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("id", seller.getId());
+    requestAgent.request("stock.List.insert", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("재고리스트 데이터 저장 실패!");
+    }
+    requestAgent.request("booking.List.insert", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("예약리스트 데이터 저장 실패!");
+    }
   }
 
   @Override
