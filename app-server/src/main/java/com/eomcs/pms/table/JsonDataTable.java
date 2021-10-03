@@ -18,6 +18,9 @@ public abstract class JsonDataTable<T> {
   protected Class<T> elementType;
   protected String filename;
 
+  public JsonDataTable() {
+  }
+
   public JsonDataTable(String filename, Class<T> elementType) {
     this.filename = filename;
     this.elementType = elementType;

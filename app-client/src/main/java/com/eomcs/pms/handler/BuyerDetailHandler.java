@@ -51,6 +51,10 @@ public class BuyerDetailHandler implements Command {
 
       Buyer buyer = buyerDao.findById(id);
 
+      if (buyer == null) {
+        System.out.println("해당 아이디를 갖는 회원이 없습니다.\n");
+        return;
+      }
       System.out.printf("회원번호 : %s\n", buyer.getNumber());
       System.out.printf("이름 : %s\n", buyer.getName());
       System.out.printf("닉네임 : %s\n", buyer.getNickname());

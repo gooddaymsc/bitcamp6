@@ -3,7 +3,6 @@ package com.eomcs.pms.handler;
 import java.util.Collection;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerListHandler implements Command {
@@ -22,16 +21,14 @@ public class BuyerListHandler implements Command {
 
       Collection<Buyer> buyerList =  buyerDao.findAll();
 
-      for (Member buyer : buyerList) {
-        if (buyer instanceof Buyer) {
-          System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6s\n", 
-              buyer.getNumber(),
-              buyer.getId(), 
-              buyer.getName(),
-              buyer.getNickname(),
-              buyer.getLevel(),
-              buyer.getRegisteredDate());
-        }
+      for (Buyer buyer : buyerList) {
+        System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6s\n", 
+            buyer.getNumber(),
+            buyer.getId(), 
+            buyer.getName(),
+            buyer.getNickname(),
+            buyer.getLevel(),
+            buyer.getRegisteredDate());
       }
       System.out.println();
       while (true) {

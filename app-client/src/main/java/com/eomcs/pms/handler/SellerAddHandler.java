@@ -73,6 +73,7 @@ public class SellerAddHandler implements Command {
 
     //    messagePrompt.addMessageListById(seller.getId());
     sellerDao.insert(seller);
+
     System.out.println("회원가입이 완료되었습니다.");
 
   }

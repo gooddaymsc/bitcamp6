@@ -5,8 +5,10 @@ import java.net.Socket;
 import java.util.HashMap;
 import com.eomcs.pms.table.BoardTable;
 import com.eomcs.pms.table.BuyerTable;
+import com.eomcs.pms.table.MemberTable;
 import com.eomcs.pms.table.ProductTable;
 import com.eomcs.pms.table.SellerTable;
+import com.eomcs.pms.table.TotalNumberTable;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.RequestProcessor;
 
@@ -21,11 +23,15 @@ public class ServerApp {
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
     // => 데이터 처리 담당자를 등록한다.
-    //    dataProcessorMap.put("member.", new BuyerTable());
-    dataProcessorMap.put("buyer.", new BuyerTable());
-    dataProcessorMap.put("seller.", new SellerTable());
+    BuyerTable buyerTable = new BuyerTable();
+    SellerTable sellerTable = new SellerTable();
+    dataProcessorMap.put("buyer.", buyerTable);
+    dataProcessorMap.put("seller.", sellerTable);
     dataProcessorMap.put("board.", new BoardTable());
-    dataProcessorMap.put("product", new ProductTable());
+    dataProcessorMap.put("product.", new ProductTable());
+    dataProcessorMap.put("member.", new MemberTable(buyerTable, sellerTable));
+    dataProcessorMap.put("addNumber.", new TotalNumberTable());
+
 
     while(true) {
       Socket socket = serverSocket.accept();

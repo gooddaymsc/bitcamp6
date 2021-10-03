@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 
 public class NetBuyerDao implements BuyerDao {
@@ -16,8 +17,17 @@ public class NetBuyerDao implements BuyerDao {
   }
 
   @Override
-  public void insert(Buyer buyer) throws Exception {
+  public void insert(Member buyer) throws Exception {
+    requestAgent.request("addNumber.member", null);
+    int no = requestAgent.getObject(Integer.class);
+    buyer.setNumber(no);
+
     requestAgent.request("buyer.insert", buyer);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("회원 데이터 저장 실패!");
+    }
+
+    requestAgent.request("member.insert", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 데이터 저장 실패!");
     }
@@ -50,7 +60,11 @@ public class NetBuyerDao implements BuyerDao {
   @Override
   public void update(Buyer buyer) throws Exception {
     requestAgent.request("buyer.update", buyer);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("회원 변경 실패!");
+    }
 
+    requestAgent.request("member.update", buyer);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 변경 실패!");
     }
@@ -62,25 +76,14 @@ public class NetBuyerDao implements BuyerDao {
     params.put("id", id);
 
     requestAgent.request("buyer.delete", params);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 삭제 실패!");
     }
 
-  }
-
-  @Override
-  public Buyer login(String id, String password) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("password", password);
-
-    requestAgent.request("buyer.Login", params);
-
-
+    requestAgent.request("member.delete", params);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("회원 로그인 실패!");
+      throw new Exception("회원 삭제 실패!");
     }
-    return requestAgent.getObject(Buyer.class);
+
   }
 }

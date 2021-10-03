@@ -16,7 +16,15 @@ public class NetSellerDao implements SellerDao {
 
   @Override
   public void insert(Seller seller) throws Exception {
+    requestAgent.request("addNumber.member", null);
+    int no = requestAgent.getObject(Integer.class);
+    seller.setNumber(no);
+
     requestAgent.request("seller.insert", seller);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("회원 데이터 저장 실패!");
+    }
+    requestAgent.request("member.insert", seller);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 데이터 저장 실패!");
     }
@@ -40,7 +48,6 @@ public class NetSellerDao implements SellerDao {
     requestAgent.request("seller.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
       return null;
     }
 
@@ -50,11 +57,13 @@ public class NetSellerDao implements SellerDao {
   @Override
   public void update(Seller seller) throws Exception {
     requestAgent.request("seller.update", seller);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("회원 변경 실패!");
     }
-
+    requestAgent.request("member.update", seller);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("회원 변경 실패!");
+    }
   }
 
   @Override
@@ -63,24 +72,12 @@ public class NetSellerDao implements SellerDao {
     params.put("id", id);
 
     requestAgent.request("seller.delete", params);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("회원 삭제 실패!");
     }
-
-  }
-
-  @Override
-  public Seller login(String id, String password) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("password", password);
-
-    requestAgent.request("seller.Login", params);
-
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("회원 로그인 실패!");
+    requestAgent.request("member.delete", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("회원 삭제 실패!");
     }
-    return requestAgent.getObject(Seller.class);
   }
 }

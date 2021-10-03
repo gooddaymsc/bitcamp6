@@ -37,10 +37,6 @@ public class ProductAddHandler implements Command {
     product.setSugerLevel(productPrompt.checkNum("당도(1-5) : "));
     product.setAcidity(productPrompt.checkNum("산도(1-5) : "));
     product.setWeight(productPrompt.checkNum("바디감(1-5) : "));
-    //    product.setProductNumber(totalNumberList.get(App.PROUDCT_NUMBER_INDEX));
-    //    // Numbering은 마지막에
-    //    totalNumberList.set(App.PROUDCT_NUMBER_INDEX, product.getProductNumber()+1);
-    //    productList.add(product);
 
     productDao.insert(product);
 

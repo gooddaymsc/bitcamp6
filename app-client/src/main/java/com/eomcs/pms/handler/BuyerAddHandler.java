@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler implements Command {
@@ -17,7 +18,7 @@ public class BuyerAddHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 등록]");
-    Buyer buyer = new Buyer();
+    Member buyer = new Buyer();
     buyer.setAuthority(Menu.ACCESS_BUYER);
 
     String id = Prompt.inputString("등록할 아이디: ");
@@ -48,7 +49,7 @@ public class BuyerAddHandler implements Command {
     //        return;
     //      }
     //    }
-    buyer.setAddress(Prompt.inputString("주소: "));
+    ((Buyer)buyer).setAddress(Prompt.inputString("주소: "));
 
     //    System.out.printf("이름 : %s\n", memberPrompt.findById(id).getName());
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));

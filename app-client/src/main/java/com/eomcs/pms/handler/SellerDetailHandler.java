@@ -57,6 +57,10 @@ public class SellerDetailHandler implements Command {
 
       Seller seller = sellerDao.findById(id);
 
+      if (seller == null) {
+        System.out.println("해당 아이디를 갖는 회원이 없습니다.\n");
+        return;
+      }
       System.out.printf("이름 : %s\n", seller.getName());
       System.out.printf("닉네임 : %s\n", seller.getNickname());
       System.out.printf("등급 : %s\n", seller.getLevel());
