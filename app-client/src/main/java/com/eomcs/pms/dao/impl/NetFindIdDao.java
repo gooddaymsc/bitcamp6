@@ -14,9 +14,9 @@ public class NetFindIdDao implements FindIdDao {
   }
 
   @Override
-  public Member findIdByName(String Name) throws Exception {
+  public Member findIdByName(String id) throws Exception {
     HashMap<String, String> params = new HashMap<>();
-    params.put("Name", String.valueOf(Name));
+    params.put("Id", id);
 
     requestAgent.request("member.selectOne", params);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
