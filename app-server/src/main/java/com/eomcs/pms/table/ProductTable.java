@@ -23,6 +23,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
       case "product.update" : productUpdate(request, response); break;
       case "product.delete" : productDelete(request, response); break;
       case "product.review.insert" : reviewInsert(request, response); break;
+      //case "product.review.selectOne" : reviewselectOne(request, response); break;
       case "product.review.selectList" : reviewselectList(request, response); break;
       case "product.review.update" : reviewUpdate(request, response); break;
       case "product.review.delete" : reviewDelete(request, response); break;
@@ -117,6 +118,18 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     product.getReviewList().add(review);
     response.setStatus(Response.SUCCESS);
   }
+
+  //  private void reviewSelectOne(Request request, Response response) throws Exception {
+  //    int reviewNumber = Integer.parseInt(request.getParameter("reviewNumber"));
+  //    Review review = findByNumber(reviewNumber);
+  //    if (review != null) {
+  //      response.setStatus(Response.SUCCESS);
+  //      response.setValue(review);
+  //    } else {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 상품이 없습니다.");
+  //    }
+  //  }
 
   private void reviewselectList(Request request, Response response) throws Exception{
     int productNumber = Integer.parseInt(request.getParameter("productNumber"));

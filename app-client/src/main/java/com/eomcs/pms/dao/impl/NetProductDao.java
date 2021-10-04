@@ -50,6 +50,18 @@ public class NetProductDao implements ProductDao{
   }
 
   @Override
+  public Product findByNo2(int no) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("reviewNumber", String.valueOf(no));
+
+    requestAgent.request("product.review.selectOne", params);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      return null;
+    }
+    return requestAgent.getObject(Product.class);
+  }
+
+  @Override
   public Product findByProduct(String name) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("productName", name);
@@ -92,12 +104,12 @@ public class NetProductDao implements ProductDao{
       throw new Exception("상품 데이터 삭제 실패");
     }
   }
-  ///////////////////////review///////////////////
+
   @Override
   public void insertReview(Review review) throws Exception {
-    //    requestAgent.request("addNumber.review", null);
-    //    int no = requestAgent.getObject(Integer.class);
-    //    review.setNo(no);
+    requestAgent.request("addNumber.review", null);
+    int no = requestAgent.getObject(Integer.class);
+    review.setNo(no);
 
     requestAgent.request("product.review.insert", review);
 
@@ -109,6 +121,7 @@ public class NetProductDao implements ProductDao{
   public List<Review> findAll(int productNumber) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("productNumber", String.valueOf(productNumber));
+
     requestAgent.request("product.review.selectList", params);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("리뷰 데이터 조회 실패");

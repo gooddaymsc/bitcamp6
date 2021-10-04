@@ -14,6 +14,7 @@ public class Review implements Serializable {
   private String id;                //작성자    
   private Date RegisteredDate;      //등록일
 
+
   public int getNo() {
     return no;
   }

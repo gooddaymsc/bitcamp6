@@ -8,6 +8,7 @@ public class TotalNumberTable extends JsonDataTable<Integer> implements DataProc
   public static final int MEMBER_NUMBER_INDEX = 0;
   public static final int BOARD_NUMBER_INDEX = 1;
   public static final int PROUDCT_NUMBER_INDEX = 2;
+  public static final int REVIEW_NUMBER_INDEX = 3;
 
   public TotalNumberTable() {
     super("totalNumber.json", Integer.class);
@@ -21,6 +22,7 @@ public class TotalNumberTable extends JsonDataTable<Integer> implements DataProc
       case "addNumber.member" : addNumberMember(request, response); break;
       case "addNumber.board" : addNumberBoard(request, response); break;
       case "addNumber.product" : addNumberProduct(request, response); break;
+      case "addNumber.review" : addNumberReview(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -50,11 +52,21 @@ public class TotalNumberTable extends JsonDataTable<Integer> implements DataProc
     response.setValue(no);
   }
 
+
+  private void addNumberReview(Request request, Response response) throws Exception {
+    checkList();
+    int no = list.get(REVIEW_NUMBER_INDEX);
+    list.set(REVIEW_NUMBER_INDEX, no+1);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(no);
+  }
+
   private void checkList() {
     if (list.size()==0) {
       list.add(MEMBER_NUMBER_INDEX,1);
       list.add(BOARD_NUMBER_INDEX,1);
       list.add(PROUDCT_NUMBER_INDEX,1);
+      list.add(REVIEW_NUMBER_INDEX,1);
     }
   }
 }
