@@ -2,32 +2,25 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.List;
-import com.eomcs.pms.App;
+import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
-import com.eomcs.pms.domain.CartList;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
-public class CartAddHandler extends AbstractCartHandler {
-  List<CartList> allCartList;
-  StockPrompt stockPrompt;
-  MemberPrompt memberPrompt;
-
-  public CartAddHandler(List<CartList> allCartList, CartPrompt cartPrompt, StockPrompt stockPrompt, MemberPrompt memberPrompt) {
-    super(cartPrompt);
-    this.allCartList = allCartList;
-    this.stockPrompt = stockPrompt;
-    this.memberPrompt = memberPrompt;
-
+public class CartAddHandler implements Command {
+  CartDao cartDao;
+  public CartAddHandler(CartDao cartDao) {
+    this.cartDao = cartDao;
   }
 
   @Override
-  public void execute(CommandRequest request) {
-    String nowLoginId = App.getLoginUser().getId();
+  public void execute(CommandRequest request) throws Exception {
+    String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[장바구니 등록]");
     Cart cart = new Cart();
-    HashMap<String, Stock> hashStock = stockPrompt.findBySellerId((String) request.getAttribute("productName"));
+    String name = (String) request.getAttribute("productName");
+    HashMap<String, Stock> hashStock = cartDao.findBySellerId(name);
 
     if (hashStock.size() == 0) {
       System.out.println("해당 상품을 갖는 판매자가 없습니다.\n");
@@ -38,7 +31,7 @@ public class CartAddHandler extends AbstractCartHandler {
     //----------장바구니 추가
     while(true) {
 
-      storeName = stockPrompt.findStoreName(hashStock.keySet(), Prompt.inputString("가게명을 선택하세요 > "));
+      storeName = cartDao.findStoreName(hashStock.keySet(), Prompt.inputString("가게명을 선택하세요 > "));
 
       // 가게명이 유효하지 않을때 에러메세지 구현해야함
       if (storeName==null) {
@@ -46,7 +39,7 @@ public class CartAddHandler extends AbstractCartHandler {
         continue;
       }
 
-      stocks = checkNum("수량 : ");
+      stocks = cartDao.checkNum("수량 : ");
       if (stocks <= hashStock.get(storeName).getStocks()) {
         cart.setCartStocks(stocks);
         break;
@@ -59,10 +52,10 @@ public class CartAddHandler extends AbstractCartHandler {
     cart.setStock(hashStock.get(storeName));
     cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
     // 체크!!!
-    cart.setSellerId(memberPrompt.findByPlaceName(storeName).getId());
+    cart.setSellerId(hashStock.get(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
 
-    cartPrompt.putCartListById(nowLoginId, cart);
+    cartDao.insert(cart);
     System.out.println("장바구니가 등록되었습니다.\n");
     // 나가기.
   }

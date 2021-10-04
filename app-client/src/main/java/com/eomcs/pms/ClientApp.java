@@ -13,12 +13,14 @@ import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.NetBoardDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
+import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetCommentDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
@@ -36,6 +38,8 @@ import com.eomcs.pms.handler.BuyerDeleteHandler;
 import com.eomcs.pms.handler.BuyerDetailHandler;
 import com.eomcs.pms.handler.BuyerListHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
+import com.eomcs.pms.handler.CartAddHandler;
+import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.CommentAddHandler;
@@ -120,6 +124,7 @@ public class ClientApp {
     BoardDao boardDao = new NetBoardDao(requestAgent);
     CommentDao commentDao = new NetCommentDao(requestAgent);
     StockDao stockDao = new NetStockDao(requestAgent);
+    CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -161,6 +166,14 @@ public class ClientApp {
     //    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
     //    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
     //    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
+
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
+    commandMap.put("/cart/list",   new CartListHandler(cartDao));
+    //    commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
+    //    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
+    //    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
+
+
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;

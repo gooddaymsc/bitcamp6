@@ -1,25 +1,22 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
-import com.eomcs.pms.App;
+import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.util.Prompt;
 
-public class CartListHandler extends AbstractCartHandler {
-  List<CartList> allCartList;
-  MemberPrompt memberPrompt;
-  public CartListHandler(List<CartList> allCartList, CartPrompt cartPrompt, MemberPrompt memberPrompt) {
-    super(cartPrompt);
-    this.allCartList = allCartList;
-    this.memberPrompt = memberPrompt;
+public class CartListHandler implements Command {
+  CartDao cartDao;
+  public CartListHandler(CartDao cartDao) {
+    this.cartDao = cartDao;
   }
   @Override
   public void execute(CommandRequest request) throws Exception{
-    String nowLoginId = App.getLoginUser().getId();
+    String nowLoginId = ClientApp.getLoginUser().getId();
     Loop : while(true) {
       System.out.println("[장바구니 목록]");
-      CartList cartList = allCartList.get(cartPrompt.getCartIndexById(nowLoginId));
+      CartList cartList = cartDao.findAll(nowLoginId);
 
       if (cartList.getPrivacyCart().size() == 0) {
         System.out.println("아직 추가한 장바구니가 없습니다.");
@@ -32,7 +29,7 @@ public class CartListHandler extends AbstractCartHandler {
       for (Cart cart : cartList.getPrivacyCart()) {
         System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6s\n", // 장바구니 번호, 가게명, 상품명, 수량, 총액, 등록일
             cart.getCartNumber(), 
-            memberPrompt.findBySellerInfo(cart.getSellerId()).getBusinessName(),
+            cartDao.findBySellerInfo(cart.getSellerId()).getBusinessName(),
             cart.getSellerId(),
             cart.getStock().getProduct().getProductName(), 
             cart.getCartStocks(), 

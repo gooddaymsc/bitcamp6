@@ -10,10 +10,16 @@ public class Cart implements Serializable {
   private int cartPrice; // 총액
   private int cartNumber; //장바구니번호
   private String sellerId; //판매자 id
+  private String id; // 구매자 id
   private Date registeredDate;
 
 
-
+  public String getId() {
+    return id;
+  }
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public int getCartStocks() {
     return cartStocks;
