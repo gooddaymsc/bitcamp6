@@ -72,7 +72,10 @@ import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
 import com.eomcs.pms.handler.SellerUpdateHandler;
 import com.eomcs.pms.handler.StockAddHandler;
+import com.eomcs.pms.handler.StockDeleteHandler;
+import com.eomcs.pms.handler.StockDetailHandler;
 import com.eomcs.pms.handler.StockListHandler;
+import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -190,9 +193,9 @@ public class ClientApp {
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
-    //    commandMap.put("/stock/detail", new StockDetailHandler(stockPrompt));
-    //    commandMap.put("/stock/update", new StockUpdateHandler(stockPrompt));
-    //    commandMap.put("/stock/delete", new StockDeleteHandler(stockPrompt));
+    commandMap.put("/stock/detail", new StockDetailHandler(stockDao));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockDao));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao));
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
     commandMap.put("/cart/list",   new CartListHandler(cartDao));

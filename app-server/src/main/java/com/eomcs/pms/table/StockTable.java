@@ -22,8 +22,8 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
       case "stock.selectList" : selectList(request, response); break;
       case "stock.selectAllList" : selectAllList(request, response); break;
       case "stock.selectOne" : selectOne(request, response); break;
-      //      case "stock.update" : update(request, response); break;
-      //      case "stock.delete" : delete(request, response); break;
+      case "stock.update" : update(request, response); break;
+      case "stock.delete" : delete(request, response); break;
       case "stock.List.delete" : deleteList(request, response); break;
 
       default :
@@ -110,6 +110,21 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     return null;
   }
 
+  private void update(Request request, Response response) {
+    Stock stock =  request.getObject(Stock.class);
+    int index = indexOf(stock.getStockNumber(), stock.getId());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("재고 변경 실패!");
+      return;
+    } 
+
+    StockList stockList = findById(stock.getId());
+    stockList.getSellerStock().set(index, stock);
+    response.setStatus(Response.SUCCESS);
+  }
+
   private int indexOf(String id) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getId().equals(id)) {
@@ -119,4 +134,29 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     return -1;
   }
 
+  private int indexOf(int stockNo, String sellerId) {
+    StockList stockList = findById(sellerId);
+    for (int i = 0; i < stockList.getSellerStock().size(); i++) {
+      if (stockList.getSellerStock().get(i).getStockNumber() == stockNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private void delete(Request request, Response response) throws Exception {
+    Stock stock = request.getObject(Stock.class);
+    int index = indexOf(stock.getStockNumber(), stock.getId());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 상품의 재고를 찾을 수 없습니다.");
+      return;
+    }
+
+    StockList stockList = findById(stock.getId());
+    stockList.getSellerStock().remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
 }
+
