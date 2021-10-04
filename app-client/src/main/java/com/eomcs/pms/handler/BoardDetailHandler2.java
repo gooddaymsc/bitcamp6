@@ -96,10 +96,3 @@ public class BoardDetailHandler2  implements Command {
     }
   }
 }
-
-
-
-
-
-
-

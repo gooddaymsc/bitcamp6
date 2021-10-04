@@ -54,7 +54,7 @@ public class CartAddHandler implements Command {
     // 체크!!!
     cart.setSellerId(hashStock.get(storeName).getId());
     cart.setRegistrationDate(new Date(System.currentTimeMillis()));
-
+    cart.setId(nowLoginId);
     cartDao.insert(cart);
     System.out.println("장바구니가 등록되었습니다.\n");
     // 나가기.

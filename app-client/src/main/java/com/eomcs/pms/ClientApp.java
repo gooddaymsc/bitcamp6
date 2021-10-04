@@ -12,6 +12,7 @@ import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.MemberDao;
@@ -19,6 +20,7 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.NetBoardDao;
+import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMemberDao;
@@ -33,12 +35,15 @@ import com.eomcs.pms.handler.BoardDetailHandler2;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
+import com.eomcs.pms.handler.BookingAddHandler;
+import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BuyerAddHandler;
 import com.eomcs.pms.handler.BuyerDeleteHandler;
 import com.eomcs.pms.handler.BuyerDetailHandler;
 import com.eomcs.pms.handler.BuyerListHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.CartAddHandler;
+import com.eomcs.pms.handler.CartDetailHandler;
 import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
@@ -122,12 +127,13 @@ public class ClientApp {
     requestAgent = new RequestAgent("127.0.0.1",8889);
     requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
 
+    MemberDao memberDao = new NetMemberDao(requestAgent);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new NetBoardDao(requestAgent);
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
-    MemberDao memberDao = new NetMemberDao(requestAgent);
+    BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -173,10 +179,15 @@ public class ClientApp {
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
     commandMap.put("/cart/list",   new CartListHandler(cartDao));
-    //    commandMap.put("/cart/detail", new CartDetailHandler(cartPrompt));
+    commandMap.put("/cart/detail", new CartDetailHandler(cartDao));
     //    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
     //    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao));
+    commandMap.put("/booking/list",   new BookingListHandler(bookingDao, sellerDao));
+    //    commandMap.put("/booking/detail",   new BookingDetailHandler(allBookingList, bookingPrompt, memberPrompt));
+    //    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList, bookingPrompt, stockPrompt, memberPrompt));
+    //    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList, bookingPrompt));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));

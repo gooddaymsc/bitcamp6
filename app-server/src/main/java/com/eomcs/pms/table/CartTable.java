@@ -21,9 +21,9 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
       case "cart.insert" : insert(request, response); break;
       case "cart.selectList" : selectList(request, response); break;
       case "cart.selectAllList" : selectAllList(request, response); break;
-      //      case "cart.selectOne" : selectOne(request, response); break;
+      case "cart.selectOne" : selectOne(request, response); break;
       //      case "cart.update" : update(request, response); break;
-      //      case "cart.delete" : delete(request, response); break;
+      case "cart.delete" : delete(request, response); break;
       case "cart.List.delete" : deleteList(request, response); break;
 
       default :
@@ -76,10 +76,53 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
     response.setValue(list);
   }
 
+  private void selectOne(Request request, Response response) throws Exception{
+    int cartNo = Integer.parseInt(request.getParameter("cartNo"));
+    String id = request.getParameter("id");
+    Cart cart = findById(id, cartNo);
+
+    if (cart != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(cart);
+
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("장바구니에 해당상품이 없습니다.");
+    }
+  }
+
+  private void delete(Request request, Response response) throws Exception{
+    Cart cart = request.getObject(Cart.class);
+    CartList cartList = findById(cart.getId());
+    int index = indexOf(cart.getId(), cart.getCartNumber());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 장바구니를 찾을 수 없습니다.");
+      return;
+    }
+
+    cartList.getPrivacyCart().remove(index);
+    response.setStatus(Response.SUCCESS);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
+  }
+
+
   private CartList findById(String id) {
     for (CartList cartList : list) {
       if (cartList.getId().equals(id)) {
         return cartList;
+      }
+    }
+    return null;
+  }
+
+  private Cart findById(String id, int cartNo) {
+    CartList cartList = findById(id);
+    for (Cart cart : cartList.getPrivacyCart()) {
+      if (cart.getCartNumber() == cartNo) {
+        return cart;
       }
     }
     return null;
@@ -94,4 +137,14 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
     return -1;
   }
 
+  private int indexOf(String id, int cartNo) {
+    CartList cartList = findById(id);
+
+    for (int i = 0; i < cartList.getPrivacyCart().size(); i++) {
+      if (cartList.getPrivacyCart().get(i).getCartNumber() == cartNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }

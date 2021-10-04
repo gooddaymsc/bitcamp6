@@ -1,3 +1,4 @@
+
 package com.eomcs.pms.dao.impl;
 
 import java.util.ArrayList;
@@ -51,6 +52,28 @@ public class NetCartDao implements CartDao{
       throw new Exception("재고목록 불러오기 실패");
     }
     return new ArrayList<>(requestAgent.getObjects(CartList.class));
+  }
+
+  @Override
+  public Cart findByNo(int cartNo, String id) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("cartNo", String.valueOf(cartNo));
+    params.put("id", id);
+
+    requestAgent.request("cart.selectOne", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return null;
+    }
+
+    return requestAgent.getObject(Cart.class);
+  }
+
+  @Override
+  public void delete(Cart cart) throws Exception {
+    requestAgent.request("cart.delete", cart);
+    // TODO Auto-generated method stub
+
   }
 
   @Override
