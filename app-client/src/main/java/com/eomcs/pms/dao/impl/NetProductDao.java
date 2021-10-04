@@ -109,7 +109,7 @@ public class NetProductDao implements ProductDao{
   public List<Review> findAll(int productNumber) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("productNumber", String.valueOf(productNumber));
-    requestAgent.request("review.selectList", params);
+    requestAgent.request("product.review.selectList", params);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("리뷰 데이터 조회 실패");
     }
@@ -119,7 +119,7 @@ public class NetProductDao implements ProductDao{
   @Override
   public void updateReview(Review review) throws Exception {
 
-    requestAgent.request("review.update", review);
+    requestAgent.request("product.review.update", review);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("리뷰 데이터 변경 실패");
