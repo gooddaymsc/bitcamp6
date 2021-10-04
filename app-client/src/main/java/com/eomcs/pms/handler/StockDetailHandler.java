@@ -18,7 +18,7 @@ public class StockDetailHandler implements Command {
 
     System.out.println("[재고 상세보기]");
     String stockName = Prompt.inputString("상품명 :");
-    Stock stock = stockDao.findStockById(nowLoginId, stockName);
+    Stock stock = stockDao.findByNameId(stockName, nowLoginId);
 
     if (stock == null) {
       System.out.println("해당 상품의 재고가 없습니다.");

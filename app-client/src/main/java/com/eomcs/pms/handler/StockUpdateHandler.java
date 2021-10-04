@@ -19,7 +19,7 @@ public class StockUpdateHandler implements Command {
       System.out.println("[재고 변경]");
 
       String stockName = (String)request.getAttribute("stock");
-      Stock stock = stockDao.findStockById(nowLoginId, stockName);
+      Stock stock = stockDao.findByNameId(stockName, nowLoginId);
 
       if (stock == null) {
         System. out.println("해당 상품의 재고가 없습니다.\n");
@@ -35,6 +35,7 @@ public class StockUpdateHandler implements Command {
         stock.setStocks(stocks);
         stock.setPrice(price);
         System.out.println("재고정보를 변경하였습니다.\n");
+        stockDao.update(stock);
         return;
       } else {
         System.out.println("재고 변경을 취소하였습니다.\n");

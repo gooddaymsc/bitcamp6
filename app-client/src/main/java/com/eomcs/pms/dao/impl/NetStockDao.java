@@ -72,18 +72,23 @@ public class NetStockDao implements StockDao {
   }
 
   @Override
-  public Stock findStockById(String id, String stockName) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("productName", stockName);
-    requestAgent.request("stock.selectOne2", params);
+  public void delete(Stock stock) throws Exception {
+
+    requestAgent.request("stock.delete", stock);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-      return null;
+      throw new Exception("재고삭제 실패");
     }
-    return requestAgent.getObject(Stock.class);
   }
 
+  @Override
+  public void update(Stock stock) throws Exception {
+    requestAgent.request("stock.update", stock);
+
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("재고 데이터 변경 실패");
+    }
+  }
 
   //수량 처음 입력시 무조건 1이상이어야함.
   @Override
@@ -100,6 +105,7 @@ public class NetStockDao implements StockDao {
     }
   }
   // 수량 변경시 0이상 가능.
+  @Override
   public int checkNum2 (String label) {
     while(true) {
       int num = Prompt.inputInt(label);
