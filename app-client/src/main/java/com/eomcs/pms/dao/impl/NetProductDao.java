@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.Review;
 import com.eomcs.request.RequestAgent;
 
 public class NetProductDao implements ProductDao{
@@ -81,4 +82,15 @@ public class NetProductDao implements ProductDao{
       throw new Exception("상품 데이터 삭제 실패");
     }
   }
+
+  @Override
+  public Review findReviewById(Product product, String id) {
+    for (Review review : product.getReviewList()) {
+      if (review.getId().equals(id)) {
+        return review;
+      }
+    }
+    return null;
+  }
+
 }

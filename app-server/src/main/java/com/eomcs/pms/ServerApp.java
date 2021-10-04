@@ -10,6 +10,7 @@ import com.eomcs.pms.table.CartTable;
 import com.eomcs.pms.table.CommentTable;
 import com.eomcs.pms.table.MemberTable;
 import com.eomcs.pms.table.ProductTable;
+import com.eomcs.pms.table.ReviewTable;
 import com.eomcs.pms.table.SellerTable;
 import com.eomcs.pms.table.StockTable;
 import com.eomcs.pms.table.TotalNumberTable;
@@ -30,6 +31,7 @@ public class ServerApp {
     BuyerTable buyerTable = new BuyerTable();
     SellerTable sellerTable = new SellerTable();
     BoardTable boardTable = new BoardTable();
+    ProductTable productTable = new ProductTable();
     dataProcessorMap.put("addNumber.", new TotalNumberTable());
     dataProcessorMap.put("buyer.", buyerTable);
     dataProcessorMap.put("seller.", sellerTable);
@@ -40,6 +42,7 @@ public class ServerApp {
     dataProcessorMap.put("stock.", new StockTable());
     dataProcessorMap.put("cart.", new CartTable());
     dataProcessorMap.put("booking.", new BookingTable());
+    dataProcessorMap.put("review.", new ReviewTable(productTable));
 
 
     while(true) {

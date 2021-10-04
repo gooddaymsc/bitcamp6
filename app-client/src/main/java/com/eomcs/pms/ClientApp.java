@@ -15,11 +15,13 @@ import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.impl.NetBoardDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCommentDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
+import com.eomcs.pms.dao.impl.NetReviewDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
@@ -46,6 +48,10 @@ import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.ReviewAddHandler;
+import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewListHandler;
+import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -116,6 +122,9 @@ public class ClientApp {
     SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new NetBoardDao(requestAgent);
     CommentDao commentDao = new NetCommentDao(requestAgent);
+    ProductPrompt productPrompt = new ProductPrompt();
+    ProductDao productDao = new NetProductDao(requestAgent);
+    ReviewDao reviewDao = new NetReviewDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -141,10 +150,8 @@ public class ClientApp {
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
 
     commandMap.put("/comment/add",   new CommentAddHandler(commentDao));
-    commandMap.put("/comment/list",   new CommentListHandler(commentDao));
+    commandMap.put("/comment/list",   new CommentListHandler(commentDao));    
 
-    ProductPrompt productPrompt = new ProductPrompt();
-    ProductDao productDao = new NetProductDao(requestAgent);
     commandMap.put("/product/add",   new ProductAddHandler(productDao, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
     // commandMap.put("/product/search", new ProductSearchHandler(productDao, productPrompt));
@@ -152,6 +159,10 @@ public class ClientApp {
     commandMap.put("/product/update", new ProductUpdateHandler(productDao, productPrompt));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
 
+    commandMap.put("/review/add",   new ReviewAddHandler(reviewDao, productDao, productPrompt));
+    commandMap.put("/review/list",   new ReviewListHandler(reviewDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao, productPrompt));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, productDao));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;

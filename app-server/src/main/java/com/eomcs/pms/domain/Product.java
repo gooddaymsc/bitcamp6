@@ -1,11 +1,13 @@
 package com.eomcs.pms.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SuppressWarnings("serial")
 public class Product implements Serializable{
-  //  private List<Review> reviewList = new ArrayList<>();
+  private List<Review> reviewList = new ArrayList<>();
   private int productNumber;        //상품번
   private String productName;       //상품명
   private String productType;       //주종
@@ -87,24 +89,24 @@ public class Product implements Serializable{
   public void setWeight(int weight) {
     this.weight = weight;
   }
-  //  public List<Review> getReviewList() {
-  //    return reviewList;
-  //  }
-  //  public void setReviewList(List<Review> reviewList) {
-  //    this.reviewList = reviewList;
-  //  }
-  //  public float getRate() {
-  //    if (this.reviewList.size()==0) {
-  //      return 0;
-  //    } else {
-  //      int sum = 0;
-  //      for (Review review : this.reviewList) {
-  //        sum += review.getScore();
+  public List<Review> getReviewList() {
+    return reviewList;
+  }
+  public void setReviewList(List<Review> reviewList) {
+    this.reviewList = reviewList;
+  }
+  //    public float getRate() {
+  //      if (this.reviewList.size()==0) {
+  //        return 0;
+  //      } else {
+  //        int sum = 0;
+  //        for (Review review : this.reviewList) {
+  //          sum += review.getScore();
+  //        }
+  //        this.rate = (float) sum/(reviewList.size());
+  //        return this.rate;
   //      }
-  //      this.rate = (float) sum/(reviewList.size());
-  //      return this.rate;
   //    }
-  //  }
   public int getReviewerNum() {
     return reviewerNum;
   }
