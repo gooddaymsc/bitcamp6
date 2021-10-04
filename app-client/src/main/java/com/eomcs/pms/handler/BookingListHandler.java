@@ -1,32 +1,31 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
-import com.eomcs.pms.App;
+import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BookingDao;
+import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.util.Prompt;
 
-public class BookingListHandler extends AbstractBookingHandler{
-
-  BookingPrompt bookingPrompt;
-  MemberPrompt memberPrompt;
-  public BookingListHandler(List <BookingList> allBookingList, BookingPrompt bookingPrompt, 
-      MemberPrompt memberPrompt) {
-    super(allBookingList);
-    this.bookingPrompt = bookingPrompt;
-    this.memberPrompt = memberPrompt;
+public class BookingListHandler implements Command {
+  BookingDao bookingDao;
+  SellerDao sellerDao;
+  public BookingListHandler(BookingDao bookingDao, SellerDao sellerDao) {
+    this.bookingDao = bookingDao;
+    this.sellerDao = sellerDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+    String nowLoginId = ClientApp.getLoginUser().getId();
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
     Loop : while(true) {
-      if (App.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
+      if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
 
         System.out.println("[내 픽업 예약 목록]");
 
-        BookingList bookingList = bookingPrompt.findBookingList(App.getLoginUser().getId());
+        BookingList bookingList = bookingDao.findAll(nowLoginId);
 
         if (bookingList.getBooking().size() == 0 ) {
           System.out.println("아직 예약한 상품이 없습니다.");
@@ -39,13 +38,13 @@ public class BookingListHandler extends AbstractBookingHandler{
           String sellerId = booking.getCart().getSellerId();
           System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-4d시 %d분\t%-10s\n",
               booking.getBookingNumber(), 
-              memberPrompt.findBySellerInfo(sellerId).getBusinessName(),
+              sellerDao.findById(sellerId).getBusinessName(),
               booking.getCart().getSellerId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingHour(), booking.getBookingMinute(),
-              bookingPrompt.bookingStatue(booking));
+              bookingDao.bookingStatue(booking));
         } 
         System.out.println();
 
@@ -68,11 +67,11 @@ public class BookingListHandler extends AbstractBookingHandler{
             case "0" : return;
           }
         }
-      } else if (App.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
-        memberPrompt.changeBookingUpdate(App.getLoginUser().getId(), false);
+      } else if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
+        //        memberPrompt.changeBookingUpdate(nowLoginId, false);
 
         System.out.println("[고객 예약 목록]\n");
-        BookingList bookingList = bookingPrompt.findBookingList(App.getLoginUser().getId());
+        BookingList bookingList = bookingDao.findAll(nowLoginId);
 
         if (bookingList.getBooking().size() == 0 ) {
           System.out.println("아직 예약한 고객이 없습니다.");
@@ -86,12 +85,12 @@ public class BookingListHandler extends AbstractBookingHandler{
         for (Booking booking : bookingList.getBooking() ) {
           System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-4d시 %d분\t%-10s\n",
               booking.getBookingNumber(),
-              booking.getBuyerId(),
+              booking.getMineId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingHour(), booking.getBookingMinute(),
-              bookingPrompt.bookingStatue(booking));
+              bookingDao.bookingStatue(booking));
 
         }
       }

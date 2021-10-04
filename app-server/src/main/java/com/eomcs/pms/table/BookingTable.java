@@ -1,5 +1,6 @@
 package com.eomcs.pms.table;
 
+import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.Request;
@@ -17,8 +18,9 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
     switch (request.getCommand()) {
       //로딩오류가 나면 새로 생성하기.
       case "booking.List.insert" : insertList(request, response); break;
-      //      case "booking.insert" : insert(request, response); break;
-      //      case "booking.selectList" : selectList(request, response); break;
+      case "booking.insert" : insert(request, response); break;
+      case "booking.selectList" : selectList(request, response); break;
+      case "booking.selectAllList" : selectAllList(request, response); break;
       //      case "booking.selectOne" : selectOne(request, response); break;
       //      case "booking.update" : update(request, response); break;
       //      case "booking.delete" : delete(request, response); break;
@@ -50,6 +52,28 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void insert(Request request, Response response) throws Exception {
+    Booking booking = request.getObject(Booking.class);
+    BookingList bookingList = findById(booking.getMineId());
+    // stock numbering
+    booking.setBookingNumber(bookingList.getTotalBookingNumber());
+    bookingList.setTotalBookingNumber(booking.getBookingNumber()+1);
+    bookingList.getBooking().add(booking);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception{
+    String id = request.getParameter("id");
+    BookingList bookingList = findById(id);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(bookingList);
+  }
+
+  private void selectAllList(Request request, Response response) throws Exception{
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
   }
 
   private BookingList findById(String id) {

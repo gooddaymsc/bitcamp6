@@ -38,27 +38,6 @@ public class NetBoardDao implements BoardDao{
   }
 
   @Override
-  public void insert(Comment comment) throws Exception {
-    requestAgent.request("board.comment.insert", comment);
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-      throw new Exception("댓글 데이터 저장 실패");   }
-  }
-
-  @Override
-  public List<Comment> findAll(int boardNo) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("boardNo", String.valueOf(boardNo));
-
-    requestAgent.request("board.comment.SelectList", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return null;
-      //      throw new Exception("댓글 데이터 조회 실패");
-    }
-    return new ArrayList<>(requestAgent.getObjects(Comment.class));
-  }
-
-  @Override
   public Board findByNo(int no) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
@@ -103,4 +82,52 @@ public class NetBoardDao implements BoardDao{
       throw new Exception("게시글 데이터 삭제 실패");
     }
   }
+
+  // 댓글 등록
+  @Override
+  public void insert(Comment comment) throws Exception {
+    requestAgent.request("board.comment.insert", comment);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      throw new Exception("댓글 데이터 저장 실패");   }
+  }
+
+  // 댓글 조회
+  @Override
+  public List<Comment> findAll(int boardNo) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("boardNo", String.valueOf(boardNo));
+
+    requestAgent.request("board.comment.selectList", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return null;
+      //      throw new Exception("댓글 데이터 조회 실패");
+    }
+    return new ArrayList<>(requestAgent.getObjects(Comment.class));
+  }
+
+  // 댓글 변경
+  @Override
+  public void update(Comment comment) throws Exception {
+    requestAgent.request("board.comment.update", comment);
+
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      //      throw new Exception("댓글 데이터 변경 실패");
+    }
+  }
+
+  @Override
+  public Comment findCommentByNo(int boardNo, int commentNo) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("boardNo", String.valueOf(boardNo));
+    params.put("commentNo", String.valueOf(commentNo));
+
+    requestAgent.request("board.comment.selectOne", params);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+    return requestAgent.getObject(Comment.class);
+  }
+
 }

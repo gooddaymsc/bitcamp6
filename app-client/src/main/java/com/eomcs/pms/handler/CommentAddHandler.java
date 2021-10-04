@@ -29,7 +29,7 @@ public class CommentAddHandler implements Command {
     comment.setRegistrationDate(new Date(System.currentTimeMillis()));
 
     boardDao.insert(comment);
-    System.out.println("댓글 완료\n");
+    System.out.println("댓글 등록 완료\n");
   }
 }
 
