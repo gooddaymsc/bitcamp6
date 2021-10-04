@@ -43,8 +43,10 @@ import com.eomcs.pms.handler.BuyerDetailHandler;
 import com.eomcs.pms.handler.BuyerListHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.CartAddHandler;
+import com.eomcs.pms.handler.CartDeleteHandler;
 import com.eomcs.pms.handler.CartDetailHandler;
 import com.eomcs.pms.handler.CartListHandler;
+import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.CommentAddHandler;
@@ -131,6 +133,8 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
+
+
     //    requestAgent = new RequestAgent("192.168.0.103",8888);
     requestAgent = new RequestAgent("127.0.0.1",8888);
     requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
@@ -196,8 +200,8 @@ public class ClientApp {
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
     commandMap.put("/cart/list",   new CartListHandler(cartDao));
     commandMap.put("/cart/detail", new CartDetailHandler(cartDao));
-    //    commandMap.put("/cart/update", new CartUpdateHandler(cartPrompt));
-    //    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartDao));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartDao));
 
     commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao));
     commandMap.put("/booking/list",   new BookingListHandler(bookingDao, sellerDao));

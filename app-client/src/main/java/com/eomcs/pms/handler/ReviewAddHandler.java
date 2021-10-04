@@ -22,9 +22,9 @@ public class ReviewAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception  {
     System.out.println("[Reviews 작성]");
     Review review = new Review();
-    Product product =  productDao.findByProduct((String) request.getAttribute("productNumber"));
+    Product product = productDao.findByNo((Integer) request.getAttribute("productNumber"));
 
-    if (productDao.reviewIs(product) == true) {
+    if (productDao.reviewIs(product.getProductNumber(), ClientApp.getLoginUser().getId()) == false) {
       System.out.println("이미 등록한 리뷰가 있습니다.\n");
       return;
     }

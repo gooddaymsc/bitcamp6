@@ -3,7 +3,6 @@ package com.eomcs.pms.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
@@ -138,17 +137,16 @@ public class NetProductDao implements ProductDao{
 
 
   @Override
-  public boolean reviewIs(int productNumber, String id) {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("productNumber", String.valueOf(productNumber));
-    params.put("id", id);
-    requestAgent.request("product.selectOne", params);
+  public boolean reviewIs(int productNumber, String id) throws Exception {
+
+    Product product = findByNo(productNumber);
+
     for (Review review : product.getReviewList()) {
-      if (review.getId().equals(ClientApp.getLoginUser().getId())) {
-        return true;
+      if (review.getId().equals(id)) {
+        return false;
       }
     }
-    return false;
+    return true;
   }
 }
 

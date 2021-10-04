@@ -18,7 +18,7 @@ public interface CartDao {
   Seller findBySellerInfo(String id) throws Exception;
   //  Product findByNo(int no) throws Exception;
   //  Product findByProduct(String name) throws Exception;
-  //  void update(Product product) throws Exception;
-  void delete(Cart cart) throws Exception;
+  void update(Cart cart) throws Exception;
+  void delete(int cartNo, String id) throws Exception;
   Cart findByNo(int cartNo, String id) throws Exception;
 }

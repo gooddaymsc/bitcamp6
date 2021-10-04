@@ -22,6 +22,7 @@ public class ReviewListHandler implements Command {
 
       int productNumber = (Integer)request.getAttribute("productNumber");
 
+
       System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",
           "평점", "코멘트", "작성자", "등록일");
       System.out.println("--------------------------------------------------------------------------");
