@@ -11,18 +11,17 @@ public class Comment implements Serializable{
   private String content;
   private Date registrationDate;
 
-  public int getBoardNumber() {
-    return boardNumber;
-  }
-  public void setBoardNumber(int boardNumber) {
-    this.boardNumber = boardNumber;
-  }
-
   public int getCommentNumber() {
     return commentNumber;
   }
   public void setCommentNumber(int commentNumber) {
     this.commentNumber = commentNumber;
+  }
+  public int getBoardNumber() {
+    return boardNumber;
+  }
+  public void setBoardNumber(int boardNumber) {
+    this.boardNumber = boardNumber;
   }
   public String getId() {
     return id;

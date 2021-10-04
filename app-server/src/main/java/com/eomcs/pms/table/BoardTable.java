@@ -1,6 +1,7 @@
 package com.eomcs.pms.table;
 
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Comment;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.Request;
 import com.eomcs.server.Response;
@@ -21,12 +22,36 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
       case "board.update" : update(request, response); break;
       case "board.delete" : delete(request, response); break;
       case "board.search" : search(request, response); break;
+      case "board.comment.insert" : commentInsert(request, response); break;
+      case "board.comment.SelectList" : commentSelectList(request, response); break;
 
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
+
+  private void commentInsert(Request request, Response response) {
+    Comment comment = request.getObject(Comment.class);
+    Board board = findByNo(comment.getBoardNumber());
+    board.getCommentList().add(comment);
+    board.setTotalCommentNumber(board.getTotalCommentNumber()+1);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void commentSelectList(Request request, Response response) throws Exception{
+    int no = Integer.parseInt(request.getParameter("boardNo"));
+    Board board = findByNo(no);
+    if (board != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(board.getCommentList());
+
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글이 없습니다.");
+    }
+  }
+
 
   private void insert(Request request, Response response) throws Exception {
     Board board = request.getObject(Board.class);

@@ -17,7 +17,7 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
     switch (request.getCommand()) {
       case "comment.insert" : insert(request, response); break;
       case "addNumber.comment" : addNumber(request, response); break;
-      case "comment.selectList" : selectList(request, response); break;
+      //      case "comment.selectList" : selectList(request, response); break;
       default: response.setStatus(Response.FAIL);
       response.setValue("해당 명령을 지원하지 않습니다.");
     }
@@ -29,13 +29,13 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
     response.setStatus(Response.SUCCESS);
 
   }
-  private void selectList(Request request, Response response) throws Exception {
-    int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-    Board board = boardTable.findByNo(boardNo);
-    list = board.getCommentList();
-    response.setStatus(Response.SUCCESS);
-    response.setValue(list);
-  }
+  //  private void selectList(Request request, Response response) throws Exception {
+  //    int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+  //    Board board = boardTable.findByNo(boardNo);
+  //    list = board.getCommentList();
+  //    response.setStatus(Response.SUCCESS);
+  //    response.setValue(list);
+  //  }
   private void addNumber(Request request, Response response) {
 
   }

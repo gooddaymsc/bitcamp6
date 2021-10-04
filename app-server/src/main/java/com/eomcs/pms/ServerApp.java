@@ -7,7 +7,6 @@ import com.eomcs.pms.table.BoardTable;
 import com.eomcs.pms.table.BookingTable;
 import com.eomcs.pms.table.BuyerTable;
 import com.eomcs.pms.table.CartTable;
-import com.eomcs.pms.table.CommentTable;
 import com.eomcs.pms.table.MemberTable;
 import com.eomcs.pms.table.ProductTable;
 import com.eomcs.pms.table.SellerTable;
@@ -34,7 +33,6 @@ public class ServerApp {
     dataProcessorMap.put("buyer.", buyerTable);
     dataProcessorMap.put("seller.", sellerTable);
     dataProcessorMap.put("board.", new BoardTable());
-    dataProcessorMap.put("comment.", new CommentTable(boardTable));
     dataProcessorMap.put("product.", new ProductTable());
     dataProcessorMap.put("member.", new MemberTable(buyerTable, sellerTable));
     dataProcessorMap.put("stock.", new StockTable());

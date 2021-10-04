@@ -48,11 +48,10 @@ public class BoardDetailHandler implements Command {
       request.getRequestDispatcher("/comment/list").forward(request);
       //
       System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");
-      //      if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
-      //        System.out.println("로그인 후 가능합니다.\n");
-      //        return;
-      System.out.println("\n< 변경(U) / 삭제(D) / 이전(0) >");
-      //      }
+      if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
+        System.out.println("로그인 후 가능합니다.\n");
+        return;
+      }
       while(true) {
         String choose2 = Prompt.inputString("선택 > ");
         System.out.println();

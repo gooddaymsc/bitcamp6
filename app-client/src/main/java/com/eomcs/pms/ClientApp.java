@@ -14,7 +14,6 @@ import com.eomcs.menu.MenuGroup;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
-import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -22,7 +21,6 @@ import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.NetBoardDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
-import com.eomcs.pms.dao.impl.NetCommentDao;
 import com.eomcs.pms.dao.impl.NetMemberDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
@@ -126,7 +124,6 @@ public class ClientApp {
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new NetBoardDao(requestAgent);
-    CommentDao commentDao = new NetCommentDao(requestAgent);
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     MemberDao memberDao = new NetMemberDao(requestAgent);
@@ -154,8 +151,8 @@ public class ClientApp {
     commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
 
-    commandMap.put("/comment/add",   new CommentAddHandler(commentDao));
-    commandMap.put("/comment/list",   new CommentListHandler(commentDao));
+    commandMap.put("/comment/add",   new CommentAddHandler(boardDao));
+    commandMap.put("/comment/list",   new CommentListHandler(boardDao));
 
     ProductPrompt productPrompt = new ProductPrompt();
     ProductDao productDao = new NetProductDao(requestAgent);
