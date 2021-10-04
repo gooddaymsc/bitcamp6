@@ -9,6 +9,7 @@ public class Request {
   String jsonData;
   Map<String, String> params;
 
+
   public Request(String command, String jsonData) {
     this.command = command;
     this.jsonData = jsonData;
