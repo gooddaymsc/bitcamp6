@@ -50,7 +50,7 @@ public class NetBoardDao implements BoardDao{
     params.put("boardNo", String.valueOf(boardNo));
 
     requestAgent.request("board.comment.SelectList", params);
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(requestAgent.getObject(String.class));
       return null;
       //      throw new Exception("댓글 데이터 조회 실패");

@@ -12,7 +12,7 @@ public class CommentListHandler implements Command {
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
-    int boardNo = (int) request.getAttribute("no");
+    int boardNo = (Integer) request.getAttribute("no");
     Collection<Comment> commentList = boardDao.findAll(boardNo);
 
     System.out.printf("\n%-3s\t%-6s\t%-15s\t%-6s\n",

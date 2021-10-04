@@ -28,9 +28,6 @@ public class CommentAddHandler implements Command {
     comment.setId(ClientApp.getLoginUser().getId());
     comment.setRegistrationDate(new Date(System.currentTimeMillis()));
 
-    //    board.getCommentList().add(comment);
-    board.setTotalCommentNumber(comment.getCommentNumber()+1);
-
     boardDao.insert(comment);
     System.out.println("댓글 완료\n");
   }

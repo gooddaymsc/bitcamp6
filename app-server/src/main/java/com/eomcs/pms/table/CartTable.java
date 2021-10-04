@@ -1,5 +1,6 @@
 package com.eomcs.pms.table;
 
+import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.Request;
@@ -17,8 +18,9 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
     switch (request.getCommand()) {
       //로딩오류가 나면 새로 생성하기.
       case "cart.List.insert" : insertList(request, response); break;
-      //      case "cart.insert" : insert(request, response); break;
-      //      case "cart.selectList" : selectList(request, response); break;
+      case "cart.insert" : insert(request, response); break;
+      case "cart.selectList" : selectList(request, response); break;
+      case "cart.selectAllList" : selectAllList(request, response); break;
       //      case "cart.selectOne" : selectOne(request, response); break;
       //      case "cart.update" : update(request, response); break;
       //      case "cart.delete" : delete(request, response); break;
@@ -50,6 +52,28 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void insert(Request request, Response response) throws Exception {
+    Cart cart = request.getObject(Cart.class);
+    CartList cartList = findById(cart.getId());
+    // stock numbering
+    cart.setCartNumber(cartList.getCartListNumber());
+    cartList.setCartListNumber(cart.getCartNumber()+1);
+    cartList.getPrivacyCart().add(cart);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception{
+    String id = request.getParameter("id");
+    CartList cartList = findById(id);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(cartList);
+  }
+
+  private void selectAllList(Request request, Response response) throws Exception{
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
   }
 
   private CartList findById(String id) {

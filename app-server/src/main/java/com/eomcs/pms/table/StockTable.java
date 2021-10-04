@@ -20,6 +20,7 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
       case "stock.List.insert" : insertList(request, response); break;
       case "stock.insert" : insert(request, response); break;
       case "stock.selectList" : selectList(request, response); break;
+      case "stock.selectAllList" : selectAllList(request, response); break;
       case "stock.selectOne" : selectOne(request, response); break;
       //      case "stock.update" : update(request, response); break;
       //      case "stock.delete" : delete(request, response); break;
@@ -68,6 +69,11 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     StockList stockList = findById(id);
     response.setStatus(Response.SUCCESS);
     response.setValue(stockList);
+  }
+
+  private void selectAllList(Request request, Response response) throws Exception{
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
   }
 
 

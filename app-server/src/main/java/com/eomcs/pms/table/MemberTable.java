@@ -35,6 +35,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
       case "member.insert" : insert(request, response); break;
       case "member.selectList" : selectList(request, response); break;
       case "member.selectOne" : selectOne(request, response); break;
+      case "member.find" : find(request, response); break;
       case "member.update" : Update(request, response); break;
       case "member.delete" : delete(request, response); break;
       case "member.Login" : selectOneByLogin(request, response); break;
@@ -57,15 +58,19 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    String id = request.getParameter("id");
-    Member member = findByNo(id);
+    String name = request.getParameter("name");
+    Member member = findByName(name);
     if (member != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(member);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 아이디의 회원이 없습니다.");
+      response.setValue("해당 이름의 회원이 없습니다.");
     }
+  }
+
+  private void find(Request request, Response response) throws Exception {
+
   }
 
   private void Update(Request request, Response response) throws Exception {
@@ -98,6 +103,15 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
   private Member findByNo(String id) {
     for (Member m : list) {
       if (m.getId().equals(id)) {
+        return m;
+      }
+    }
+    return null;
+  }
+
+  private Member findByName(String name) {
+    for (Member m : list) {
+      if (m.getName().equals(name)) {
         return m;
       }
     }

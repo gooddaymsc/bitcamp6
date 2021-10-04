@@ -1,6 +1,8 @@
 package com.eomcs.pms.dao.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Stock;
@@ -32,6 +34,14 @@ public class NetStockDao implements StockDao {
       throw new Exception("재고목록 불러오기 실패");
     }
     return requestAgent.getObject(StockList.class);
+  }
+
+  public List<StockList> findAll() throws Exception {
+    requestAgent.request("stock.selectAllList", null);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      throw new Exception("재고목록 불러오기 실패");
+    }
+    return new ArrayList<>(requestAgent.getObjects(StockList.class));
   }
 
   @Override

@@ -26,7 +26,7 @@ public class StockAddHandler implements Command {
     }
     Stock stockcheck = stockDao.findByNameId(productName, nowLoginId);
     if (stockcheck != null) {
-      System.out.println("이미 추가된 상품입니다.\n");
+      System.out.println("이미 재고에 추가된 상품입니다.\n");
       return;
     }
     stock.setProduct(product);

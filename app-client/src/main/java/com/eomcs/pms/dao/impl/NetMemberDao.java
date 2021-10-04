@@ -1,21 +1,21 @@
 package com.eomcs.pms.dao.impl;
 
 import java.util.HashMap;
-import com.eomcs.pms.dao.FindPasswordDao;
+import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.request.RequestAgent;
 
-public class NetFindPasswordDao implements FindPasswordDao {
-
+public class NetMemberDao implements MemberDao{
   RequestAgent requestAgent;
 
-  public NetFindPasswordDao(RequestAgent requestAgent) {
+  public NetMemberDao(RequestAgent requestAgent) {
     this.requestAgent =  requestAgent;
   }
 
-  public Member findPasswordByName(String Name) throws Exception {
+  @Override
+  public Member findByName(String name) throws Exception {
     HashMap<String, String> params = new HashMap<>();
-    params.put("Name", String.valueOf(Name));
+    params.put("name", String.valueOf(name));
 
     requestAgent.request("member.selectOne", params);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
@@ -23,4 +23,5 @@ public class NetFindPasswordDao implements FindPasswordDao {
     }
     return requestAgent.getObject(Member.class);
   }
+
 }

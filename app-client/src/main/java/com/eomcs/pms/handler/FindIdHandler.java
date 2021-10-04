@@ -1,14 +1,14 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.dao.FindIdDao;
+import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class FindIdHandler implements Command {
 
-  FindIdDao findIdDao;
-  public FindIdHandler(FindIdDao findIdDao) {
-    this.findIdDao = findIdDao;
+  MemberDao memberDao;
+  public FindIdHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -18,7 +18,7 @@ public class FindIdHandler implements Command {
       if (name.equals("0")) {
         return;
       }
-      Member member = findIdDao.findIdByName(name);
+      Member member = memberDao.findByName(name);
 
       if (member==null) {
         System.out.println("회원가입 된 이름이 아닙니다.\n");
