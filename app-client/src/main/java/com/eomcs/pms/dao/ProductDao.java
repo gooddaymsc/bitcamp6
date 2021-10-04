@@ -12,4 +12,9 @@ public interface ProductDao {
   Review findReviewById(Product productName, String id) throws Exception;
   void update(Product product) throws Exception;
   void delete(Product product) throws Exception;
+  void insertReview(Review review) throws Exception;
+  List<Review> findAll(int productNumber) throws Exception;
+  void updateReview(Review review) throws Exception;
+  void deleteReview(Review review) throws Exception;
+  boolean reviewIs(int productNumber, String id) throws Exception;
 }

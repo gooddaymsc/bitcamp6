@@ -3,16 +3,16 @@ package com.eomcs.pms.handler;
 import java.util.Collection;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
-import com.eomcs.pms.dao.ReviewDao;
+import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ReviewListHandler implements Command {
 
-  ReviewDao reviewDao;
+  ProductDao productDao;
 
-  public ReviewListHandler ( ReviewDao reviewDao) {
-    this.reviewDao = reviewDao;
+  public ReviewListHandler (ProductDao productDao) {
+    this.productDao = productDao;
   }
 
   @Override
@@ -20,13 +20,13 @@ public class ReviewListHandler implements Command {
     Loop : while(true) {
       System.out.println("[Reviews]");
 
-      String productName = (String) request.getAttribute("productName");
+      int productNumber = (Integer)request.getAttribute("productNumber");
 
       System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",
           "평점", "코멘트", "작성자", "등록일");
       System.out.println("--------------------------------------------------------------------------");
 
-      Collection<Review> reviewList = reviewDao.findAll(productName);
+      Collection<Review> reviewList = productDao.findAll(productNumber);
 
       if (reviewList.equals(null)) {
         System.out.println("아직 등록된 리뷰가 없습니다.");

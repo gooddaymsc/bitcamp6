@@ -35,6 +35,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
     Comment comment = request.getObject(Comment.class);
     Board board = findByNo(comment.getBoardNumber());
     board.getCommentList().add(comment);
+    board.setTotalCommentNumber(board.getTotalCommentNumber()+1);
     response.setStatus(Response.SUCCESS);
   }
 

@@ -18,16 +18,11 @@ public class ProductUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상품 변경]");
 
-    String productName = (String) request.getAttribute("productName");
+    int productNumber = (Integer) request.getAttribute("productNumber");
 
-    Product product =  productDao.findByProduct(productName);
+    Product product =  productDao.findByNo(productNumber);
 
-    if (product.equals(null)) {
-      System.out.println("해당 상품이 존재하지 않습니다.\n");
-      return;
-    }
-
-    //    String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
+    String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
     String type = productPrompt.checkType("주종(" + product.getProductType() + ")? ");
     String subType = productPrompt.checkSubType2(("상세주종(" + product.getProductSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
@@ -44,7 +39,7 @@ public class ProductUpdateHandler implements Command {
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      //      product.setProductName(name);
+      product.setProductName(name);
       product.setProductType(type);
       product.setProductSubType(subType);
       product.setCountryOrigin(made);

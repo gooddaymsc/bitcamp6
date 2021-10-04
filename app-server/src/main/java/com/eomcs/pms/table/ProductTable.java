@@ -1,6 +1,7 @@
 package com.eomcs.pms.table;
 
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.Review;
 import com.eomcs.server.DataProcessor;
 import com.eomcs.server.Request;
 import com.eomcs.server.Response;
@@ -15,31 +16,36 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
   public void execute(Request request, Response response) throws Exception {
     // TODO Auto-generated method stub
     switch (request.getCommand()) {
-      case "product.insert" : insertProduct(request, response); break;
-      case "product.selectOne" : selectOne(request, response); break;
-      case "product.selectList" : selectList(request, response); break;
-      case "product.update" : updateProduct(request, response); break;
-      case "product.delete" : deleteProduct(request, response); break;
+      case "product.insert" : productInsert(request, response); break;
+      case "product.selectOne" : productSelectOne(request, response); break;
+      case "product.selectList" : productSelectList(request, response); break;
+      case "product.update" : productUpdate(request, response); break;
+      case "product.delete" : productDelete(request, response); break;
+      case "product.review.insert" : reviewInsert(request, response); break;
+      case "product.review.selectList" : reviewselectList(request, response); break;
+      case "product.review.update" : reviewUpdate(request, response); break;
+      case "product.review.delete" : reviewDelete(request, response); break;
+
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
 
-  private void insertProduct(Request request, Response response) throws Exception {
+  private void productInsert(Request request, Response response) throws Exception {
     Product product = request.getObject(Product.class);
     list.add(product);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectList(Request request, Response response) throws Exception{
+  private void productSelectList(Request request, Response response) throws Exception{
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }
 
-  private void selectOne(Request request, Response response) throws Exception {
-    String productName = request.getParameter("productName");
-    Product product = findByProduct(productName);
+  private void productSelectOne(Request request, Response response) throws Exception {
+    int productNumber = Integer.parseInt(request.getParameter("productNumber"));
+    Product product = findByNumber(productNumber);
     if (product != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(product);
@@ -48,10 +54,10 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
       response.setValue("해당 상품이 없습니다.");
     }
   }
-  private void updateProduct(Request request, Response response) throws Exception {
+  private void productUpdate(Request request, Response response) throws Exception {
     Product product = request.getObject(Product.class);
 
-    int index = indexOf(product.getProductName());
+    int index = indexOf(product.getProductNumber());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 이름의 상품명이 없습니다.");
@@ -61,7 +67,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     response.setStatus(Response.SUCCESS);
   }
 
-  private void deleteProduct(Request request, Response response) throws Exception {
+  private void productDelete(Request request, Response response) throws Exception {
     Product product = request.getObject(Product.class);
     int index = indexOf(product.getProductName());
 
@@ -82,9 +88,60 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     }
     return null;
   }
+
+  public Product findByNumber (int productNo) {
+    for (Product product : list) {
+      if (product.getProductNumber() == productNo) {
+        return product;
+      }
+    }
+    return null;
+  }
+
+  private void reviewInsert (Request request, Response response) throws Exception {
+    Review review = request.getObject(Review.class);
+    Product product = findByNumber(review.getProductNo());
+    product.getReviewList().add(review);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void reviewselectList(Request request, Response response) throws Exception{
+    int productNumber = Integer.parseInt(request.getParameter("productNumber"));
+    Product product = findByNumber(productNumber);
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(product.getReviewList());
+  }
+
+  private void reviewUpdate(Request request, Response response) throws Exception{
+    Review review = request.getObject(Review.class);
+    int index = indexOf(review.getId());
+
+    //    list.set(index, review);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
+  }
+
+  private void reviewDelete(Request request, Response response) throws Exception {
+    Review review = request.getObject(Review.class);
+    int index = indexOf(review.getId());
+
+    list.remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
+
   private int indexOf(String productName) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getProductName().equals(productName)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private int indexOf(int productNumber) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getProductNumber() == productNumber) {
         return i;
       }
     }

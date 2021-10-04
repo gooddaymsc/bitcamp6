@@ -2,19 +2,16 @@ package com.eomcs.pms.handler;
 
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ReviewUpdateHandler implements Command {
 
-  ReviewDao reviewDao;
   ProductDao productDao;
   ProductPrompt productPrompt;
 
-  public ReviewUpdateHandler (ReviewDao reviewDao, ProductDao productDao, ProductPrompt productPrompt) {
-    this.reviewDao = reviewDao;
+  public ReviewUpdateHandler (ProductDao productDao, ProductPrompt productPrompt) {
     this.productDao = productDao;
     this.productPrompt = productPrompt;
   }
@@ -25,11 +22,10 @@ public class ReviewUpdateHandler implements Command {
     Product product =  productDao.findByProduct((String) request.getAttribute("productName"));
     Review review = productDao.findReviewById(product, ClientApp.getLoginUser().getId());
 
-    //
-    //    if (!review.getId().equals(ClientApp.getLoginUser().getId())) {
-    //      System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
-    //      return;
-    //    }
+    if (!review.getId().equals(ClientApp.getLoginUser().getId())) {
+      System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
+      return;
+    }
 
     float scores = productPrompt.checkNum("맛은 어떠셨나요?(1점-5점):");
     review.setScore(scores);
@@ -37,7 +33,7 @@ public class ReviewUpdateHandler implements Command {
     review.setComment(content);
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      reviewDao.update(review);
+      productDao.updateReview(review);
       System.out.println("리뷰 변경 완료\n");
       return;
     }

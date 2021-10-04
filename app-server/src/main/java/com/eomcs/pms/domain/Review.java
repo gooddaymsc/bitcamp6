@@ -7,6 +7,7 @@ import java.sql.Date;
 public class Review implements Serializable {
 
   private int no;
+  private int productNo;
   private float score;              //평점
   private String comment;           //코멘트        
   private String id;                //작성자    
@@ -19,6 +20,12 @@ public class Review implements Serializable {
   }
   public void setNo(int no) {
     this.no = no;
+  }  
+  public int getProductNo() {
+    return productNo;
+  }
+  public void setProductNo(int productNo) {
+    this.productNo = productNo;
   }
   public float getScore() {
     return score;

@@ -4,18 +4,16 @@ import java.sql.Date;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ReviewAddHandler implements Command {
 
-  ReviewDao reviewDao;
+
   ProductDao productDao;
   ProductPrompt productPrompt;
-  public ReviewAddHandler (ReviewDao reviewDao, ProductDao productDao, ProductPrompt productPrompt) {
-    this.reviewDao = reviewDao;
+  public ReviewAddHandler (ProductDao productDao, ProductPrompt productPrompt) {
     this.productDao = productDao;
     this.productPrompt = productPrompt;
   }
@@ -24,13 +22,12 @@ public class ReviewAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception  {
     System.out.println("[Reviews 작성]");
     Review review = new Review();
-    Product product =  productDao.findByProduct((String) request.getAttribute("productName"));
+    Product product =  productDao.findByProduct((String) request.getAttribute("productNumber"));
 
-    //    if (reviewDao.reviewIs(product) == true) {
-    //      System.out.println("이미 등록한 리뷰가 있습니다.\n");
-    //      return;
-    //    }
-    //
+    if (productDao.reviewIs(product) == true) {
+      System.out.println("이미 등록한 리뷰가 있습니다.\n");
+      return;
+    }
 
     if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
       float scores = productPrompt.checkNum("맛은 어떠셨나요?(1점-5점):");
@@ -39,10 +36,12 @@ public class ReviewAddHandler implements Command {
 
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
       review.setNo(review.getNo()+1);
+      review.setProductNo(product.getProductNumber());
+      review.setReviewProduct(product.getProductName());
       review.setRegisteredDate(new Date(System.currentTimeMillis()));
       review.setId(ClientApp.getLoginUser().getId());
 
-      reviewDao.insert(review);
+      productDao.insertReview(review);
 
       System.out.println("상품평 등록을 완료하였습니다.\n");
       return;

@@ -16,7 +16,6 @@ import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.NetBoardDao;
@@ -24,7 +23,6 @@ import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMemberDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
-import com.eomcs.pms.dao.impl.NetReviewDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.dao.impl.NetStockDao;
 import com.eomcs.pms.domain.Member;
@@ -132,7 +130,6 @@ public class ClientApp {
     BoardDao boardDao = new NetBoardDao(requestAgent);    
     ProductPrompt productPrompt = new ProductPrompt();
     ProductDao productDao = new NetProductDao(requestAgent);
-    ReviewDao reviewDao = new NetReviewDao(requestAgent);
 
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
@@ -172,10 +169,10 @@ public class ClientApp {
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
 
 
-    commandMap.put("/review/add",   new ReviewAddHandler(reviewDao, productDao, productPrompt));
-    commandMap.put("/review/list",   new ReviewListHandler(reviewDao));
-    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao, productPrompt));
-    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, productDao));
+    commandMap.put("/review/add",   new ReviewAddHandler(productDao, productPrompt));
+    commandMap.put("/review/list",   new ReviewListHandler(productDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao, productPrompt));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
