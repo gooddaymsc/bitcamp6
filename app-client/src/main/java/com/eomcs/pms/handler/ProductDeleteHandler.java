@@ -15,9 +15,9 @@ public class ProductDeleteHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상품 삭제]");
-    String productName = (String) request.getAttribute("productName");    
+    int productNumber = (Integer) request.getAttribute("productNumber");    
 
-    Product product = productDao.findByProduct(productName);
+    Product product = productDao.findByNo(productNumber);
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
 
     if (input.equalsIgnoreCase("y")) {

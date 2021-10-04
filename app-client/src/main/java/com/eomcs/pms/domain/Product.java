@@ -89,12 +89,12 @@ public class Product implements Serializable{
     this.weight = weight;
   }
 
-  //  public List<Review> getReviewList() {
-  //    return reviewList;
-  //  }
-  //  public void setReviewList(List<Review> reviewList) {
-  //    this.reviewList = reviewList;
-  //  }
+  public List<Review> getReviewList() {
+    return reviewList;
+  }
+  public void setReviewList(List<Review> reviewList) {
+    this.reviewList = reviewList;
+  }
   //  public float getRate() {
   //    if (this.reviewList.size()==0) {
   //      return 0;

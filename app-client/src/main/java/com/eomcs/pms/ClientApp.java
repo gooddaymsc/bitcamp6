@@ -60,6 +60,10 @@ import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.ReviewAddHandler;
+import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewListHandler;
+import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
@@ -131,7 +135,10 @@ public class ClientApp {
     MemberDao memberDao = new NetMemberDao(requestAgent);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
-    BoardDao boardDao = new NetBoardDao(requestAgent);
+    BoardDao boardDao = new NetBoardDao(requestAgent);    
+    ProductPrompt productPrompt = new ProductPrompt();
+    ProductDao productDao = new NetProductDao(requestAgent);
+
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
@@ -164,14 +171,18 @@ public class ClientApp {
     commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
     commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));
 
-    ProductPrompt productPrompt = new ProductPrompt();
-    ProductDao productDao = new NetProductDao(requestAgent);
     commandMap.put("/product/add",   new ProductAddHandler(productDao, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
     // commandMap.put("/product/search", new ProductSearchHandler(productDao, productPrompt));
     commandMap.put("/product/detail", new ProductDetailHandler(productDao));
     commandMap.put("/product/update", new ProductUpdateHandler(productDao, productPrompt));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
+
+
+    commandMap.put("/review/add",   new ReviewAddHandler(productDao, productPrompt));
+    commandMap.put("/review/list",   new ReviewListHandler(productDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao, productPrompt));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
