@@ -69,11 +69,21 @@ public class NetCartDao implements CartDao{
     return requestAgent.getObject(Cart.class);
   }
 
-  @Override
-  public void delete(Cart cart) throws Exception {
-    requestAgent.request("cart.delete", cart);
-    // TODO Auto-generated method stub
+  public void update(Cart cart) throws Exception {
+    requestAgent.request("cart.update", cart);
 
+  }
+
+  @Override
+  public void delete(int cartNo, String id) throws Exception {
+    Cart cart = new Cart();
+    cart.setId(id);
+    cart.setCartNumber(cartNo);
+    requestAgent.request("cart.delete", cart);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      //      System.out.println(requestAgent.getObject(String.class));
+      throw new Exception("장바구니 삭제 실패");
+    }  
   }
 
   @Override

@@ -29,7 +29,6 @@ public class ServerApp {
     // => 데이터 처리 담당자를 등록한다.
     BuyerTable buyerTable = new BuyerTable();
     SellerTable sellerTable = new SellerTable();
-    BoardTable boardTable = new BoardTable();
     ProductTable productTable = new ProductTable();
     dataProcessorMap.put("addNumber.", new TotalNumberTable());
     dataProcessorMap.put("buyer.", buyerTable);
