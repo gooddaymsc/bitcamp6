@@ -44,6 +44,7 @@ import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.CommentAddHandler;
 import com.eomcs.pms.handler.CommentListHandler;
+import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
@@ -153,6 +154,7 @@ public class ClientApp {
 
     commandMap.put("/comment/add",   new CommentAddHandler(boardDao));
     commandMap.put("/comment/list",   new CommentListHandler(boardDao));
+    commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
 
     ProductPrompt productPrompt = new ProductPrompt();
     ProductDao productDao = new NetProductDao(requestAgent);

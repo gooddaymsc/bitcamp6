@@ -13,4 +13,6 @@ public interface BoardDao {
   void delete(int no) throws Exception;
   List<Comment> findAll(int boardNo) throws Exception;
   void insert(Comment comment) throws Exception;
+  void update(Comment comment) throws Exception;
+  Comment findCommentByNo(int boardNo, int commentNo) throws Exception;
 }
