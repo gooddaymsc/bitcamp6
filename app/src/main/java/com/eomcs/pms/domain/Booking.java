@@ -16,9 +16,14 @@ public class Booking implements Serializable {
   private int bookingStocks;     // 예약 상품의 갯수
   private int bookingPrice;      // 총액
   private boolean confirm;        //픽업확정여부
+  private String mineId;
 
-
-
+  public String getMineId() {
+    return mineId;
+  }
+  public void setMineId(String mineId) {
+    this.mineId = mineId;
+  }
   public int getBookingStocks() {
     return bookingStocks;
   }

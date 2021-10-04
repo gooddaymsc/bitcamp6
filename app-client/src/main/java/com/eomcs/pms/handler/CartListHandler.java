@@ -19,7 +19,7 @@ public class CartListHandler implements Command {
       CartList cartList = cartDao.findAll(nowLoginId);
 
       if (cartList.getPrivacyCart().size() == 0) {
-        System.out.println("아직 추가한 장바구니가 없습니다.");
+        System.out.println("장바구니에 담긴 상품이 없습니다.");
         return;
       }
       System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",

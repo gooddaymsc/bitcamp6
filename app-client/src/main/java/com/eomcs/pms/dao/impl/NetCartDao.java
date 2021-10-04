@@ -55,6 +55,28 @@ public class NetCartDao implements CartDao{
   }
 
   @Override
+  public Cart findByNo(int cartNo, String id) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("cartNo", String.valueOf(cartNo));
+    params.put("id", id);
+
+    requestAgent.request("cart.selectOne", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return null;
+    }
+
+    return requestAgent.getObject(Cart.class);
+  }
+
+  @Override
+  public void delete(Cart cart) throws Exception {
+    requestAgent.request("cart.delete", cart);
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
   public HashMap<String, Stock> findBySellerId(String stockName) throws Exception {
     HashMap<String, Stock> hashStock= new HashMap<>();
 

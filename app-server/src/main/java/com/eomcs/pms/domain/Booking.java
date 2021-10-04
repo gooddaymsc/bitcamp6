@@ -6,7 +6,7 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class Booking implements Serializable {
   public Cart cart;
-  private String buyerId;
+  //  private String buyerId;
   private int bookingNumber;     //예약번호
   private Date bookingDate;      //예약날짜
   private int bookingHour;      
@@ -16,7 +16,14 @@ public class Booking implements Serializable {
   private int bookingStocks;     // 예약 상품의 갯수
   private int bookingPrice;      // 총액
   private boolean confirm;        //픽업확정여부
+  private String mineId;
 
+  public String getMineId() {
+    return mineId;
+  }
+  public void setMineId(String mineId) {
+    this.mineId = mineId;
+  }
 
 
   public int getBookingStocks() {
@@ -38,12 +45,12 @@ public class Booking implements Serializable {
     this.cart = cart;
   }
 
-  public String getBuyerId() {
-    return buyerId;
-  }
-  public void setBuyerId(String buyerId) {
-    this.buyerId = buyerId;
-  }
+  //  public String getBuyerId() {
+  //    return buyerId;
+  //  }
+  //  public void setBuyerId(String buyerId) {
+  //    this.buyerId = buyerId;
+  //  }
   public int getBookingNumber() {
     return bookingNumber;
   }
