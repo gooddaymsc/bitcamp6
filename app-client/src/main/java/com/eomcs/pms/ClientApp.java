@@ -48,6 +48,7 @@ import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.CommentAddHandler;
+import com.eomcs.pms.handler.CommentDeleteHandler;
 import com.eomcs.pms.handler.CommentListHandler;
 import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
@@ -161,6 +162,7 @@ public class ClientApp {
     commandMap.put("/comment/add",   new CommentAddHandler(boardDao));
     commandMap.put("/comment/list",   new CommentListHandler(boardDao));
     commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
+    commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));
 
     ProductPrompt productPrompt = new ProductPrompt();
     ProductDao productDao = new NetProductDao(requestAgent);

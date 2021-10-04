@@ -60,7 +60,7 @@ public class BoardDetailHandler implements Command {
           //                    case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
           case "2" : request.getRequestDispatcher("/comment/add").forward(request); continue Loop;
           case "3" : request.getRequestDispatcher("/comment/update").forward(request); continue Loop;
-          //          case "4" : request.getRequestDispatcher("/comment/delete").forward(request); continue Loop;
+                    case "4" : request.getRequestDispatcher("/comment/delete").forward(request); continue Loop;
           case "u": 
           case "U": request.getRequestDispatcher("/board/update").forward(request); return;
           case "d": 

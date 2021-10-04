@@ -25,12 +25,14 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
       case "board.comment.selectList" : commentSelectList(request, response); break;
       case "board.comment.selectOne" : commentSelectOne(request, response); break;
       case "board.comment.update" : commentUpdate(request, response); break;
+      case "board.comment.delete" : commentDelete(request, response); break;
 
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
+
   // 댓글 등록
   private void commentInsert(Request request, Response response) {
     Comment comment = request.getObject(Comment.class);
@@ -92,6 +94,19 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
     response.setStatus(Response.SUCCESS);
   }
 
+  private void commentDelete(Request request, Response response) {
+    Comment comment = request.getObject(Comment.class);
+    int index = indexOf(comment.getBoardNumber(), comment.getCommentNumber());
+
+    if (index ==-1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("댓글 데이터 삭제 실패!");
+      return;
+    }
+    Board board = findByNo(comment.getBoardNumber());
+    board.getCommentList().remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
 
   private void insert(Request request, Response response) throws Exception {
     Board board = request.getObject(Board.class);

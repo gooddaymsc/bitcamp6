@@ -10,6 +10,7 @@ public class CommentUpdateHandler implements Command {
   public CommentUpdateHandler(BoardDao boardDao) {
     this.boardDao = boardDao;
   }
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     int commentNo = Prompt.inputInt("변경할 댓글 번호 : ");
@@ -18,7 +19,7 @@ public class CommentUpdateHandler implements Command {
     Comment comment = boardDao.findCommentByNo(boardNo, commentNo);
 
     if (comment == null) {
-      System.out.println("해당 번호의 댓글이 없습니다.");
+      System.out.println("해당 번호의 댓글이 없습니다.\n");
       return;
     }
 

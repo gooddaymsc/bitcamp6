@@ -112,11 +112,22 @@ public class NetBoardDao implements BoardDao{
     requestAgent.request("board.comment.update", comment);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      //      throw new Exception("댓글 데이터 변경 실패");
+      //      System.out.println(requestAgent.getObject(String.class));
+      throw new Exception("댓글 데이터 변경 실패");
     }
   }
 
+  // 댓글 삭제
+  @Override
+  public void delete(Comment comment) throws Exception {
+    requestAgent.request("board.comment.delete", comment);
+
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("댓글 데이터 삭제 실패");
+    }
+  }
+
+  // 댓글 선택
   @Override
   public Comment findCommentByNo(int boardNo, int commentNo) throws Exception {
     HashMap<String, String> params = new HashMap<>();
