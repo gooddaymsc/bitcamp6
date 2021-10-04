@@ -99,7 +99,7 @@ public class NetProductDao implements ProductDao{
     //    int no = requestAgent.getObject(Integer.class);
     //    review.setNo(no);
 
-    requestAgent.request("review.insert", review);
+    requestAgent.request("product.review.insert", review);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       throw new Exception("리뷰 데이터 저장 실패");
@@ -128,7 +128,7 @@ public class NetProductDao implements ProductDao{
 
   @Override
   public void deleteReview(Review review) throws Exception {
-    requestAgent.request("review.delete", review);
+    requestAgent.request("product.review.delete", review);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("상품 데이터 삭제 실패");
@@ -138,7 +138,6 @@ public class NetProductDao implements ProductDao{
 
   @Override
   public boolean reviewIs(int productNumber, String id) throws Exception {
-
     Product product = findByNo(productNumber);
 
     for (Review review : product.getReviewList()) {

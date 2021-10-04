@@ -128,24 +128,39 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
 
   private void reviewUpdate(Request request, Response response) throws Exception{
     Review review = request.getObject(Review.class);
-    int index = indexOf(review.getId());
+    Product product = findByNumber(review.getProductNo());
+    int index = indexOf(product, review.getNo());
+    product.getReviewList().set(index, review);
 
-    //    list.set(index, review);
+    if(index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 리뷰가 없습니다.");
+      return;
+    }
     response.setStatus(Response.SUCCESS);
-    response.setValue(list);
+
   }
 
   private void reviewDelete(Request request, Response response) throws Exception {
     Review review = request.getObject(Review.class);
-    int index = indexOf(review.getId());
-
-    list.remove(index);
+    Product product = findByNumber(review.getProductNo());
+    int index = indexOf(product, review.getNo());
+    product.getReviewList().remove(index);
     response.setStatus(Response.SUCCESS);
   }
 
   private int indexOf(String productName) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getProductName().equals(productName)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private int indexOf(Product product, int reviewNumber) {
+    for (int i = 0; i < product.getReviewList().size(); i++) {
+      if (product.getReviewList().get(i).getNo() == reviewNumber) {
         return i;
       }
     }
