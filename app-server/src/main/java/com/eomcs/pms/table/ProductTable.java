@@ -18,6 +18,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     switch (request.getCommand()) {
       case "product.insert" : productInsert(request, response); break;
       case "product.selectOne" : productSelectOne(request, response); break;
+      case "product.selectOne2" : productSelectOne2(request, response); break;
       case "product.selectList" : productSelectList(request, response); break;
       case "product.update" : productUpdate(request, response); break;
       case "product.delete" : productDelete(request, response); break;
@@ -46,6 +47,18 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
   private void productSelectOne(Request request, Response response) throws Exception {
     int productNumber = Integer.parseInt(request.getParameter("productNumber"));
     Product product = findByNumber(productNumber);
+    if (product != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(product);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 상품이 없습니다.");
+    }
+  }
+
+  private void productSelectOne2(Request request, Response response) throws Exception {
+    String name = request.getParameter("productName");
+    Product product = findByProduct(name);
     if (product != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(product);

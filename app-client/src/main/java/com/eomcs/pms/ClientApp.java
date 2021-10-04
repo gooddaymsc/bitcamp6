@@ -128,8 +128,8 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
-    //    requestAgent = new RequestAgent("192.168.0.122",8888);
-    requestAgent = new RequestAgent("127.0.0.1",8889);
+    //    requestAgent = new RequestAgent("192.168.0.103",8888);
+    requestAgent = new RequestAgent("127.0.0.1",8888);
     requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
 
     MemberDao memberDao = new NetMemberDao(requestAgent);

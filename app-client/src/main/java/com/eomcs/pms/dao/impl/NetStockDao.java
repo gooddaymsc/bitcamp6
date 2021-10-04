@@ -49,7 +49,7 @@ public class NetStockDao implements StockDao {
   public Product checkProduct(String name) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("productName", name);
-    requestAgent.request("product.selectOne", params);
+    requestAgent.request("product.selectOne2", params);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       return null;
