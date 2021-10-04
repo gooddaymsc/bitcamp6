@@ -22,6 +22,7 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
       case "stock.selectList" : selectList(request, response); break;
       case "stock.selectAllList" : selectAllList(request, response); break;
       case "stock.selectOne" : selectOne(request, response); break;
+      case "stock.selectOne2" : selectOne2(request, response); break;
       //      case "stock.update" : update(request, response); break;
       //      case "stock.delete" : delete(request, response); break;
       case "stock.List.delete" : deleteList(request, response); break;
@@ -91,6 +92,20 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     }
   }
 
+  private void selectOne2(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    String productName = request.getParameter("productName");
+
+    Stock stock = findStockById(productName, id);
+    if (stock != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(stock);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 상품이 없습니다.");
+    }
+  }
+
   private StockList findById(String id) {
     for (StockList stockList : list) {
       if (stockList.getId().equals(id)) {
@@ -104,6 +119,16 @@ public class StockTable extends JsonDataTable<StockList> implements DataProcesso
     StockList stockList = findById(id);
     for (Stock stock : stockList.getSellerStock()) {
       if (stock.getProduct().getProductName().equals(name)) {
+        return stock;
+      }
+    }
+    return null;
+  }
+
+  private Stock findStockById(String id, String stockName) {
+    StockList stockList = findById(id);
+    for (Stock stock : stockList.getSellerStock()) {
+      if (stock.getProduct().getProductName().equals(stockName)) {
         return stock;
       }
     }

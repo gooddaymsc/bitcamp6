@@ -36,6 +36,7 @@ public class NetStockDao implements StockDao {
     return requestAgent.getObject(StockList.class);
   }
 
+  @Override
   public List<StockList> findAll() throws Exception {
     requestAgent.request("stock.selectAllList", null);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
@@ -63,6 +64,19 @@ public class NetStockDao implements StockDao {
     params.put("id", id);
 
     requestAgent.request("stock.selectOne", params);
+
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      return null;
+    }
+    return requestAgent.getObject(Stock.class);
+  }
+
+  @Override
+  public Stock findStockById(String id, String stockName) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("id", id);
+    params.put("productName", stockName);
+    requestAgent.request("stock.selectOne2", params);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       return null;
