@@ -101,7 +101,6 @@ public class NetBoardDao implements BoardDao{
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(requestAgent.getObject(String.class));
       return null;
-      //      throw new Exception("댓글 데이터 조회 실패");
     }
     return new ArrayList<>(requestAgent.getObjects(Comment.class));
   }

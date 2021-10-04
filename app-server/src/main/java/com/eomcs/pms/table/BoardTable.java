@@ -46,7 +46,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
   void commentSelectList(Request request, Response response) throws Exception{
     int no = Integer.parseInt(request.getParameter("boardNo"));
     Board board = findByNo(no);
-    if (board.getCommentList().size()!=0) {
+    if (board != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(board.getCommentList());
 

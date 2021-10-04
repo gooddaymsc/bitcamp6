@@ -26,6 +26,7 @@ public class CartDetailHandler implements Command {
     System.out.println();
 
     request.setAttribute("productName",  cart.getStock().getProduct().getProductName());
+    request.setAttribute("cartNo", cart.getCartNumber());
 
     while (true) {
 

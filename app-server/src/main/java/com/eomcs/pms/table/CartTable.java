@@ -22,7 +22,7 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
       case "cart.selectList" : selectList(request, response); break;
       case "cart.selectAllList" : selectAllList(request, response); break;
       case "cart.selectOne" : selectOne(request, response); break;
-      //      case "cart.update" : update(request, response); break;
+      case "cart.update" : update(request, response); break;
       case "cart.delete" : delete(request, response); break;
       case "cart.List.delete" : deleteList(request, response); break;
 
@@ -89,6 +89,21 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
       response.setStatus(Response.FAIL);
       response.setValue("장바구니에 해당상품이 없습니다.");
     }
+  }
+
+  private void update(Request request, Response response) throws Exception{
+    Cart cart = request.getObject(Cart.class);
+    CartList cartList = findById(cart.getId());
+    int index = indexOf(cart.getId(), cart.getCartNumber());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글이 없습니다.");
+      return;
+    } 
+    cartList.getPrivacyCart().set(index, cart);
+    response.setStatus(Response.SUCCESS);
+
   }
 
   private void delete(Request request, Response response) throws Exception{
