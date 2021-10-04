@@ -6,10 +6,17 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class Comment implements Serializable{
   private int commentNumber;
+  private int boardNumber;
   private String id;
   private String content;
   private Date registrationDate;
 
+  public int getBoardNumber() {
+    return boardNumber;
+  }
+  public void setBoardNumber(int boardNumber) {
+    this.boardNumber = boardNumber;
+  }
   public int getCommentNumber() {
     return commentNumber;
   }

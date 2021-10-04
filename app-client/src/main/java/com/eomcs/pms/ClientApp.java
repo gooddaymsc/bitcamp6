@@ -15,6 +15,7 @@ import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.CommentDao;
+import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
@@ -22,6 +23,7 @@ import com.eomcs.pms.dao.impl.NetBoardDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetCommentDao;
+import com.eomcs.pms.dao.impl.NetMemberDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.dao.impl.NetStockDao;
@@ -44,6 +46,8 @@ import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.CommentAddHandler;
 import com.eomcs.pms.handler.CommentListHandler;
+import com.eomcs.pms.handler.FindIdHandler;
+import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
@@ -125,6 +129,7 @@ public class ClientApp {
     CommentDao commentDao = new NetCommentDao(requestAgent);
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
+    MemberDao memberDao = new NetMemberDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -174,6 +179,8 @@ public class ClientApp {
     //    commandMap.put("/cart/delete", new CartDeleteHandler(cartPrompt));
 
 
+    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
+    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;
@@ -292,8 +299,6 @@ public class ClientApp {
     //    requestAgent.request("member.insert", new Member("관리자","1234", Menu.ACCESS_ADMIN));
 
     createMainMenu().execute();
-
-    // memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
 
     Prompt.close();
 
