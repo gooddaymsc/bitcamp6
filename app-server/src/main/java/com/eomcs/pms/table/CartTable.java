@@ -104,7 +104,6 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
 
     cartList.getPrivacyCart().remove(index);
     response.setStatus(Response.SUCCESS);
-    response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }
 

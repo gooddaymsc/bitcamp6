@@ -40,6 +40,8 @@ public class ProductDetailHandler implements Command {
       System.out.printf("바디감: %d\n", product.getWeight());
       System.out.println();
       request.setAttribute("productNumber", product.getProductNumber());
+      request.setAttribute("productName", product.getProductName());
+
       //장바구니 등록 / 재고등록 / 리뷰보기(CRUD) 
 
       if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {

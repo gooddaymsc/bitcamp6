@@ -55,7 +55,7 @@ public class NetProductDao implements ProductDao{
     HashMap<String, String> params = new HashMap<>();
     params.put("productName", name);
 
-    requestAgent.request("product.selectOne", params);
+    requestAgent.request("product.selectOne2", params);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       return null;
