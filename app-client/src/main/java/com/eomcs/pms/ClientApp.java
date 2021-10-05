@@ -71,6 +71,7 @@ import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewFindHandler;
 import com.eomcs.pms.handler.ReviewListHandler;
 import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
@@ -198,6 +199,8 @@ public class ClientApp {
     commandMap.put("/review/list",   new ReviewListHandler(productDao));
     commandMap.put("/review/update",   new ReviewUpdateHandler(productDao, productPrompt));
     commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
+    commandMap.put("/findReview",   new ReviewFindHandler(productDao));
+
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
