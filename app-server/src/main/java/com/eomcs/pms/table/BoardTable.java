@@ -26,6 +26,7 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
       case "board.comment.selectOne" : commentSelectOne(request, response); break;
       case "board.comment.update" : commentUpdate(request, response); break;
       case "board.comment.delete" : commentDelete(request, response); break;
+      case "board.comment.like" : like(request, response); break;
 
       default :
         response.setStatus(Response.FAIL);
@@ -200,5 +201,19 @@ public class BoardTable extends JsonDataTable<Board> implements DataProcessor{
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 게시글이 없습니다.");
     }
+  }
+
+  private void like(Request request, Response response) throws Exception {
+    Board board = request.getObject(Board.class);
+
+    int index = indexOf(board.getBoardNumber());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 게시글이 없습니다.");
+      return;
+    } 
+    list.set(index, board);
+    response.setStatus(Response.SUCCESS);
   }
 }
