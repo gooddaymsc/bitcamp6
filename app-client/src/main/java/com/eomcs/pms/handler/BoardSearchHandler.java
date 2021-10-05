@@ -19,8 +19,6 @@ public class BoardSearchHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[게시글 검색] || 이전(0)");
 
-    //1. 게시판리스트 출력
-
     Collection<Board> boardList = boardDao.findAll();
 
     String keyword = Prompt.inputString("검색어 : ");
@@ -57,8 +55,8 @@ public class BoardSearchHandler implements Command {
       }
       System.out.println();
 
-      //      request.setAttribute("boardNumList", boardNumList);
-      //      request.getRequestDispatcher("/board/detail2").forward(request);
+      request.setAttribute("boardNumList", boardNumList);
+      request.getRequestDispatcher("/board/detail2").forward(request);
       return;
 
     }

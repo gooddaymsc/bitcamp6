@@ -1,6 +1,8 @@
 package com.eomcs.pms.handler;
 
 import java.util.List;
+import com.eomcs.menu.Menu;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
@@ -30,16 +32,6 @@ public class BoardDetailHandler2  implements Command {
       }
     }
 
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
-    //
-    //
-    //    requestAgent.request("board.selectOne", params);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("게시글 조회 실패");
-    //      return;
-    //    }
-
     Board board = boardDao.findByNo(no);
 
     if (board == null) {
@@ -49,11 +41,11 @@ public class BoardDetailHandler2  implements Command {
     System.out.println();
     Loop : while(true) {
       System.out.printf("[게시글 상세보기]");
-      //      if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
-      //        System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
-      //      } else {
-      //        System.out.println("|| 이전(0)\n");
-      //      }
+      if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
+        System.out.println("|| 게시글 변경(U) / 게시글 삭제(D) / 이전(0)\n");
+      } else {
+        System.out.println("|| 이전(0)\n");
+      }
 
       //      if (ClientApp.getLoginUser().isCommentUpdate()) {
       //        memberPrompt.changeCommentUpdate(ClientApp.getLoginUser().getId(), false);
@@ -82,10 +74,10 @@ public class BoardDetailHandler2  implements Command {
         System.out.println();
         switch (choose2) {
           case "0" : return;
-          //          case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
-          //          case "2" : request.getRequestDispatcher("/comment/add").forward(request); continue Loop;
-          //          case "3" : request.getRequestDispatcher("/comment/update").forward(request); continue Loop;
-          //          case "4" : request.getRequestDispatcher("/comment/delete").forward(request); continue Loop;
+          case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
+          case "2" : request.getRequestDispatcher("/comment/add").forward(request); continue Loop;
+          case "3" : request.getRequestDispatcher("/comment/update").forward(request); continue Loop;
+          case "4" : request.getRequestDispatcher("/comment/delete").forward(request); continue Loop;
           case "u": 
           case "U": request.getRequestDispatcher("/board/update").forward(request); return;
           case "d": 
