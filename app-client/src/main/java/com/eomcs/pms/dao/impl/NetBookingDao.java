@@ -1,9 +1,7 @@
 
 package com.eomcs.pms.dao.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -44,13 +42,22 @@ public class NetBookingDao implements BookingDao{
     }
     return requestAgent.getObject(BookingList.class);
   }
+  //  @Override
+  //  public List<BookingList> findAll() throws Exception {
+  //    requestAgent.request("booking.selectAllList", null);
+  //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+  //      throw new Exception("재고목록 불러오기 실패");
+  //    }
+  //    return new ArrayList<>(requestAgent.getObjects(BookingList.class));
+  //  } 
+
   @Override
-  public List<BookingList> findAll() throws Exception {
-    requestAgent.request("booking.selectAllList", null);
+  public void delete(Booking booking) throws Exception {
+    requestAgent.request("booking.delete", booking);
+
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-      throw new Exception("재고목록 불러오기 실패");
+      throw new Exception("예약 삭제 실패");
     }
-    return new ArrayList<>(requestAgent.getObjects(BookingList.class));
   }
 
   @Override
@@ -70,7 +77,7 @@ public class NetBookingDao implements BookingDao{
   }
 
   @Override
-  public Cart findByCart (String ProductName, String nowLoginId) throws Exception {
+  public Cart findByCart(String ProductName, String nowLoginId) throws Exception {
     CartList cartList = cartDao.findAll(nowLoginId);
     for (Cart cart : cartList.getPrivacyCart()) {
       if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
@@ -154,4 +161,17 @@ public class NetBookingDao implements BookingDao{
   //      }
   //    }
   //  }
+
+  @Override
+  public Booking findByNoId(int no, String id) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+    params.put("id", id);
+
+    requestAgent.request("booking.selectOne", params);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      return null;
+    }
+    return requestAgent.getObject(Booking.class);
+  }
 }

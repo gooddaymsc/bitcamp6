@@ -36,6 +36,8 @@ import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
+import com.eomcs.pms.handler.BookingDeleteHandler;
+import com.eomcs.pms.handler.BookingDetailHandler;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BuyerAddHandler;
 import com.eomcs.pms.handler.BuyerDeleteHandler;
@@ -190,9 +192,9 @@ public class ClientApp {
     commandMap.put("/review/add",   new ReviewAddHandler(productDao, productPrompt));
     commandMap.put("/review/list",   new ReviewListHandler(productDao));
     commandMap.put("/review/update",   new ReviewUpdateHandler(productDao, productPrompt));
+
     commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
     commandMap.put("/findReview",   new ReviewFindHandler(productDao));
-
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
@@ -208,9 +210,9 @@ public class ClientApp {
 
     commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao));
     commandMap.put("/booking/list",   new BookingListHandler(bookingDao, sellerDao));
-    //    commandMap.put("/booking/detail",   new BookingDetailHandler(allBookingList, bookingPrompt, memberPrompt));
+    commandMap.put("/booking/detail",   new BookingDetailHandler(bookingDao, buyerDao, sellerDao));
     //    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList, bookingPrompt, stockPrompt, memberPrompt));
-    //    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList, bookingPrompt));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingDao));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));

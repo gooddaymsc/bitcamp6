@@ -1,5 +1,7 @@
 package com.eomcs.pms.table;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.server.DataProcessor;
@@ -21,9 +23,9 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
       case "booking.insert" : insert(request, response); break;
       case "booking.selectList" : selectList(request, response); break;
       case "booking.selectAllList" : selectAllList(request, response); break;
-      //      case "booking.selectOne" : selectOne(request, response); break;
+      case "booking.selectOne" : selectOne(request, response); break;
       //      case "booking.update" : update(request, response); break;
-      //      case "booking.delete" : delete(request, response); break;
+      case "booking.delete" : delete(request, response); break;
       case "booking.List.delete" : deleteList(request, response); break;
 
       default :
@@ -31,6 +33,7 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
+
   private void insertList(Request request, Response response) throws Exception {
     String id = request.getParameter("id");
 
@@ -76,10 +79,92 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
     response.setValue(list);
   }
 
+  private void selectOne(Request request, Response response) {
+    int no = Integer.parseInt(request.getParameter("no"));
+    String id = request.getParameter("id");
+
+    Booking booking = findByNoId(no, id);
+    if (booking != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(booking);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 예약이 없습니다.");
+    }
+  }
+
   private BookingList findById(String id) {
     for (BookingList bookingList : list) {
       if (bookingList.getId().equals(id)) {
         return bookingList;
+      }
+    }
+    return null;
+  }
+
+  private Booking findByNoId(int no, String id) {
+    BookingList bookingList = findById(id);
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == no) {
+        return booking;
+      }
+    }
+    return null;
+  }
+
+  private void delete(Request request, Response response) {
+
+  }
+
+  // 먼저 buyer 기준으로만.
+  protected List<Booking> findBookingBuyer (int No, String firstId, String secondId, boolean delete) {
+    List<Booking> twoBookingList = new ArrayList<>();
+    BookingList bookingList = findById(firstId);
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == No) {
+        twoBookingList.add(booking);
+        if (delete) {
+          bookingList.getBooking().remove(booking);
+        }
+        bookingList = findById(secondId);
+        for (Booking booking2 : bookingList.getBooking()) {
+          if (booking2.getMineId().equals(firstId)
+              && booking2.getCart().getStock().getProduct().getProductName().equals(
+                  booking.getCart().getStock().getProduct().getProductName())) {
+            twoBookingList.add(booking2);
+            if (delete) {
+              bookingList.getBooking().remove(booking2);
+            }
+            return twoBookingList;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  // 먼저 seller 기준으로만.
+  protected List<Booking> findBookingSeller (int No, String firstId, String secondId, boolean delete) {
+    List<Booking> twoBookingList = new ArrayList<>();
+    BookingList bookingList = findById(firstId);
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == No) {
+        twoBookingList.add(booking);
+        if (delete) {
+          bookingList.getBooking().remove(booking);
+        }
+        bookingList = findById(secondId);
+        for (Booking booking2 : bookingList.getBooking()) {
+          if (booking2.getCart().getSellerId().equals(firstId)
+              && booking2.getCart().getStock().getProduct().getProductName().equals(
+                  booking.getCart().getStock().getProduct().getProductName())) {
+            twoBookingList.add(booking2);
+            if (delete) {
+              bookingList.getBooking().remove(booking2);
+            }
+            return twoBookingList;
+          }
+        }
       }
     }
     return null;
