@@ -41,7 +41,6 @@ public class NetBoardDao implements BoardDao{
   public Board findByNo(int no) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
-
     requestAgent.request("board.selectOne", params);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       return null;
