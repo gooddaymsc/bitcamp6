@@ -16,6 +16,7 @@ import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.MemberDao;
+import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
@@ -24,6 +25,7 @@ import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMemberDao;
+import com.eomcs.pms.dao.impl.NetMessageDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.dao.impl.NetStockDao;
@@ -56,6 +58,11 @@ import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LoginHandler;
+import com.eomcs.pms.handler.MessageAddHandler;
+import com.eomcs.pms.handler.MessageDeleteHandler;
+import com.eomcs.pms.handler.MessageDetailHandler;
+import com.eomcs.pms.handler.MessageListHandler;
+import com.eomcs.pms.handler.MessageUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -152,6 +159,7 @@ public class ClientApp {
 
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
+    MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -213,6 +221,12 @@ public class ClientApp {
     //    commandMap.put("/booking/detail",   new BookingDetailHandler(allBookingList, bookingPrompt, memberPrompt));
     //    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList, bookingPrompt, stockPrompt, memberPrompt));
     //    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList, bookingPrompt));
+
+    commandMap.put("/message/add",    new MessageAddHandler(messageDao, memberDao));
+    commandMap.put("/message/update",    new MessageUpdateHandler(messageDao));
+    commandMap.put("/message/list",   new MessageListHandler(messageDao));
+    commandMap.put("/message/detail", new MessageDetailHandler(messageDao));
+    commandMap.put("/message/delete", new MessageDeleteHandler(messageDao));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));

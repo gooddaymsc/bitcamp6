@@ -8,6 +8,7 @@ import com.eomcs.pms.table.BookingTable;
 import com.eomcs.pms.table.BuyerTable;
 import com.eomcs.pms.table.CartTable;
 import com.eomcs.pms.table.MemberTable;
+import com.eomcs.pms.table.MessageTable;
 import com.eomcs.pms.table.ProductTable;
 import com.eomcs.pms.table.SellerTable;
 import com.eomcs.pms.table.StockTable;
@@ -37,6 +38,7 @@ public class ServerApp {
     dataProcessorMap.put("stock.", new StockTable());
     dataProcessorMap.put("cart.", new CartTable());
     dataProcessorMap.put("booking.", new BookingTable());
+    dataProcessorMap.put("message.", new MessageTable());
 
 
     while(true) {

@@ -23,5 +23,15 @@ public class NetMemberDao implements MemberDao{
     }
     return requestAgent.getObject(Member.class);
   }
+  @Override
+  public Member findById(String id) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("id", String.valueOf(id));
 
+    requestAgent.request("member.find", params);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      return null;
+    }
+    return requestAgent.getObject(Member.class);
+  }
 }
