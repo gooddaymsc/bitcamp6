@@ -43,6 +43,11 @@ public class NetBuyerDao implements BuyerDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("예약리스트 데이터 저장 실패!");
     }
+
+    requestAgent.request("message.List.insert", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("메세지리스트 데이터 저장 실패!");
+    }
   }
 
   @Override
