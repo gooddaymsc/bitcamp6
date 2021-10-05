@@ -4,18 +4,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProductSearchHandler implements Command {
 
-  RequestAgent requestAgent;
-  ProductPrompt productPrompt;
-  public ProductSearchHandler(RequestAgent requestAgent, ProductPrompt productPrompt) {
-    this.requestAgent = requestAgent;
-    this.productPrompt = productPrompt;
+  ProductDao productDao;
+  //ProductPrompt productPrompt;
+  public ProductSearchHandler(ProductDao productDao) {
+    this.productDao = productDao;
+    // this.productPrompt = productPrompt;
   }
 
   @Override
@@ -24,28 +24,31 @@ public class ProductSearchHandler implements Command {
     HashMap<String, Seller> map = new HashMap<>();
 
     System.out.println("[상품검색]");
-    String input = Prompt.inputString("\n상품입력: ");
 
-    Product productIs = productPrompt.findByProduct(input);
-    if (productIs == null) {
+    int productNumber = Prompt.inputInt("\n상품번호 > ");
+    Product product = productDao.findByNo(productNumber);
+    request.setAttribute("productNumber", product.getProductNumber());
+
+    if (product.equals(null)) {
       System.out.println("입력하신 상품이 없습니다.\n");
       return;
     }
 
-    String productName  = productPrompt.findByProduct2(input);   
-    requestAgent.request("product.selectList", null);
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록조회 실패!");
-      return;
-    }
+    //
+    //    String productName  = productPrompt.findByProduct2(productNumber);   
+    //    requestAgent.request("product.selectList", null);
+    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("목록조회 실패!");
+    //      return;
+    //    }
 
-    Collection<Product> productList = requestAgent.getObjects(Product.class);
+    Collection<Product> productList = productDao.findAll();
 
 
     while(true) {
       int size = 1;
-      for(Product product : productList) {
-        if(product.getProductName().equals(productName)) {
+      for(Product p : productList) {
+        if(p.getProductNumber() == product.getProductNumber()) {
           System.out.printf("상품번호: %d \n", size++);
           System.out.printf("상품명: %s\n", product.getProductName());
           System.out.printf("주종: %s\n", product.getProductType());
@@ -66,11 +69,12 @@ public class ProductSearchHandler implements Command {
 
       while(true) {
         try {
+
           String adress = Prompt.inputString("주소입력: ");
           if(adress.equals("0")){
             return; }
 
-          map = memberPrompt.findByAdress(adress); 
+          map = productDao.findByAdress(adress); 
           break;
 
         } catch (Exception e) {
@@ -91,13 +95,13 @@ public class ProductSearchHandler implements Command {
               entry.getValue().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
-              stockPrompt.findStockById(entry.getValue().getId(),input).getStocks());
+              productDao.findStockById(entry.getValue().getId(), productNumber).getStocks());
         }
       }
 
       System.out.println("--------------------------------------------------------------------------");
 
-      request.setAttribute("productName", productName); 
+      request.setAttribute("productNumber", productNumber); 
       while(true) {
         System.out.println("1. 장바구니 담기 / 2. 판매자에게 문의하기 / 이전(0)");
         int choose = Prompt.inputInt("선택 > ");

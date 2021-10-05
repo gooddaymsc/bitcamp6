@@ -94,5 +94,4 @@ public class SellerTable extends JsonDataTable<Seller> implements DataProcessor{
     }
     return -1;
   }
-
 }

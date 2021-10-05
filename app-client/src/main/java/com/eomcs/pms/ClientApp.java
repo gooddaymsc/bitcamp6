@@ -61,6 +61,7 @@ import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
+import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
@@ -143,11 +144,12 @@ public class ClientApp {
     MemberDao memberDao = new NetMemberDao(requestAgent);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
-    BoardDao boardDao = new NetBoardDao(requestAgent);    
-    ProductPrompt productPrompt = new ProductPrompt();
-    ProductDao productDao = new NetProductDao(requestAgent);
-
+    BoardDao boardDao = new NetBoardDao(requestAgent);  
     StockDao stockDao = new NetStockDao(requestAgent);
+
+    ProductPrompt productPrompt = new ProductPrompt();
+    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao);
+
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
@@ -181,7 +183,7 @@ public class ClientApp {
 
     commandMap.put("/product/add",   new ProductAddHandler(productDao, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
-    // commandMap.put("/product/search", new ProductSearchHandler(productDao, productPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productDao));
     commandMap.put("/product/detail", new ProductDetailHandler(productDao));
     commandMap.put("/product/update", new ProductUpdateHandler(productDao, productPrompt));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));

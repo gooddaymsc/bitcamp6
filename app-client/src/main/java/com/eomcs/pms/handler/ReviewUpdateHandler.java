@@ -19,7 +19,7 @@ public class ReviewUpdateHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[Reviews 변경]");
-    Product product =  productDao.findByProduct((String) request.getAttribute("productName"));
+    Product product =  productDao.findByNo((Integer)request.getAttribute("productNumber"));
     Review review = productDao.findReviewById(product, ClientApp.getLoginUser().getId());
 
     if (!review.getId().equals(ClientApp.getLoginUser().getId())) {

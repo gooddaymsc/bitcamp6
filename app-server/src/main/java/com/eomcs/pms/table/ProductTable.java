@@ -23,7 +23,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
       case "product.update" : productUpdate(request, response); break;
       case "product.delete" : productDelete(request, response); break;
       case "product.review.insert" : reviewInsert(request, response); break;
-      //case "product.review.selectOne" : reviewselectOne(request, response); break;
+      //  case "product.review.selectOne" : reviewSelectOne(request, response); break;
       case "product.review.selectList" : reviewselectList(request, response); break;
       case "product.review.update" : reviewUpdate(request, response); break;
       case "product.review.delete" : reviewDelete(request, response); break;
@@ -112,6 +112,15 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
     return null;
   }
 
+  public Review fidndByReviewNumber (int reviewNumber, Product product) {
+    for(Review review : product.getReviewList()) {
+      if(review.getProductNo() == reviewNumber) {
+        return review;
+      }
+    }
+    return null;
+  }
+
   private void reviewInsert (Request request, Response response) throws Exception {
     Review review = request.getObject(Review.class);
     Product product = findByNumber(review.getProductNo());
@@ -121,7 +130,10 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
 
   //  private void reviewSelectOne(Request request, Response response) throws Exception {
   //    int reviewNumber = Integer.parseInt(request.getParameter("reviewNumber"));
-  //    Review review = findByNumber(reviewNumber);
+  //    int productNumber = Integer.parseInt(request.getParameter("productNumber"));
+  //    Product product = findByNumber(productNumber);
+  //    Review review = fidndByReviewNumber(reviewNumber, product); 
+  //
   //    if (review != null) {
   //      response.setStatus(Response.SUCCESS);
   //      response.setValue(review);

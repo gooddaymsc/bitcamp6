@@ -95,18 +95,18 @@ public class Product implements Serializable{
   public void setReviewList(List<Review> reviewList) {
     this.reviewList = reviewList;
   }
-  //  public float getRate() {
-  //    if (this.reviewList.size()==0) {
-  //      return 0;
-  //    } else {
-  //      int sum = 0;
-  //      for (Review review : this.reviewList) {
-  //        sum += review.getScore();
-  //      }
-  //      this.rate = (float) sum/(reviewList.size());
-  //      return this.rate;
-  //    }
-  //  }
+  public float getRate() {
+    if (this.reviewList.size()==0) {
+      return 0;
+    } else {
+      int sum = 0;
+      for (Review review : this.reviewList) {
+        sum += review.getScore();
+      }
+      this.rate = (float) sum/(reviewList.size());
+      return this.rate;
+    }
+  }
   public int getReviewerNum() {
     return reviewerNum;
   }
