@@ -70,7 +70,15 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
   }
 
   private void find(Request request, Response response) throws Exception {
-
+    String id = request.getParameter("id");
+    Member member = findById(id);
+    if (member != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(member);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 아이디의 회원이 없습니다.");
+    }
   }
 
   private void Update(Request request, Response response) throws Exception {
@@ -100,7 +108,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
     response.setStatus(Response.SUCCESS);
   }
 
-  private Member findByNo(String id) {
+  private Member findById(String id) {
     for (Member m : list) {
       if (m.getId().equals(id)) {
         return m;
