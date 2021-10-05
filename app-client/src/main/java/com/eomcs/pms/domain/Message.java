@@ -2,7 +2,6 @@ package com.eomcs.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import com.eomcs.pms.ClientApp;
 
 @SuppressWarnings("serial")
 public class Message implements Serializable {
@@ -30,14 +29,8 @@ public class Message implements Serializable {
     return allContent;
   }
   public void setAllContent(String allContent) {
-    if (this.allContent.length()==0) {
-      this.allContent = ClientApp.getLoginUser().getId() +" : "+ allContent ;
-    } else {
-      this.allContent += "/"+ClientApp.getLoginUser().getId() +" : " + allContent;
-      //    this.allContent = allContent;
-    }
+    this.allContent = allContent;
   }
-
   public Date getRegistrationDate() {
     return registrationDate;
   }
