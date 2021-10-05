@@ -26,16 +26,6 @@ public class ProductPrompt  {
   //
   //    return -1;
   //  }
-  //
-  //  protected String findByProduct2 (String ProductName) throws Exception {
-  //    List<Product> productList = findProductList();
-  //    for (Product product : productList) {
-  //      if (product.getProductName().equals(ProductName)) {
-  //        return ProductName;
-  //      }
-  //    }
-  //    return null;
-  //  }
 
   protected int checkNum(String label) {
     while(true) {

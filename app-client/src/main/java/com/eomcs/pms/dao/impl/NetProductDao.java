@@ -4,16 +4,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
+import com.eomcs.pms.domain.Seller;
+import com.eomcs.pms.domain.Stock;
+import com.eomcs.pms.domain.StockList;
 import com.eomcs.request.RequestAgent;
 
 public class NetProductDao implements ProductDao{
 
   RequestAgent requestAgent;
+  SellerDao sellerDao;
+  StockDao stockDao;
 
-  public NetProductDao(RequestAgent requestAgent) {
+  public NetProductDao(RequestAgent requestAgent, SellerDao sellerDao,  StockDao stockDao ) {
     this.requestAgent =  requestAgent;
+    this.sellerDao = sellerDao;
+    this.stockDao = stockDao;
   }
 
   @Override
@@ -146,6 +155,32 @@ public class NetProductDao implements ProductDao{
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("상품 데이터 삭제 실패");
     }
+  }
+
+  //findProductHandle
+  @Override
+  public HashMap<String, Seller> findByAdress (String address) throws Exception {
+    HashMap<String, Seller> hashMap = new HashMap<>();
+    for (Seller seller : sellerDao.findAll()) {
+      String[] arr = address.split(" ");
+      if((seller.getBusinessAddress().contains(arr[2])) && 
+          (seller.getBusinessAddress().contains(arr[1]))) {
+        hashMap.put(seller.getId(), seller);
+        return hashMap;
+      } 
+    }
+    return null;
+  }
+
+  @Override
+  public Stock findStockById(String id, int productNumber) throws Exception{
+    StockList stockList = stockDao.findAll(id);
+    for (Stock stock : stockList.getSellerStock()) {
+      if (stock.getProduct().getProductNumber() == productNumber) {
+        return stock;
+      }
+    }
+    return null;
   }
 
 
