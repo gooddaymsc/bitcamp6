@@ -70,6 +70,7 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
 import com.eomcs.pms.handler.ReviewFindHandler;
@@ -230,6 +231,8 @@ public class ClientApp {
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+
+    commandMap.put("/ranking/list",   new RankingHandler(productDao, productPrompt));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;

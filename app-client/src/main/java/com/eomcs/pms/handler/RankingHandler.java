@@ -39,6 +39,7 @@ public class RankingHandler implements Command {
 
       List<Entry<String, Float>> entries = new ArrayList<>(map.entrySet());
 
+      //객체 정렬
       Collections.sort(entries, new Comparator<Entry<String, Float>>(){
 
         @Override
@@ -72,7 +73,7 @@ public class RankingHandler implements Command {
             System.out.printf("\n # 상품명 : %s \n", numberMap.get(chooseNum));
             request.setAttribute("productName", numberMap.get(chooseNum));
             System.out.println();
-            request.getRequestDispatcher("/product/detail2").forward(request);       //상품 상세보기
+            request.getRequestDispatcher("/product/detail").forward(request);       //상품 상세보기
             continue Loop;
           case 0 : return;
           default : System.out.println("다시 선택해 주세요."); continue;

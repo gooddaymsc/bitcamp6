@@ -12,10 +12,8 @@ import com.eomcs.util.Prompt;
 public class ProductSearchHandler implements Command {
 
   ProductDao productDao;
-  //ProductPrompt productPrompt;
   public ProductSearchHandler(ProductDao productDao) {
     this.productDao = productDao;
-    // this.productPrompt = productPrompt;
   }
 
   @Override
@@ -27,6 +25,7 @@ public class ProductSearchHandler implements Command {
 
     int productNumber = Prompt.inputInt("\n상품번호 > ");
     Product product = productDao.findByNo(productNumber);
+    String productName = product.getProductName();
     request.setAttribute("productNumber", product.getProductNumber());
 
     if (product.equals(null)) {
@@ -101,7 +100,7 @@ public class ProductSearchHandler implements Command {
 
       System.out.println("--------------------------------------------------------------------------");
 
-      request.setAttribute("productNumber", productNumber); 
+      request.setAttribute("productName", productName); 
       while(true) {
         System.out.println("1. 장바구니 담기 / 2. 판매자에게 문의하기 / 이전(0)");
         int choose = Prompt.inputInt("선택 > ");
