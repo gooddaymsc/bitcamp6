@@ -31,10 +31,10 @@ public class SellerUpdateHandler implements Command {
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", seller.getBusinessAddress()));
       String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", seller.getBusinessPlaceNumber()));
 
-      int BusinessOpeningHours = Prompt.inputInt(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
-      int BusinessOpeningMinutes= Prompt.inputInt(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
-      int BusinessClosingHours = Prompt.inputInt(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
-      int BusinessClosingMinutes= Prompt.inputInt(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
+      int BusinessOpeningHours = SellerValidation.checkHour(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
+      int BusinessOpeningMinutes= SellerValidation.checkMinute(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
+      int BusinessClosingHours = SellerValidation.checkHour(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
+      int BusinessClosingMinutes= SellerValidation.checkMinute(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
