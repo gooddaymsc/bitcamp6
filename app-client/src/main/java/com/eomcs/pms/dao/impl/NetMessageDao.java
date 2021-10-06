@@ -52,4 +52,10 @@ public class NetMessageDao implements MessageDao {
     // TODO Auto-generated method stub
 
   }
+
+  @Override
+  public void insert(Message message, String id) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
 }

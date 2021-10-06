@@ -1,6 +1,7 @@
 package com.eomcs.pms.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Cart;
@@ -23,4 +24,6 @@ public interface BookingDao {
   void deleteCart(String nowLoginId, Cart bookingProduct) throws Exception;
   //  void changeBookingUpdate(String sellerId, boolean b) throws Exception;
   Object bookingStatue(Booking booking) throws Exception;
+  List<Booking> findBookingBuyer(int no, String id, String sellerId, boolean delete) throws Exception;
+  List<Booking> findBookingSeller(int no, String id, String id2, boolean delete) throws Exception;
 }

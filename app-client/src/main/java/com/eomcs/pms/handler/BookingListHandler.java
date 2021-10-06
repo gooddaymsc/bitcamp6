@@ -49,12 +49,12 @@ public class BookingListHandler implements Command {
         System.out.println();
 
         while(true) {
-          System.out.println("\n 예약 상세보기(U) / 상품 상세정보 보기(1) / 판매자에게 문의하기(2) / 이전(0)");
+          System.out.println("\n 예약 상세보기(R) / 상품 상세정보 보기(1) / 판매자에게 문의하기(2) / 이전(0)");
           String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch(choose) {
-            case "u" :
-            case "U" : request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
+            case "r" :
+            case "R" : request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
             case "1" : 
               String productName = Prompt.inputString("\n상품명 선택 / 이전(0) > ");
               if (productName.equals("0")) {
@@ -96,12 +96,12 @@ public class BookingListHandler implements Command {
       }
       System.out.println();
       while(true) {
-        System.out.println("예약 상세보기(U) / 상품 상세정보 보기(1) / 예약자와 대화하기(2) / 이전(0)");
+        System.out.println("예약 상세보기(R) / 상품 상세정보 보기(1) / 예약자와 대화하기(2) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch(choose) {
-          case "u" : 
-          case "U" :  request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
+          case "r" : 
+          case "R" :  request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
           case "1" : 
             String productName = Prompt.inputString("\n상품명 선택 (0.이전) > ");
             if (productName.equals("0")) {

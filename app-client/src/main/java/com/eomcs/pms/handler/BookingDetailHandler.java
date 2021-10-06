@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BookingDao;
@@ -23,13 +24,13 @@ public class BookingDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
-      System.out.println("[\n 내 픽업 예약 상세보기]");
+      System.out.println("[내 픽업 예약 상세보기]");
 
       int No = Prompt.inputInt("예약번호 :");
       String id =ClientApp.getLoginUser().getId();
       Booking booking = bookingDao.findByNoId(No, id);
 
-      //      List<Booking> bookingList = null;
+      List<Booking> bookingList = null;
 
       if (booking == null) {
         System.out.println("해당 상품의 예약이 없습니다.");
@@ -51,21 +52,25 @@ public class BookingDetailHandler implements Command {
       request.setAttribute("bookingNo", No);
 
       while(true) {
-        System.out.println(" 예약변경(R) / 예약취소(D) / 이전(0)");
+        System.out.println(" 예약변경(U) / 예약취소(D) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
-        //        bookingList = bookingDao.findAll(id).getBooking();
-        //        bookingList = bookingPrompt.findBookingBuyer(
-        //            No, ClientApp.getLoginUser().getId(), booking.getCart().getSellerId(), false);
+        //                bookingList = bookingDao.findAll(id).getBooking();
+        bookingList = bookingDao.findBookingBuyer(
+            No, ClientApp.getLoginUser().getId(), booking.getCart().getSellerId(), false);
         switch(choose) {
-          //          case "r" :
-          //          case "R" : if(bookingList.get(0).isConfirm() == false) {
-          //            request.getRequestDispatcher("/booking/update").forward(request); return;
-          //          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
-          //          case "d" :
-          //          case "D" : if(bookingList.get(0).isConfirm() == false) {
-          //            request.getRequestDispatcher("/booking/delete").forward(request); return;
-          //          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
+          case "u" :
+          case "U" : 
+            request.getRequestDispatcher("/booking/update").forward(request); return;
+            //          case "R" : if(bookingList.get(0).isConfirm() == false) {
+            //            request.getRequestDispatcher("/booking/update").forward(request); return;
+            //          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
+          case "d" :
+          case "D" : 
+            request.getRequestDispatcher("/booking/delete").forward(request); return;
+            //          case "D" : if(bookingList.get(0).isConfirm() == false) {
+            //            request.getRequestDispatcher("/booking/delete").forward(request); return;
+            //          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
           case "0" : return;
         }
       }
@@ -101,16 +106,17 @@ public class BookingDetailHandler implements Command {
         System.out.println("\n 예약변경(U) / 예약확정(C) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
-        //        List<Booking> bookingList = null;
-        //        bookingList = bookingPrompt.findBookingSeller(
-        //            No, ClientApp.getLoginUser().getId(), booking.getMineId(), false);
+        List<Booking> bookingList = null;
+        bookingList = bookingDao.findBookingSeller(
+            No, ClientApp.getLoginUser().getId(), booking.getMineId(), false);
         switch(choose) {
-          //          case "u" :
+          case "u" :
+          case "U" : request.getRequestDispatcher("/booking/update").forward(request); return;
           //          case "U" : if(bookingList.get(0).isConfirm()==false){
           //            request.getRequestDispatcher("/booking/update").forward(request); return;
           //          }{ System.out.println("픽업이 완료된 예약은 변경이 불가합니다."); continue; }
           //          case "c" :
-          //          case "C" : 
+          //          case "C" :
           //            if(bookingList.get(0).isConfirm() == false) {
           //              String input = Prompt.inputString("정말 예약을 확정하시겠습니까?(y/N) ");
           //              if(input.equalsIgnoreCase("y")) {

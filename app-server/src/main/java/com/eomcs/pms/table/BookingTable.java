@@ -1,7 +1,5 @@
 package com.eomcs.pms.table;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.eomcs.pms.domain.Booking;
 import com.eomcs.pms.domain.BookingList;
 import com.eomcs.server.DataProcessor;
@@ -16,7 +14,6 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
 
   @Override
   public void execute(Request request, Response response) throws Exception {
-    // TODO Auto-generated method stub
     switch (request.getCommand()) {
       //로딩오류가 나면 새로 생성하기.
       case "booking.List.insert" : insertList(request, response); break;
@@ -114,60 +111,6 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
 
   private void delete(Request request, Response response) {
 
-  }
-
-  // 먼저 buyer 기준으로만.
-  protected List<Booking> findBookingBuyer (int No, String firstId, String secondId, boolean delete) {
-    List<Booking> twoBookingList = new ArrayList<>();
-    BookingList bookingList = findById(firstId);
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getBookingNumber() == No) {
-        twoBookingList.add(booking);
-        if (delete) {
-          bookingList.getBooking().remove(booking);
-        }
-        bookingList = findById(secondId);
-        for (Booking booking2 : bookingList.getBooking()) {
-          if (booking2.getMineId().equals(firstId)
-              && booking2.getCart().getStock().getProduct().getProductName().equals(
-                  booking.getCart().getStock().getProduct().getProductName())) {
-            twoBookingList.add(booking2);
-            if (delete) {
-              bookingList.getBooking().remove(booking2);
-            }
-            return twoBookingList;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  // 먼저 seller 기준으로만.
-  protected List<Booking> findBookingSeller (int No, String firstId, String secondId, boolean delete) {
-    List<Booking> twoBookingList = new ArrayList<>();
-    BookingList bookingList = findById(firstId);
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getBookingNumber() == No) {
-        twoBookingList.add(booking);
-        if (delete) {
-          bookingList.getBooking().remove(booking);
-        }
-        bookingList = findById(secondId);
-        for (Booking booking2 : bookingList.getBooking()) {
-          if (booking2.getCart().getSellerId().equals(firstId)
-              && booking2.getCart().getStock().getProduct().getProductName().equals(
-                  booking.getCart().getStock().getProduct().getProductName())) {
-            twoBookingList.add(booking2);
-            if (delete) {
-              bookingList.getBooking().remove(booking2);
-            }
-            return twoBookingList;
-          }
-        }
-      }
-    }
-    return null;
   }
 
   private int indexOf(String id) {
