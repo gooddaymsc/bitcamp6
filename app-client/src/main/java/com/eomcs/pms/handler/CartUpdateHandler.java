@@ -1,5 +1,5 @@
 package com.eomcs.pms.handler;
-
+import static com.eomcs.pms.handler.CartValidation.checkNum;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
@@ -19,7 +19,7 @@ public class CartUpdateHandler implements Command {
       int cartNo = (Integer) request.getAttribute("cartNo");
       Cart cart = cartDao.findByNo(cartNo, nowLoginId);
 
-      int cartstocks = cartDao.checkNum(String.format("수량(변경 전 : %d) : ", cart.getCartStocks()));
+      int cartstocks = checkNum(String.format("수량(변경 전 : %d) : ", cart.getCartStocks()));
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         cart.setCartStocks(cartstocks);
