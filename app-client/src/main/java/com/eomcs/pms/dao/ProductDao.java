@@ -10,10 +10,9 @@ import com.eomcs.pms.domain.Stock;
 public interface ProductDao {
   void insert(Product product) throws Exception;
   List<Product> findAll() throws Exception;
-  Product findByNo(int no) throws Exception;
+  Product findByNo(int boardNo) throws Exception;
   Product findByNo2(int reviewNo) throws Exception;
   Product findByProduct(String name) throws Exception;
-  Review findReviewById(Product productName, String id) throws Exception;
   void update(Product product) throws Exception;
   void delete(Product product) throws Exception;
   void insertReview(Review review) throws Exception;

@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BookingDao;
@@ -23,14 +22,14 @@ public class BookingDetailHandler implements Command {
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
+    String nowLoginId = ClientApp.getLoginUser().getId();
     if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
       System.out.println("[내 픽업 예약 상세보기]");
 
       int No = Prompt.inputInt("예약번호 :");
-      String id =ClientApp.getLoginUser().getId();
-      Booking booking = bookingDao.findByNoId(No, id);
+      Booking booking = bookingDao.findByNoId(No, nowLoginId);
 
-      List<Booking> bookingList = null;
+      //      BookingList bookingList = null;
 
       if (booking == null) {
         System.out.println("해당 상품의 예약이 없습니다.");
@@ -56,8 +55,7 @@ public class BookingDetailHandler implements Command {
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         //                bookingList = bookingDao.findAll(id).getBooking();
-        bookingList = bookingDao.findBookingBuyer(
-            No, ClientApp.getLoginUser().getId(), booking.getCart().getSellerId(), false);
+        //        bookingList = bookingDao.findAll(nowLoginId);
         switch(choose) {
           case "u" :
           case "U" : 
@@ -90,7 +88,7 @@ public class BookingDetailHandler implements Command {
 
       Buyer buyer = buyerDao.findById(booking.getCart().getId());
 
-      System.out.printf("예약자: %s\n", booking.getMineId());
+      System.out.printf("예약자: %s\n", booking.getId());
       System.out.printf("연락처: %s\n", buyer.getPhoneNumber());
       System.out.printf("상품명: %s\n", booking.getCart().getStock().getProduct().getProductName());
       System.out.printf("수량: %d\n", booking.getBookingStocks());
@@ -106,9 +104,7 @@ public class BookingDetailHandler implements Command {
         System.out.println("\n 예약변경(U) / 예약확정(C) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
-        List<Booking> bookingList = null;
-        bookingList = bookingDao.findBookingSeller(
-            No, ClientApp.getLoginUser().getId(), booking.getMineId(), false);
+        //        BookingList bookingList = bookingDao.findAll(id);
         switch(choose) {
           case "u" :
           case "U" : request.getRequestDispatcher("/booking/update").forward(request); return;

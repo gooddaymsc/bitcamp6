@@ -13,7 +13,4 @@ public interface StockDao {
   Stock findByNameId(String name, String id) throws Exception;
   void update(Stock Stock) throws Exception;
   void delete(Stock stock) throws Exception;
-  int checkPrice(String string);
-  int checkNum(String string);
-  int checkNum2(String string);
 }

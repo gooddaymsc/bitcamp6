@@ -66,7 +66,8 @@ public class BookingAddHandler implements Command {
     booking.setBookingMinute(bookingDao.checkMinutes(("픽업시간(분): "), 
         booking.getBookingHour(), sellerId));
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    booking.setMineId(nowLoginId);
+    booking.setId(nowLoginId);
+    booking.setTheOtherId(sellerId);
     // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기 > 서버에서 구현해야함.
     sellerStock.setStocks(sellerStock.getStocks() - cart.getCartStocks());
     // 구매자 장바구니에서 예약(결제)한 상품 빼기
@@ -82,7 +83,8 @@ public class BookingAddHandler implements Command {
     booking2.setBookingHour(booking.getBookingHour());
     booking2.setBookingMinute(booking.getBookingMinute());
     booking2.setRegisteredDate(booking.getRegisteredDate());
-    booking2.setMineId(booking.getCart().getSellerId());
+    booking2.setId(sellerId);
+    booking2.setTheOtherId(nowLoginId);
     // All.allBookingList에 판매자의 Id에 예약내역 추가.
     bookingDao.insert(sellerId, booking2);
 

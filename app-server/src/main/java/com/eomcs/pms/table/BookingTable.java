@@ -56,7 +56,7 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
 
   private void insert(Request request, Response response) throws Exception {
     Booking booking = request.getObject(Booking.class);
-    BookingList bookingList = findById(booking.getMineId());
+    BookingList bookingList = findById(booking.getId());
     // stock numbering
     booking.setBookingNumber(bookingList.getTotalBookingNumber());
     bookingList.setTotalBookingNumber(booking.getBookingNumber()+1);
@@ -111,21 +111,20 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
 
   private void delete(Request request, Response response) {
     Booking booking = request.getObject(Booking.class);
-    BookingList buyerBookingList = findById(booking.getMineId());
-    BookingList sellerBookingList = findById(booking.getCart().getSellerId());
+    BookingList buyerBookingList = findById(booking.getId());
+    BookingList sellerBookingList = findById(booking.getTheOtherId());
 
-    int index = indexOf(booking.getBookingNumber(), booking.getMineId());
-    int index2 = indexOf(booking.getCart().getSellerId(), booking.getMineId());
+    int index = indexOf(booking.getBookingNumber(), booking.getId());
+    int index2 = indexOf(booking.getTheOtherId(), booking.getId());
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 예약을 찾을 수 없습니다.");
-
-      buyerBookingList.getBooking().remove(index);
-      sellerBookingList.getBooking().remove(index2);
-
-      response.setStatus(Response.SUCCESS);
     }
+    buyerBookingList.getBooking().remove(index);
+    sellerBookingList.getBooking().remove(index2);
+
+    response.setStatus(Response.SUCCESS);
   }
 
   private int indexOf(int bookingNo, String id) {
@@ -138,10 +137,10 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
     return -1;
   }
 
-  private int indexOf(String sellerId, String id) {
-    BookingList sellerBookingList = findById(sellerId);
+  private int indexOf(String theOtherId, String id) {
+    BookingList sellerBookingList = findById(theOtherId);
     for (int i = 0; i < sellerBookingList.getBooking().size(); i++) {
-      if (sellerBookingList.getBooking().get(i).getCart().getId().equals(id)) {
+      if (sellerBookingList.getBooking().get(i).getTheOtherId().equals(id)) {
         return i;
       }
     }

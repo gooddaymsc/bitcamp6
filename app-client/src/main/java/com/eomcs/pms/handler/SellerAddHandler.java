@@ -1,8 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Seller;
@@ -40,7 +38,7 @@ public class SellerAddHandler implements Command {
     seller.setEmail(Prompt.inputString("이메일 : "));
     seller.setBirthday(Prompt.inputDate("생일 : "));
 
-    String passWord = checkPassword("암호 : ");
+    String passWord = SellerValidation.checkPassword("암호 : ");
     seller.setPassword(passWord);
 
     seller.setPhoto(Prompt.inputString("사진 : "));
@@ -56,10 +54,10 @@ public class SellerAddHandler implements Command {
     seller.setBusinessNumber(Prompt.inputString("사업자번호 : "));
     seller.setBusinessAddress(Prompt.inputString("사업장주소 : "));
     seller.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
-    seller.setBusinessOpeningHours(checkHour("시작시간(시) : "));
-    seller.setBusinessOpeningMinutes(checkMinute("시작시간(분) : "));
-    seller.setBusinessClosingHours(checkHour("종료시간(시) : "));
-    seller.setBusinessClosingMinutes(checkMinute("종료시간(분) : "));
+    seller.setBusinessOpeningHours(SellerValidation.checkHour("시작시간(시) : "));
+    seller.setBusinessOpeningMinutes(SellerValidation.checkMinute("시작시간(분) : "));
+    seller.setBusinessClosingHours(SellerValidation.checkHour("종료시간(시) : "));
+    seller.setBusinessClosingMinutes(SellerValidation.checkMinute("종료시간(분) : "));
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    // 예약리스트에 판매자 id를 갖는 bookingList add.
     //    bookingPrompt.addBookingListById(seller.getId());
@@ -73,60 +71,7 @@ public class SellerAddHandler implements Command {
 
   }
 
-  protected String checkPassword(String label) {
 
-    while(true) {
-
-      String passWord = Prompt.inputString(label);
-
-      String regExp_symbol = "([0-9].*[!,@,#,$,%,^,&,*,(,)])|([!,@,#,$,%,^,&,*,(,)].*[0-9])";
-      String regExp_alpha = "([a-z].*[A-Z])|([A-Z].*[a-z])";
-
-      Pattern pattern_symbol = Pattern.compile(regExp_symbol);
-      Pattern pattern_alpha = Pattern.compile(regExp_alpha);
-
-      Matcher matcher_symbol = pattern_symbol.matcher(passWord);
-      Matcher matcher_alpha = pattern_alpha.matcher(passWord);
-
-      if (passWord.length() < 8 || passWord.length() > 12) {
-        System.out.println("8 ~ 12자리 이내의 비밀번호를 입력하시오.");
-        continue;
-      } else {
-        if (matcher_symbol.find() == false) {
-          System.out.println("알파벳, 숫자 및 특수문자를 포함하시오.");
-          continue;
-        } else {
-          if (matcher_alpha.find() == false) {
-            System.out.println("알파벳 대소문자를 적어도 한개씩 포함하시오.");
-            continue;
-          }
-        }
-      }
-      return passWord;
-    }
-  }
-
-  protected int checkHour (String label) { 
-    while(true) {
-      int num = Prompt.inputInt(label);
-      if(num < 1 || num > 24) {  
-        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
-        continue;
-      }           
-      return num;       
-    }
-  }
-
-  protected int checkMinute (String label) {
-    while(true) {
-      int num = Prompt.inputInt(label);
-      if(num < 0 || num > 59) {  
-        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
-        continue;
-      }           
-      return num;       
-    }
-  }
 
 }
 

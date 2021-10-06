@@ -21,6 +21,7 @@ public class BookingListHandler implements Command {
     String nowLoginId = ClientApp.getLoginUser().getId();
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
     Loop : while(true) {
+
       if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
 
         System.out.println("[내 픽업 예약 목록]");
@@ -85,7 +86,7 @@ public class BookingListHandler implements Command {
         for (Booking booking : bookingList.getBooking() ) {
           System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-4d시 %d분\t%-10s\n",
               booking.getBookingNumber(),
-              booking.getMineId(),
+              booking.getId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),

@@ -1,9 +1,7 @@
 
 package com.eomcs.pms.dao.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -168,7 +166,6 @@ public class NetBookingDao implements BookingDao{
     }
     return statue;
   }
-  //  
   //  public void changeBookingUpdate(String id, Boolean bool) throws Exception {
   //    requestAgent.request("member.selectList", );
   //    for (Member member : memberList) {
@@ -177,61 +174,4 @@ public class NetBookingDao implements BookingDao{
   //      }
   //    }
   //  }
-
-  // 먼저 buyer 기준으로만.
-  @Override
-  public List<Booking> findBookingBuyer(int no, String firstId, String secondId, boolean delete) throws Exception {
-    List<Booking> twoBookingList = new ArrayList<>();
-    BookingList bookingList = findAll(firstId);
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getBookingNumber() == no) {
-        twoBookingList.add(booking);
-        if (delete) {
-          bookingList.getBooking().remove(booking);
-        }
-        bookingList = findAll(secondId);
-        for (Booking booking2 : bookingList.getBooking()) {
-          if (booking2.getMineId().equals(firstId)
-              && booking2.getCart().getStock().getProduct().getProductName().equals(
-                  booking.getCart().getStock().getProduct().getProductName())) {
-            twoBookingList.add(booking2);
-            if (delete) {
-              bookingList.getBooking().remove(booking2);
-            }
-            return twoBookingList;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  // 먼저 seller 기준으로만.
-  @Override
-  public List<Booking> findBookingSeller(int no, String firstId, String secondId, boolean delete) throws Exception {
-    List<Booking> twoBookingList = new ArrayList<>();
-    BookingList bookingList = findAll(firstId);
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getBookingNumber() == no) {
-        twoBookingList.add(booking);
-        if (delete) {
-          bookingList.getBooking().remove(booking);
-        }
-        bookingList = findAll(secondId);
-        for (Booking booking2 : bookingList.getBooking()) {
-          if (booking2.getCart().getSellerId().equals(firstId)
-              && booking2.getCart().getStock().getProduct().getProductName().equals(
-                  booking.getCart().getStock().getProduct().getProductName())) {
-            twoBookingList.add(booking2);
-            if (delete) {
-              bookingList.getBooking().remove(booking2);
-            }
-            return twoBookingList;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
 }

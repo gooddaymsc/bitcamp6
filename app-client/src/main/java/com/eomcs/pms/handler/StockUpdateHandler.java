@@ -26,8 +26,8 @@ public class StockUpdateHandler implements Command {
         return;
       }
 
-      int stocks = stockDao.checkNum2(String.format("수량(변경 전 : %d) : ", stock.getStocks()));
-      int price = stockDao.checkPrice(String.format("가격(변경 전 : %d) : ", stock.getPrice()));
+      int stocks = StockValidation.checkNum2(String.format("수량(변경 전 : %d) : ", stock.getStocks()));
+      int price = StockValidation.checkPrice(String.format("가격(변경 전 : %d) : ", stock.getPrice()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
