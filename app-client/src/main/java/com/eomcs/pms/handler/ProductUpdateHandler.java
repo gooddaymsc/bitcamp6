@@ -7,11 +7,9 @@ import com.eomcs.util.Prompt;
 public class ProductUpdateHandler implements Command {
 
   ProductDao productDao;
-  ProductPrompt productPrompt;
 
-  public ProductUpdateHandler (ProductDao productDao,  ProductPrompt productPrompt) {
+  public ProductUpdateHandler (ProductDao productDao) {
     this.productDao = productDao;
-    this.productPrompt = productPrompt;
   }
 
   @Override
@@ -23,8 +21,8 @@ public class ProductUpdateHandler implements Command {
     Product product =  productDao.findByNo(productNumber);
 
     String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
-    String type = productPrompt.checkType("주종(" + product.getProductType() + ")? ");
-    String subType = productPrompt.checkSubType2(("상세주종(" + product.getProductSubType() + ")? "),type);
+    String type = ProductValidation.checkType("주종(" + product.getProductType() + ")? ");
+    String subType = ProductValidation.checkSubType2(("상세주종(" + product.getProductSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
     String grapes = product.getVariety();
     if(type.equals("와인")) {
@@ -32,9 +30,9 @@ public class ProductUpdateHandler implements Command {
     }
     int volumes = Prompt.inputInt("용량(" + product.getVolume() +")?");
     float abv = Prompt.inputFloat("알콜도수(" + product.getAlcoholLevel() + ")? ");
-    int sweet = productPrompt.checkNum("당도(" + product.getSugerLevel() + ")? ");
-    int acidic = productPrompt.checkNum("산도(" + product.getAcidity() + ")? ");
-    int body = productPrompt.checkNum("바디감(" + product.getWeight() + ")? ");
+    int sweet = ProductValidation.checkNum("당도(" + product.getSugerLevel() + ")? ");
+    int acidic = ProductValidation.checkNum("산도(" + product.getAcidity() + ")? ");
+    int body = ProductValidation.checkNum("바디감(" + product.getWeight() + ")? ");
 
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");

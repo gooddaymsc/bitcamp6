@@ -1,9 +1,7 @@
 
 package com.eomcs.pms.dao.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -14,7 +12,6 @@ import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 import com.eomcs.request.RequestAgent;
-import com.eomcs.util.Prompt;
 
 public class NetCartDao implements CartDao{
   RequestAgent requestAgent;
@@ -39,19 +36,10 @@ public class NetCartDao implements CartDao{
     HashMap<String, String> params = new HashMap<>();
     params.put("id", id);
     requestAgent.request("cart.selectList", params);
-
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       throw new Exception("재고목록 불러오기 실패");
     }
     return requestAgent.getObject(CartList.class);
-  }
-  @Override
-  public List<CartList> findAll() throws Exception {
-    requestAgent.request("cart.selectAllList", null);
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-      throw new Exception("재고목록 불러오기 실패");
-    }
-    return new ArrayList<>(requestAgent.getObjects(CartList.class));
   }
 
   @Override
@@ -72,7 +60,9 @@ public class NetCartDao implements CartDao{
   @Override
   public void update(Cart cart) throws Exception {
     requestAgent.request("cart.update", cart);
-
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("장바구니 변경 실패");
+    }
   }
 
   @Override
@@ -82,7 +72,6 @@ public class NetCartDao implements CartDao{
     cart.setCartNumber(cartNo);
     requestAgent.request("cart.delete", cart);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //      System.out.println(requestAgent.getObject(String.class));
       throw new Exception("장바구니 삭제 실패");
     }  
   }
@@ -137,17 +126,6 @@ public class NetCartDao implements CartDao{
     return null;
   }
 
-  @Override
-  public int checkNum(String label) throws Exception {
-    while(true) {
-      int num = Prompt.inputInt(label);
-      if(num < 1) {  
-        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
-        continue;
-      } 
-      return num;       
-    }
-  }
   @Override
   public Seller findBySellerInfo(String id) throws Exception {
     HashMap<String,String> params = new HashMap<>();

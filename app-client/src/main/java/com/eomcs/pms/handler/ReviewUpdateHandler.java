@@ -9,25 +9,23 @@ import com.eomcs.util.Prompt;
 public class ReviewUpdateHandler implements Command {
 
   ProductDao productDao;
-  ProductPrompt productPrompt;
 
-  public ReviewUpdateHandler (ProductDao productDao, ProductPrompt productPrompt) {
+  public ReviewUpdateHandler (ProductDao productDao) {
     this.productDao = productDao;
-    this.productPrompt = productPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[Reviews 변경]");
     Product product =  productDao.findByNo((Integer)request.getAttribute("productNumber"));
-    Review review = productDao.findReviewById(product, ClientApp.getLoginUser().getId());
+    Review review = ProductValidation.findReviewById(product, ClientApp.getLoginUser().getId());
 
     if (!review.getId().equals(ClientApp.getLoginUser().getId())) {
       System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
       return;
     }
 
-    float scores = productPrompt.checkNum("맛은 어떠셨나요?(1점-5점):");
+    float scores = ProductValidation.checkNum("맛은 어떠셨나요?(1점-5점):");
     review.setScore(scores);
     String content = Prompt.inputString(String.format("내용(변경 전 : %s) : ", review.getComment()));
     review.setComment(content);

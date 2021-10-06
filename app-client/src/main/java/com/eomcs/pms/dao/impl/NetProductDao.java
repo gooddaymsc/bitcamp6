@@ -83,15 +83,16 @@ public class NetProductDao implements ProductDao{
     return requestAgent.getObject(Product.class);
   }
 
-  @Override
-  public Review findReviewById(Product product, String id) {
-    for (Review review : product.getReviewList()) {
-      if (review.getId().equals(id)) {
-        return review;
-      }
-    }
-    return null;
-  }
+  // ProductValidation 으로 migration
+  //  @Override
+  //  public Review findReviewById(Product product, String id) {
+  //    for (Review review : product.getReviewList()) {
+  //      if (review.getId().equals(id)) {
+  //        return review;
+  //      }
+  //    }
+  //    return null;
+  //  }
 
   @Override
   public void update(Product product) throws Exception {
@@ -157,7 +158,6 @@ public class NetProductDao implements ProductDao{
     }
   }
 
-  //findProductHandle
   @Override
   public HashMap<String, Seller> findByAdress (String address) throws Exception {
     HashMap<String, Seller> hashMap = new HashMap<>();
@@ -182,7 +182,6 @@ public class NetProductDao implements ProductDao{
     }
     return null;
   }
-
 
   @Override
   public boolean reviewIs(int productNumber, String id) throws Exception {

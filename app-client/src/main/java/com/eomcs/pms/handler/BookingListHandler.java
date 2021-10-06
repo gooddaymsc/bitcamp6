@@ -21,6 +21,7 @@ public class BookingListHandler implements Command {
     String nowLoginId = ClientApp.getLoginUser().getId();
     // 로그인한 판매자의 예약업뎃을 확인한 후에 알림을 끔. 
     Loop : while(true) {
+
       if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_BUYER) {
 
         System.out.println("[내 픽업 예약 목록]");
@@ -44,17 +45,17 @@ public class BookingListHandler implements Command {
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingHour(), booking.getBookingMinute(),
-              bookingDao.bookingStatue(booking));
+              BookingValidation.bookingStatue(booking));
         } 
         System.out.println();
 
         while(true) {
-          System.out.println("\n 예약 상세보기(U) / 상품 상세정보 보기(1) / 판매자에게 문의하기(2) / 이전(0)");
+          System.out.println("\n 예약 상세보기(R) / 상품 상세정보 보기(1) / 판매자에게 문의하기(2) / 이전(0)");
           String choose = Prompt.inputString("선택 > ");
           System.out.println();
           switch(choose) {
-            case "u" :
-            case "U" : request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
+            case "r" :
+            case "R" : request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
             case "1" : 
               String productName = Prompt.inputString("\n상품명 선택 / 이전(0) > ");
               if (productName.equals("0")) {
@@ -68,7 +69,6 @@ public class BookingListHandler implements Command {
           }
         }
       } else if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
-        //        memberPrompt.changeBookingUpdate(nowLoginId, false);
 
         System.out.println("[고객 예약 목록]\n");
         BookingList bookingList = bookingDao.findAll(nowLoginId);
@@ -85,23 +85,23 @@ public class BookingListHandler implements Command {
         for (Booking booking : bookingList.getBooking() ) {
           System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-4d시 %d분\t%-10s\n",
               booking.getBookingNumber(),
-              booking.getMineId(),
+              booking.getId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingHour(), booking.getBookingMinute(),
-              bookingDao.bookingStatue(booking));
+              BookingValidation.bookingStatue(booking));
 
         }
       }
       System.out.println();
       while(true) {
-        System.out.println("예약 상세보기(U) / 상품 상세정보 보기(1) / 예약자와 대화하기(2) / 이전(0)");
+        System.out.println("예약 상세보기(R) / 상품 상세정보 보기(1) / 예약자와 대화하기(2) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
         switch(choose) {
-          case "u" : 
-          case "U" :  request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
+          case "r" : 
+          case "R" :  request.getRequestDispatcher("/booking/detail").forward(request); continue Loop;
           case "1" : 
             String productName = Prompt.inputString("\n상품명 선택 (0.이전) > ");
             if (productName.equals("0")) {

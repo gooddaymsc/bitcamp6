@@ -30,8 +30,8 @@ public class StockAddHandler implements Command {
       return;
     }
     stock.setProduct(product);
-    stock.setPrice(stockDao.checkPrice("판매 가격 : "));
-    stock.setStocks(stockDao.checkNum("재고 수량 : "));
+    stock.setPrice(StockValidation.checkPrice("판매 가격 : "));
+    stock.setStocks(StockValidation.checkNum("재고 수량 : "));
     stock.setId(nowLoginId);
     stockDao.insert(stock);
     System.out.println("재고 등록을 완료하였습니다.\n");

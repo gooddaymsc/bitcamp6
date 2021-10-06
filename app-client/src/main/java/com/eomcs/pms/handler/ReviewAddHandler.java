@@ -12,10 +12,9 @@ public class ReviewAddHandler implements Command {
 
 
   ProductDao productDao;
-  ProductPrompt productPrompt;
-  public ReviewAddHandler (ProductDao productDao, ProductPrompt productPrompt) {
+
+  public ReviewAddHandler (ProductDao productDao) {
     this.productDao = productDao;
-    this.productPrompt = productPrompt;
   }
 
   @Override
@@ -30,7 +29,7 @@ public class ReviewAddHandler implements Command {
     }
 
     if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
-      float scores = productPrompt.checkNum("맛은 어떠셨나요?(1점-5점):");
+      float scores = ProductValidation.checkNum("맛은 어떠셨나요?(1점-5점):");
       review.setScore(scores); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));

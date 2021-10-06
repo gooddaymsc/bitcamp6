@@ -14,11 +14,9 @@ import com.eomcs.util.Prompt;
 public class RankingHandler implements Command {
 
   ProductDao productDao;
-  ProductPrompt productPrompt;
 
-  public RankingHandler(ProductDao productDao, ProductPrompt productPrompt) {
+  public RankingHandler(ProductDao productDao) {
     this.productDao = productDao;
-    this.productPrompt = productPrompt;
   }
 
   @Override
@@ -69,7 +67,7 @@ public class RankingHandler implements Command {
         int choose = Prompt.inputInt("선택 > ");
         switch (choose) {
           case 1 : 
-            int chooseNum = productPrompt.checkNum("상품선택(1-5위) > ");
+            int chooseNum = ProductValidation.checkNum("상품선택(1-5위) > ");
             System.out.printf("\n # 상품명 : %s \n", numberMap.get(chooseNum));
             request.setAttribute("productName", numberMap.get(chooseNum));
             System.out.println();

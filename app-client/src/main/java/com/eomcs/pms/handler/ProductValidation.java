@@ -1,12 +1,21 @@
 package com.eomcs.pms.handler;
 
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
+public class ProductValidation {
 
-public class ProductPrompt  {
+  public static Review findReviewById(Product product, String id) {
+    for (Review review : product.getReviewList()) {
+      if (review.getId().equals(id)) {
+        return review;
+      }
+    }
+    return null;
+  }
 
-  protected int checkNum(String label) {
+  public static int checkNum(String label) {
     while(true) {
       int num = Prompt.inputInt(label);
       if(num < 1 || num > 5) {  
@@ -17,7 +26,7 @@ public class ProductPrompt  {
     }
   }
 
-  protected String checkType(String label) {
+  public static String checkType(String label) {
     while(true) {
       System.out.println(" < 와인(1)/ 위스키(2)/ 브랜디,꼬냑(3) / 리큐르,보드카(4)/ 전통주(5) >");
       String productType = Prompt.inputString(label);
@@ -32,7 +41,7 @@ public class ProductPrompt  {
     }
   }
 
-  protected String checkSubType(String label, Product product) {
+  public static String checkSubType(String label, Product product) {
     while(true) {
       if(product.getProductType().equals("와인")) {
         System.out.println(" < 레드와인(1) / 화이트와인(2) / 로제와인(3) / 스위트와인(4) / 스파클링와인(5) >");  
@@ -90,7 +99,7 @@ public class ProductPrompt  {
     }
   }
 
-  protected String checkSubType2(String label, String type) {
+  public static String checkSubType2(String label, String type) {
     while(true) {
       if(type.equals("와인")) {
         System.out.println(" < 레드와인(1) / 화이트와인(2) / 로제와인(3) / 스위트와인(4) / 스파클링와인(5) >");  
@@ -148,6 +157,3 @@ public class ProductPrompt  {
     }
   }
 }
-
-
-

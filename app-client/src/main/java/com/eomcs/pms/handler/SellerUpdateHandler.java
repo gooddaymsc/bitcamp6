@@ -13,7 +13,6 @@ public class SellerUpdateHandler implements Command {
     this.sellerDao = sellerDao;
   }
 
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
@@ -32,10 +31,10 @@ public class SellerUpdateHandler implements Command {
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", seller.getBusinessAddress()));
       String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", seller.getBusinessPlaceNumber()));
 
-      int BusinessOpeningHours = Prompt.inputInt(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
-      int BusinessOpeningMinutes= Prompt.inputInt(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
-      int BusinessClosingHours = Prompt.inputInt(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
-      int BusinessClosingMinutes= Prompt.inputInt(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
+      int BusinessOpeningHours = SellerValidation.checkHour(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
+      int BusinessOpeningMinutes= SellerValidation.checkMinute(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
+      int BusinessClosingHours = SellerValidation.checkHour(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
+      int BusinessClosingMinutes= SellerValidation.checkMinute(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
@@ -64,7 +63,7 @@ public class SellerUpdateHandler implements Command {
 
       Seller seller = sellerDao.findById(id);
 
-      int level = checkLevel(String.format("등급(변경 전 : %d) : ", seller.getLevel())); 
+      int level = SellerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", seller.getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         seller.setLevel(level);
@@ -76,14 +75,5 @@ public class SellerUpdateHandler implements Command {
     }
   }
 
-  private int checkLevel(String label) {
-    while(true) {
-      int level = Prompt.inputInt(label);
-      if (level<1 || level>5) {
-        System.out.println("잘못된 등급입니다.\n1부터 5사이 값으로 입력해주세요.\n");
-        continue;
-      }
-      return level;
-    }
-  }
+
 }

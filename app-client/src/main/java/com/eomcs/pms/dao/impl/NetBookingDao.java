@@ -1,9 +1,7 @@
 
 package com.eomcs.pms.dao.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -44,13 +42,34 @@ public class NetBookingDao implements BookingDao{
     }
     return requestAgent.getObject(BookingList.class);
   }
+
   @Override
-  public List<BookingList> findAll() throws Exception {
-    requestAgent.request("booking.selectAllList", null);
+  public Booking findByNoId(int no, String id) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+    params.put("id", id);
+
+    requestAgent.request("booking.selectOne", params);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-      throw new Exception("재고목록 불러오기 실패");
+      return null;
     }
-    return new ArrayList<>(requestAgent.getObjects(BookingList.class));
+    return requestAgent.getObject(Booking.class);
+  }
+
+  @Override
+  public void update(Booking booking) throws Exception {
+    requestAgent.request("booking.update", booking);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("예약 변경 실패!");
+    }
+  }
+
+  @Override
+  public void delete(Booking booking) throws Exception {
+    requestAgent.request("booking.delete", booking);
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+      throw new Exception("예약 삭제 실패!");
+    }
   }
 
   @Override
@@ -70,7 +89,7 @@ public class NetBookingDao implements BookingDao{
   }
 
   @Override
-  public Cart findByCart (String ProductName, String nowLoginId) throws Exception {
+  public Cart findByCart(String ProductName, String nowLoginId) throws Exception {
     CartList cartList = cartDao.findAll(nowLoginId);
     for (Cart cart : cartList.getPrivacyCart()) {
       if (cart.getStock().getProduct().getProductName().equals(ProductName)) {
@@ -78,6 +97,14 @@ public class NetBookingDao implements BookingDao{
       }
     }
     return null;
+  }
+
+  @Override
+  public void deleteCart(String id, Cart cart) throws Exception {
+    requestAgent.request("cart.delete", cart);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("장바구니 삭제 실패!");
+    }
   }
 
   @Override
@@ -97,14 +124,6 @@ public class NetBookingDao implements BookingDao{
     }
   }
 
-  @Override
-  public void deleteCart(String id, Cart cart) throws Exception {
-    requestAgent.request("cart.delete", cart);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("장바구니 삭제 실패!");
-    }
-  }
-  // 판매자의 아이디를 이용해 영업시간 알아내서 분 비교하기
   @Override
   public int checkMinutes (String label, int hours, String sellerId) throws Exception {
     Seller seller = sellerDao.findById(sellerId);
@@ -133,19 +152,6 @@ public class NetBookingDao implements BookingDao{
       return minutes;
     }
   }
-
-  @Override
-  public String bookingStatue(Booking booking) {
-    String statue ;
-    if(booking.isConfirm() == true) {
-      statue = "픽업완료";
-    }
-    else {
-      statue = "픽업예정";
-    }
-    return statue;
-  }
-  //  
   //  public void changeBookingUpdate(String id, Boolean bool) throws Exception {
   //    requestAgent.request("member.selectList", );
   //    for (Member member : memberList) {

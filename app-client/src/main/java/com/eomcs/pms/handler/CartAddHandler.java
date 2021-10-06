@@ -1,5 +1,4 @@
 package com.eomcs.pms.handler;
-
 import java.sql.Date;
 import java.util.HashMap;
 import com.eomcs.pms.ClientApp;
@@ -20,21 +19,17 @@ public class CartAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[장바구니 등록]");
-    //List<Seller> serachList;
+
     Cart cart = new Cart();
-    String name = (String) request.getAttribute("productName");
-
     HashMap<String, Stock> hashStock = null;
-
     String storeName = null;
     int stocks;
 
     //search 후 등록
     if(search == true) {
-
       String store = (String) request.getAttribute("storeName");
       hashStock = cartDao.findBySeller((String) request.getAttribute("productName"));
-      //----------장바구니 추가
+
       while(true) {
         String input = Prompt.inputString("가게명을 선택하세요(0.취소) > ");
         if(input.equals("0")) { return; }
@@ -45,7 +40,7 @@ public class CartAddHandler implements Command {
           System.out.println("가게명을 다시 입력해주세요.\n");
           continue;
         } else {
-          stocks = cartDao.checkNum("수량 : ");
+          stocks = CartValidation.checkNum("수량 : ");
           if (stocks <= hashStock.get(storeName).getStocks()) {
             cart.setCartStocks(stocks);
             cart.setStock(hashStock.get(storeName));
@@ -79,7 +74,7 @@ public class CartAddHandler implements Command {
           continue;
         }
 
-        stocks = cartDao.checkNum("수량 : ");
+        stocks = CartValidation.checkNum("수량 : ");
         if (stocks <= hashStock.get(storeName).getStocks()) {
           cart.setCartStocks(stocks);
           break;

@@ -20,7 +20,7 @@ public class ReviewDeleteHandler implements Command {
     System.out.println("[Reviews 삭제]");
     Product product =  productDao.findByNo((Integer)request.getAttribute("productNumber"));
 
-    Review review = productDao.findReviewById(product, ClientApp.getLoginUser().getId());
+    Review review = ProductValidation.findReviewById(product, ClientApp.getLoginUser().getId());
 
     //    if (review == null) {
     //      System.out.println("해당 상품에 작성하신 리뷰가 없습니다.\n");
