@@ -2,9 +2,11 @@ package com.eomcs.pms.handler;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
@@ -14,25 +16,55 @@ public class CartAddHandler implements Command {
     this.cartDao = cartDao;
   }
 
+  static boolean search = false;    //productSearch 실행 전/후 구분
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[장바구니 등록]");
+    //List<Seller> serachList;
     Cart cart = new Cart();
     String name = (String) request.getAttribute("productName");
-    HashMap<String, Stock> hashStock = cartDao.findBySellerId(name);
 
-    if (hashStock.size() == 0) {
-      System.out.println("해당 상품을 갖는 판매자가 없습니다.\n");
-      return;
+
+    HashMap<String, Stock> hashStock = null;
+    String storeName;
+
+    if(search == false) {
+      hashStock = cartDao.findBySellerId(name);
+      if (hashStock.size() == 0) {
+        System.out.println("해당 상품을 갖는 판매자가 없습니다.\n");
+      } 
+
+      { storeName = Prompt.inputString("가게명을 입력해주세요>");
+      int stocks = cartDao.checkNum("수량 : ");
+
+      if (stocks <= hashStock.get(storeName).getStocks()) {
+        cart.setCartStocks(stocks);
+
+      } else {
+        System.out.println("주문수량이 재고를 초과하였습니다.\n");
+        return;
+      }
+      cart.setStock(hashStock.get(storeName));
+      cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
+      // 체크!!!
+      cart.setSellerId(hashStock.get(storeName).getId());
+      cart.setRegistrationDate(new Date(System.currentTimeMillis()));
+      cart.setId(nowLoginId);
+      cartDao.insert(cart);
+      System.out.println("장바구니가 등록되었습니다.\n");
+      // 나가기.
+
+      }
     }
-    String storeName = "";
-    int stocks;
+
+
+    {int stocks;
     //----------장바구니 추가
     while(true) {
 
       storeName = cartDao.findStoreName(hashStock.keySet(), Prompt.inputString("가게명을 선택하세요 > "));
-
       // 가게명이 유효하지 않을때 에러메세지 구현해야함
       if (storeName==null) {
         System.out.println("가게명을 다시 입력해주세요.\n");
@@ -58,5 +90,6 @@ public class CartAddHandler implements Command {
     cartDao.insert(cart);
     System.out.println("장바구니가 등록되었습니다.\n");
     // 나가기.
+    }
   }
 }

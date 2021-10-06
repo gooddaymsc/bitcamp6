@@ -33,16 +33,7 @@ public class ProductSearchHandler implements Command {
       return;
     }
 
-    //
-    //    String productName  = productPrompt.findByProduct2(productNumber);   
-    //    requestAgent.request("product.selectList", null);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("목록조회 실패!");
-    //      return;
-    //    }
-
     Collection<Product> productList = productDao.findAll();
-
 
     while(true) {
       int size = 1;
@@ -60,6 +51,8 @@ public class ProductSearchHandler implements Command {
       }
 
       System.out.println("[재고 찾기]");
+
+      //List<Seller> searchList = new ArrayList<>();
 
       if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
         System.out.println("로그인 후 이용가능합니다.\n");
@@ -95,6 +88,7 @@ public class ProductSearchHandler implements Command {
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
               productDao.findStockById(entry.getValue().getId(), productNumber).getStocks());
+          request.setAttribute("businessName",entry.getValue().getBusinessName());
         }
       }
 
@@ -106,7 +100,9 @@ public class ProductSearchHandler implements Command {
         int choose = Prompt.inputInt("선택 > ");
         System.out.println();
         switch(choose) {
-          case 1 : request.getRequestDispatcher("/cart/add").forward(request); return;
+          case 1 : 
+            CartAddHandler.search = true;
+            request.getRequestDispatcher("/cart/add").forward(request); return;
           case 2 : request.getRequestDispatcher("/message/add").forward(request); break;
           case 0 : return;
         }

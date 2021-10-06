@@ -69,6 +69,7 @@ public class NetCartDao implements CartDao{
     return requestAgent.getObject(Cart.class);
   }
 
+  @Override
   public void update(Cart cart) throws Exception {
     requestAgent.request("cart.update", cart);
 
@@ -110,7 +111,6 @@ public class NetCartDao implements CartDao{
     }
     return hashStock;
   }
-
   @Override
   public String findStoreName(Set<String> keySet, String storeName) {
     for (String str : keySet) {
