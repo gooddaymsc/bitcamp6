@@ -96,7 +96,6 @@ public class NetCartDao implements CartDao{
         if (stock.getProduct().getProductName().equals(stockName)) {
           //          isStock = true;
 
-
           Seller sellerInfo = sellerDao.findById(stockList.getId());;
           System.out.printf("가게명 : %s, 판매자 : %s, 재고 : %s, 금액 : %d, 주소 : %s, 판매자연락처 : %s\n", 
               sellerInfo.getBusinessName(),
@@ -111,6 +110,23 @@ public class NetCartDao implements CartDao{
     }
     return hashStock;
   }
+
+  @Override
+  public HashMap<String, Stock> findBySeller(String stockName) throws Exception {
+    HashMap<String, Stock> hashStock= new HashMap<>();
+    for (StockList stockList : stockDao.findAll()) {
+      for (Stock stock : stockList.getSellerStock()) {
+        if (stock.getProduct().getProductName().equals(stockName)) {
+
+          Seller sellerInfo = sellerDao.findById(stockList.getId());;
+          hashStock.put(sellerInfo.getBusinessName(), stock);
+        }
+      }
+    }
+    return hashStock;
+  }
+
+
   @Override
   public String findStoreName(Set<String> keySet, String storeName) {
     for (String str : keySet) {

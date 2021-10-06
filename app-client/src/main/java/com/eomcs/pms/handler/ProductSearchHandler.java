@@ -88,7 +88,7 @@ public class ProductSearchHandler implements Command {
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
               productDao.findStockById(entry.getValue().getId(), productNumber).getStocks());
-          request.setAttribute("businessName",entry.getValue().getBusinessName());
+          request.setAttribute("storeName",entry.getValue().getBusinessName());
         }
       }
 

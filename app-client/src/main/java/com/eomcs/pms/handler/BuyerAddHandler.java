@@ -1,8 +1,6 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
@@ -38,7 +36,7 @@ public class BuyerAddHandler implements Command {
     buyer.setNickname(Prompt.inputString("닉네임: "));
     buyer.setEmail(Prompt.inputString("이메일: "));
     buyer.setBirthday(Prompt.inputDate("생일: "));
-    String passWord = checkPassword("암호 : ");
+    String passWord = BuyerValidation.checkPassword("암호 : ");
     buyer.setPassword(passWord);
     buyer.setPhoto(Prompt.inputString("사진: "));
     buyer.setPhoneNumber(Prompt.inputString("전화: "));
@@ -81,38 +79,7 @@ public class BuyerAddHandler implements Command {
     System.out.println("회원가입이 완료되었습니다.");
   }
 
-  protected String checkPassword(String label) {
 
-    while(true) {
-
-      String passWord = Prompt.inputString(label);  
-
-      String regExp_symbol = "([0-9].*[!,@,#,$,%,^,&,*,(,)])|([!,@,#,$,%,^,&,*,(,)].*[0-9])";
-      String regExp_alpha = "([a-z].*[A-Z])|([A-Z].*[a-z])";
-
-      Pattern pattern_symbol = Pattern.compile(regExp_symbol);
-      Pattern pattern_alpha = Pattern.compile(regExp_alpha);
-
-      Matcher matcher_symbol = pattern_symbol.matcher(passWord);
-      Matcher matcher_alpha = pattern_alpha.matcher(passWord);
-
-      if (passWord.length() < 8 || passWord.length() > 12) {
-        System.out.println("8 ~ 12자리 이내의 비밀번호를 입력하시오.");
-        continue;
-      } else {
-        if (matcher_symbol.find() == false) {
-          System.out.println("알파벳, 숫자 및 특수문자를 포함하시오.");
-          continue;
-        } else {
-          if (matcher_alpha.find() == false) {
-            System.out.println("알파벳 대소문자를 적어도 한개씩 포함하시오.");
-            continue;
-          }
-        }
-      }
-      return passWord;
-    }
-  }
   //
   //  public int findDeletedByName(String name) {
   //    for (int i=0; i< deleteMemberList.size(); i++) {
