@@ -2,17 +2,16 @@ package com.eomcs.pms.handler;
 
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProductDetailHandler implements Command {
 
-  RequestAgent requestAgent;
-  ProductPrompt productPrompt;
-  public ProductDetailHandler (RequestAgent requestAgent, ProductPrompt productPrompt) {
-    this.requestAgent = requestAgent;
-    this.productPrompt = productPrompt;
+  ProductDao productDao;
+
+  public ProductDetailHandler (ProductDao productDao) {
+    this.productDao = productDao;
   }
 
   @Override
@@ -20,9 +19,11 @@ public class ProductDetailHandler implements Command {
     while(true) {
       System.out.println("[상품 상세보기]");
 
-      Product product = productPrompt.findByProduct(Prompt.inputString("\n상품명 > "));
+      Product product = productDao.findByNo(Prompt.inputInt("\n상품번호 > "));
 
-      if (product == null) {
+      request.setAttribute("productNumber", product.getProductNumber());
+
+      if (product.equals(null)) {
         System.out.println("입력하신 상품이 없습니다.\n");
         return;
       }
@@ -38,7 +39,9 @@ public class ProductDetailHandler implements Command {
       System.out.printf("산도: %d\n", product.getAcidity());
       System.out.printf("바디감: %d\n", product.getWeight());
       System.out.println();
+      request.setAttribute("productNumber", product.getProductNumber());
       request.setAttribute("productName", product.getProductName());
+
       //장바구니 등록 / 재고등록 / 리뷰보기(CRUD) 
 
       if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {

@@ -3,16 +3,16 @@ package com.eomcs.pms.handler;
 import java.util.Collection;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProductListHandler implements Command {
 
-  RequestAgent requestAgent;
+  ProductDao productDao;
 
-  public ProductListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ProductListHandler (ProductDao productDao) {
+    this.productDao = productDao;
   }
 
   @Override
@@ -29,13 +29,7 @@ public class ProductListHandler implements Command {
           "상품번호", "상품명", "주종 - 상세주종", "원산지", "용량", "당도", "산도", "바디감", "도수");
       System.out.println("--------------------------------------------------------------------------------------------------------");
 
-      requestAgent.request("product.selectList", null);
-      if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("목록조회 실패!");
-        return;
-      }
-
-      Collection<Product> productList = requestAgent.getObjects(Product.class);
+      Collection<Product> productList = productDao.findAll();
 
       for (Product product : productList) {
         System.out.printf(" %-6d\t%-6s\t%-2s-%s\t%-7s\t%-4d\t%-4d\t%-1d\t%-1d\t%-1.2f\n", 
@@ -58,7 +52,7 @@ public class ProductListHandler implements Command {
         while (true) {
           System.out.println("상세정보보기(R) / 검색(1)");
           // 상품 목록 후 판매자는 재고에 등록하게.
-          String choose = Prompt.inputString("선택 > ");
+          String choose = Prompt.inputString("선택 >");
           System.out.println();
           switch (choose) {
             case "0" : return;
@@ -72,7 +66,7 @@ public class ProductListHandler implements Command {
           (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN)){
         while (true) {
           System.out.println("상세정보보기(R) / 검색(1)");
-          String choose = Prompt.inputString("선택 > ");
+          String choose = Prompt.inputString("선택 >");
           System.out.println();
           switch (choose) {
             case "0" : return;

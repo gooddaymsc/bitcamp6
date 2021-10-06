@@ -1,34 +1,26 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
-  public BoardUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BoardDao boardDao;
+
+  public BoardUpdateHandler(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[게시글 변경]");
+
     int no = (int) request.getAttribute("no");
 
-    //    String no = Integer.toString(Prompt.inputInt("게시글 번호> ")); 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("board.selectOne", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.\n");
-      return;
-    }
-    Board board = requestAgent.getObject(Board.class);
+    Board board = boardDao.findByNo(no);
 
     if (!board.getWriter().equals(ClientApp.getLoginUser().getId())) {
       System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
@@ -44,11 +36,7 @@ public class BoardUpdateHandler implements Command {
       board.setContent(content);
       board.setTag(tag);
 
-      requestAgent.request("board.update", board);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("게시글 변경 실패!");
-        System.out.println(requestAgent.getObject(String.class));
-      }
+      boardDao.update(board);
       System.out.println("게시글을 변경하였습니다.\n");
       return;
     }

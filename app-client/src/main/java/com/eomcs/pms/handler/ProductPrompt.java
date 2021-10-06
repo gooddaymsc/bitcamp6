@@ -1,58 +1,31 @@
 package com.eomcs.pms.handler;
 
-import java.util.Collection;
-import java.util.List;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 
 public class ProductPrompt  {
 
-  RequestAgent requestAgent;
-  public ProductPrompt (RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }
-  protected List<Product> findProductList() throws Exception {
-    requestAgent.request("product.selectList", null);
-    if (requestAgent.getStatus().equals(requestAgent.FAIL)) {
-      System.out.println("상품 리스트 풀러오기 실패!");
-      return null;
-    }
-    Collection<Product> productList = requestAgent.getObjects(Product.class);
-    return (List<Product>) productList;
-  }
+  //  protected List<Product> findProductList() throws Exception {
+  //    requestAgent.request("product.selectList", null);
+  //    if (requestAgent.getStatus().equals(requestAgent.FAIL)) {
+  //      System.out.println("상품 리스트 풀러오기 실패!");
+  //      return null;
+  //    }
+  //    Collection<Product> productList = requestAgent.getObjects(Product.class);
+  //    return (List<Product>) productList;
+  //  }
 
-  protected int findProductIndex (String ProductName) throws Exception {
-    List<Product> productList = findProductList();
-    for (int i = 1; i < productList.size(); i++) {
-      if (productList.get(i).getProductName().equals(ProductName)) {
-        return i;
-      }
-    }
-
-    return -1;
-  }
-
-  public Product findByProduct (String ProductName) throws Exception {
-    List<Product> productList = findProductList();
-    for (Product product : productList) {
-      if (product.getProductName().equals(ProductName)) {
-        return product;
-      }
-    }
-    return null;
-  }
-
-  protected String findByProduct2 (String ProductName) throws Exception {
-    List<Product> productList = findProductList();
-    for (Product product : productList) {
-      if (product.getProductName().equals(ProductName)) {
-        return ProductName;
-      }
-    }
-    return null;
-  }
+  //  protected int findProductIndex (String ProductName) throws Exception {
+  //    List<Product> productList = findProductList();
+  //    for (int i = 1; i < productList.size(); i++) {
+  //      if (productList.get(i).getProductName().equals(ProductName)) {
+  //        return i;
+  //      }
+  //    }
+  //
+  //    return -1;
+  //  }
 
   protected int checkNum(String label) {
     while(true) {

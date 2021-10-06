@@ -3,15 +3,16 @@ package com.eomcs.pms.handler;
 import java.util.Collection;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardListHandler implements Command {
-  RequestAgent requestAgent;
 
-  public BoardListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BoardDao boardDao;
+
+  public BoardListHandler(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
 
   @Override
@@ -24,13 +25,7 @@ public class BoardListHandler implements Command {
         System.out.println("|| 이전(0)\n");
       }
 
-      requestAgent.request("board.selectList", null);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("목록조회실패!");
-        return;
-      }
-
-      Collection<Board> boardList = requestAgent.getObjects(Board.class);
+      Collection<Board> boardList = boardDao.findAll();
 
       System.out.printf("%-3s\t%-15s\t%-15s\t%-6s\t%-3s\t%-3s\t%-6s\n",
           "번호", "제목", "태그", "작성자", "조회수","좋아요", "등록일");

@@ -1,18 +1,17 @@
 package com.eomcs.pms.handler;
 
 import java.sql.Date;
-import java.util.Collection;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardAddHandler implements Command {
-  Collection<Board> productList ;
-  RequestAgent requestAgent;
 
-  public BoardAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  BoardDao boardDao;
+
+  public BoardAddHandler(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -29,13 +28,10 @@ public class BoardAddHandler implements Command {
     // Numbering은 마지막에
     //    board.setBoardNumber(totalNumberList.get(App.BOARD_NUMBER_INDEX));
     //    totalNumberList.set(App.BOARD_NUMBER_INDEX, board.getBoardNumber()+1);
-    requestAgent.request("board.insert", board);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("게시글 등록을 완료하였습니다.\n");
-      return;
-    }
-    System.out.println("게시글 등록 실패!");
+    boardDao.insert(board);
+
+    System.out.println("게시글 등록을 완료하였습니다.\n");
   }
 }
 

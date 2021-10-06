@@ -11,24 +11,62 @@ import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuFilter;
 import com.eomcs.menu.MenuGroup;
+import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.BookingDao;
+import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.CartDao;
+import com.eomcs.pms.dao.MemberDao;
+import com.eomcs.pms.dao.MessageDao;
+import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.dao.StockDao;
+import com.eomcs.pms.dao.impl.NetBoardDao;
+import com.eomcs.pms.dao.impl.NetBookingDao;
+import com.eomcs.pms.dao.impl.NetBuyerDao;
+import com.eomcs.pms.dao.impl.NetCartDao;
+import com.eomcs.pms.dao.impl.NetMemberDao;
+import com.eomcs.pms.dao.impl.NetMessageDao;
+import com.eomcs.pms.dao.impl.NetProductDao;
+import com.eomcs.pms.dao.impl.NetSellerDao;
+import com.eomcs.pms.dao.impl.NetStockDao;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
 import com.eomcs.pms.handler.BoardDetailHandler2;
+import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
+import com.eomcs.pms.handler.BoardSearchHandler2;
 import com.eomcs.pms.handler.BoardUpdateHandler;
+import com.eomcs.pms.handler.BookingAddHandler;
+import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BuyerAddHandler;
 import com.eomcs.pms.handler.BuyerDeleteHandler;
 import com.eomcs.pms.handler.BuyerDetailHandler;
 import com.eomcs.pms.handler.BuyerListHandler;
-import com.eomcs.pms.handler.BuyerLoginHandler;
 import com.eomcs.pms.handler.BuyerUpdateHandler;
+import com.eomcs.pms.handler.CartAddHandler;
+import com.eomcs.pms.handler.CartDeleteHandler;
+import com.eomcs.pms.handler.CartDetailHandler;
+import com.eomcs.pms.handler.CartListHandler;
+import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
+import com.eomcs.pms.handler.CommentAddHandler;
+import com.eomcs.pms.handler.CommentDeleteHandler;
+import com.eomcs.pms.handler.CommentFindHandler;
+import com.eomcs.pms.handler.CommentListHandler;
+import com.eomcs.pms.handler.CommentUpdateHandler;
+import com.eomcs.pms.handler.FindIdHandler;
+import com.eomcs.pms.handler.FindPasswordHandler;
+import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
+import com.eomcs.pms.handler.MessageAddHandler;
+import com.eomcs.pms.handler.MessageDeleteHandler;
+import com.eomcs.pms.handler.MessageDetailHandler;
+import com.eomcs.pms.handler.MessageListHandler;
+import com.eomcs.pms.handler.MessageUpdateHandler;
 import com.eomcs.pms.handler.ProductAddHandler;
 import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
@@ -36,12 +74,22 @@ import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.RankingHandler;
+import com.eomcs.pms.handler.ReviewAddHandler;
+import com.eomcs.pms.handler.ReviewDeleteHandler;
+import com.eomcs.pms.handler.ReviewFindHandler;
+import com.eomcs.pms.handler.ReviewListHandler;
+import com.eomcs.pms.handler.ReviewUpdateHandler;
 import com.eomcs.pms.handler.SellerAddHandler;
 import com.eomcs.pms.handler.SellerDeleteHandler;
 import com.eomcs.pms.handler.SellerDetailHandler;
 import com.eomcs.pms.handler.SellerListHandler;
-import com.eomcs.pms.handler.SellerLoginHandler;
 import com.eomcs.pms.handler.SellerUpdateHandler;
+import com.eomcs.pms.handler.StockAddHandler;
+import com.eomcs.pms.handler.StockDeleteHandler;
+import com.eomcs.pms.handler.StockDetailHandler;
+import com.eomcs.pms.handler.StockListHandler;
+import com.eomcs.pms.handler.StockUpdateHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -49,7 +97,6 @@ import com.eomcs.util.Prompt;
 public class ClientApp {
   RequestAgent requestAgent;
   HashMap<String, Command> commandMap = new HashMap<>();
-  static List<Member> memberList = new ArrayList<>();
 
   //권한에 따른 메뉴 구성 위함.
   class MenuItem extends Menu {
@@ -100,43 +147,103 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
+
+
+    //    requestAgent = new RequestAgent("192.168.0.103",8888);
     requestAgent = new RequestAgent("127.0.0.1",8888);
+    requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
 
+    MemberDao memberDao = new NetMemberDao(requestAgent);
+    BuyerDao buyerDao = new NetBuyerDao(requestAgent);
+    SellerDao sellerDao = new NetSellerDao(requestAgent);
+    BoardDao boardDao = new NetBoardDao(requestAgent);  
+    StockDao stockDao = new NetStockDao(requestAgent);
 
-    commandMap.put("/buyer/login", new BuyerLoginHandler(requestAgent));
-    commandMap.put("/seller/login", new SellerLoginHandler(requestAgent));
+    ProductPrompt productPrompt = new ProductPrompt();
+    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao);
 
-    commandMap.put("/buyer/add", new BuyerAddHandler(requestAgent));
-    commandMap.put("/buyer/list",   new BuyerListHandler(requestAgent));
-    commandMap.put("/buyer/detail", new BuyerDetailHandler(requestAgent));
-    commandMap.put("/buyer/update", new BuyerUpdateHandler(requestAgent));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(requestAgent));
+    CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
+    BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
+    MessageDao messageDao = new NetMessageDao(requestAgent);
+
+    commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
+    commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
+    commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerDao));
+    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
     commandMap.put("/login", new LoginHandler(requestAgent));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(requestAgent));
-    commandMap.put("/seller/list",   new SellerListHandler(requestAgent));
-    commandMap.put("/seller/detail", new SellerDetailHandler(requestAgent));
-    commandMap.put("/seller/update", new SellerUpdateHandler(requestAgent));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(requestAgent));
+    commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
+    commandMap.put("/seller/list",   new SellerListHandler(sellerDao));
+    commandMap.put("/seller/detail", new SellerDetailHandler(sellerDao));
+    commandMap.put("/seller/update", new SellerUpdateHandler(sellerDao));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerDao));
 
-    commandMap.put("/board/add",    new BoardAddHandler(requestAgent));
-    commandMap.put("/board/list",   new BoardListHandler(requestAgent));
-    commandMap.put("/board/update",   new BoardUpdateHandler(requestAgent));
-    commandMap.put("/board/detail",   new BoardDetailHandler(requestAgent));
-    commandMap.put("/board/detail2",   new BoardDetailHandler2(requestAgent));
-    commandMap.put("/board/update",   new BoardUpdateHandler(requestAgent));
-    commandMap.put("/board/delete",   new BoardDeleteHandler(requestAgent));
-    commandMap.put("/board/search",   new BoardSearchHandler(requestAgent));
+    commandMap.put("/board/add",    new BoardAddHandler(boardDao));
+    commandMap.put("/board/list",   new BoardListHandler(boardDao));
+    commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
+    commandMap.put("/board/detail",   new BoardDetailHandler(boardDao));
+    commandMap.put("/board/detail2",   new BoardDetailHandler2(boardDao));
+    commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
+    commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
+    commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
+    commandMap.put("/board/search2",   new BoardSearchHandler2(boardDao));
 
-    ProductPrompt productPrompt = new ProductPrompt(requestAgent);
-    commandMap.put("/product/add",   new ProductAddHandler(requestAgent));
-    commandMap.put("/product/list",   new ProductListHandler(requestAgent));
-    commandMap.put("/product/search", new ProductSearchHandler(requestAgent, productPrompt));
-    commandMap.put("/product/detail", new ProductDetailHandler(requestAgent, productPrompt));
-    commandMap.put("/product/update", new ProductUpdateHandler(requestAgent, productPrompt));
-    commandMap.put("/product/delete",   new ProductDeleteHandler(requestAgent));
 
+    commandMap.put("/comment/like",   new LikeHandler(boardDao));
+    commandMap.put("/comment/add",   new CommentAddHandler(boardDao));
+    commandMap.put("/comment/list",   new CommentListHandler(boardDao));
+    commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
+    commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));
+
+    commandMap.put("/product/add",   new ProductAddHandler(productDao, productPrompt));
+    commandMap.put("/product/list",   new ProductListHandler(productDao));
+    commandMap.put("/product/search", new ProductSearchHandler(productDao));
+    commandMap.put("/product/detail", new ProductDetailHandler(productDao));
+    commandMap.put("/product/update", new ProductUpdateHandler(productDao, productPrompt));
+    commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
+
+
+    commandMap.put("/review/add",   new ReviewAddHandler(productDao, productPrompt));
+    commandMap.put("/review/list",   new ReviewListHandler(productDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao, productPrompt));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
+
+    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
+    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+    commandMap.put("/findBoard", new BoardFindHandler(boardDao));
+    commandMap.put("/findComment", new CommentFindHandler(boardDao));
+    commandMap.put("/findReview",   new ReviewFindHandler(productDao));
+
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
+    commandMap.put("/stock/list",   new StockListHandler(stockDao));
+    commandMap.put("/stock/detail", new StockDetailHandler(stockDao));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockDao));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao));
+
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
+    commandMap.put("/cart/list",   new CartListHandler(cartDao));
+    commandMap.put("/cart/detail", new CartDetailHandler(cartDao));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartDao));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartDao));
+
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao));
+    commandMap.put("/booking/list",   new BookingListHandler(bookingDao, sellerDao));
+    //    commandMap.put("/booking/detail",   new BookingDetailHandler(allBookingList, bookingPrompt, memberPrompt));
+    //    commandMap.put("/booking/update", new BookingUpdateHandler(allBookingList, bookingPrompt, stockPrompt, memberPrompt));
+    //    commandMap.put("/booking/delete", new BookingDeleteHandler(allBookingList, bookingPrompt));
+
+    commandMap.put("/message/add",    new MessageAddHandler(messageDao, memberDao));
+    commandMap.put("/message/update",    new MessageUpdateHandler(messageDao));
+    commandMap.put("/message/list",   new MessageListHandler(messageDao));
+    commandMap.put("/message/detail", new MessageDetailHandler(messageDao));
+    commandMap.put("/message/delete", new MessageDeleteHandler(messageDao));
+
+    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
+    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+
+    commandMap.put("/ranking/list",   new RankingHandler(productDao, productPrompt));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;
@@ -153,11 +260,7 @@ public class ClientApp {
     mainMenuGroup.setMenuFilter(menuFilter);
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    MenuGroup loginGroup = new MenuGroup("로그인",ACCESS_LOGOUT);
-    loginGroup.setMenuFilter(menuFilter);
-    mainMenuGroup.add(loginGroup);
-    loginGroup.add(new MenuItem("일반회원", ACCESS_LOGOUT, "/buyer/login"));
-    loginGroup.add(new MenuItem("판매자", ACCESS_LOGOUT, "/seller/login"));
+    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/login"));
 
     mainMenuGroup.add(new Menu("로그아웃", ACCESS_BUYER | ACCESS_ADMIN | ACCESS_SELLER) {
 
@@ -229,23 +332,7 @@ public class ClientApp {
     mainMenuGroup.add(personMenu);
     personMenu.setMenuFilter(menuFilter);
 
-    personMenu.add(new MenuItem("My Store", ACCESS_SELLER, "/stock/list") {
-      @Override
-      public void execute() {
-        //        Member mine = memberPrompt.findById(App.getLoginUser().getId());
-        Member mine = new Member();
-        System.out.printf("<<\t%s\t>>\n", ((Seller) mine).getBusinessName());
-        System.out.printf("> 주소\t:\t%s\n", ((Seller) mine).getBusinessAddress());
-        System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
-        System.out.println();
-        Command command  = commandMap.get(menuId);
-        try {
-          command.execute(new CommandRequest(commandMap));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }});
-
+    personMenu.add(new MenuItem("My Store", ACCESS_SELLER, "/stock/list"));
     personMenu.add(new MenuItem("개인정보", ACCESS_BUYER, "/buyer/detail"));
     personMenu.add(new MenuItem("개인정보", ACCESS_SELLER, "/seller/detail"));
     personMenu.add(new MenuItem("내 게시글", "/findBoard"));
@@ -272,12 +359,9 @@ public class ClientApp {
   void service() throws Exception {
     notifyOnApplicationStarted();
     // 관리자 계정 생성
+    //    requestAgent.request("member.insert", new Member("관리자","1234", Menu.ACCESS_ADMIN));
 
     createMainMenu().execute();
-
-    // memberList.add(new Member("관리자","1234", Menu.ACCESS_ADMIN));
-
-    requestAgent.request("quit", null);
 
     Prompt.close();
 

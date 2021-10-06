@@ -1,17 +1,16 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class SellerDetailHandler implements Command {
-  RequestAgent requestAgent;
-  public SellerDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }  
+  SellerDao sellerDao;
+  public SellerDetailHandler(SellerDao sellerDao) {
+    this.sellerDao = sellerDao;
+  } 
 
 
   @Override
@@ -20,17 +19,7 @@ public class SellerDetailHandler implements Command {
       System.out.println("[개인정보 상세보기]");
       String id = ClientApp.getLoginUser().getId();
 
-      HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
-
-      //      requestAgent.request("member.seller.selectOne", params);
-      requestAgent.request("seller.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("아이디 조회 실패");
-        return;
-      }
-
-      Seller seller = requestAgent.getObject(Seller.class);
+      Seller seller = sellerDao.findById(id);
 
       System.out.printf("이름 : %s\n", seller.getName());
       System.out.printf("닉네임 : %s\n", seller.getNickname());
@@ -49,7 +38,6 @@ public class SellerDetailHandler implements Command {
       System.out.printf("등록일 : %s\n", seller.getRegisteredDate());
       System.out.printf("권한등급 : %d\n", seller.getAuthority());
       System.out.println();
-      request.setAttribute("seller", seller);
 
       while(true) {
         System.out.println("개인정보변경(U) / 회원탈퇴(D) / 이전(0)");
@@ -65,22 +53,14 @@ public class SellerDetailHandler implements Command {
       }
     } else {
       System.out.println("[판매자 상세보기] || 이전(0)");
-      String id = (String)request.getAttribute("Id");
+      String id = (String)request.getAttribute("id");
 
-      HashMap<String, String> params = new HashMap<>();
-      params.put("id", id);
+      Seller seller = sellerDao.findById(id);
 
-      //      requestAgent.request("member.seller.selectOne", params);
-
-      //      Member seller = findById((String)request.getAttribute("Id"));
-      requestAgent.request("seller.selectOne", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("해당 아이디의 판매자가 없습니다.\n");
+      if (seller == null) {
+        System.out.println("해당 아이디를 갖는 회원이 없습니다.\n");
         return;
       }
-
-      Seller seller = requestAgent.getObject(Seller.class);
-
       System.out.printf("이름 : %s\n", seller.getName());
       System.out.printf("닉네임 : %s\n", seller.getNickname());
       System.out.printf("등급 : %s\n", seller.getLevel());
@@ -96,7 +76,7 @@ public class SellerDetailHandler implements Command {
       System.out.printf("마감시간: %s시 %s분\n", 
           seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
 
-      request.setAttribute("seller", seller);
+      request.setAttribute("id", seller.getId());
 
       while(true) {
         System.out.println("\n등급변경(U) / 회원탈퇴(D)");

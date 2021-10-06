@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class BoardFindHandler implements Command {
 
-  RequestAgent requestAgent;
+  BoardDao boardDao;
 
-  public BoardFindHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public BoardFindHandler(BoardDao boardDao) {
+    this.boardDao = boardDao;
   }
 
   @Override
@@ -27,13 +27,8 @@ public class BoardFindHandler implements Command {
       List<Integer> boardNumList = new ArrayList<>();
       List<Board> boardMyList = new ArrayList<>();
 
-      requestAgent.request("board.selectList", null);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("목록조회실패!");
-        return;
-      }
+      Collection<Board> boardList = boardDao.findAll();
 
-      Collection<Board> boardList = requestAgent.getObjects(Board.class);
 
       for (Board board : boardList) {
         if (board.getWriter().equals(ClientApp.getLoginUser().getId())) {

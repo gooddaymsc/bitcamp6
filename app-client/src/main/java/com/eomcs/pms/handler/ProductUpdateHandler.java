@@ -1,31 +1,28 @@
 package com.eomcs.pms.handler;
 
+import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ProductUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  ProductDao productDao;
   ProductPrompt productPrompt;
-  public ProductUpdateHandler(RequestAgent requestAgent, ProductPrompt productPrompt) {
-    this.requestAgent = requestAgent;
+
+  public ProductUpdateHandler (ProductDao productDao,  ProductPrompt productPrompt) {
+    this.productDao = productDao;
     this.productPrompt = productPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[상품 변경]");
-    String productName = Prompt.inputString("\n상품명 > ");
-    //    String productName = (String) request.getAttribute("productName");
-    Product product =  productPrompt.findByProduct(productName);
 
-    if (product == null) {
-      System.out.println("해당 상품이 존재하지 않습니다.\n");
-      return;
-    }
+    int productNumber = (Integer) request.getAttribute("productNumber");
 
-    //    String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
+    Product product =  productDao.findByNo(productNumber);
+
+    String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
     String type = productPrompt.checkType("주종(" + product.getProductType() + ")? ");
     String subType = productPrompt.checkSubType2(("상세주종(" + product.getProductSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
@@ -42,7 +39,7 @@ public class ProductUpdateHandler implements Command {
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      //      product.setProductName(name);
+      product.setProductName(name);
       product.setProductType(type);
       product.setProductSubType(subType);
       product.setCountryOrigin(made);
@@ -55,13 +52,9 @@ public class ProductUpdateHandler implements Command {
       product.setSugerLevel(sweet);
       product.setAcidity(acidic);
       product.setWeight(body);
-      requestAgent.request("product.update", product);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("상품변경실패!");
-        return;
-      }
+
+      productDao.update(product);
       System.out.println("상품정보를 변경하였습니다.\n");
-      return;
     } else {
       System.out.println("상품정보 변경을 취소하였습니다.\n");
       return;
