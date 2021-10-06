@@ -1,7 +1,6 @@
 package com.eomcs.pms.dao.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.domain.Message;
 import com.eomcs.pms.domain.MessageList;
@@ -23,12 +22,6 @@ public class NetMessageDao implements MessageDao {
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       throw new Exception("예약 데이터 저장 실패");
     }
-  }
-
-  @Override
-  public List<MessageList> findAll() throws Exception {
-    // TODO Auto-generated method stub
-    return null;
   }
   @Override
   public MessageList findAll(String id) throws Exception {

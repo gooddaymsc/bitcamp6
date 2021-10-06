@@ -2,14 +2,17 @@ package com.eomcs.pms.handler;
 
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.CartDao;
+import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Cart;
 import com.eomcs.pms.domain.CartList;
 import com.eomcs.util.Prompt;
 
 public class CartListHandler implements Command {
   CartDao cartDao;
-  public CartListHandler(CartDao cartDao) {
+  SellerDao sellerDao;
+  public CartListHandler(CartDao cartDao, SellerDao sellerDao) {
     this.cartDao = cartDao;
+    this.sellerDao = sellerDao;
   }
   @Override
   public void execute(CommandRequest request) throws Exception{
@@ -29,7 +32,7 @@ public class CartListHandler implements Command {
       for (Cart cart : cartList.getPrivacyCart()) {
         System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6s\n", // 장바구니 번호, 가게명, 상품명, 수량, 총액, 등록일
             cart.getCartNumber(), 
-            cartDao.findBySellerInfo(cart.getSellerId()).getBusinessName(),
+            sellerDao.findById(cart.getSellerId()).getBusinessName(),
             cart.getSellerId(),
             cart.getStock().getProduct().getProductName(), 
             cart.getCartStocks(), 

@@ -223,7 +223,7 @@ public class ClientApp {
     commandMap.put("/stock/delete", new StockDeleteHandler(stockDao));
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
-    commandMap.put("/cart/list",   new CartListHandler(cartDao));
+    commandMap.put("/cart/list",   new CartListHandler(cartDao, sellerDao));
     commandMap.put("/cart/detail", new CartDetailHandler(cartDao));
     commandMap.put("/cart/update", new CartUpdateHandler(cartDao));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartDao));

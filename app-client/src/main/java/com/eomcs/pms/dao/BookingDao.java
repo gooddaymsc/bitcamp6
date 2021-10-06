@@ -11,11 +11,6 @@ public interface BookingDao {
   void insert(String id, Booking booking) throws Exception;
   List<BookingList> findAll() throws Exception;
   BookingList findAll(String id) throws Exception;
-  //  List<Product> findByKeyword() throws Exception;
-  //  Product findByNo(int no) throws Exception;
-  //  Product findByProduct(String name) throws Exception;
-  //  void update(Product product) throws Exception;
-  //  void delete(Product product) throws Exception;
   HashMap<Cart, Seller> findByCartList(String productName, String id) throws Exception;
   Cart findByCart(String productName, String nowLoginId) throws Exception;
   int checkHours(String string, String sellerId) throws Exception;

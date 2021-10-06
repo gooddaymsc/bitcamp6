@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
-
+import static com.eomcs.pms.handler.CartValidation.checkNum;
+import static com.eomcs.pms.handler.CartValidation.findStoreName;
 import java.sql.Date;
 import java.util.HashMap;
 import com.eomcs.pms.ClientApp;
@@ -31,7 +32,7 @@ public class CartAddHandler implements Command {
     //----------장바구니 추가
     while(true) {
 
-      storeName = cartDao.findStoreName(hashStock.keySet(), Prompt.inputString("가게명을 선택하세요 > "));
+      storeName = findStoreName(hashStock.keySet(), Prompt.inputString("가게명을 선택하세요 > "));
 
       // 가게명이 유효하지 않을때 에러메세지 구현해야함
       if (storeName==null) {
@@ -39,7 +40,7 @@ public class CartAddHandler implements Command {
         continue;
       }
 
-      stocks = cartDao.checkNum("수량 : ");
+      stocks = checkNum("수량 : ");
       if (stocks <= hashStock.get(storeName).getStocks()) {
         cart.setCartStocks(stocks);
         break;

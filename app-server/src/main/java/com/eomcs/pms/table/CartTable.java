@@ -20,7 +20,6 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
       case "cart.List.insert" : insertList(request, response); break;
       case "cart.insert" : insert(request, response); break;
       case "cart.selectList" : selectList(request, response); break;
-      case "cart.selectAllList" : selectAllList(request, response); break;
       case "cart.selectOne" : selectOne(request, response); break;
       case "cart.update" : update(request, response); break;
       case "cart.delete" : delete(request, response); break;
@@ -69,11 +68,6 @@ public class CartTable extends JsonDataTable<CartList> implements DataProcessor 
     CartList cartList = findById(id);
     response.setStatus(Response.SUCCESS);
     response.setValue(cartList);
-  }
-
-  private void selectAllList(Request request, Response response) throws Exception{
-    response.setStatus(Response.SUCCESS);
-    response.setValue(list);
   }
 
   private void selectOne(Request request, Response response) throws Exception{
