@@ -28,14 +28,8 @@ public class Message implements Serializable {
     return allContent;
   }
   public void setAllContent(String allContent) {
-    if (this.allContent.length()==0) {
-      this.allContent = this.id +" : "+ allContent ;
-    } else {
-      this.allContent += "/"+this.id +" : " + allContent;
-      //    this.allContent = allContent;
-    }
+    this.allContent = allContent;
   }
-
   public Date getRegistrationDate() {
     return registrationDate;
   }

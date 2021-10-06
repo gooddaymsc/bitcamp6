@@ -41,10 +41,16 @@ public class ReviewFindHandler implements Command {
 
     if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
       System.out.println();
-      int reviewNumber = Prompt.inputInt("리뷰번호 : ");
-      //리뷰번호의 상품명의 상품번호를 찾아 넘김
 
-      Product product = productDao.findByNo2(reviewNumber);
+      String productName = Prompt.inputString("상품명 > ");
+
+
+      Product product = productDao.findByProduct(productName);
+
+      if(product.equals(null)) {
+        System.out.println("잘못된 상품명입니다.");
+        return;
+      }
 
       request.setAttribute("productNumber", product.getProductNumber());
 

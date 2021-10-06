@@ -45,34 +45,6 @@ public class NetBookingDao implements BookingDao{
     return requestAgent.getObject(BookingList.class);
   }
 
-
-  // 먼저 buyer 기준으로만.
-  @Override
-  public List<Booking> findBookingBuyer(int no, String firstId, String secondId, boolean delete) throws Exception {
-    List<Booking> twoBookingList = new ArrayList<>();
-    BookingList bookingList = findAll(firstId);
-    for (Booking booking : bookingList.getBooking()) {
-      if (booking.getBookingNumber() == no) {
-        twoBookingList.add(booking);
-        if (delete) {
-          bookingList.getBooking().remove(booking);
-        }
-        bookingList = findAll(secondId);
-        for (Booking booking2 : bookingList.getBooking()) {
-          if (booking2.getMineId().equals(firstId)
-              && booking2.getCart().getStock().getProduct().getProductName().equals(
-                  booking.getCart().getStock().getProduct().getProductName())) {
-            twoBookingList.add(booking2);
-            if (delete) {
-              bookingList.getBooking().remove(booking2);
-            }
-            return twoBookingList;
-          }
-        }
-      }
-    }
-    return null;
-  }
   //  @Override
   //  public List<BookingList> findAll() throws Exception {
   //    requestAgent.request("booking.selectAllList", null);
@@ -98,9 +70,8 @@ public class NetBookingDao implements BookingDao{
   @Override
   public void delete(Booking booking) throws Exception {
     requestAgent.request("booking.delete", booking);
-
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-      throw new Exception("예약 삭제 실패");
+      throw new Exception("예약 삭제 실패!");
     }
   }
 
@@ -155,6 +126,7 @@ public class NetBookingDao implements BookingDao{
       throw new Exception("장바구니 삭제 실패!");
     }
   }
+
   // 판매자의 아이디를 이용해 영업시간 알아내서 분 비교하기
   @Override
   public int checkMinutes (String label, int hours, String sellerId) throws Exception {
@@ -206,7 +178,33 @@ public class NetBookingDao implements BookingDao{
   //    }
   //  }
 
-
+  // 먼저 buyer 기준으로만.
+  @Override
+  public List<Booking> findBookingBuyer(int no, String firstId, String secondId, boolean delete) throws Exception {
+    List<Booking> twoBookingList = new ArrayList<>();
+    BookingList bookingList = findAll(firstId);
+    for (Booking booking : bookingList.getBooking()) {
+      if (booking.getBookingNumber() == no) {
+        twoBookingList.add(booking);
+        if (delete) {
+          bookingList.getBooking().remove(booking);
+        }
+        bookingList = findAll(secondId);
+        for (Booking booking2 : bookingList.getBooking()) {
+          if (booking2.getMineId().equals(firstId)
+              && booking2.getCart().getStock().getProduct().getProductName().equals(
+                  booking.getCart().getStock().getProduct().getProductName())) {
+            twoBookingList.add(booking2);
+            if (delete) {
+              bookingList.getBooking().remove(booking2);
+            }
+            return twoBookingList;
+          }
+        }
+      }
+    }
+    return null;
+  }
 
   // 먼저 seller 기준으로만.
   @Override

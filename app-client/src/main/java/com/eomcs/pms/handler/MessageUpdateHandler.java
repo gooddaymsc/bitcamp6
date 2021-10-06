@@ -1,6 +1,6 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.App;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.domain.Message;
 import com.eomcs.pms.domain.MessageList;
@@ -14,27 +14,22 @@ public class MessageUpdateHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
-
+  public void execute(CommandRequest request) throws Exception {
+    String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[답장]");
 
     int No = (Integer) request.getAttribute("MessageNo");
 
-    MessageList messageList = findMessageListById(App.getLoginUser().getId());
+    MessageList messageList = messageDao.findAll(nowLoginId);
 
     for (Message message : messageList.getMessage()) {
       if (message.getMessageNumber()==No) {
-        String newStr = Prompt.inputString("내용 : ");
+        String newStr = message.getAllContent()+"/"+nowLoginId+" : "+Prompt.inputString("내용 : ");
         message.setAllContent(newStr);
-        memberPrompt.sendMessageUpdate(message.getTheOtherId());
-
-        MessageList messageList1 = findMessageListById(message.getTheOtherId());
-        Message message1 = findMessageById(messageList1, App.getLoginUser().getId());
-        message1.setAllContent(newStr);
-
+        //        memberPrompt.sendMessageUpdate(message.getTheOtherId());
+        messageDao.update(message);
       }
     }
-
     System.out.println("메세지를 보냈습니다.\n");
   }
 }

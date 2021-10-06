@@ -139,4 +139,13 @@ public class NetBoardDao implements BoardDao{
     return requestAgent.getObject(Comment.class);
   }
 
+  @Override
+  public void like(Board board) throws Exception {
+
+    requestAgent.request("board.comment.like", board);
+
+    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("좋아요 데이터 변경 실패");
+    }
+  }
 }

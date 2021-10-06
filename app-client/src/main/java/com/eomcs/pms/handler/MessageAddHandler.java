@@ -45,7 +45,7 @@ public class MessageAddHandler implements Command {
     Message message = new Message();
     message.setMessageNumber(messageList.getMessageListNumber());
     messageList.setMessageListNumber(messageList.getMessageListNumber()+1);
-    String newStr = Prompt.inputString("내용 : ");
+    String newStr = nowLoginId + " : " +Prompt.inputString("내용 : ");
     message.setAllContent(newStr);
     message.setTheOtherId(memberId);
     message.setId(nowLoginId);
@@ -62,7 +62,7 @@ public class MessageAddHandler implements Command {
     message1.setId(memberId);
     message1.setRegistrationDate(new Date(System.currentTimeMillis()));
 
-    messageDao.insert(message, memberId);
+    messageDao.insert(message1, memberId);
 
     //    memberPrompt.sendMessageUpdate(memberId);
     System.out.println("메세지를 보냈습니다.\n");

@@ -1,6 +1,6 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.App;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.domain.Message;
 import com.eomcs.pms.domain.MessageList;
@@ -16,13 +16,13 @@ public class MessageDetailHandler implements Command {
   public static int messageNumber = 1;
   @Override
   public void execute(CommandRequest request) throws Exception {
-    String nowLoginId = App.getLoginUser().getId();
+    String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[대화 상세보기]");
 
     int No = Prompt.inputInt("대화방 번호 > ");
     Loop : while(true) {
       boolean bool = false;
-      MessageList messageList = findMessageListById(nowLoginId);
+      MessageList messageList = messageDao.findAll(nowLoginId);
       for (Message message : messageList.getMessage()) {
         if (message.getMessageNumber()==No) {
           String[] str = message.getAllContent().split("/");

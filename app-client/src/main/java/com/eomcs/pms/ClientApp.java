@@ -34,8 +34,10 @@ import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
 import com.eomcs.pms.handler.BoardDetailHandler2;
+import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
+import com.eomcs.pms.handler.BoardSearchHandler2;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
@@ -55,10 +57,12 @@ import com.eomcs.pms.handler.Command;
 import com.eomcs.pms.handler.CommandRequest;
 import com.eomcs.pms.handler.CommentAddHandler;
 import com.eomcs.pms.handler.CommentDeleteHandler;
+import com.eomcs.pms.handler.CommentFindHandler;
 import com.eomcs.pms.handler.CommentListHandler;
 import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
 import com.eomcs.pms.handler.FindPasswordHandler;
+import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MessageAddHandler;
 import com.eomcs.pms.handler.MessageDeleteHandler;
@@ -70,7 +74,9 @@ import com.eomcs.pms.handler.ProductDeleteHandler;
 import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductPrompt;
+import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
 import com.eomcs.pms.handler.ReviewFindHandler;
@@ -152,11 +158,12 @@ public class ClientApp {
     MemberDao memberDao = new NetMemberDao(requestAgent);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
-    BoardDao boardDao = new NetBoardDao(requestAgent);    
-    ProductPrompt productPrompt = new ProductPrompt();
-    ProductDao productDao = new NetProductDao(requestAgent);
-
+    BoardDao boardDao = new NetBoardDao(requestAgent);  
     StockDao stockDao = new NetStockDao(requestAgent);
+
+    ProductPrompt productPrompt = new ProductPrompt();
+    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao);
+
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
@@ -183,7 +190,10 @@ public class ClientApp {
     commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
     commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
+    commandMap.put("/board/search2",   new BoardSearchHandler2(boardDao));
 
+
+    commandMap.put("/comment/like",   new LikeHandler(boardDao));
     commandMap.put("/comment/add",   new CommentAddHandler(boardDao));
     commandMap.put("/comment/list",   new CommentListHandler(boardDao));
     commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
@@ -191,7 +201,7 @@ public class ClientApp {
 
     commandMap.put("/product/add",   new ProductAddHandler(productDao, productPrompt));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
-    // commandMap.put("/product/search", new ProductSearchHandler(productDao, productPrompt));
+    commandMap.put("/product/search", new ProductSearchHandler(productDao));
     commandMap.put("/product/detail", new ProductDetailHandler(productDao));
     commandMap.put("/product/update", new ProductUpdateHandler(productDao, productPrompt));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
@@ -202,6 +212,11 @@ public class ClientApp {
     commandMap.put("/review/update",   new ReviewUpdateHandler(productDao, productPrompt));
 
     commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
+
+    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
+    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+    commandMap.put("/findBoard", new BoardFindHandler(boardDao));
+    commandMap.put("/findComment", new CommentFindHandler(boardDao));
     commandMap.put("/findReview",   new ReviewFindHandler(productDao));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
@@ -230,6 +245,8 @@ public class ClientApp {
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+
+    commandMap.put("/ranking/list",   new RankingHandler(productDao, productPrompt));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & getLoginUser().getAuthority()) > 0;

@@ -21,6 +21,7 @@ public class BoardDetailHandler implements Command {
 
     //    request.setAttribute("boardNo", board.getBoardNumber());
     Loop : while(true) {
+      board = boardDao.findByNo(board.getBoardNumber());
       System.out.printf("[게시글 상세보기]");
 
       if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
@@ -57,7 +58,7 @@ public class BoardDetailHandler implements Command {
         System.out.println();
         switch (choose2) {
           case "0" : return;
-          //                    case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
+          case "1" : request.getRequestDispatcher("/comment/like").forward(request); continue Loop;
           case "2" : request.getRequestDispatcher("/comment/add").forward(request); continue Loop;
           case "3" : request.getRequestDispatcher("/comment/update").forward(request); continue Loop;
           case "4" : request.getRequestDispatcher("/comment/delete").forward(request); continue Loop;

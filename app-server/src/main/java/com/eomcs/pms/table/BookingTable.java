@@ -110,7 +110,42 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
   }
 
   private void delete(Request request, Response response) {
+    Booking booking = request.getObject(Booking.class);
+    BookingList buyerBookingList = findById(booking.getMineId());
+    BookingList sellerBookingList = findById(booking.getCart().getSellerId());
 
+    int index = indexOf(booking.getBookingNumber(), booking.getMineId());
+    int index2 = indexOf(booking.getCart().getSellerId(), booking.getMineId());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 예약을 찾을 수 없습니다.");
+
+      buyerBookingList.getBooking().remove(index);
+      sellerBookingList.getBooking().remove(index2);
+
+      response.setStatus(Response.SUCCESS);
+    }
+  }
+
+  private int indexOf(int bookingNo, String id) {
+    BookingList buyerBookingList = findById(id);
+    for (int i = 0; i < buyerBookingList.getBooking().size(); i++) {
+      if (buyerBookingList.getBooking().get(i).getBookingNumber() == bookingNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private int indexOf(String sellerId, String id) {
+    BookingList sellerBookingList = findById(sellerId);
+    for (int i = 0; i < sellerBookingList.getBooking().size(); i++) {
+      if (sellerBookingList.getBooking().get(i).getCart().getId().equals(id)) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   private int indexOf(String id) {

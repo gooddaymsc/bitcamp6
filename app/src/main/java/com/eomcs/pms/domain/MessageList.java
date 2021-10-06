@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class MessageList extends Message implements Serializable {
+public class MessageList implements Serializable {
   private String id; // nowLoginId
   private List<Message> message = new ArrayList<>();
   private int messageListNumber = 1;
