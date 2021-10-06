@@ -21,7 +21,7 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
       case "booking.selectList" : selectList(request, response); break;
       case "booking.selectAllList" : selectAllList(request, response); break;
       case "booking.selectOne" : selectOne(request, response); break;
-      //      case "booking.update" : update(request, response); break;
+      case "booking.update" : update(request, response); break;
       case "booking.delete" : delete(request, response); break;
       case "booking.List.delete" : deleteList(request, response); break;
 
@@ -109,10 +109,34 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
     return null;
   }
 
+  private void update(Request request, Response response) {
+    Booking booking = request.getObject(Booking.class);
+    BookingList bookingList = findById(booking.getId());
+    BookingList bookingList2 = findById(booking.getTheOtherId());
+
+    int index = indexOf(booking.getBookingNumber(), booking.getId());
+    int index2 = indexOf(booking.getTheOtherId(), booking.getId());
+    Booking booking2 = bookingList2.getBooking().get(index2);
+    booking2.setBookingDate(booking.getBookingDate());
+    booking2.setBookingHour(booking.getBookingHour());
+    booking2.setBookingMinute(booking.getBookingMinute());
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 예약을 찾을 수 없습니다.");
+      return;
+    }
+
+    bookingList.getBooking().set(index, booking);
+    bookingList2.getBooking().set(index2, booking);
+
+    response.setStatus(Response.SUCCESS);
+  }
+
   private void delete(Request request, Response response) {
     Booking booking = request.getObject(Booking.class);
-    BookingList buyerBookingList = findById(booking.getId());
-    BookingList sellerBookingList = findById(booking.getTheOtherId());
+    BookingList bookingList = findById(booking.getId());
+    BookingList bookingList2 = findById(booking.getTheOtherId());
 
     int index = indexOf(booking.getBookingNumber(), booking.getId());
     int index2 = indexOf(booking.getTheOtherId(), booking.getId());
@@ -121,16 +145,16 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
       response.setStatus(Response.FAIL);
       response.setValue("해당 예약을 찾을 수 없습니다.");
     }
-    buyerBookingList.getBooking().remove(index);
-    sellerBookingList.getBooking().remove(index2);
+    bookingList.getBooking().remove(index);
+    bookingList2.getBooking().remove(index2);
 
     response.setStatus(Response.SUCCESS);
   }
 
   private int indexOf(int bookingNo, String id) {
-    BookingList buyerBookingList = findById(id);
-    for (int i = 0; i < buyerBookingList.getBooking().size(); i++) {
-      if (buyerBookingList.getBooking().get(i).getBookingNumber() == bookingNo) {
+    BookingList bookingList = findById(id);
+    for (int i = 0; i < bookingList.getBooking().size(); i++) {
+      if (bookingList.getBooking().get(i).getBookingNumber() == bookingNo) {
         return i;
       }
     }
@@ -138,9 +162,9 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
   }
 
   private int indexOf(String theOtherId, String id) {
-    BookingList sellerBookingList = findById(theOtherId);
-    for (int i = 0; i < sellerBookingList.getBooking().size(); i++) {
-      if (sellerBookingList.getBooking().get(i).getTheOtherId().equals(id)) {
+    BookingList bookingList = findById(id);
+    for (int i = 0; i < bookingList.getBooking().size(); i++) {
+      if (bookingList.getBooking().get(i).getTheOtherId().equals(theOtherId)) {
         return i;
       }
     }

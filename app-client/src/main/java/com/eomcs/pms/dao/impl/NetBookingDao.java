@@ -43,15 +43,6 @@ public class NetBookingDao implements BookingDao{
     return requestAgent.getObject(BookingList.class);
   }
 
-  //  @Override
-  //  public List<BookingList> findAll() throws Exception {
-  //    requestAgent.request("booking.selectAllList", null);
-  //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-  //      throw new Exception("재고목록 불러오기 실패");
-  //    }
-  //    return new ArrayList<>(requestAgent.getObjects(BookingList.class));
-  //  } 
-
   @Override
   public Booking findByNoId(int no, String id) throws Exception {
     HashMap<String, String> params = new HashMap<>();
@@ -63,6 +54,14 @@ public class NetBookingDao implements BookingDao{
       return null;
     }
     return requestAgent.getObject(Booking.class);
+  }
+
+  @Override
+  public void update(Booking booking) throws Exception {
+    requestAgent.request("booking.update", booking);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("예약 변경 실패!");
+    }
   }
 
   @Override
@@ -101,6 +100,14 @@ public class NetBookingDao implements BookingDao{
   }
 
   @Override
+  public void deleteCart(String id, Cart cart) throws Exception {
+    requestAgent.request("cart.delete", cart);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("장바구니 삭제 실패!");
+    }
+  }
+
+  @Override
   public int checkHours (String label, String sellerId) throws Exception {
     Seller seller = sellerDao.findById(sellerId);
     while(true) {
@@ -117,15 +124,6 @@ public class NetBookingDao implements BookingDao{
     }
   }
 
-  @Override
-  public void deleteCart(String id, Cart cart) throws Exception {
-    requestAgent.request("cart.delete", cart);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("장바구니 삭제 실패!");
-    }
-  }
-
-  // 판매자의 아이디를 이용해 영업시간 알아내서 분 비교하기
   @Override
   public int checkMinutes (String label, int hours, String sellerId) throws Exception {
     Seller seller = sellerDao.findById(sellerId);
@@ -153,18 +151,6 @@ public class NetBookingDao implements BookingDao{
       }
       return minutes;
     }
-  }
-
-  @Override
-  public String bookingStatue(Booking booking) {
-    String statue ;
-    if(booking.isConfirm() == true) {
-      statue = "픽업완료";
-    }
-    else {
-      statue = "픽업예정";
-    }
-    return statue;
   }
   //  public void changeBookingUpdate(String id, Boolean bool) throws Exception {
   //    requestAgent.request("member.selectList", );

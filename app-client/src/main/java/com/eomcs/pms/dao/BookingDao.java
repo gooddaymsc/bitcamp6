@@ -16,6 +16,6 @@ public interface BookingDao {
   int checkHours(String string, String sellerId) throws Exception;
   int checkMinutes(String string, int bookingHour, String sellerId) throws Exception;
   void deleteCart(String nowLoginId, Cart bookingProduct) throws Exception;
+  void update(Booking booking) throws Exception;
   //  void changeBookingUpdate(String sellerId, boolean b) throws Exception;
-  Object bookingStatue(Booking booking) throws Exception;
 }

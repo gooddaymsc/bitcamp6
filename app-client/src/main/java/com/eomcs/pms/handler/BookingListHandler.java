@@ -45,7 +45,7 @@ public class BookingListHandler implements Command {
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingHour(), booking.getBookingMinute(),
-              bookingDao.bookingStatue(booking));
+              BookingValidation.bookingStatue(booking));
         } 
         System.out.println();
 
@@ -69,7 +69,6 @@ public class BookingListHandler implements Command {
           }
         }
       } else if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
-        //        memberPrompt.changeBookingUpdate(nowLoginId, false);
 
         System.out.println("[고객 예약 목록]\n");
         BookingList bookingList = bookingDao.findAll(nowLoginId);
@@ -91,7 +90,7 @@ public class BookingListHandler implements Command {
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingHour(), booking.getBookingMinute(),
-              bookingDao.bookingStatue(booking));
+              BookingValidation.bookingStatue(booking));
 
         }
       }

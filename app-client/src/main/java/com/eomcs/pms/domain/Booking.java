@@ -15,7 +15,7 @@ public class Booking implements Serializable {
   private int bookingStocks;     // 예약 상품의 갯수
   private int bookingPrice;      // 총액
   private boolean confirm;        //픽업확정여부
-  private String theOtherId; // 대화상대.
+  private String theOtherId; // 상대방 id
   private String id;
 
 
