@@ -85,7 +85,7 @@ public class BookingListHandler implements Command {
         for (Booking booking : bookingList.getBooking() ) {
           System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-4d시 %d분\t%-10s\n",
               booking.getBookingNumber(),
-              booking.getId(),
+              booking.getTheOtherId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),

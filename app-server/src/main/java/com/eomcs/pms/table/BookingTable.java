@@ -120,6 +120,7 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
     booking2.setBookingDate(booking.getBookingDate());
     booking2.setBookingHour(booking.getBookingHour());
     booking2.setBookingMinute(booking.getBookingMinute());
+    booking2.setConfirm(booking.isConfirm());
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
