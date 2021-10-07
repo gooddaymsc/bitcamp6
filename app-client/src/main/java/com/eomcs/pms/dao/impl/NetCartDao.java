@@ -2,6 +2,7 @@
 package com.eomcs.pms.dao.impl;
 
 import java.util.HashMap;
+import java.util.Set;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
@@ -97,5 +98,43 @@ public class NetCartDao implements CartDao{
       }
     }
     return hashStock;
+  }
+
+  @Override
+  public HashMap<String, Stock> findBySeller(String stockName) throws Exception {
+    HashMap<String, Stock> hashStock= new HashMap<>();
+    for (StockList stockList : stockDao.findAll()) {
+      for (Stock stock : stockList.getSellerStock()) {
+        if (stock.getProduct().getProductName().equals(stockName)) {
+
+          Seller sellerInfo = sellerDao.findById(stockList.getId());;
+          hashStock.put(sellerInfo.getBusinessName(), stock);
+        }
+      }
+    }
+    return hashStock;
+  }
+
+
+  @Override
+  public String findStoreName(Set<String> keySet, String storeName) {
+    for (String str : keySet) {
+      if (str.equals(storeName)) {
+        return storeName;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public Seller findBySellerInfo(String id) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("id", id);
+
+    requestAgent.request("seller.selectOne", params);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+    return requestAgent.getObject(Seller.class);
   }
 }

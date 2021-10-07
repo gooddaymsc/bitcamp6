@@ -47,7 +47,7 @@ public class BuyerUpdateHandler implements Command {
 
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      int level = checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 
+      int level =BuyerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         buyer.setLevel(level);
@@ -56,17 +56,6 @@ public class BuyerUpdateHandler implements Command {
         return;
       }
       System.out.println("회원정보 변경을 취소하였습니다.\n");
-    }
-  }
-
-  private int checkLevel(String label) {
-    while(true) {
-      int level = Prompt.inputInt(label);
-      if (level<1 || level>5) {
-        System.out.println("잘못된 등급입니다.\n1부터 5사이 값으로 입력해주세요.\n");
-        continue;
-      }
-      return level;
     }
   }
 }
