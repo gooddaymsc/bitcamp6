@@ -29,8 +29,6 @@ public class BookingDetailHandler implements Command {
       int No = Prompt.inputInt("예약번호 :");
       Booking booking = bookingDao.findByNoId(No, nowLoginId);
 
-      //      BookingList bookingList = null;
-
       if (booking == null) {
         System.out.println("해당 상품의 예약이 없습니다.");
         return;
@@ -54,21 +52,15 @@ public class BookingDetailHandler implements Command {
         System.out.println(" 예약변경(U) / 예약취소(D) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
         System.out.println();
-        //                bookingList = bookingDao.findAll(id).getBooking();
-        //        bookingList = bookingDao.findAll(nowLoginId);
         switch(choose) {
           case "u" :
-          case "U" : 
+          case "U" : if(booking.isConfirm() == false) {
             request.getRequestDispatcher("/booking/update").forward(request); return;
-            //          case "R" : if(bookingList.get(0).isConfirm() == false) {
-            //            request.getRequestDispatcher("/booking/update").forward(request); return;
-            //          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
+          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
           case "d" :
-          case "D" : 
+          case "D" : if(booking.isConfirm() == false) {
             request.getRequestDispatcher("/booking/delete").forward(request); return;
-            //          case "D" : if(bookingList.get(0).isConfirm() == false) {
-            //            request.getRequestDispatcher("/booking/delete").forward(request); return;
-            //          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
+          } { System.out.println("이미 픽업을 완료한 상품입니다."); return;}
           case "0" : return;
         }
       }
@@ -88,7 +80,7 @@ public class BookingDetailHandler implements Command {
 
       Buyer buyer = buyerDao.findById(booking.getCart().getId());
 
-      System.out.printf("예약자: %s\n", booking.getId());
+      System.out.printf("예약자: %s\n", booking.getTheOtherId());
       System.out.printf("연락처: %s\n", buyer.getPhoneNumber());
       System.out.printf("상품명: %s\n", booking.getCart().getStock().getProduct().getProductName());
       System.out.printf("수량: %d\n", booking.getBookingStocks());
@@ -107,36 +99,36 @@ public class BookingDetailHandler implements Command {
         //        BookingList bookingList = bookingDao.findAll(id);
         switch(choose) {
           case "u" :
-          case "U" : request.getRequestDispatcher("/booking/update").forward(request); return;
-          //          case "U" : if(bookingList.get(0).isConfirm()==false){
-          //            request.getRequestDispatcher("/booking/update").forward(request); return;
-          //          }{ System.out.println("픽업이 완료된 예약은 변경이 불가합니다."); continue; }
-          //          case "c" :
-          //          case "C" :
-          //            if(bookingList.get(0).isConfirm() == false) {
-          //              String input = Prompt.inputString("정말 예약을 확정하시겠습니까?(y/N) ");
-          //              if(input.equalsIgnoreCase("y")) {
-          //                bookingList.get(0).setConfirm(true);
-          //                bookingList.get(1).setConfirm(true);
-          //                System.out.println("예약확정을 완료했습니다.\n");  
-          //                return;
-          //              } else if (input.equalsIgnoreCase("n")) {
-          //                System.out.println("예약 확정을 취소하였습니다.\n");
-          //                return;
-          //              }
-          //            }
-          //            if(bookingList.get(0).isConfirm() == true) {
-          //              String input = Prompt.inputString("정말 예약 확정을 취소하시겠습니까?(y/N) ");
-          //              if(input.equalsIgnoreCase("y")) {
-          //                bookingList.get(0).setConfirm(false);
-          //                bookingList.get(1).setConfirm(false);
-          //                System.out.println("예약확정을 취소했습니다.\n");  
-          //                return;
-          //              } else if (input.equalsIgnoreCase("n")) {
-          //                System.out.println("취소하였습니다.\n");
-          //                return;
-          //              }
-          //            } System.out.println("잘못입력하셨습니다."); continue;
+          case "U" : if(booking.isConfirm()==false){
+            request.getRequestDispatcher("/booking/update").forward(request); return;
+          }{ System.out.println("픽업이 완료된 예약은 변경이 불가합니다."); continue; }
+          case "c" :
+          case "C" :
+            if(booking.isConfirm() == false) {
+              String input = Prompt.inputString("정말 예약을 확정하시겠습니까?(y/N) ");
+              if(input.equalsIgnoreCase("y")) {
+                booking.setConfirm(true);
+                bookingDao.update(booking);
+                //상대방 booking 에도 예약 확정 해줘야함
+                System.out.println("예약확정을 완료했습니다.\n");  
+                return;
+              } else if (input.equalsIgnoreCase("n")) {
+                System.out.println("예약 확정을 취소하였습니다.\n");
+                return;
+              }
+            }
+            if(booking.isConfirm() == true) {
+              String input = Prompt.inputString("정말 예약 확정을 취소하시겠습니까?(y/N) ");
+              if(input.equalsIgnoreCase("y")) {
+                booking.setConfirm(false);
+                bookingDao.update(booking);
+                System.out.println("예약확정을 취소했습니다.\n");  
+                return;
+              } else if (input.equalsIgnoreCase("n")) {
+                System.out.println("취소하였습니다.\n");
+                return;
+              }
+            } System.out.println("잘못입력하셨습니다."); continue;
           case "0" : return;
         }
       }

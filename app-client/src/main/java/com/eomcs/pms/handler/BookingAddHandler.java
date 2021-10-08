@@ -70,6 +70,7 @@ public class BookingAddHandler implements Command {
     booking.setTheOtherId(sellerId);
     // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기 > 서버에서 구현해야함.
     sellerStock.setStocks(sellerStock.getStocks() - cart.getCartStocks());
+    stockDao.update(sellerStock);
     // 구매자 장바구니에서 예약(결제)한 상품 빼기
     bookingDao.deleteCart(nowLoginId, cart);
     // All.allBookingList에 구매자의 Id에 예약내역 추가.
