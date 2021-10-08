@@ -22,4 +22,5 @@ public interface ProductDao {
   HashMap<String,Seller> findByAdress(String address) throws Exception;
   Stock findStockById(String id, int productNumber) throws Exception;
   boolean reviewIs(int productNumber, String id) throws Exception;
+  boolean findPurchased(String productName) throws Exception;
 }

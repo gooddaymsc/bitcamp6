@@ -13,6 +13,7 @@ public class Review implements Serializable {
   private String comment;           //코멘트        
   private String id;                //작성자    
   private Date RegisteredDate;      //등록일
+  private boolean purchase;         //구매여부
 
 
   public int getNo() {
@@ -56,6 +57,15 @@ public class Review implements Serializable {
   }
   public void setRegisteredDate(Date registeredDate) {
     RegisteredDate = registeredDate;
+  }
+  public boolean isPurchase() {
+    if(isPurchase() == true) {
+      System.out.println("-실구매자");
+    }
+    return purchase;
+  }
+  public void setPurchase(boolean purchase) {
+    this.purchase = purchase;
   }
 
 

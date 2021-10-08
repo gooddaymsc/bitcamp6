@@ -21,7 +21,8 @@ public class ReviewAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception  {
     System.out.println("[Reviews 작성]");
     Review review = new Review();
-    Product product = productDao.findByNo((Integer) request.getAttribute("productNumber"));
+    String productName = (String) request.getAttribute("productNumber");
+    Product product = productDao.findByNo(Integer.parseInt(productName));
 
     if (productDao.reviewIs(product.getProductNumber(), ClientApp.getLoginUser().getId()) == false) {
       System.out.println("이미 등록한 리뷰가 있습니다.\n");
@@ -31,6 +32,7 @@ public class ReviewAddHandler implements Command {
     if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
       float scores = ProductValidation.checkNum("맛은 어떠셨나요?(1점-5점):");
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
+      review.setPurchase(productDao.findPurchased(productName));
       review.setNo(product.getTotalReviewNumber());
       review.setScore(scores); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);
@@ -49,6 +51,8 @@ public class ReviewAddHandler implements Command {
     } 
   }
 } 
+
+
 
 
 

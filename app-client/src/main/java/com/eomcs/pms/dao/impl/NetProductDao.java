@@ -3,9 +3,13 @@ package com.eomcs.pms.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.eomcs.pms.ClientApp;
+import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
+import com.eomcs.pms.domain.Booking;
+import com.eomcs.pms.domain.BookingList;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.pms.domain.Seller;
@@ -18,11 +22,13 @@ public class NetProductDao implements ProductDao{
   RequestAgent requestAgent;
   SellerDao sellerDao;
   StockDao stockDao;
+  BookingDao bookingDao;
 
-  public NetProductDao(RequestAgent requestAgent, SellerDao sellerDao,  StockDao stockDao ) {
+  public NetProductDao(RequestAgent requestAgent, SellerDao sellerDao,  StockDao stockDao, BookingDao bookingDao) {
     this.requestAgent =  requestAgent;
     this.sellerDao = sellerDao;
     this.stockDao = stockDao;
+    this.bookingDao = bookingDao;
   }
 
   @Override
@@ -187,6 +193,17 @@ public class NetProductDao implements ProductDao{
     for (Review review : product.getReviewList()) {
       if (review.getId().equals(id)) {
         return false;
+      }
+    }
+    return true;
+  }
+
+  public boolean findPurchased(String productName) throws Exception {
+    BookingList bookingList = bookingDao.findAll(ClientApp.getLoginUser().getId());
+    for(Booking booking : bookingList.getBooking()) {
+      if(booking.getCart().getStock().getProduct().getProductName().equals(productName)
+          && booking.isConfirm()== true) {
+        System.out.println("실구매자");  
       }
     }
     return true;

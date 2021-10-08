@@ -20,7 +20,7 @@ public class Product implements Serializable{
   private int weight;               //바디감
   private float rate;               //평점
   private int reviewerNum;          //댓글 남긴 사람의 
-  private int totalReviewNumber; 
+  private int totalReviewNumber = 1; 
 
   public int getProductNumber() {
     return productNumber;

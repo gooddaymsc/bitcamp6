@@ -160,11 +160,9 @@ public class ClientApp {
     SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new NetBoardDao(requestAgent);  
     StockDao stockDao = new NetStockDao(requestAgent);
-
-    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao);
-
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
+    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao, bookingDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));

@@ -39,13 +39,14 @@ public class ReviewListHandler implements Command {
               re.getScore(),
               re.getComment(),
               re.getId(),
+              re.isPurchase(),
               re.getRegisteredDate());
         }
       }
       System.out.println();
 
       if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
-        System.out.println("리뷰작성(C) / 리뷰변경(U) / 리뷰삭제(D) / 이전(0)");
+        System.out.println("리뷰작성(C) / 리뷰상세(P) / 리뷰변경(U) / 리뷰삭제(D) / 이전(0)");
         // 상품 목록 후 판매자는 재고에 등록하게.
         while (true) {
           String choose = Prompt.inputString("선택 > ");
@@ -53,6 +54,8 @@ public class ReviewListHandler implements Command {
           switch (choose) {
             case "C" :
             case "c" : request.getRequestDispatcher("/review/add").forward(request); continue Loop;
+            case "P" :
+            case "p" : request.getRequestDispatcher("/review/detail").forward(request); continue Loop;
             case "U" :
             case "u" : request.getRequestDispatcher("/review/update").forward(request); continue Loop;
             case "D" :
