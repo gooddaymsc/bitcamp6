@@ -37,6 +37,9 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
       case "member.selectOne" : selectOne(request, response); break;
       case "member.find" : find(request, response); break;
       case "member.update" : Update(request, response); break;
+      case "member.update.booking" : UpdateBooking(request, response); break;
+      case "member.update.comment" : UpdateComment(request, response); break;
+      case "member.update.message" : UpdateMessage(request, response); break;
       case "member.delete" : delete(request, response); break;
       case "member.Login" : selectOneByLogin(request, response); break;
 
@@ -92,6 +95,49 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor{
     } 
     list.set(index, member);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void UpdateBooking(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    Member member = findById(id);
+    member.setBookingUpdate(Boolean.parseBoolean(request.getParameter("boolean")));
+    int index = indexOf(id);
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 아이디의 회원이 없습니다.");
+      return;
+    } 
+    list.set(index, member);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void UpdateMessage(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    Member member = findById(id);
+    member.setMessageUpdate(Boolean.parseBoolean(request.getParameter("boolean")));
+    int index = indexOf(id);
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 아이디의 회원이 없습니다.");
+      return;
+    } 
+    list.set(index, member);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void UpdateComment(Request request, Response response) throws Exception {
+    String id = request.getParameter("id");
+    Member member = findById(id);
+    member.setCommentUpdate(Boolean.parseBoolean(request.getParameter("boolean")));
+    int index = indexOf(id);
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 아이디의 회원이 없습니다.");
+      return;
+    } 
+    list.set(index, member);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(member);
   }
   //
   private void delete(Request request, Response response) throws Exception {

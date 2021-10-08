@@ -4,15 +4,17 @@ import java.util.List;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
 public class BoardDetailHandler2  implements Command {
 
   BoardDao boardDao;
-
-  public BoardDetailHandler2(BoardDao boardDao) {
+  MemberDao memberDao;
+  public BoardDetailHandler2(BoardDao boardDao, MemberDao memberDao) {
     this.boardDao = boardDao;
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -47,9 +49,10 @@ public class BoardDetailHandler2  implements Command {
         System.out.println("|| 이전(0)\n");
       }
 
-      //      if (ClientApp.getLoginUser().isCommentUpdate()) {
-      //        memberPrompt.changeCommentUpdate(ClientApp.getLoginUser().getId(), false);
-      //      }
+      if (ClientApp.getLoginUser().isCommentUpdate() && 
+          board.getWriter().equals(ClientApp.getLoginUser().getId())) {
+        memberDao.changeCommentUpdate(board.getWriter(), false);
+      }
 
       System.out.printf("제목 : %s\n", board.getTitle());
       System.out.printf("내용 : %s\n", board.getContent());

@@ -183,9 +183,8 @@ public class ClientApp {
 
     commandMap.put("/board/add",    new BoardAddHandler(boardDao));
     commandMap.put("/board/list",   new BoardListHandler(boardDao));
-    commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
-    commandMap.put("/board/detail",   new BoardDetailHandler(boardDao));
-    commandMap.put("/board/detail2",   new BoardDetailHandler2(boardDao));
+    commandMap.put("/board/detail",   new BoardDetailHandler(boardDao, memberDao));
+    commandMap.put("/board/detail2",   new BoardDetailHandler2(boardDao, memberDao));
     commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
     commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
@@ -193,7 +192,7 @@ public class ClientApp {
 
 
     commandMap.put("/comment/like",   new LikeHandler(boardDao));
-    commandMap.put("/comment/add",   new CommentAddHandler(boardDao));
+    commandMap.put("/comment/add",   new CommentAddHandler(boardDao, memberDao));
     commandMap.put("/comment/list",   new CommentListHandler(boardDao));
     commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
     commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));

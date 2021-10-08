@@ -88,6 +88,7 @@ public class NetBoardDao implements BoardDao{
     requestAgent.request("board.comment.insert", comment);
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
       throw new Exception("댓글 데이터 저장 실패");   }
+
   }
 
   // 댓글 조회
