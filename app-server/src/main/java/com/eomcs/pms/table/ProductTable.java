@@ -124,6 +124,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
   private void reviewInsert (Request request, Response response) throws Exception {
     Review review = request.getObject(Review.class);
     Product product = findByNumber(review.getProductNo());
+    product.setTotalReviewNumber(product.getTotalReviewNumber()+1);
     product.getReviewList().add(review);
     response.setStatus(Response.SUCCESS);
   }
@@ -149,6 +150,7 @@ public class ProductTable extends JsonDataTable<Product> implements DataProcesso
 
     response.setStatus(Response.SUCCESS);
     response.setValue(product.getReviewList());
+
   }
 
   private void reviewUpdate(Request request, Response response) throws Exception{

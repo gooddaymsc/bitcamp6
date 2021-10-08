@@ -23,8 +23,8 @@ public class ReviewListHandler implements Command {
       int productNumber = (Integer)request.getAttribute("productNumber");
 
 
-      System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",
-          "평점", "코멘트", "작성자", "등록일");
+      System.out.printf("%-6s\t%-6s\t%-10s\t%-6s\t%-6s\n",
+          "no","평점", "코멘트", "작성자", "등록일");
       System.out.println("--------------------------------------------------------------------------");
 
       Collection<Review> reviewList = productDao.findAll(productNumber);
@@ -34,7 +34,8 @@ public class ReviewListHandler implements Command {
 
       } else {
         for(Review re : reviewList) {
-          System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\n",  
+          System.out.printf("%-6s\t%-6s\t%-10s\t%-6s\t%-6s\n",  
+              re.getNo(),
               re.getScore(),
               re.getComment(),
               re.getId(),

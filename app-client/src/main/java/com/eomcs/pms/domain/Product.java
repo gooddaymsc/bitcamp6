@@ -20,6 +20,7 @@ public class Product implements Serializable{
   private int weight;               //바디감
   private float rate;               //평점
   private int reviewerNum;          //댓글 남긴 사람의 
+  private int totalReviewNumber; 
 
   public int getProductNumber() {
     return productNumber;
@@ -113,7 +114,11 @@ public class Product implements Serializable{
   public void setReviewerNum(int reviewerNum) {
     this.reviewerNum = reviewerNum;
   }
-
-
+  public int getTotalReviewNumber() {
+    return totalReviewNumber;
+  }
+  public void setTotalReviewNumber(int totalReviewNumber) {
+    this.totalReviewNumber = totalReviewNumber;
+  }
 
 }

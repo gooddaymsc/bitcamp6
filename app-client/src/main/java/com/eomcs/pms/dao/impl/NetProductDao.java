@@ -118,9 +118,6 @@ public class NetProductDao implements ProductDao{
   @Override
   public void insertReview(Review review) throws Exception {
     requestAgent.request("addNumber.review", null);
-    int no = requestAgent.getObject(Integer.class);
-    review.setNo(no);
-
     requestAgent.request("product.review.insert", review);
 
     if(requestAgent.getStatus().equals(RequestAgent.FAIL)){

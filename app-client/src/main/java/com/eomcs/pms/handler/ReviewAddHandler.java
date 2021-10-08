@@ -30,9 +30,10 @@ public class ReviewAddHandler implements Command {
 
     if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
       float scores = ProductValidation.checkNum("맛은 어떠셨나요?(1점-5점):");
+      review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
+      review.setNo(product.getTotalReviewNumber());
       review.setScore(scores); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);
-      review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
       review.setProductNo(product.getProductNumber());
       review.setReviewProduct(product.getProductName());
       review.setRegisteredDate(new Date(System.currentTimeMillis()));
