@@ -198,15 +198,16 @@ public class NetProductDao implements ProductDao{
     return true;
   }
 
+  @Override
   public boolean findPurchased(String productName) throws Exception {
     BookingList bookingList = bookingDao.findAll(ClientApp.getLoginUser().getId());
     for(Booking booking : bookingList.getBooking()) {
-      if(booking.getCart().getStock().getProduct().getProductName().equals(productName)
-          && booking.isConfirm()== true) {
-        System.out.println("실구매자");  
-      }
+      if(booking.getCart().getStock().getProduct().getProductName().equals(productName) &&
+          booking.isConfirm() == true) { 
+        return true;
+      }    
     }
-    return true;
+    return false;
   }
 }
 

@@ -34,12 +34,13 @@ public class ReviewListHandler implements Command {
 
       } else {
         for(Review re : reviewList) {
-          System.out.printf("%-6s\t%-6s\t%-10s\t%-6s\t%-6s\n",  
+          System.out.printf("%-6s\t%-6s\t%-10s\t%-6s\t%-6s\t%-6s\n",  
               re.getNo(),
               re.getScore(),
               re.getComment(),
               re.getId(),
               re.isPurchase(),
+              //ProductValidation.purchaseStatus(re),
               re.getRegisteredDate());
         }
       }
@@ -68,7 +69,7 @@ public class ReviewListHandler implements Command {
         return;
       }
     }
-  }
+  } 
 }
 
 

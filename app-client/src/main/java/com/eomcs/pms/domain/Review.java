@@ -59,14 +59,9 @@ public class Review implements Serializable {
     RegisteredDate = registeredDate;
   }
   public boolean isPurchase() {
-    if(isPurchase() == true) {
-      System.out.println("-실구매자");
-    }
     return purchase;
   }
   public void setPurchase(boolean purchase) {
     this.purchase = purchase;
   }
-
-
 }

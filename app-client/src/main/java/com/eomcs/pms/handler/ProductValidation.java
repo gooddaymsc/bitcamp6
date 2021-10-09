@@ -15,6 +15,16 @@ public class ProductValidation {
     return null;
   }
 
+  public static String purchaseStatus(Review re) {
+    String statue;
+    if(re.isPurchase() == true){
+      statue = "[실구매자]";
+    } else {
+      statue = "_";
+    }
+    return statue;
+  }
+
   public static int checkNum(String label) {
     while(true) {
       int num = Prompt.inputInt(label);
@@ -25,7 +35,6 @@ public class ProductValidation {
       return num;       
     }
   }
-
   public static String checkType(String label) {
     while(true) {
       System.out.println(" < 와인(1)/ 위스키(2)/ 브랜디,꼬냑(3) / 리큐르,보드카(4)/ 전통주(5) >");
