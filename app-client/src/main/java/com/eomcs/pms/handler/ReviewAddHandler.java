@@ -31,7 +31,7 @@ public class ReviewAddHandler implements Command {
     if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER) {
       float scores = ProductValidation.checkNum("맛은 어떠셨나요?(1점-5점):");
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
-      review.setPurchase(productDao.findPurchased(product.getProductName()));
+      review.setPurchase(productDao.findPurchased(product.getProductName())); 
       review.setNo(product.getTotalReviewNumber());
       review.setScore(scores); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);
@@ -43,7 +43,6 @@ public class ReviewAddHandler implements Command {
       productDao.insertReview(review);
 
       System.out.println("상품평 등록을 완료하였습니다.\n");
-      System.out.println(review.isPurchase());
       return;
 
     } else {

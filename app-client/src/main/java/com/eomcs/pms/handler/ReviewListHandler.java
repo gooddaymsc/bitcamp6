@@ -39,8 +39,7 @@ public class ReviewListHandler implements Command {
               re.getScore(),
               re.getComment(),
               re.getId(),
-              re.isPurchase(),
-              //ProductValidation.purchaseStatus(re),
+              ProductValidation.purchaseStatus(re),
               re.getRegisteredDate());
         }
       }

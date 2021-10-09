@@ -20,7 +20,7 @@ public class ProductValidation {
     if(re.isPurchase() == true){
       statue = "[실구매자]";
     } else {
-      statue = "_";
+      statue = "";
     }
     return statue;
   }
