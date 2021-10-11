@@ -44,7 +44,6 @@ public class Prompt {
     } else {
       return input;
     }
-
   }
 }
 

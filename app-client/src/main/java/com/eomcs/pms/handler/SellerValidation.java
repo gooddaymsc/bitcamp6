@@ -71,4 +71,35 @@ public class SellerValidation {
       return level;
     }
   }
+
+  public static String openingTime(String label) throws Exception{
+    while(true) {
+      String time = Prompt.inputString(label);
+      String temp[] = time.split(":");
+      int hour = Integer.parseInt(temp[0]);
+      int minute = Integer.parseInt(temp[1]);
+
+      if((hour >= 1 && hour <= 24) && (minute >= 0 && minute <= 59)) {  
+        return time;
+      } else{  
+        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
+        continue;
+      }
+    }
+  }
+  public static String closingTime(String label) {
+    while(true) {
+      String time = Prompt.inputString(label);
+      String temp[] = time.split(":");
+      int hour = Integer.parseInt(temp[0]);
+      int minute = Integer.parseInt(temp[1]);
+
+      if((hour >= 1 && hour <= 24) && (minute >= 0 && minute <= 59)) {  
+        return time;
+      } else{  
+        System.out.println("입력하신 수는 유효하지 않습니다.\n"); 
+        continue;
+      }
+    }
+  }
 }

@@ -53,11 +53,30 @@ public class SellerAddHandler implements Command {
     seller.setBusinessName(Prompt.inputString("가게명 : "));
     seller.setBusinessNumber(Prompt.inputString("사업자번호 : "));
     seller.setBusinessAddress(Prompt.inputString("사업장주소 : "));
-    seller.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));
-    seller.setBusinessOpeningHours(SellerValidation.checkHour("시작시간(시) : "));
-    seller.setBusinessOpeningMinutes(SellerValidation.checkMinute("시작시간(분) : "));
-    seller.setBusinessClosingHours(SellerValidation.checkHour("종료시간(시) : "));
-    seller.setBusinessClosingMinutes(SellerValidation.checkMinute("종료시간(분) : "));
+    seller.setBusinessPlaceNumber(Prompt.inputString("사업장번호 : "));  
+    while(true) {
+      try{
+        seller.setBusinessOpeningTime(SellerValidation.openingTime("오픈시간(예 10:50) : "));    
+        break;
+      } catch(Exception e){
+        System.out.println("예시대로 입력해주세요.");
+      }
+    }
+    while(true) {
+      try{
+        seller.setBusinessClosingTime(SellerValidation.closingTime("마감시간(예 10:50) : "));
+        break;
+      } catch(Exception e){
+        System.out.println("예시대로 입력해주세요.");
+      }
+    }
+
+    //    seller.setBusinessOpeningHours(SellerValidation.checkHour(hour));
+    //    seller.setBusinessOpeningHours(SellerValidation.checkHour(minute));
+    //    seller.setBusinessOpeningMinutes(SellerValidation.checkMinute("시작시간(분) : "));
+    //    seller.setBusinessClosingHours(SellerValidation.checkHour("종료시간(시) : "));
+    //    seller.setBusinessClosingMinutes(SellerValidation.checkMinute("종료시간(분) : "));
+
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    // 예약리스트에 판매자 id를 갖는 bookingList add.
     //    bookingPrompt.addBookingListById(seller.getId());

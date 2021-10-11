@@ -30,11 +30,8 @@ public class SellerUpdateHandler implements Command {
       String bussinessNo = Prompt.inputString(String.format("사업자번호(변경 전 : %s) : ", seller.getBusinessNumber()));
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", seller.getBusinessAddress()));
       String bussinessTel = Prompt.inputString(String.format("사업장번호(변경 전 : %s) : ", seller.getBusinessPlaceNumber()));
-
-      int BusinessOpeningHours = SellerValidation.checkHour(String.format("영업시간(시)(변경 전 : %s) : ", seller.getBusinessOpeningHours()));
-      int BusinessOpeningMinutes= SellerValidation.checkMinute(String.format("영업시간(분)(변경 전 : %s) : ", seller.getBusinessOpeningMinutes()));
-      int BusinessClosingHours = SellerValidation.checkHour(String.format("마감시간(시)(변경 전 : %s) : ", seller.getBusinessClosingHours()));
-      int BusinessClosingMinutes= SellerValidation.checkMinute(String.format("마감시간(분)(변경 전 : %s) : ", seller.getBusinessClosingMinutes()));
+      String BusinessOpeningTimes = SellerValidation.openingTime(String.format("오픈시간(변경 전: %s) : ", seller.getBusinessOpeningTime()));
+      String BusinessClosingTimes = SellerValidation.closingTime(String.format("마감시간(변경 전: %s) : ", seller.getBusinessClosingTime()));    
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
@@ -48,10 +45,8 @@ public class SellerUpdateHandler implements Command {
         seller.setBusinessNumber(bussinessNo);
         seller.setBusinessAddress(bussinessAddress);
         seller.setBusinessPlaceNumber(bussinessTel);  
-        seller.setBusinessOpeningHours(BusinessOpeningHours);  
-        seller.setBusinessOpeningMinutes(BusinessOpeningMinutes);  
-        seller.setBusinessClosingHours(BusinessClosingHours);  
-        seller.setBusinessClosingMinutes(BusinessClosingMinutes);  
+        seller.setBusinessOpeningTime(BusinessOpeningTimes);
+        seller.setBusinessClosingTime(BusinessClosingTimes);
         sellerDao.update(seller);
         System.out.println("개인 정보를 변경하였습니다.\n");
         return;

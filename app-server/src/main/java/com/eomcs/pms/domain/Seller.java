@@ -10,8 +10,8 @@ public class Seller extends Member {
   private int businessOpeningMinutes;
   private int businessClosingHours;
   private int businessClosingMinutes;
-
-  //  private String businessHours;
+  private String businessOpeningTime;
+  private String businessClosingTime;
 
 
   public int getBusinessOpeningHours() {
@@ -62,5 +62,18 @@ public class Seller extends Member {
   public void setBusinessPlaceNumber(String businessPlaceNumber) {
     this.businessPlaceNumber = businessPlaceNumber;
   }
+  public String getBusinessOpeningTime() {
+    return businessOpeningTime;
+  }
+  public void setBusinessOpeningTime(String businessOpeningTime) {
+    this.businessOpeningTime = businessOpeningTime;
+  }
+  public String getBusinessClosingTime() {
+    return businessClosingTime;
+  }
+  public void setBusinessClosingTime(String businessClosingTime) {
+    this.businessClosingTime = businessClosingTime;
+  }
+
 
 }

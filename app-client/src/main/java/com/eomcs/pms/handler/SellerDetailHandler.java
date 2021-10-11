@@ -31,10 +31,8 @@ public class SellerDetailHandler implements Command {
       System.out.printf("사업자번호 : %s\n", seller.getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", seller.getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", seller.getBusinessPlaceNumber());
-      System.out.printf("오픈시간: %s시 %s분\n", 
-          seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
-      System.out.printf("마감시간: %s시 %s분\n", 
-          seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
+      System.out.printf("오픈시간: %s\n", seller.getBusinessOpeningTime());
+      System.out.printf("마감시간: %s\n", seller.getBusinessClosingTime());
       System.out.printf("등록일 : %s\n", seller.getRegisteredDate());
       System.out.printf("권한등급 : %d\n", seller.getAuthority());
       System.out.println();
@@ -71,10 +69,8 @@ public class SellerDetailHandler implements Command {
       System.out.printf("사업자번호 : %s\n", seller.getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", seller.getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", seller.getBusinessPlaceNumber());
-      System.out.printf("오픈시간: %s시 %s분\n", 
-          seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
-      System.out.printf("마감시간: %s시 %s분\n", 
-          seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
+      System.out.printf("오픈시간: %s\n", seller.getBusinessOpeningTime());
+      System.out.printf("마감시간: %s\n", seller.getBusinessClosingTime());
 
       request.setAttribute("id", seller.getId());
 
