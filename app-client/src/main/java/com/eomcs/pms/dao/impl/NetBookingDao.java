@@ -108,56 +108,32 @@ public class NetBookingDao implements BookingDao{
   }
 
   @Override
-  public int checkHours (String label, String sellerId) throws Exception {
+  public String checkTime (String label, String sellerId) throws Exception {
     Seller seller = sellerDao.findById(sellerId);
     while(true) {
-      int hours = Prompt.inputInt(label);
-      if(hours < seller.getBusinessOpeningHours() || hours > seller.getBusinessClosingHours()) {  
+      String time = Prompt.inputString(label);
+      String temp[] = time.split(":");                              //구매자 입력시간
+      String temp2[] = seller.getBusinessOpeningTime().split(":");  //판매자 오픈시간
+      String temp3[] = seller.getBusinessClosingTime().split(":");  //판매자 마감시간
+      int hour = Integer.parseInt(temp[0]);             
+      int minute = Integer.parseInt(temp[1]);
+      int sellerOpeningHour = Integer.parseInt(temp2[0]);      
+      int sellerOpeningMinute = Integer.parseInt(temp2[1]);
+      int sellerClosingHour = Integer.parseInt(temp3[0]);   
+      int sellerClosingMinute = Integer.parseInt(temp3[1]);
+      if(hour < sellerOpeningHour || hour > sellerClosingHour)  {          
         System.out.println("영업시간이 아닙니다.\n"); 
-        System.out.printf("오픈시간: %s시 %s분\n", 
-            seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
-        System.out.printf("마감시간: %s시 %s분\n", 
-            seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
+        System.out.printf("영업시간: %s - %s \n", seller.getBusinessOpeningTime(), 
+            seller.getBusinessClosingTime());
         continue;
-      }           
-      return hours;       
-    }
-  }
-
-  @Override
-  public int checkMinutes (String label, int hours, String sellerId) throws Exception {
-    Seller seller = sellerDao.findById(sellerId);
-    while(true) {
-      int minutes = Prompt.inputInt(label);
-      if (hours == seller.getBusinessOpeningHours()) {
-        if((minutes < seller.getBusinessOpeningMinutes() || minutes > 59)) {
+      } else if(hour == sellerOpeningHour || hour == sellerClosingHour)      {   
+        if(minute < sellerOpeningMinute && minute > sellerClosingMinute) {
           System.out.println("영업시간이 아닙니다.\n"); 
-          System.out.printf("오픈시간: %s시 %s분\n", 
-              seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
-          System.out.printf("마감시간: %s시 %s분\n", 
-              seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
-          continue;
-        } 
-      }
-      if (hours == seller.getBusinessClosingHours()) {
-        if (minutes > seller.getBusinessClosingMinutes() || minutes <0) {
-          System.out.println("영업시간이 아닙니다.\n"); 
-          System.out.printf("오픈시간: %s시 %s분\n", 
-              seller.getBusinessOpeningHours(), seller.getBusinessOpeningMinutes());
-          System.out.printf("마감시간: %s시 %s분\n", 
-              seller.getBusinessClosingHours() ,seller.getBusinessClosingMinutes());
-          continue;
+          System.out.printf("영업시간: %s - %s \n", seller.getBusinessOpeningTime(), 
+              seller.getBusinessClosingTime());
         }
       }
-      return minutes;
+      return time;       
     }
   }
-  //  public void changeBookingUpdate(String id, Boolean bool) throws Exception {
-  //    requestAgent.request("member.selectList", );
-  //    for (Member member : memberList) {
-  //      if (member.getId().equals(id)) {
-  //        member.setBookingUpdate(bool);
-  //      }
-  //    }
-  //  }
 }

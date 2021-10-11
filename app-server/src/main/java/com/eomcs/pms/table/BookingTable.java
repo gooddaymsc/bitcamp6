@@ -118,8 +118,7 @@ public class BookingTable extends JsonDataTable<BookingList> implements DataProc
     int index2 = indexOf(booking.getTheOtherId(), booking.getId());
     Booking booking2 = bookingList2.getBooking().get(index2);
     booking2.setBookingDate(booking.getBookingDate());
-    booking2.setBookingHour(booking.getBookingHour());
-    booking2.setBookingMinute(booking.getBookingMinute());
+    booking2.setBookingTime(booking.getBookingTime());
     booking2.setConfirm(booking.isConfirm());
 
     if (index == -1) {

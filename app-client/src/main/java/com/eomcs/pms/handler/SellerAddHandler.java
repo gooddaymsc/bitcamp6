@@ -71,12 +71,6 @@ public class SellerAddHandler implements Command {
       }
     }
 
-    //    seller.setBusinessOpeningHours(SellerValidation.checkHour(hour));
-    //    seller.setBusinessOpeningHours(SellerValidation.checkHour(minute));
-    //    seller.setBusinessOpeningMinutes(SellerValidation.checkMinute("시작시간(분) : "));
-    //    seller.setBusinessClosingHours(SellerValidation.checkHour("종료시간(시) : "));
-    //    seller.setBusinessClosingMinutes(SellerValidation.checkMinute("종료시간(분) : "));
-
     seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    // 예약리스트에 판매자 id를 갖는 bookingList add.
     //    bookingPrompt.addBookingListById(seller.getId());

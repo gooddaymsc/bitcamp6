@@ -18,15 +18,14 @@ public class BookingUpdateHandler implements Command {
     Booking booking = bookingDao.findByNoId(No, nowLoginId);
 
     Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") : ");
-    int reservationHour = bookingDao.checkHours("픽업시간 변경 (기존 : " + booking.getBookingHour() + "시"+ ") : ", booking.getCart().getSellerId());
-    int reservationMinute = bookingDao.checkMinutes("픽업시간 변경 (기존 : " + booking.getBookingMinute() + "분"+ ") : ", reservationHour, booking.getCart().getSellerId());
+    String reservationTime = bookingDao.checkTime("픽업시간 변경 (기존 : " + booking.getBookingTime()+ ")", booking.getCart().getSellerId());
+
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
     if (input.equalsIgnoreCase("y")) {
       booking.setBookingDate(reservationDate);
-      booking.setBookingHour(reservationHour);
-      booking.setBookingMinute(reservationMinute);
+      booking.setBookingTime(reservationTime);
       bookingDao.update(booking);
       System.out.println("픽업 예약을 변경하였습니다.");
       return;

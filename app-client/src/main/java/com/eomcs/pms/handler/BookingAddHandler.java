@@ -62,9 +62,14 @@ public class BookingAddHandler implements Command {
     booking.setBookingStocks(cart.getCartStocks());
     booking.setBookingPrice(cart.getCartPrice());
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
-    booking.setBookingHour(bookingDao.checkHours(("픽업시간(시): "), sellerId));
-    booking.setBookingMinute(bookingDao.checkMinutes(("픽업시간(분): "), 
-        booking.getBookingHour(), sellerId));
+    while(true) {
+      try{
+        booking.setBookingTime(bookingDao.checkTime("픽업시간(예 10:20) : ", sellerId));
+        break;
+      } catch(Exception e){
+        System.out.println("예시대로 입력해주세요.");
+      }
+    }
     booking.setRegisteredDate(new Date(System.currentTimeMillis()));
     booking.setId(nowLoginId);
     booking.setTheOtherId(sellerId);
@@ -81,8 +86,7 @@ public class BookingAddHandler implements Command {
     booking2.setBookingStocks(booking.getBookingStocks());
     booking2.setBookingPrice(booking.getBookingPrice());
     booking2.setBookingDate(booking.getBookingDate());
-    booking2.setBookingHour(booking.getBookingHour());
-    booking2.setBookingMinute(booking.getBookingMinute());
+    booking2.setBookingTime(booking.getBookingTime());
     booking2.setRegisteredDate(booking.getRegisteredDate());
     booking2.setId(sellerId);
     booking2.setTheOtherId(nowLoginId);

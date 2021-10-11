@@ -13,9 +13,8 @@ public interface BookingDao {
   void delete(Booking booking) throws Exception;
   HashMap<Cart, Seller> findByCartList(String productName, String id) throws Exception;
   Cart findByCart(String productName, String nowLoginId) throws Exception;
-  int checkHours(String string, String sellerId) throws Exception;
-  int checkMinutes(String string, int bookingHour, String sellerId) throws Exception;
   void deleteCart(String nowLoginId, Cart bookingProduct) throws Exception;
   void update(Booking booking) throws Exception;
   //  void changeBookingUpdate(String sellerId, boolean b) throws Exception;
+  String checkTime(String label, String sellerId) throws Exception;
 }
