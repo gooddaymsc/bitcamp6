@@ -46,7 +46,7 @@ public class CartAddHandler implements Command {
           if (stocks <= hashStock.get(storeName).getStocks()) {
             for(Cart privacyCart : cartList.getPrivacyCart()) {
               if(privacyCart.getStock().getProduct().getProductName().equals(request.getAttribute("productName"))
-                  && privacyCart.getSellerId().equals(storeName)) {
+                  && cartDao.findBySellerInfo(privacyCart.getSellerId()).getBusinessName().equals(storeName)) {
                 String input2 = Prompt.inputString("이미 등록된 상품입니다. 정말 등록하시겠습니까(y/N)? ");
                 if(input2.equalsIgnoreCase("y")) {
                   privacyCart.getStock().setStocks(privacyCart.getStock().getStocks()+stocks);
@@ -97,12 +97,13 @@ public class CartAddHandler implements Command {
         if (stocks <= hashStock.get(storeName).getStocks()) {
           for(Cart privacyCart : cartList.getPrivacyCart()) {
             if(privacyCart.getStock().getProduct().getProductName().equals(request.getAttribute("productName"))
-                && privacyCart.getSellerId().equals(storeName)) {
+                && cartDao.findBySellerInfo(privacyCart.getSellerId()).getBusinessName().equals(storeName)) {
               String input2 = Prompt.inputString("이미 등록된 상품입니다. 정말 등록하시겠습니까(y/N)? ");
               if(input2.equalsIgnoreCase("y")) {
+                //판매자의 재고수량..
                 privacyCart.getStock().setStocks(privacyCart.getStock().getStocks()+stocks);
                 privacyCart.getStock().setPrice(cart.getCartPrice()+(cart.getStock().getPrice()*stocks));
-                cartDao.update(privacyCart);
+                cartDao.update(privacyCart); 
                 System.out.println("장바구니가 등록되었습니다.\n");         
                 return;
               } else if (input2.equalsIgnoreCase("N")) {
