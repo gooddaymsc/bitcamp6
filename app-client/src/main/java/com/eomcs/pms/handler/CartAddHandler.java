@@ -86,12 +86,14 @@ public class CartAddHandler implements Command {
 
     //search 전 등록
     else { 
-      hashStock = cartDao.findBySellerId((String) request.getAttribute("productName"));
+
+      HashMap<String, Stock> hashStocks = cartDao.findBySellerId((String) request.getAttribute("productName"));
+
       while(true) {
         String input = Prompt.inputString("가게명을 선택하세요(0.취소) > ");
         if(input.equals("0")) { return; }
 
-        storeName = cartDao.findStoreName(hashStock.keySet(), input);
+        storeName = cartDao.findStoreName(hashStocks.keySet(), input);
 
         if (storeName==null) {
           System.out.println("가게명을 다시 입력해주세요.\n");
@@ -99,13 +101,13 @@ public class CartAddHandler implements Command {
         }
 
         stocks = CartValidation.checkNum("수량 : ");
-        if (stocks <= hashStock.get(storeName).getStocks()) {
+        if (stocks <= hashStocks.get(storeName).getStocks()) {
           for(Cart privacyCart : cartList.getPrivacyCart()) {
             if(privacyCart.getStock().getProduct().getProductName().equals(request.getAttribute("productName"))
                 && cartDao.findBySellerInfo(privacyCart.getSellerId()).getBusinessName().equals(storeName)) {
               String input2 = Prompt.inputString("이미 등록된 상품입니다. 정말 등록하시겠습니까(y/N)? ");
               if(input2.equalsIgnoreCase("y")) {
-                if((privacyCart.getCartStocks()+stocks)<= hashStock.get(storeName).getStocks()) {
+                if((privacyCart.getCartStocks()+stocks)<= hashStocks.get(storeName).getStocks()) {
                   privacyCart.setCartStocks(privacyCart.getCartStocks() + stocks);
                   privacyCart.setCartPrice(privacyCart.getCartPrice()+(privacyCart.getStock().getPrice()*stocks));
                   cartDao.update(privacyCart); 
@@ -124,10 +126,10 @@ public class CartAddHandler implements Command {
             }
           }
           cart.setCartStocks(stocks);
-          cart.setStock(hashStock.get(storeName));
-          cart.setCartPrice(hashStock.get(storeName).getPrice()*stocks);
+          cart.setStock(hashStocks.get(storeName));
+          cart.setCartPrice(hashStocks.get(storeName).getPrice()*stocks);
           // 체크!!!
-          cart.setSellerId(hashStock.get(storeName).getId());
+          cart.setSellerId(hashStocks.get(storeName).getId());
           cart.setRegistrationDate(new Date(System.currentTimeMillis()));
           cart.setId(nowLoginId);
           cartDao.insert(cart);
