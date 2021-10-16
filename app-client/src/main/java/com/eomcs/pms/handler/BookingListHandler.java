@@ -32,12 +32,12 @@ public class BookingListHandler implements Command {
           System.out.println("아직 예약한 상품이 없습니다.");
           return;
         }
-        System.out.printf("%-6s\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-10s\n",
-            "예약번호", "가게명", "판매자", "상품명", "예약일시", "픽업 예약날짜", "픽업 예약시간", "픽업상태");
+        System.out.printf("%-5s\t%-5s\t%-9s\t%-9s\t%-9s\t%-9s\t%-9s\n",
+            "예약번호", "상품명","주문일시",  "픽업날짜", "픽업시간", "결제상태", "픽업 상태");
         System.out.println("----------------------------------------------------------------------------------------");
         for (Booking booking : bookingList.getBooking()) {
           String sellerId = booking.getCart().getSellerId();
-          System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-10s\n",
+          System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-10s\t%-10s\n",
               booking.getBookingNumber(), 
               sellerDao.findById(sellerId).getBusinessName(),
               booking.getCart().getSellerId(),
@@ -45,6 +45,7 @@ public class BookingListHandler implements Command {
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingTime(),
+              BookingValidation.paymentType(booking),
               BookingValidation.bookingStatue(booking));
         } 
         System.out.println();
@@ -78,22 +79,23 @@ public class BookingListHandler implements Command {
           return;
         }
 
-        System.out.printf("%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-10s\n",
-            "예약번호","예약자", "상품명", "예약일시",  "픽업 예약날짜", "픽업 예약시간", "픽업 상태");
+        System.out.printf("%-5s\t%-5s\t%-5s\t%-9s\t%-9s\t%-9s\t%-9s\t%-9s\n",
+            "예약번호","예약자", "상품명","주문일시",  "픽업날짜", "픽업시간", "결제상태", "픽업 상태");
         System.out.println("------------------------------------------------------------------------------------------------");
 
         for (Booking booking : bookingList.getBooking() ) {
-          System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-10s\n",
+          System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-10s\t%-10s\n",
               booking.getBookingNumber(),
               booking.getTheOtherId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),
               booking.getBookingTime(),
+              BookingValidation.paymentType(booking),
               BookingValidation.bookingStatue(booking));
-
         }
       }
+
       System.out.println();
       while(true) {
         System.out.println("예약 상세보기(R) / 상품 상세정보 보기(1) / 예약자와 대화하기(2) / 이전(0)");

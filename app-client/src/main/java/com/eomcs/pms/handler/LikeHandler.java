@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.sql.Date;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
@@ -22,6 +23,7 @@ public class LikeHandler implements Command {
     } else {
       System.out.println("좋아요를 눌렀습니다.\n");
       board.setLikes(board.getLikes() + 1);
+      board.setLikeDate(new Date(System.currentTimeMillis()));
       board.getLikeMember().add(ClientApp.getLoginUser().getId());
     }
 

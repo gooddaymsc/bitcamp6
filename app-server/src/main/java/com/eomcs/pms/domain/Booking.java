@@ -10,11 +10,16 @@ public class Booking implements Serializable {
   private Date bookingDate;      //예약날짜
   private String bookingTime;    //예약시간
   private Date registeredDate;   //등록일시
-  private int bookingStocks;     // 예약 상품의 갯수
-  private int bookingPrice;      // 총액
-  private boolean confirm;        //픽업확정여부
-  private String theOtherId; // 상대방 id
-  private String id;
+  private int bookingStocks;     //예약 상품의 갯수
+  private int bookingPrice;      //총액
+  private boolean confirm;       //픽업확정여부. 구매상태
+  private String theOtherId;     // 상대방 id
+  private String id; 
+  private int paymentType;       //결제방법
+  private int paymentStatus;     //결제상태
+  private Date bookingStartTime;  //픽업가능 시작시간
+  private Date bookingEndTime;  //픽업가능 종료시간
+
 
   public String getTheOtherId() {
     return theOtherId;
@@ -46,7 +51,7 @@ public class Booking implements Serializable {
   public void setCart(Cart cart) {
     this.cart = cart;
   }
-
+  //
   //  public String getBuyerId() {
   //    return buyerId;
   //  }
@@ -83,6 +88,31 @@ public class Booking implements Serializable {
   public void setConfirm(boolean confirm) {
     this.confirm = confirm;
   }
+  public int getPaymentType() {
+    return paymentType;
+  }
+  public void setPaymentType(int paymentType) {
+    this.paymentType = paymentType;
+  }
+  public int getPaymentStatus() {
+    return paymentStatus;
+  }
+  public void setPaymentStatus(int paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
+  public Date getBookingStartTime() {
+    return bookingStartTime;
+  }
+  public void setBookingStartTime(Date bookingStartTime) {
+    this.bookingStartTime = bookingStartTime;
+  }
+  public Date getBookingEndTime() {
+    return bookingEndTime;
+  }
+  public void setBookingEndTime(Date bookingEndTime) {
+    this.bookingEndTime = bookingEndTime;
+  }
+
 
 
 }

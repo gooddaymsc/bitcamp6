@@ -70,33 +70,43 @@ public class BookingAddHandler implements Command {
         System.out.println("예시대로 입력해주세요.");
       }
     }
-    booking.setRegisteredDate(new Date(System.currentTimeMillis()));
-    booking.setId(nowLoginId);
-    booking.setTheOtherId(sellerId);
-    // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기 > 서버에서 구현해야함.
-    sellerStock.setStocks(sellerStock.getStocks() - cart.getCartStocks());
-    stockDao.update(sellerStock);
-    // 구매자 장바구니에서 예약(결제)한 상품 빼기
-    bookingDao.deleteCart(nowLoginId, cart);
-    // All.allBookingList에 구매자의 Id에 예약내역 추가.
-    bookingDao.insert(nowLoginId, booking);
+    System.out.println("1.카드결제 / 2.실시간 계좌이체 / 3.현장결제 ");
+    int input = Prompt.inputInt("결제방법을 선택해주세요 > ");
+    if(input != 1 && input != 2 && input != 3 ) {
+      System.out.println("잘못 입력하셨습니다. 결제를 취소합니다. \n");
+      return;
+    } else{
+      booking.setPaymentType(input);
+      booking.setRegisteredDate(new Date(System.currentTimeMillis()));
+      booking.setId(nowLoginId);
+      booking.setTheOtherId(sellerId);
+      // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기 > 서버에서 구현해야함.
+      sellerStock.setStocks(sellerStock.getStocks() - cart.getCartStocks());
+      stockDao.update(sellerStock);
+      // 구매자 장바구니에서 예약(결제)한 상품 빼기
+      bookingDao.deleteCart(nowLoginId, cart);
+      // All.allBookingList에 구매자의 Id에 예약내역 추가.
+      bookingDao.insert(nowLoginId, booking);
 
-    Booking booking2 = new Booking();
-    booking2.setCart(booking.getCart());
-    booking2.setBookingStocks(booking.getBookingStocks());
-    booking2.setBookingPrice(booking.getBookingPrice());
-    booking2.setBookingDate(booking.getBookingDate());
-    booking2.setBookingTime(booking.getBookingTime());
-    booking2.setRegisteredDate(booking.getRegisteredDate());
-    booking2.setId(sellerId);
-    booking2.setTheOtherId(nowLoginId);
-    // All.allBookingList에 판매자의 Id에 예약내역 추가.
-    bookingDao.insert(sellerId, booking2);
+      Booking booking2 = new Booking();
+      booking2.setCart(booking.getCart());
+      booking2.setBookingStocks(booking.getBookingStocks());
+      booking2.setBookingPrice(booking.getBookingPrice());
+      booking2.setBookingDate(booking.getBookingDate());
+      booking2.setBookingTime(booking.getBookingTime());
+      booking2.setRegisteredDate(booking.getRegisteredDate());
+      booking2.setConfirm(booking.isConfirm());
+      booking2.setPaymentType(booking.getPaymentType());
+      booking2.setId(sellerId);
+      booking2.setTheOtherId(nowLoginId);
 
-    //    bookingDao.changeBookingUpdate(sellerId, true);
-    System.out.println("픽업예약을 완료하였습니다.");
+      // All.allBookingList에 판매자의 Id에 예약내역 추가.
+      bookingDao.insert(sellerId, booking2);
+
+      //    bookingDao.changeBookingUpdate(sellerId, true);
+      System.out.println("픽업예약을 완료하였습니다.");
+    }
   }
-
 }
 
 
