@@ -32,15 +32,14 @@ public class BookingListHandler implements Command {
           System.out.println("아직 예약한 상품이 없습니다.");
           return;
         }
-        System.out.printf("%-4s\t%-4s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\n",
-            "예약번호", "상품명", "주문일시", "픽업날짜", "픽업시간", "결제상태", "픽업상태");
+        System.out.printf("%-3s\t%-4s\t%-4s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\n",
+            "번호", "가게명", "상품명", "주문일시", "픽업날짜", "픽업시간", "결제상태", "픽업상태");
         System.out.println("----------------------------------------------------------------------------------------");
         for (Booking booking : bookingList.getBooking()) {
           String sellerId = booking.getCart().getSellerId();
-          System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
+          System.out.printf("%-5d\t%-5s\t%-5s\t%-9s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
               booking.getBookingNumber(), 
               sellerDao.findById(sellerId).getBusinessName(),
-              booking.getCart().getSellerId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),
@@ -80,12 +79,12 @@ public class BookingListHandler implements Command {
           return;
         }
 
-        System.out.printf("%-4s\t%-4s\t%-4s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\n",
-            "예약번호","예약자", "상품명","주문일시",  "픽업날짜", "픽업시간", "결제상태", "픽업 상태");
+        System.out.printf("%-3s\t%-4s\t%-4s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\n",
+            "번호","예약자", "상품명","주문일시",  "픽업날짜", "픽업시간", "결제상태", "픽업 상태");
         System.out.println("------------------------------------------------------------------------------------------------");
 
         for (Booking booking : bookingList.getBooking() ) {
-          System.out.printf("%-6d\t%-6s\t%-6s\t%-10s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
+          System.out.printf("%-5d\t%-5s\t%-6s\t%-10s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
               booking.getBookingNumber(),
               booking.getTheOtherId(),
               booking.getCart().getStock().getProduct().getProductName(),

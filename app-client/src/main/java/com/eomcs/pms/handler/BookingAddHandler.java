@@ -64,7 +64,7 @@ public class BookingAddHandler implements Command {
     booking.setBookingDate(Prompt.inputDate("픽업 예정 날짜: "));
     while(true) {
       try{
-        booking.setBookingTime(bookingDao.checkTime("픽업시간(예 10:20) : ", sellerId));
+        booking.setBookingTime(bookingDao.checkTime("픽업시간(예 10:30) : ", sellerId));
         break;
       } catch(Exception e){
         System.out.println("예시대로 입력해주세요.");

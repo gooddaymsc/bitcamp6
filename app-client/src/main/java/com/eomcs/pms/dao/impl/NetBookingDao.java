@@ -121,14 +121,18 @@ public class NetBookingDao implements BookingDao{
       int sellerOpeningMinute = Integer.parseInt(temp2[1]);
       int sellerClosingHour = Integer.parseInt(temp3[0]);   
       int sellerClosingMinute = Integer.parseInt(temp3[1]);
+      if(minute != 30 && minute != 0 ) {
+        System.out.println(" 30분 단위로 입력가능합니다. \n");
+        continue;
+      } 
       if(hour < sellerOpeningHour || hour > sellerClosingHour)  {          
-        System.out.println("영업시간이 아닙니다.\n"); 
+        System.out.println(" 영업시간이 아닙니다.\n"); 
         System.out.printf("영업시간: %s - %s \n", seller.getBusinessOpeningTime(), 
             seller.getBusinessClosingTime());
         continue;
       } else if(hour == sellerOpeningHour || hour == sellerClosingHour)      {   
         if(minute < sellerOpeningMinute && minute > sellerClosingMinute) {
-          System.out.println("영업시간이 아닙니다.\n"); 
+          System.out.println(" 영업시간이 아닙니다.\n"); 
           System.out.printf("영업시간: %s - %s \n", seller.getBusinessOpeningTime(), 
               seller.getBusinessClosingTime());
         }

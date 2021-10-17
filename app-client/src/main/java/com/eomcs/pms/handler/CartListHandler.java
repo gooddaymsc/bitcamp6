@@ -26,7 +26,7 @@ public class CartListHandler implements Command {
         return;
       }
       System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
-          "번호", "가게명", "판매자", "상품명", "재고", "금액","등록일");
+          "번호", "가게명", "판매자", "상품명", "수량", "금액","등록일");
       System.out.println("--------------------------------------------------------------------------");
       int total = 0;
       for (Cart cart : cartList.getPrivacyCart()) {
