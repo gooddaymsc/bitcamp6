@@ -19,9 +19,9 @@ public class BookingUpdateHandler implements Command {
 
     Date reservationDate = Prompt.inputDate("픽업날짜 변경 (기존 : " + booking.getBookingDate() + ") : ");
     String reservationTime = bookingDao.checkTime("픽업시간 변경 (기존 : " + booking.getBookingTime()+ ")", booking.getCart().getSellerId());
-    System.out.println("1. 카드결제 / 2.실시간 계좌이체 / 3.현장결제 ");
+    System.out.println("1. 카드결제 / 2.실시간 계좌이체 / 3.무통장입금 / 4.휴대폰결제 / 5.현장결제 ");
     int type = Prompt.inputInt("결제방법을 선택해주세요 (기존 :"+ booking.getPaymentType() +" > ");
-    if(type != 1 && type != 2 && type != 3 ) {
+    if(type < 1 &&  type > 5 ) {
       System.out.println("잘못 입력하셨습니다. 결제를 취소합니다. \n");
       return;
     }

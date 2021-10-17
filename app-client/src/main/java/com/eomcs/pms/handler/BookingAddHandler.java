@@ -70,13 +70,14 @@ public class BookingAddHandler implements Command {
         System.out.println("예시대로 입력해주세요.");
       }
     }
-    System.out.println("1.카드결제 / 2.실시간 계좌이체 / 3.현장결제 ");
+    System.out.println("1.카드결제 / 2.실시간 계좌이체 / 3.무통장입금 / 4.휴대폰 결제 / 5.현장결제  ");
     int input = Prompt.inputInt("결제방법을 선택해주세요 > ");
-    if(input != 1 && input != 2 && input != 3 ) {
+    if(input < 1 && input > 5 ) {
       System.out.println("잘못 입력하셨습니다. 결제를 취소합니다. \n");
       return;
     } else{
       booking.setPaymentType(input);
+      booking.setPaymentStatus(BookingValidation.paymentStatus(booking));
       booking.setRegisteredDate(new Date(System.currentTimeMillis()));
       booking.setId(nowLoginId);
       booking.setTheOtherId(sellerId);
