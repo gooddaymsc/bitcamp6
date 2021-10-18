@@ -47,8 +47,9 @@ public class BuyerAddHandler implements Command {
     //        return;
     //      }
     //    }
+    ((Buyer)buyer).setZipcode(Prompt.inputString("우편번호: "));
     ((Buyer)buyer).setAddress(Prompt.inputString("주소: "));
-
+    ((Buyer)buyer).setAddress(Prompt.inputString("상세주소: "));
     //    System.out.printf("이름 : %s\n", memberPrompt.findById(id).getName());
     buyer.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    buyer.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));

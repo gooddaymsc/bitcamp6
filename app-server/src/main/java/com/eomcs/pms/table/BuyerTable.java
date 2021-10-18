@@ -13,7 +13,6 @@ public class BuyerTable extends JsonDataTable<Buyer> implements DataProcessor{
 
   @Override
   public void execute(Request request, Response response) throws Exception {
-    // TODO Auto-generated method stub
     switch (request.getCommand()) {
       case "buyer.insert" : insert(request, response); break;
       case "buyer.selectList" : selectList(request, response); break;

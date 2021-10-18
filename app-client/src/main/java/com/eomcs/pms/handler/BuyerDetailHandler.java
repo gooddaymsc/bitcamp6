@@ -28,9 +28,12 @@ public class BuyerDetailHandler implements Command {
       System.out.printf("생일 : %s\n", buyer.getBirthday());
       System.out.printf("사진 : %s\n", buyer.getPhoto());
       System.out.printf("전화 : %s\n", buyer.getPhoneNumber());
+      System.out.printf("우편번호 : %s\n", buyer.getZipcode());
       System.out.printf("주소 : %s\n", buyer.getAddress());
+      System.out.printf("상세주소 : %s\n", buyer.getDetailAddress());
       System.out.printf("등록일 : %s\n", buyer.getRegisteredDate());
-      System.out.printf("권한등급 : %d\n", buyer.getAuthority());
+      System.out.printf("등급 : %s\n", buyer.getLevel());
+      System.out.printf("권한 : %d\n", buyer.getAuthority());
 
       while(true) {
         System.out.println("\n개인정보변경(U) / 회원탈퇴(D) / 이전(0)");
@@ -62,7 +65,9 @@ public class BuyerDetailHandler implements Command {
       System.out.printf("이메일 : %s\n", buyer.getEmail());
       System.out.printf("사진 : %s\n", buyer.getPhoto());
       System.out.printf("전화 : %s\n", buyer.getPhoneNumber());
+      System.out.printf("우편번호 : %s\n", buyer.getZipcode());
       System.out.printf("주소 : %s\n", buyer.getAddress());
+      System.out.printf("상세주소 : %s\n", buyer.getDetailAddress());
       System.out.printf("등록일 : %s\n", buyer.getRegisteredDate());
       request.setAttribute("id", buyer.getId());
 
