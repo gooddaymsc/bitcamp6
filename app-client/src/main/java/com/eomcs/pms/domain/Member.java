@@ -17,6 +17,7 @@ public class Member implements Serializable {
   private String photo;
   private String phoneNumber;
   private Date registeredDate;
+  private int active;
   private int level;
   private boolean bookingUpdate;
   private boolean commentUpdate;
@@ -119,6 +120,12 @@ public class Member implements Serializable {
   }
   public void setMessageUpdate(boolean MessageUpdate) {
     this.MessageUpdate = MessageUpdate;
+  }
+  public int getActive() {
+    return active;
+  }
+  public void setActive(int active) {
+    this.active = active;
   }
 
 

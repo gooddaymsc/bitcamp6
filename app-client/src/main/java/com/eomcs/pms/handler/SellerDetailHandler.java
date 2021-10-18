@@ -23,6 +23,7 @@ public class SellerDetailHandler implements Command {
 
       System.out.printf("이름 : %s\n", seller.getName());
       System.out.printf("닉네임 : %s\n", seller.getNickname());
+      System.out.printf("등급 : %d\n", seller.getLevel());
       System.out.printf("이메일 : %s\n", seller.getEmail());
       System.out.printf("생일 : %s\n", seller.getBirthday());
       System.out.printf("사진 : %s\n", seller.getPhoto());
@@ -34,7 +35,7 @@ public class SellerDetailHandler implements Command {
       System.out.printf("오픈시간: %s\n", seller.getBusinessOpeningTime());
       System.out.printf("마감시간: %s\n", seller.getBusinessClosingTime());
       System.out.printf("등록일 : %s\n", seller.getRegisteredDate());
-      System.out.printf("권한등급 : %d\n", seller.getAuthority());
+      System.out.printf("권한 : %d\n", seller.getAuthority());
       System.out.println();
 
       while(true) {

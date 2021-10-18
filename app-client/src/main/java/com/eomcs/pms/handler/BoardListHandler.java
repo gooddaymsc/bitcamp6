@@ -35,10 +35,10 @@ public class BoardListHandler implements Command {
         System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
-            board.getTag(),
+            //            board.getTag(),
             board.getWriter(),
             board.getViews(), 
-            board.getLikes(),
+            //            board.getLikes(),
             board.getRegistrationDate());
       }
       if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {

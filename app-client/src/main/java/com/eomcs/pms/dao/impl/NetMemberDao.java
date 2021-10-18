@@ -36,6 +36,12 @@ public class NetMemberDao implements MemberDao{
   }
 
   @Override
+  public Member findByEmailAndPassword(String id, String password) throws Exception {
+
+    return null;
+  }
+
+  @Override
   public void changeBookingUpdate(String id, boolean check) throws Exception {
     HashMap<String, String> params = new HashMap<>();
     params.put("id", String.valueOf(id));

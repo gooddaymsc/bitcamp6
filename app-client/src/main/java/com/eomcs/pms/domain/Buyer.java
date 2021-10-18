@@ -5,10 +5,21 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class Buyer extends Member {
+  private String zipcode;
   private String address;
   private int point;
   private List<Coupon> coupon = new ArrayList<>();
+  private String detailAddress;
+  //  private List<Point> pointList = new ArrayList<>();
+  //  private List<Coupon> couponList = new ArrayList<>();
 
+
+  public String getZipcode() {
+    return zipcode;
+  }
+  public void setZipcode(String zipcode) {
+    this.zipcode = zipcode;
+  }
   public String getAddress() {
     return address;
   }
@@ -28,4 +39,10 @@ public class Buyer extends Member {
     this.coupon = coupon;
   }
 
+  public String getDetailAddress() {
+    return detailAddress;
+  }
+  public void setDetailAddress(String detailAddress) {
+    this.detailAddress = detailAddress;
+  }
 }

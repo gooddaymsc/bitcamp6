@@ -4,6 +4,8 @@ import static com.eomcs.menu.Menu.ACCESS_ADMIN;
 import static com.eomcs.menu.Menu.ACCESS_BUYER;
 import static com.eomcs.menu.Menu.ACCESS_LOGOUT;
 import static com.eomcs.menu.Menu.ACCESS_SELLER;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +22,11 @@ import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.NetBoardDao;
+import com.eomcs.pms.dao.impl.MariadbBoardDao;
+import com.eomcs.pms.dao.impl.MariadbMemberDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
-import com.eomcs.pms.dao.impl.NetMemberDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
@@ -97,6 +99,8 @@ import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class ClientApp {
+
+  Connection con;
   RequestAgent requestAgent;
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -149,16 +153,18 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
 
+    con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/drinkerdb?user=drinker&password=1111");
 
 
     //    requestAgent = new RequestAgent("192.168.0.103",8888);
-    requestAgent = new RequestAgent("127.0.0.1",8888);
-    requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
+    //    requestAgent = new RequestAgent("127.0.0.1",8888);
+    // requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
 
-    MemberDao memberDao = new NetMemberDao(requestAgent);
+    MemberDao memberDao = new MariadbMemberDao(con);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
-    BoardDao boardDao = new NetBoardDao(requestAgent);  
+    BoardDao boardDao = new MariadbBoardDao(con);  
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
@@ -171,7 +177,7 @@ public class ClientApp {
     commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
     commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
 
-    commandMap.put("/login", new LoginHandler(requestAgent));
+    commandMap.put("/login", new LoginHandler(memberDao));
 
     commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
     commandMap.put("/seller/list",   new SellerListHandler(sellerDao));
@@ -367,7 +373,9 @@ public class ClientApp {
 
     notifyOnApplicationEnded();
 
+    con.close();
   }
+
   public static void main(String[] args) throws Exception {
     System.out.println("[PMS 클라이언트]");
 
