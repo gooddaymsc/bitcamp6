@@ -22,7 +22,7 @@ public class BoardAddHandler implements Command {
     Board board = new Board();
     board.setTitle(Prompt.inputString("제목 : "));
     board.setContent(Prompt.inputString("내용 : "));
-    board.setWriter(ClientApp.getLoginUser().getId());
+    board.setWriter(ClientApp.getLoginUser());
     board.setRegistrationDate(new Date(System.currentTimeMillis()));
     board.setTag(Prompt.inputString("태그 : "));
     // Numbering은 마지막에
