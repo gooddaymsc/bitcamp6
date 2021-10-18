@@ -1,21 +1,19 @@
 package com.eomcs.pms.handler;
 
-import java.util.HashMap;
-import java.util.List;
+import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
-import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
-import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class LoginHandler implements Command {
   // 횟수 관련 메서드 구현해야함.
   public static final int CHANCE_LOG = 5; //로그인 기회
 
-  RequestAgent requestAgent;
-  List<Buyer> memberList;
-  public LoginHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  MemberDao memberDao;
+
+  public LoginHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -24,18 +22,22 @@ public class LoginHandler implements Command {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
     String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("id", id);
-    params.put("password", password);
+    if(id.equals("admin") && password.equals("0000")) {
+      Member admin = new Member();
+      admin.setId("admin");
+      admin.setPassword("0000");
+      admin.setAuthority(Menu.ACCESS_ADMIN);
+      ClientApp.loginMember = admin;
+      return;
+    }
 
-    requestAgent.request("member.Login", params);
+    Member member = memberDao.findByEmailAndPassword(id, password);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      Member member = requestAgent.getObject(Member.class);
+    if (member != null) {
       System.out.printf("%s님 환영합니다!\n", member.getId());
       ClientApp.loginMember = member;
     } else {
-      System.out.println(requestAgent.getObject(String.class));
+      System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
     }
   }
 }

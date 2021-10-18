@@ -1,0 +1,722 @@
+-- 회원
+DROP TABLE IF EXISTS member RESTRICT;
+
+-- 판매자
+DROP TABLE IF EXISTS seller RESTRICT;
+
+-- 게시판
+DROP TABLE IF EXISTS board RESTRICT;
+
+-- 댓글
+DROP TABLE IF EXISTS comment RESTRICT;
+
+-- 좋아요
+DROP TABLE IF EXISTS board_like RESTRICT;
+
+-- 술
+DROP TABLE IF EXISTS product RESTRICT;
+
+-- 리뷰
+DROP TABLE IF EXISTS review RESTRICT;
+
+-- 판매
+DROP TABLE IF EXISTS stock RESTRICT;
+
+-- 메세지
+DROP TABLE IF EXISTS message RESTRICT;
+
+-- 장바구니
+DROP TABLE IF EXISTS cart RESTRICT;
+
+-- 알림
+DROP TABLE IF EXISTS alert RESTRICT;
+
+-- 태그
+DROP TABLE IF EXISTS tag RESTRICT;
+
+-- 게시글태그
+DROP TABLE IF EXISTS board_tag RESTRICT;
+
+-- 주종
+DROP TABLE IF EXISTS product_type RESTRICT;
+
+-- 쿠폰
+DROP TABLE IF EXISTS coupon RESTRICT;
+
+-- 구매항목
+DROP TABLE IF EXISTS purchase_list RESTRICT;
+
+-- 구매
+DROP TABLE IF EXISTS purchase RESTRICT;
+
+-- 픽업가능시간
+DROP TABLE IF EXISTS pickup_available RESTRICT;
+
+-- 적립금
+DROP TABLE IF EXISTS point RESTRICT;
+
+-- 회원
+CREATE TABLE member (
+  member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  id             VARCHAR(50)  NOT NULL COMMENT '아이디', -- 아이디
+  password       VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+  authority      INTEGER      NOT NULL COMMENT '권한', -- 권한
+  name           VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  nickname       VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
+  email          VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+  birthday       DATETIME     NULL     COMMENT '생일', -- 생일
+  photo          VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  phoneNumber    VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
+  zipcode        INTEGER      NULL     COMMENT '우편번호', -- 우편번호
+  address        VARCHAR(50)  NULL     COMMENT '기본주소', -- 기본주소
+  detail_address VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
+  registeredDate DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
+  active         INTEGER      NULL     COMMENT '탈퇴', -- 탈퇴
+  level          INTEGER      NOT NULL DEFAULT 0 COMMENT '등급' -- 등급
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE member
+  ADD CONSTRAINT PK_member -- 회원 기본키
+    PRIMARY KEY (
+      member_no -- 회원번호
+    );
+
+-- 회원 유니크 인덱스
+CREATE UNIQUE INDEX UIX_member
+  ON member ( -- 회원
+    email ASC, -- 이메일
+    id ASC     -- 아이디
+  );
+
+ALTER TABLE member
+  MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+
+-- 판매자
+CREATE TABLE seller (
+  member_no        INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  business_name    VARCHAR(50)  NOT NULL COMMENT '사업자명', -- 사업자명
+  business_no      INTEGER      NOT NULL COMMENT '사업자번호', -- 사업자번호
+  business_address VARCHAR(255) NOT NULL COMMENT '사업장주소', -- 사업장주소
+  business_tel     VARCHAR(30)  NOT NULL COMMENT '사업장전화번호', -- 사업장전화번호
+  openingTime      TIME         NOT NULL COMMENT '오픈시간', -- 오픈시간
+  closingTime      TIME         NOT NULL COMMENT '마감시간' -- 마감시간
+)
+COMMENT '판매자';
+
+-- 판매자
+ALTER TABLE seller
+  ADD CONSTRAINT PK_seller -- 판매자 기본키
+    PRIMARY KEY (
+      member_no -- 회원번호
+    );
+
+-- 판매자 유니크 인덱스
+CREATE UNIQUE INDEX UIX_seller
+  ON seller ( -- 판매자
+    business_no ASC -- 사업자번호
+  );
+
+-- 판매자 인덱스
+CREATE INDEX IX_seller
+  ON seller( -- 판매자
+    business_name ASC -- 사업자명
+  );
+
+-- 게시판
+CREATE TABLE board (
+  board_no       INTEGER     NOT NULL COMMENT '게시글번호', -- 게시글번호
+  member_no      INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  title          VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
+  content        TEXT        NOT NULL COMMENT '내용', -- 내용
+  registeredDate DATETIME    NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
+  views          INTEGER     NULL     DEFAULT 0 COMMENT '조회수' -- 조회수
+)
+COMMENT '게시판';
+
+-- 게시판
+ALTER TABLE board
+  ADD CONSTRAINT PK_board -- 게시판 기본키
+    PRIMARY KEY (
+      board_no -- 게시글번호
+    );
+
+-- 게시판 인덱스
+CREATE INDEX IX_board
+  ON board( -- 게시판
+    title ASC -- 제목
+  );
+
+ALTER TABLE board
+  MODIFY COLUMN board_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시글번호';
+
+-- 댓글
+CREATE TABLE comment (
+  comment_no     INTEGER  NOT NULL COMMENT '댓글번호', -- 댓글번호
+  content        TEXT     NOT NULL COMMENT '내용', -- 내용
+  registeredDate DATETIME NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
+  board_no       INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
+  member_no      INTEGER  NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '댓글';
+
+-- 댓글
+ALTER TABLE comment
+  ADD CONSTRAINT PK_comment -- 댓글 기본키
+    PRIMARY KEY (
+      comment_no -- 댓글번호
+    );
+
+ALTER TABLE comment
+  MODIFY COLUMN comment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+
+-- 좋아요
+CREATE TABLE board_like (
+  member_no      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  board_no       INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
+  registeredDate DATE    NOT NULL COMMENT '등록일' -- 등록일
+)
+COMMENT '좋아요';
+
+-- 좋아요
+ALTER TABLE board_like
+  ADD CONSTRAINT PK_board_like -- 좋아요 기본키
+    PRIMARY KEY (
+      member_no, -- 회원번호
+      board_no   -- 게시글번호
+    );
+
+-- 술
+CREATE TABLE product (
+  product_no   INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
+  type_no      INTEGER      NOT NULL COMMENT '주종번호', -- 주종번호
+  name         VARCHAR(50)  NOT NULL COMMENT '상품명', -- 상품명
+  origin       VARCHAR(255) NOT NULL COMMENT '원산지', -- 원산지
+  volume       INTEGER      NOT NULL COMMENT '용량', -- 용량
+  alcoholLevel FLOAT        NOT NULL COMMENT '알콜도수', -- 알콜도수
+  sugarLevel   INTEGER      NOT NULL COMMENT '당도', -- 당도
+  acidity      INTEGER      NOT NULL COMMENT '산도', -- 산도
+  weight       INTEGER      NOT NULL COMMENT '바디감', -- 바디감
+  rate         FLOAT        NOT NULL DEFAULT 0 COMMENT '평점' -- 평점
+)
+COMMENT '술';
+
+-- 술
+ALTER TABLE product
+  ADD CONSTRAINT PK_product -- 술 기본키
+    PRIMARY KEY (
+      product_no -- 상품번호
+    );
+
+-- 술 인덱스
+CREATE INDEX IX_product
+  ON product( -- 술
+    name ASC -- 상품명
+  );
+
+ALTER TABLE product
+  MODIFY COLUMN product_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '상품번호';
+
+-- 리뷰
+CREATE TABLE review (
+  review_no      INTEGER  NOT NULL COMMENT '리뷰번호', -- 리뷰번호
+  product_no     INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
+  member_no      INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  purchase_no    INTEGER  NULL     COMMENT '구매번호', -- 구매번호
+  score          FLOAT    NOT NULL COMMENT '평점', -- 평점
+  comment        TEXT     NULL     COMMENT '코멘트', -- 코멘트
+  registeredDate DATETIME NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+)
+COMMENT '리뷰';
+
+-- 리뷰
+ALTER TABLE review
+  ADD CONSTRAINT PK_review -- 리뷰 기본키
+    PRIMARY KEY (
+      review_no -- 리뷰번호
+    );
+
+ALTER TABLE review
+  MODIFY COLUMN review_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '리뷰번호';
+
+-- 판매
+CREATE TABLE stock (
+  stock_no   INTEGER NOT NULL COMMENT '판매번호', -- 판매번호
+  member_no  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  product_no INTEGER NOT NULL COMMENT '상품번호', -- 상품번호
+  amount     INTEGER NOT NULL COMMENT '재고수량', -- 재고수량
+  price      INTEGER NOT NULL COMMENT '가격' -- 가격
+)
+COMMENT '판매';
+
+-- 판매
+ALTER TABLE stock
+  ADD CONSTRAINT PK_stock -- 판매 기본키
+    PRIMARY KEY (
+      stock_no -- 판매번호
+    );
+
+ALTER TABLE stock
+  MODIFY COLUMN stock_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '판매번호';
+
+-- 메세지
+CREATE TABLE message (
+  message_no     INTEGER  NOT NULL COMMENT '메세지번호', -- 메세지번호
+  member_no      INTEGER  NOT NULL COMMENT '보내는이', -- 보내는이
+  member_no2     INTEGER  NOT NULL COMMENT '받는이', -- 받는이
+  content        TEXT     NOT NULL COMMENT '내용', -- 내용
+  registeredDate DATETIME NOT NULL DEFAULT curdate() COMMENT '작성시간' -- 작성시간
+)
+COMMENT '메세지';
+
+-- 메세지
+ALTER TABLE message
+  ADD CONSTRAINT PK_message -- 메세지 기본키
+    PRIMARY KEY (
+      message_no -- 메세지번호
+    );
+
+-- 장바구니
+CREATE TABLE cart (
+  cart_no        INTEGER  NOT NULL COMMENT '장바구니번호', -- 장바구니번호
+  member_no      INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  stock_no       INTEGER  NOT NULL COMMENT '판매번호', -- 판매번호
+  amount         INTEGER  NOT NULL DEFAULT 1 COMMENT '수량', -- 수량
+  registeredDate DATETIME NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+)
+COMMENT '장바구니';
+
+-- 장바구니
+ALTER TABLE cart
+  ADD CONSTRAINT PK_cart -- 장바구니 기본키
+    PRIMARY KEY (
+      cart_no -- 장바구니번호
+    );
+
+ALTER TABLE cart
+  MODIFY COLUMN cart_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '장바구니번호';
+
+-- 알림
+CREATE TABLE alert (
+  alert_no  INTEGER  NOT NULL COMMENT '알림번호', -- 알림번호
+  member_no INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  comment   TEXT     NOT NULL COMMENT '내용', -- 내용
+  status    DATETIME NOT NULL DEFAULT 0 COMMENT '등록일' -- 등록일
+)
+COMMENT '알림';
+
+-- 알림
+ALTER TABLE alert
+  ADD CONSTRAINT PK_alert -- 알림 기본키
+    PRIMARY KEY (
+      alert_no -- 알림번호
+    );
+
+ALTER TABLE alert
+  MODIFY COLUMN alert_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '알림번호';
+
+-- 태그
+CREATE TABLE tag (
+  tag_no INTEGER NOT NULL COMMENT '태그번호', -- 태그번호
+  tag    TEXT    NULL     COMMENT '태그' -- 태그
+)
+COMMENT '태그';
+
+-- 태그
+ALTER TABLE tag
+  ADD CONSTRAINT PK_tag -- 태그 기본키
+    PRIMARY KEY (
+      tag_no -- 태그번호
+    );
+
+-- 태그 인덱스
+CREATE INDEX IX_tag
+  ON tag( -- 태그
+    tag ASC -- 태그
+  );
+
+-- 게시글태그
+CREATE TABLE board_tag (
+  board_no INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
+  tag_no   INTEGER NOT NULL COMMENT '태그번호' -- 태그번호
+)
+COMMENT '게시글태그';
+
+-- 게시글태그
+ALTER TABLE board_tag
+  ADD CONSTRAINT PK_board_tag -- 게시글태그 기본키
+    PRIMARY KEY (
+      board_no, -- 게시글번호
+      tag_no    -- 태그번호
+    );
+
+-- 주종
+CREATE TABLE product_type (
+  type_no INTEGER      NOT NULL COMMENT '주종번호', -- 주종번호
+  type    VARCHAR(255) NOT NULL COMMENT '주종', -- 주종
+  variety VARCHAR(255) NOT NULL COMMENT '품종', -- 품종
+  subType VARCHAR(255) NOT NULL COMMENT '세부주종' -- 세부주종
+)
+COMMENT '주종';
+
+-- 주종
+ALTER TABLE product_type
+  ADD CONSTRAINT PK_product_type -- 주종 기본키
+    PRIMARY KEY (
+      type_no -- 주종번호
+    );
+
+ALTER TABLE product_type
+  MODIFY COLUMN type_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '주종번호';
+
+-- 쿠폰
+CREATE TABLE coupon (
+  coupon_no     INTEGER NOT NULL COMMENT '쿠폰번호', -- 쿠폰번호
+  member_no     INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  coupon_price  INTEGER NOT NULL COMMENT '쿠폰금액', -- 쿠폰금액
+  discount_rate INTEGER NOT NULL COMMENT '할인율', -- 할인율
+  minimum       INTEGER NULL     COMMENT '최저금액', -- 최저금액
+  validity      DATE    NOT NULL COMMENT '유효기간', -- 유효기간
+  useYn         INTEGER NOT NULL COMMENT '사용여부' -- 사용여부
+)
+COMMENT '쿠폰';
+
+-- 쿠폰
+ALTER TABLE coupon
+  ADD CONSTRAINT PK_coupon -- 쿠폰 기본키
+    PRIMARY KEY (
+      coupon_no -- 쿠폰번호
+    );
+
+ALTER TABLE coupon
+  MODIFY COLUMN coupon_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '쿠폰번호';
+
+-- 구매항목
+CREATE TABLE purchase_list (
+  purchase_no INTEGER NOT NULL COMMENT '구매번호', -- 구매번호
+  stock_no    INTEGER NOT NULL COMMENT '판매번호', -- 판매번호
+  amount      INTEGER NULL     COMMENT '수량', -- 수량
+  price       INTEGER NULL     COMMENT '가격' -- 가격
+)
+COMMENT '구매항목';
+
+-- 구매항목
+ALTER TABLE purchase_list
+  ADD CONSTRAINT PK_purchase_list -- 구매항목 기본키
+    PRIMARY KEY (
+      purchase_no, -- 구매번호
+      stock_no     -- 판매번호
+    );
+
+-- 구매
+CREATE TABLE purchase (
+  purchase_no         INTEGER  NOT NULL COMMENT '구매번호', -- 구매번호
+  member_no           INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  date                DATETIME NOT NULL COMMENT '구매일', -- 구매일
+  payment_type        INTEGER  NOT NULL COMMENT '결제방법', -- 결제방법
+  payment_status      INTEGER  NOT NULL COMMENT '결제상태', -- 결제상태
+  purchase_status     INTEGER  NOT NULL COMMENT '구매상태', -- 구매상태
+  pickup_booking_date DATE     NOT NULL COMMENT '픽업예약일', -- 픽업예약일
+  pickup_booking_time INTEGER  NOT NULL COMMENT '픽업가능시간번호', -- 픽업가능시간번호
+  real_pickup_date    DATETIME NULL     COMMENT '실제픽업일시' -- 실제픽업일시
+)
+COMMENT '구매';
+
+-- 구매
+ALTER TABLE purchase
+  ADD CONSTRAINT PK_purchase -- 구매 기본키
+    PRIMARY KEY (
+      purchase_no -- 구매번호
+    );
+
+ALTER TABLE purchase
+  MODIFY COLUMN purchase_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '구매번호';
+
+-- 픽업가능시간
+CREATE TABLE pickup_available (
+  pickup_available_tie INTEGER NOT NULL COMMENT '픽업가능시간번호', -- 픽업가능시간번호
+  start_time           TIME    NOT NULL COMMENT '시작시간', -- 시작시간
+  end_time             TIME    NOT NULL COMMENT '종료시간' -- 종료시간
+)
+COMMENT '픽업가능시간';
+
+-- 픽업가능시간
+ALTER TABLE pickup_available
+  ADD CONSTRAINT PK_pickup_available -- 픽업가능시간 기본키
+    PRIMARY KEY (
+      pickup_available_tie -- 픽업가능시간번호
+    );
+
+ALTER TABLE pickup_available
+  MODIFY COLUMN pickup_available_tie INTEGER NOT NULL AUTO_INCREMENT COMMENT '픽업가능시간번호';
+
+-- 적립금
+CREATE TABLE point (
+  point_no  INTEGER NOT NULL COMMENT '적립금번호', -- 적립금번호
+  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  point     INTEGER NOT NULL COMMENT '적립금', -- 적립금
+  validity  DATE    NOT NULL COMMENT '유효기간', -- 유효기간
+  useYn     INTEGER NOT NULL COMMENT '사용여부' -- 사용여부
+)
+COMMENT '적립금';
+
+-- 적립금
+ALTER TABLE point
+  ADD CONSTRAINT PK_point -- 적립금 기본키
+    PRIMARY KEY (
+      point_no -- 적립금번호
+    );
+
+ALTER TABLE point
+  MODIFY COLUMN point_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '적립금번호';
+
+-- 판매자
+ALTER TABLE seller
+  ADD CONSTRAINT FK_member_TO_seller -- 회원 -> 판매자
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 게시판
+ALTER TABLE board
+  ADD CONSTRAINT FK_member_TO_board -- 회원 -> 게시판
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 댓글
+ALTER TABLE comment
+  ADD CONSTRAINT FK_board_TO_comment -- 게시판 -> 댓글
+    FOREIGN KEY (
+      board_no -- 게시글번호
+    )
+    REFERENCES board ( -- 게시판
+      board_no -- 게시글번호
+    );
+
+-- 댓글
+ALTER TABLE comment
+  ADD CONSTRAINT FK_member_TO_comment -- 회원 -> 댓글
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 좋아요
+ALTER TABLE board_like
+  ADD CONSTRAINT FK_member_TO_board_like -- 회원 -> 좋아요
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 좋아요
+ALTER TABLE board_like
+  ADD CONSTRAINT FK_board_TO_board_like -- 게시판 -> 좋아요
+    FOREIGN KEY (
+      board_no -- 게시글번호
+    )
+    REFERENCES board ( -- 게시판
+      board_no -- 게시글번호
+    );
+
+-- 술
+ALTER TABLE product
+  ADD CONSTRAINT FK_product_type_TO_product -- 주종 -> 술
+    FOREIGN KEY (
+      type_no -- 주종번호
+    )
+    REFERENCES product_type ( -- 주종
+      type_no -- 주종번호
+    );
+
+-- 리뷰
+ALTER TABLE review
+  ADD CONSTRAINT FK_purchase_TO_review -- 구매 -> 리뷰
+    FOREIGN KEY (
+      purchase_no -- 구매번호
+    )
+    REFERENCES purchase ( -- 구매
+      purchase_no -- 구매번호
+    );
+
+-- 리뷰
+ALTER TABLE review
+  ADD CONSTRAINT FK_product_TO_review -- 술 -> 리뷰
+    FOREIGN KEY (
+      product_no -- 상품번호
+    )
+    REFERENCES product ( -- 술
+      product_no -- 상품번호
+    );
+
+-- 리뷰
+ALTER TABLE review
+  ADD CONSTRAINT FK_member_TO_review -- 회원 -> 리뷰
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 판매
+ALTER TABLE stock
+  ADD CONSTRAINT FK_seller_TO_stock -- 판매자 -> 판매
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES seller ( -- 판매자
+      member_no -- 회원번호
+    );
+
+-- 판매
+ALTER TABLE stock
+  ADD CONSTRAINT FK_product_TO_stock -- 술 -> 판매
+    FOREIGN KEY (
+      product_no -- 상품번호
+    )
+    REFERENCES product ( -- 술
+      product_no -- 상품번호
+    );
+
+-- 메세지
+ALTER TABLE message
+  ADD CONSTRAINT FK_member_TO_message -- 회원 -> 메세지
+    FOREIGN KEY (
+      member_no -- 보내는이
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 메세지
+ALTER TABLE message
+  ADD CONSTRAINT FK_member_TO_message2 -- 회원 -> 메세지2
+    FOREIGN KEY (
+      member_no2 -- 받는이
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 장바구니
+ALTER TABLE cart
+  ADD CONSTRAINT FK_member_TO_cart -- 회원 -> 장바구니
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 장바구니
+ALTER TABLE cart
+  ADD CONSTRAINT FK_stock_TO_cart -- 판매 -> 장바구니
+    FOREIGN KEY (
+      stock_no -- 판매번호
+    )
+    REFERENCES stock ( -- 판매
+      stock_no -- 판매번호
+    );
+
+-- 알림
+ALTER TABLE alert
+  ADD CONSTRAINT FK_member_TO_alert -- 회원 -> 알림
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 게시글태그
+ALTER TABLE board_tag
+  ADD CONSTRAINT FK_tag_TO_board_tag -- 태그 -> 게시글태그
+    FOREIGN KEY (
+      tag_no -- 태그번호
+    )
+    REFERENCES tag ( -- 태그
+      tag_no -- 태그번호
+    );
+
+-- 게시글태그
+ALTER TABLE board_tag
+  ADD CONSTRAINT FK_board_TO_board_tag -- 게시판 -> 게시글태그
+    FOREIGN KEY (
+      board_no -- 게시글번호
+    )
+    REFERENCES board ( -- 게시판
+      board_no -- 게시글번호
+    );
+
+-- 쿠폰
+ALTER TABLE coupon
+  ADD CONSTRAINT FK_member_TO_coupon -- 회원 -> 쿠폰
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 구매항목
+ALTER TABLE purchase_list
+  ADD CONSTRAINT FK_stock_TO_purchase_list -- 판매 -> 구매항목
+    FOREIGN KEY (
+      stock_no -- 판매번호
+    )
+    REFERENCES stock ( -- 판매
+      stock_no -- 판매번호
+    );
+
+-- 구매항목
+ALTER TABLE purchase_list
+  ADD CONSTRAINT FK_purchase_TO_purchase_list -- 구매 -> 구매항목
+    FOREIGN KEY (
+      purchase_no -- 구매번호
+    )
+    REFERENCES purchase ( -- 구매
+      purchase_no -- 구매번호
+    );
+
+-- 구매
+ALTER TABLE purchase
+  ADD CONSTRAINT FK_member_TO_purchase -- 회원 -> 구매
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 구매
+ALTER TABLE purchase
+  ADD CONSTRAINT FK_pickup_available_TO_purchase -- 픽업가능시간 -> 구매
+    FOREIGN KEY (
+      pickup_booking_time -- 픽업가능시간번호
+    )
+    REFERENCES pickup_available ( -- 픽업가능시간
+      pickup_available_tie -- 픽업가능시간번호
+    );
+
+-- 적립금
+ALTER TABLE point
+  ADD CONSTRAINT FK_member_TO_point -- 회원 -> 적립금
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
