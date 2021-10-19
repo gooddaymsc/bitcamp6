@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.request.RequestAgent;
 
@@ -15,7 +16,7 @@ public class NetSellerDao implements SellerDao {
   }
 
   @Override
-  public void insert(Seller seller) throws Exception {
+  public void insert(Member seller) throws Exception {
     requestAgent.request("addNumber.member", null);
     int no = requestAgent.getObject(Integer.class);
     seller.setNumber(no);
