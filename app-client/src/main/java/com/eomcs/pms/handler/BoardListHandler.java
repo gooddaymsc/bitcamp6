@@ -32,7 +32,9 @@ public class BoardListHandler implements Command {
       System.out.println("--------------------------------------------------------------------------");
 
       for (Board board : boardList) {
-        System.out.printf("%-3d\t%-15s\t%-6s\t%-3d\t%-6s\n", 
+
+        System.out.printf("%-3d\t%-15s\t%-5s\t%-3d\t%-6s\n", 
+            //  System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
             //            board.getTag(),
@@ -45,6 +47,7 @@ public class BoardListHandler implements Command {
         System.out.println("\n 게시글 등록(A) / 상세보기(R) / 검색(1)");
         while (true) {
           String choose = Prompt.inputString("선택 > ");
+
           System.out.println();
           switch (choose) {
             case "0" : return;

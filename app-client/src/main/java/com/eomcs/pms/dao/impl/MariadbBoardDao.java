@@ -66,7 +66,7 @@ public class MariadbBoardDao implements BoardDao{
         member.setName(rs.getString("name"));
         member.setId(rs.getString("id"));
         board.setWriter(member);
-
+        board.setContent(rs.getString("content"));
         board.setViews(rs.getInt("views"));
         board.setRegistrationDate(rs.getDate("registeredDate"));
 

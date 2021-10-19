@@ -30,12 +30,14 @@ import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
+import com.eomcs.pms.dao.impl.MariadbProductDao;
+import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.dao.impl.NetStockDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
-import com.eomcs.pms.handler.BoardDetailHandler2;
+import com.eomcs.pms.handler.BoardFindDetailHandler;
 import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
@@ -156,11 +158,6 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/drinkerdb?user=drinker&password=1111");
 
-
-    //    requestAgent = new RequestAgent("192.168.0.103",8888);
-    //    requestAgent = new RequestAgent("127.0.0.1",8888);
-    // requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
-
     MemberDao memberDao = new MariadbMemberDao(con);
     SellerDao sellerDao = new MariadbSellerDao(con);
     BuyerDao buyerDao = new MariadbBuyerDao(con);
@@ -168,7 +165,7 @@ public class ClientApp {
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
-    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao, bookingDao);
+    ProductDao productDao = new MariadbProductDao(con, sellerDao, stockDao, bookingDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
@@ -188,7 +185,7 @@ public class ClientApp {
     commandMap.put("/board/add",    new BoardAddHandler(boardDao));
     commandMap.put("/board/list",   new BoardListHandler(boardDao));
     commandMap.put("/board/detail",   new BoardDetailHandler(boardDao, memberDao));
-    commandMap.put("/board/detail2",   new BoardDetailHandler2(boardDao, memberDao));
+    commandMap.put("/board/detail2",   new BoardFindDetailHandler(boardDao, memberDao));
     commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
     commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));

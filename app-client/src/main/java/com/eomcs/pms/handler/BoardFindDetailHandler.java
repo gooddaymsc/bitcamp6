@@ -8,11 +8,11 @@ import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.util.Prompt;
 
-public class BoardDetailHandler2  implements Command {
+public class BoardFindDetailHandler  implements Command {
 
   BoardDao boardDao;
   MemberDao memberDao;
-  public BoardDetailHandler2(BoardDao boardDao, MemberDao memberDao) {
+  public BoardFindDetailHandler(BoardDao boardDao, MemberDao memberDao) {
     this.boardDao = boardDao;
     this.memberDao = memberDao;
   }
@@ -49,14 +49,14 @@ public class BoardDetailHandler2  implements Command {
         System.out.println("|| 이전(0)\n");
       }
 
-      if (ClientApp.getLoginUser().isCommentUpdate() && 
-          board.getWriter().equals(ClientApp.getLoginUser().getId())) {
-        memberDao.changeCommentUpdate(board.getWriter(), false);
-      }
+      //      if (ClientApp.getLoginUser().isCommentUpdate() && 
+      //          board.getWriter().equals(ClientApp.getLoginUser().getId())) {
+      //        memberDao.changeCommentUpdate(board.getWriter(), false);
+      //      }
 
       System.out.printf("제목 : %s\n", board.getTitle());
       System.out.printf("내용 : %s\n", board.getContent());
-      System.out.printf("작성자 : %s\n", board.getWriter());
+      System.out.printf("작성자 : %s\n", board.getWriter().getId());
       System.out.printf("등록일 : %s\n", board.getRegistrationDate());
 
       board.setViews(board.getViews() + 1);
