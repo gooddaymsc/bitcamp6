@@ -24,11 +24,11 @@ import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MariadbBoardDao;
 import com.eomcs.pms.dao.impl.MariadbMemberDao;
+import com.eomcs.pms.dao.impl.MariadbProductDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
-import com.eomcs.pms.dao.impl.NetProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.dao.impl.NetStockDao;
 import com.eomcs.pms.domain.Member;
@@ -156,11 +156,6 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/drinkerdb?user=drinker&password=1111");
 
-
-    //    requestAgent = new RequestAgent("192.168.0.103",8888);
-    //    requestAgent = new RequestAgent("127.0.0.1",8888);
-    // requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
-
     MemberDao memberDao = new MariadbMemberDao(con);
     BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
@@ -168,7 +163,7 @@ public class ClientApp {
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
-    ProductDao productDao = new NetProductDao(requestAgent, sellerDao, stockDao, bookingDao);
+    ProductDao productDao = new MariadbProductDao(con, sellerDao, stockDao, bookingDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
