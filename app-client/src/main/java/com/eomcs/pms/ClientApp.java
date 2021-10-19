@@ -23,10 +23,10 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MariadbBoardDao;
+import com.eomcs.pms.dao.impl.MariadbBuyerDao;
 import com.eomcs.pms.dao.impl.MariadbMemberDao;
 import com.eomcs.pms.dao.impl.MariadbProductDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
-import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
@@ -35,7 +35,7 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
-import com.eomcs.pms.handler.BoardDetailHandler2;
+import com.eomcs.pms.handler.BoardFindDetailHandler;
 import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
@@ -157,7 +157,7 @@ public class ClientApp {
         "jdbc:mysql://localhost:3306/drinkerdb?user=drinker&password=1111");
 
     MemberDao memberDao = new MariadbMemberDao(con);
-    BuyerDao buyerDao = new NetBuyerDao(requestAgent);
+    BuyerDao buyerDao = new MariadbBuyerDao(con);
     SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new MariadbBoardDao(con);  
     StockDao stockDao = new NetStockDao(requestAgent);
@@ -183,7 +183,7 @@ public class ClientApp {
     commandMap.put("/board/add",    new BoardAddHandler(boardDao));
     commandMap.put("/board/list",   new BoardListHandler(boardDao));
     commandMap.put("/board/detail",   new BoardDetailHandler(boardDao, memberDao));
-    commandMap.put("/board/detail2",   new BoardDetailHandler2(boardDao, memberDao));
+    commandMap.put("/board/detail2",   new BoardFindDetailHandler(boardDao, memberDao));
     commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
     commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));

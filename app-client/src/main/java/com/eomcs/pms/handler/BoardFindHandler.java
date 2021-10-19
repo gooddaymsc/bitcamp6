@@ -31,7 +31,7 @@ public class BoardFindHandler implements Command {
 
 
       for (Board board : boardList) {
-        if (board.getWriter().equals(ClientApp.getLoginUser().getId())) {
+        if (board.getWriter().getId().equals(ClientApp.getLoginUser().getId())) {
           System.out.printf("%-3d\t%-10s\t%-6s\n", /*"%-3d\t%-10s\t%-3d\t%-6s\n",*/ 
               board.getBoardNumber(),
               board.getTitle(),

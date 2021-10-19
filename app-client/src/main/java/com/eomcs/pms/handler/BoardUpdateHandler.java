@@ -22,7 +22,7 @@ public class BoardUpdateHandler implements Command {
 
     Board board = boardDao.findByNo(no);
 
-    if (!board.getWriter().equals(ClientApp.getLoginUser().getId())) {
+    if (!board.getWriter().getId().equals(ClientApp.getLoginUser().getId())) {
       System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
       return;
     }

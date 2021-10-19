@@ -27,17 +27,18 @@ public class BoardListHandler implements Command {
 
       Collection<Board> boardList = boardDao.findAll();
 
-      System.out.printf("%-3s\t%-15s\t%-15s\t%-6s\t%-3s\t%-3s\t%-6s\n",
-          "번호", "제목", "태그", "작성자", "조회수","좋아요", "등록일");
+      System.out.printf("%-3s\t%-15s\t%-6s\t%-3s\t%-6s\n",
+          "번호", "제목", "작성자", "조회수", "등록일");
       System.out.println("--------------------------------------------------------------------------");
 
       for (Board board : boardList) {
+
         System.out.printf("%-3d\t%-15s\t%-5s\t%-3d\t%-6s\n", 
             //  System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
             //            board.getTag(),
-            board.getWriter(),
+            board.getWriter().getId(),
             board.getViews(), 
             //            board.getLikes(),
             board.getRegistrationDate());
@@ -46,6 +47,7 @@ public class BoardListHandler implements Command {
         System.out.println("\n 게시글 등록(A) / 상세보기(R) / 검색(1)");
         while (true) {
           String choose = Prompt.inputString("선택 > ");
+
           System.out.println();
           switch (choose) {
             case "0" : return;

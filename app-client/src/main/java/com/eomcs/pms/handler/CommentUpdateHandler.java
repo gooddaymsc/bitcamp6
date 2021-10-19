@@ -15,15 +15,14 @@ public class CommentUpdateHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     int commentNo = Prompt.inputInt("변경할 댓글 번호 : ");
 
-    int boardNo = (int) request.getAttribute("no");
-    Comment comment = boardDao.findCommentByNo(boardNo, commentNo);
+    Comment comment = boardDao.findCommentByNo(commentNo);
 
     if (comment == null) {
       System.out.println("해당 번호의 댓글이 없습니다.\n");
       return;
     }
 
-    if (!comment.getId().equals(ClientApp.getLoginUser().getId())) {
+    if (!comment.getWriter().getId().equals(ClientApp.getLoginUser().getId())) {
       System.out.println("작성자가 아니므로 변경할 수 없습니다.\n");
       return;
     }

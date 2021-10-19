@@ -26,7 +26,7 @@ public class CommentListHandler implements Command {
     for (Comment comment : commentList) {
       System.out.printf("%-3d\t%-6s\t%-15s\t%-6s\n", 
           comment.getCommentNumber(),
-          comment.getId(),
+          comment.getWriter().getId(),
           comment.getContent(),
           comment.getRegistrationDate());
     }
