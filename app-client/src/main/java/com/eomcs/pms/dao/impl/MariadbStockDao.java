@@ -3,6 +3,7 @@ package com.eomcs.pms.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
@@ -20,40 +21,65 @@ public class MariadbStockDao implements StockDao {
   public void insert(Stock stock) throws Exception {
 
     try (PreparedStatement stmt2 = con.prepareStatement(
-        "select member_no from member where member_no=?")) {
+        "select member_no from member where id=?")) {
       stmt2.setString(1, stock.getId());
-      stmt2.executeQuery();
+      ResultSet rs = stmt2.executeQuery();
 
-      try (PreparedStatement stmt3 = con.prepareStatement(
-          "select product_no from product where product_no=?")) {
-        stmt3.setString(1, stock.getProduct());
-        stmt3.executeQuery();
-
-        try (PreparedStatement stmt = con.prepareStatement(
-            "insert into stock(stock_no,amount,price) + values(?,?,?)")) {
-          stmt.setInt(1, stock.getStockNumber());
-          stmt.setInt(2, stock.getStocks());
-          stmt.setInt(3, stock.getPrice());
-
-          if(stmt.executeUpdate() == 0 ) {
-            throw new Exception("재고 데이터 입력 실패");
-          }
-        }    
+      int member_no = 0;
+      while(rs.next()) {
+        member_no = rs.getInt("member_no");
       }
-    }
 
+      try (PreparedStatement stmt = con.prepareStatement(
+          "insert into stock(stock_no,member_no,product_no,amount,price) values(?,?,?,?,?)")) {
+        stmt.setInt(1, stock.getStockNumber());
+        stmt.setInt(2, member_no);
+        stmt.setInt(3, stock.getProduct().getProductNumber());
+        stmt.setInt(4, stock.getStocks());
+        stmt.setInt(5, stock.getPrice());
+
+        if(stmt.executeUpdate() == 0 ) {
+          throw new Exception("재고 데이터 입력 실패");
+        }
+      }    
+    }
   }
+
   @Override
   public StockList findAll(String id) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("id", id);
-    //    requestAgent.request("stock.selectList", params);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      throw new Exception("재고목록 불러오기 실패");
-    //    }
-    //    return requestAgent.getObject(StockList.class);
-    return null;
+
+    try (PreparedStatement stmt2 = con.prepareStatement(
+        "select member_no from member where id=?")) {
+      stmt2.setString(1, id);
+      ResultSet rs2 = stmt2.executeQuery();
+
+      int member_no = 0;
+      while(rs2.next()) {
+        member_no = rs2.getInt("member_no");
+      }
+
+      try(PreparedStatement stmt = con.prepareStatement(
+          "Select s.stock_no, p.name, s.price, s.amount"
+              + " From stock s left outer join product p"
+              + " on s.product_no = p.product_no where member_no=" + member_no
+              + " order by s.product_no asc");
+          ResultSet rs = stmt.executeQuery()) {
+
+        ArrayList<Stock> list = new ArrayList<>();
+
+        while(rs.next()) {
+          Stock s = new Stock();
+          s.setStockNumber(rs.getInt("stock_no"));
+          s.getProduct().setProductName(rs.getString("name"));
+          s.setPrice(rs.getInt("price"));
+          s.setStocks(rs.getInt("amount"));
+
+
+          list.add(s);
+        }
+        return list; // 질문.....
+      }
+    }
   }
 
   @Override
@@ -74,9 +100,9 @@ public class MariadbStockDao implements StockDao {
             + " p.acidity, p.weight, p.rate, p.variety,"
             + " t.type, t.subType"
             + " from product p join product_type t on p.type_no=t.type_no"
-            + " where p.name="+name);
-
-        ResultSet rs = stmt.executeQuery()) { 
+            + " where p.name=?")) {
+      stmt.setString(1, name);
+      ResultSet rs = stmt.executeQuery(); 
 
       if (rs.next()) {
         Product p = new Product();
@@ -113,21 +139,29 @@ public class MariadbStockDao implements StockDao {
   }
 
   @Override
-  public void delete(Stock stock) throws Exception {
+  public void update(Stock stock) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update stock set amount=?,price=? where stock_no=?")) {
 
-    //    requestAgent.request("stock.delete", stock);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      throw new Exception("재고삭제 실패");
-    //    }
+      stmt.setInt(1, stock.getStocks());
+      stmt.setInt(2, stock.getPrice());
+      stmt.setInt(3, stock.getStockNumber());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("재고 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
-  public void update(Stock stock) throws Exception {
-    //    requestAgent.request("stock.update", stock);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("재고 데이터 변경 실패");
-    //    }
+  public void delete(Stock stock) throws Exception {
+
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from stock where stock_no=" + stock.getStockNumber())) {
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("재고 데이터 삭제 실패!");
+      }
+    }
   }
 }
