@@ -142,7 +142,7 @@ public class NetBoardDao implements BoardDao{
   }
 
   @Override
-  public void like(Board board) throws Exception {
+  public void like(Board board, boolean check) throws Exception {
 
     requestAgent.request("board.comment.like", board);
 

@@ -22,7 +22,7 @@ public class ProductUpdateHandler implements Command {
 
     String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
     String type = ProductValidation.checkType("주종(" + product.getProductType() + ")? ");
-    String subType = ProductValidation.checkSubType2(("상세주종(" + product.getProductSubType() + ")? "),type);
+    String subType = ProductValidation.checkSubType(("상세주종(" + product.getProductSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
     String grapes = product.getVariety();
     if(type.equals("와인")) {
@@ -43,8 +43,9 @@ public class ProductUpdateHandler implements Command {
       product.setCountryOrigin(made);
       if(type.equals("와인")){
         product.setVariety(grapes);
+      } else {
+        product.setVariety(null);
       }
-      product.setVariety(null);
       product.setVolume(volumes);
       product.setAlcoholLevel(abv);
       product.setSugerLevel(sweet);
