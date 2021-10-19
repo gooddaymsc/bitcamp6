@@ -31,21 +31,35 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public void insert(Product product) throws Exception {
-    try(PreparedStatement stmt = con.prepareStatement(
-        "insert into product(type_no, name, origin, volume, alcoholLevel, sugarLevel,  acidity, weight, rate)"
-            + " values(?, ?, ?, ?, ?, ?, ?, ?, ?)" )) {
-      stmt.setString(1, product.getProductType());
-      stmt.setString(2, product.getProductName());
-      stmt.setString(3, product.getCountryOrigin());
-      stmt.setInt(4, product.getVolume());
-      stmt.setFloat(5, product.getAlcoholLevel());
-      stmt.setInt(6, product.getSugerLevel());
-      stmt.setInt(7, product.getAcidity());
-      stmt.setInt(8, product.getWeight()); 
-      stmt.setFloat(9, product.getRate());  //////
+    try (PreparedStatement stmt2 = con.prepareStatement(
+        "select type_no"
+            + " from product_type"
+            + " where type=? and subType=?")) {
+      stmt2.setString(1, product.getProductType());
+      stmt2.setString(2, product.getProductSubType());
+      ResultSet rs = stmt2.executeQuery();
 
-      if(stmt.executeUpdate() == 0 ) {
-        throw new Exception("상품 데이터 입력 실패");
+      int type_no = 0;
+      while(rs.next()) {
+        type_no = rs.getInt("type_no");
+      }
+
+      try(PreparedStatement stmt = con.prepareStatement(
+          "insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)"
+              + " values(?, ?, ?, ?, ?, ?, ?, ?, ?)" )) {
+        stmt.setInt(1, type_no);
+        stmt.setString(2, product.getProductName());
+        stmt.setString(3, product.getVariety());
+        stmt.setString(4, product.getCountryOrigin());
+        stmt.setInt(5, product.getVolume());
+        stmt.setFloat(6, product.getAlcoholLevel());
+        stmt.setInt(7, product.getSugerLevel());
+        stmt.setInt(8, product.getAcidity());
+        stmt.setInt(9, product.getWeight()); 
+
+        if(stmt.executeUpdate() == 0 ) {
+          throw new Exception("상품 데이터 입력 실패");
+        }
       }
     }
   }
@@ -54,8 +68,8 @@ public class MariadbProductDao implements ProductDao{
   public List<Product> findAll() throws Exception {
     try(PreparedStatement stmt = con.prepareStatement(
         "Select"
-            + " p.product_no, t.type, t.subType, t.variety,"
-            + " p.name, p.origin, p.volume, p.alcoholLevel, p.sugarLevel, p.acidity, p.weight, p.rate"
+            + " p.product_no, t.type, t.subType,"
+            + " p.name, p.origin, p.volume, p.alcoholLevel, p.sugarLevel, p.acidity, p.weight, p.rate, p.variety"
             + " From product p"
             + " left outer join product_type t on t.type_no = p.type_no"
             + " order by p.product_no asc");
@@ -86,16 +100,33 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public Product findByNo(int no) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("productNumber", String.valueOf(no));
-    //
-    //    requestAgent.request("product.selectOne", params);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      return null;
-    //    }
-    //    return requestAgent.getObject(Product.class);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " p.product_no, p.type_no, p.name, p.origin, p.volume, p.alcoholLevel, p.sugarLevel, p.acidity, p.weight, p.rate, p.variety,"
+            + " t.type, t.subType"
+            + " from product p join product_type t on p.type_no=t.type_no"
+            + " where p.product_no="+no);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (rs.next()) {
+        Product p = new Product();
+        p.setProductNumber(rs.getInt("product_no"));
+        p.setProductName(rs.getString("name"));
+        p.setCountryOrigin(rs.getNString("origin"));
+        p.setVolume(rs.getInt("volume"));
+        p.setAlcoholLevel(rs.getFloat("alcoholLevel"));
+        p.setSugerLevel(rs.getInt("sugarLevel"));
+        p.setAcidity(rs.getInt("acidity"));
+        p.setWeight(rs.getInt("weight"));
+        p.setProductType(rs.getString("type"));
+        p.setProductSubType(rs.getString("subType"));
+        p.setVariety(rs.getString("variety"));
+        return p;
+      }
+    }
     return null;
   }
+
 
   @Override
   public Product findByNo2(int no) throws Exception {
@@ -126,23 +157,46 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public void update(Product product) throws Exception {
-    //    requestAgent.request("product.update", product);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("상품 데이터 변경 실패");
-    //    }
+    try (PreparedStatement stmt2 = con.prepareStatement(
+        "select type_no"
+            + " from product_type"
+            + " where type=? and subType=?")) {
+      stmt2.setString(1, product.getProductType());
+      stmt2.setString(2, product.getProductSubType());
+      ResultSet rs = stmt2.executeQuery();
+
+      int type_no = 0;
+      while(rs.next()) {
+        type_no = rs.getInt("type_no");
+      }
+
+      try(PreparedStatement stmt = con.prepareStatement(
+          "update product set"
+              + " name = ?, origin=?, volume=?, alcoholLevel=?, sugarLevel=?, acidity=?, weight=?, variety=?"
+              + " where product_no=?")) {
+
+        //        stmt.setInt(1, type_no);
+        stmt.setString(1, product.getProductName());
+        stmt.setString(2, product.getCountryOrigin());
+        stmt.setInt(3, product.getVolume());
+        stmt.setFloat(4, product.getAlcoholLevel());
+        stmt.setInt(5, product.getSugerLevel());
+        stmt.setInt(6, product.getAcidity());
+        stmt.setInt(7, product.getWeight());
+        stmt.setString(8, product.getVariety());
+        stmt.setInt(9, product.getProductNumber());
+
+        if (stmt.executeUpdate() == 0) {
+          throw new Exception("프로젝트 데이터 변경 실패!");
+        }
+      }
+    }             
   }
+
 
   @Override
   public void delete(Product product) throws Exception {    
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("name", product.getProductName());
-    //
-    //    requestAgent.request("product.delete", product);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("상품 데이터 삭제 실패");
-    //    }
+
   }
 
   @Override

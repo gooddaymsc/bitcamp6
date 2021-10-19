@@ -43,15 +43,17 @@ public class ProductUpdateHandler implements Command {
       product.setCountryOrigin(made);
       if(type.equals("와인")){
         product.setVariety(grapes);
+      } else {
+        product.setVariety(null);
       }
-      product.setVariety(null);
       product.setVolume(volumes);
       product.setAlcoholLevel(abv);
       product.setSugerLevel(sweet);
       product.setAcidity(acidic);
       product.setWeight(body);
 
-      productDao.update(product);
+      productDao.delete(product);
+      productDao.insert(product);
       System.out.println("상품정보를 변경하였습니다.\n");
     } else {
       System.out.println("상품정보 변경을 취소하였습니다.\n");

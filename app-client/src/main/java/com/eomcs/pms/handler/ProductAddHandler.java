@@ -24,12 +24,12 @@ public class ProductAddHandler implements Command {
       return;  }
 
     product.setProductName(productName);
-    // product.setProductType(ProductValidation.checkType("주종 : "));
-    // product.setProductSubType(ProductValidation.checkSubType("상세주종 : ",product));
+    product.setProductType(ProductValidation.checkType("주종 : "));
+    product.setProductSubType(ProductValidation.checkSubType("상세주종 : ",product));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
-    //    if(product.getProductType().equals("와인")) {
-    //      product.setVariety(Prompt.inputString("품종 : "));
-    //    }
+    if(product.getProductType().equals("와인")) {
+      product.setVariety(Prompt.inputString("품종 : "));
+    }
     product.setVolume(Prompt.inputInt("용량 : "));
     product.setAlcoholLevel(Prompt.inputFloat("알콜도수 : ")); 
     product.setSugerLevel(ProductValidation.checkNum("당도(1-5) : "));
