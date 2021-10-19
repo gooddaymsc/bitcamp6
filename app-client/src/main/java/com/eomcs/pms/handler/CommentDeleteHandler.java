@@ -18,15 +18,14 @@ public class CommentDeleteHandler implements Command {
     System.out.println("[댓글 삭제]\n");
     int commentNo = Prompt.inputInt("삭제할 댓글 번호 : ");
 
-    int boardNo = (int) request.getAttribute("no");
-    Comment comment = boardDao.findCommentByNo(boardNo, commentNo);
+    Comment comment = boardDao.findCommentByNo(commentNo);
 
     if (comment == null) {
       System.out.println("해당 번호의 댓글 없습니다.\n");
       return;
     }
 
-    if (!((comment.getId().equals(ClientApp.getLoginUser().getId())) ||
+    if (!((comment.getWriter().getId().equals(ClientApp.getLoginUser().getId())) ||
         (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN))) {
       System.out.println("작성자가 아니므로 삭제할 수 없습니다.\n");
       return;

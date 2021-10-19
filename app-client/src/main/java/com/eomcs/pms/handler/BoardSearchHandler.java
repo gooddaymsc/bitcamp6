@@ -35,17 +35,19 @@ public class BoardSearchHandler implements Command {
     while(true) {
       for (Board board : boardList) {
         if (!board.getTitle().contains(keyword) &&
-            !board.getContent().contains(keyword) &&
-            !board.getTag().contains(keyword)) {
+            !board.getContent().contains(keyword) 
+            //            &&!board.getTag().contains(keyword)
+            ) {
 
           continue;
         }
 
-        System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-6s\n", 
+        System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
             board.getContent(),
-            board.getTag(),
+
+            //            board.getTag(),
             board.getRegistrationDate());
         boardNumList.add(board.getBoardNumber());
       }

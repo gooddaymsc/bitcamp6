@@ -16,7 +16,7 @@ public class Board implements Serializable {
   private String tag;
   private int likes;
   private Date likeDate;
-  private List<String> likeMember = new ArrayList<>();
+  private List<Integer> likeMember = new ArrayList<>();
   private int totalCommentNumber = 1;
   private List<Comment> commentList = new ArrayList<>();
 
@@ -86,10 +86,10 @@ public class Board implements Serializable {
   public void setCommentList(List<Comment> commentList) {
     this.commentList = commentList;
   }
-  public List<String> getLikeMember() {
+  public List<Integer> getLikeMember() {
     return likeMember;
   }
-  public void setLikeMember(List<String> likeMember) {
+  public void setLikeMember(List<Integer> likeMember) {
     this.likeMember = likeMember;
   }
 
