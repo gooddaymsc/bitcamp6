@@ -23,10 +23,10 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MariadbBoardDao;
+import com.eomcs.pms.dao.impl.MariadbBuyerDao;
 import com.eomcs.pms.dao.impl.MariadbMemberDao;
 import com.eomcs.pms.dao.impl.MariadbSellerDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
-import com.eomcs.pms.dao.impl.NetBuyerDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
 import com.eomcs.pms.dao.impl.NetProductDao;
@@ -162,8 +162,8 @@ public class ClientApp {
     // requestAgent.request("member.insert", new Member("admin","1234", Menu.ACCESS_ADMIN));
 
     MemberDao memberDao = new MariadbMemberDao(con);
-    BuyerDao buyerDao = new NetBuyerDao(requestAgent);
     SellerDao sellerDao = new MariadbSellerDao(con);
+    BuyerDao buyerDao = new MariadbBuyerDao(con);
     BoardDao boardDao = new MariadbBoardDao(con);  
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
