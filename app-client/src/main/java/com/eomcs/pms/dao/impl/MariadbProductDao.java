@@ -157,12 +157,42 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public void update(Product product) throws Exception {
-    //    requestAgent.request("product.update", product);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("상품 데이터 변경 실패");
-    //    }
+    try (PreparedStatement stmt2 = con.prepareStatement(
+        "select type_no"
+            + " from product_type"
+            + " where type=? and subType=?")) {
+      stmt2.setString(1, product.getProductType());
+      stmt2.setString(2, product.getProductSubType());
+      ResultSet rs = stmt2.executeQuery();
+
+      int type_no = 0;
+      while(rs.next()) {
+        type_no = rs.getInt("type_no");
+      }
+
+      try(PreparedStatement stmt = con.prepareStatement(
+          "update product set"
+              + " type_no = ?, name = ?, origin=?, volume=?, alcoholLevel=?, sugarLevel=?, acidity=?, weight=?, variety=?"
+              + " where product_no=?")) {
+
+        stmt.setInt(1, type_no);
+        stmt.setString(2, product.getProductName());
+        stmt.setString(3, product.getCountryOrigin());
+        stmt.setInt(4, product.getVolume());
+        stmt.setFloat(5, product.getAlcoholLevel());
+        stmt.setInt(6, product.getSugerLevel());
+        stmt.setInt(7, product.getAcidity());
+        stmt.setInt(8, product.getWeight());
+        stmt.setString(9, product.getVariety());
+        stmt.setInt(10, product.getProductNumber());
+
+        if (stmt.executeUpdate() == 0) {
+          throw new Exception("프로젝트 데이터 변경 실패!");
+        }
+      }
+    }             
   }
+
 
   @Override
   public void delete(Product product) throws Exception {    
