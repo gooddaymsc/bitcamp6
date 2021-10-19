@@ -34,7 +34,6 @@ public class MariadbBoardDao implements BoardDao{
         throw new Exception("게시글 저장 실패");
       }
     }
-
   }
 
 
@@ -163,25 +162,52 @@ public class MariadbBoardDao implements BoardDao{
   // 댓글 등록
   @Override
   public void insert(Comment comment) throws Exception {
-    //    requestAgent.request("board.comment.insert", comment);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      throw new Exception("댓글 데이터 저장 실패");   }
+    try(PreparedStatement stmt = con.prepareStatement(
+        "insert"
+            + " into comment(board_no,member_no,content)"
+            + " values(?,?,?)")){
 
+      stmt.setInt(1, comment.getBoardNumber());
+      stmt.setInt(2, comment.getWriter().getNumber());
+      stmt.setString(3, comment.getContent());
+
+
+      if(stmt.executeUpdate() == 0) {
+        throw new Exception("게시글 저장 실패");
+      }
+    }
   }
 
   // 댓글 조회
   @Override
   public List<Comment> findAll(int boardNo) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("boardNo", String.valueOf(boardNo));
-    //
-    //    requestAgent.request("board.comment.selectList", params);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(requestAgent.getObject(String.class));
-    //      return null;
-    //    }
-    //    return new ArrayList<>(requestAgent.getObjects(Comment.class));
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " c.content, c.registeredDate,"
+            + " m.id, m.member_no"
+            + " from comment c join member m on c.member_no=m.member_no"
+            + " where board_no="+boardNo)) {
+
+      try (ResultSet rs = stmt.executeQuery()) {
+
+        ArrayList<Comment> list = new ArrayList<>();
+
+        while (rs.next()) {
+          Comment comment = new Comment();
+          comment.setBoardNumber(boardNo);
+          comment.setContent(rs.getString("content"));
+          comment.setRegistrationDate(rs.getTimestamp("registeredDate"));
+
+          Member member = new Member();
+          member.setId(rs.getString("id"));
+          member.setNumber(rs.getInt("member_no"));
+          comment.setWriter(member);
+          list.add(comment);
+        }
+
+        return list;
+      }
+    }
   }
 
   // 댓글 변경
