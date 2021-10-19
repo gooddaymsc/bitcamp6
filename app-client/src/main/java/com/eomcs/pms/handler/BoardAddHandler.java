@@ -24,7 +24,7 @@ public class BoardAddHandler implements Command {
     board.setContent(Prompt.inputString("내용 : "));
     board.setWriter(ClientApp.getLoginUser());
     board.setRegistrationDate(new Date(System.currentTimeMillis()));
-    board.setTag(Prompt.inputString("태그 : "));
+    //    board.setTag(Prompt.inputString("태그 : "));
     // Numbering은 마지막에
     //    board.setBoardNumber(totalNumberList.get(App.BOARD_NUMBER_INDEX));
     //    totalNumberList.set(App.BOARD_NUMBER_INDEX, board.getBoardNumber()+1);

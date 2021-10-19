@@ -68,40 +68,10 @@ public class BuyerAddHandler implements Command {
     //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
     //    memberList.add(buyer);
 
-    //    //    // 예약리스트에 구매자 id를 갖는 bookingList add.
-    //    requestAgent.request("cart.insert", buyer.getId());
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("장바구니 생성 실패!");
-    //      return;
-    //    }
-    //    //    // 장바구니리스트에 구매자 id를 갖는 cartList add.
-    //    requestAgent.request("booking.insert", buyer.getId());
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("예약 생성 실패!");
-    //      return;
-    //    }
-    //    requestAgent.request("message.insert", buyer.getId());
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("메신저 생성 실패!");
-    //      return;
-    //    }
-    //    messagePrompt.addMessageListById(buyer.getId());
-    //    //    memberList.add(new Member(buyer.getId(), buyer.getPassword(), buyer.getAuthority()));
 
     buyerDao.insert(buyer);
     System.out.println("회원가입이 완료되었습니다.");
   }
-
-
-  //
-  //  public int findDeletedByName(String name) {
-  //    for (int i=0; i< deleteMemberList.size(); i++) {
-  //      if (deleteMemberList.get(i).getName().equals(name)) {
-  //        return i;
-  //      }
-  //    }
-  //    return -1;
-  //  }
 
 }
 

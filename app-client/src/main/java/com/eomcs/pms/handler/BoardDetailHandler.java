@@ -21,7 +21,6 @@ public class BoardDetailHandler implements Command {
 
     Board board = boardDao.findByNo(Prompt.inputInt("게시글 번호 : "));
 
-    //    request.setAttribute("boardNo", board.getBoardNumber());
     Loop : while(true) {
       board = boardDao.findByNo(board.getBoardNumber());
       System.out.printf("[게시글 상세보기]");
@@ -34,19 +33,18 @@ public class BoardDetailHandler implements Command {
 
       if (ClientApp.getLoginUser().isCommentUpdate() && 
           board.getWriter().equals(ClientApp.getLoginUser().getId())) {
-        memberDao.changeCommentUpdate(board.getWriter(), false);
+        //        memberDao.changeCommentUpdate(board.getWriter(), false);
       }
 
       System.out.printf("제목 : %s\n", board.getTitle());
       System.out.printf("내용 : %s\n", board.getContent());
-      System.out.printf("작성자 : %s\n", board.getWriter());
+      System.out.printf("작성자 : %s\n", board.getWriter().getId());
       System.out.printf("등록일 : %s\n", board.getRegistrationDate());
 
       board.setViews(board.getViews() + 1);
       System.out.printf("조회수 : %d\n", board.getViews());
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
       System.out.printf("태그 : %s\n", board.getTag());
-      //      commentListHandler.list(board.getBoardNumber(), boardPrompt);
       request.setAttribute("no", board.getBoardNumber());
       request.getRequestDispatcher("/comment/list").forward(request);
       //
