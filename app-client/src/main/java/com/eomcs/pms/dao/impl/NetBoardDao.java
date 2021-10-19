@@ -128,9 +128,10 @@ public class NetBoardDao implements BoardDao{
 
   // 댓글 선택
   @Override
-  public Comment findCommentByNo(int boardNo, int commentNo) throws Exception {
+  public Comment findCommentByNo(int commentNo) throws Exception {
+    //    public Comment findCommentByNo(int boardNo, int commentNo) throws Exception {
     HashMap<String, String> params = new HashMap<>();
-    params.put("boardNo", String.valueOf(boardNo));
+    //    params.put("boardNo", String.valueOf(boardNo));
     params.put("commentNo", String.valueOf(commentNo));
 
     requestAgent.request("board.comment.selectOne", params);
