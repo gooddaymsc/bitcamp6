@@ -31,7 +31,7 @@ public class CommentFindHandler implements Command {
 
       for (Board board : boardList) {
         for (Comment comment : board.getCommentList()) {
-          if (comment.getId().equals(ClientApp.getLoginUser().getId())) {
+          if (comment.getWriter().getId().equals(ClientApp.getLoginUser().getId())) {
             System.out.printf("%-3d\t%-10s\t%-15s\t%-6s\n", 
                 board.getBoardNumber(),
                 board.getTitle(),
