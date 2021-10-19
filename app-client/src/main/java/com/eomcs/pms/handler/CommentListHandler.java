@@ -15,8 +15,8 @@ public class CommentListHandler implements Command {
     int boardNo = (Integer) request.getAttribute("no");
     Collection<Comment> commentList = boardDao.findAll(boardNo);
 
-    System.out.printf("\n%-3s\t%-6s\t%-15s\t%-6s\n",
-        "No.", "아이디", "내용", "등록일");
+    System.out.printf("\n%-6s\t%-15s\t%-6s\n",
+        "아이디", "내용", "등록일");
     System.out.println("--------------------------------------------------------------");
     if (commentList == null) {
       System.out.println("등록된 댓글이 없습니다.");
@@ -24,9 +24,8 @@ public class CommentListHandler implements Command {
     }
 
     for (Comment comment : commentList) {
-      System.out.printf("%-3d\t%-6s\t%-15s\t%-6s\n", 
-          comment.getCommentNumber(),
-          comment.getId(),
+      System.out.printf("%-6s\t%-15s\t%-6s\n", 
+          comment.getWriter().getId(),
           comment.getContent(),
           comment.getRegistrationDate());
     }
