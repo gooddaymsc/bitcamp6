@@ -25,7 +25,7 @@ public class ProductAddHandler implements Command {
 
     product.setProductName(productName);
     // product.setProductType(ProductValidation.checkType("주종 : "));
-    //    product.setProductSubType(ProductValidation.checkSubType("상세주종 : ",product));
+    // product.setProductSubType(ProductValidation.checkSubType("상세주종 : ",product));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
     //    if(product.getProductType().equals("와인")) {
     //      product.setVariety(Prompt.inputString("품종 : "));
