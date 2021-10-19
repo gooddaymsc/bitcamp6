@@ -32,7 +32,7 @@ public class BoardDetailHandler implements Command {
       }
 
       if (ClientApp.getLoginUser().isCommentUpdate() && 
-          board.getWriter().equals(ClientApp.getLoginUser().getId())) {
+          board.getWriter().getId().equals(ClientApp.getLoginUser().getId())) {
         //        memberDao.changeCommentUpdate(board.getWriter(), false);
       }
 

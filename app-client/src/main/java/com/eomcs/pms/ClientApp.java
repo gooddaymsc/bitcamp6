@@ -35,7 +35,7 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
 import com.eomcs.pms.handler.BoardDetailHandler;
-import com.eomcs.pms.handler.BoardDetailHandler2;
+import com.eomcs.pms.handler.BoardFindDetailHandler;
 import com.eomcs.pms.handler.BoardFindHandler;
 import com.eomcs.pms.handler.BoardListHandler;
 import com.eomcs.pms.handler.BoardSearchHandler;
@@ -188,7 +188,7 @@ public class ClientApp {
     commandMap.put("/board/add",    new BoardAddHandler(boardDao));
     commandMap.put("/board/list",   new BoardListHandler(boardDao));
     commandMap.put("/board/detail",   new BoardDetailHandler(boardDao, memberDao));
-    commandMap.put("/board/detail2",   new BoardDetailHandler2(boardDao, memberDao));
+    commandMap.put("/board/detail2",   new BoardFindDetailHandler(boardDao, memberDao));
     commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
     commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
