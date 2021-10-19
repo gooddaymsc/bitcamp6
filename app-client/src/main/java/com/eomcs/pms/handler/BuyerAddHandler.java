@@ -4,6 +4,7 @@ import java.sql.Date;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Coupon;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
@@ -47,6 +48,17 @@ public class BuyerAddHandler implements Command {
     //        return;
     //      }
     //    }
+
+    // 회원가입할때 쿠폰지급하기 (2개)
+    Coupon coupon = new Coupon();
+    coupon.setMinimum(10000);
+    coupon.setPercent(10);
+    ((Buyer)buyer).getCoupon().add(coupon);
+    coupon = new Coupon();
+    coupon.setMinimum(15000);
+    coupon.setPrice(2000);
+    ((Buyer)buyer).getCoupon().add(coupon);
+
     ((Buyer)buyer).setZipcode(Prompt.inputString("우편번호: "));
     ((Buyer)buyer).setAddress(Prompt.inputString("주소: "));
     ((Buyer)buyer).setAddress(Prompt.inputString("상세주소: "));
