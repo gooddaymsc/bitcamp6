@@ -52,8 +52,8 @@ public class MariadbMemberDao implements MemberDao{
   @Override
   public Member findByEmailAndPassword(String id, String password) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select member_no,name,email,photo,phoneNumber, registeredDate from member"
-            + "where id=? and password = password(?)")){
+        "select member_no,name,email,photo,phoneNumber,authority,registeredDate from member"
+            + " where id=? and password = password(?)")){
       stmt.setString(1, id);
       stmt.setString(2, password);
 
@@ -63,6 +63,8 @@ public class MariadbMemberDao implements MemberDao{
         }
         Member member = new Member();
         member.setNumber(rs.getInt("member_no"));
+        member.setId(id);
+        member.setAuthority(rs.getInt("authority"));
         member.setName(rs.getString("name"));
         member.setEmail(rs.getString("email"));
         member.setPhoto(rs.getString("photo"));

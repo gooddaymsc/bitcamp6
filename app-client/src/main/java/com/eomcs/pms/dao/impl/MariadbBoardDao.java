@@ -35,13 +35,6 @@ public class MariadbBoardDao implements BoardDao{
       }
     }
 
-    //    requestAgent.request("addNumber.board", null);
-    //    int no = requestAgent.getObject(Integer.class);
-    //    board.setBoardNumber(no);
-    //
-    //    requestAgent.request("board.insert", board);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      throw new Exception("게시글 데이터 저장 실패");
   }
 
 
@@ -87,14 +80,42 @@ public class MariadbBoardDao implements BoardDao{
 
   @Override
   public Board findByNo(int no) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
-    //    requestAgent.request("board.selectOne", params);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      return null;
-    //    }
-    //    return requestAgent.getObject(Board.class);
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " b.board_no,b.title,b.content,b.registeredDate,b.views,"
+            + " m.member_no, m.id, m.name,m.email"
+            + " from board b inner join member m on b.member_no=m.member_no"
+            + " where board_no=" + no);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (rs.next()) {
+        Board board = new Board();
+        board.setBoardNumber(rs.getInt("board_no"));
+        board.setTitle(rs.getString("title"));
+        board.setContent(rs.getString("content"));
+        board.setRegistrationDate(rs.getDate("registeredDate"));
+        board.setViews(rs.getInt("views"));
+
+        Member member = new Member();
+        member.setNumber(rs.getInt("member_no"));
+        member.setId(rs.getString("id"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+
+        board.setWriter(member);
+
+        // 조회수 증가하기
+        try (PreparedStatement stmt2 = con.prepareStatement(
+            "update board set views=views + 1"
+                + " where board_no=" + no)) {
+          stmt2.executeUpdate();
+        }
+
+        return board;
+      }
+
+      return null;
+    }
   }
 
   @Override
@@ -113,23 +134,30 @@ public class MariadbBoardDao implements BoardDao{
 
   @Override
   public void update(Board board) throws Exception {
-    //    requestAgent.request("board.update", board);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("게시글 데이터 변경 실패");
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update board set"
+            + " title=?,content=?"
+            + " where board_no=?")) {
+
+      stmt.setString(1, board.getTitle());
+      stmt.setString(2, board.getContent());
+      stmt.setInt(3, board.getBoardNumber());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("게시글 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
-  public void delete(int no) throws Exception {    
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
-    //
-    //    requestAgent.request("board.delete", params);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("게시글 데이터 삭제 실패");
-    //    }
+  public void delete(int no) throws Exception { 
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from board where board_no="+no)) {
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("게시글 데이터 삭제 실패!");
+      }
+    }
   }
 
   // 댓글 등록

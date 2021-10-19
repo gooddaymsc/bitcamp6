@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
@@ -22,14 +21,14 @@ public class LoginHandler implements Command {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
     String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
-    if(id.equals("admin") && password.equals("0000")) {
-      Member admin = new Member();
-      admin.setId("admin");
-      admin.setPassword("0000");
-      admin.setAuthority(Menu.ACCESS_ADMIN);
-      ClientApp.loginMember = admin;
-      return;
-    }
+    //    if(id.equals("admin") && password.equals("0000")) {
+    //      Member admin = new Member();
+    //      admin.setId("admin");
+    //      admin.setPassword("0000");
+    //      admin.setAuthority(Menu.ACCESS_ADMIN);
+    //      ClientApp.loginMember = admin;
+    //      return;
+    //    }
 
     Member member = memberDao.findByEmailAndPassword(id, password);
 
