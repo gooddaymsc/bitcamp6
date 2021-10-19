@@ -22,7 +22,7 @@ public class ProductUpdateHandler implements Command {
 
     String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
     String type = ProductValidation.checkType("주종(" + product.getProductType() + ")? ");
-    String subType = ProductValidation.checkSubType2(("상세주종(" + product.getProductSubType() + ")? "),type);
+    String subType = ProductValidation.checkSubType(("상세주종(" + product.getProductSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
     String grapes = product.getVariety();
     if(type.equals("와인")) {
@@ -52,8 +52,7 @@ public class ProductUpdateHandler implements Command {
       product.setAcidity(acidic);
       product.setWeight(body);
 
-      productDao.delete(product);
-      productDao.insert(product);
+      productDao.update(product);
       System.out.println("상품정보를 변경하였습니다.\n");
     } else {
       System.out.println("상품정보 변경을 취소하였습니다.\n");

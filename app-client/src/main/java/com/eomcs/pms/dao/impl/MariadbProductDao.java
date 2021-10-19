@@ -172,19 +172,19 @@ public class MariadbProductDao implements ProductDao{
 
       try(PreparedStatement stmt = con.prepareStatement(
           "update product set"
-              + " name = ?, origin=?, volume=?, alcoholLevel=?, sugarLevel=?, acidity=?, weight=?, variety=?"
+              + " type_no = ?, name = ?, origin=?, volume=?, alcoholLevel=?, sugarLevel=?, acidity=?, weight=?, variety=?"
               + " where product_no=?")) {
 
-        //        stmt.setInt(1, type_no);
-        stmt.setString(1, product.getProductName());
-        stmt.setString(2, product.getCountryOrigin());
-        stmt.setInt(3, product.getVolume());
-        stmt.setFloat(4, product.getAlcoholLevel());
-        stmt.setInt(5, product.getSugerLevel());
-        stmt.setInt(6, product.getAcidity());
-        stmt.setInt(7, product.getWeight());
-        stmt.setString(8, product.getVariety());
-        stmt.setInt(9, product.getProductNumber());
+        stmt.setInt(1, type_no);
+        stmt.setString(2, product.getProductName());
+        stmt.setString(3, product.getCountryOrigin());
+        stmt.setInt(4, product.getVolume());
+        stmt.setFloat(5, product.getAlcoholLevel());
+        stmt.setInt(6, product.getSugerLevel());
+        stmt.setInt(7, product.getAcidity());
+        stmt.setInt(8, product.getWeight());
+        stmt.setString(9, product.getVariety());
+        stmt.setInt(10, product.getProductNumber());
 
         if (stmt.executeUpdate() == 0) {
           throw new Exception("프로젝트 데이터 변경 실패!");
