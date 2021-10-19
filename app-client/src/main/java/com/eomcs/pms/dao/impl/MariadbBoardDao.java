@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.Comment;
@@ -108,6 +109,15 @@ public class MariadbBoardDao implements BoardDao{
             "update board set views=views + 1"
                 + " where board_no=" + no)) {
           stmt2.executeUpdate();
+        }
+
+        try (PreparedStatement stmt2 = con.prepareStatement(
+            "select count(*) as count from board_like where board_no="+board.getBoardNumber());
+            ResultSet rs2 = stmt.executeQuery()) {
+          if (rs.next()) {
+            board.setLikes(rs2.getInt("count"));
+          }
+
         }
 
         return board;
@@ -271,12 +281,26 @@ public class MariadbBoardDao implements BoardDao{
   }
 
   @Override
-  public void like(Board board) throws Exception {
-    //
-    //    requestAgent.request("board.comment.like", board);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("좋아요 데이터 변경 실패");
-    //    }
+  public void like(Board board, boolean check) throws Exception {
+    if (check) {
+      try (PreparedStatement stmt = con.prepareStatement(
+          "insert into board_like(member_no, board_no) values(?,?)")) {
+
+        stmt.setInt(1, ClientApp.getLoginUser().getNumber());
+        stmt.setInt(2, board.getBoardNumber());
+
+        if (stmt.executeUpdate() == 0) {
+          throw new Exception("좋아요 변경 실패!");
+        }
+      }
+    } else {
+      try (PreparedStatement stmt = con.prepareStatement(
+          "delete from board_like where member_no="+ClientApp.getLoginUser().getNumber())) {
+
+        if (stmt.executeUpdate() == 0) {
+          throw new Exception("좋아요 변경 실패!");
+        }
+      }
+    }
   }
 }

@@ -196,7 +196,13 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public void delete(Product product) throws Exception {    
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from product where product_no="+product.getProductNumber())) {
 
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("상품 데이터 삭제 실패!");
+      }
+    }
   }
 
   @Override
