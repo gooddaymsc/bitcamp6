@@ -100,16 +100,33 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public Product findByNo(int no) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("productNumber", String.valueOf(no));
-    //
-    //    requestAgent.request("product.selectOne", params);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      return null;
-    //    }
-    //    return requestAgent.getObject(Product.class);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " p.product_no, p.type_no, p.name, p.origin, p.volume, p.alcoholLevel, p.sugarLevel, p.acidity, p.weight, p.rate, p.variety,"
+            + " t.type, t.subType"
+            + " from product p join product_type t on p.type_no=t.type_no"
+            + " where p.product_no="+no);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (rs.next()) {
+        Product p = new Product();
+        p.setProductNumber(rs.getInt("product_no"));
+        p.setProductName(rs.getString("name"));
+        p.setCountryOrigin(rs.getNString("origin"));
+        p.setVolume(rs.getInt("volume"));
+        p.setAlcoholLevel(rs.getFloat("alcoholLevel"));
+        p.setSugerLevel(rs.getInt("sugarLevel"));
+        p.setAcidity(rs.getInt("acidity"));
+        p.setWeight(rs.getInt("weight"));
+        p.setProductType(rs.getString("type"));
+        p.setProductSubType(rs.getString("subType"));
+        p.setVariety(rs.getString("variety"));
+        return p;
+      }
+    }
     return null;
   }
+
 
   @Override
   public Product findByNo2(int no) throws Exception {
@@ -149,14 +166,7 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public void delete(Product product) throws Exception {    
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("name", product.getProductName());
-    //
-    //    requestAgent.request("product.delete", product);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("상품 데이터 삭제 실패");
-    //    }
+
   }
 
   @Override

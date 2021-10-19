@@ -21,9 +21,7 @@ public class ProductDetailHandler implements Command {
 
       Product product = productDao.findByNo(Prompt.inputInt("\n상품번호 > "));
 
-      request.setAttribute("productNumber", product.getProductNumber());
-
-      if (product.equals(null)) {
+      if (product ==null) {
         System.out.println("입력하신 상품이 없습니다.\n");
         return;
       }
