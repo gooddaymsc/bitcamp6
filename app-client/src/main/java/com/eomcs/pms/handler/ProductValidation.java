@@ -91,7 +91,7 @@ public class ProductValidation {
           case("3") : return "럼";
           case("4") : return "보드카";
           case("5") : return "데낄라";
-          case("6") : return "읍료/시럽";
+          case("6") : return "음료/시럽";
           default : System.out.println("정확한 주종을 입력하세요"); continue;
         }
       } if(product.getProductType().equals("전통주")) {
