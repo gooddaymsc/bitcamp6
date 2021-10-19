@@ -74,33 +74,42 @@ public class MariadbBuyerDao implements BuyerDao {
 
   @Override
   public Buyer findById(String id) throws Exception {
-    //    try(PreparedStatement stmt = con.prepareStatement(
-    //        "select member_no,name,email,phoneNumber,registeredDate from member"
-    //            + "where name = ?")) {
-    //      stmt.setString(1, id);
-    //
-    //      try(ResultSet rs = stmt.executeQuery()){
-    //        if(!rs.next()) {
-    //          return null;
-    //        }
-    //        Member member = new Member();
-    //        member.setNumber(rs.getInt("member_no"));
-    //        member.setName(rs.getString("name"));
-    //        member.setEmail(rs.getString("email"));
-    //        member.setPhoto(rs.getString("photo"));
-    //        member.setPhoneNumber(rs.getString("phoneNumber"));
-    //        member.setRegisteredDate(rs.getDate("registeredDate"));
-    //        return Buyer;
-    //      }
-    //    }
-    return null;
+    try(PreparedStatement stmt = con.prepareStatement(
+        "select member_no,name,nickname,email,birthday,photo,phoneNumber,zipcode,address,"
+            + " detail_address,registeredDate,level,authority"
+            + " from member where id = ?")) {
+      stmt.setString(1, id);
+
+      try(ResultSet rs = stmt.executeQuery()){
+        if(!rs.next()) {
+          return null;
+        }
+        Buyer buyer = new Buyer();
+        buyer.setNumber(rs.getInt("member_no"));
+        buyer.setName(rs.getString("name"));
+        buyer.setNickname(rs.getString("nickname"));
+        buyer.setEmail(rs.getString("email"));
+        buyer.setBirthday(rs.getDate("birthday"));
+        buyer.setPhoto(rs.getString("photo"));
+        buyer.setPhoneNumber(rs.getString("phoneNumber"));
+        buyer.setZipcode(rs.getString("zipcode"));
+
+        buyer.setAddress(rs.getString("address"));
+        buyer.setDetailAddress(rs.getString("detail_address"));
+        buyer.setRegisteredDate(rs.getDate("registeredDate"));
+        buyer.setLevel(rs.getInt("level"));
+        buyer.setAuthority(rs.getInt("authority"));
+
+        return buyer;
+      }
+    }
   }
 
   @Override
   public void update(Buyer buyer) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update member set"
-            + " nickname=?,email=?,password=?,photo=?,address=?,phoneNumber=?"
+            + " nickname=?,email=?,password=password(?),photo=?,address=?,phoneNumber=?"
             + " where member_no=?")) {
 
       stmt.setString(1, buyer.getNickname());
@@ -109,6 +118,7 @@ public class MariadbBuyerDao implements BuyerDao {
       stmt.setString(4, buyer.getPhoto());
       stmt.setString(5, buyer.getAddress());
       stmt.setString(6, buyer.getPhoneNumber());
+      stmt.setInt(7, buyer.getNumber());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("회원 데이터 변경 실패!");
@@ -118,18 +128,14 @@ public class MariadbBuyerDao implements BuyerDao {
 
   @Override
   public void delete(String id) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("id", id);
-    //
-    //    requestAgent.request("buyer.delete", params);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("회원 삭제 실패!");
-    //    }
-    //
-    //    requestAgent.request("member.delete", params);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("회원 삭제 실패!");
-    //    }
-  }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from member where id=?")) {
 
+      stmt.setString(1, id);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 데이터 삭제 실패!");
+      }
+    }
+  }
 }
