@@ -25,10 +25,12 @@ import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MariadbBoardDao;
 import com.eomcs.pms.dao.impl.MariadbBuyerDao;
 import com.eomcs.pms.dao.impl.MariadbMemberDao;
-import com.eomcs.pms.dao.impl.MariadbProductDao;
+import com.eomcs.pms.dao.impl.MariadbSellerDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
+import com.eomcs.pms.dao.impl.NetProductDao;
+import com.eomcs.pms.dao.impl.MariadbProductDao;
 import com.eomcs.pms.dao.impl.NetSellerDao;
 import com.eomcs.pms.dao.impl.NetStockDao;
 import com.eomcs.pms.domain.Member;
@@ -157,8 +159,8 @@ public class ClientApp {
         "jdbc:mysql://localhost:3306/drinkerdb?user=drinker&password=1111");
 
     MemberDao memberDao = new MariadbMemberDao(con);
+    SellerDao sellerDao = new MariadbSellerDao(con);
     BuyerDao buyerDao = new MariadbBuyerDao(con);
-    SellerDao sellerDao = new NetSellerDao(requestAgent);
     BoardDao boardDao = new MariadbBoardDao(con);  
     StockDao stockDao = new NetStockDao(requestAgent);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
