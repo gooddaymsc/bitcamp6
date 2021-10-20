@@ -69,15 +69,19 @@ public class MariadbStockDao implements StockDao {
 
         while(rs.next()) {
           Stock s = new Stock();
+          Product p = new Product();
+          p.setProductName(rs.getString("name"));
+          s.setProduct(p);
           s.setStockNumber(rs.getInt("stock_no"));
-          s.getProduct().setProductName(rs.getString("name"));
           s.setPrice(rs.getInt("price"));
           s.setStocks(rs.getInt("amount"));
 
-
           list.add(s);
         }
-        return list; // 질문.....
+        StockList stocklist = new StockList();
+        stocklist.setId(id);
+        stocklist.setSellerStock(list);
+        return stocklist;
       }
     }
   }
@@ -125,17 +129,38 @@ public class MariadbStockDao implements StockDao {
 
   @Override
   public Stock findByNameId(String name, String id) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("productName", name);
-    //    params.put("id", id);
-    //
-    //    requestAgent.request("stock.selectOne", params);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      return null;
-    //    }
-    //    return requestAgent.getObject(Stock.class);
-    return null;
+    try (PreparedStatement stmt2 = con.prepareStatement(
+        "select member_no from member where id=?")) {
+      stmt2.setString(1, id);
+      ResultSet rs2 = stmt2.executeQuery();
+
+      int member_no = 0;
+      while(rs2.next()) {
+        member_no = rs2.getInt("member_no");
+      }
+
+      try (PreparedStatement stmt = con.prepareStatement(
+          "Select s.stock_no, p.name, s.price, s.amount"
+              + " From stock s left outer join product p"
+              + " on s.product_no = p.product_no where p.name=? and member_no=?"
+              + " order by s.product_no asc")) {
+        stmt.setString(1, name);
+        stmt.setInt(2, member_no);
+        ResultSet rs = stmt.executeQuery(); 
+
+        if (rs.next()) {
+          Stock s = new Stock();
+          Product p = new Product();
+          p.setProductName(rs.getString("name"));
+          s.setProduct(p);
+          s.setStockNumber(rs.getInt("stock_no"));
+          s.setPrice(rs.getInt("price"));
+          s.setStocks(rs.getInt("amount"));
+          return s;
+        }
+      }
+      return null;
+    }
   }
 
   @Override
