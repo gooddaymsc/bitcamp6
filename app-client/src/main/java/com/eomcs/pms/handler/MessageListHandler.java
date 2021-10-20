@@ -16,7 +16,7 @@ public class MessageListHandler implements Command {
   public static int messageNumber = 1;
   @Override
   public void execute(CommandRequest request) throws Exception {
-    String nowLoginId = ClientApp.getLoginUser().getId();
+    int nowLoginId = ClientApp.getLoginUser().getNumber();
     Loop : while(true) {
       if (ClientApp.getLoginUser().isMessageUpdate()) {
         //메시지 알림 보내기
