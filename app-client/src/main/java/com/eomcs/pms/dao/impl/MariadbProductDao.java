@@ -127,33 +127,51 @@ public class MariadbProductDao implements ProductDao{
     return null;
   }
 
-
-  @Override
-  public Product findByNo2(int no) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("reviewNumber", String.valueOf(no));
-    //
-    //    requestAgent.request("product.review.selectOne", params);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      return null;
-    //    }
-    //    return requestAgent.getObject(Product.class);
-    return null;
-  }
-
   @Override
   public Product findByProduct(String name) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("productName", name);
-    //
-    //    requestAgent.request("product.selectOne2", params);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      return null;
-    //    }
-    //    return requestAgent.getObject(Product.class);
+    HashMap<String, String> params = new HashMap<>();
+    params.put("productName", name);
+
+    try(PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " p.product_no, p.type_no, p.name, p.origin, p.volume, p.alcoholLevel, p.sugarLevel, p.acidity, p.weight, p.rate, p.variety,"
+            + " t.type, t.subType"
+            + " from product p join product_type t on p.type_no=t.type_no"
+            + " where p.name = " + name);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (rs.next()) {
+        Product p = new Product();
+        p.setProductNumber(rs.getInt("product_no"));
+        p.setProductName(rs.getString("name"));
+        p.setCountryOrigin(rs.getNString("origin"));
+        p.setVolume(rs.getInt("volume"));
+        p.setAlcoholLevel(rs.getFloat("alcoholLevel"));
+        p.setSugerLevel(rs.getInt("sugarLevel"));
+        p.setAcidity(rs.getInt("acidity"));
+        p.setWeight(rs.getInt("weight"));
+        p.setProductType(rs.getString("type"));
+        p.setProductSubType(rs.getString("subType"));
+        p.setVariety(rs.getString("variety"));
+        return p;
+      }
+    }
     return null;
   }
+
+  //  @Override
+  //  public Product findByNo2(int no) throws Exception {
+  //    //    HashMap<String, String> params = new HashMap<>();
+  //    //    params.put("reviewNumber", String.valueOf(no));
+  //    //
+  //    //    requestAgent.request("product.review.selectOne", params);
+  //    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
+  //    //      return null;
+  //    //    }
+  //    //    return requestAgent.getObject(Product.class);
+  //    return null;
+  //  }
+
 
   @Override
   public void update(Product product) throws Exception {
@@ -206,58 +224,92 @@ public class MariadbProductDao implements ProductDao{
   }
 
   @Override
+  public HashMap<String, Seller> findByAdress (String address) throws Exception {
+    HashMap<String, Seller> hashMap = new HashMap<>();
+    for (Seller seller : sellerDao.findAll()) {
+      String[] arr = address.split(" ");
+      if((seller.getBusinessAddress().contains(arr[2])) && 
+          (seller.getBusinessAddress().contains(arr[1]))) {
+        hashMap.put(seller.getId(), seller);
+        return hashMap;
+      } 
+    }
+    return null;
+  }
+
+  @Override
   public void insertReview(Review review) throws Exception {
-    //    requestAgent.request("addNumber.review", null);
-    //    requestAgent.request("product.review.insert", review);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-    //      throw new Exception("리뷰 데이터 저장 실패");
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into review(product_no, member_no, purchase_no, score, comment)"
+            + " values(?, ?, ?, ?, ?)" )){
+
+      stmt.setInt(1, review.getProductNo());
+      stmt.setString(2, review.getId());
+      stmt.setString(3, null);
+      stmt.setFloat(4, review.getScore());
+      stmt.setString(5, review.getComment());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("리뷰 데이터 등록 실패!");
+      } 
+    }
   }
   @Override
   public List<Review> findAll(int productNumber) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("productNumber", String.valueOf(productNumber));
-    //
-    //    requestAgent.request("product.review.selectList", params);
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("리뷰 데이터 조회 실패");
-    //    }
-    //    return new ArrayList<>(requestAgent.getObjects(Review.class));
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " r.review_no, pro.product_no, m.id, r.score, r.comment, r.registeredDate"
+            + " from review r"
+            + " join product pro on r.product_no = pro.product_no"
+            + " join member m on r.member_no = m.member_no"
+            + " where pro.product_no =" + productNumber)) {
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        ArrayList<Review> list = new ArrayList<>();
+        while(rs.next()) {
+          Review review = new Review();
+          review.setNo(rs.getInt("review_no"));
+          review.setProductNo(productNumber);
+          review.setId(rs.getString("id"));
+          review.setScore(rs.getFloat("score"));
+          review.setComment(rs.getString("comment"));
+          review.setRegisteredDate(rs.getDate("registeredDate"));
+
+          Product product = new Product();
+          product.setProductNumber(rs.getInt("product_no"));
+          list.add(review);
+        }
+        return list;
+      }
+    }
   }
 
   @Override
   public void updateReview(Review review) throws Exception {
-    //
-    //    requestAgent.request("product.review.update", review);
-    //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("리뷰 데이터 변경 실패");
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update review set"
+            + " score=?, comment=?"
+            + " where review_no=?")){
+
+      stmt.setFloat(1, review.getScore());
+      stmt.setString(2, review.getComment());
+      stmt.setInt(3, review.getNo());
+
+      if(stmt.executeUpdate() == 0) {
+        throw new Exception("리뷰 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
   public void deleteReview(Review review) throws Exception {
-    //    requestAgent.request("product.review.delete", review);
+    //    try (PreparedStatement stmt = con.prepareStatement(
+    //        "delete from review where review_id ="+ ClientApp.getLoginUser().getId())){
     //
-    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception("상품 데이터 삭제 실패");
+    //      if(stmt.executeUpdate() == 0) {
+    //        throw new Exception("리뷰 데이터 삭제 실패!");
+    //      }
     //    }
-  }
-
-  @Override
-  public HashMap<String, Seller> findByAdress (String address) throws Exception {
-    //    HashMap<String, Seller> hashMap = new HashMap<>();
-    //    for (Seller seller : sellerDao.findAll()) {
-    //      String[] arr = address.split(" ");
-    //      if((seller.getBusinessAddress().contains(arr[2])) && 
-    //          (seller.getBusinessAddress().contains(arr[1]))) {
-    //        hashMap.put(seller.getId(), seller);
-    //        return hashMap;
-    //      } 
-    //    }
-    return null;
   }
 
   @Override

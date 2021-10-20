@@ -96,6 +96,16 @@ public class MariadbBoardDao implements BoardDao{
         board.setRegistrationDate(rs.getDate("registeredDate"));
         board.setViews(rs.getInt("views"));
 
+        List<Integer> list = new ArrayList<>();
+        try (PreparedStatement stmt2 = con.prepareStatement(
+            "select member_no from board_like where board_no="+no);
+            ResultSet rs2 = stmt2.executeQuery()) {
+          while (rs2.next()) {
+            list.add(rs2.getInt("member_no"));
+          }
+        }
+        board.setLikes(list.size());
+        board.setLikeMember(list);
         Member member = new Member();
         member.setNumber(rs.getInt("member_no"));
         member.setId(rs.getString("id"));
@@ -111,14 +121,14 @@ public class MariadbBoardDao implements BoardDao{
           stmt2.executeUpdate();
         }
 
-        try (PreparedStatement stmt2 = con.prepareStatement(
-            "select count(*) as count from board_like where board_no="+board.getBoardNumber());
-            ResultSet rs2 = stmt.executeQuery()) {
-          if (rs.next()) {
-            board.setLikes(rs2.getInt("count"));
-          }
-
-        }
+        //        try (PreparedStatement stmt2 = con.prepareStatement(
+        //            "select count(*) as count from board_like where board_no="+board.getBoardNumber());
+        //            ResultSet rs2 = stmt.executeQuery()) {
+        //          if (rs.next()) {
+        //            board.setLikes(rs2.getInt("count"));
+        //          }
+        //
+        //        }
 
         return board;
       }
