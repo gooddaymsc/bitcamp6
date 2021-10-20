@@ -44,7 +44,7 @@ public class ReviewFindHandler implements Command {
 
       String productName = Prompt.inputString("상품명 > ");
 
-
+      //넘버로찾기
       Product product = productDao.findByProduct(productName);
 
       if(product.equals(null)) {
