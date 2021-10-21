@@ -14,7 +14,7 @@ public class MybatisSellerDao implements SellerDao {
 
   @Override
   public void insert(Seller seller) throws Exception {
-    sqlSession.insert("SellerMapper.insert",seller);
+    sqlSession.insert("SellerMapper.insert",seller.getMember());
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", seller.getMember().getNumber());
@@ -36,74 +36,22 @@ public class MybatisSellerDao implements SellerDao {
 
   @Override
   public Seller findById(String id) throws Exception {
-    return null;
-    //    try(PreparedStatement stmt = con.prepareStatement(
-    //        "select"
-    //            + " s.member_no, m.name, m.nickname, m.level, m.email, m.birthday, m.photo, m.phoneNumber,"
-    //            + " s.business_name, s.business_no, s.business_address, s.business_tel,"
-    //            + " s.openingTime, s.closingTime, m.registeredDate, m.authority"
-    //            + " from member m join seller s on m.member_no=s.member_no"
-    //            + " where m.id=?")) {
-    //      stmt.setString(1, id);
-    //
-    //      try(ResultSet rs = stmt.executeQuery()){
-    //        if(!rs.next()) {
-    //          return null;
-    //        }
-    //        Seller seller = new Seller();
-    //        seller.setNumber(rs.getInt("member_no"));
-    //        seller.setName(rs.getString("name"));
-    //        seller.setNickname(rs.getString("nickname"));
-    //        seller.setLevel(rs.getInt("level"));
-    //        seller.setEmail(rs.getString("email"));
-    //        seller.setBirthday(rs.getDate("birthday"));
-    //        seller.setPhoto(rs.getString("photo"));
-    //        seller.setPhoneNumber(rs.getString("phoneNumber"));
-    //        seller.setBusinessName(rs.getString("business_name"));
-    //        seller.setBusinessNumber(rs.getString("business_no"));
-    //        seller.setBusinessAddress(rs.getString("business_address"));
-    //        seller.setBusinessPlaceNumber(rs.getString("business_tel"));
-    //        seller.setBusinessOpeningTime(rs.getString("openingTime"));
-    //        seller.setBusinessClosingTime(rs.getString("closingTime"));
-    //        seller.setRegisteredDate(rs.getDate("registeredDate"));
-    //        seller.setAuthority(rs.getInt("authority"));
-    //
-    //        return seller;
-    //      }
-    //    }
+    return sqlSession.selectOne("SellerMapper.findById",id);
   }
 
   @Override
   public void update(Seller seller) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "update"
-    //            + " member m join seller s on m.member_no = s.member_no"
-    //            + " set m.nickname=?, m.email=?, m.password=password(?), m.photo=?, m.phoneNumber=?,"
-    //            + " s.business_name=?, s.business_no=?, s.business_address=?, s.business_tel=?,"
-    //            + " s.openingTime=?, s.closingTime=?  where m.member_no=?")) {
-    //
-    //      stmt.setString(1, seller.getNickname());
-    //      stmt.setString(2, seller.getEmail());
-    //      stmt.setString(3, seller.getPassword());
-    //      stmt.setString(4, seller.getPhoto());
-    //      stmt.setString(5, seller.getPhoneNumber());
-    //      stmt.setString(6, seller.getBusinessName());
-    //      stmt.setString(7, seller.getBusinessNumber());
-    //      stmt.setString(8, seller.getBusinessAddress());
-    //      stmt.setString(9, seller.getBusinessPlaceNumber());
-    //      stmt.setString(10, seller.getBusinessOpeningTime());
-    //      stmt.setString(11, seller.getBusinessClosingTime());
-    //      stmt.setInt(12, seller.getNumber());
-    //
-    //      if (stmt.executeUpdate() == 0) {
-    //        throw new Exception("회원 데이터 변경 실패!");
-    //      }
-    //    }
-
+    sqlSession.update("SellerMapper.update",seller.getMember());
+    sqlSession.update("SellerMapper.updateSeller",seller);
+    sqlSession.commit();
   }
 
   @Override
-  public void delete(String id) throws Exception {
+  public void delete(Seller seller) throws Exception {
+    sqlSession.delete("SellerMapper.deleteSeller",seller.getMember().getNumber());
+    sqlSession.delete("SellerMapper.delete",seller.getMember().getNumber());
+    sqlSession.commit();
+
     //    try (PreparedStatement stmt = con.prepareStatement(
     //        "delete from member where member_no=?");
     //        PreparedStatement stmt2 = con.prepareStatement(

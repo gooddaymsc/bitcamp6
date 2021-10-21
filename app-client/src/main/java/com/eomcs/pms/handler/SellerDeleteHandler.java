@@ -4,6 +4,7 @@ import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 
@@ -23,7 +24,8 @@ public class SellerDeleteHandler implements Command {
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        sellerDao.delete(id);
+        Seller seller = sellerDao.findById(id);
+        sellerDao.delete(seller);
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(nowLoginId);
         //        bookingPrompt.removeBookingListById(nowLoginId);
@@ -47,7 +49,8 @@ public class SellerDeleteHandler implements Command {
         //        bookingPrompt.removeBookingListById(sellerId);
         //        stockPrompt.removeStockListById(sellerId);
         //        messagePrompt.removeMessageListById(sellerId);
-        sellerDao.delete(id);
+        Seller seller = sellerDao.findById(id);
+        sellerDao.delete(seller);
         System.out.println("판매자를 탈퇴시켰습니다.\n");
         return;
       }

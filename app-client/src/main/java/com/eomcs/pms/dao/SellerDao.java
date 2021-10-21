@@ -8,5 +8,5 @@ public interface SellerDao {
   List<Seller> findAll() throws Exception;
   Seller findById(String id) throws Exception;
   void update(Seller seller) throws Exception;
-  void delete(String id) throws Exception;
+  void delete(Seller seller) throws Exception;
 }
