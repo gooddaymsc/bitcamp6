@@ -6,7 +6,6 @@
 <mapper namespace="SellerMapper">
   
   <resultMap type="Seller" id="SellerMap">
-    <!-- <id column="member_no" property="number"/>-->
     <result column="business_name" property="businessName"/>
     <result column="business_no" property="businessNumber"/>
     <result column="business_address" property="businessAddress"/>
@@ -23,6 +22,7 @@
       <result column="nickname" property="nickname"/>
       <result column="email" property="email"/>
       <result column="birthday" property="birthday"/>
+      <result column="photo" property="photo"/>
       <result column="phoneNumber" property="phoneNumber"/>
       <result column="registeredDate" property="registeredDate"/>
       <result column="active" property="active"/>
@@ -48,56 +48,65 @@
   <insert id="insert" parameterType="member"
   useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
     insert into member(id, password, authority, name, nickname, email, birthday, photo, phoneNumber) 
-    values(#{member.id}, password(#{member.password}), #{member.authority},#{member.name},#{member.nickname},#{member.email},#{member.birthday},#{member.photo},#{member.phoneNumber})
+    values(#{id}, password(#{password}), #{authority},#{name},#{nickname},#{email},#{birthday},#{photo},#{phoneNumber})
   </insert>
   
   <insert id="insertSeller" parameterType="map">
     insert into seller(member_no, business_name,business_no ,business_address ,business_tel ,openingTime ,closingTime ) 
     values(#{memberNo},#{businessName},#{businessNumber},#{businessAddress},#{businessPlaceNumber},#{businessOpeningTime},#{businessClosingTime})
   </insert>
-  <!--
   
   <select id="findById" resultMap="SellerMap" parameterType="string">
     select 
-      member_no,
-      name,
-      nickname,
-      email,
-      birthday,
-      photo,
-      phoneNumber,
-      zipcode,
-      address,
-      detail_address,
-      registeredDate,
-      level,
-      authority,
-      active
+      s.member_no, 
+      m.name, 
+      m.nickname, 
+      m.level, 
+      m.email, 
+      m.birthday, 
+      m.photo, 
+      m.phoneNumber, 
+      s.business_name, 
+      s.business_no, 
+      s.business_address, 
+      s.business_tel, 
+      s.openingTime, 
+      s.closingTime, 
+      m.registeredDate, 
+      m.authority 
     from 
-      member 
+      member m join seller s on m.member_no=s.member_no
     where 
-      id = #{id}
+      m.id=#{id}
   </select>
   
-  <update id="update" parameterType="seller">
+  <update id="update" parameterType="member">
     update member set 
       nickname=#{nickname},
       email=#{email},
-      password=password(#{password}),
+      password=password(#{password}), 
       photo=#{photo},
-      address=#{address},
       phoneNumber=#{phoneNumber} 
     where 
       member_no=#{number}
   </update>
   
+  <update id="updateSeller" parameterType="seller">
+    update seller set 
+      business_name=#{businessName}, 
+      business_no=#{businessNumber}, 
+      business_address=#{businessAddress}, 
+      business_tel=#{businessPlaceNumber}, 
+      openingTime=#{businessOpeningTime}, 
+      closingTime=#{businessClosingTime} 
+    where 
+      member_no=#{member.number}
+  </update>
   
-  <delete id="delete" parameterType="string">
+  <delete id="delete" parameterType="int" >
     update member set 
-      id="none",
       name="none",
       nickname="none",
-      email="none",
       birthday="0000-00-00",
       password="none",
       photo="none",
@@ -107,8 +116,19 @@
       detail_address="none",
       active=1
     where
-      id=#{id}
-  </delete>-->
+      member_no=#{no}
+  </delete>
+  
+  <delete id="deleteSeller" parameterType="int">
+    update seller set 
+      business_name="none", 
+      business_address="none", 
+      business_tel="none", 
+      openingTime="00:00", 
+      closingTime="00:00" 
+    where 
+      member_no=#{no}
+  </delete>
 
 </mapper>
 

@@ -19,6 +19,7 @@
       <result column="nickname" property="nickname"/>
       <result column="email" property="email"/>
       <result column="birthday" property="birthday"/>
+      <result column="photo" property="photo"/>
       <result column="phoneNumber" property="phoneNumber"/>
       <result column="registeredDate" property="registeredDate"/>
       <result column="active" property="active"/>
@@ -86,10 +87,8 @@
   
   <delete id="delete" parameterType="string">
     update member set 
-      id="none",
       name="none",
       nickname="none",
-      email="none",
       birthday="0000-00-00",
       password="none",
       photo="none",
