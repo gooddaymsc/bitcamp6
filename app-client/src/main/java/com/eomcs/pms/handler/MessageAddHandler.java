@@ -32,7 +32,7 @@ public class MessageAddHandler implements Command {
     // 이미 상대id랑 주고 받은 대화가 있는가
     Message messageIs = null;
     for (Message message : messageList.getMessage()) {
-      if (message.getTheOtherId().equals(memberId)) {
+      if (message.getTheOther   Id().equals(memberId)) {
         messageIs = message;
       }
     }

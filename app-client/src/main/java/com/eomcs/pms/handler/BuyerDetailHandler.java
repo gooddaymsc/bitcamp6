@@ -22,18 +22,17 @@ public class BuyerDetailHandler implements Command {
       Buyer buyer = buyerDao.findById(id);
 
       //      Buyer buyer = (Buyer) findById(ClientApp.getLoginUser().getId());
-      System.out.printf("이름 : %s\n", buyer.getName());
-      System.out.printf("닉네임 : %s\n", buyer.getNickname());
-      System.out.printf("이메일 : %s\n", buyer.getEmail());
-      System.out.printf("생일 : %s\n", buyer.getBirthday());
-      System.out.printf("사진 : %s\n", buyer.getPhoto());
-      System.out.printf("전화 : %s\n", buyer.getPhoneNumber());
+      System.out.printf("이름 : %s\n", buyer.getMember().getName());
+      System.out.printf("닉네임 : %s\n", buyer.getMember().getNickname());
+      System.out.printf("이메일 : %s\n", buyer.getMember().getEmail());
+      System.out.printf("생일 : %s\n", buyer.getMember().getBirthday());
+      System.out.printf("사진 : %s\n", buyer.getMember().getPhoto());
+      System.out.printf("전화 : %s\n", buyer.getMember().getPhoneNumber());
       System.out.printf("우편번호 : %s\n", buyer.getZipcode());
       System.out.printf("주소 : %s\n", buyer.getAddress());
       System.out.printf("상세주소 : %s\n", buyer.getDetailAddress());
-      System.out.printf("등록일 : %s\n", buyer.getRegisteredDate());
-      System.out.printf("등급 : %s\n", buyer.getLevel());
-      System.out.printf("권한 : %d\n", buyer.getAuthority());
+      System.out.printf("등록일 : %s\n", buyer.getMember().getRegisteredDate());
+      System.out.printf("등급 : %s\n", buyer.getMember().getLevel());
 
       while(true) {
         System.out.println("\n개인정보변경(U) / 회원탈퇴(D) / 이전(0)");
@@ -58,18 +57,19 @@ public class BuyerDetailHandler implements Command {
         System.out.println("해당 아이디를 갖는 회원이 없습니다.\n");
         return;
       }
-      System.out.printf("회원번호 : %s\n", buyer.getNumber());
-      System.out.printf("이름 : %s\n", buyer.getName());
-      System.out.printf("닉네임 : %s\n", buyer.getNickname());
-      System.out.printf("등급 : %s\n", buyer.getLevel());
-      System.out.printf("이메일 : %s\n", buyer.getEmail());
-      System.out.printf("사진 : %s\n", buyer.getPhoto());
-      System.out.printf("전화 : %s\n", buyer.getPhoneNumber());
+      System.out.printf("회원번호 : %s\n", buyer.getMember().getNumber());
+      System.out.printf("이름 : %s\n", buyer.getMember().getName());
+      System.out.printf("닉네임 : %s\n", buyer.getMember().getNickname());
+      System.out.printf("등급 : %s\n", buyer.getMember().getLevel());
+      System.out.printf("이메일 : %s\n", buyer.getMember().getEmail());
+      System.out.printf("사진 : %s\n", buyer.getMember().getPhoto());
+      System.out.printf("전화 : %s\n", buyer.getMember().getPhoneNumber());
       System.out.printf("우편번호 : %s\n", buyer.getZipcode());
       System.out.printf("주소 : %s\n", buyer.getAddress());
       System.out.printf("상세주소 : %s\n", buyer.getDetailAddress());
-      System.out.printf("등록일 : %s\n", buyer.getRegisteredDate());
-      request.setAttribute("id", buyer.getId());
+      System.out.printf("등록일 : %s\n", buyer.getMember().getRegisteredDate());
+      System.out.printf("권한 : %d\n", buyer.getMember().getAuthority());
+      request.setAttribute("id", buyer.getMember().getId());
 
       while(true) {
         System.out.println("\n등급변경(U) / 회원탈퇴(D)");

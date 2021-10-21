@@ -6,10 +6,10 @@ import com.eomcs.menu.Menu;
 
 @SuppressWarnings("serial")
 public class Member implements Serializable {
+  private int number;
   private String id;
   private String password;
   private int authority;
-  private int number;
   private String name;
   private String nickname;
   private String email;
