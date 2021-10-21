@@ -225,16 +225,17 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public HashMap<String, Seller> findByAdress (String address) throws Exception {
-    HashMap<String, Seller> hashMap = new HashMap<>();
-    for (Seller seller : sellerDao.findAll()) {
-      String[] arr = address.split(" ");
-      if((seller.getBusinessAddress().contains(arr[2])) && 
-          (seller.getBusinessAddress().contains(arr[1]))) {
-        hashMap.put(seller.getId(), seller);
-        return hashMap;
-      } 
-    }
     return null;
+    //    HashMap<String, Seller> hashMap = new HashMap<>();
+    //    for (Seller seller : sellerDao.findAll()) {
+    //      String[] arr = address.split(" ");
+    //      if((seller.getBusinessAddress().contains(arr[2])) && 
+    //          (seller.getBusinessAddress().contains(arr[1]))) {
+    //        hashMap.put(seller.getId(), seller);
+    //        return hashMap;
+    //      } 
+    //    }
+    //    return null;
   }
 
   @Override
