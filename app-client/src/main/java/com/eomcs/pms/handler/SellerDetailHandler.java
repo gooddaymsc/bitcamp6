@@ -21,21 +21,21 @@ public class SellerDetailHandler implements Command {
 
       Seller seller = sellerDao.findById(id);
 
-      System.out.printf("이름 : %s\n", seller.getName());
-      System.out.printf("닉네임 : %s\n", seller.getNickname());
-      System.out.printf("등급 : %d\n", seller.getLevel());
-      System.out.printf("이메일 : %s\n", seller.getEmail());
-      System.out.printf("생일 : %s\n", seller.getBirthday());
-      System.out.printf("사진 : %s\n", seller.getPhoto());
-      System.out.printf("전화 : %s\n", seller.getPhoneNumber());
+      System.out.printf("이름 : %s\n", seller.getMember().getName());
+      System.out.printf("닉네임 : %s\n", seller.getMember().getNickname());
+      System.out.printf("등급 : %d\n", seller.getMember().getLevel());
+      System.out.printf("이메일 : %s\n", seller.getMember().getEmail());
+      System.out.printf("생일 : %s\n", seller.getMember().getBirthday());
+      System.out.printf("사진 : %s\n", seller.getMember().getPhoto());
+      System.out.printf("전화 : %s\n", seller.getMember().getPhoneNumber());
       System.out.printf("가게명 : %s\n", seller.getBusinessName());
       System.out.printf("사업자번호 : %s\n", seller.getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", seller.getBusinessAddress());
       System.out.printf("사업장번호 : %s\n", seller.getBusinessPlaceNumber());
       System.out.printf("오픈시간: %s\n", seller.getBusinessOpeningTime());
       System.out.printf("마감시간: %s\n", seller.getBusinessClosingTime());
-      System.out.printf("등록일 : %s\n", seller.getRegisteredDate());
-      System.out.printf("권한 : %d\n", seller.getAuthority());
+      System.out.printf("등록일 : %s\n", seller.getMember().getRegisteredDate());
+      System.out.printf("권한 : %d\n", seller.getMember().getAuthority());
       System.out.println();
 
       while(true) {
@@ -60,12 +60,12 @@ public class SellerDetailHandler implements Command {
         System.out.println("해당 아이디를 갖는 회원이 없습니다.\n");
         return;
       }
-      System.out.printf("이름 : %s\n", seller.getName());
-      System.out.printf("닉네임 : %s\n", seller.getNickname());
-      System.out.printf("등급 : %s\n", seller.getLevel());
-      System.out.printf("이메일 : %s\n", seller.getEmail());
-      System.out.printf("사진 : %s\n", seller.getPhoto());
-      System.out.printf("전화 : %s\n", seller.getPhoneNumber());
+      System.out.printf("이름 : %s\n", seller.getMember().getName());
+      System.out.printf("닉네임 : %s\n", seller.getMember().getNickname());
+      System.out.printf("등급 : %s\n", seller.getMember().getLevel());
+      System.out.printf("이메일 : %s\n", seller.getMember().getEmail());
+      System.out.printf("사진 : %s\n", seller.getMember().getPhoto());
+      System.out.printf("전화 : %s\n", seller.getMember().getPhoneNumber());
       System.out.printf("가게명 : %s\n", seller.getBusinessName());
       System.out.printf("사업자번호 : %s\n", seller.getBusinessNumber());
       System.out.printf("사업장주소 : %s\n", seller.getBusinessAddress());
@@ -73,7 +73,7 @@ public class SellerDetailHandler implements Command {
       System.out.printf("오픈시간: %s\n", seller.getBusinessOpeningTime());
       System.out.printf("마감시간: %s\n", seller.getBusinessClosingTime());
 
-      request.setAttribute("id", seller.getId());
+      request.setAttribute("id", seller.getMember().getId());
 
       while(true) {
         System.out.println("\n등급변경(U) / 회원탈퇴(D)");

@@ -19,21 +19,21 @@ public class BuyerUpdateHandler implements Command {
 
       Buyer buyer = buyerDao.findById(id);
 
-      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", buyer.getNickname()));
-      String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", buyer.getEmail()));
-      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", buyer.getPassword()));
-      String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", buyer.getPhoto()));
+      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", buyer.getMember().getNickname()));
+      String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", buyer.getMember().getEmail()));
+      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", buyer.getMember().getPassword()));
+      String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", buyer.getMember().getPhoto()));
       String address = Prompt.inputString(String.format("주소(변경 전 : %s) : ", buyer.getAddress()));
-      String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", buyer.getPhoneNumber()));
+      String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", buyer.getMember().getPhoneNumber()));
 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        buyer.setNickname(nickName);
-        buyer.setEmail(email);
-        buyer.setPassword(password);
-        buyer.setPhoto(photo);
+        buyer.getMember().setNickname(nickName);
+        buyer.getMember().setEmail(email);
+        buyer.getMember().setPassword(password);
+        buyer.getMember().setPhoto(photo);
         buyer.setAddress(address);
-        buyer.setPhoneNumber(tel);
+        buyer.getMember().setPhoneNumber(tel);
         buyerDao.update(buyer);
         System.out.println("개인정보를 변경하였습니다.\n");
         return;
@@ -47,10 +47,10 @@ public class BuyerUpdateHandler implements Command {
 
 
       // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-      int level =BuyerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getLevel())); 
+      int level =BuyerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getMember().getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        buyer.setLevel(level);
+        buyer.getMember().setLevel(level);
         buyerDao.update(buyer);
         System.out.println("회원정보를 변경했습니다.\n");
         return;

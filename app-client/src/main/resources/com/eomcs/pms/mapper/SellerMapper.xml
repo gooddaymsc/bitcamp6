@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SellerMapper">
+  
+  <resultMap type="Seller" id="SellerMap">
+    <!-- <id column="member_no" property="number"/>-->
+    <result column="business_name" property="businessName"/>
+    <result column="business_no" property="businessNumber"/>
+    <result column="business_address" property="businessAddress"/>
+    <result column="business_tel" property="businessPlaceNumber"/>
+    <result column="openingTime" property="businessOpeningTime"/>
+    <result column="closingTime" property="businessClosingTime"/>
+
+    <association property="member" javaType="member">
+      <id column="member_no" property="number"/>
+      <result column="id" property="id"/>
+      <result column="password" property="password"/>
+      <result column="authority" property="authority"/>
+      <result column="name" property="name"/>
+      <result column="nickname" property="nickname"/>
+      <result column="email" property="email"/>
+      <result column="birthday" property="birthday"/>
+      <result column="phoneNumber" property="phoneNumber"/>
+      <result column="registeredDate" property="registeredDate"/>
+      <result column="active" property="active"/>
+      <result column="level" property="level"/>
+    </association>
+  </resultMap>
+  
+  <select id="findAll" resultMap="SellerMap">
+    select 
+      m.member_no, 
+      m.id, 
+      s.business_name, 
+      m.name,
+      m.nickname,
+      m.level,
+      m.registeredDate 
+    from 
+      member m join seller s on m.member_no = s.member_no 
+    order by 
+      m.member_no desc
+  </select>
+  
+  <insert id="insert" parameterType="member"
+  useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
+    insert into member(id, password, authority, name, nickname, email, birthday, photo, phoneNumber) 
+    values(#{member.id}, password(#{member.password}), #{member.authority},#{member.name},#{member.nickname},#{member.email},#{member.birthday},#{member.photo},#{member.phoneNumber})
+  </insert>
+  
+  <insert id="insertSeller" parameterType="map">
+    insert into seller(member_no, business_name,business_no ,business_address ,business_tel ,openingTime ,closingTime ) 
+    values(#{memberNo},#{businessName},#{businessNumber},#{businessAddress},#{businessPlaceNumber},#{businessOpeningTime},#{businessClosingTime})
+  </insert>
+  <!--
+  
+  <select id="findById" resultMap="SellerMap" parameterType="string">
+    select 
+      member_no,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      zipcode,
+      address,
+      detail_address,
+      registeredDate,
+      level,
+      authority,
+      active
+    from 
+      member 
+    where 
+      id = #{id}
+  </select>
+  
+  <update id="update" parameterType="seller">
+    update member set 
+      nickname=#{nickname},
+      email=#{email},
+      password=password(#{password}),
+      photo=#{photo},
+      address=#{address},
+      phoneNumber=#{phoneNumber} 
+    where 
+      member_no=#{number}
+  </update>
+  
+  
+  <delete id="delete" parameterType="string">
+    update member set 
+      id="none",
+      name="none",
+      nickname="none",
+      email="none",
+      birthday="0000-00-00",
+      password="none",
+      photo="none",
+      phoneNumber="none",
+      zipcode=0,
+      address="none",
+      detail_address="none",
+      active=1
+    where
+      id=#{id}
+  </delete>-->
+
+</mapper>
+
+
+
+
+
+
+

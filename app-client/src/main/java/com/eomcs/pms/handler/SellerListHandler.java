@@ -24,13 +24,13 @@ public class SellerListHandler implements Command {
 
       for (Seller seller : sellerList) {
         System.out.printf("%-3d\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n", 
-            seller.getNumber(), 
-            seller.getId(),
+            seller.getMember().getNumber(), 
+            seller.getMember().getId(),
             seller.getBusinessName(),
-            seller.getName(), 
-            seller.getNickname(),
-            seller.getLevel(),
-            seller.getRegisteredDate());
+            seller.getMember().getName(), 
+            seller.getMember().getNickname(),
+            seller.getMember().getLevel(),
+            seller.getMember().getRegisteredDate());
       }
       System.out.println();
       while (true) {

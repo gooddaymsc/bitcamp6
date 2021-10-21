@@ -1,61 +1,4 @@
 -- 회원
-DROP TABLE IF EXISTS member RESTRICT;
-
--- 판매자
-DROP TABLE IF EXISTS seller RESTRICT;
-
--- 게시판
-DROP TABLE IF EXISTS board RESTRICT;
-
--- 댓글
-DROP TABLE IF EXISTS comment RESTRICT;
-
--- 좋아요
-DROP TABLE IF EXISTS board_like RESTRICT;
-
--- 술
-DROP TABLE IF EXISTS product RESTRICT;
-
--- 리뷰
-DROP TABLE IF EXISTS review RESTRICT;
-
--- 판매
-DROP TABLE IF EXISTS stock RESTRICT;
-
--- 메세지
-DROP TABLE IF EXISTS message RESTRICT;
-
--- 장바구니
-DROP TABLE IF EXISTS cart RESTRICT;
-
--- 알림
-DROP TABLE IF EXISTS alert RESTRICT;
-
--- 태그
-DROP TABLE IF EXISTS tag RESTRICT;
-
--- 게시글태그
-DROP TABLE IF EXISTS board_tag RESTRICT;
-
--- 주종
-DROP TABLE IF EXISTS product_type RESTRICT;
-
--- 쿠폰
-DROP TABLE IF EXISTS coupon RESTRICT;
-
--- 구매항목
-DROP TABLE IF EXISTS purchase_list RESTRICT;
-
--- 구매
-DROP TABLE IF EXISTS purchase RESTRICT;
-
--- 픽업가능시간
-DROP TABLE IF EXISTS pickup_available RESTRICT;
-
--- 적립금
-DROP TABLE IF EXISTS point RESTRICT;
-
--- 회원
 CREATE TABLE member (
   member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   id             VARCHAR(50)  NOT NULL COMMENT '아이디', -- 아이디
@@ -173,9 +116,9 @@ ALTER TABLE comment
 
 -- 좋아요
 CREATE TABLE board_like (
-  member_no      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  board_no       INTEGER NOT NULL COMMENT '게시글번호', -- 게시글번호
-  registeredDate DATE    NOT NULL COMMENT '등록일' -- 등록일
+  member_no      INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  board_no       INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
+  registeredDate DATETIME NOT NULL COMMENT '등록일' -- 등록일
 )
 COMMENT '좋아요';
 
@@ -198,6 +141,7 @@ CREATE TABLE product (
   sugarLevel   INTEGER      NOT NULL COMMENT '당도', -- 당도
   acidity      INTEGER      NOT NULL COMMENT '산도', -- 산도
   weight       INTEGER      NOT NULL COMMENT '바디감', -- 바디감
+  variety      VARCHAR(255) NULL     COMMENT '품종', -- 품종
   rate         FLOAT        NOT NULL DEFAULT 0 COMMENT '평점' -- 평점
 )
 COMMENT '술';
@@ -263,10 +207,11 @@ ALTER TABLE stock
 -- 메세지
 CREATE TABLE message (
   message_no     INTEGER  NOT NULL COMMENT '메세지번호', -- 메세지번호
-  member_no      INTEGER  NOT NULL COMMENT '보내는이', -- 보내는이
-  member_no2     INTEGER  NOT NULL COMMENT '받는이', -- 받는이
+  member_no      INTEGER  NOT NULL COMMENT '받는이', -- 받는이
+  member_no2     INTEGER  NOT NULL COMMENT '보낸이', -- 보낸이
+  room_no        INTEGER  NOT NULL COMMENT '방번호', -- 방번호
   content        TEXT     NOT NULL COMMENT '내용', -- 내용
-  registeredDate DATETIME NOT NULL DEFAULT curdate() COMMENT '작성시간' -- 작성시간
+  registeredDate DATETIME NOT NULL DEFAULT now() COMMENT '작성시간' -- 작성시간
 )
 COMMENT '메세지';
 
@@ -276,6 +221,9 @@ ALTER TABLE message
     PRIMARY KEY (
       message_no -- 메세지번호
     );
+
+ALTER TABLE message
+  MODIFY COLUMN message_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '메세지번호';
 
 -- 장바구니
 CREATE TABLE cart (
@@ -355,7 +303,6 @@ ALTER TABLE board_tag
 CREATE TABLE product_type (
   type_no INTEGER      NOT NULL COMMENT '주종번호', -- 주종번호
   type    VARCHAR(255) NOT NULL COMMENT '주종', -- 주종
-  variety VARCHAR(255) NOT NULL COMMENT '품종', -- 품종
   subType VARCHAR(255) NOT NULL COMMENT '세부주종' -- 세부주종
 )
 COMMENT '주종';
@@ -470,6 +417,22 @@ ALTER TABLE point
 
 ALTER TABLE point
   MODIFY COLUMN point_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '적립금번호';
+
+-- 채팅방
+CREATE TABLE messageRoom (
+  room_no INTEGER NOT NULL COMMENT '방번호' -- 방번호
+)
+COMMENT '채팅방';
+
+-- 채팅방
+ALTER TABLE messageRoom
+  ADD CONSTRAINT PK_messageRoom -- 채팅방 기본키
+    PRIMARY KEY (
+      room_no -- 방번호
+    );
+
+ALTER TABLE messageRoom
+  MODIFY COLUMN room_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '방번호';
 
 -- 판매자
 ALTER TABLE seller
@@ -595,7 +558,7 @@ ALTER TABLE stock
 ALTER TABLE message
   ADD CONSTRAINT FK_member_TO_message -- 회원 -> 메세지
     FOREIGN KEY (
-      member_no -- 보내는이
+      member_no -- 받는이
     )
     REFERENCES member ( -- 회원
       member_no -- 회원번호
@@ -605,10 +568,20 @@ ALTER TABLE message
 ALTER TABLE message
   ADD CONSTRAINT FK_member_TO_message2 -- 회원 -> 메세지2
     FOREIGN KEY (
-      member_no2 -- 받는이
+      member_no2 -- 보낸이
     )
     REFERENCES member ( -- 회원
       member_no -- 회원번호
+    );
+
+-- 메세지
+ALTER TABLE message
+  ADD CONSTRAINT FK_messageRoom_TO_message -- 채팅방 -> 메세지
+    FOREIGN KEY (
+      room_no -- 방번호
+    )
+    REFERENCES messageRoom ( -- 채팅방
+      room_no -- 방번호
     );
 
 -- 장바구니

@@ -3,8 +3,8 @@ package com.eomcs.pms.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("serial")
-public class Buyer extends Member {
+public class Buyer {
+  private Member member;
   private String zipcode;
   private String address;
   private int point;
@@ -14,6 +14,12 @@ public class Buyer extends Member {
   //  private List<Coupon> couponList = new ArrayList<>();
 
 
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
   public String getZipcode() {
     return zipcode;
   }

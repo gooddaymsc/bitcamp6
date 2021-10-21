@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.context.ApplicationContextListener;
 import com.eomcs.menu.Menu;
 import com.eomcs.menu.MenuFilter;
@@ -23,11 +26,11 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MariadbBoardDao;
-import com.eomcs.pms.dao.impl.MariadbBuyerDao;
-import com.eomcs.pms.dao.impl.MariadbMemberDao;
 import com.eomcs.pms.dao.impl.MariadbProductDao;
-import com.eomcs.pms.dao.impl.MariadbSellerDao;
 import com.eomcs.pms.dao.impl.MariadbStockDao;
+import com.eomcs.pms.dao.impl.MybatisBuyerDao;
+import com.eomcs.pms.dao.impl.MybatisMemberDao;
+import com.eomcs.pms.dao.impl.MybatisSellerDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.dao.impl.NetMessageDao;
@@ -156,9 +159,13 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/drinkerdb?user=drinker&password=1111");
 
-    MemberDao memberDao = new MariadbMemberDao(con);
-    SellerDao sellerDao = new MariadbSellerDao(con);
-    BuyerDao buyerDao = new MariadbBuyerDao(con);
+    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
+
+
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    SellerDao sellerDao = new MybatisSellerDao(sqlSession);
+    BuyerDao buyerDao = new MybatisBuyerDao(sqlSession);
     BoardDao boardDao = new MariadbBoardDao(con);
     StockDao stockDao = new MariadbStockDao(con);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
