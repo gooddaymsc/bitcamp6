@@ -53,7 +53,7 @@
   
   <insert id="insertSeller" parameterType="seller">
     insert into seller(member_no, business_name,business_no ,business_address ,business_tel ,openingTime ,closingTime ) 
-    values(#{memberNo},#{businessName},#{businessNumber},#{businessAddress},#{businessPlaceNumber},#{businessOpeningTime},#{businessClosingTime})
+    values(#{member.number},#{businessName},#{businessNumber},#{businessAddress},#{businessPlaceNumber},#{businessOpeningTime},#{businessClosingTime})
   </insert>
   
   <select id="findById" resultMap="SellerMap" parameterType="string">
