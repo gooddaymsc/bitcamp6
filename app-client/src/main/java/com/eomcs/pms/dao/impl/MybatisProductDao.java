@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.dao.ProductType;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.ProductType;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
@@ -23,11 +23,13 @@ public class MybatisProductDao implements ProductDao{
 
   @Override
   public void insert(Product product) throws Exception {
+    sqlSession.insert("ProductMapper.insert", product);
+    sqlSession.commit();
   }
 
   @Override
   public Product findByNo(int no) throws Exception {
-    return null;
+    return sqlSession.selectOne("ProductMapper.findByNo",no);
   }
 
   @Override
@@ -50,11 +52,15 @@ public class MybatisProductDao implements ProductDao{
 
   @Override
   public void update(Product product) throws Exception {
+    sqlSession.update("ProductMapper.update",product);
+    sqlSession.commit();
   }
 
 
   @Override
-  public void delete(Product product) throws Exception {    
+  public void delete(Product product) throws Exception {   
+    sqlSession.delete("ProductMapper.delete", product);
+    sqlSession.commit();
   }
 
   @Override

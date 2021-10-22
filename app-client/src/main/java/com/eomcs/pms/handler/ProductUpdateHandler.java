@@ -21,8 +21,8 @@ public class ProductUpdateHandler implements Command {
     Product product =  productDao.findByNo(productNumber);
 
     String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
-    String type = ProductValidation.checkType("주종(" + product.getProductType() + ")? ");
-    String subType = ProductValidation.checkSubType(("상세주종(" + product.getProductSubType() + ")? "),type);
+    String type = ProductValidation.checkType("주종(" + product.getProductType().getType() + ")? ");
+    String subType = ProductValidation.checkSubType(("상세주종(" + product.getProductType().getSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
     String grapes = product.getVariety();
     if(type.equals("와인")) {
@@ -38,8 +38,7 @@ public class ProductUpdateHandler implements Command {
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
       product.setProductName(name);
-      product.setProductType(type);
-      product.setProductSubType(subType);
+      product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
       product.setCountryOrigin(made);
       if(type.equals("와인")){
         product.setVariety(grapes);

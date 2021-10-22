@@ -3,7 +3,6 @@ package com.eomcs.pms.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import com.eomcs.pms.dao.ProductType;
 
 @SuppressWarnings("serial")
 public class Product implements Serializable{
@@ -23,7 +22,7 @@ public class Product implements Serializable{
   private float rate;               //평점
   private int reviewerNum;          //댓글 남긴 사람의 
   private int totalReviewNumber = 1; 
-  private ProductType productTypes;
+  private ProductType productType;
 
   public int getProductNumber() {
     return productNumber;
@@ -129,10 +128,11 @@ public class Product implements Serializable{
   public void setTotalReviewNumber(int totalReviewNumber) {
     this.totalReviewNumber = totalReviewNumber;
   }
-  public ProductType getProductTypes() {
-    return productTypes;
+  public ProductType getProductType() {
+    return productType;
   }
-  public void setProductTypes(ProductType productTypes) {
-    this.productTypes = productTypes;
+  public void setProductType(ProductType productType) {
+    this.productType = productType;
   }
+
 }

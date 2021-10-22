@@ -1,4 +1,4 @@
-package com.eomcs.pms.dao;
+package com.eomcs.pms.domain;
 
 public class ProductType {
 

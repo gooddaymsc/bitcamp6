@@ -3,6 +3,7 @@ package com.eomcs.pms.dao;
 import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.ProductType;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;

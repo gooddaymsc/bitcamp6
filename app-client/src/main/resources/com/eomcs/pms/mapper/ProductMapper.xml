@@ -19,20 +19,20 @@
     <result column="rate" property="rate"/>
     <result column="reviewerNum" property="reviewerNum"/>
     
- <!--  <association property="productTypes" javaType="ProductType">
+   <association property="productType" javaType="ProductType">
     <id column="type_no" property="number"/>
     <result column="type" property="type"/>
     <result column="subType" property="subType"/>
-  </association> -->
+  </association> 
 
   </resultMap>
- <!--  
-  <resultMap type="productTypes" id="ProductTypeMap">
+   
+  <resultMap type="productType" id="ProductTypeMap">
     <id column="type_no"  property="number"/>
     <result column="type" property="type"/>  
     <result column="subType" property="subType"/>  
-  </resultMap> -->
-<!--   
+  </resultMap> 
+   
   <select id="findAllProductType" resultMap="ProductTypeMap">
     select 
       type_no,
@@ -43,7 +43,7 @@
     order by 
       type_no asc
   </select>
- -->
+ 
   <select id="findAll" resultMap="ProductMap">
 	   Select 
 	     p.product_no, 
@@ -65,48 +65,51 @@
   </select>
   
   
-<!--   <insert id="insert" parameterType="product">
+   <insert id="insert" parameterType="product">
    insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
-    values(#{productTypes.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight})" 
+    values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
   </insert>
-   -->
-  <!-- 
+   
   
-  
-  <select id="findByNo" resultMap="BoardMap" parameterType="int">
-       select
-         b.board_no,
-         b.title,
-         b.content,
-         b.registeredDate,
-         b.views,
-         m.member_no, 
-         m.id, 
-         m.name,
-         m.email
-       from board b inner join member m 
-         on b.member_no=m.member_no
-        where board_no=#{no}
+  <select id="findByNo" resultMap="ProductMap" parameterType="int">
+    select 
+      p.product_no, 
+      p.type_no, 
+      p.name, 
+      p.origin, 
+      p.volume, 
+      p.alcoholLevel, 
+      p.sugarLevel, 
+      p.acidity, 
+      p.weight, 
+      p.rate, 
+      p.variety, 
+      t.type, 
+      t.subType 
+    from product p join product_type t on p.type_no=t.type_no 
+    where 
+      p.product_no=#{no}
   </select>
   
-  <update id="update" parameterType="board">
-  update board set
-    title=#{title},
-    content=#{content}
+  <update id="update" parameterType="Product">
+    update product set 
+      type_no = #{productType.number}, 
+      name = #{productName}, 
+      origin=#{countryOrigin}, 
+      volume=#{volume}, 
+      alcoholLevel=#{alcoholLevel}, 
+      sugarLevel=#{sugarLevel}, 
+      acidity=#{acidity}, 
+      weight=#{weight}, 
+      variety=#{variety}
     where 
-    board_no=#{boardNumber}
+      product_no=#{productNumber}
   </update>
   
-  <delete id="delete" parameterType="int">
-    delete from board 
-    where board_no=#{no}
+  <delete id="delete" parameterType="Product">
+    delete from product 
+    where product_no=#{productNumber}
   </delete>
-  
-  <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
-  </select>
-
-  
-   -->
   
 </mapper>
 
