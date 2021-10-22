@@ -74,14 +74,14 @@
   
   <update id="update" parameterType="buyer">
     update member set 
-      nickname=#{nickname},
-      email=#{email},
-      password=password(#{password}),
-      photo=#{photo},
+      nickname=#{member.nickname},
+      email=#{member.email},
+      password=password(#{member.password}),
+      photo=#{member.photo},
       address=#{address},
-      phoneNumber=#{phoneNumber} 
+      phoneNumber=#{member.phoneNumber} 
     where 
-      member_no=#{number}
+      member_no=#{member.number}
   </update>
   
   
