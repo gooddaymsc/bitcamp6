@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -18,11 +19,13 @@ import com.eomcs.pms.domain.Stock;
 public class MariadbProductDao implements ProductDao{
 
   Connection con;
+  SqlSession sqlSesson;
   SellerDao sellerDao;
   StockDao stockDao;
   BookingDao bookingDao;
 
-  public MariadbProductDao(Connection con, SellerDao sellerDao,  StockDao stockDao, BookingDao bookingDao) {
+  public MariadbProductDao(SqlSession sqlSesson, Connection con, SellerDao sellerDao,  StockDao stockDao, BookingDao bookingDao) {
+    this.sqlSesson = sqlSesson;
     this.con = con;
     this.sellerDao = sellerDao;
     this.stockDao = stockDao;
@@ -225,17 +228,16 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public HashMap<String, Seller> findByAdress (String address) throws Exception {
+    HashMap<String, Seller> hashMap = new HashMap<>();
+    for (Seller seller : sellerDao.findAll()) {
+      String[] arr = address.split(" ");
+      if((seller.getBusinessAddress().contains(arr[2])) && 
+          (seller.getBusinessAddress().contains(arr[1]))) {
+        hashMap.put(seller.getMember().getId(), seller);
+        return hashMap;
+      } 
+    }
     return null;
-    //    HashMap<String, Seller> hashMap = new HashMap<>();
-    //    for (Seller seller : sellerDao.findAll()) {
-    //      String[] arr = address.split(" ");
-    //      if((seller.getBusinessAddress().contains(arr[2])) && 
-    //          (seller.getBusinessAddress().contains(arr[1]))) {
-    //        hashMap.put(seller.getId(), seller);
-    //        return hashMap;
-    //      } 
-    //    }
-    //    return null;
   }
 
   @Override
@@ -245,7 +247,7 @@ public class MariadbProductDao implements ProductDao{
             + " values(?, ?, ?, ?, ?)" )){
 
       stmt.setInt(1, review.getProductNo());
-      stmt.setString(2, review.getId());
+      stmt.setString(2, review.getMember().getId());
       stmt.setString(3, null);
       stmt.setFloat(4, review.getScore());
       stmt.setString(5, review.getComment());
@@ -271,7 +273,7 @@ public class MariadbProductDao implements ProductDao{
           Review review = new Review();
           review.setNo(rs.getInt("review_no"));
           review.setProductNo(productNumber);
-          review.setId(rs.getString("id"));
+          review.getMember().setId(rs.getString("id"));
           review.setScore(rs.getFloat("score"));
           review.setComment(rs.getString("comment"));
           review.setRegisteredDate(rs.getDate("registeredDate"));

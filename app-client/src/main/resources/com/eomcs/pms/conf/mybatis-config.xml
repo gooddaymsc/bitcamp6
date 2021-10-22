@@ -23,12 +23,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/eomcs/pms/mapper/MemberMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/BuyerMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/SellerMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/StockMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/BoardMapper.xml"/>
-    <mapper resource="com/eomcs/pms/mapper/ProductMapper.xml"/>
+    <package name="com.eomcs.pms.dao"/>
   </mappers>
 </configuration>
 

@@ -9,44 +9,35 @@
     <id column="stock_no" property="stockNumber"/>
     <result column="amount" property="stocks"/>
     <result column="price" property="price"/>
-        
-<!--     <association property="member" javaType="member">
-      <id column="member_no" property="number"/>
-      <result column="id" property="id"/>
-    </association> -->
-    
-<!--     <association property="product" javaType="Product">
+
+    <association property="product" javaType="Product">
       <id column="product_no" property="productNumber"/>
-      <result column="name" property="ProductName"/>
-      <result column="origin" property="CountryOrigin"/>
-      <result column="volume" property="Volume"/>
-      <result column="alcoholLevel" property="AlcoholLevel"/>
-      <result column="sugarLevel" property="SugerLevel"/>
-      <result column="acidity" property="Acidity"/>
-      <result column="weight" property="Weight"/>
-      <result column="type" property="ProductType"/>
-      <result column="subType" property="ProductSubType"/>
-      <result column="variety" property="Variety"/>
-      <result column="rate" property="Rate"/>
-    </association> -->
+      <result column="name" property="productName"/>
+      <result column="origin" property="countryOrigin"/>
+      <result column="volume" property="volume"/>
+      <result column="alcoholLevel" property="alcoholLevel"/>
+      <result column="sugarLevel" property="sugarLevel"/>
+      <result column="acidity" property="acidity"/>
+      <result column="weight" property="weight"/>
+      <result column="variety" property="variety"/>
+      <result column="rate" property="rate"/>
+    </association>
+  </resultMap>
+    
+  <resultMap type="Product" id="ProductMap">
+      <id column="product_no" property="productNumber"/>
+      <result column="name" property="productName"/>
+      <result column="origin" property="countryOrigin"/>
+      <result column="volume" property="volume"/>
+      <result column="alcoholLevel" property="alcoholLevel"/>
+      <result column="sugarLevel" property="sugarLevel"/>
+      <result column="acidity" property="acidity"/>
+      <result column="weight" property="weight"/>
+      <result column="variety" property="variety"/>
+      <result column="rate" property="rate"/>
   </resultMap>
   
-<!--   <resultMap type="Product" id="ProductMap">
-      <id column="product_no" property="productNumber"/>
-      <result column="name" property="ProductName"/>
-      <result column="origin" property="CountryOrigin"/>
-      <result column="volume" property="Volume"/>
-      <result column="alcoholLevel" property="AlcoholLevel"/>
-      <result column="sugarLevel" property="SugerLevel"/>
-      <result column="acidity" property="Acidity"/>
-      <result column="weight" property="Weight"/>
-      <result column="type" property="ProductType"/>
-      <result column="subType" property="ProductSubType"/>
-      <result column="variety" property="Variety"/>
-      <result column="rate" property="Rate"/>
-  </resultMap> -->
-  
-<!--   <select id="findAll" resultMap="StockMap" parameterType="string">
+  <select id="findAll" resultMap="StockMap" parameterType="string">
     Select
       s.stock_no,
       p.name,
@@ -61,13 +52,13 @@
       s.product_no asc
   </select>
   
-  <insert id="insert" parameterType="stock">
+<!--   <insert id="insert" parameterType="stock">
     insert 
       into stock(stock_no,member_no,product_no,amount,price) 
     values(#{stockNumber},#{(select member_no from member where id=member.id)},#{product.productNumber},#{stocks},#{price})
   </insert> -->
   
-  <select id="checkProduct" resultMap="StockMap" parameterType="string">
+<!--   <select id="checkProduct" resultMap="StockMap" parameterType="string">
     select
       p.product_no, 
       p.type_no, 
@@ -108,7 +99,7 @@
   
   <delete id="delete" parameterType="stock">
     delete from stock where stock_no=#{no}
-  </delete>
+  </delete> -->
 
 </mapper>
 

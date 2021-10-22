@@ -26,7 +26,7 @@ public class ProductDetailHandler implements Command {
         return;
       }
 
-      System.out.printf("주종: %s - %s\n", product.getProductType(),product.getProductSubType());
+      System.out.printf("주종: %s - %s\n", product.getProductType().getType(),product.getProductType().getSubType());
       //      System.out.printf("평점: %.2f\n", product.getRate());
       System.out.printf("원산지: %s\n", product.getCountryOrigin());
       if(product.getProductType().equals("와인")){

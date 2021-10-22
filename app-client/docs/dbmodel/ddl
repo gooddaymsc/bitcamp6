@@ -14,7 +14,7 @@ CREATE TABLE member (
   address        VARCHAR(50)  NULL     COMMENT '기본주소', -- 기본주소
   detail_address VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
   registeredDate DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
-  active         INTEGER      NULL     COMMENT '탈퇴', -- 탈퇴
+  active         INTEGER      NULL     DEFAULT 0 COMMENT '탈퇴', -- 탈퇴
   level          INTEGER      NOT NULL DEFAULT 0 COMMENT '등급' -- 등급
 )
 COMMENT '회원';
@@ -165,8 +165,8 @@ ALTER TABLE product
 -- 리뷰
 CREATE TABLE review (
   review_no      INTEGER  NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-  product_no     INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
   member_no      INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  product_no     INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
   purchase_no    INTEGER  NULL     COMMENT '구매번호', -- 구매번호
   score          FLOAT    NOT NULL COMMENT '평점', -- 평점
   comment        TEXT     NULL     COMMENT '코멘트', -- 코멘트
@@ -178,7 +178,8 @@ COMMENT '리뷰';
 ALTER TABLE review
   ADD CONSTRAINT PK_review -- 리뷰 기본키
     PRIMARY KEY (
-      review_no -- 리뷰번호
+      review_no, -- 리뷰번호
+      member_no  -- 회원번호
     );
 
 ALTER TABLE review

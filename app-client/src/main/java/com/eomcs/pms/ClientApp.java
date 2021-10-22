@@ -25,11 +25,7 @@ import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.MybatisBoardDao;
-import com.eomcs.pms.dao.impl.MybatisBuyerDao;
-import com.eomcs.pms.dao.impl.MybatisMemberDao;
 import com.eomcs.pms.dao.impl.MybatisProductDao;
-import com.eomcs.pms.dao.impl.MybatisSellerDao;
 import com.eomcs.pms.dao.impl.MybatisStockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
@@ -163,14 +159,15 @@ public class ClientApp {
         "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
 
 
-    MemberDao memberDao = new MybatisMemberDao(sqlSession);
-    SellerDao sellerDao = new MybatisSellerDao(sqlSession);
-    BuyerDao buyerDao = new MybatisBuyerDao(sqlSession);
-    BoardDao boardDao = new MybatisBoardDao(sqlSession);
+    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+    SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
+    BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
+    BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+
     StockDao stockDao = new MybatisStockDao(sqlSession);
+    ProductDao productDao = new MybatisProductDao(sqlSession, sellerDao);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
-    ProductDao productDao = new MybatisProductDao(sqlSession, sellerDao, stockDao, bookingDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));

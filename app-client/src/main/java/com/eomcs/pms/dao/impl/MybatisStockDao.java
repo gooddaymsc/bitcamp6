@@ -1,5 +1,6 @@
 package com.eomcs.pms.dao.impl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -22,16 +23,11 @@ public class MybatisStockDao implements StockDao {
 
   @Override
   public StockList findAll(String id) throws Exception {
-    //    return null;
-    return sqlSession.selectOne("StockMapper.findAll", id);
-
-
-    //    ArrayList<Stock> list = new ArrayList<>();
-    //    list = sqlSession.selectOne("StockMapper.findAll", id);
-    //    StockList stocklist = new StockList();
-    //    stocklist.setId(id);
-    //    stocklist.setSellerStock(list);
-    //    return stocklist;
+    Collection<Stock> list = sqlSession.selectList("StockMapper.findAll", id);
+    StockList stocklist = new StockList();
+    stocklist.setId(id);
+    stocklist.setSellerStock((List<Stock>) list);
+    return stocklist;
 
   }
 
@@ -48,33 +44,6 @@ public class MybatisStockDao implements StockDao {
   @Override
   public Product checkProduct(String name) throws Exception {
     return sqlSession.selectOne("StockMapper.checkProduct", name);
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "select"
-    //            + " p.product_no, p.type_no, p.name, p.origin, p.volume, p.alcoholLevel, p.sugarLevel,"
-    //            + " p.acidity, p.weight, p.rate, p.variety,"
-    //            + " t.type, t.subType"
-    //            + " from product p join product_type t on p.type_no=t.type_no"
-    //            + " where p.name=?")) {
-    //      stmt.setString(1, name);
-    //      ResultSet rs = stmt.executeQuery(); 
-    //
-    //      if (rs.next()) {
-    //        Product p = new Product();
-    //        p.setProductNumber(rs.getInt("product_no"));
-    //        p.setProductName(rs.getString("name"));
-    //        p.setCountryOrigin(rs.getNString("origin"));
-    //        p.setVolume(rs.getInt("volume"));
-    //        p.setAlcoholLevel(rs.getFloat("alcoholLevel"));
-    //        p.setSugerLevel(rs.getInt("sugarLevel"));
-    //        p.setAcidity(rs.getInt("acidity"));
-    //        p.setWeight(rs.getInt("weight"));
-    //        p.setProductType(rs.getString("type"));
-    //        p.setProductSubType(rs.getString("subType"));
-    //        p.setVariety(rs.getString("variety"));
-    //        return p;
-    //      }
-    //      return null;
-    //    }
   }
 
   @Override

@@ -1,7 +1,6 @@
 package com.eomcs.pms.handler;
 
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.dao.ProductType;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
 
@@ -26,13 +25,11 @@ public class ProductAddHandler implements Command {
 
     product.setProductName(productName);
     String type = ProductValidation.checkType("주종 : ");
-    String subType = ProductValidation.checkSubType("상세주종 : ",product.getProductTypes().getType());
+    String subType = ProductValidation.checkSubType("상세주종 : ",type);
 
-    ProductType productType = new ProductHandlerHelper(productDao).promptType(type, subType);
-
-    product.setProductTypes(productType);
+    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
     product.setCountryOrigin(Prompt.inputString("원산지 : "));
-    if(product.getProductTypes().getType().equals("와인")) {
+    if(product.getProductType().getType().equals("와인")) {
       product.setVariety(Prompt.inputString("품종 : "));
     }
     product.setVolume(Prompt.inputInt("용량 : "));

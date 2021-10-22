@@ -2,7 +2,7 @@ package com.eomcs.pms.handler;
 
 import java.util.List;
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.dao.ProductType;
+import com.eomcs.pms.domain.ProductType;
 
 public class ProductHandlerHelper {
 
