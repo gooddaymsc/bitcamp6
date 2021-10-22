@@ -23,4 +23,5 @@ public interface ProductDao {
   Stock findStockById(String id, int productNumber) throws Exception;
   boolean reviewIs(int productNumber, String id) throws Exception;
   boolean findPurchased(String productName) throws Exception;
+  List<ProductType> findAllProductType() throws Exception;
 }

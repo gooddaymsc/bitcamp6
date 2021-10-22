@@ -25,11 +25,11 @@ import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.MariadbProductDao;
 import com.eomcs.pms.dao.impl.MariadbStockDao;
 import com.eomcs.pms.dao.impl.MybatisBoardDao;
 import com.eomcs.pms.dao.impl.MybatisBuyerDao;
 import com.eomcs.pms.dao.impl.MybatisMemberDao;
+import com.eomcs.pms.dao.impl.MybatisProductDao;
 import com.eomcs.pms.dao.impl.MybatisSellerDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
@@ -170,7 +170,7 @@ public class ClientApp {
     StockDao stockDao = new MariadbStockDao(con);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
-    ProductDao productDao = new MariadbProductDao(con, sellerDao, stockDao, bookingDao);
+    ProductDao productDao = new MybatisProductDao(sqlSession, sellerDao, stockDao, bookingDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));

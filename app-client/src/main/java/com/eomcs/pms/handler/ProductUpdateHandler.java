@@ -30,7 +30,7 @@ public class ProductUpdateHandler implements Command {
     }
     int volumes = Prompt.inputInt("용량(" + product.getVolume() +")?");
     float abv = Prompt.inputFloat("알콜도수(" + product.getAlcoholLevel() + ")? ");
-    int sweet = ProductValidation.checkNum("당도(" + product.getSugerLevel() + ")? ");
+    int sweet = ProductValidation.checkNum("당도(" + product.getSugarLevel() + ")? ");
     int acidic = ProductValidation.checkNum("산도(" + product.getAcidity() + ")? ");
     int body = ProductValidation.checkNum("바디감(" + product.getWeight() + ")? ");
 
@@ -48,7 +48,7 @@ public class ProductUpdateHandler implements Command {
       }
       product.setVolume(volumes);
       product.setAlcoholLevel(abv);
-      product.setSugerLevel(sweet);
+      product.setSugarLevel(sweet);
       product.setAcidity(acidic);
       product.setWeight(body);
 
