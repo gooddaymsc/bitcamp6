@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
@@ -7,9 +8,10 @@ import com.eomcs.util.Prompt;
 public class ProductUpdateHandler implements Command {
 
   ProductDao productDao;
-
-  public ProductUpdateHandler (ProductDao productDao) {
+  SqlSession sqlSession;
+  public ProductUpdateHandler (ProductDao productDao, SqlSession sqlSession) {
     this.productDao = productDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -21,6 +23,9 @@ public class ProductUpdateHandler implements Command {
     Product product =  productDao.findByNo(productNumber);
 
     String name = Prompt.inputString("상품이름(" + product.getProductName()  + ")? ");
+    if (productDao.findByProduct(name)!=null) {
+      System.out.println("중복되는 이름입니다.\n");
+      return;  }
     String type = ProductValidation.checkType("주종(" + product.getProductType().getType() + ")? ");
     String subType = ProductValidation.checkSubType(("상세주종(" + product.getProductType().getSubType() + ")? "),type);
     String made = Prompt.inputString("원산지(" + product.getCountryOrigin() + ")? ");
@@ -52,6 +57,7 @@ public class ProductUpdateHandler implements Command {
       product.setWeight(body);
 
       productDao.update(product);
+      sqlSession.commit();
       System.out.println("상품정보를 변경하였습니다.\n");
     } else {
       System.out.println("상품정보 변경을 취소하였습니다.\n");

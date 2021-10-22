@@ -25,7 +25,6 @@ import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.MybatisProductDao;
 import com.eomcs.pms.dao.impl.MybatisStockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
@@ -163,9 +162,9 @@ public class ClientApp {
     SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
     BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+    ProductDao productDao = sqlSession.getMapper(ProductDao.class);
 
     StockDao stockDao = new MybatisStockDao(sqlSession);
-    ProductDao productDao = new MybatisProductDao(sqlSession, sellerDao);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
@@ -200,12 +199,12 @@ public class ClientApp {
     commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
     commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));
 
-    commandMap.put("/product/add",   new ProductAddHandler(productDao));
+    commandMap.put("/product/add",   new ProductAddHandler(productDao,sqlSession));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
     commandMap.put("/product/search", new ProductSearchHandler(productDao));
     commandMap.put("/product/detail", new ProductDetailHandler(productDao));
-    commandMap.put("/product/update", new ProductUpdateHandler(productDao));
-    commandMap.put("/product/delete",   new ProductDeleteHandler(productDao));
+    commandMap.put("/product/update", new ProductUpdateHandler(productDao,sqlSession));
+    commandMap.put("/product/delete",   new ProductDeleteHandler(productDao,sqlSession));
 
 
     commandMap.put("/review/add",   new ReviewAddHandler(productDao));
