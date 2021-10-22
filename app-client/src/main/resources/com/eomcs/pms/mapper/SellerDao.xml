@@ -60,6 +60,7 @@
     select 
       s.member_no, 
       m.name, 
+      m.id,
       m.nickname, 
       m.level, 
       m.email, 

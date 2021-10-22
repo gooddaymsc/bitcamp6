@@ -20,7 +20,6 @@ public class SellerDeleteHandler implements Command {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[탈퇴하기]");
       String id = ClientApp.getLoginUser().getId();
-      //      String nowLoginId = seller.getId();
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
@@ -44,13 +43,13 @@ public class SellerDeleteHandler implements Command {
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
+        Seller seller = sellerDao.findById(id);
+        sellerDao.delete(seller);
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(sellerId);
         //        bookingPrompt.removeBookingListById(sellerId);
         //        stockPrompt.removeStockListById(sellerId);
         //        messagePrompt.removeMessageListById(sellerId);
-        Seller seller = sellerDao.findById(id);
-        sellerDao.delete(seller);
         System.out.println("판매자를 탈퇴시켰습니다.\n");
         return;
       }
