@@ -170,7 +170,7 @@ public class ClientApp {
     StockDao stockDao = new MariadbStockDao(con);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
-    ProductDao productDao = new MybatisProductDao(sqlSession, con, sellerDao);
+    ProductDao productDao = new MybatisProductDao(sqlSession, sellerDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));

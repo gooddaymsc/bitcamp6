@@ -45,7 +45,7 @@ public class ProductSearchHandler implements Command {
           System.out.printf("원산지: %s\n", product.getCountryOrigin());
           System.out.printf("품종: %s\n", product.getVariety());
           System.out.printf("알콜도수: %.2f\n", product.getAlcoholLevel()); 
-          System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugerLevel(),product.getAcidity(),product.getWeight());
+          System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugarLevel(),product.getAcidity(),product.getWeight());
           System.out.println("-----------------------------------------");
         }
       }

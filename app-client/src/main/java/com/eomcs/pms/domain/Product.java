@@ -3,24 +3,27 @@ package com.eomcs.pms.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import com.eomcs.pms.dao.ProductType;
 
 @SuppressWarnings("serial")
 public class Product implements Serializable{
   private List<Review> reviewList = new ArrayList<>();
   private int productNumber;        //상품번
   private String productName;       //상품명
-  private String productType;       //주종
-  private String productSubType;    //세부주종    
+  private int typeNumber;
+  //  private String productType;       //주종
+  //  private String productSubType;    //세부주종    
   private String countryOrigin;     //원산지
   private String variety;           //품종
   private int volume;               //용량 
   private float alcoholLevel;       //알콜도수
-  private int sugerLevel;           //당도
+  private int sugarLevel;           //당도
   private int acidity;              //산도
   private int weight;               //바디감
   private float rate;               //평점
   private int reviewerNum;          //댓글 남긴 사람의 
   private int totalReviewNumber = 1; 
+  private ProductType productTypes;
 
   public int getProductNumber() {
     return productNumber;
@@ -34,19 +37,25 @@ public class Product implements Serializable{
   public void setProductName(String productName) {
     this.productName = productName;
   }
-  public String getProductType() {
-    return productType;
+  public int getTypeNumber() {
+    return typeNumber;
   }
-  public void setProductType(String productType) {
-    //조건문
-    this.productType = productType;
+  public void setTypeNumber(int typeNumber) {
+    this.typeNumber = typeNumber;
   }
-  public String getProductSubType() {
-    return productSubType;
-  }
-  public void setProductSubType(String productSubType) {
-    this.productSubType = productSubType;
-  }
+  //  public String getProductType() {
+  //    return productType;
+  //  }
+  //  public void setProductType(String productType) {
+  //    //조건문
+  //    this.productType = productType;
+  //  }
+  //  public String getProductSubType() {
+  //    return productSubType;
+  //  }
+  //  public void setProductSubType(String productSubType) {
+  //    this.productSubType = productSubType;
+  //  }
   public String getCountryOrigin() {
     return countryOrigin;
   }
@@ -71,11 +80,11 @@ public class Product implements Serializable{
   public void setAlcoholLevel(float alcoholLevel) {
     this.alcoholLevel = alcoholLevel;
   }
-  public int getSugerLevel() {  
-    return sugerLevel;
+  public int getSugarLevel() {
+    return sugarLevel;
   }
-  public void setSugerLevel(int sugerLevel) {
-    this.sugerLevel = sugerLevel;
+  public void setSugarLevel(int sugarLevel) {
+    this.sugarLevel = sugarLevel;
   }
   public int getAcidity() {
     return acidity;
@@ -120,5 +129,10 @@ public class Product implements Serializable{
   public void setTotalReviewNumber(int totalReviewNumber) {
     this.totalReviewNumber = totalReviewNumber;
   }
-
+  public ProductType getProductTypes() {
+    return productTypes;
+  }
+  public void setProductTypes(ProductType productTypes) {
+    this.productTypes = productTypes;
+  }
 }

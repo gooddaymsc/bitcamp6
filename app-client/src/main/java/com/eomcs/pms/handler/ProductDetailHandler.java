@@ -33,7 +33,7 @@ public class ProductDetailHandler implements Command {
         System.out.printf("품종: %s\n", product.getVariety());  }
       System.out.printf("용량: %d\n", product.getVolume());
       System.out.printf("알콜도수: %.1f\n", product.getAlcoholLevel());
-      System.out.printf("당도: %d\n", product.getSugerLevel());
+      System.out.printf("당도: %d\n", product.getSugarLevel());
       System.out.printf("산도: %d\n", product.getAcidity());
       System.out.printf("바디감: %d\n", product.getWeight());
       System.out.println();
