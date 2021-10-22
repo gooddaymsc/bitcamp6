@@ -8,7 +8,7 @@ public class ProductValidation {
 
   public static Review findReviewById(Product product, String id) {
     for (Review review : product.getReviewList()) {
-      if (review.getId().equals(id)) {
+      if (review.getMember().getId().equals(id)) {
         return review;
       }
     }

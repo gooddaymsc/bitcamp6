@@ -84,10 +84,10 @@ public class ProductSearchHandler implements Command {
           System.out.println("--------------------------------------------------------------------------");
           System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n", 
               entry.getValue().getBusinessName(),
-              entry.getValue().getId(),
+              entry.getValue().getMember().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
-              productDao.findStockById(entry.getValue().getId(), productNumber).getStocks());
+              productDao.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
           request.setAttribute("storeName",entry.getValue().getBusinessName());
         }
       }

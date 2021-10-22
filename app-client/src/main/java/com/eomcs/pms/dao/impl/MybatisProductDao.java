@@ -7,29 +7,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
-import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 
-public class MariadbProductDao implements ProductDao{
+public class MybatisProductDao implements ProductDao{
 
   Connection con;
-  SqlSession sqlSesson;
+  SqlSession sqlSession;
   SellerDao sellerDao;
-  StockDao stockDao;
-  BookingDao bookingDao;
 
-  public MariadbProductDao(SqlSession sqlSesson, Connection con, SellerDao sellerDao,  StockDao stockDao, BookingDao bookingDao) {
-    this.sqlSesson = sqlSesson;
+  public MybatisProductDao(SqlSession sqlSession, Connection con, SellerDao sellerDao) {
+    this.sqlSession = sqlSession;
     this.con = con;
     this.sellerDao = sellerDao;
-    this.stockDao = stockDao;
-    this.bookingDao = bookingDao;
   }
 
   @Override
@@ -162,20 +156,6 @@ public class MariadbProductDao implements ProductDao{
     return null;
   }
 
-  //  @Override
-  //  public Product findByNo2(int no) throws Exception {
-  //    //    HashMap<String, String> params = new HashMap<>();
-  //    //    params.put("reviewNumber", String.valueOf(no));
-  //    //
-  //    //    requestAgent.request("product.review.selectOne", params);
-  //    //    if(requestAgent.getStatus().equals(RequestAgent.FAIL)){
-  //    //      return null;
-  //    //    }
-  //    //    return requestAgent.getObject(Product.class);
-  //    return null;
-  //  }
-
-
   @Override
   public void update(Product product) throws Exception {
     try (PreparedStatement stmt2 = con.prepareStatement(
@@ -242,49 +222,13 @@ public class MariadbProductDao implements ProductDao{
 
   @Override
   public void insertReview(Review review) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into review(product_no, member_no, purchase_no, score, comment)"
-            + " values(?, ?, ?, ?, ?)" )){
-
-      stmt.setInt(1, review.getProductNo());
-      stmt.setString(2, review.getMember().getId());
-      stmt.setString(3, null);
-      stmt.setFloat(4, review.getScore());
-      stmt.setString(5, review.getComment());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("리뷰 데이터 등록 실패!");
-      } 
-    }
+    sqlSession.selectOne("ReviewMapper.insert",review);
+    sqlSession.commit();
   }
+
   @Override
   public List<Review> findAll(int productNumber) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select"
-            + " r.review_no, pro.product_no, m.id, r.score, r.comment, r.registeredDate"
-            + " from review r"
-            + " join product pro on r.product_no = pro.product_no"
-            + " join member m on r.member_no = m.member_no"
-            + " where pro.product_no =" + productNumber)) {
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        ArrayList<Review> list = new ArrayList<>();
-        while(rs.next()) {
-          Review review = new Review();
-          review.setNo(rs.getInt("review_no"));
-          review.setProductNo(productNumber);
-          review.getMember().setId(rs.getString("id"));
-          review.setScore(rs.getFloat("score"));
-          review.setComment(rs.getString("comment"));
-          review.setRegisteredDate(rs.getDate("registeredDate"));
-
-          Product product = new Product();
-          product.setProductNumber(rs.getInt("product_no"));
-          list.add(review);
-        }
-        return list;
-      }
-    }
+    return sqlSession.selectList("ReviewMapper.findAll",productNumber);
   }
 
   @Override

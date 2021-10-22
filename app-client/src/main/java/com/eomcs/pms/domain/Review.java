@@ -11,8 +11,8 @@ public class Review implements Serializable {
   private String reviewProduct;     //리뷰상품
   private float score;              //평점
   private String comment;           //코멘트        
-  private String id;                //작성자    
-  private Date RegisteredDate;      //등록일
+  private Member member;                //작성자    
+  private Date registeredDate;      //등록일
   private boolean purchase;         //구매여부
 
 
@@ -46,17 +46,17 @@ public class Review implements Serializable {
   public void setComment(String comment) {
     this.comment = comment;
   }
-  public String getId() {
-    return id;
+  public Member getMember() {
+    return member;
   }
-  public void setId(String id) {
-    this.id = id;
+  public void setMember(Member member) {
+    this.member = member;
   }
   public Date getRegisteredDate() {
-    return RegisteredDate;
+    return registeredDate;
   }
   public void setRegisteredDate(Date registeredDate) {
-    RegisteredDate = registeredDate;
+    this.registeredDate = registeredDate;
   }
   public boolean isPurchase() {
     return purchase;

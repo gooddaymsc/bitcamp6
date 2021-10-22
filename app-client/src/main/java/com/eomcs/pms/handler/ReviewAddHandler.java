@@ -1,6 +1,5 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
@@ -32,13 +31,11 @@ public class ReviewAddHandler implements Command {
       float scores = ProductValidation.checkNum("맛은 어떠셨나요?(1점-5점):");
       review.setComment(Prompt.inputString("한줄평을 등록해주세요:"));
       review.setPurchase(productDao.findPurchased(product.getProductName())); 
-      review.setNo(product.getTotalReviewNumber());
       review.setScore(scores); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);
       review.setProductNo(product.getProductNumber());
       review.setReviewProduct(product.getProductName());
-      review.setRegisteredDate(new Date(System.currentTimeMillis()));
-      review.setId(ClientApp.getLoginUser().getId());
+      review.setMember(ClientApp.getLoginUser());
 
       productDao.insertReview(review);
 
