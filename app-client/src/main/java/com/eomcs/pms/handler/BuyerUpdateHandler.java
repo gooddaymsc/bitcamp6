@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BuyerDao;
@@ -8,8 +9,10 @@ import com.eomcs.util.Prompt;
 
 public class BuyerUpdateHandler implements Command {
   BuyerDao buyerDao;
-  public BuyerUpdateHandler (BuyerDao buyerDao) {
+  SqlSession sqlSession;
+  public BuyerUpdateHandler (BuyerDao buyerDao, SqlSession sqlSession) {
     this.buyerDao = buyerDao;
+    this.sqlSession = sqlSession;
   } 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -35,6 +38,7 @@ public class BuyerUpdateHandler implements Command {
         buyer.setAddress(address);
         buyer.getMember().setPhoneNumber(tel);
         buyerDao.update(buyer);
+        sqlSession.commit();
         System.out.println("개인정보를 변경하였습니다.\n");
         return;
       } 
@@ -52,6 +56,7 @@ public class BuyerUpdateHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         buyer.getMember().setLevel(level);
         buyerDao.update(buyer);
+        sqlSession.commit();
         System.out.println("회원정보를 변경했습니다.\n");
         return;
       }

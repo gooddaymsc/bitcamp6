@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Member;
@@ -8,8 +9,10 @@ import com.eomcs.util.Prompt;
 
 public class SellerAddHandler implements Command {
   SellerDao sellerDao;
-  public SellerAddHandler(SellerDao sellerDao) {
+  SqlSession sqlSession;
+  public SellerAddHandler(SellerDao sellerDao, SqlSession sqlSession) {
     this.sellerDao = sellerDao;
+    this.sqlSession = sqlSession;
   }  
 
   @Override
@@ -76,7 +79,8 @@ public class SellerAddHandler implements Command {
     //    stockPrompt.addStockListById(seller.getId());
 
     //    messagePrompt.addMessageListById(seller.getId());
-    sellerDao.insert(seller);
+    sellerDao.insert(seller.getMember());
+    sqlSession.commit();
 
     System.out.println("회원가입이 완료되었습니다.");
 

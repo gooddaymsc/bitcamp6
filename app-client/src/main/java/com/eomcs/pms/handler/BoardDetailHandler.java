@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
@@ -11,9 +12,11 @@ public class BoardDetailHandler implements Command {
 
   BoardDao boardDao;
   MemberDao memberDao;
-  public BoardDetailHandler(BoardDao boardDao, MemberDao memberDao) {
+  SqlSession sqlSession;
+  public BoardDetailHandler(BoardDao boardDao, MemberDao memberDao, SqlSession sqlSession) {
     this.boardDao = boardDao;
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -45,9 +48,13 @@ public class BoardDetailHandler implements Command {
       System.out.printf("조회수 : %d\n", board.getViews());
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
       System.out.printf("태그 : %s\n", board.getTag());
+
+      boardDao.updateCount(board.getBoardNumber());
+      sqlSession.commit();
+
       request.setAttribute("no", board.getBoardNumber());
       request.getRequestDispatcher("/comment/list").forward(request);
-      //
+
       System.out.println("\n< 좋아요(1) / 댓글등록(2) / 댓글수정(3) / 댓글삭제(4) >");
       if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
         System.out.println("로그인 후 가능합니다.\n");

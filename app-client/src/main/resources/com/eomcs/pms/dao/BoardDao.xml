@@ -36,6 +36,12 @@
 		order by b.board_no desc
   </select>
   
+  <update id="updateCount" parameterType="int">
+    update board set
+      views = views + 1
+    where board_no=#{no}
+  </update>
+  
   <insert id="insert" parameterType="board">
     insert
         into board(member_no,title,content)

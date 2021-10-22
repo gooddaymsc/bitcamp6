@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.SellerDao;
@@ -10,8 +11,10 @@ import com.eomcs.util.Prompt;
 
 public class SellerDeleteHandler implements Command {
   SellerDao sellerDao;
-  public SellerDeleteHandler(SellerDao sellerDao) {
+  SqlSession sqlSession;
+  public SellerDeleteHandler(SellerDao sellerDao, SqlSession sqlSession) {
     this.sellerDao = sellerDao;
+    this.sqlSession = sqlSession;
   } 
 
   @Override
@@ -25,6 +28,7 @@ public class SellerDeleteHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         Seller seller = sellerDao.findById(id);
         sellerDao.delete(seller);
+        sqlSession.commit();
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(nowLoginId);
         //        bookingPrompt.removeBookingListById(nowLoginId);
@@ -45,6 +49,7 @@ public class SellerDeleteHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         Seller seller = sellerDao.findById(id);
         sellerDao.delete(seller);
+        sqlSession.commit();
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(sellerId);
         //        bookingPrompt.removeBookingListById(sellerId);

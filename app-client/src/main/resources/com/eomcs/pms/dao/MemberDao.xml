@@ -20,7 +20,7 @@
     <result column="level" property="level"/>
   </resultMap>
   
-    <select id="findByIdAndPassword" resultMap="MemberMap" parameterType="map">
+    <select id="findByIdAndPassword" resultMap="MemberMap">
     select 
       member_no,
       id,

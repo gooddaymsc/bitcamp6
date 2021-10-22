@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BuyerDao;
@@ -8,8 +9,10 @@ import com.eomcs.util.Prompt;
 
 public class BuyerDeleteHandler implements Command {
   BuyerDao buyerDao;
-  public BuyerDeleteHandler (BuyerDao buyerDao) {
+  SqlSession sqlSession;
+  public BuyerDeleteHandler (BuyerDao buyerDao, SqlSession sqlSession) {
     this.buyerDao = buyerDao;
+    this.sqlSession = sqlSession;
   } 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -27,6 +30,7 @@ public class BuyerDeleteHandler implements Command {
         //        bookingPrompt.removeBookingListById(nowLoginId);
         //        messagePrompt.removeMessageListById(nowLoginId);
         buyerDao.delete(id);
+        sqlSession.commit();
         System.out.println("탈퇴가 완료되었습니다.\n");
         // 현재로그인 상태 초기화
         ClientApp.loginMember = new Member();
@@ -46,6 +50,7 @@ public class BuyerDeleteHandler implements Command {
         //        bookingPrompt.removeBookingListById(buyerId);
         //        messagePrompt.removeMessageListById(buyerId);
         buyerDao.delete(id);
+        sqlSession.commit();
         System.out.println("회원을 탈퇴시켰습니다.\n");
         return;
       }

@@ -51,7 +51,7 @@
     values(#{id}, password(#{password}), #{authority},#{name},#{nickname},#{email},#{birthday},#{photo},#{phoneNumber})
   </insert>
   
-  <insert id="insertSeller" parameterType="map">
+  <insert id="insertSeller" parameterType="seller">
     insert into seller(member_no, business_name,business_no ,business_address ,business_tel ,openingTime ,closingTime ) 
     values(#{memberNo},#{businessName},#{businessNumber},#{businessAddress},#{businessPlaceNumber},#{businessOpeningTime},#{businessClosingTime})
   </insert>

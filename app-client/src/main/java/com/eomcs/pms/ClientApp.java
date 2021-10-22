@@ -170,26 +170,26 @@ public class ClientApp {
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
     MessageDao messageDao = new NetMessageDao(requestAgent);
 
-    commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao));
+    commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao, sqlSession));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerDao));
-    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao));
-    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao));
+    commandMap.put("/buyer/update", new BuyerUpdateHandler(buyerDao, sqlSession));
+    commandMap.put("/buyer/delete", new BuyerDeleteHandler(buyerDao, sqlSession));
 
     commandMap.put("/login", new LoginHandler(memberDao));
 
-    commandMap.put("/seller/add",    new SellerAddHandler(sellerDao));
+    commandMap.put("/seller/add",    new SellerAddHandler(sellerDao, sqlSession));
     commandMap.put("/seller/list",   new SellerListHandler(sellerDao));
     commandMap.put("/seller/detail", new SellerDetailHandler(sellerDao));
-    commandMap.put("/seller/update", new SellerUpdateHandler(sellerDao));
-    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerDao));
+    commandMap.put("/seller/update", new SellerUpdateHandler(sellerDao, sqlSession));
+    commandMap.put("/seller/delete", new SellerDeleteHandler(sellerDao, sqlSession));
 
-    commandMap.put("/board/add",    new BoardAddHandler(boardDao));
+    commandMap.put("/board/add",    new BoardAddHandler(boardDao, sqlSession));
     commandMap.put("/board/list",   new BoardListHandler(boardDao));
-    commandMap.put("/board/detail",   new BoardDetailHandler(boardDao, memberDao));
+    commandMap.put("/board/detail",   new BoardDetailHandler(boardDao, memberDao, sqlSession));
     commandMap.put("/board/detail2",   new BoardFindDetailHandler(boardDao, memberDao));
-    commandMap.put("/board/update",   new BoardUpdateHandler(boardDao));
-    commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao));
+    commandMap.put("/board/update",   new BoardUpdateHandler(boardDao, sqlSession));
+    commandMap.put("/board/delete",   new BoardDeleteHandler(boardDao, sqlSession));
     commandMap.put("/board/search",   new BoardSearchHandler(boardDao));
     commandMap.put("/board/search2",   new BoardSearchHandler2(boardDao));
 

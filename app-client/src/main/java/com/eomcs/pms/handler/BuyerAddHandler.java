@@ -1,6 +1,6 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
@@ -9,9 +9,13 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
 public class BuyerAddHandler implements Command {
+
   BuyerDao buyerDao;
-  public BuyerAddHandler (BuyerDao buyerDao) {
+  SqlSession sqlSession;
+
+  public BuyerAddHandler (BuyerDao buyerDao, SqlSession sqlSession) {
     this.buyerDao = buyerDao;
+    this.sqlSession = sqlSession;
   } 
 
   @Override
@@ -64,13 +68,14 @@ public class BuyerAddHandler implements Command {
     buyer.setAddress(Prompt.inputString("주소: "));
     buyer.setDetailAddress(Prompt.inputString("상세주소: "));
     //    System.out.printf("이름 : %s\n", memberPrompt.findById(id).getName());
-    member.setRegisteredDate(new Date(System.currentTimeMillis()));
+    //    member.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    buyer.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
     //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
     //    memberList.add(buyer);
     buyer.setMember(member);
 
     buyerDao.insert(buyer);
+    sqlSession.commit();
     System.out.println("회원가입이 완료되었습니다.");
   }
 
