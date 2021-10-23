@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
@@ -7,9 +8,10 @@ import com.eomcs.util.Prompt;
 public class ProductAddHandler implements Command {
 
   ProductDao productDao;
-
-  public ProductAddHandler (ProductDao productDao) {
+  SqlSession sqlSession;
+  public ProductAddHandler (ProductDao productDao, SqlSession sqlSession) {
     this.productDao = productDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -39,7 +41,7 @@ public class ProductAddHandler implements Command {
     product.setWeight(ProductValidation.checkNum("바디감(1-5) : "));
 
     productDao.insert(product);
-
+    sqlSession.commit();
     System.out.println("상품을 등록하였습니다.\n");
 
   }  
