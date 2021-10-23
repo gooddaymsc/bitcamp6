@@ -11,7 +11,7 @@ public class Review implements Serializable {
   private String reviewProduct;     //리뷰상품
   private float score;              //평점
   private String comment;           //코멘트        
-  private Member member;                //작성자    
+  private Member member;            //작성자    
   private Date registeredDate;      //등록일
   private boolean purchase;         //구매여부
 

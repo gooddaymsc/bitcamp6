@@ -211,14 +211,14 @@ public class ClientApp {
 
     commandMap.put("/review/add",   new ReviewAddHandler(reviewDao, productDao, sqlSession));
     commandMap.put("/review/list",   new ReviewListHandler(reviewDao));
-    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao));
-    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, productDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao, sqlSession));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, sqlSession));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
     commandMap.put("/findBoard", new BoardFindHandler(boardDao));
     commandMap.put("/findComment", new CommentFindHandler(boardDao));
-    commandMap.put("/findReview",   new ReviewFindHandler(productDao));
+    commandMap.put("/findReview",   new ReviewFindHandler(reviewDao, productDao));
 
     commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
