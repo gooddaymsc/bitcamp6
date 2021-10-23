@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Stock;
@@ -8,9 +9,11 @@ import com.eomcs.util.Prompt;
 public class StockDeleteHandler implements Command {
 
   StockDao stockDao;
+  SqlSession sqlSession;
 
-  public StockDeleteHandler(StockDao stockDao) {
+  public StockDeleteHandler(StockDao stockDao, SqlSession sqlSession) {
     this.stockDao = stockDao;
+    this.sqlSession = sqlSession;
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -29,7 +32,8 @@ public class StockDeleteHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         Stock stock = stockDao.findByNameId(stockName, nowLoginId);
         System.out.println("상품을 삭제하였습니다.\n");
-        stockDao.delete(stock);
+        stockDao.delete(stock.getStockNumber());
+        sqlSession.commit();
         return;
       } else {
         System.out.println("삭제를 취소하였습니다.\n");

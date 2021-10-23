@@ -25,7 +25,6 @@ import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.MybatisStockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.domain.Member;
@@ -161,10 +160,10 @@ public class ClientApp {
     SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
     BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+    StockDao stockDao = sqlSession.getMapper(StockDao.class);
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
 
-    StockDao stockDao = new MybatisStockDao(sqlSession);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
@@ -219,11 +218,11 @@ public class ClientApp {
     commandMap.put("/findComment", new CommentFindHandler(boardDao));
     commandMap.put("/findReview",   new ReviewFindHandler(productDao));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao,sqlSession));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
     commandMap.put("/stock/detail", new StockDetailHandler(stockDao));
-    commandMap.put("/stock/update", new StockUpdateHandler(stockDao));
-    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockDao,sqlSession));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao,sqlSession));
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
     commandMap.put("/cart/list",   new CartListHandler(cartDao, sellerDao));
