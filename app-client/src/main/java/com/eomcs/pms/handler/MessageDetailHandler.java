@@ -1,9 +1,9 @@
 package com.eomcs.pms.handler;
 
+import java.util.Collection;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.domain.Message;
-import com.eomcs.pms.domain.MessageList;
 import com.eomcs.util.Prompt;
 
 public class MessageDetailHandler implements Command {
@@ -13,30 +13,31 @@ public class MessageDetailHandler implements Command {
     this.messageDao = messageDao;
   }
 
-  public static int messageNumber = 1;
   @Override
   public void execute(CommandRequest request) throws Exception {
-    String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[대화 상세보기]");
-
-    int No = Prompt.inputInt("대화방 번호 > ");
+    String nowLoginId = ClientApp.getLoginUser().getId();
+    String other = "";
     Loop : while(true) {
       boolean bool = false;
-      MessageList messageList = messageDao.findAll(nowLoginId);
-      for (Message message : messageList.getMessage()) {
-        if (message.getMessageNumber()==No) {
-          String[] str = message.getAllContent().split("/");
-          for (int i=0; i<str.length; i++) {
-            System.out.printf("%-20s\t%s\n",str[i], message.getRegistrationDate());
-          }
-          bool = true;
+      int no = (Integer) request.getAttribute("roomNo");
+      Collection<Message> messages = messageDao.findByNo(no);
+      for (Message message : messages) {
+        System.out.printf("ID : %s\tContent : %15s\tRecentDate : %s\n", 
+            message.getId(), message.getContent(), message.getRegistrationDate());
+        if (message.getId().equals(nowLoginId)) {
+          other = message.getTheOtherId();
+        } else {
+          other = message.getId();
         }
+        bool = true;
       }
       if (!bool) {
         System.out.println("해당 번호의 대화내용이 없습니다.\n");
         return;
       }
-      request.setAttribute("MessageNo", No);
+      request.setAttribute("otherId", other);
+      request.setAttribute("roomNo", no);
       System.out.println();
       while(true) {
         System.out.println("답장(U) / 삭제(D) / 이전(0)");

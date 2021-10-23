@@ -42,7 +42,7 @@ public class ReviewAddHandler implements Command {
       review.setReviewProduct(product.getProductName());
       review.setMember(ClientApp.getLoginUser());
 
-      reviewDao.insertReview(review);
+      reviewDao.insert(review);
       sqlSession.commit();
 
       System.out.println("상품평 등록을 완료하였습니다.\n");
