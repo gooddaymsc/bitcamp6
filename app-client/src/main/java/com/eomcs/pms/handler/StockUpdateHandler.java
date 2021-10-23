@@ -38,7 +38,7 @@ public class StockUpdateHandler implements Command {
         stock.setStocks(stocks);
         stock.setPrice(price);
         System.out.println("재고정보를 변경하였습니다.\n");
-        stockDao.update(stock.getStocks(), stock.getPrice(), stock.getStockNumber());
+        stockDao.update(stock);
         sqlSession.commit();
         return;
       } else {

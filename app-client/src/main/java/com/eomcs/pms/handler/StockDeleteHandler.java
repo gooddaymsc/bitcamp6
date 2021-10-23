@@ -32,7 +32,7 @@ public class StockDeleteHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         Stock stock = stockDao.findByNameId(stockName, nowLoginId);
         System.out.println("상품을 삭제하였습니다.\n");
-        stockDao.delete(stock.getStockNumber());
+        stockDao.delete(stock);
         sqlSession.commit();
         return;
       } else {

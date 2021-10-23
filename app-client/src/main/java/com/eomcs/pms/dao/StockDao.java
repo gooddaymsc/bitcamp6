@@ -11,6 +11,6 @@ public interface StockDao {
   List<StockList> findAll() throws Exception;
   Stock checkProduct(String name) throws Exception; 
   Stock findByNameId(@Param("name")String name, @Param("id")String id) throws Exception;
-  void update(@Param("stocks")int stocks,@Param("price")int price, @Param("no")int no) throws Exception;
-  void delete(@Param("no")int no) throws Exception;
+  void update(Stock stock) throws Exception;
+  void delete(Stock stock) throws Exception;
 }
