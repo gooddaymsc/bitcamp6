@@ -3,15 +3,18 @@ package com.eomcs.pms.handler;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ReviewDeleteHandler implements Command {
 
+  ReviewDao reviewDao;
   ProductDao productDao;
 
-  public ReviewDeleteHandler ( ProductDao productDao) {
+  public ReviewDeleteHandler (ReviewDao reviewDao, ProductDao productDao) {
+    this.reviewDao = reviewDao;
     this.productDao = productDao;
   }
 
@@ -35,7 +38,7 @@ public class ReviewDeleteHandler implements Command {
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      productDao.deleteReview(review);
+      reviewDao.deleteReview(review);
       System.out.println("리뷰 삭제 완료\n");
       return;
     }

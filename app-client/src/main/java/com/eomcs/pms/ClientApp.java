@@ -23,6 +23,7 @@ import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MybatisStockDao;
@@ -163,6 +164,7 @@ public class ClientApp {
     BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
+    ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
 
     StockDao stockDao = new MybatisStockDao(sqlSession);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
@@ -207,12 +209,10 @@ public class ClientApp {
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao,sqlSession));
 
 
-    commandMap.put("/review/add",   new ReviewAddHandler(productDao));
-    commandMap.put("/review/list",   new ReviewListHandler(productDao));
-    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao));
-
-    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao));
-    commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
+    commandMap.put("/review/add",   new ReviewAddHandler(reviewDao, productDao, sqlSession));
+    commandMap.put("/review/list",   new ReviewListHandler(reviewDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, productDao));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
