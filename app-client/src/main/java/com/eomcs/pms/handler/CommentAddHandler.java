@@ -1,17 +1,20 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
-import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
 public class CommentAddHandler implements Command {
-  BoardDao boardDao;
+  CommentDao commentDao;
   MemberDao memberDao;
-  public CommentAddHandler(BoardDao boardDao, MemberDao memberDao) {
-    this.boardDao = boardDao;
+  SqlSession sqlSession;
+  public CommentAddHandler(CommentDao commentDao, MemberDao memberDao, SqlSession sqlSession) {
+    this.commentDao = commentDao;
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
 
   }
 
@@ -26,7 +29,9 @@ public class CommentAddHandler implements Command {
     comment.setContent(Prompt.inputString("내용 : "));
     comment.setWriter(ClientApp.getLoginUser());
 
-    boardDao.insertComment(comment);
+    commentDao.insert(comment);
+    sqlSession.commit();
+
     //    memberDao.changeCommentUpdate(board.getWriter(), true);
     System.out.println("댓글 등록 완료\n");
   }

@@ -1,15 +1,18 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
-import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
 public class CommentDeleteHandler implements Command {
-  BoardDao boardDao;
-  public CommentDeleteHandler(BoardDao boardDao) {
-    this.boardDao = boardDao;
+  CommentDao commentDao;
+  SqlSession sqlSession;
+  public CommentDeleteHandler(CommentDao commentDao, SqlSession sqlSession) {
+    this.commentDao = commentDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -18,7 +21,7 @@ public class CommentDeleteHandler implements Command {
     System.out.println("[댓글 삭제]\n");
     int commentNo = Prompt.inputInt("삭제할 댓글 번호 : ");
 
-    Comment comment = boardDao.findCommentByNo(commentNo);
+    Comment comment = commentDao.findByNo(commentNo);
 
     if (comment == null) {
       System.out.println("해당 번호의 댓글 없습니다.\n");
@@ -33,7 +36,8 @@ public class CommentDeleteHandler implements Command {
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      boardDao.delete(comment);
+      commentDao.delete(comment);
+      sqlSession.commit();
       System.out.println("댓글 삭제 완료\n");
       return;
     }

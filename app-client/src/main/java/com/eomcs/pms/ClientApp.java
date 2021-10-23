@@ -20,6 +20,7 @@ import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
+import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
@@ -156,11 +157,11 @@ public class ClientApp {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
 
-
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
     BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+    CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
 
@@ -193,10 +194,10 @@ public class ClientApp {
 
 
     commandMap.put("/comment/like",   new LikeHandler(boardDao));
-    commandMap.put("/comment/add",   new CommentAddHandler(boardDao, memberDao));
-    commandMap.put("/comment/list",   new CommentListHandler(boardDao));
-    commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
-    commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));
+    commandMap.put("/comment/add",   new CommentAddHandler(commentDao, memberDao, sqlSession));
+    commandMap.put("/comment/list",   new CommentListHandler(commentDao));
+    commandMap.put("/comment/update",   new CommentUpdateHandler(commentDao, sqlSession));
+    commandMap.put("/comment/delete",   new CommentDeleteHandler(commentDao, sqlSession));
 
     commandMap.put("/product/add",   new ProductAddHandler(productDao,sqlSession));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
