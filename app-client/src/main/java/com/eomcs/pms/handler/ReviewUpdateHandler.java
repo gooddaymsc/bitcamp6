@@ -2,15 +2,18 @@ package com.eomcs.pms.handler;
 
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ReviewUpdateHandler implements Command {
 
+  ReviewDao reviewDao;
   ProductDao productDao;
 
-  public ReviewUpdateHandler (ProductDao productDao) {
+  public ReviewUpdateHandler (ReviewDao reviewDao, ProductDao productDao) {
+    this.reviewDao = reviewDao;
     this.productDao = productDao;
   }
 
@@ -31,7 +34,7 @@ public class ReviewUpdateHandler implements Command {
     review.setComment(content);
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
-      productDao.updateReview(review);
+      reviewDao.updateReview(review);
       System.out.println("리뷰 변경 완료\n");
       return;
     }

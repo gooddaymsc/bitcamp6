@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ReviewMapper">
+<mapper namespace="com.eomcs.pms.dao.ReviewDao">
+
     <resultMap type="Review" id="ReviewMap">
     <id column="review_no" property="no"/> 
     <result column="product_no" property="productNo"/>
@@ -38,7 +39,39 @@
       values(#{productNo},#{member.number},#{score},#{comment})
   </insert>
   
+  <select id="reviewIs" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+     review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     pro.product_no = #{productNo}
+   and
+     m.id = #{id};
+  
+
+  </select>
+  
+  
   <!-- 
+    @Override
+  public boolean reviewIs(int productNumber, String id) throws Exception {
+    //    Product product = findByNo(productNumber);
+    //
+    //    for (Review review : product.getReviewList()) {
+    //      if (review.getId().equals(id)) {
+    //        return false;
+    //      }
+    //    }
+    return true;
+  }
+  
+  
   <select id="findByNo" resultMap="BoardMap" parameterType="int">
        select
          b.board_no,
