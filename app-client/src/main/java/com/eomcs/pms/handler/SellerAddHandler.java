@@ -79,10 +79,14 @@ public class SellerAddHandler implements Command {
     //    stockPrompt.addStockListById(seller.getId());
 
     //    messagePrompt.addMessageListById(seller.getId());
-    sellerDao.insert(seller.getMember());
-    sellerDao.insertSeller();
-    sqlSession.commit();
 
+    try {
+      sellerDao.insert(seller.getMember());
+      sellerDao.insertSeller(seller);
+      sqlSession.commit();
+    } catch (Exception e) {    
+      sqlSession.rollback();
+    }
     System.out.println("회원가입이 완료되었습니다.");
 
   }

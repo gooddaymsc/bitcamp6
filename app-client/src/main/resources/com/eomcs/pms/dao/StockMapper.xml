@@ -52,11 +52,11 @@
       s.product_no asc
   </select>
   
-<!--   <insert id="insert" parameterType="stock">
+  <insert id="insert" parameterType="stock">
     insert 
       into stock(stock_no,member_no,product_no,amount,price) 
     values(#{stockNumber},#{(select member_no from member where id=member.id)},#{product.productNumber},#{stocks},#{price})
-  </insert> -->
+  </insert>
   
 <!--   <select id="checkProduct" resultMap="StockMap" parameterType="string">
     select
