@@ -237,11 +237,11 @@ public class ClientApp {
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingDao));
     commandMap.put("/booking/delete", new BookingDeleteHandler(bookingDao));
 
-    commandMap.put("/message/add",    new MessageAddHandler(messageDao, memberDao));
+    commandMap.put("/message/add",    new MessageAddHandler(messageDao, sqlSession, memberDao));
     commandMap.put("/message/update",    new MessageUpdateHandler(messageDao, sqlSession));
     commandMap.put("/message/list",   new MessageListHandler(messageDao));
     commandMap.put("/message/detail", new MessageDetailHandler(messageDao));
-    commandMap.put("/message/delete", new MessageDeleteHandler(messageDao));
+    commandMap.put("/message/delete", new MessageDeleteHandler(messageDao, sqlSession));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));

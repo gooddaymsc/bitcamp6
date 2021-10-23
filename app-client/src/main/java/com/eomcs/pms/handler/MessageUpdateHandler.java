@@ -20,7 +20,7 @@ public class MessageUpdateHandler implements Command {
     String nowLoginId = ClientApp.getLoginUser().getId();
     System.out.println("[답장]");
     String other = (String) request.getAttribute("otherId");
-    int no = (Integer) request.getAttribute("messageNo");
+    int no = (Integer) request.getAttribute("roomNo");
     Message message = new Message();
     message.setRoomNumber(no);
     message.setContent(Prompt.inputString("내용 : "));

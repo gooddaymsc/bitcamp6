@@ -34,13 +34,14 @@ public class MessageListHandler implements Command {
       if (messageList.getMessage().size() == 0) {
         System.out.println("받은 메세지가 없습니다.");
       }
-      String other = "";
-      if (messageList.getMessage().get(0).getId().equals(nowLoginId)) {
-        other = messageList.getMessage().get(0).getTheOtherId();
-      } else {
-        other = messageList.getMessage().get(0).getId();
-      }
+
       for (Message message : messageList.getMessage()) {
+        String other = "";
+        if (message.getId().equals(nowLoginId)) {
+          other = message.getTheOtherId();
+        } else {
+          other = message.getId();
+        }
         System.out.printf("No : %d\tID : %s\tContent : %s\tRecentDate : %s\n", 
             message.getRoomNumber(), other, message.getContent(), message.getRegistrationDate());
       }
@@ -48,6 +49,10 @@ public class MessageListHandler implements Command {
       while(true) {
         System.out.println("새 메세지(A) / 대화보기(R) / 이전(0)");
         String choose = Prompt.inputString("선택 > ");
+        if (choose.equalsIgnoreCase("r")) {
+          int no = Prompt.inputInt("대화방 번호 > ");
+          request.setAttribute("roomNo", no);
+        }
         System.out.println();
         switch (choose) {
           case "0" : return;
