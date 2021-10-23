@@ -18,9 +18,9 @@ public class MessageDetailHandler implements Command {
     System.out.println("[대화 상세보기]");
     String nowLoginId = ClientApp.getLoginUser().getId();
     String other = "";
-    int no = Prompt.inputInt("대화방 번호 > ");
     Loop : while(true) {
       boolean bool = false;
+      int no = (Integer) request.getAttribute("roomNo");
       Collection<Message> messages = messageDao.findByNo(no);
       for (Message message : messages) {
         System.out.printf("ID : %s\tContent : %15s\tRecentDate : %s\n", 
@@ -37,7 +37,7 @@ public class MessageDetailHandler implements Command {
         return;
       }
       request.setAttribute("otherId", other);
-      request.setAttribute("messageNo", no);
+      request.setAttribute("roomNo", no);
       System.out.println();
       while(true) {
         System.out.println("답장(U) / 삭제(D) / 이전(0)");
