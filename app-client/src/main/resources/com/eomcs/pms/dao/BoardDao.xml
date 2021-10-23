@@ -79,10 +79,38 @@
   <!-- 
   <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
   </select>
-
-  
    -->
   
+    
+  <resultMap type="Comment" id="CommentMap">
+    <id column="comment_no" property="commentNumber"/> 
+    <result column="content" property="content"/>
+    <result column="registeredDate" property="registrationDate"/>
+    <result column="board_no" property="boardNumber"/>
+    
+	    <association property="writer" javaType="member">    
+	      <id column="member_no" property="number"/>
+	      <result column="id" property="id"/>
+	    </association>
+  </resultMap>
+  
+  <select id="findAllComment" resultMap="CommentMap">
+    select
+      c.id,
+      c.content,
+      b.registeredDate,
+      c.comment_no
+    from  comment c join board b
+      on c.board_no=b.board_no
+    order by c.comment_no desc
+  </select>
+    
+  <select id="insertComment" parameterType="comment">
+    insert into 
+    comment(id, content, board_no, member_no) 
+    values(#{writer.id}, #{content},#{boardNumber}, #{writer.number})
+  </select>
+    
 </mapper>
 
 

@@ -13,10 +13,10 @@ public class CommentListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     int boardNo = (Integer) request.getAttribute("no");
-    Collection<Comment> commentList = boardDao.findAll(boardNo);
+    Collection<Comment> commentList = boardDao.findAllComment(boardNo);
 
     System.out.printf("\n%-3s\t%-6s\t%-15s\t%-6s\n",
-        "No.", "아이디", "내용", "등록일");
+        "번호", "아이디", "내용", "등록일");
     System.out.println("--------------------------------------------------------------");
     if (commentList == null) {
       System.out.println("등록된 댓글이 없습니다.");

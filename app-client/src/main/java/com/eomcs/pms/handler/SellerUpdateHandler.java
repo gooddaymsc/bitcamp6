@@ -50,8 +50,15 @@ public class SellerUpdateHandler implements Command {
         seller.setBusinessPlaceNumber(bussinessTel);  
         seller.setBusinessOpeningTime(BusinessOpeningTimes);
         seller.setBusinessClosingTime(BusinessClosingTimes);
-        sellerDao.update(seller);
-        sqlSession.commit();
+
+        try {
+          sellerDao.update(seller.getMember());
+          sellerDao.updateSeller(seller);
+          sqlSession.commit();
+        }   catch (Exception e) {
+          sqlSession.rollback();
+        }
+
         System.out.println("개인 정보를 변경하였습니다.\n");
         return;
       }
@@ -66,7 +73,7 @@ public class SellerUpdateHandler implements Command {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         seller.getMember().setLevel(level);
-        sellerDao.update(seller);
+        sellerDao.updateLevel(seller.getMember());
         sqlSession.commit();
         System.out.println("회원정보를 변경했습니다.\n");
         return;

@@ -26,7 +26,7 @@ public class CommentAddHandler implements Command {
     comment.setContent(Prompt.inputString("내용 : "));
     comment.setWriter(ClientApp.getLoginUser());
 
-    boardDao.insert(comment);
+    boardDao.insertComment(comment);
     //    memberDao.changeCommentUpdate(board.getWriter(), true);
     System.out.println("댓글 등록 완료\n");
   }

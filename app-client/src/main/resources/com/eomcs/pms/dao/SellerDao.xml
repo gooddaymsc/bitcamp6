@@ -81,6 +81,14 @@
       m.id=#{id}
   </select>
   
+  <update id="updateLevel" parameterType="member">
+  update member set
+    level=#{level}
+      where 
+      member_no=#{number}
+  </update>
+  
+  
   <update id="update" parameterType="member">
     update member set 
       nickname=#{nickname},

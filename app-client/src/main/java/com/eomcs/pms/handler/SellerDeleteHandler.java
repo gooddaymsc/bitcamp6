@@ -27,8 +27,14 @@ public class SellerDeleteHandler implements Command {
 
       if (input.equalsIgnoreCase("y")) {
         Seller seller = sellerDao.findById(id);
-        sellerDao.delete(seller);
-        sqlSession.commit();
+
+        try {
+          sellerDao.delete(seller.getMember().getNumber());
+          sellerDao.deleteSeller(seller.getMember().getNumber());
+          sqlSession.commit();
+        }   catch (Exception e) {
+          sqlSession.rollback();
+        }
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(nowLoginId);
         //        bookingPrompt.removeBookingListById(nowLoginId);
@@ -48,8 +54,13 @@ public class SellerDeleteHandler implements Command {
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
         Seller seller = sellerDao.findById(id);
-        sellerDao.delete(seller);
-        sqlSession.commit();
+        try {
+          sellerDao.delete(seller.getMember().getNumber());
+          sellerDao.deleteSeller(seller.getMember().getNumber());
+          sqlSession.commit();
+        }   catch (Exception e) {
+          sqlSession.rollback();
+        }
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(sellerId);
         //        bookingPrompt.removeBookingListById(sellerId);
