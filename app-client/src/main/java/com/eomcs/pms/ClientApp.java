@@ -24,9 +24,9 @@ import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.MybatisStockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.domain.Member;
@@ -162,10 +162,11 @@ public class ClientApp {
     BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
     CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
+    StockDao stockDao = sqlSession.getMapper(StockDao.class);
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
+    ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
 
-    StockDao stockDao = new MybatisStockDao(sqlSession);
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
@@ -207,24 +208,22 @@ public class ClientApp {
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao,sqlSession));
 
 
-    commandMap.put("/review/add",   new ReviewAddHandler(productDao));
-    commandMap.put("/review/list",   new ReviewListHandler(productDao));
-    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao));
-
-    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao));
-    commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
+    commandMap.put("/review/add",   new ReviewAddHandler(reviewDao, productDao, sqlSession));
+    commandMap.put("/review/list",   new ReviewListHandler(reviewDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao, sqlSession));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, sqlSession));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
     commandMap.put("/findBoard", new BoardFindHandler(boardDao));
     commandMap.put("/findComment", new CommentFindHandler(boardDao));
-    commandMap.put("/findReview",   new ReviewFindHandler(productDao));
+    commandMap.put("/findReview",   new ReviewFindHandler(reviewDao, productDao));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao,sqlSession));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
     commandMap.put("/stock/detail", new StockDetailHandler(stockDao));
-    commandMap.put("/stock/update", new StockUpdateHandler(stockDao));
-    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockDao,sqlSession));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao,sqlSession));
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
     commandMap.put("/cart/list",   new CartListHandler(cartDao, sellerDao));
@@ -238,11 +237,11 @@ public class ClientApp {
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingDao));
     commandMap.put("/booking/delete", new BookingDeleteHandler(bookingDao));
 
-    commandMap.put("/message/add",    new MessageAddHandler(messageDao, memberDao));
+    commandMap.put("/message/add",    new MessageAddHandler(messageDao, sqlSession, memberDao));
     commandMap.put("/message/update",    new MessageUpdateHandler(messageDao, sqlSession));
     commandMap.put("/message/list",   new MessageListHandler(messageDao));
     commandMap.put("/message/detail", new MessageDetailHandler(messageDao));
-    commandMap.put("/message/delete", new MessageDeleteHandler(messageDao));
+    commandMap.put("/message/delete", new MessageDeleteHandler(messageDao, sqlSession));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
     commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));

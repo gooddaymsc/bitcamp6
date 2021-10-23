@@ -1,5 +1,7 @@
 package com.eomcs.pms.handler;
 
+import java.util.Collection;
+import java.util.List;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Member;
@@ -25,7 +27,13 @@ public class StockListHandler implements Command {
       //      System.out.printf("> 전화번호\t:\t%s\n", ((Seller) mine).getBusinessPlaceNumber());
       //      System.out.println();
 
-      StockList stockList = stockDao.findAll(nowLoginId);
+      StockList stockList = new StockList();
+      Collection<Stock> list = stockDao.findAll(nowLoginId);
+
+      stockList.setId(nowLoginId);
+      stockList.setSellerStock((List<Stock>) list);
+
+
 
       if (stockList.getSellerStock().size() == 0) {
         System.out.println("아직 추가한 상품이 없습니다.\n");

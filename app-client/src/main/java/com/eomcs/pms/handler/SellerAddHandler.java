@@ -79,6 +79,7 @@ public class SellerAddHandler implements Command {
     //    stockPrompt.addStockListById(seller.getId());
 
     //    messagePrompt.addMessageListById(seller.getId());
+
     try {
       sellerDao.insert(seller.getMember());
       sellerDao.insertSeller(seller);

@@ -1,19 +1,18 @@
 package com.eomcs.pms.handler;
 
-import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ProductValidation {
 
-  public static Review findReviewById(Product product, String id) {
-    for (Review review : product.getReviewList()) {
-      if (review.getMember().getId().equals(id)) {
-        return review;
-      }
-    }
-    return null;
-  }
+  //  public static Review findReviewById(Product product, String id) {
+  //    for (Review review : product.getReviewList()) {
+  //      if (review.getMember().getId().equals(id)) {
+  //        return review;
+  //      }
+  //    }
+  //    return null;
+  //  }
 
   public static String purchaseStatus(Review re) {
     String statue;

@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ReviewMapper">
+<mapper namespace="com.eomcs.pms.dao.ReviewDao">
+
     <resultMap type="Review" id="ReviewMap">
     <id column="review_no" property="no"/> 
     <result column="product_no" property="productNo"/>
@@ -33,41 +34,57 @@
       pro.product_no = #{productNo}
   </select>
   
+  
   <insert id="insert" parameterType="review">
     insert into review(product_no, member_no, score, comment)
       values(#{productNo},#{member.number},#{score},#{comment})
   </insert>
   
-  <!-- 
-  <select id="findByNo" resultMap="BoardMap" parameterType="int">
-       select
-         b.board_no,
-         b.title,
-         b.content,
-         b.registeredDate,
-         b.views,
-         m.member_no, 
-         m.id, 
-         m.name,
-         m.email
-       from board b inner join member m 
-         on b.member_no=m.member_no
-        where board_no=#{no}
+  
+  <select id="reviewIs" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+     review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     pro.product_no = #{productNo}
+   and
+     m.id = #{id};
   </select>
   
-  <update id="update" parameterType="board">
-  update board set
-    title=#{title},
-    content=#{content}
-    where 
-    board_no=#{boardNumber}
+  <update id="update" parameterType="review">
+  update review set
+    score=#{score},
+    comment=#{comment}
+  where 
+    review_no=#{no} 
   </update>
   
+ 
+  <select id="myReview" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+     review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     m.id = #{id};
+  </select>
+  
   <delete id="delete" parameterType="int">
-    delete from board 
-    where board_no=#{no}
+    delete from review 
+    where review_no=#{no}
   </delete>
-  -->
+
 </mapper>
 
 
