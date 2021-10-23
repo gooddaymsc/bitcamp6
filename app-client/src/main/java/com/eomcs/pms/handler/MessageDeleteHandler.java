@@ -19,7 +19,7 @@ public class MessageDeleteHandler implements Command {
     String nowLoginId = ClientApp.getLoginUser().getId();
 
     System.out.println("[메세지 삭제]");
-    int No = (Integer) request.getAttribute("MessageNo");
+    int no = (Integer) request.getAttribute("messageNo");
 
     MessageList messageList = messageDao.findAll(nowLoginId);
 
