@@ -194,7 +194,7 @@ public class ClientApp {
     commandMap.put("/board/search2",   new BoardSearchHandler2(boardDao));
 
 
-    commandMap.put("/comment/like",   new LikeHandler(boardDao));
+    commandMap.put("/comment/like",   new LikeHandler(boardDao, sqlSession));
     commandMap.put("/comment/add",   new CommentAddHandler(commentDao, memberDao, sqlSession));
     commandMap.put("/comment/list",   new CommentListHandler(commentDao));
     commandMap.put("/comment/update",   new CommentUpdateHandler(commentDao, sqlSession));
