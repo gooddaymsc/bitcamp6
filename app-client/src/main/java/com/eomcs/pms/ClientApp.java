@@ -62,7 +62,6 @@ import com.eomcs.pms.handler.CommentFindHandler;
 import com.eomcs.pms.handler.CommentListHandler;
 import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
-import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MessageAddHandler;
@@ -93,6 +92,7 @@ import com.eomcs.pms.handler.StockDeleteHandler;
 import com.eomcs.pms.handler.StockDetailHandler;
 import com.eomcs.pms.handler.StockListHandler;
 import com.eomcs.pms.handler.StockUpdateHandler;
+import com.eomcs.pms.handler.UpdatePasswordHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -217,7 +217,7 @@ public class ClientApp {
     commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, sqlSession));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
-    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+    commandMap.put("/updatePassword",   new UpdatePasswordHandler(memberDao, sqlSession));
     commandMap.put("/findBoard", new BoardFindHandler(boardDao));
     commandMap.put("/findComment", new CommentFindHandler(boardDao));
     commandMap.put("/findReview",   new ReviewFindHandler(reviewDao, productDao));
@@ -246,8 +246,8 @@ public class ClientApp {
     commandMap.put("/message/detail", new MessageDetailHandler(messageDao));
     commandMap.put("/message/delete", new MessageDeleteHandler(messageDao, sqlSession));
 
-    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
-    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+    //    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
+    //    commandMap.put("/findPassword",   new UpdatePasswordHandler(memberDao, sqlSession));
 
     commandMap.put("/ranking/list",   new RankingHandler(productDao));
   }
@@ -329,7 +329,7 @@ public class ClientApp {
     mainMenuGroup.add(findMenu);
 
     findMenu.add(new MenuItem("아이디찾기", "/findId"));
-    findMenu.add(new MenuItem("비밀번호찾기", "/findPassword"));
+    findMenu.add(new MenuItem("비밀번호변경", "/updatePassword"));
 
     ////////////////////////////////////////////
 

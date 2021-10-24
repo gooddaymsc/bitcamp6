@@ -81,6 +81,14 @@
     where 
       name = #{name}
   </select>
+  
+  <update id="update" parameterType="member">
+    update member set 
+      password=password(#{password})
+    where 
+      member_no=#{number}
+  </update>
+  
 </mapper>
 
 
