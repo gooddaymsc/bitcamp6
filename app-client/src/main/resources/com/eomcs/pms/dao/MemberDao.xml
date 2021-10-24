@@ -59,6 +59,28 @@
       id = #{id}
   </select>
  
+  <select id="findByName" resultMap="MemberMap">
+    select 
+      member_no,
+      id,
+      authority,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      registeredDate,
+      active,
+      level,
+      zipcode,
+      address,
+      detail_address
+    from 
+      member 
+    where 
+      name = #{name}
+  </select>
 </mapper>
 
 
