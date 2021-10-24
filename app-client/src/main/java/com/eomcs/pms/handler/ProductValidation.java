@@ -115,8 +115,6 @@ public class ProductValidation {
     List<Seller> sellerList = sellerDao.findAll();
     for (Seller seller : sellerList) {
       String[] arr = address.split(" ");
-      System.out.println(seller.getMember().getId());
-      System.out.println(seller.getBusinessAddress());
       if((seller.getBusinessAddress().contains(arr[2])) && 
           (seller.getBusinessAddress().contains(arr[1]))) {
         hashMap.put(seller.getMember().getId(), seller);

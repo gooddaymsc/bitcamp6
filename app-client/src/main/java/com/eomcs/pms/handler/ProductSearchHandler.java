@@ -61,18 +61,17 @@ public class ProductSearchHandler implements Command {
       }
 
       while(true) {
-        //        try {
+        try {
+          String adress = Prompt.inputString("주소입력: ");
+          if(adress.equals("0")){
+            return; }
 
-        String adress = Prompt.inputString("주소입력: ");
-        if(adress.equals("0")){
-          return; }
+          map = productValidation.findByAdress(adress); 
+          break;
 
-        map = productValidation.findByAdress(adress); 
-        break;
-
-        //        } catch (Exception e) {
-        //          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
-        //        }
+        } catch (Exception e) {
+          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
+        }
 
       } if(map == null) {
         System.out.println("해당 위치에 판매처가 없습니다.\n");
@@ -83,7 +82,7 @@ public class ProductSearchHandler implements Command {
         for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
           System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "판매자", "주소", "연락처", "재고수량");
           System.out.println("--------------------------------------------------------------------------");
-          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n", 
+          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-12s\n", 
               entry.getValue().getBusinessName(),
               entry.getValue().getMember().getId(),
               entry.getValue().getBusinessAddress(),
@@ -93,7 +92,7 @@ public class ProductSearchHandler implements Command {
         }
       }
 
-      System.out.println("--------------------------------------------------------------------------");
+      System.out.println("--------------------------------------------------------------------------\n");
 
       request.setAttribute("productName", productName); 
       while(true) {
