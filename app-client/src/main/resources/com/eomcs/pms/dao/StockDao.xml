@@ -28,6 +28,7 @@
   
   <select id="findAll" resultMap="StockMap" parameterType="string">
     Select
+      p.product_no,
       s.stock_no,
       p.name,
       s.price,

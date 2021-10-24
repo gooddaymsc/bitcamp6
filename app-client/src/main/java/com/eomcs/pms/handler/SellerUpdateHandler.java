@@ -56,6 +56,7 @@ public class SellerUpdateHandler implements Command {
           sellerDao.updateSeller(seller);
           sqlSession.commit();
         }   catch (Exception e) {
+          System.out.println("개인 정보 변경에 실패했습니다.\n");
           sqlSession.rollback();
         }
 
