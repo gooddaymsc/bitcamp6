@@ -1,18 +1,22 @@
 package com.eomcs.pms.handler;
 
+import java.util.HashMap;
+import java.util.List;
+import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Review;
+import com.eomcs.pms.domain.Seller;
+import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class ProductValidation {
 
-  //  public static Review findReviewById(Product product, String id) {
-  //    for (Review review : product.getReviewList()) {
-  //      if (review.getMember().getId().equals(id)) {
-  //        return review;
-  //      }
-  //    }
-  //    return null;
-  //  }
+  SellerDao sellerDao;
+  StockDao stockDao;
+  public ProductValidation(SellerDao sellerDao, StockDao stockDao) {
+    this.sellerDao = sellerDao;
+    this.stockDao = stockDao;
+  }
 
   public static String purchaseStatus(Review re) {
     String statue;
@@ -106,4 +110,29 @@ public class ProductValidation {
       }
     }
   }  
+  public HashMap<String, Seller> findByAdress (String address) throws Exception {
+    HashMap<String, Seller> hashMap = new HashMap<>();
+    List<Seller> sellerList = sellerDao.findAll();
+    for (Seller seller : sellerList) {
+      String[] arr = address.split(" ");
+      System.out.println(seller.getMember().getId());
+      System.out.println(seller.getBusinessAddress());
+      if((seller.getBusinessAddress().contains(arr[2])) && 
+          (seller.getBusinessAddress().contains(arr[1]))) {
+        hashMap.put(seller.getMember().getId(), seller);
+        return hashMap;
+      } 
+    }
+    return null;
+  }
+
+  public Stock findStockById(String id, int productNumber) throws Exception{
+    List<Stock> stockList = stockDao.findAll(id);
+    for (Stock stock : stockList) {
+      if (stock.getProduct().getProductNumber() == productNumber) {
+        return stock;
+      }
+    }
+    return null;
+  }
 }

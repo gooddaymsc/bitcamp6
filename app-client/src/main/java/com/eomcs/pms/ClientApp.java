@@ -76,6 +76,7 @@ import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.ProductValidation;
 import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
@@ -170,6 +171,8 @@ public class ClientApp {
     CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
+    ProductValidation productValidation = new ProductValidation(sellerDao, stockDao);
+
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao, sqlSession));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
     commandMap.put("/buyer/detail", new BuyerDetailHandler(buyerDao));
@@ -202,7 +205,7 @@ public class ClientApp {
 
     commandMap.put("/product/add",   new ProductAddHandler(productDao,sqlSession));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
-    commandMap.put("/product/search", new ProductSearchHandler(productDao));
+    commandMap.put("/product/search", new ProductSearchHandler(productDao, productValidation));
     commandMap.put("/product/detail", new ProductDetailHandler(productDao));
     commandMap.put("/product/update", new ProductUpdateHandler(productDao,sqlSession));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao,sqlSession));

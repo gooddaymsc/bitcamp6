@@ -12,13 +12,14 @@ import com.eomcs.util.Prompt;
 public class ProductSearchHandler implements Command {
 
   ProductDao productDao;
-  public ProductSearchHandler(ProductDao productDao) {
+  ProductValidation productValidation;
+  public ProductSearchHandler(ProductDao productDao, ProductValidation productValidation) {
     this.productDao = productDao;
+    this.productValidation = productValidation;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    //String nowLoginId = App.getLoginUser().getId();
     HashMap<String, Seller> map = new HashMap<>();
 
     System.out.println("[상품검색]");
@@ -41,9 +42,11 @@ public class ProductSearchHandler implements Command {
         if(p.getProductNumber() == product.getProductNumber()) {
           System.out.printf("상품번호: %d \n", size++);
           System.out.printf("상품명: %s\n", product.getProductName());
-          System.out.printf("주종: %s\n", product.getProductType());
+          System.out.printf("주종: %s - %s\n", product.getProductType().getType(), product.getProductType().getSubType());
           System.out.printf("원산지: %s\n", product.getCountryOrigin());
-          System.out.printf("품종: %s\n", product.getVariety());
+          if(product.getProductType().getType().equals("와인")) {
+            System.out.printf("품종: %s\n", product.getVariety());        
+          }
           System.out.printf("알콜도수: %.2f\n", product.getAlcoholLevel()); 
           System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugarLevel(),product.getAcidity(),product.getWeight());
           System.out.println("-----------------------------------------");
@@ -52,26 +55,24 @@ public class ProductSearchHandler implements Command {
 
       System.out.println("[재고 찾기]");
 
-      //List<Seller> searchList = new ArrayList<>();
-
       if(ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_LOGOUT) {
         System.out.println("로그인 후 이용가능합니다.\n");
         return;
       }
 
       while(true) {
-        try {
+        //        try {
 
-          String adress = Prompt.inputString("주소입력: ");
-          if(adress.equals("0")){
-            return; }
+        String adress = Prompt.inputString("주소입력: ");
+        if(adress.equals("0")){
+          return; }
 
-          map = productDao.findByAdress(adress); 
-          break;
+        map = productValidation.findByAdress(adress); 
+        break;
 
-        } catch (Exception e) {
-          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
-        }
+        //        } catch (Exception e) {
+        //          System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
+        //        }
 
       } if(map == null) {
         System.out.println("해당 위치에 판매처가 없습니다.\n");
@@ -87,7 +88,7 @@ public class ProductSearchHandler implements Command {
               entry.getValue().getMember().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
-              productDao.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
+              productValidation.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
           request.setAttribute("storeName",entry.getValue().getBusinessName());
         }
       }
