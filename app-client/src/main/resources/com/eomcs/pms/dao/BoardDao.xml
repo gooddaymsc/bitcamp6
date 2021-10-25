@@ -11,7 +11,7 @@
     <result column="content" property="content"/>
     <result column="registeredDate" property="registrationDate"/>
     <result column="views" property="views"/>
-    
+
   <association property="writer" javaType="member">    
     <id column="member_no" property="number"/>
     <result column="id" property="id"/>
@@ -20,6 +20,10 @@
   </association>
   </resultMap>
   
+  <resultMap type="LikeMember" id="LikeMap">
+    <id column="member_no" property="number"/>
+    <result column="registeredDate" property="registeredDate"/>
+    </resultMap>
   
   <select id="findAll" resultMap="BoardMap">
 		select
@@ -45,7 +49,7 @@
   <insert id="insert" parameterType="board">
     insert
         into board(member_no,title,content)
-      values(#{writer.number},#{title}, #{content})
+      values (#{title}, #{content})
   </insert>
   
   <select id="findByNo" resultMap="BoardMap" parameterType="int">
@@ -65,24 +69,46 @@
   </select>
   
   <update id="update" parameterType="board">
-  update board set
-    title=#{title},
-    content=#{content}
+    update board set
+      title=#{title},
+      content=#{content},
     where 
-    board_no=#{boardNumber}
+      board_no=#{boardNumber}
   </update>
   
+  <select id="findLikeList" resultMap="LikeMap" parameterType="int">
+    select 
+      member_no,
+      registeredDate
+    from 
+      board_like 
+    where 
+      board_no=#{no}     
+  </select>
+     
   <delete id="delete" parameterType="int">
     delete from board 
     where board_no=#{no}
   </delete>
+  
+  <insert id="likeInsert" parameterType="map">
+    insert into board_like(member_no,board_no) 
+    values(#{memberNo},#{boardNo});
+  </insert>
+  
+  <delete id="likeDelete" parameterType="map">
+    delete from board_like 
+    where 
+      member_no=#{memberNo} and board_no=#{boardNo};
+  </delete>
+  
+  
   <!-- 
   <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
   </select>
-
-  
    -->
   
+   
 </mapper>
 
 

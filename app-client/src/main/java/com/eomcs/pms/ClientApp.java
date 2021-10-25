@@ -20,12 +20,13 @@ import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
+import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.MybatisStockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
@@ -60,7 +61,6 @@ import com.eomcs.pms.handler.CommentFindHandler;
 import com.eomcs.pms.handler.CommentListHandler;
 import com.eomcs.pms.handler.CommentUpdateHandler;
 import com.eomcs.pms.handler.FindIdHandler;
-import com.eomcs.pms.handler.FindPasswordHandler;
 import com.eomcs.pms.handler.LikeHandler;
 import com.eomcs.pms.handler.LoginHandler;
 import com.eomcs.pms.handler.MessageAddHandler;
@@ -74,6 +74,7 @@ import com.eomcs.pms.handler.ProductDetailHandler;
 import com.eomcs.pms.handler.ProductListHandler;
 import com.eomcs.pms.handler.ProductSearchHandler;
 import com.eomcs.pms.handler.ProductUpdateHandler;
+import com.eomcs.pms.handler.ProductValidation;
 import com.eomcs.pms.handler.RankingHandler;
 import com.eomcs.pms.handler.ReviewAddHandler;
 import com.eomcs.pms.handler.ReviewDeleteHandler;
@@ -90,6 +91,7 @@ import com.eomcs.pms.handler.StockDeleteHandler;
 import com.eomcs.pms.handler.StockDetailHandler;
 import com.eomcs.pms.handler.StockListHandler;
 import com.eomcs.pms.handler.StockUpdateHandler;
+import com.eomcs.pms.handler.UpdatePasswordHandler;
 import com.eomcs.pms.lisner.AppInitListener;
 import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
@@ -155,17 +157,20 @@ public class ClientApp {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
 
-
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
     BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+    CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
+    StockDao stockDao = sqlSession.getMapper(StockDao.class);
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
+    ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
     CartDao cartDao = sqlSession.getMapper(CartDao.class);
 
-    StockDao stockDao = new MybatisStockDao(sqlSession);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
+
+    ProductValidation productValidation = new ProductValidation(sellerDao, stockDao);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao, sqlSession));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -191,38 +196,36 @@ public class ClientApp {
     commandMap.put("/board/search2",   new BoardSearchHandler2(boardDao));
 
 
-    commandMap.put("/comment/like",   new LikeHandler(boardDao));
-    commandMap.put("/comment/add",   new CommentAddHandler(boardDao, memberDao));
-    commandMap.put("/comment/list",   new CommentListHandler(boardDao));
-    commandMap.put("/comment/update",   new CommentUpdateHandler(boardDao));
-    commandMap.put("/comment/delete",   new CommentDeleteHandler(boardDao));
+    commandMap.put("/comment/like",   new LikeHandler(boardDao, sqlSession));
+    commandMap.put("/comment/add",   new CommentAddHandler(commentDao, memberDao, sqlSession));
+    commandMap.put("/comment/list",   new CommentListHandler(commentDao));
+    commandMap.put("/comment/update",   new CommentUpdateHandler(commentDao, sqlSession));
+    commandMap.put("/comment/delete",   new CommentDeleteHandler(commentDao, sqlSession));
 
     commandMap.put("/product/add",   new ProductAddHandler(productDao,sqlSession));
     commandMap.put("/product/list",   new ProductListHandler(productDao));
-    commandMap.put("/product/search", new ProductSearchHandler(productDao));
+    commandMap.put("/product/search", new ProductSearchHandler(productDao, productValidation));
     commandMap.put("/product/detail", new ProductDetailHandler(productDao));
     commandMap.put("/product/update", new ProductUpdateHandler(productDao,sqlSession));
     commandMap.put("/product/delete",   new ProductDeleteHandler(productDao,sqlSession));
 
 
-    commandMap.put("/review/add",   new ReviewAddHandler(productDao));
-    commandMap.put("/review/list",   new ReviewListHandler(productDao));
-    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao));
-
-    commandMap.put("/review/update",   new ReviewUpdateHandler(productDao));
-    commandMap.put("/review/delete",   new ReviewDeleteHandler(productDao));
+    commandMap.put("/review/add",   new ReviewAddHandler(reviewDao, productDao, sqlSession));
+    commandMap.put("/review/list",   new ReviewListHandler(reviewDao));
+    commandMap.put("/review/update",   new ReviewUpdateHandler(reviewDao, productDao, sqlSession));
+    commandMap.put("/review/delete",   new ReviewDeleteHandler(reviewDao, sqlSession));
 
     commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
-    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+    commandMap.put("/updatePassword",   new UpdatePasswordHandler(memberDao, sqlSession));
     commandMap.put("/findBoard", new BoardFindHandler(boardDao));
     commandMap.put("/findComment", new CommentFindHandler(boardDao));
-    commandMap.put("/findReview",   new ReviewFindHandler(productDao));
+    commandMap.put("/findReview",   new ReviewFindHandler(reviewDao, productDao));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao,sqlSession));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
     commandMap.put("/stock/detail", new StockDetailHandler(stockDao));
-    commandMap.put("/stock/update", new StockUpdateHandler(stockDao));
-    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao));
+    commandMap.put("/stock/update", new StockUpdateHandler(stockDao,sqlSession));
+    commandMap.put("/stock/delete", new StockDeleteHandler(stockDao,sqlSession));
 
     commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
     commandMap.put("/cart/list",   new CartListHandler(cartDao, sellerDao));
@@ -242,8 +245,8 @@ public class ClientApp {
     commandMap.put("/message/detail", new MessageDetailHandler(messageDao));
     commandMap.put("/message/delete", new MessageDeleteHandler(messageDao, sqlSession));
 
-    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
-    commandMap.put("/findPassword",   new FindPasswordHandler(memberDao));
+    //    commandMap.put("/findId"  ,  new FindIdHandler(memberDao));
+    //    commandMap.put("/findPassword",   new UpdatePasswordHandler(memberDao, sqlSession));
 
     commandMap.put("/ranking/list",   new RankingHandler(productDao));
   }
@@ -325,7 +328,7 @@ public class ClientApp {
     mainMenuGroup.add(findMenu);
 
     findMenu.add(new MenuItem("아이디찾기", "/findId"));
-    findMenu.add(new MenuItem("비밀번호찾기", "/findPassword"));
+    findMenu.add(new MenuItem("비밀번호변경", "/updatePassword"));
 
     ////////////////////////////////////////////
 

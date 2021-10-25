@@ -9,9 +9,7 @@ public class Product implements Serializable{
   private List<Review> reviewList = new ArrayList<>();
   private int productNumber;        //상품번
   private String productName;       //상품명
-  private int typeNumber;
-  //  private String productType;       //주종
-  //  private String productSubType;    //세부주종    
+  private int typeNumber;   
   private String countryOrigin;     //원산지
   private String variety;           //품종
   private int volume;               //용량 
@@ -42,19 +40,6 @@ public class Product implements Serializable{
   public void setTypeNumber(int typeNumber) {
     this.typeNumber = typeNumber;
   }
-  //  public String getProductType() {
-  //    return productType;
-  //  }
-  //  public void setProductType(String productType) {
-  //    //조건문
-  //    this.productType = productType;
-  //  }
-  //  public String getProductSubType() {
-  //    return productSubType;
-  //  }
-  //  public void setProductSubType(String productSubType) {
-  //    this.productSubType = productSubType;
-  //  }
   public String getCountryOrigin() {
     return countryOrigin;
   }

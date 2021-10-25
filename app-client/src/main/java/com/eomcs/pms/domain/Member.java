@@ -127,6 +127,4 @@ public class Member implements Serializable {
   public void setActive(int active) {
     this.active = active;
   }
-
-
 }

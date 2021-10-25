@@ -21,22 +21,13 @@ public class LoginHandler implements Command {
     String id = Prompt.inputString("아이디를 입력해주세요: ");
     String password = Prompt.inputString("비밀번호를 입력해주세요: ");
 
-    //    if(id.equals("admin") && password.equals("0000")) {
-    //      Member admin = new Member();
-    //      admin.setId("admin");
-    //      admin.setPassword("0000");
-    //      admin.setAuthority(Menu.ACCESS_ADMIN);
-    //      ClientApp.loginMember = admin;
-    //      return;
-    //    }
-
     Member member = memberDao.findByIdAndPassword(id, password);
 
     if (member != null) {
       System.out.printf("%s님 환영합니다!\n", member.getId());
       ClientApp.loginMember = member;
     } else {
-      System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+      System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
     }
   }
 }

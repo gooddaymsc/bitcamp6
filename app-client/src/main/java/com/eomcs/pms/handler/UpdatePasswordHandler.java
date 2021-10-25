@@ -1,14 +1,18 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.util.Prompt;
 
-public class FindPasswordHandler implements Command {
+public class UpdatePasswordHandler implements Command {
 
   MemberDao memberDao;
-  public FindPasswordHandler(MemberDao memberDao) {
+  SqlSession sqlSession;
+
+  public UpdatePasswordHandler(MemberDao memberDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -33,7 +37,11 @@ public class FindPasswordHandler implements Command {
       String phoneOrEmail = Prompt.inputString("전화번호 또는 이메일을 입력하세요: ");
 
       if (member.getPhoneNumber().equals(phoneOrEmail) || (member.getEmail().equals(phoneOrEmail))) {
-        System.out.printf("회원의 비밀번호는 %s 입니다.\n", member.getPassword());
+        String password = Prompt.inputString(String.format("변경할 비밀번호를 입력해주세요 :"));
+        member.setPassword(password);
+        memberDao.update(member);
+        sqlSession.commit();
+        System.out.println("비밀번호 변경이 완료되었습니다.");
         return;
       } else {
         System.out.println("입력하신 전화번호 또는 이메일에 해당하는 회원이 없습니다.\n");

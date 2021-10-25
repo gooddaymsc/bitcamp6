@@ -14,8 +14,14 @@
    <association property="stock" javaType="Stock">
     <id column="stock_no" property="stockNumber"/>
     <result column="sellerId" property="id"/> <!-- 판매자 id -->
-    
+    <result column="amount" property="stocks"/>
+    <result column="price" property="price"/>
     <!-- stock 안에 product 객체정보를 넣어야한다면? -->
+    
+    <association property="product" javaType="Product">
+      <id column="product_no" property="productNumber"/>
+      <result column="name" property="productName"/> 
+    </association>
   </association> 
 
   </resultMap>
@@ -23,12 +29,14 @@
   <select id="findAll" resultMap="CartMap">
     select 
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount, c.registeredDate, 
-      s.stock_no, s.member_no sellerNo, 
+      s.stock_no, s.member_no sellerNo, s.price,
+      p.product_no, p.name,
       m1.id as buyerId, 
       m2.id as sellerId 
     from 
       cart c join stock s on c.stock_no=s.stock_no 
       join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
       join member m2 on m2.member_no=s.member_no 
     where 
       m1.id=#{id}
