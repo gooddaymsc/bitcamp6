@@ -21,18 +21,19 @@ public class LikeHandler implements Command {
     Board board = boardDao.findByNo((Integer) request.getAttribute("no"));
     String nowLoginId = ClientApp.getLoginUser().getId();
     Board board2 = new Board();
+
     board2.setRegistrationDate(new Date(System.currentTimeMillis()));
-    if (board.getLikeMember() == ClientApp.getLoginUser().getNumber()) {
+    if (board.getLikeMember().contains(ClientApp.getLoginUser())) {
       System.out.println("좋아요를 취소합니다.\n");
       boardDao.likeDelete(nowLoginId, board.getBoardNumber());
-      board.setLikeMember(0);
+      board.getLikeMember().remove(ClientApp.getLoginUser());
       board.setLikes(board.getLikes() - 1);
       boardDao.update2(board);
       sqlSession.commit();
     } else {
       System.out.println("좋아요를 눌렀습니다.\n");
       boardDao.like(nowLoginId, board.getBoardNumber(), board2.getRegistrationDate());
-      board.setLikeMember(ClientApp.getLoginUser().getNumber());
+      board.getLikeMember().add(ClientApp.getLoginUser());
       board.setLikes(board.getLikes() + 1);
       boardDao.update2(board);
       sqlSession.commit();

@@ -77,7 +77,7 @@
   
     <update id="update2" parameterType="board">
     update board set
-      likeMember=#{likeMember},
+      likeMember=#{writer.number},
       likes=#{likes}
     where 
       board_no=#{boardNumber}
