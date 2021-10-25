@@ -11,9 +11,7 @@
     <result column="content" property="content"/>
     <result column="registeredDate" property="registrationDate"/>
     <result column="views" property="views"/>
-    <result column="likeMember" property="likeMember"/>
-    <result column="likes" property="likes"/>
-    
+
   <association property="writer" javaType="member">    
     <id column="member_no" property="number"/>
     <result column="id" property="id"/>
@@ -22,6 +20,10 @@
   </association>
   </resultMap>
   
+  <resultMap type="LikeMember" id="LikeMap">
+    <id column="member_no" property="number"/>
+    <result column="registeredDate" property="registeredDate"/>
+    </resultMap>
   
   <select id="findAll" resultMap="BoardMap">
 		select
@@ -57,7 +59,6 @@
          b.content,
          b.registeredDate,
          b.views,
-         b.likeMember,
          m.member_no, 
          m.id, 
          m.name,
@@ -75,29 +76,37 @@
       board_no=#{boardNumber}
   </update>
   
+<<<<<<< HEAD
     <update id="update2" parameterType="board">
     update board set
       likeMember=#{writer.number},
       likes=#{likes}
+=======
+  <select id="findLikeList" resultMap="LikeMap" parameterType="int">
+    select 
+      member_no,
+      registeredDate
+    from 
+      board_like 
+>>>>>>> b654afe235757ba8d3900c248f7467defac0bc1c
     where 
-      board_no=#{boardNumber}
-  </update>
+      board_no=#{no}     
+  </select>
      
   <delete id="delete" parameterType="int">
     delete from board 
     where board_no=#{no}
   </delete>
   
-  <insert id="like" parameterType="map">
-    insert into board_like(member_no, board_no, registeredDate) 
-    values((select member_no from member where id=#{likeId}),#{boardNo},#{registrationDate})
+  <insert id="likeInsert" parameterType="map">
+    insert into board_like(member_no,board_no) 
+    values(#{memberNo},#{boardNo});
   </insert>
   
   <delete id="likeDelete" parameterType="map">
-    delete from board_like
+    delete from board_like 
     where 
-      member_no=(select member_no from member where id=#{likeId})
-      and board_no=#{boardNo}
+      member_no=#{memberNo} and board_no=#{boardNo};
   </delete>
   
   

@@ -28,7 +28,6 @@ import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
-import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
@@ -167,8 +166,8 @@ public class ClientApp {
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
     ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
+    CartDao cartDao = sqlSession.getMapper(CartDao.class);
 
-    CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
     ProductValidation productValidation = new ProductValidation(sellerDao, stockDao);

@@ -1,10 +1,12 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.LikeMember;
 
 public class LikeHandler implements Command {
 
@@ -17,27 +19,31 @@ public class LikeHandler implements Command {
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
+    int boardNo = (Integer) request.getAttribute("no");
+    Board board = boardDao.findByNo(boardNo);
+    int nowLoginNo = ClientApp.getLoginUser().getNumber();
+    Collection<LikeMember> likeList = boardDao.findLikeList(boardNo);
+    board.setLikeMember((List<LikeMember>) likeList);
+    board.setLikes(likeList.size());
+    int i=0;
+    for (LikeMember lk : likeList) {
+      if (lk.getNumber()==nowLoginNo) {
+        System.out.println("좋아요를 취소합니다.\n");
+        boardDao.likeDelete(nowLoginNo, boardNo);
+        board.getLikeMember().remove(i);
+        board.setLikes(board.getLikes() - 1);
+        sqlSession.commit();
+        return;
+      }
+      i++;
+    }
+    System.out.println("좋아요를 눌렀습니다.\n");
 
-    Board board = boardDao.findByNo((Integer) request.getAttribute("no"));
-    String nowLoginId = ClientApp.getLoginUser().getId();
-    Board board2 = new Board();
-
-    board2.setRegistrationDate(new Date(System.currentTimeMillis()));
-    if (board.getLikeMember().contains(ClientApp.getLoginUser())) {
-      System.out.println("좋아요를 취소합니다.\n");
-      boardDao.likeDelete(nowLoginId, board.getBoardNumber());
-      board.getLikeMember().remove(ClientApp.getLoginUser());
-      board.setLikes(board.getLikes() - 1);
-      boardDao.update2(board);
-      sqlSession.commit();
-    } else {
-      System.out.println("좋아요를 눌렀습니다.\n");
-      boardDao.like(nowLoginId, board.getBoardNumber(), board2.getRegistrationDate());
-      board.getLikeMember().add(ClientApp.getLoginUser());
-      board.setLikes(board.getLikes() + 1);
-      boardDao.update2(board);
-      sqlSession.commit();
-    }    
-    return;
+    boardDao.likeInsert(nowLoginNo, boardNo);
+    LikeMember lm = new LikeMember();
+    lm.setNumber(nowLoginNo);
+    board.getLikeMember().add(lm);
+    board.setLikes(board.getLikes() + 1);
+    sqlSession.commit();
   }
 }
