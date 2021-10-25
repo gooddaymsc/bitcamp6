@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Stock;
@@ -8,9 +9,11 @@ import com.eomcs.util.Prompt;
 public class StockUpdateHandler implements Command {
 
   StockDao stockDao;
+  SqlSession sqlSession;
 
-  public StockUpdateHandler(StockDao stockDao) {
+  public StockUpdateHandler(StockDao stockDao, SqlSession sqlSession) {
     this.stockDao = stockDao;
+    this.sqlSession = sqlSession;
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -36,6 +39,7 @@ public class StockUpdateHandler implements Command {
         stock.setPrice(price);
         System.out.println("재고정보를 변경하였습니다.\n");
         stockDao.update(stock);
+        sqlSession.commit();
         return;
       } else {
         System.out.println("재고 변경을 취소하였습니다.\n");

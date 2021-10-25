@@ -52,7 +52,7 @@ public class RankingHandler implements Command {
         for(Product product : productList)
         {
           if(entry.getKey().equals(product.getProductName())){ 
-            System.out.printf("- 주종 : %s\n", product.getProductType());
+            System.out.printf("- 주종 : %s\n", product.getProductType().getType());
             System.out.printf("- 원산지 : %s\n", product.getCountryOrigin());
             System.out.printf("- 알콜도수 : %.2f\n", product.getAlcoholLevel());
             System.out.println("-----------------------------------------------");

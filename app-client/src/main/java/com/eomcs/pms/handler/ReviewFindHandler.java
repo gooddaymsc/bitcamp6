@@ -4,15 +4,18 @@ import java.util.Collection;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.util.Prompt;
 
 public class ReviewFindHandler implements Command {
 
+  ReviewDao reviewDao;
   ProductDao productDao;
 
-  public ReviewFindHandler  ( ProductDao productDao) {
+  public ReviewFindHandler  ( ReviewDao reviewDao, ProductDao productDao) {
+    this.reviewDao = reviewDao;
     this.productDao = productDao;
   }
 
@@ -20,24 +23,21 @@ public class ReviewFindHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[내가 남긴 리뷰 목록]\n");
-    System.out.printf(" %-5s\t%-4s\t%-8s\t%-6s\n",
-        "상품명","평점","한줄평","등록일");
+    System.out.printf(" %-5s\t%-4s\t%-4s\t%-8s\t%-6s\n",
+        "NO", "상품명", "평점","한줄평","등록일");
     System.out.println("---------------------------------------------------------------");
 
-    Collection<Product> productList = productDao.findAll();
+    Collection<Review> reviewList = reviewDao.myReview(ClientApp.getLoginUser().getId());
 
-    for(Product product : productList) {
-      for (Review review : product.getReviewList()) {
-        if(review.getId().equals(ClientApp.getLoginUser().getId()))
+    for (Review review : reviewList) {
+      System.out.printf("%-5d\t%-5s\t%-4s\t%-8s\t%-6s\n", 
+          review.getNo(),
+          productDao.findByNo(review.getProductNo()).getProductName(),
+          review.getScore(),
+          review.getComment(),
+          review.getRegisteredDate());
+    }    
 
-          System.out.printf("%-5d\t%-5s\t%-4s\t%-8s\t%-6s\n", 
-              review.getNo(),
-              product.getProductName(),
-              review.getScore(),
-              review.getComment(),
-              review.getRegisteredDate());
-      }    
-    }
 
     if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
       System.out.println();

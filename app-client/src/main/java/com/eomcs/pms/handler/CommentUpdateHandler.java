@@ -1,21 +1,24 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
-import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 import com.eomcs.util.Prompt;
 
 public class CommentUpdateHandler implements Command {
-  BoardDao boardDao;
-  public CommentUpdateHandler(BoardDao boardDao) {
-    this.boardDao = boardDao;
+  CommentDao commentDao;
+  SqlSession sqlSession;
+  public CommentUpdateHandler(CommentDao commentDao, SqlSession sqlSession) {
+    this.commentDao = commentDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     int commentNo = Prompt.inputInt("변경할 댓글 번호 : ");
 
-    Comment comment = boardDao.findCommentByNo(commentNo);
+    Comment comment = commentDao.findByNo(commentNo);
 
     if (comment == null) {
       System.out.println("해당 번호의 댓글이 없습니다.\n");
@@ -32,7 +35,8 @@ public class CommentUpdateHandler implements Command {
     if (input.equalsIgnoreCase("y")) {
 
       comment.setContent(content);
-      boardDao.update(comment);
+      commentDao.update(comment);
+      sqlSession.commit();
 
       System.out.println("댓글 변경 완료\n");
       return;

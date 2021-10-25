@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="StockMapper">
+<mapper namespace="com.eomcs.pms.dao.StockDao">
   
   <resultMap type="Stock" id="StockMap">
     <id column="stock_no" property="stockNumber"/>
@@ -11,34 +11,24 @@
     <result column="price" property="price"/>
 
     <association property="product" javaType="Product">
-      <id column="product_no" property="productNumber"/>
+      <id column="product_no" property="productNumber"/> 
+      <result column="type_no" property="typeNumber"/>
       <result column="name" property="productName"/>
       <result column="origin" property="countryOrigin"/>
       <result column="volume" property="volume"/>
+      <result column="variety" property="variety"/>
       <result column="alcoholLevel" property="alcoholLevel"/>
-      <result column="sugarLevel" property="sugarLevel"/>
+      <result column="sugarLevel" property="sugarLevel"/> 
       <result column="acidity" property="acidity"/>
       <result column="weight" property="weight"/>
-      <result column="variety" property="variety"/>
       <result column="rate" property="rate"/>
+      <result column="reviewerNum" property="reviewerNum"/>
     </association>
-  </resultMap>
-    
-  <resultMap type="Product" id="ProductMap">
-      <id column="product_no" property="productNumber"/>
-      <result column="name" property="productName"/>
-      <result column="origin" property="countryOrigin"/>
-      <result column="volume" property="volume"/>
-      <result column="alcoholLevel" property="alcoholLevel"/>
-      <result column="sugarLevel" property="sugarLevel"/>
-      <result column="acidity" property="acidity"/>
-      <result column="weight" property="weight"/>
-      <result column="variety" property="variety"/>
-      <result column="rate" property="rate"/>
   </resultMap>
   
   <select id="findAll" resultMap="StockMap" parameterType="string">
     Select
+      p.product_no,
       s.stock_no,
       p.name,
       s.price,
@@ -52,24 +42,24 @@
       s.product_no asc
   </select>
   
-<!--   <insert id="insert" parameterType="stock">
+  <insert id="insert" parameterType="stock">
     insert 
-      into stock(stock_no,member_no,product_no,amount,price) 
-    values(#{stockNumber},#{(select member_no from member where id=member.id)},#{product.productNumber},#{stocks},#{price})
-  </insert> -->
+      into stock(member_no,product_no,amount,price) 
+    values((select member_no from member where id=#{id}),#{product.productNumber},#{stocks},#{price})
+  </insert>
   
-<!--   <select id="checkProduct" resultMap="StockMap" parameterType="string">
+  <select id="checkProduct" resultMap="StockMap" parameterType="string">
     select
-      p.product_no, 
-      p.type_no, 
-      p.name, 
-      p.origin, 
-      p.volume, 
-      p.alcoholLevel, 
+      p.product_no,
+      p.type_no,
+      p.name,
+      p.origin,
+      p.volume,
+      p.alcoholLevel,
       p.sugarLevel,
-      p.acidity, 
-      p.weight, 
-      p.rate, 
+      p.acidity,
+      p.weight,
+      p.rate,
       p.variety,
       t.type, 
       t.subType
@@ -88,18 +78,18 @@
     From 
       stock s left outer join product p on s.product_no = p.product_no 
     where 
-      p.name=#{productName} and member_no=(select member_no from member where id=#{id})
+      p.name=#{name} and member_no=(select member_no from member where id=#{id})
     order by s.product_no asc
   </select>
   
   <update id="update" parameterType="stock">
-    update stock set amount=#{stocks},price=#{price} where stock_no=#{no}
+    update stock set amount=#{stocks},price=#{price} where stock_no=#{stockNumber}
   </update>
   
   
   <delete id="delete" parameterType="stock">
-    delete from stock where stock_no=#{no}
-  </delete> -->
+    delete from stock where stock_no=#{stockNumber}
+  </delete>
 
 </mapper>
 

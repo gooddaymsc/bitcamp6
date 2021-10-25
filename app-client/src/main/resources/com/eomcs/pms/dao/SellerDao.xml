@@ -34,10 +34,14 @@
     select 
       m.member_no, 
       m.id, 
-      s.business_name, 
       m.name,
       m.nickname,
       m.level,
+      s.business_name, 
+      s.business_address,
+      s.business_tel,
+      s.openingTime,
+      s.closingTime,
       m.registeredDate 
     from 
       member m join seller s on m.member_no = s.member_no 
@@ -80,6 +84,14 @@
     where 
       m.id=#{id}
   </select>
+  
+  <update id="updateLevel" parameterType="member">
+  update member set
+    level=#{level}
+      where 
+      member_no=#{number}
+  </update>
+  
   
   <update id="update" parameterType="member">
     update member set 

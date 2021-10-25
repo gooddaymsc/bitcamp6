@@ -19,6 +19,7 @@ public class MybatisStockDao implements StockDao {
   @Override
   public void insert(Stock stock) throws Exception {
     sqlSession.insert("StockMapper.insert", stock);
+    sqlSession.commit();
   }
 
   @Override
@@ -28,7 +29,7 @@ public class MybatisStockDao implements StockDao {
     stocklist.setId(id);
     stocklist.setSellerStock((List<Stock>) list);
     return stocklist;
-
+    //    return null;
   }
 
   @Override
@@ -58,12 +59,12 @@ public class MybatisStockDao implements StockDao {
   @Override
   public void update(Stock stock) throws Exception {
     sqlSession.update("StockMapper.update", stock);
-    //    sqlSession.commit();
+    sqlSession.commit();
   }
 
   @Override
   public void delete(Stock stock) throws Exception {
     sqlSession.delete("StockMapper.delete", stock);
-    //    sqlSession.commit();
+    sqlSession.commit();
   }
 }
