@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.SellerDao">
+  
+  <resultMap type="Seller" id="SellerMap">
+    <result column="business_name" property="businessName"/>
+    <result column="business_no" property="businessNumber"/>
+    <result column="business_address" property="businessAddress"/>
+    <result column="business_tel" property="businessPlaceNumber"/>
+    <result column="openingTime" property="businessOpeningTime"/>
+    <result column="closingTime" property="businessClosingTime"/>
+
+    <association property="member" javaType="member">
+      <id column="member_no" property="number"/>
+      <result column="id" property="id"/>
+      <result column="password" property="password"/>
+      <result column="authority" property="authority"/>
+      <result column="name" property="name"/>
+      <result column="nickname" property="nickname"/>
+      <result column="email" property="email"/>
+      <result column="birthday" property="birthday"/>
+      <result column="photo" property="photo"/>
+      <result column="phoneNumber" property="phoneNumber"/>
+      <result column="registeredDate" property="registeredDate"/>
+      <result column="active" property="active"/>
+      <result column="level" property="level"/>
+    </association>
+  </resultMap>
+  
+  <select id="findAll" resultMap="SellerMap">
+    select 
+      m.member_no, 
+      m.id, 
+      s.business_name, 
+      m.name,
+      m.nickname,
+      m.level,
+      m.registeredDate 
+    from 
+      member m join seller s on m.member_no = s.member_no 
+    order by 
+      m.member_no desc
+  </select>
+  
+  <insert id="insert" parameterType="member"
+  useGeneratedKeys="true" keyColumn="member_no" keyProperty="number">
+    insert into member(id, password, authority, name, nickname, email, birthday, photo, phoneNumber) 
+    values(#{id}, password(#{password}), #{authority},#{name},#{nickname},#{email},#{birthday},#{photo},#{phoneNumber})
+  </insert>
+  
+  <insert id="insertSeller" parameterType="seller">
+    insert into seller(member_no, business_name,business_no ,business_address ,business_tel ,openingTime ,closingTime ) 
+    values(#{member.number},#{businessName},#{businessNumber},#{businessAddress},#{businessPlaceNumber},#{businessOpeningTime},#{businessClosingTime})
+  </insert>
+  
+  <select id="findById" resultMap="SellerMap" parameterType="string">
+    select 
+      s.member_no, 
+      m.name, 
+      m.id,
+      m.nickname, 
+      m.level, 
+      m.email, 
+      m.birthday, 
+      m.photo, 
+      m.phoneNumber, 
+      s.business_name, 
+      s.business_no, 
+      s.business_address, 
+      s.business_tel, 
+      s.openingTime, 
+      s.closingTime, 
+      m.registeredDate, 
+      m.authority 
+    from 
+      member m join seller s on m.member_no=s.member_no
+    where 
+      m.id=#{id}
+  </select>
+  
+  <update id="update" parameterType="member">
+    update member set 
+      nickname=#{nickname},
+      email=#{email},
+      password=password(#{password}), 
+      photo=#{photo},
+      phoneNumber=#{phoneNumber} 
+    where 
+      member_no=#{number}
+  </update>
+  
+  <update id="updateSeller" parameterType="seller">
+    update seller set 
+      business_name=#{businessName}, 
+      business_no=#{businessNumber}, 
+      business_address=#{businessAddress}, 
+      business_tel=#{businessPlaceNumber}, 
+      openingTime=#{businessOpeningTime}, 
+      closingTime=#{businessClosingTime} 
+    where 
+      member_no=#{member.number}
+  </update>
+  
+  <delete id="delete" parameterType="int" >
+    update member set 
+      name="none",
+      nickname="none",
+      birthday="0000-00-00",
+      password="none",
+      photo="none",
+      phoneNumber="none",
+      zipcode=0,
+      address="none",
+      detail_address="none",
+      active=1
+    where
+      member_no=#{no}
+  </delete>
+  
+  <delete id="deleteSeller" parameterType="int">
+    update seller set 
+      business_name="none", 
+      business_address="none", 
+      business_tel="none", 
+      openingTime="00:00", 
+      closingTime="00:00" 
+    where 
+      member_no=#{no}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+

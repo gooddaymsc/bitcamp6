@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.util.Prompt;
@@ -7,9 +8,10 @@ import com.eomcs.util.Prompt;
 public class ProductDeleteHandler implements Command {
 
   ProductDao productDao;
-
-  public ProductDeleteHandler (ProductDao productDao) {
+  SqlSession sqlSession;
+  public ProductDeleteHandler (ProductDao productDao, SqlSession sqlSession) {
     this.productDao = productDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -22,6 +24,7 @@ public class ProductDeleteHandler implements Command {
 
     if (input.equalsIgnoreCase("y")) {
       productDao.delete(product);
+      sqlSession.commit();
       System.out.println("상품을 삭제하였습니다.\n");
 
     }else {

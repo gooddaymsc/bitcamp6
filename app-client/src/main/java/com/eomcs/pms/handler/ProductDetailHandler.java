@@ -26,14 +26,14 @@ public class ProductDetailHandler implements Command {
         return;
       }
 
-      System.out.printf("주종: %s - %s\n", product.getProductType(),product.getProductSubType());
+      System.out.printf("주종: %s - %s\n", product.getProductType().getType(),product.getProductType().getSubType());
       //      System.out.printf("평점: %.2f\n", product.getRate());
       System.out.printf("원산지: %s\n", product.getCountryOrigin());
       if(product.getProductType().equals("와인")){
         System.out.printf("품종: %s\n", product.getVariety());  }
       System.out.printf("용량: %d\n", product.getVolume());
       System.out.printf("알콜도수: %.1f\n", product.getAlcoholLevel());
-      System.out.printf("당도: %d\n", product.getSugerLevel());
+      System.out.printf("당도: %d\n", product.getSugarLevel());
       System.out.printf("산도: %d\n", product.getAcidity());
       System.out.printf("바디감: %d\n", product.getWeight());
       System.out.println();

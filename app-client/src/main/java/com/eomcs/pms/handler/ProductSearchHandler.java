@@ -45,7 +45,7 @@ public class ProductSearchHandler implements Command {
           System.out.printf("원산지: %s\n", product.getCountryOrigin());
           System.out.printf("품종: %s\n", product.getVariety());
           System.out.printf("알콜도수: %.2f\n", product.getAlcoholLevel()); 
-          System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugerLevel(),product.getAcidity(),product.getWeight());
+          System.out.printf("당도: %d, 산도: %d, 바디감:%d\n", product.getSugarLevel(),product.getAcidity(),product.getWeight());
           System.out.println("-----------------------------------------");
         }
       }
@@ -84,10 +84,10 @@ public class ProductSearchHandler implements Command {
           System.out.println("--------------------------------------------------------------------------");
           System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n", 
               entry.getValue().getBusinessName(),
-              entry.getValue().getId(),
+              entry.getValue().getMember().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
-              productDao.findStockById(entry.getValue().getId(), productNumber).getStocks());
+              productDao.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
           request.setAttribute("storeName",entry.getValue().getBusinessName());
         }
       }

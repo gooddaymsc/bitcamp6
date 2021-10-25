@@ -23,12 +23,12 @@ public class BuyerListHandler implements Command {
 
       for (Buyer buyer : buyerList) {
         System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6s\n", 
-            buyer.getNumber(),
-            buyer.getId(), 
-            buyer.getName(),
-            buyer.getNickname(),
-            buyer.getLevel(),
-            buyer.getRegisteredDate());
+            buyer.getMember().getNumber(),
+            buyer.getMember().getId(), 
+            buyer.getMember().getName(),
+            buyer.getMember().getNickname(),
+            buyer.getMember().getLevel(),
+            buyer.getMember().getRegisteredDate());
       }
       System.out.println();
       while (true) {

@@ -30,7 +30,7 @@ public class LoginHandler implements Command {
     //      return;
     //    }
 
-    Member member = memberDao.findByEmailAndPassword(id, password);
+    Member member = memberDao.findByIdAndPassword(id, password);
 
     if (member != null) {
       System.out.printf("%s님 환영합니다!\n", member.getId());

@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
@@ -9,9 +10,11 @@ import com.eomcs.util.Prompt;
 public class BoardDeleteHandler implements Command {
 
   BoardDao boardDao;
+  SqlSession sqlSession;
 
-  public BoardDeleteHandler(BoardDao boardDao) {
+  public BoardDeleteHandler(BoardDao boardDao, SqlSession sqlSession) {
     this.boardDao = boardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -21,7 +24,7 @@ public class BoardDeleteHandler implements Command {
     int no = (Integer) request.getAttribute("no");
     Board board = boardDao.findByNo(no);
 
-    if (!((board.getWriter().equals(ClientApp.getLoginUser().getId())) ||
+    if (!((board.getWriter().getNumber() == ClientApp.getLoginUser().getNumber()) ||
         (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN))) {
       System.out.println("작성자가 아니므로 삭제할 수 없습니다.\n");
       return;
@@ -30,6 +33,7 @@ public class BoardDeleteHandler implements Command {
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
       boardDao.delete(no);
+      sqlSession.commit();
       System.out.println("게시글을 삭제하였습니다.\n");
       return;
     }

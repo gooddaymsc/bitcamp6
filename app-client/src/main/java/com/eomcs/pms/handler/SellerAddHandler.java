@@ -1,15 +1,18 @@
 package com.eomcs.pms.handler;
 
-import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 public class SellerAddHandler implements Command {
   SellerDao sellerDao;
-  public SellerAddHandler(SellerDao sellerDao) {
+  SqlSession sqlSession;
+  public SellerAddHandler(SellerDao sellerDao, SqlSession sqlSession) {
     this.sellerDao = sellerDao;
+    this.sqlSession = sqlSession;
   }  
 
   @Override
@@ -17,7 +20,6 @@ public class SellerAddHandler implements Command {
     System.out.println("[판매자 등록]");
 
     Seller seller = new Seller();
-    seller.setAuthority(Menu.ACCESS_SELLER);
 
     String id = Prompt.inputString("등록할 아이디: ");
 
@@ -30,19 +32,18 @@ public class SellerAddHandler implements Command {
     //      System.out.println(requestAgent.getObject(String.class));
     //      return;
     //    }
-
-    seller.setId(id);
-
-    seller.setName(Prompt.inputString("이름 : "));
-    seller.setNickname(Prompt.inputString("닉네임 : "));
-    seller.setEmail(Prompt.inputString("이메일 : "));
-    seller.setBirthday(Prompt.inputDate("생일 : "));
+    Member member = new Member();
+    member.setId(id);
+    member.setAuthority(Menu.ACCESS_SELLER);
+    member.setName(Prompt.inputString("이름 : "));
+    member.setNickname(Prompt.inputString("닉네임 : "));
+    member.setEmail(Prompt.inputString("이메일 : "));
+    member.setBirthday(Prompt.inputDate("생일 : "));
 
     String passWord = SellerValidation.checkPassword("암호 : ");
-    seller.setPassword(passWord);
-
-    seller.setPhoto(Prompt.inputString("사진 : "));
-    seller.setPhoneNumber(Prompt.inputString("전화 : "));
+    member.setPassword(passWord);
+    member.setPhoto(Prompt.inputString("사진 : "));
+    member.setPhoneNumber(Prompt.inputString("전화 : "));
     //    if (memberPrompt.findDeletedByName(seller.getName()) != -1) {
     //      if (deletedMemberList.get(memberPrompt.findDeletedByName(seller.getName())).getPhoneNumber().equals(seller.getPhoneNumber()) && 
     //          deletedMemberList.get(memberPrompt.findDeletedByName(seller.getName())).getName().equals(seller.getName())) {
@@ -50,6 +51,7 @@ public class SellerAddHandler implements Command {
     //        return;
     //      }
     //    }
+    seller.setMember(member);
     seller.setBusinessName(Prompt.inputString("가게명 : "));
     seller.setBusinessNumber(Prompt.inputString("사업자번호 : "));
     seller.setBusinessAddress(Prompt.inputString("사업장주소 : "));
@@ -71,15 +73,19 @@ public class SellerAddHandler implements Command {
       }
     }
 
-    seller.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    // 예약리스트에 판매자 id를 갖는 bookingList add.
     //    bookingPrompt.addBookingListById(seller.getId());
     //    // 재고 리스트에 판매자 id를 갖는 stockList add.
     //    stockPrompt.addStockListById(seller.getId());
 
     //    messagePrompt.addMessageListById(seller.getId());
-    sellerDao.insert(seller);
-
+    try {
+      sellerDao.insert(seller.getMember());
+      sellerDao.insertSeller(seller);
+      sqlSession.commit();
+    } catch (Exception e) {    
+      sqlSession.rollback();
+    }
     System.out.println("회원가입이 완료되었습니다.");
 
   }

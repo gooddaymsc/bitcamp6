@@ -1,16 +1,20 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Member;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.util.Prompt;
 
 
 public class SellerDeleteHandler implements Command {
   SellerDao sellerDao;
-  public SellerDeleteHandler(SellerDao sellerDao) {
+  SqlSession sqlSession;
+  public SellerDeleteHandler(SellerDao sellerDao, SqlSession sqlSession) {
     this.sellerDao = sellerDao;
+    this.sqlSession = sqlSession;
   } 
 
   @Override
@@ -19,11 +23,12 @@ public class SellerDeleteHandler implements Command {
     if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
       System.out.println("[탈퇴하기]");
       String id = ClientApp.getLoginUser().getId();
-      //      String nowLoginId = seller.getId();
       String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {
-        sellerDao.delete(id);
+        Seller seller = sellerDao.findById(id);
+        sellerDao.delete(seller);
+        sqlSession.commit();
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(nowLoginId);
         //        bookingPrompt.removeBookingListById(nowLoginId);
@@ -42,12 +47,14 @@ public class SellerDeleteHandler implements Command {
 
       String input = Prompt.inputString("정말 탈퇴시키겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
+        Seller seller = sellerDao.findById(id);
+        sellerDao.delete(seller);
+        sqlSession.commit();
         //        deleteMemberList.add(seller);
         //        memberPrompt.removeMemberById(sellerId);
         //        bookingPrompt.removeBookingListById(sellerId);
         //        stockPrompt.removeStockListById(sellerId);
         //        messagePrompt.removeMessageListById(sellerId);
-        sellerDao.delete(id);
         System.out.println("판매자를 탈퇴시켰습니다.\n");
         return;
       }

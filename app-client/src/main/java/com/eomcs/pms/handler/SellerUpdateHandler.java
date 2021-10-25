@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.SellerDao;
@@ -8,9 +9,11 @@ import com.eomcs.util.Prompt;
 
 public class SellerUpdateHandler implements Command {
   SellerDao sellerDao;
+  SqlSession sqlSession;
 
-  public SellerUpdateHandler(SellerDao sellerDao) {
+  public SellerUpdateHandler(SellerDao sellerDao, SqlSession sqlSession) {
     this.sellerDao = sellerDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -21,11 +24,11 @@ public class SellerUpdateHandler implements Command {
 
       Seller seller = sellerDao.findById(id);
 
-      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", seller.getNickname()));
-      String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", seller.getEmail()));
-      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", seller.getPassword()));
-      String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", seller.getPhoto()));
-      String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", seller.getPhoneNumber()));
+      String nickName = Prompt.inputString(String.format("닉네임(변경 전 : %s) : ", seller.getMember().getNickname()));
+      String email = Prompt.inputString(String.format("이메일(변경 전 : %s) : ", seller.getMember().getEmail()));
+      String password = Prompt.inputString(String.format("암호(변경 전 : %s) : ", seller.getMember().getPassword()));
+      String photo = Prompt.inputString(String.format("사진(변경 전 : %s) : ", seller.getMember().getPhoto()));
+      String tel = Prompt.inputString(String.format("전화(변경 전 : %s) : ", seller.getMember().getPhoneNumber()));
       String bussinessName = Prompt.inputString(String.format("가게명(변경 전 : %s) : ", seller.getBusinessName()));
       String bussinessNo = Prompt.inputString(String.format("사업자번호(변경 전 : %s) : ", seller.getBusinessNumber()));
       String bussinessAddress = Prompt.inputString(String.format("사업장주소(변경 전 : %s) : ", seller.getBusinessAddress()));
@@ -36,11 +39,11 @@ public class SellerUpdateHandler implements Command {
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
 
       if (input.equalsIgnoreCase("y")) {     
-        seller.setNickname(nickName);
-        seller.setEmail(email);
-        seller.setPassword(password);
-        seller.setPhoto(photo);
-        seller.setPhoneNumber(tel);
+        seller.getMember().setNickname(nickName);
+        seller.getMember().setEmail(email);
+        seller.getMember().setPassword(password);
+        seller.getMember().setPhoto(photo);
+        seller.getMember().setPhoneNumber(tel);
         seller.setBusinessName(bussinessName);
         seller.setBusinessNumber(bussinessNo);
         seller.setBusinessAddress(bussinessAddress);
@@ -48,6 +51,7 @@ public class SellerUpdateHandler implements Command {
         seller.setBusinessOpeningTime(BusinessOpeningTimes);
         seller.setBusinessClosingTime(BusinessClosingTimes);
         sellerDao.update(seller);
+        sqlSession.commit();
         System.out.println("개인 정보를 변경하였습니다.\n");
         return;
       }
@@ -58,11 +62,12 @@ public class SellerUpdateHandler implements Command {
 
       Seller seller = sellerDao.findById(id);
 
-      int level = SellerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", seller.getLevel())); 
+      int level = SellerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", seller.getMember().getLevel())); 
       String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
       if (input.equalsIgnoreCase("y")) {
-        seller.setLevel(level);
+        seller.getMember().setLevel(level);
         sellerDao.update(seller);
+        sqlSession.commit();
         System.out.println("회원정보를 변경했습니다.\n");
         return;
       }

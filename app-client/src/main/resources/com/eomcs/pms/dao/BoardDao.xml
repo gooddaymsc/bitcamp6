@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.BoardDao">
+  
+  <resultMap type="Board" id="BoardMap">
+    <id column="board_no" property="boardNumber"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="registeredDate" property="registrationDate"/>
+    <result column="views" property="views"/>
+    
+  <association property="writer" javaType="member">    
+    <id column="member_no" property="number"/>
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+  </association>
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="BoardMap">
+		select
+			b.board_no,
+			b.member_no,
+			b.title,
+			b.content,
+			b.registeredDate,
+			b.views,
+			m.name,
+			m.id
+		from board b inner join member m
+			on b.member_no=m.member_no
+		order by b.board_no desc
+  </select>
+  
+  <update id="updateCount" parameterType="int">
+    update board set
+      views = views + 1
+    where board_no=#{no}
+  </update>
+  
+  <insert id="insert" parameterType="board">
+    insert
+        into board(member_no,title,content)
+      values(#{writer.number},#{title}, #{content})
+  </insert>
+  
+  <select id="findByNo" resultMap="BoardMap" parameterType="int">
+       select
+         b.board_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.member_no, 
+         m.id, 
+         m.name,
+         m.email
+       from board b inner join member m 
+         on b.member_no=m.member_no
+        where board_no=#{no}
+  </select>
+  
+  <update id="update" parameterType="board">
+  update board set
+    title=#{title},
+    content=#{content}
+    where 
+    board_no=#{boardNumber}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from board 
+    where board_no=#{no}
+  </delete>
+  <!-- 
+  <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
+  </select>
+
+  
+   -->
+  
+</mapper>
+
+
+
+
+
+
+
