@@ -27,7 +27,6 @@ import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.dao.impl.MybatisStockDao;
 import com.eomcs.pms.dao.impl.NetBookingDao;
-import com.eomcs.pms.dao.impl.NetCartDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
@@ -163,9 +162,9 @@ public class ClientApp {
     BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
     ProductDao productDao = sqlSession.getMapper(ProductDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
+    CartDao cartDao = sqlSession.getMapper(CartDao.class);
 
     StockDao stockDao = new MybatisStockDao(sqlSession);
-    CartDao cartDao = new NetCartDao(requestAgent, sellerDao, stockDao);
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao, sqlSession));

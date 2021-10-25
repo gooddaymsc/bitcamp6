@@ -1,5 +1,7 @@
 package com.eomcs.pms.handler;
 
+import java.util.Collection;
+import java.util.List;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -19,7 +21,10 @@ public class CartListHandler implements Command {
     String nowLoginId = ClientApp.getLoginUser().getId();
     Loop : while(true) {
       System.out.println("[장바구니 목록]");
-      CartList cartList = cartDao.findAll(nowLoginId);
+      Collection<Cart> carts = cartDao.findAll(nowLoginId);
+      CartList cartList = new CartList();
+      cartList.setId(nowLoginId);
+      cartList.setPrivacyCart((List<Cart>) carts);
 
       if (cartList.getPrivacyCart().size() == 0) {
         System.out.println("장바구니에 담긴 상품이 없습니다.");
@@ -28,19 +33,19 @@ public class CartListHandler implements Command {
       System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\t%-6s\n",
           "번호", "가게명", "판매자", "상품명", "수량", "금액","등록일");
       System.out.println("--------------------------------------------------------------------------");
-      int total = 0;
+      //      int total = 0;
       for (Cart cart : cartList.getPrivacyCart()) {
-        System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6s\n", // 장바구니 번호, 가게명, 상품명, 수량, 총액, 등록일
+        System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6s\n", // 장바구니 번호, 가게명, 상품명, 수량, 총액, 등록일
             cart.getCartNumber(), 
-            sellerDao.findById(cart.getSellerId()).getBusinessName(),
-            cart.getSellerId(),
+            sellerDao.findById(cart.getStock().getId()).getBusinessName(),
+            cart.getStock().getId(),
             cart.getStock().getProduct().getProductName(), 
             cart.getCartStocks(), 
-            cart.getCartPrice(),
+            //            cart.getCartPrice(),
             cart.getRegistrationDate());
-        total += cart.getCartPrice();
+        //        total += cart.getCartPrice();
       }
-      System.out.printf("\n>>> 총 금액 : %d원\n", total);
+      //      System.out.printf("\n>>> 총 금액 : %d원\n", total);
       System.out.println();
 
       while(true) {
