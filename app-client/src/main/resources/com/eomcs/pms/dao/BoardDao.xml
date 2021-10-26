@@ -26,18 +26,18 @@
     </resultMap>
   
   <select id="findAll" resultMap="BoardMap">
-		select
-			b.board_no,
-			b.member_no,
-			b.title,
-			b.content,
-			b.registeredDate,
-			b.views,
-			m.name,
-			m.id
-		from board b inner join member m
-			on b.member_no=m.member_no
-		order by b.board_no desc
+      select
+         b.board_no,
+         b.member_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.name,
+         m.id
+      from board b inner join member m
+         on b.member_no=m.member_no
+      order by b.board_no desc
   </select>
   
   <update id="updateCount" parameterType="int">
@@ -49,7 +49,7 @@
   <insert id="insert" parameterType="board">
     insert
         into board(member_no,title,content)
-      values (#{title}, #{content})
+      values (#{writer.number}, #{title}, #{content})
   </insert>
   
   <select id="findByNo" resultMap="BoardMap" parameterType="int">
@@ -110,7 +110,6 @@
   
    
 </mapper>
-
 
 
 
