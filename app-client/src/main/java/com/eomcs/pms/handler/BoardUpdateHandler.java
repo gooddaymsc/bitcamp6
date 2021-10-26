@@ -31,13 +31,14 @@ public class BoardUpdateHandler implements Command {
     }
     String title = Prompt.inputString(String.format("제목(변경 전 : %s) : ", board.getTitle()));
     String content = Prompt.inputString(String.format("내용(변경 전 : %s) : ", board.getContent()));
-    String tag = Prompt.inputString(String.format("태그(변경 전 : %s) : ", board.getTag()));
+    //    BoardTag boardTag = new BoardTag();
+    //    boardTag.setTag(Prompt.inputString(String.format("태그(변경 전 : %s) : ", board.getBoardTag().getTag())));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
       board.setTitle(title);
       board.setContent(content);
-      board.setTag(tag);
+      //      board.setBoardTag(boardTag);
 
       boardDao.update(board);
       sqlSession.commit();
