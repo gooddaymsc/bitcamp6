@@ -62,7 +62,7 @@ public class BoardFindDetailHandler  implements Command {
       board.setViews(board.getViews() + 1);
       System.out.printf("조회수 : %d\n", board.getViews());
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
-      System.out.printf("태그 : %s\n", board.getTag());
+      //      System.out.printf("태그 : %s\n", board.getBoardTag().getTag());
       //            commentListHandler.list(board.getBoardNumber(), boardPrompt);
       request.setAttribute("no", no);
       request.getRequestDispatcher("/comment/list").forward(request);

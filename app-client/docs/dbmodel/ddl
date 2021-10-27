@@ -1,4 +1,64 @@
 -- 회원
+DROP TABLE IF EXISTS member RESTRICT;
+
+-- 판매자
+DROP TABLE IF EXISTS seller RESTRICT;
+
+-- 게시판
+DROP TABLE IF EXISTS board RESTRICT;
+
+-- 댓글
+DROP TABLE IF EXISTS comment RESTRICT;
+
+-- 좋아요
+DROP TABLE IF EXISTS board_like RESTRICT;
+
+-- 술
+DROP TABLE IF EXISTS product RESTRICT;
+
+-- 리뷰
+DROP TABLE IF EXISTS review RESTRICT;
+
+-- 판매
+DROP TABLE IF EXISTS stock RESTRICT;
+
+-- 메세지
+DROP TABLE IF EXISTS message RESTRICT;
+
+-- 장바구니
+DROP TABLE IF EXISTS cart RESTRICT;
+
+-- 알림
+DROP TABLE IF EXISTS alert RESTRICT;
+
+-- 태그
+DROP TABLE IF EXISTS tag RESTRICT;
+
+-- 게시글태그
+DROP TABLE IF EXISTS board_tag RESTRICT;
+
+-- 주종
+DROP TABLE IF EXISTS product_type RESTRICT;
+
+-- 쿠폰
+DROP TABLE IF EXISTS coupon RESTRICT;
+
+-- 구매항목
+DROP TABLE IF EXISTS purchase_list RESTRICT;
+
+-- 구매
+DROP TABLE IF EXISTS purchase RESTRICT;
+
+-- 적립금
+DROP TABLE IF EXISTS point RESTRICT;
+
+-- 채팅방
+DROP TABLE IF EXISTS messageRoom RESTRICT;
+
+-- 결제타입
+DROP TABLE IF EXISTS payment_type RESTRICT;
+
+-- 회원
 CREATE TABLE member (
   member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   id             VARCHAR(50)  NOT NULL COMMENT '아이디', -- 아이디
@@ -344,8 +404,8 @@ ALTER TABLE coupon
 CREATE TABLE purchase_list (
   purchase_no INTEGER NOT NULL COMMENT '구매번호', -- 구매번호
   stock_no    INTEGER NOT NULL COMMENT '판매번호', -- 판매번호
-  amount      INTEGER NULL     COMMENT '수량', -- 수량
-  price       INTEGER NULL     COMMENT '가격' -- 가격
+  amount      INTEGER NOT NULL COMMENT '수량', -- 수량
+  price       INTEGER NOT NULL COMMENT '가격' -- 가격
 )
 COMMENT '구매항목';
 
@@ -361,12 +421,13 @@ ALTER TABLE purchase_list
 CREATE TABLE purchase (
   purchase_no         INTEGER  NOT NULL COMMENT '구매번호', -- 구매번호
   member_no           INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  cart_no             INTEGER  NOT NULL COMMENT '장바구니번호', -- 장바구니번호
+  payment_no          INTEGER  NOT NULL COMMENT '결제번호', -- 결제번호
   date                DATETIME NOT NULL COMMENT '구매일', -- 구매일
-  payment_type        INTEGER  NOT NULL COMMENT '결제방법', -- 결제방법
   payment_status      INTEGER  NOT NULL COMMENT '결제상태', -- 결제상태
-  purchase_status     INTEGER  NOT NULL COMMENT '구매상태', -- 구매상태
   pickup_booking_date DATE     NOT NULL COMMENT '픽업예약일', -- 픽업예약일
-  pickup_booking_time INTEGER  NOT NULL COMMENT '픽업가능시간번호', -- 픽업가능시간번호
+  pickup_time         TIME     NOT NULL COMMENT '픽업시간', -- 픽업시간
+  registeredDate      DATETIME NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
   real_pickup_date    DATETIME NULL     COMMENT '실제픽업일시' -- 실제픽업일시
 )
 COMMENT '구매';
@@ -380,24 +441,6 @@ ALTER TABLE purchase
 
 ALTER TABLE purchase
   MODIFY COLUMN purchase_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '구매번호';
-
--- 픽업가능시간
-CREATE TABLE pickup_available (
-  pickup_available_tie INTEGER NOT NULL COMMENT '픽업가능시간번호', -- 픽업가능시간번호
-  start_time           TIME    NOT NULL COMMENT '시작시간', -- 시작시간
-  end_time             TIME    NOT NULL COMMENT '종료시간' -- 종료시간
-)
-COMMENT '픽업가능시간';
-
--- 픽업가능시간
-ALTER TABLE pickup_available
-  ADD CONSTRAINT PK_pickup_available -- 픽업가능시간 기본키
-    PRIMARY KEY (
-      pickup_available_tie -- 픽업가능시간번호
-    );
-
-ALTER TABLE pickup_available
-  MODIFY COLUMN pickup_available_tie INTEGER NOT NULL AUTO_INCREMENT COMMENT '픽업가능시간번호';
 
 -- 적립금
 CREATE TABLE point (
@@ -434,6 +477,20 @@ ALTER TABLE messageRoom
 
 ALTER TABLE messageRoom
   MODIFY COLUMN room_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '방번호';
+
+-- 결제타입
+CREATE TABLE payment_type (
+  payment_no INTEGER NOT NULL COMMENT '결제번호', -- 결제번호
+  type       TEXT    NOT NULL COMMENT '결제타입' -- 결제타입
+)
+COMMENT '결제타입';
+
+-- 결제타입
+ALTER TABLE payment_type
+  ADD CONSTRAINT PK_payment_type -- 결제타입 기본키
+    PRIMARY KEY (
+      payment_no -- 결제번호
+    );
 
 -- 판매자
 ALTER TABLE seller
@@ -677,12 +734,22 @@ ALTER TABLE purchase
 
 -- 구매
 ALTER TABLE purchase
-  ADD CONSTRAINT FK_pickup_available_TO_purchase -- 픽업가능시간 -> 구매
+  ADD CONSTRAINT FK_cart_TO_purchase -- 장바구니 -> 구매
     FOREIGN KEY (
-      pickup_booking_time -- 픽업가능시간번호
+      cart_no -- 장바구니번호
     )
-    REFERENCES pickup_available ( -- 픽업가능시간
-      pickup_available_tie -- 픽업가능시간번호
+    REFERENCES cart ( -- 장바구니
+      cart_no -- 장바구니번호
+    );
+
+-- 구매
+ALTER TABLE purchase
+  ADD CONSTRAINT FK_payment_type_TO_purchase -- 결제타입 -> 구매
+    FOREIGN KEY (
+      payment_no -- 결제번호
+    )
+    REFERENCES payment_type ( -- 결제타입
+      payment_no -- 결제번호
     );
 
 -- 적립금

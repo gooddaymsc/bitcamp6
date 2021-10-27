@@ -46,9 +46,10 @@ public class BuyerListHandler extends HttpServlet {
     out.println("<thead>");
     out.println("  <tr>");
     out.println("    <th>번호</th>");
+    out.println("    <th>아이디</th>");
     out.println("    <th>이름</th>");
-    out.println("    <th>이메일</th>");
-    out.println("    <th>전화</th>");
+    out.println("    <th>닉네임</th>");
+    out.println("    <th>레벨</th>");
     out.println("    <th>등록일</th>");
     out.println("  <tr>");
     out.println("</thread>");
@@ -57,8 +58,10 @@ public class BuyerListHandler extends HttpServlet {
     try {
       Collection<Buyer> buyerList =  buyerDao.findAll();
 
+
+      //      <a href='detail?no=%1$d'>%s</a>
       for (Buyer buyer : buyerList) {
-        System.out.printf("%d, <a href='detail?no=%1$d'>%s<a/>, %s, %s, %s, %d, %s<br>", 
+        out.printf("%d, %s, %s, %s, %d, %s<br>", 
             buyer.getMember().getNumber(),
             buyer.getMember().getId(), 
             buyer.getMember().getName(),
@@ -69,18 +72,8 @@ public class BuyerListHandler extends HttpServlet {
     } catch (Exception e) {
       throw new ServletException(e);
     }
-    out.println("</tbody>");
-    out.println("</table>");
     out.println("</body>");
     out.println("</html>");
-    //      System.out.println();
-    //      while (true) {
-    //        String id = Prompt.inputString("선택할 아이디 : ");
-    //        System.out.println();
-    //        request.setAttribute("id", id);
-    //        if (id.equals("0")) {return;}
-    //        request.getRequestDispatcher("/buyer/detail").forward(request);
-    //        continue Loop;
   }
 }
 

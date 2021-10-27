@@ -11,36 +11,41 @@
     <result column="content" property="content"/>
     <result column="registeredDate" property="registrationDate"/>
     <result column="views" property="views"/>
-    <result column="likeMember" property="likeMember"/>
-    <result column="likes" property="likes"/>
-    
+
   <association property="writer" javaType="member">    
     <id column="member_no" property="number"/>
     <result column="id" property="id"/>
     <result column="name" property="name"/>
     <result column="email" property="email"/>
   </association>
+  
+  <association property="boardTag" javaType="boardTag">    
+    <id column="tag_no" property="tagNumber"/>
+    <result column="tag" property="tag"/>
+  </association>
   </resultMap>
   
-  <insert id="insert" parameterType="board">
-    insert
-        into board(member_no, title, content)
-      values (#{title}, #{content})
-  </insert>
+  <resultMap type="LikeMember" id="LikeMap">
+    <id column="member_no" property="number"/>
+    <result column="registeredDate" property="registeredDate"/>
+    </resultMap>
   
   <select id="findAll" resultMap="BoardMap">
-		select
-			b.board_no,
-			b.member_no,
-			b.title,
-			b.content,
-			b.registeredDate,
-			b.views,
-			m.name,
-			m.id
-		from board b inner join member m
-			on b.member_no=m.member_no
-		order by b.board_no desc
+      select
+         b.board_no,
+         b.member_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.name,
+         m.id,
+         t.tag
+      from board b
+        left join member m on b.member_no=m.member_no
+        left join board_tag bt on b.board_no=bt.board_no
+        left join tag t on bt.tag_no = t.tag_no
+      order by b.board_no desc
   </select>
   
   <update id="updateCount" parameterType="int">
@@ -49,7 +54,23 @@
     where board_no=#{no}
   </update>
   
+  <insert id="insert" parameterType="board">
+    insert
+      into board(member_no,title,content)
+      values (#{writer.number}, #{title}, #{content})
+  </insert>
   
+  <insert id="insertTag" parameterType="boardTag">
+    insert
+      into tag(tag)
+      values (#{boardTag.tag})
+  </insert>
+  
+<!--   <insert id="insertBoardTag" parameterType="boardTag">
+    insert
+      into board_tag(board_no, tag_no)
+      values (#{boardNumber}, #{boardTag.tagNumber})
+  </insert> -->
   
   <select id="findByNo" resultMap="BoardMap" parameterType="int">
        select
@@ -58,7 +79,6 @@
          b.content,
          b.registeredDate,
          b.views,
-         b.likeMember,
          m.member_no, 
          m.id, 
          m.name,
@@ -76,29 +96,30 @@
       board_no=#{boardNumber}
   </update>
   
-    <update id="update2" parameterType="board">
-    update board set
-      likeMember=#{likeMember},
-      likes=#{likes}
+  <select id="findLikeList" resultMap="LikeMap" parameterType="int">
+    select 
+      member_no,
+      registeredDate
+    from 
+      board_like 
     where 
-      board_no=#{boardNumber}
-  </update>
+      board_no=#{no}     
+  </select>
      
   <delete id="delete" parameterType="int">
     delete from board 
     where board_no=#{no}
   </delete>
   
-  <insert id="like" parameterType="map">
-    insert into board_like(member_no, board_no, registeredDate) 
-    values((select member_no from member where id=#{likeId}),#{boardNo},#{registrationDate})
+  <insert id="likeInsert" parameterType="map">
+    insert into board_like(member_no,board_no) 
+    values(#{memberNo},#{boardNo});
   </insert>
   
   <delete id="likeDelete" parameterType="map">
-    delete from board_like
+    delete from board_like 
     where 
-      member_no=(select member_no from member where id=#{likeId})
-      and board_no=#{boardNo}
+      member_no=#{memberNo} and board_no=#{boardNo};
   </delete>
   
   
@@ -109,7 +130,6 @@
   
    
 </mapper>
-
 
 
 

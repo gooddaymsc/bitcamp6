@@ -37,7 +37,7 @@ public class BoardListHandler implements Command {
             //  System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
-            //            board.getTag(),
+            //            board.getBoardTag().getTag(),
             board.getWriter().getId(),
             board.getViews(), 
             //            board.getLikes(),
