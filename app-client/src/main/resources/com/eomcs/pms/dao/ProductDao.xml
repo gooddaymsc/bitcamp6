@@ -130,7 +130,21 @@
     delete from product 
     where product_no=#{productNumber}
   </delete>
+  <!-- 
+   <update id="updateRate" parameterType="product">
+     update product set 
+       rate=#{rate}
+     where 
+       product_no=#{productNumber}
+  </update>
   
+  <select id="ranking" resultMap="ProductMap" parameterType="String">
+    select p.rate, p.name, p.product_no, p.origin, p.alcoholLevel, 
+         
+      dense_rank() over (order by rate desc) rank 
+    from product p;
+  </select>
+   -->
 </mapper>
 
 

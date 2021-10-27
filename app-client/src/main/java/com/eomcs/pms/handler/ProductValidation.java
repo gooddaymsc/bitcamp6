@@ -110,8 +110,8 @@ public class ProductValidation {
       }
     }
   }  
-  public HashMap<String, Seller> findByAdress (String address) throws Exception {
-    HashMap<String, Seller> hashMap = new HashMap<>();
+  public HashMap<String, Stock> findByAdress (String address) throws Exception {
+    HashMap<String, Stock> hashMap = new HashMap<>();
     List<Seller> sellerList = sellerDao.findAll();
     for (Seller seller : sellerList) {
       String[] arr = address.split(" ");

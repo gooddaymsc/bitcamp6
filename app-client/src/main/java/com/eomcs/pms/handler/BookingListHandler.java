@@ -1,19 +1,16 @@
 package com.eomcs.pms.handler;
 
+import java.util.Collection;
 import com.eomcs.menu.Menu;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BookingDao;
-import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Booking;
-import com.eomcs.pms.domain.BookingList;
 import com.eomcs.util.Prompt;
 
 public class BookingListHandler implements Command {
   BookingDao bookingDao;
-  SellerDao sellerDao;
-  public BookingListHandler(BookingDao bookingDao, SellerDao sellerDao) {
+  public BookingListHandler(BookingDao bookingDao) {
     this.bookingDao = bookingDao;
-    this.sellerDao = sellerDao;
   }
 
   @Override
@@ -26,20 +23,22 @@ public class BookingListHandler implements Command {
 
         System.out.println("[내 픽업 예약 목록]");
 
-        BookingList bookingList = bookingDao.findAll(nowLoginId);
+        Collection<Booking> bookingList = bookingDao.findAll1(nowLoginId);
 
-        if (bookingList.getBooking().size() == 0 ) {
+        if (bookingList.size() == 0 ) {
           System.out.println("아직 예약한 상품이 없습니다.");
           return;
         }
         System.out.printf("%-3s\t%-4s\t%-4s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\n",
             "번호", "가게명", "상품명", "주문일시", "픽업날짜", "픽업시간", "결제상태", "픽업상태");
         System.out.println("----------------------------------------------------------------------------------------");
-        for (Booking booking : bookingList.getBooking()) {
-          String sellerId = booking.getCart().getSellerId();
+        for (Booking booking : bookingList) {
+          if (booking.getPaymentStatus()==-1) {
+            continue;
+          }
           System.out.printf("%-5d\t%-5s\t%-5s\t%-9s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
               booking.getBookingNumber(), 
-              sellerDao.findById(sellerId).getBusinessName(),
+              booking.getCart().getStock().getSeller().getBusinessName(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),
@@ -72,9 +71,9 @@ public class BookingListHandler implements Command {
       } else if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_SELLER) {
 
         System.out.println("[고객 예약 목록]\n");
-        BookingList bookingList = bookingDao.findAll(nowLoginId);
+        Collection<Booking> bookingList = bookingDao.findAll2(nowLoginId);
 
-        if (bookingList.getBooking().size() == 0 ) {
+        if (bookingList.size() == 0 ) {
           System.out.println("아직 예약한 고객이 없습니다.");
           return;
         }
@@ -83,10 +82,10 @@ public class BookingListHandler implements Command {
             "번호","예약자", "상품명","주문일시",  "픽업날짜", "픽업시간", "결제상태", "픽업 상태");
         System.out.println("------------------------------------------------------------------------------------------------");
 
-        for (Booking booking : bookingList.getBooking() ) {
+        for (Booking booking : bookingList) {
           System.out.printf("%-5d\t%-5s\t%-6s\t%-10s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
               booking.getBookingNumber(),
-              booking.getTheOtherId(),
+              booking.getCart().getId(),
               booking.getCart().getStock().getProduct().getProductName(),
               booking.getRegisteredDate(),
               booking.getBookingDate(),

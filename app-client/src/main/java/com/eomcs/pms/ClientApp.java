@@ -27,7 +27,6 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.dao.impl.NetBookingDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.handler.BoardAddHandler;
 import com.eomcs.pms.handler.BoardDeleteHandler;
@@ -39,8 +38,10 @@ import com.eomcs.pms.handler.BoardSearchHandler;
 import com.eomcs.pms.handler.BoardSearchHandler2;
 import com.eomcs.pms.handler.BoardUpdateHandler;
 import com.eomcs.pms.handler.BookingAddHandler;
+import com.eomcs.pms.handler.BookingConfirmHandler;
 import com.eomcs.pms.handler.BookingDeleteHandler;
 import com.eomcs.pms.handler.BookingDetailHandler;
+import com.eomcs.pms.handler.BookingHandlerHelper;
 import com.eomcs.pms.handler.BookingListHandler;
 import com.eomcs.pms.handler.BookingUpdateHandler;
 import com.eomcs.pms.handler.BuyerAddHandler;
@@ -168,11 +169,11 @@ public class ClientApp {
     ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
     MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
     CartDao cartDao = sqlSession.getMapper(CartDao.class);
-
-    BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
+    BookingDao bookingDao = sqlSession.getMapper(BookingDao.class);
 
     ProductValidation productValidation = new ProductValidation(sellerDao, stockDao);
     CartHandlerHelper cartHelper = new CartHandlerHelper(stockDao);
+    BookingHandlerHelper bookingHelper = new BookingHandlerHelper(bookingDao);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao, sqlSession));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -235,11 +236,12 @@ public class ClientApp {
     commandMap.put("/cart/update", new CartUpdateHandler(cartDao, sqlSession));
     commandMap.put("/cart/delete", new CartDeleteHandler(cartDao, sqlSession));
 
-    commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao));
-    commandMap.put("/booking/list",   new BookingListHandler(bookingDao, sellerDao));
-    commandMap.put("/booking/detail",   new BookingDetailHandler(bookingDao, buyerDao, sellerDao));
+    commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao, cartDao, bookingHelper, sqlSession));
+    commandMap.put("/booking/list",   new BookingListHandler(bookingDao));
+    commandMap.put("/booking/detail",   new BookingDetailHandler(bookingDao, buyerDao));
+    commandMap.put("/booking/confirm",   new BookingConfirmHandler(bookingDao, buyerDao, sellerDao));
     commandMap.put("/booking/update", new BookingUpdateHandler(bookingDao));
-    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingDao));
+    commandMap.put("/booking/delete", new BookingDeleteHandler(bookingDao, sqlSession));
 
     commandMap.put("/message/add",    new MessageAddHandler(messageDao, sqlSession, memberDao));
     commandMap.put("/message/update",    new MessageUpdateHandler(messageDao, sqlSession));

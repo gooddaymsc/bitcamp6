@@ -26,10 +26,10 @@ public class CartDeleteHandler implements Command {
       if (input.equalsIgnoreCase("y")) {
         cartDao.delete(cart);
         sqlSession.commit();
-        System.out.println("장바구니를 삭제하였습니다.");
+        System.out.println("장바구니를 삭제하였습니다.\n");
         return;
       } else {
-        System.out.println("장바구니 삭제를 취소하였습니다.");
+        System.out.println("장바구니 삭제를 취소하였습니다.\n");
         return;
       }
     }

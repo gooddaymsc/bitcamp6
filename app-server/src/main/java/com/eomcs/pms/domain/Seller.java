@@ -1,7 +1,7 @@
 package com.eomcs.pms.domain;
 
-@SuppressWarnings("serial")
-public class Seller extends Member {
+public class Seller {
+  private Member member;
   private String businessName;
   private String businessNumber;
   private String businessAddress;
@@ -13,7 +13,12 @@ public class Seller extends Member {
   private String businessOpeningTime;
   private String businessClosingTime;
 
-
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
   //  public int getBusinessOpeningHours() {
   //    return businessOpeningHours;
   //  }
@@ -74,6 +79,5 @@ public class Seller extends Member {
   public void setBusinessClosingTime(String businessClosingTime) {
     this.businessClosingTime = businessClosingTime;
   }
-
 
 }
