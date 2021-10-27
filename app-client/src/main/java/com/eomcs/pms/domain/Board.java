@@ -13,12 +13,13 @@ public class Board implements Serializable {
   private Member writer;
   private Date registrationDate;
   private int views;
-  private String tag;
+  //  private String tag;
   private int likes;
   private Date likeDate;
   private List<LikeMember> likeMember = new ArrayList<>();
   private int totalCommentNumber = 1;
   private List<Comment> commentList = new ArrayList<>();
+  private BoardTag boardTag;
 
   public int getBoardNumber() {
     return boardNumber;
@@ -56,12 +57,12 @@ public class Board implements Serializable {
   public void setViews(int views) {
     this.views = views;
   }
-  public String getTag() {
-    return tag;
-  }
-  public void setTag(String tag) {
-    this.tag = tag;
-  }
+  //  public String getTag() {
+  //    return tag;
+  //  }
+  //  public void setTag(String tag) {
+  //    this.tag = tag;
+  //  }
   public int getLikes() {
     return likes;
   }
@@ -91,5 +92,11 @@ public class Board implements Serializable {
   }
   public void setLikeMember(List<LikeMember> likeMember) {
     this.likeMember = likeMember;
+  }
+  public BoardTag getBoardTag() {
+    return boardTag;
+  }
+  public void setBoardTag(BoardTag boardTag) {
+    this.boardTag = boardTag;
   }
 }

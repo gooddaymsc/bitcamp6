@@ -18,6 +18,11 @@
     <result column="name" property="name"/>
     <result column="email" property="email"/>
   </association>
+  
+  <association property="boardTag" javaType="boardTag">    
+    <id column="tag_no" property="tagNumber"/>
+    <result column="tag" property="tag"/>
+  </association>
   </resultMap>
   
   <resultMap type="LikeMember" id="LikeMap">
@@ -26,18 +31,21 @@
     </resultMap>
   
   <select id="findAll" resultMap="BoardMap">
-		select
-			b.board_no,
-			b.member_no,
-			b.title,
-			b.content,
-			b.registeredDate,
-			b.views,
-			m.name,
-			m.id
-		from board b inner join member m
-			on b.member_no=m.member_no
-		order by b.board_no desc
+      select
+         b.board_no,
+         b.member_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.name,
+         m.id,
+         t.tag
+      from board b
+        left join member m on b.member_no=m.member_no
+        left join board_tag bt on b.board_no=bt.board_no
+        left join tag t on bt.tag_no = t.tag_no
+      order by b.board_no desc
   </select>
   
   <update id="updateCount" parameterType="int">
@@ -48,9 +56,21 @@
   
   <insert id="insert" parameterType="board">
     insert
-        into board(member_no,title,content)
-      values (#{title}, #{content})
+      into board(member_no,title,content)
+      values (#{writer.number}, #{title}, #{content})
   </insert>
+  
+  <insert id="insertTag" parameterType="boardTag">
+    insert
+      into tag(tag)
+      values (#{boardTag.tag})
+  </insert>
+  
+<!--   <insert id="insertBoardTag" parameterType="boardTag">
+    insert
+      into board_tag(board_no, tag_no)
+      values (#{boardNumber}, #{boardTag.tagNumber})
+  </insert> -->
   
   <select id="findByNo" resultMap="BoardMap" parameterType="int">
        select
@@ -110,7 +130,6 @@
   
    
 </mapper>
-
 
 
 

@@ -7,6 +7,7 @@ import com.eomcs.pms.domain.LikeMember;
 
 public interface BoardDao {
   void insert(Board board) throws Exception;
+  void insertTag(Board board) throws Exception;
   List<Board> findAll() throws Exception;
   Board findByNo(int no) throws Exception;
   Board findByBoard(String name) throws Exception;
