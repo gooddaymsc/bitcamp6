@@ -1,12 +1,10 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
-import java.util.List;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.pms.domain.Seller;
-import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class ProductValidation {
@@ -110,27 +108,17 @@ public class ProductValidation {
       }
     }
   }  
-  public HashMap<String, Stock> findByAdress (String address) throws Exception {
-    HashMap<String, Stock> hashMap = new HashMap<>();
-    List<Seller> sellerList = sellerDao.findAll();
-    for (Seller seller : sellerList) {
-      String[] arr = address.split(" ");
-      if((seller.getBusinessAddress().contains(arr[2])) && 
-          (seller.getBusinessAddress().contains(arr[1]))) {
-        hashMap.put(seller.getMember().getId(), seller);
-        return hashMap;
-      } 
-    }
-    return null;
-  }
+  public HashMap<String, Seller> findByAdress (String address, int productNumber) throws Exception {    
+    HashMap<String, Seller> hashMap = new HashMap<>();
+    Seller seller = sellerDao.findByStock(productNumber);
 
-  public Stock findStockById(String id, int productNumber) throws Exception{
-    List<Stock> stockList = stockDao.findAll(id);
-    for (Stock stock : stockList) {
-      if (stock.getProduct().getProductNumber() == productNumber) {
-        return stock;
-      }
-    }
+    String[] arr = address.split(" ");
+    if((seller.getBusinessAddress().contains(arr[2])) && 
+        (seller.getBusinessAddress().contains(arr[1]))) {
+      hashMap.put(seller.getMember().getId(), seller);
+      return hashMap;
+    } 
     return null;
   }
 }
+

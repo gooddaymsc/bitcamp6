@@ -28,7 +28,22 @@
       <result column="active" property="active"/>
       <result column="level" property="level"/>
     </association>
-  </resultMap>
+    
+      <association property="seller" javaType="Seller">
+      <result column="business_name" property="businessName"/>
+      <result column="business_no" property="businessNumber"/>
+      <result column="business_address" property="businessAddress"/>
+      <result column="business_tel" property="businessPlaceNumber"/>
+      <result column="openingTime" property="businessOpeningTime"/>
+      <result column="closingTime" property="businessClosingTime"/>
+  
+      <association property="member" javaType="member">
+        <id column="member_no" property="number"/>
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        </association>
+        </association>
+     </resultMap>
   
   <select id="findAll" resultMap="SellerMap">
     select 
@@ -142,6 +157,24 @@
     where 
       member_no=#{no}
   </delete>
+  
+  <select id="findByStock" resultMap="SellerMap" parameterType="int">
+    select 
+      se.business_name,
+      Se.business_address,
+      s.stock_no,
+      p.product_no,
+      p.name,
+      s.price, 
+      s.amount
+    from 
+      Seller se join member m on se.member_no = m.member_no
+      left outer join stock s on s.member_no = se.member_no 
+      left outer join product p on  p.proudct_no = s.product_no
+    where 
+      p.product_no=#{no}
+    order by s.product_no asc;
+    </select>
 
 </mapper>
 

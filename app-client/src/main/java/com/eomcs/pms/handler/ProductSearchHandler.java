@@ -22,7 +22,7 @@ public class ProductSearchHandler implements Command {
     HashMap<String, Seller> map = new HashMap<>();
 
     System.out.println("[상품검색]");
-
+    String id = ClientApp.getLoginUser().getId();
     int productNumber = Prompt.inputInt("\n상품번호 > ");
     Product product = productDao.findByNo(productNumber);
 
@@ -54,13 +54,13 @@ public class ProductSearchHandler implements Command {
         if(adress.equals("0")){
           return; }
 
-        map = productValidation.findByAdress(adress); 
+
+        map = productValidation.findByAdress(adress, productNumber); 
         break;
 
       } catch (Exception e) {
         System.out.println("* 주소입력을 다시 해주세요. (예: 서울시 강남구 역삼동 / 0.취소) ");
       }
-
     } if(map == null) {
       System.out.println("해당 위치에 판매처가 없습니다.\n");
       break;
@@ -75,7 +75,7 @@ public class ProductSearchHandler implements Command {
             entry.getValue().getMember().getId(),
             entry.getValue().getBusinessAddress(),
             entry.getValue().getBusinessPlaceNumber(),
-            productValidation.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
+           // productValidation.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
         request.setAttribute("storeName",entry.getValue().getBusinessName());
       }
     }
