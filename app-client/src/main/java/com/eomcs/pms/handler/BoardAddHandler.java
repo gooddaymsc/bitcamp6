@@ -38,6 +38,7 @@ public class BoardAddHandler implements Command {
 
     boardDao.insert(board);
     boardDao.insertTag(board);
+    boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
     sqlSession.commit();
 
     System.out.println("게시글 등록을 완료하였습니다.\n");

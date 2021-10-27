@@ -32,16 +32,17 @@ public class BoardDeleteHandler implements Command {
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
+
+      boardDao.deleteTag(no);
       boardDao.delete(no);
       sqlSession.commit();
+
       System.out.println("게시글을 삭제하였습니다.\n");
       return;
     }
-
     System.out.println("게시글 삭제를 취소하였습니다.\n");
     return;
   }
-
 }
 
 
