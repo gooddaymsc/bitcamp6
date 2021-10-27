@@ -24,7 +24,35 @@
       <result column="rate" property="rate"/>
       <result column="reviewerNum" property="reviewerNum"/>
     </association>
+    
+    <association property="seller" javaType="Seller">
+      <result column="business_name" property="businessName"/>
+      <result column="business_no" property="businessNumber"/>
+      <result column="business_address" property="businessAddress"/>
+      <result column="business_tel" property="businessPlaceNumber"/>
+      <result column="openingTime" property="businessOpeningTime"/>
+      <result column="closingTime" property="businessClosingTime"/>
+  
+      <association property="member" javaType="member">
+        <id column="member_no" property="number"/>
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+      </association>
+    </association>
   </resultMap>
+  
+  <select id="findByProductNo" resultMap="StockMap" parameterType="int">
+    select 
+      p.product_no, p.name, 
+      m.member_no, m.id, m.name,
+      s.stock_no,s.price,s.amount, 
+      sl.business_name, sl.business_no, sl.business_address, sl.business_address, sl.business_tel, sl.openingTime, sl.closingTime 
+    from product p join stock s on p.product_no=s.product_no 
+      join member m on s.member_no=m.member_no 
+      join seller sl on m.member_no=sl.member_no 
+    where 
+      p.product_no=#{productNo};
+  </select>
   
   <select id="findAll" resultMap="StockMap" parameterType="string">
     Select
@@ -45,7 +73,7 @@
   <insert id="insert" parameterType="stock">
     insert 
       into stock(member_no,product_no,amount,price) 
-    values((select member_no from member where id=#{id}),#{product.productNumber},#{stocks},#{price})
+    values((select member_no from member where id=#{seller.member.id}),#{product.productNumber},#{stocks},#{price})
   </insert>
   
   <select id="checkProduct" resultMap="StockMap" parameterType="string">

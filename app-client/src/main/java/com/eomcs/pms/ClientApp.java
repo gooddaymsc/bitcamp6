@@ -51,6 +51,7 @@ import com.eomcs.pms.handler.BuyerUpdateHandler;
 import com.eomcs.pms.handler.CartAddHandler;
 import com.eomcs.pms.handler.CartDeleteHandler;
 import com.eomcs.pms.handler.CartDetailHandler;
+import com.eomcs.pms.handler.CartHandlerHelper;
 import com.eomcs.pms.handler.CartListHandler;
 import com.eomcs.pms.handler.CartUpdateHandler;
 import com.eomcs.pms.handler.Command;
@@ -171,6 +172,7 @@ public class ClientApp {
     BookingDao bookingDao = new NetBookingDao(requestAgent, cartDao, sellerDao);
 
     ProductValidation productValidation = new ProductValidation(sellerDao, stockDao);
+    CartHandlerHelper cartHelper = new CartHandlerHelper(stockDao);
 
     commandMap.put("/buyer/add", new BuyerAddHandler(buyerDao, sqlSession));
     commandMap.put("/buyer/list",   new BuyerListHandler(buyerDao));
@@ -221,13 +223,13 @@ public class ClientApp {
     commandMap.put("/findComment", new CommentFindHandler(boardDao));
     commandMap.put("/findReview",   new ReviewFindHandler(reviewDao, productDao));
 
-    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao,sqlSession));
+    commandMap.put("/stock/add"  ,  new StockAddHandler(stockDao, sellerDao, sqlSession));
     commandMap.put("/stock/list",   new StockListHandler(stockDao));
     commandMap.put("/stock/detail", new StockDetailHandler(stockDao));
     commandMap.put("/stock/update", new StockUpdateHandler(stockDao,sqlSession));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockDao,sqlSession));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao, cartHelper));
     commandMap.put("/cart/list",   new CartListHandler(cartDao, sellerDao));
     commandMap.put("/cart/detail", new CartDetailHandler(cartDao));
     commandMap.put("/cart/update", new CartUpdateHandler(cartDao));

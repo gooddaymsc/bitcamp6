@@ -13,14 +13,19 @@
     
    <association property="stock" javaType="Stock">
     <id column="stock_no" property="stockNumber"/>
-    <result column="sellerId" property="id"/> <!-- 판매자 id -->
     <result column="amount" property="stocks"/>
     <result column="price" property="price"/>
-    <!-- stock 안에 product 객체정보를 넣어야한다면? -->
     
     <association property="product" javaType="Product">
       <id column="product_no" property="productNumber"/>
       <result column="name" property="productName"/> 
+    </association>
+    
+    <association property="seller" javaType="Seller">
+      <association property="member" javaType="member">
+        <id column="sellerNo" property="number"/>
+        <result column="sellerid" property="id"/>
+      </association>
     </association>
   </association> 
 
@@ -62,7 +67,6 @@
   
   <update id="update" parameterType="Cart">
     update cart set 
-      cart_no = #{cartNumber}, 
       amount = #{cartStocks}
     where 
       cart_no=#{cartNumber}
@@ -76,12 +80,12 @@
   </delete>
   
   
-  <!-- 
-   <insert id="insert" parameterType="product">
-   insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
-    values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
+  <insert id="insert" parameterType="cart">
+    insert into cart(member_no, stock_no, amount) 
+    values((select member_no from member where id=#{id}),#{stock.stockNumber},#{cartStocks});
   </insert>
    
+  <!-- 
     
     <select id="findByProduct" resultMap="ProductMap" parameterType="String">
     select 

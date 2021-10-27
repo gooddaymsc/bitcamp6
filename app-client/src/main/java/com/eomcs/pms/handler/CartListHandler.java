@@ -37,8 +37,8 @@ public class CartListHandler implements Command {
       for (Cart cart : cartList.getPrivacyCart()) {
         System.out.printf("%-6d\t%-6s\t%-6s\t%-6s\t%-6d\t%-6d\t%-6s\n", // 장바구니 번호, 가게명, 상품명, 수량, 총액, 등록일
             cart.getCartNumber(), 
-            sellerDao.findById(cart.getStock().getId()).getBusinessName(),
-            cart.getStock().getId(),
+            sellerDao.findById(cart.getStock().getSeller().getMember().getId()).getBusinessName(),
+            cart.getStock().getSeller().getMember().getId(),
             cart.getStock().getProduct().getProductName(), 
             cart.getCartStocks(), 
             cart.getStock().getPrice(),
