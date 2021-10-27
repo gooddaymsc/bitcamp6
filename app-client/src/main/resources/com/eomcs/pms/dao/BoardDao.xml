@@ -22,6 +22,11 @@
   </association>
   </resultMap>
   
+  <insert id="insert" parameterType="board">
+    insert
+        into board(member_no, title, content)
+      values (#{title}, #{content})
+  </insert>
   
   <select id="findAll" resultMap="BoardMap">
 		select
@@ -44,11 +49,7 @@
     where board_no=#{no}
   </update>
   
-  <insert id="insert" parameterType="board">
-    insert
-        into board(member_no,title,content)
-      values (#{title}, #{content})
-  </insert>
+  
   
   <select id="findByNo" resultMap="BoardMap" parameterType="int">
        select

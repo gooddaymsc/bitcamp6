@@ -5,15 +5,10 @@ import java.sql.Date;
 
 @SuppressWarnings("serial")
 public class Member implements Serializable {
-  public static final int ACCESS_LOGOUT = 0x01;
-  public static final int ACCESS_BUYER = 0x02; //2
-  public static final int ACCESS_SELLER = 0x04; //4
-  public static final int ACCESS_ADMIN = 0x08; //8
-
+  private int number;
   private String id;
   private String password;
   private int authority;
-  private int number;
   private String name;
   private String nickname;
   private String email;
@@ -27,9 +22,9 @@ public class Member implements Serializable {
   private boolean commentUpdate;
   private boolean MessageUpdate;
 
-  public Member() {
-    this("-","-", ACCESS_LOGOUT);
-  }
+  //  public Member() {
+  //    this("-","-",Menu.ACCESS_LOGOUT);
+  //  }
   public Member(String id, String password, int authority) {
     this.id = id;
     this.password = password;
@@ -131,6 +126,4 @@ public class Member implements Serializable {
   public void setActive(int active) {
     this.active = active;
   }
-
-
 }

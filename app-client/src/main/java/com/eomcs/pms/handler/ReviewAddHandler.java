@@ -38,12 +38,22 @@ public class ReviewAddHandler implements Command {
       // review.setPurchase(reviewDao.findPurchased(product.getProductName())); 
       review.setScore(scores); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);
+
       review.setProductNo(product.getProductNumber());
       review.setReviewProduct(product.getProductName());
       review.setMember(ClientApp.getLoginUser());
 
-      reviewDao.insert(review);
-      sqlSession.commit();
+      try {
+        reviewDao.insert(review);
+        System.out.println(reviewDao.avg(review));
+        product.setRate(reviewDao.avg(review));
+
+        productDao.updateRate(product);
+        sqlSession.commit();
+      } catch (Exception e) {
+        sqlSession.rollback();
+      }
+
 
       System.out.println("상품평 등록을 완료하였습니다.\n");
       return;
