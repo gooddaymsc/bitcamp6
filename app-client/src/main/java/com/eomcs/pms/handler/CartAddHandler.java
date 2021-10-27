@@ -2,6 +2,7 @@ package com.eomcs.pms.handler;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
@@ -12,9 +13,11 @@ import com.eomcs.util.Prompt;
 public class CartAddHandler implements Command {
   CartDao cartDao;
   CartHandlerHelper cartHelper;
-  public CartAddHandler(CartDao cartDao, CartHandlerHelper cartHelper) {
+  SqlSession sqlSession;
+  public CartAddHandler(CartDao cartDao, CartHandlerHelper cartHelper, SqlSession sqlSession) {
     this.cartDao = cartDao;
     this.cartHelper = cartHelper;
+    this.sqlSession = sqlSession;
   }
 
   static boolean search = false;    //productSearch 실행 전/후 구분
@@ -117,6 +120,7 @@ public class CartAddHandler implements Command {
                   privacyCart.setCartStocks(privacyCart.getCartStocks() + stocks);
                   privacyCart.setCartPrice(privacyCart.getCartPrice()+(privacyCart.getStock().getPrice()*stocks));
                   cartDao.update(privacyCart); 
+                  sqlSession.commit();
                   System.out.println("장바구니가 등록되었습니다.\n");         
                   return;
                 } else {
@@ -135,6 +139,7 @@ public class CartAddHandler implements Command {
           // 체크!!!
           cart.setId(nowLoginId);
           cartDao.insert(cart);
+          sqlSession.commit();
           System.out.println("장바구니가 등록되었습니다.\n");         
           break;
         } else {

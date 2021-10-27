@@ -229,11 +229,11 @@ public class ClientApp {
     commandMap.put("/stock/update", new StockUpdateHandler(stockDao,sqlSession));
     commandMap.put("/stock/delete", new StockDeleteHandler(stockDao,sqlSession));
 
-    commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao, cartHelper));
+    commandMap.put("/cart/add"  ,  new CartAddHandler(cartDao, cartHelper, sqlSession));
     commandMap.put("/cart/list",   new CartListHandler(cartDao, sellerDao));
     commandMap.put("/cart/detail", new CartDetailHandler(cartDao));
-    commandMap.put("/cart/update", new CartUpdateHandler(cartDao));
-    commandMap.put("/cart/delete", new CartDeleteHandler(cartDao));
+    commandMap.put("/cart/update", new CartUpdateHandler(cartDao, sqlSession));
+    commandMap.put("/cart/delete", new CartDeleteHandler(cartDao, sqlSession));
 
     commandMap.put("/booking/add",    new BookingAddHandler(bookingDao, stockDao));
     commandMap.put("/booking/list",   new BookingListHandler(bookingDao, sellerDao));
