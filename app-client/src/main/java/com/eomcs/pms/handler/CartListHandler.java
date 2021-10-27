@@ -43,7 +43,7 @@ public class CartListHandler implements Command {
             cart.getCartStocks(), 
             cart.getStock().getPrice(),
             cart.getRegistrationDate());
-        total += cart.getStock().getPrice();
+        total += cart.getStock().getPrice() * cart.getCartStocks();
       }
       System.out.printf("\n>>> 총 금액 : %d원\n", total);
       System.out.println();
