@@ -9,7 +9,9 @@ public interface ProductDao {
   List<Product> findAll() throws Exception;
   Product findByNo(int no) throws Exception;
   Product findByProduct(String name) throws Exception;
+  Product ranking(String name) throws Exception;
   void update(Product product) throws Exception;
+  void updateRate(Product product) throws Exception;
   void delete(Product product) throws Exception;
   List<ProductType> findAllProductType() throws Exception;
 }

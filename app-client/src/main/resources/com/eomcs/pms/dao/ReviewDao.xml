@@ -16,7 +16,6 @@
       <id column="member_no" property="number"/>
       <result column="id" property="id"/>
     </association>
-    
   </resultMap>
   
   
@@ -33,7 +32,6 @@
     where 
       pro.product_no = #{productNo}
   </select>
-  
   
   <insert id="insert" parameterType="review">
     insert into review(product_no, member_no, score, comment)
@@ -85,6 +83,13 @@
     where review_no=#{no}
   </delete>
 
+  <!-- 
+<select id="avg" parameterType="review" resultType="float" >
+    select product_no, avg(score) from review
+    group by review_no=#{no}
+  </select>
+   -->
+  
 </mapper>
 
 

@@ -11,9 +11,8 @@ public class Booking implements Serializable {
   private String bookingTime;    //예약시간
   private Date registeredDate;   //등록일시
   private int bookingStocks;     //예약 상품의 갯수
-  private int bookingPrice;      //총액
+  private int bookingPrice;      //금액
   private boolean confirm;       //픽업확정여부. 구매상태
-  //  private String theOtherId;     // 상대방 id
   //  private String id; 
   private int paymentType;       //결제방법
   private int paymentStatus;     //결제상태
