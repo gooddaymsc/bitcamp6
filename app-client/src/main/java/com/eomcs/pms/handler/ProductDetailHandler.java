@@ -41,7 +41,7 @@ public class ProductDetailHandler implements Command {
       request.setAttribute("productName", product.getProductName());
 
       //장바구니 등록 / 재고등록 / 리뷰보기(CRUD) 
-
+      request.setAttribute("searchIs", false);
       if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_BUYER ) {
         while (true) {
           System.out.println("리뷰보기(1) / 장바구니 등록(2) / 이전(0)");
