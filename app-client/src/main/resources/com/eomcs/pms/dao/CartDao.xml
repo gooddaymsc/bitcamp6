@@ -22,6 +22,8 @@
     </association>
     
     <association property="seller" javaType="Seller">
+    <result column="openingTime" property="businessOpeningTime"/>
+    <result column="closingTime" property="businessClosingTime"/>
       <association property="member" javaType="member">
         <id column="sellerNo" property="number"/>
         <result column="sellerid" property="id"/>
@@ -53,12 +55,14 @@
       s.stock_no, s.member_no sellerNo, s.price,
       p.product_no, p.name,
       m1.id as buyerId, 
-      m2.id as sellerId 
+      m2.id as sellerId, 
+      sl.openingTime, sl.closingTime
     from 
       cart c join stock s on c.stock_no=s.stock_no 
       join member m1 on m1.member_no=c.member_no 
       join product p on s.product_no = p.product_no
       join member m2 on m2.member_no=s.member_no 
+      join seller sl on m2.member_no=sl.member_no
     where 
       m1.id= #{id}
      And 
@@ -73,10 +77,10 @@
   </update>
   
   <delete id="delete" parameterType="Cart">
-    delete 
-    from cart
+    update cart set 
+      amount = -1
     where 
-    cart_no=#{cartNumber}
+      cart_no=#{cartNumber}
   </delete>
   
   

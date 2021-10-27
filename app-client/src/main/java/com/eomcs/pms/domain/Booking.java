@@ -5,15 +5,14 @@ import java.sql.Date;
 
 @SuppressWarnings("serial")
 public class Booking implements Serializable {
-  public Cart cart;
   private int bookingNumber;     //예약번호
+  public Cart cart;
   private Date bookingDate;      //예약날짜
   private String bookingTime;    //예약시간
   private Date registeredDate;   //등록일시
   private int bookingStocks;     //예약 상품의 갯수
   private int bookingPrice;      //금액
   private boolean confirm;       //픽업확정여부. 구매상태
-  //  private String id; 
   private int paymentType;       //결제방법
   private int paymentStatus;     //결제상태
   private Date bookingStartTime;  //픽업가능 시작시간

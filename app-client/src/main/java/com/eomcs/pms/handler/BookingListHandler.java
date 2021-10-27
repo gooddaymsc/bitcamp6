@@ -33,6 +33,9 @@ public class BookingListHandler implements Command {
             "번호", "가게명", "상품명", "주문일시", "픽업날짜", "픽업시간", "결제상태", "픽업상태");
         System.out.println("----------------------------------------------------------------------------------------");
         for (Booking booking : bookingList) {
+          if (booking.getPaymentStatus()==-1) {
+            continue;
+          }
           System.out.printf("%-5d\t%-5s\t%-5s\t%-9s\t%-10s\t%-10s\t%-3s-%s\t%-10s\n",
               booking.getBookingNumber(), 
               booking.getCart().getStock().getSeller().getBusinessName(),

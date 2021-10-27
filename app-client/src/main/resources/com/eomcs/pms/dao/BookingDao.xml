@@ -127,26 +127,36 @@
       m2.id=#{id} and b.purchase_no=#{bookingNo}
   </select>
   
+  <insert id="insert" parameterType="booking"
+  useGeneratedKeys="true" keyColumn="purchase_no" keyProperty="bookingNumber">
+    insert into purchase(member_no, cart_no, payment_no, date, payment_status, pickup_booking_date, pickup_time) 
+    values((select member_no from member where id = #{cart.id}), #{cart.cartNumber},#{paymentType},#{bookingDate},#{paymentStatus},#{bookingDate},#{bookingTime})
+  </insert>
+  
+  <insert id="insertList" parameterType="booking">
+    insert into purchase_list(purchase_no, stock_no, amount, price) 
+    values(#{bookingNumber}, #{cart.stock.stockNumber}, #{cart.cartStocks} ,#{cart.stock.price})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    update purchase set
+      payment_status = -1
+    where
+      purchase_no=#{bookingNumber}
+  </delete>
   <!--
   <insert id="update" parameterType="message">
     insert into message(member_no, member_no2, room_no, content) 
       values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
   </insert>
   
-  <insert id="insertRoomNo" parameterType="message"
-  useGeneratedKeys="true" keyColumn="room_no" keyProperty="roomNumber">
-    insert into messageRoom values();
-  </insert>
    
   <insert id="insert" parameterType="message">
     insert into message(member_no, member_no2, room_no, content) 
       values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
   </insert>
   
-  <delete id="delete" parameterType="message">
-    delete from message 
-    where room_no = #{roomNo}
-  </delete>-->
+  -->
 </mapper>
 
 
