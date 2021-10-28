@@ -240,7 +240,7 @@ public class ClientApp {
     commandMap.put("/booking/list",   new BookingListHandler(bookingDao));
     commandMap.put("/booking/detail",   new BookingDetailHandler(bookingDao, buyerDao));
     commandMap.put("/booking/confirm",   new BookingConfirmHandler(bookingDao, buyerDao, sellerDao));
-    commandMap.put("/booking/update", new BookingUpdateHandler(bookingDao));
+    commandMap.put("/booking/update", new BookingUpdateHandler(bookingDao, bookingHelper, sqlSession));
     commandMap.put("/booking/delete", new BookingDeleteHandler(bookingDao, sqlSession));
 
     commandMap.put("/message/add",    new MessageAddHandler(messageDao, sqlSession, memberDao));

@@ -34,7 +34,8 @@
           <result column="business_name" property="businessName"/>
           <result column="business_address" property="businessAddress"/>
           <result column="business_tel" property="businessPlaceNumber"/>
-    
+          <result column="openingTime" property="businessOpeningTime"/>
+          <result column="closingTime" property="businessClosingTime"/>
           <association property="member" javaType="member">
           <id column="sellerNo" property="number"/>
           <result column="sellerid" property="id"/>
@@ -91,7 +92,7 @@
       p.product_no, p.name,
       m1.id as buyerId, 
       m2.id as sellerId, 
-      sl.business_name, sl.business_address, sl.business_tel,
+      sl.business_name, sl.business_address, sl.business_tel, sl.openingTime, sl.closingTime,
       pl.amount B_amount, pl.price B_price
     from 
       purchase b join cart c on b.cart_no=c.cart_no
@@ -144,19 +145,14 @@
     where
       purchase_no=#{bookingNumber}
   </delete>
-  <!--
-  <insert id="update" parameterType="message">
-    insert into message(member_no, member_no2, room_no, content) 
-      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
+
+  <insert id="update" parameterType="booking">
+    update purchase set 
+      pickup_booking_date=#{bookingDate},
+      pickup_time=#{bookingTime}
+    where 
+      purchase_no=#{bookingNumber}
   </insert>
-  
-   
-  <insert id="insert" parameterType="message">
-    insert into message(member_no, member_no2, room_no, content) 
-      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
-  </insert>
-  
-  -->
 </mapper>
 
 
