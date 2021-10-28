@@ -41,20 +41,34 @@ public class ProductAddHandler extends HttpServlet {
 
     Product product = new Product();
 
-    product.setProductName(productName);
-    String type = ProductValidation.checkType("주종 : ");
-    String subType = ProductValidation.checkSubType("상세주종 : ",type);
+    //상품명
+    //       주종-상세주종
+    //원산지
+    //품종
+    //용량
+    //도수
+    //당도(1-5)
+    //산도(1-5)
+    //바디감    
 
-    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
-    product.setCountryOrigin(Prompt.inputString("원산지 : "));
-    if(product.getProductType().getType().equals("와인")) {
-      product.setVariety(Prompt.inputString("품종 : "));
-    }
-    product.setVolume(Prompt.inputInt("용량 : "));
-    product.setAlcoholLevel(Prompt.inputFloat("알콜도수 : ")); 
-    product.setSugarLevel(ProductValidation.checkNum("당도(1-5) : "));
-    product.setAcidity(ProductValidation.checkNum("산도(1-5) : "));
-    product.setWeight(ProductValidation.checkNum("바디감(1-5) : "));
+
+    product.setProductName(request.getParameter("productName"));
+
+    //    String type = ProductValidation.checkType(request.getParameter("type"));
+    //    String subType = ProductValidation.checkSubType(request.getParameter("subType"));
+    //    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
+
+    product.setCountryOrigin(request.getParameter("countryOrigin"));
+    product.setVariety(request.getParameter("variety"));
+
+    //    if(product.getProductType().getType().equals("와인")) {
+    //      product.setVariety(Prompt.inputString("품종 : "));
+    //    }
+    product.setVolume(Integer.parseInt(request.getParameter("volume")));
+    product.setAlcoholLevel(Integer.parseInt(request.getParameter("alcoholLevel"))); 
+    product.setSugarLevel(ProductValidation.checkNum(request.getParameter("sugarLevel")));
+    product.setAcidity(ProductValidation.checkNum(request.getParameter("acidity")));
+    product.setWeight(ProductValidation.checkNum(request.getParameter("weight")));
 
     productDao.insert(product);
     sqlSession.commit();
