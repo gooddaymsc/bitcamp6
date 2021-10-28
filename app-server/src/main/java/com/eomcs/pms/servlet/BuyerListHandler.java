@@ -61,10 +61,15 @@ public class BuyerListHandler extends HttpServlet {
 
       //      <a href='detail?no=%1$d'>%s</a>
       for (Buyer buyer : buyerList) {
-        out.printf("%d, %s, %s, %s, %d, %s<br>", 
+        out.printf("<td>%d</td>"
+            + " <td>%s</td>"
+            + " <td>%s</td>"
+            //  + " <td>%s</td>"
+            + " <td>%d</td>"
+            + " <td>%s</td> </tr>", 
             buyer.getMember().getNumber(),
             buyer.getMember().getId(), 
-            buyer.getMember().getName(),
+            //    buyer.getMember().getName(),
             buyer.getMember().getNickname(),
             buyer.getMember().getLevel(),
             buyer.getMember().getRegisteredDate());

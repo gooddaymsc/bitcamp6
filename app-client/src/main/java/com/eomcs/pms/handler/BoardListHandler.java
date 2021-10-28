@@ -27,17 +27,17 @@ public class BoardListHandler implements Command {
 
       Collection<Board> boardList = boardDao.findAll();
 
-      System.out.printf("%-3s\t%-15s\t%-6s\t%-3s\t%-6s\n",
-          "번호", "제목", "작성자", "조회수", "등록일");
+      System.out.printf("%-3s\t%-6s\t%-6s\t%-6s\t%-3s\t%-6s\n",
+          "번호", "제목", "태그", "작성자", "조회수", "등록일");
       System.out.println("--------------------------------------------------------------------------");
 
       for (Board board : boardList) {
 
-        System.out.printf("%-3d\t%-15s\t%-5s\t%-3d\t%-6s\n", 
+        System.out.printf("%-3d\t%-15s\t%-5s\t%-5s\t%-3d\t%-6s\n", 
             //  System.out.printf("%-3d\t%-15s\t%-15s\t%-6s\t%-3d\t%-3d\t%-6s\n", 
             board.getBoardNumber(), 
             board.getTitle(), 
-            //            board.getBoardTag().getTag(),
+            board.getBoardTag().getTag(),
             board.getWriter().getId(),
             board.getViews(), 
             //            board.getLikes(),

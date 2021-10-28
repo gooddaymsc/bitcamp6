@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import com.eomcs.pms.dao.SellerDao;
@@ -112,14 +113,18 @@ public class ProductValidation {
   }  
   public HashMap<String, Seller> findByAdress (String address, int productNumber) throws Exception {    
     HashMap<String, Seller> hashMap = new HashMap<>();
-    Seller seller = sellerDao.findByStock(productNumber);
-
+    Collection<Seller> sellerList = sellerDao.findByStock(productNumber);
+    System.out.println(sellerList.toString());
     String[] arr = address.split(" ");
-    if((seller.getBusinessAddress().contains(arr[2])) && 
-        (seller.getBusinessAddress().contains(arr[1]))) {
-      hashMap.put(seller.getMember().getId(), seller);
-      return hashMap;
-    } 
+    for(Seller seller : sellerList) {
+      System.out.println(seller.getBusinessAddress());
+      if((seller.getBusinessAddress().contains(arr[2])) && 
+          (seller.getBusinessAddress().contains(arr[1]))) {
+        hashMap.put(seller.getMember().getId(), seller);
+        System.out.println(seller.getBusinessAddress());
+        return hashMap;
+      } 
+    }
     return null;
   }
 

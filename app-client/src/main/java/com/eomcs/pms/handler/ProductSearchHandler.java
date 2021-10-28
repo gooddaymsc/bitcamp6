@@ -63,15 +63,17 @@ public class ProductSearchHandler implements Command {
       } else {
         System.out.println();
         System.out.println("[현재 상품 판매처]");
+
         for (HashMap.Entry<String, Seller> entry : map.entrySet()) { //판매자 id 추가
           System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-4s\n","가게명", "판매자", "주소", "연락처", "재고수량");
           System.out.println("--------------------------------------------------------------------------");
-          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\t%-12s\n", 
+          System.out.printf("%-6s\t%-6s\t%-19s\t%-12s\n", 
               entry.getValue().getBusinessName(),
               entry.getValue().getMember().getId(),
               entry.getValue().getBusinessAddress(),
               entry.getValue().getBusinessPlaceNumber(),
-              productValidation.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
+              entry.getValue().getMember().getId(), productNumber).getStocks()
+          //    productValidation.findStockById(entry.getValue().getMember().getId(), productNumber).getStocks());
           request.setAttribute("storeName",entry.getValue().getBusinessName());
         }
       }

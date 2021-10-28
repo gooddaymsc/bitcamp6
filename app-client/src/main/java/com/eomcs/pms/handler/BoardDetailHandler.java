@@ -49,7 +49,7 @@ public class BoardDetailHandler implements Command {
 
       board.setLikes(boardDao.findLikeList(board.getBoardNumber()).size());
       System.out.printf("좋아요 수 : %d\n", board.getLikes());
-      //      System.out.printf("태그 : %s\n", board.getBoardTag().getTag());
+      System.out.printf("태그 : %s\n", board.getBoardTag().getTag());
 
       boardDao.updateCount(board.getBoardNumber());
       sqlSession.commit();
