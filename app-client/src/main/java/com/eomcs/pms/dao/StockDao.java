@@ -10,7 +10,6 @@ public interface StockDao {
   List<Stock> findByProductNo(int ProductNo) throws Exception;
   List<StockList> findAll() throws Exception;
   Stock checkProduct(String name) throws Exception; 
-  Stock findBySeller(int no) throws Exception;
   void update(Stock stock) throws Exception;
   void delete(Stock stock) throws Exception;
 }

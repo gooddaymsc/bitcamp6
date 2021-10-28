@@ -1,10 +1,12 @@
 package com.eomcs.pms.handler;
 
 import java.util.HashMap;
+import java.util.List;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Review;
 import com.eomcs.pms.domain.Seller;
+import com.eomcs.pms.domain.Stock;
 import com.eomcs.util.Prompt;
 
 public class ProductValidation {
@@ -118,6 +120,16 @@ public class ProductValidation {
       hashMap.put(seller.getMember().getId(), seller);
       return hashMap;
     } 
+    return null;
+  }
+
+  public Stock findStockById(String id, int productNumber) throws Exception{
+    List<Stock> stockList = stockDao.findAll(id);
+    for (Stock stock : stockList) {
+      if (stock.getProduct().getProductNumber() == productNumber) {
+        return stock;
+      }
+    }
     return null;
   }
 }

@@ -117,25 +117,6 @@
   <delete id="delete" parameterType="stock">
     delete from stock where stock_no=#{stockNumber}
   </delete>
-
-  <select id="findBySeller" resultMap="StockMap" parameterType="int">
-    select 
-      s.stock_no,
-      p.product_no,
-      p.name,
-      se.business_name,
-      Se.business_address,
-      s.price, 
-      s.amount
-    from 
-      stock s left outer join product p on s.product_no = p.product_no 
-      left outer join  member m on  m.member_no = s.member_no
-      Left outer join seller se on se.member_no = m.member_no
-    where 
-      p.product_no=#{no}
-    order by s.product_no asc;
-    </select>
-
 </mapper>
 
 
