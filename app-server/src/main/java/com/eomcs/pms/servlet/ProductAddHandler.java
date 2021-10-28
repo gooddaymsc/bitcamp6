@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
+@WebServlet("/product/add")
 public class ProductAddHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -42,7 +44,7 @@ public class ProductAddHandler extends HttpServlet {
     Product product = new Product();
 
     //상품명
-    //       주종-상세주종
+    //주종-상세주종
     //원산지
     //품종
     //용량
@@ -51,7 +53,6 @@ public class ProductAddHandler extends HttpServlet {
     //산도(1-5)
     //바디감    
 
-
     product.setProductName(request.getParameter("productName"));
 
     //    String type = ProductValidation.checkType(request.getParameter("type"));
@@ -59,26 +60,16 @@ public class ProductAddHandler extends HttpServlet {
     //    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
 
     product.setCountryOrigin(request.getParameter("countryOrigin"));
-    product.setVariety(request.getParameter("variety"));
+    //    product.setVariety(request.getParameter("variety"));
 
     //    if(product.getProductType().getType().equals("와인")) {
     //      product.setVariety(Prompt.inputString("품종 : "));
     //    }
     product.setVolume(Integer.parseInt(request.getParameter("volume")));
     product.setAlcoholLevel(Integer.parseInt(request.getParameter("alcoholLevel"))); 
-    product.setSugarLevel(ProductValidation.checkNum(request.getParameter("sugarLevel")));
-    product.setAcidity(ProductValidation.checkNum(request.getParameter("acidity")));
-    product.setWeight(ProductValidation.checkNum(request.getParameter("weight")));
-
-    productDao.insert(product);
-    sqlSession.commit();
-    System.out.println("상품을 등록하였습니다.\n");
-
-    //    member.setName(request.getParameter("name"));
-    //    member.setEmail(request.getParameter("email"));
-    //    member.setPassword(request.getParameter("password"));
-    //    member.setPhoto(request.getParameter("photo"));
-    //    member.setTel(request.getParameter("tel"));
+    //    product.setSugarLevel(ProductValidation.checkNum(request.getParameter("sugarLevel")));
+    //    product.setAcidity(ProductValidation.checkNum(request.getParameter("acidity")));
+    //    product.setWeight(ProductValidation.checkNum(request.getParameter("weight")));
 
     try {
       productDao.insert(product);
@@ -102,39 +93,6 @@ public class ProductAddHandler extends HttpServlet {
     response.setHeader("Refresh", "1;url=list");
   }
 }
-
-////  @Override
-//public void execute(CommandRequest request) throws Exception {
-//
-//  System.out.println("[상품 등록]");
-//  Product product = new Product();
-//  String productName = Prompt.inputString("상품명 : ");
-//
-//  if (productDao.findByProduct(productName)!=null) {
-//    System.out.println("이미 추가된 상품입니다.\n");
-//    return;  }
-//
-//  product.setProductName(productName);
-//  String type = ProductValidation.checkType("주종 : ");
-//  String subType = ProductValidation.checkSubType("상세주종 : ",type);
-//
-//  product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
-//  product.setCountryOrigin(Prompt.inputString("원산지 : "));
-//  if(product.getProductType().getType().equals("와인")) {
-//    product.setVariety(Prompt.inputString("품종 : "));
-//  }
-//  product.setVolume(Prompt.inputInt("용량 : "));
-//  product.setAlcoholLevel(Prompt.inputFloat("알콜도수 : ")); 
-//  product.setSugarLevel(ProductValidation.checkNum("당도(1-5) : "));
-//  product.setAcidity(ProductValidation.checkNum("산도(1-5) : "));
-//  product.setWeight(ProductValidation.checkNum("바디감(1-5) : "));
-//
-//  productDao.insert(product);
-//  sqlSession.commit();
-//  System.out.println("상품을 등록하였습니다.\n");
-//
-//}  
-//}
 
 
 

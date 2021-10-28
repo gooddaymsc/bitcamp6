@@ -38,10 +38,16 @@ public class ProductFormHandler extends HttpServlet {
 
     out.println("<form action='add'>");
     out.println("<label for='f-productName'>상품명</label> <input id='f-productName' type='text' name='productName'><br>");
-    out.println("<label for='f-email'>이메일</label> <input id='f-email' type='email' name='email'><br>");
-    out.println("<label for='f-password'>암호</label> <input id='f-password' type='password' name='password'><br>");
-    out.println("<label for='f-photo'>사진</label> <input id='f-photo' type='text' name='photo'><br>");
-    out.println("<label for='f-tel'>전화</label> <input id='f-tel' type='tel' name='tel'><br>");
+    //    out.println("<label for='f-type'>주종</label> <input id='f-type' type='text' name='type'><br>");
+    //    out.println("<label for='f-subType'>상세주종</label> <input id='f-subType' type='text' name='subType'><br>");
+    out.println("<label for='f-countryOrigin'>원산지</label> <input id='f-countryOrigin' type='text' name='countryOrigin'><br>");
+    out.println("<label for='f-variety'>품종</label> <input id='f-variety' type='text' name='variety'><br>");
+    out.println("<label for='f-volume'>용량</label> <input id='f-volume' type='text' name='volume'><br>");
+    out.println("<label for='f-alcoholLevel'>도수</label> <input id='f-alcoholLevel' type='text' name='alcoholLevel'><br>");
+    //    out.println("<label for='f-sugarLevel'>당도</label> <input id='f-sugarLevel' type='text' name='sugarLevel'><br>");
+    //    out.println("<label for='f-acidity'>산도</label> <input id='f-acidity' type='text' name='acidity'><br>");
+    //    out.println("<label for='f-weight'>바디감</label> <input id='f-weight' type='text' name='weight'><br>");
+
     out.println("<button>등록</button><br>");
     out.println("</form>");
 

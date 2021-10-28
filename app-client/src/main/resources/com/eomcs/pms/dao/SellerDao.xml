@@ -28,7 +28,7 @@
       <result column="active" property="active"/>
       <result column="level" property="level"/>
     </association>
-  </resultMap>
+     </resultMap>
   
   <select id="findAll" resultMap="SellerMap">
     select 
@@ -142,6 +142,28 @@
     where 
       member_no=#{no}
   </delete>
+  
+  <select id="findByStock" resultMap="SellerMap" parameterType="int">
+    select 
+      se.business_name,
+      se.business_address,
+      se.business_tel,
+      s.stock_no,
+      p.product_no,
+      p.name,
+      s.price, 
+      s.amount,
+      m.id
+    from 
+      Seller se join member m on se.member_no = m.member_no
+      left outer join stock s on s.member_no = se.member_no 
+      left outer join product p on  p.product_no = s.product_no
+    where 
+      p.product_no=#{no}
+    and
+      s.amount >0
+    order by s.product_no asc;
+    </select>
 
 </mapper>
 

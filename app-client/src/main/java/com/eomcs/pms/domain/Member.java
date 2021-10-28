@@ -2,7 +2,6 @@ package com.eomcs.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import com.eomcs.menu.Menu;
 
 @SuppressWarnings("serial")
 public class Member implements Serializable {
@@ -23,14 +22,16 @@ public class Member implements Serializable {
   private boolean commentUpdate;
   private boolean MessageUpdate;
 
-  public Member() {
-    this("-","-",Menu.ACCESS_LOGOUT);
-  }
-  public Member(String id, String password, int authority) {
-    this.id = id;
-    this.password = password;
-    this.authority = authority;
-  }
+  public Member() { }
+
+  //  public Member() {
+  //    this("-","-",Menu.ACCESS_LOGOUT);
+  //  }
+  //  public Member(String id, String password, int authority) {
+  //    this.id = id;
+  //    this.password = password;
+  //    this.authority = authority;
+  //  }
   public String getId() {
     return id;
   }

@@ -91,36 +91,3 @@ public class ProductListHandler extends HttpServlet {
     out.println("</html>");
   }
 }
-
-//" %-6d\t%-6s\t%-2s-%s\t%-7s\t%-4d\t%-4d\t%-1d\t%-1d\t%-1.2f\n", 
-
-//@Override
-//public void execute(CommandRequest request) throws Exception {
-//  Loop : while(true) {
-//    System.out.printf("[상품 목록]");
-//    if (ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_SELLER ||
-//        ClientApp.getLoginUser().getAuthority() == Menu.ACCESS_ADMIN) {
-//      System.out.println(" || 상품 등록(A) / 이전(0)\n");
-//    } else {
-//      System.out.println(" || 이전(0)\n");
-//    }
-//    System.out.printf("%-4s\t%-6s\t%-13s\t%-6s\t%-4s\t%-4s\t%-1s\t%-1s\t%-1s\n",
-//        "상품번호", "상품명", "주종 - 상세주종", "원산지", "용량", "당도", "산도", "바디감", "도수");
-//    System.out.println("--------------------------------------------------------------------------------------------------------");
-//
-//    Collection<Product> productList = productDao.findAll();
-//
-//    for (Product product : productList) {
-//      System.out.printf(" %-6d\t%-6s\t%-2s-%s\t%-7s\t%-4d\t%-4d\t%-1d\t%-1d\t%-1.2f\n", 
-//          product.getProductNumber(), 
-//          product.getProductName(), 
-//          product.getProductType().getType(),
-//          product.getProductType().getSubType(),
-//          product.getCountryOrigin(),
-//          product.getVolume(),
-//          product.getSugarLevel(),
-//          product.getAcidity(),
-//          product.getWeight(),
-//          product.getAlcoholLevel());
-//    }
-//    System.out.println();

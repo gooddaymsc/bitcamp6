@@ -6,10 +6,10 @@ import java.io.Serializable;
 public class Stock implements Serializable{
 
   private Product product;
+  private Seller seller;
   private int stockNumber;            //재고번호
   private int stocks;                 //재고 수량
   private int price;                  //가격
-  private Seller seller;
 
   public Seller getSeller() {
     return seller;

@@ -10,7 +10,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'java'
-      id 'eclipse-wtp' // 이클립스 IDE 용 웹 프로젝트 관련 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
+    id 'eclipse-wtp' // 이클립스 IDE 용 웹 프로젝트 관련 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
     id 'war' // 웹 애플리케이션의 배포 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
 }
 
