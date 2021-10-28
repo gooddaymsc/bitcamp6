@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.BoardDao">
+  
+  <resultMap type="Board" id="BoardMap">
+    <id column="board_no" property="boardNumber"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="registeredDate" property="registrationDate"/>
+    <result column="views" property="views"/>
+
+  <association property="writer" javaType="member">    
+    <id column="member_no" property="number"/>
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+  </association>
+  
+  <association property="boardTag" javaType="boardTag">    
+    <id column="tag_no" property="tagNumber"/>
+    <result column="tag" property="tag"/>
+  </association>
+  </resultMap>
+  
+  <resultMap type="LikeMember" id="LikeMap">
+    <id column="member_no" property="number"/>
+    <result column="registeredDate" property="registeredDate"/>
+    </resultMap>
+  
+  <select id="findAll" resultMap="BoardMap">
+      select
+         b.board_no,
+         b.member_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.name,
+         m.id,
+         t.tag
+      from board b
+        left join member m on b.member_no=m.member_no
+        left join board_tag bt on b.board_no=bt.board_no
+        left join tag t on bt.tag_no = t.tag_no
+      order by b.board_no desc
+  </select>
+  
+  <update id="updateCount" parameterType="int">
+    update board set
+      views = views + 1
+    where board_no=#{no}
+  </update>
+  
+  <insert id="insert" parameterType="board"
+  useGeneratedKeys="true" keyColumn="board_no" keyProperty="boardNumber">
+    insert
+      into board(member_no,title,content)
+      values (#{writer.number}, #{title}, #{content})
+  </insert>
+  
+  <insert id="insertTag" parameterType="board"
+  useGeneratedKeys="true" keyColumn="tag_no" keyProperty="boardTag.tagNumber">
+    insert
+      into tag(tag)
+      values (#{boardTag.tag})
+  </insert>
+  
+  <insert id="insertBoardTag" parameterType="boardTag">
+    insert
+      into board_tag(board_no, tag_no)
+      values (#{boardNo}, #{tagNo})
+  </insert>
+  
+  <select id="findByNo" resultMap="BoardMap" parameterType="int">
+       select
+         b.board_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.member_no, 
+         m.id, 
+         m.name,
+         m.email,
+         t.tag
+       from board b 
+        left join member m on b.member_no=m.member_no
+        left join board_tag bt on b.board_no=bt.board_no
+        left join tag t on bt.tag_no = t.tag_no
+        where b.board_no=#{no}
+  </select>
+  
+  <update id="update" parameterType="board">
+    update board set
+      title=#{title},
+      content=#{content}
+    where 
+      board_no=#{boardNumber}
+  </update>
+  
+  <update id="update2" parameterType="board">
+    update tag set
+      tag=#{boardTag.tag}
+    where 
+      tag_no=#{boardTag.tagNumber}
+  </update>
+  
+  <select id="findLikeList" resultMap="LikeMap" parameterType="int">
+    select 
+      member_no,
+      registeredDate
+    from 
+      board_like 
+    where 
+      board_no=#{no}     
+  </select>
+     
+  <delete id="deleteTag" parameterType="int">
+    delete from board_tag 
+    where board_no=#{no}
+  </delete>
+  
+  <delete id="delete" parameterType="int">
+    delete from board 
+    where board_no=#{no}
+  </delete>
+    
+  <insert id="likeInsert" parameterType="map">
+    insert into board_like(member_no,board_no) 
+    values(#{memberNo},#{boardNo});
+  </insert>
+  
+  <delete id="likeDelete" parameterType="map">
+    delete from board_like 
+    where 
+      member_no=#{memberNo} and board_no=#{boardNo};
+  </delete>
+  
+  
+  <!-- 
+  <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
+  </select>
+   -->
+  
+   
+</mapper>
+
+
+
+
+
+
