@@ -8,6 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.ProductDao;
 
 
 @WebListener
@@ -23,10 +24,12 @@ public class AppInitListener implements ServletContextListener {
           "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
 
       BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
+      ProductDao productDao = sqlSession.getMapper(ProductDao.class);
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
 
       웹애플리케이션공용저장소.setAttribute("buyerDao", buyerDao);
+      웹애플리케이션공용저장소.setAttribute("productDao", productDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 

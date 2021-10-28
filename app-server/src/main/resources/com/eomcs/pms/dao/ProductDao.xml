@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.ProductDao">
+  
+  <resultMap type="Product" id="ProductMap">
+    <id column="product_no" property="productNumber"/> 
+    <result column="name" property="productName"/>
+    <result column="type_no" property="typeNumber"/>
+    <result column="origin" property="countryOrigin"/>
+    <result column="variety" property="variety"/>
+    <result column="volume" property="volume"/>
+    <result column="alcoholLevel" property="alcoholLevel"/>
+    <result column="sugarLevel" property="sugarLevel"/> 
+    <result column="acidity" property="acidity"/>
+    <result column="weight" property="weight"/>
+    <result column="rate" property="rate"/>
+    <result column="reviewerNum" property="reviewerNum"/>
+    
+   <association property="productType" javaType="ProductType">
+    <id column="type_no" property="number"/>
+    <result column="type" property="type"/>
+    <result column="subType" property="subType"/>
+  </association> 
+
+  </resultMap>
+   
+  <resultMap type="productType" id="ProductTypeMap">
+    <id column="type_no"  property="number"/>
+    <result column="type" property="type"/>  
+    <result column="subType" property="subType"/>  
+  </resultMap> 
+   
+  <select id="findAllProductType" resultMap="ProductTypeMap">
+    select 
+      type_no,
+      type, 
+      subType 
+    from 
+      product_type
+    order by 
+      type_no asc
+  </select>
+ 
+  <select id="findAll" resultMap="ProductMap">
+	   Select 
+	     p.product_no, 
+	     t.type, 
+	     t.subType, 
+	     p.name, 
+	     p.origin, 
+	     p.volume, 
+	     p.alcoholLevel, 
+	     p.sugarLevel,
+	     p.acidity, 
+	     p.weight, 
+	     p.rate, 
+	     p.variety 
+	   From 
+	     product p
+     left outer join product_type t on t.type_no = p.type_no 
+     order by p.product_no asc
+  </select>
+  
+  
+   <insert id="insert" parameterType="product">
+   insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
+    values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
+  </insert>
+   
+  
+  <select id="findByNo" resultMap="ProductMap" parameterType="int">
+    select 
+      p.product_no, 
+      p.type_no, 
+      p.name, 
+      p.origin, 
+      p.volume, 
+      p.alcoholLevel, 
+      p.sugarLevel, 
+      p.acidity, 
+      p.weight, 
+      p.rate, 
+      p.variety, 
+      t.type, 
+      t.subType 
+    from product p join product_type t on p.type_no=t.type_no 
+    where 
+      p.product_no=#{no}
+  </select>
+  
+    <select id="findByProduct" resultMap="ProductMap" parameterType="String">
+    select 
+      p.product_no, 
+      p.type_no, 
+      p.name, 
+      p.origin, 
+      p.volume, 
+      p.alcoholLevel, 
+      p.sugarLevel, 
+      p.acidity, 
+      p.weight, 
+      p.rate, 
+      p.variety, 
+      t.type, 
+      t.subType 
+    from product p join product_type t on p.type_no=t.type_no 
+    where 
+      p.name=#{name}
+  </select>
+  
+  <update id="update" parameterType="Product">
+    update product set 
+      type_no = #{productType.number}, 
+      name = #{productName}, 
+      origin=#{countryOrigin}, 
+      volume=#{volume}, 
+      alcoholLevel=#{alcoholLevel}, 
+      sugarLevel=#{sugarLevel}, 
+      acidity=#{acidity}, 
+      weight=#{weight}, 
+      variety=#{variety}
+    where 
+      product_no=#{productNumber}
+  </update>
+  
+  <delete id="delete" parameterType="Product">
+    delete from product 
+    where product_no=#{productNumber}
+  </delete>
+  <!-- 
+   <update id="updateRate" parameterType="product">
+     update product set 
+       rate=#{rate}
+     where 
+       product_no=#{productNumber}
+  </update>
+  
+  <select id="ranking" resultMap="ProductMap" parameterType="String">
+    select p.rate, p.name, p.product_no, p.origin, p.alcoholLevel, 
+         
+      dense_rank() over (order by rate desc) rank 
+    from product p;
+  </select>
+   -->
+</mapper>
+
+
+
+
+
+
+
