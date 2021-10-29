@@ -41,7 +41,7 @@ public class ProductFormHandler extends HttpServlet {
     //    out.println("<label for='f-type'>주종</label> <input id='f-type' type='text' name='type'><br>");
     //    out.println("<label for='f-subType'>상세주종</label> <input id='f-subType' type='text' name='subType'><br>");
     out.println("<label for='f-countryOrigin'>원산지</label> <input id='f-countryOrigin' type='text' name='countryOrigin'><br>");
-    out.println("<label for='f-variety'>품종</label> <input id='f-variety' type='text' name='variety'><br>");
+    //    out.println("<label for='f-variety'>품종</label> <input id='f-variety' type='text' name='variety'><br>");
     out.println("<label for='f-volume'>용량</label> <input id='f-volume' type='text' name='volume'><br>");
     out.println("<label for='f-alcoholLevel'>도수</label> <input id='f-alcoholLevel' type='text' name='alcoholLevel'><br>");
     //    out.println("<label for='f-sugarLevel'>당도</label> <input id='f-sugarLevel' type='text' name='sugarLevel'><br>");

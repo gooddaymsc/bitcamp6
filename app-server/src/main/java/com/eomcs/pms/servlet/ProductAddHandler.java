@@ -55,9 +55,9 @@ public class ProductAddHandler extends HttpServlet {
 
     product.setProductName(request.getParameter("productName"));
 
-    //    String type = ProductValidation.checkType(request.getParameter("type"));
-    //    String subType = ProductValidation.checkSubType(request.getParameter("subType"));
-    //    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
+    String type = ProductValidation.checkType(request.getParameter("type"));
+    String subType = ProductValidation.checkSubType(request.getParameter("subType"));
+    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
 
     product.setCountryOrigin(request.getParameter("countryOrigin"));
     //    product.setVariety(request.getParameter("variety"));

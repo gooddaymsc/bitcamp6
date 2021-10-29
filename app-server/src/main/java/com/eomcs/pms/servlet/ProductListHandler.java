@@ -62,7 +62,7 @@ public class ProductListHandler extends HttpServlet {
       for (Product product : productList) {
         out.printf("<tr>"
             + "<td>%d</td>"
-            + " <td>%s</td>"
+            + " <td><a href='detail?no=%1$d'>%s</a></td>"
             + " <td>%s-%s</td>"
             + " <td>%s</td>"
             + " <td>%d</td>"
