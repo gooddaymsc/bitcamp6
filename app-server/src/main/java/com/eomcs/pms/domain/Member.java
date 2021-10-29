@@ -22,9 +22,8 @@ public class Member implements Serializable {
   private boolean commentUpdate;
   private boolean MessageUpdate;
 
-  //  public Member() {
-  //    this("-","-",Menu.ACCESS_LOGOUT);
-  //  }
+  public Member() {
+  }
   //  public Member(String id, String password, int authority) {
   //    this.id = id;
   //    this.password = password;

@@ -35,6 +35,7 @@ public class AppInitListener implements ServletContextListener {
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
+      e.printStackTrace();
     }
 
   }
