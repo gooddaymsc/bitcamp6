@@ -31,8 +31,8 @@ public class BuyerAddController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      Member member = new Member();
       Buyer buyer = new Buyer();
+      Member member = new Member();
 
       member.setAuthority(2);
       member.setId(request.getParameter("id"));
@@ -79,7 +79,7 @@ public class BuyerAddController extends HttpServlet {
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-
+      e.getStackTrace();
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
