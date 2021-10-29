@@ -42,7 +42,7 @@ public class ProductAddHandler extends HttpServlet {
     out.println("<h1>상품등록결과</h1>");
 
     Product product = new Product();
-
+    int num = Prompt.inputInt(label);
     //상품명
     //주종-상세주종
     //원산지

@@ -1,48 +1,19 @@
 package com.eomcs.pms.servlet;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import com.eomcs.pms.dao.SellerDao;
-import com.eomcs.pms.dao.StockDao;
-import com.eomcs.pms.domain.Review;
-import com.eomcs.pms.domain.Seller;
-import com.eomcs.pms.domain.Stock;
-import com.eomcs.util.Prompt;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-public class ProductValidation {
+public class ProductValidation  extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  SellerDao sellerDao;
-  StockDao stockDao;
-  public ProductValidation(SellerDao sellerDao, StockDao stockDao) {
-    this.sellerDao = sellerDao;
-    this.stockDao = stockDao;
-  }
+  static HttpServletRequest request;
+  static HttpServletResponse response;
 
-  public static String purchaseStatus(Review re) {
-    String statue;
-    if(re.isPurchase() == true){
-      statue = "[실구매자]";
-    } else {
-      statue = "";
-    }
-    return statue;
-  }
-
-  public static int checkNum(String label) {
-    while(true) {
-      int num = Prompt.inputInt(label);
-      if(num < 1 || num > 5) {  
-        System.out.println("1-5 사이 수를 입력해주세요!"); 
-        continue;
-      }           
-      return num;       
-    }
-  }
-  public static String checkType(String label) {
+  public static String checkType(String parameter) {
     while(true) {
       System.out.println(" < 와인(1)/ 위스키(2)/ 브랜디,꼬냑(3) / 리큐르,보드카(4)/ 전통주(5) >");
-      String productType = Prompt.inputString(label);
+      String productType = request.getParameter("type");
       switch(productType){
         case("1") : return "와인";
         case("2") : return "위스키";
@@ -58,7 +29,7 @@ public class ProductValidation {
     while(true) {
       if(type.equals("와인")) {
         System.out.println(" < 레드와인(1) / 화이트와인(2) / 로제와인(3) / 스위트와인(4) / 스파클링와인(5) >");  
-        String productType2 = Prompt.inputString(label);
+        String productType2 = request.getParameter("subType");
         switch(productType2){
           case("1") : return "레드와인";
           case("2") : return "화이트와인";
@@ -69,7 +40,7 @@ public class ProductValidation {
         }
       } if(type.equals("위스키")) {
         System.out.println(" < 아메리칸위스키(버번)(1)/ 스카치위스키(몰트)(2) / 아이리쉬위스키(3) / 캐나다위스키(4) >"); 
-        String productType2 = Prompt.inputString(label);
+        String productType2 = request.getParameter("subType");
         switch(productType2){
           case("1") : return "아메리칸위스키(버번)";
           case("2") : return "스카치위스키(몰트)";
@@ -79,7 +50,7 @@ public class ProductValidation {
         }
       } if(type.equals("브랜디/꼬냑")) {
         System.out.println(" < 브랜디(1)/ 꼬냑(2) / 알마냑(3) >"); 
-        String productType2 = Prompt.inputString(label);
+        String productType2 = request.getParameter("subType");
         switch(productType2){
           case("1") : return "브랜디";
           case("2") : return "꼬냑";
@@ -88,7 +59,7 @@ public class ProductValidation {
         }
       } if(type.equals("리큐르/보드카")) {
         System.out.println(" < 리큐르(1)/ 진(2) / 럼(3) / 보드카(4) / 데낄라(5) / 음료.시럽(6) >"); 
-        String productType2 = Prompt.inputString(label);
+        String productType2 = request.getParameter("subType");
         switch(productType2){
           case("1") : return "리큐르";
           case("2") : return "진";
@@ -100,7 +71,7 @@ public class ProductValidation {
         }
       } if(type.equals("전통주")) {
         System.out.println(" < 한국전통주(1)/ 중국전통주(2) / 일본전통주(3) / 기타전통주(4) >"); 
-        String productType2 = Prompt.inputString(label);
+        String productType2 = request.getParameter("subType");
         switch(productType2){
           case("1") : return "한국전통주";
           case("2") : return "중국전통주";
@@ -111,31 +82,56 @@ public class ProductValidation {
       }
     }
   }  
-  public HashMap<String, Seller> findByAdress (String address, int productNumber) throws Exception {    
-    HashMap<String, Seller> hashMap = new HashMap<>();
-    Collection<Seller> sellerList = sellerDao.findByStock(productNumber);
-    System.out.println(sellerList.toString());
-    String[] arr = address.split(" ");
-    for(Seller seller : sellerList) {
-      System.out.println(seller.getBusinessAddress());
-      if((seller.getBusinessAddress().contains(arr[2])) && 
-          (seller.getBusinessAddress().contains(arr[1]))) {
-        hashMap.put(seller.getMember().getId(), seller);
-        System.out.println(seller.getBusinessAddress());
-        return hashMap;
-      } 
-    }
-    return null;
-  }
-
-  public Stock findStockById(String id, int productNumber) throws Exception{
-    List<Stock> stockList = stockDao.findAll(id);
-    for (Stock stock : stockList) {
-      if (stock.getProduct().getProductNumber() == productNumber) {
-        return stock;
-      }
-    }
-    return null;
-  }
 }
+
+//    public static String purchaseStatus(Review re) {
+//      String statue;
+//      if(re.isPurchase() == true){
+//        statue = "[실구매자]";
+//      } else {
+//        statue = "";
+//      }
+//      return statue;
+//    }
+
+//    public static int checkNum(String label) {
+//      while(true) {
+//        int num = Prompt.inputInt(label);
+//        if(num < 1 || num > 5) {  
+//          System.out.println("1-5 사이 수를 입력해주세요!"); 
+//          continue;
+//        }           
+//        return num;       
+//      }
+//    }
+
+
+
+//    public HashMap<String, Seller> findByAdress (String address, int productNumber) throws Exception {    
+//      HashMap<String, Seller> hashMap = new HashMap<>();
+//      Collection<Seller> sellerList = sellerDao.findByStock(productNumber);
+//      System.out.println(sellerList.toString());
+//      String[] arr = address.split(" ");
+//      for(Seller seller : sellerList) {
+//        System.out.println(seller.getBusinessAddress());
+//        if((seller.getBusinessAddress().contains(arr[2])) && 
+//            (seller.getBusinessAddress().contains(arr[1]))) {
+//          hashMap.put(seller.getMember().getId(), seller);
+//          System.out.println(seller.getBusinessAddress());
+//          return hashMap;
+//        } 
+//      }
+//      return null;
+//    }
+//
+//    public Stock findStockById(String id, int productNumber) throws Exception{
+//      List<Stock> stockList = stockDao.findAll(id);
+//      for (Stock stock : stockList) {
+//        if (stock.getProduct().getProductNumber() == productNumber) {
+//          return stock;
+//        }
+//      }
+//      return null;
+//    }
+
 
