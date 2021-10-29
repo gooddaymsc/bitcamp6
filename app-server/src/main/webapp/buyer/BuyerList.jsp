@@ -17,7 +17,12 @@
     <th>아이디</th>
     <th>이름</th>
     <th>닉네임</th>
+    <th>이메일</th>
+    <th>생일</th>
+    <th>사진</th>
+    <th>전화번호</th>
     <th>레벨</th>
+    <th>상태</th>
     <th>등록일</th>
   </tr>
 </thead>
@@ -26,10 +31,15 @@
 <c:forEach items="${buyerList}" var="buyer">
 <tr>
     <td>${buyer.member.number}</td>
- <td><a href='detail?no=${buyer.member.number}'>${buyer.member.name}</a></td> 
+ <td><a href='detail?no=${buyer.member.id}'>${buyer.member.id}</a></td> 
     <td>${buyer.member.name}</td> 
     <td>${buyer.member.nickname}</td> 
+    <td>${buyer.member.email}</td> 
+    <td>${buyer.member.birthday}</td> 
+    <td>${buyer.member.photo}</td> 
+    <td>${buyer.member.phoneNumber}</td> 
     <td>${buyer.member.level}</td> 
+    <td>${buyer.member.active}</td> 
     <td>${buyer.member.registeredDate}</td>
 </tr>
 </c:forEach>

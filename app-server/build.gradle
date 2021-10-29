@@ -36,6 +36,7 @@ repositories {
 
 dependencies {
 
+<<<<<<< HEAD
   // 서블릿 API
   providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
   
