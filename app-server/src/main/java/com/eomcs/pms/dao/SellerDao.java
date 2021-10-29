@@ -13,5 +13,6 @@ public interface SellerDao {
   void updateSeller(Seller seller) throws Exception;
   void updateLevel(Member seller) throws Exception;
   void delete(int no) throws Exception;
+  void deleteSeller(int no) throws Exception;
   List<Seller> findByStock(int no) throws Exception;
 }
