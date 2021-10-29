@@ -24,6 +24,7 @@ public class BuyerAddController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     buyerDao = (BuyerDao) 웹애플리케이션공용저장소.getAttribute("buyerDao");
   }
 
@@ -42,7 +43,6 @@ public class BuyerAddController extends HttpServlet {
     member.setBirthday(Date.valueOf((request.getParameter("birthday"))));
     member.setPhoto(request.getParameter("photo"));
     member.setPhoto(request.getParameter("phoneNumber"));
-    member.setPhoto(request.getParameter("registeredDate"));
     //    if (findDeletedByName(buyer.getName()) != -1) {
     //      if (deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getPhoneNumber().equals(buyer.getPhoneNumber()) && 
     //          deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getName().equals(buyer.getName())) {

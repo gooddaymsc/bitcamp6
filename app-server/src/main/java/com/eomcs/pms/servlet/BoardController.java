@@ -1,22 +1,21 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
+import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 
 @WebServlet("/board/list")
-public class BoardListHandler extends HttpServlet{
+public class BoardController extends GenericServlet{
   private static final long serialVersionUID = 1L;
-
   BoardDao boardDao;
 
   @Override
@@ -26,73 +25,26 @@ public class BoardListHandler extends HttpServlet{
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("  <title>게시판</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>[게시글 목록]</h1>");
-    out.println("<a href='form'>이전</a><br>");
-    out.println("<a href='form'>게시글 등록</a>");
-    out.println("<table border='1'>");
-    out.println("<thead>");
-    out.println("  <tr>");
-    out.println("    <th>번호</th>");
-    out.println("    <th>제목</th>");
-    // out.println("    <th>태그</th>");
-    out.println("    <th>작성자</th>");
-    out.println("    <th>조회수</th>");
-    // out.println("    <th>좋아요</th>");
-    out.println("    <th>등록일</th>");
-    out.println("  <tr>");
-    out.println("</thead>");
-    out.println("<tbody>");
-
-
-    //        if (ClientApp.getLoginUser().getAuthority()!=Menu.ACCESS_LOGOUT) {
-    //          System.out.println("|| 게시글 등록(A) / 이전(0)\n");  
-    //        } else {
-    //          System.out.println("|| 이전(0)\n");
-    //        }
-
     try {
-
+      System.out.println("0");
       Collection<Board> boardList = boardDao.findAll();
+      System.out.println("1");
+      request.setAttribute("boardList", boardList);
+      System.out.println("2");
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/board/BoardList.jsp");
+      요청배달자.forward(request, response);
+      System.out.println("3");
 
-      for (Board board : boardList) {
-        out.printf("<tr> "
-            + "<td>%d<\td>"
-            + "<td>%s<\td>" 
-            //             + "<td>%s<\td>" 
-            + "<td>%s<\td>" 
-            + "<td>%d<\td>" 
-            //             + "<td>%d<\td>" 
-            + "<td>%s<\td>" 
-            + "<\tr>\n",
-            board.getBoardNumber(), 
-            board.getTitle(), 
-            //              board.getBoardTag().getTag(),
-            board.getWriter().getId(),
-            board.getViews(), 
-            //            board.getLikes(),
-            board.getRegistrationDate());
-      }
     } catch (Exception e) {
-      throw new ServletException(e);
-    }
-    out.println("</tbody>");
-    out.println("</table>");
-    out.println("</body>");
-    out.println("</html>");
+      request.setAttribute("error", e);
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      요청배달자.forward(request, response);
+    }  
   }
 }
+
 
 
 //        if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
