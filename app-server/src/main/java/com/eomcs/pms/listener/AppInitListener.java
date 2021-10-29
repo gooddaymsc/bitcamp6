@@ -13,7 +13,7 @@ import com.eomcs.pms.dao.BuyerDao;
 @WebListener
 public class AppInitListener implements ServletContextListener {
 
-  SqlSession sqlSession = null;
+  SqlSession sqlSession;
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
@@ -39,7 +39,6 @@ public class AppInitListener implements ServletContextListener {
   @Override
   public void contextDestroyed(ServletContextEvent sce) {
     System.out.println("애플리케이션 종료됨!");
-
     sqlSession.close();
   }
 }

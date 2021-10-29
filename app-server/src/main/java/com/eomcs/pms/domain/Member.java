@@ -25,11 +25,11 @@ public class Member implements Serializable {
   //  public Member() {
   //    this("-","-",Menu.ACCESS_LOGOUT);
   //  }
-  public Member(String id, String password, int authority) {
-    this.id = id;
-    this.password = password;
-    this.authority = authority;
-  }
+  //  public Member(String id, String password, int authority) {
+  //    this.id = id;
+  //    this.password = password;
+  //    this.authority = authority;
+  //  }
   public String getId() {
     return id;
   }

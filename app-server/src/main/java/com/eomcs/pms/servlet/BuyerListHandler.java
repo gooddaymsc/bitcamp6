@@ -34,7 +34,6 @@ public class BuyerListHandler extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
     out.println("  <title>회원목록</title>");
@@ -51,8 +50,8 @@ public class BuyerListHandler extends HttpServlet {
     out.println("    <th>닉네임</th>");
     out.println("    <th>레벨</th>");
     out.println("    <th>등록일</th>");
-    out.println("  <tr>");
-    out.println("</thread>");
+    out.println("  </tr>");
+    out.println("</thead>");
     out.println("<tbody>");
 
     try {
@@ -72,6 +71,8 @@ public class BuyerListHandler extends HttpServlet {
     } catch (Exception e) {
       throw new ServletException(e);
     }
+    out.println("</tbody>");
+    out.println("</table>");
     out.println("</body>");
     out.println("</html>");
   }
