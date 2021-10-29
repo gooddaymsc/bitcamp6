@@ -114,11 +114,9 @@
     update stock set amount=#{stocks},price=#{price} where stock_no=#{stockNumber}
   </update>
   
-  
   <delete id="delete" parameterType="stock">
     delete from stock where stock_no=#{stockNumber}
   </delete>
-
 </mapper>
 
 

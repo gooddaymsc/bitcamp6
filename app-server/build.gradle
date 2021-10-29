@@ -8,9 +8,8 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
     id 'java'
-      id 'eclipse-wtp' // 이클립스 IDE 용 웹 프로젝트 관련 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
+    id 'eclipse-wtp' // 이클립스 IDE 용 웹 프로젝트 관련 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
     id 'war' // 웹 애플리케이션의 배포 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
 }
 
@@ -28,7 +27,7 @@ tasks.withType(JavaCompile) {
 // 웹 애플리케이션 배포 파일(.war)을 만들 때 사용할 기본 파일 이름을 설정한다.
 // 이 이름은 웹 애플리케이션 context root 경로로도 사용된다.
 war {
-    archiveBaseName = "pms"
+    archiveBaseName = "drinker"
 }
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -37,7 +36,6 @@ repositories {
 
 dependencies {
   // 서블릿 API
-  implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
   // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.8'
@@ -50,12 +48,15 @@ dependencies {
   
   implementation 'com.google.guava:guava:30.1-jre'
   testImplementation 'junit:junit:4.13.2'
+  
+  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+  
+  implementation 'javax.servlet:jstl:1.2'
+  
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'com.App'
-}
+
 
 eclipse {
     project {
