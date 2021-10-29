@@ -35,7 +35,18 @@ repositories {
 }
 
 dependencies {
+
   // 서블릿 API
+<<<<<<< HEAD
+=======
+  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  
+  // JSP API
+  providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+  
+  // JSTL 구현체
+implementation 'javax.servlet:jstl:1.2'
+>>>>>>> 01c7e76bee990894dc87de2068d56afd593b79d8
 
   // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.8'
@@ -56,8 +67,11 @@ dependencies {
   
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 01c7e76bee990894dc87de2068d56afd593b79d8
 eclipse {
     project {
         name = "AlchoholFinder-server"
