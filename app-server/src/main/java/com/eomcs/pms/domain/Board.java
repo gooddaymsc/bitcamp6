@@ -1,8 +1,12 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Board {
+@SuppressWarnings("serial")
+public class Board implements Serializable {
   private int boardNumber;
   private String title;
   private String content;
@@ -10,11 +14,11 @@ public class Board {
   private Date registrationDate;
   private int views;
   private String tag;
-  //private int likes;
+  private int likes;
   private Date likeDate;
-  //  private List<LikeMember> likeMember = new ArrayList<>();
-  // private int totalCommentNumber = 1;
-  //  private List<Comment> commentList = new ArrayList<>();
+  private List<LikeMember> likeMember = new ArrayList<>();
+  private int totalCommentNumber = 1;
+  private List<Comment> commentList = new ArrayList<>();
   private BoardTag boardTag;
 
   public int getBoardNumber() {
@@ -59,36 +63,36 @@ public class Board {
   public void setTag(String tag) {
     this.tag = tag;
   }
-  //  public int getLikes() {
-  //    return likes;
-  //  }
-  //  public void setLikes(int likes) {
-  //    this.likes = likes;
-  //  }
+  public int getLikes() {
+    return likes;
+  }
+  public void setLikes(int likes) {
+    this.likes = likes;
+  }
   public Date getLikeDate() {
     return likeDate;
   }
   public void setLikeDate(Date likeDate) {
     this.likeDate = likeDate;
   }
-  //  public int getTotalCommentNumber() {
-  //    return totalCommentNumber;
-  //  }
-  //  public void setTotalCommentNumber(int totalCommentNumber) {
-  //    this.totalCommentNumber = totalCommentNumber;
-  //}
-  //  public List<Comment> getCommentList() {
-  //    return commentList;
-  //  }
-  //  public void setCommentList(List<Comment> commentList) {
-  //    this.commentList = commentList;
-  //  }
-  //  public List<LikeMember> getLikeMember() {
-  //    return likeMember;
-  //  }
-  //  public void setLikeMember(List<LikeMember> likeMember) {
-  //    this.likeMember = likeMember;
-  //  }
+  public int getTotalCommentNumber() {
+    return totalCommentNumber;
+  }
+  public void setTotalCommentNumber(int totalCommentNumber) {
+    this.totalCommentNumber = totalCommentNumber;
+  }
+  public List<Comment> getCommentList() {
+    return commentList;
+  }
+  public void setCommentList(List<Comment> commentList) {
+    this.commentList = commentList;
+  }
+  public List<LikeMember> getLikeMember() {
+    return likeMember;
+  }
+  public void setLikeMember(List<LikeMember> likeMember) {
+    this.likeMember = likeMember;
+  }
   public BoardTag getBoardTag() {
     return boardTag;
   }

@@ -10,7 +10,7 @@
 <body>
 <h1>게시글 목록(MVC + EL + JSTL)</h1>
 <!-- <a href='form'>이전</a><br> -->
-<a href='form'>게시글 목록</a><br>
+<a href='form'>게시글 작성</a><br>
 <table border='1'>
 <thead>
   <tr>
@@ -27,8 +27,7 @@
 
 <c:forEach items="${boardList}" var="board">
 <tr>
-    <td>${board.boardNumber}</td> 
-  <td><a href='detail?no=${board.boardNumber}'>${board.boardNumber}</a></td> 
+    <td><a href='detail?no=${board.boardNumber}'>${board.boardNumber}</a></td>  
     <td>${board.title}</td> 
     <td>${board.tag}</td> 
     <td>${board.content}</td> 

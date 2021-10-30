@@ -28,13 +28,9 @@ public class BoardListController extends HttpServlet{
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
-      System.out.println("0");
       Collection<Board> boardList = boardDao.findAll();
-      System.out.println("1");
       request.setAttribute("boardList", boardList);
-      System.out.println("2");
       request.getRequestDispatcher("BoardList.jsp").forward(request, response);
-      System.out.println("3");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

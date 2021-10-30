@@ -40,7 +40,7 @@
          b.views,
          m.name,
          m.id,
-         t.tag
+         t.tag 
       from board b
         left join member m on b.member_no=m.member_no
         left join board_tag bt on b.board_no=bt.board_no
