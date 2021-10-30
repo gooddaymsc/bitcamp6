@@ -48,20 +48,12 @@ public class BoardAddController extends HttpServlet {
     board.setBoardTag(boardTag);
 
     try {
-      System.out.println("0");
       boardDao.insert(board);
-      System.out.println("1");
       boardDao.insertTag(board);
-      System.out.println("2");
-
       boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
-      System.out.println("3");
-
       sqlSession.commit();
-      System.out.println(4);
 
       response.setHeader("Refresh", "1;url=list");
-      System.out.println(5);
 
       request.getRequestDispatcher("/board/BoardAdd.jsp").forward(request, response);
 
