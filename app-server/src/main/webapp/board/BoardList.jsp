@@ -31,7 +31,7 @@
     <td>${board.title}</td> 
     <td>${board.tag}</td> 
     <td>${board.content}</td> 
-    <td>${board.writer}</td> 
+    <td>${board.writer.id}</td> 
     <td>${board.views}</td> 
     <td>${board.registrationDate}</td> 
 </tr>

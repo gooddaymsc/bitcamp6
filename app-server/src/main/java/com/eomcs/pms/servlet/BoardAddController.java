@@ -1,7 +1,6 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.BoardTag;
+import com.eomcs.pms.domain.Member;
 
 
 @WebServlet("/board/add")
@@ -39,23 +39,23 @@ public class BoardAddController extends HttpServlet {
     board.setTitle(request.getParameter("title"));
     board.setContent(request.getParameter("content"));
 
-    //board.setWriter(ClientApp.getLoginUser());
-
-    board.setRegistrationDate(new Date(System.currentTimeMillis()));
+    Member member = new Member();
+    member.setNumber(1);
+    board.setWriter(member);
 
     BoardTag boardTag = new BoardTag();
     boardTag.setTag(request.getParameter("tag"));
     board.setBoardTag(boardTag);
 
     try {
-      System.out.println(0);
+      System.out.println("0");
       boardDao.insert(board);
-      System.out.println(1);
+      System.out.println("1");
       boardDao.insertTag(board);
-      System.out.println(2);
+      System.out.println("2");
 
       boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
-      System.out.println(3);
+      System.out.println("3");
 
       sqlSession.commit();
       System.out.println(4);
@@ -63,7 +63,7 @@ public class BoardAddController extends HttpServlet {
       response.setHeader("Refresh", "1;url=list");
       System.out.println(5);
 
-      request.getRequestDispatcher("board/BoardAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("/board/BoardAdd.jsp").forward(request, response);
 
 
     } catch(Exception e){
