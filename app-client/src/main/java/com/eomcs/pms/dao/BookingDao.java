@@ -13,9 +13,4 @@ public interface BookingDao {
   Booking findByNo2(@Param("bookingNo")int bookingNo, @Param("id")String id) throws Exception; // 판매자
   void update(Booking booking) throws Exception;
   void delete(int bookingNo) throws Exception;
-  //  HashMap<Cart, Seller> findByCartList(String productName, String id) throws Exception;
-  //  Cart findByCart(String productName, String nowLoginId) throws Exception;
-  //  void deleteCart(String nowLoginId, Cart bookingProduct) throws Exception;
-  //  //  void changeBookingUpdate(String sellerId, boolean b) throws Exception;
-  //  String checkTime(String label, String sellerId) throws Exception;
 }
