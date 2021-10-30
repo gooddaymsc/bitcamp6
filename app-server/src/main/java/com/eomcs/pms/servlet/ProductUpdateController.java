@@ -33,11 +33,19 @@ public class ProductUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      // 왜 안될까요?
       String name = request.getParameter("productName");
       Product product = productDao.findByProduct(name);
 
-      //      int no = Integer.parseInt(request.getParameter("productNumber"));
+      //      int no = Integer.parseInt(request.getParameter("no"));  
       //      Product product = productDao.findByNo(no);
+      // form에(add)할때 상품번호를 입력받지 않음.. 고유item은 productName..(회원 id 처럼..)
+
+      // 그냥 해봄..
+      //      Product product = new Product();
+      //      int no = product.getProductNumber();
+      //      product = productDao.findByNo(no);
+
 
       if (product == null) {
         throw new Exception("해당 이름의 상품이 없습니다.");
