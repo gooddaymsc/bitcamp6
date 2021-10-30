@@ -10,12 +10,12 @@ public class Board {
   private Date registrationDate;
   private int views;
   private String tag;
-  private int likes;
+  //private int likes;
   private Date likeDate;
   //  private List<LikeMember> likeMember = new ArrayList<>();
-  //  private int totalCommentNumber = 1;
+  // private int totalCommentNumber = 1;
   //  private List<Comment> commentList = new ArrayList<>();
-  //  private BoardTag boardTag;
+  private BoardTag boardTag;
 
   public int getBoardNumber() {
     return boardNumber;
@@ -53,18 +53,18 @@ public class Board {
   public void setViews(int views) {
     this.views = views;
   }
-  //  public String getTag() {
-  //    return tag;
-  //  }
-  //  public void setTag(String tag) {
-  //    this.tag = tag;
-  //  }
-  public int getLikes() {
-    return likes;
+  public String getTag() {
+    return tag;
   }
-  public void setLikes(int likes) {
-    this.likes = likes;
+  public void setTag(String tag) {
+    this.tag = tag;
   }
+  //  public int getLikes() {
+  //    return likes;
+  //  }
+  //  public void setLikes(int likes) {
+  //    this.likes = likes;
+  //  }
   public Date getLikeDate() {
     return likeDate;
   }
@@ -76,23 +76,23 @@ public class Board {
   //  }
   //  public void setTotalCommentNumber(int totalCommentNumber) {
   //    this.totalCommentNumber = totalCommentNumber;
+  //}
+  //  public List<Comment> getCommentList() {
+  //    return commentList;
+  //  }
+  //  public void setCommentList(List<Comment> commentList) {
+  //    this.commentList = commentList;
+  //  }
+  //  public List<LikeMember> getLikeMember() {
+  //    return likeMember;
+  //  }
+  //  public void setLikeMember(List<LikeMember> likeMember) {
+  //    this.likeMember = likeMember;
+  //  }
+  public BoardTag getBoardTag() {
+    return boardTag;
+  }
+  public void setBoardTag(BoardTag boardTag) {
+    this.boardTag = boardTag;
+  }
 }
-//  public List<Comment> getCommentList() {
-//    return commentList;
-//  }
-//  public void setCommentList(List<Comment> commentList) {
-//    this.commentList = commentList;
-//  }
-//  public List<LikeMember> getLikeMember() {
-//    return likeMember;
-//  }
-//  public void setLikeMember(List<LikeMember> likeMember) {
-//    this.likeMember = likeMember;
-//  }
-//  public BoardTag getBoardTag() {
-//    return boardTag;
-//  }
-//  public void setBoardTag(BoardTag boardTag) {
-//    this.boardTag = boardTag;
-//  }
-//}

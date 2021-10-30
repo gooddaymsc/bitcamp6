@@ -2,20 +2,20 @@ package com.eomcs.pms.servlet;
 
 import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 
 @WebServlet("/board/list")
-public class BoardController extends GenericServlet{
+public class BoardListController extends HttpServlet{
   private static final long serialVersionUID = 1L;
+
   BoardDao boardDao;
 
   @Override
@@ -33,19 +33,15 @@ public class BoardController extends GenericServlet{
       System.out.println("1");
       request.setAttribute("boardList", boardList);
       System.out.println("2");
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/board/BoardList.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("BoardList.jsp").forward(request, response);
       System.out.println("3");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }  
   }
 }
-
-
 
 //        if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
 //          System.out.println("\n 게시글 등록(A) / 상세보기(R) / 검색(1)");

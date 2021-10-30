@@ -16,7 +16,7 @@
   <tr>
     <th>번호</th>
     <th>제목</th>
-<!--     <th>태그</th> -->
+    <th>태그</th>
     <th>내용</th>
     <th>작성자</th>
     <th>조회수</th>
@@ -28,8 +28,9 @@
 <c:forEach items="${boardList}" var="board">
 <tr>
     <td>${board.boardNumber}</td> 
+  <td><a href='detail?no=${board.boardNumber}'>${board.boardNumber}</a></td> 
     <td>${board.title}</td> 
-<%--     <td>${board.tag}</td>  --%>
+    <td>${board.tag}</td> 
     <td>${board.content}</td> 
     <td>${board.writer}</td> 
     <td>${board.views}</td> 

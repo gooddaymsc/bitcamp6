@@ -66,6 +66,7 @@
       m.name, 
       m.id,
       m.nickname, 
+      m.password,
       m.level, 
       m.email, 
       m.birthday, 

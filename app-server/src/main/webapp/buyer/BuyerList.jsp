@@ -31,7 +31,7 @@
 <c:forEach items="${buyerList}" var="buyer">
 <tr>
     <td>${buyer.member.number}</td>
- <td><a href='detail?no=${buyer.member.id}'>${buyer.member.id}</a></td> 
+    <td><a href='detail?no=${buyer.member.id}'>${buyer.member.id}</a></td> 
     <td>${buyer.member.name}</td> 
     <td>${buyer.member.nickname}</td> 
     <td>${buyer.member.email}</td> 
