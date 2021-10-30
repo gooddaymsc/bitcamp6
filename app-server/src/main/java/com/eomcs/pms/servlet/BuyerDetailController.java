@@ -40,7 +40,6 @@ public class BuyerDetailController extends HttpServlet {
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      e.getStackTrace();
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }

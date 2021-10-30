@@ -17,8 +17,8 @@
 </head>
 <body>
 <h1>회원 상세(MVC + EL)</h1>
- action='update'
-<form>
+
+<form action='update'>
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${buyer.member.number}' readonly><br>
     
