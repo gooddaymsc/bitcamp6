@@ -34,6 +34,10 @@
       id,
       name,
       nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
       level,
       registeredDate 
     from 
@@ -45,17 +49,10 @@
   </select>
   
   <insert id="insert" parameterType="buyer">
-    insert into member(id,name,nickname) 
-    values(#{member.id},#{member.name},#{member.nickname})
-  </insert>
-  
-  <!--  
-  <insert id="insert" parameterType="buyer">
     insert into member(authority,id,password,name,nickname,email,birthday,photo,phoneNumber,zipcode,address,detail_address) 
     values(#{member.authority},#{member.id},password(#{member.password}),#{member.name},#{member.nickname},#{member.email},
     #{member.birthday},#{member.photo},#{member.phoneNumber},#{zipcode},#{address},#{detailAddress})
   </insert>
-  -->
   
   <select id="findById" resultMap="BuyerMap" parameterType="string">
     select 
@@ -83,17 +80,18 @@
   <update id="update" parameterType="buyer">
     update member set 
       nickname=#{member.nickname},
-      email=#{member.email},
       password=password(#{member.password}),
       photo=#{member.photo},
+      phoneNumber=#{member.phoneNumber},
+      zipcode=#{zipcode},
       address=#{address},
-      phoneNumber=#{member.phoneNumber} 
+      detail_address=#{detailAddress}
     where 
       member_no=#{member.number}
   </update>
   
   
-  <delete id="delete" parameterType="string">
+  <delete id="delete" parameterType="int">
     update member set 
       name="none",
       nickname="none",
@@ -106,7 +104,7 @@
       detail_address="none",
       active=1
     where
-      id=#{id}
+       member_no=#{no}
   </delete>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ public class BuyerAddController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     buyerDao = (BuyerDao) 웹애플리케이션공용저장소.getAttribute("buyerDao");
   }
 
@@ -32,15 +34,15 @@ public class BuyerAddController extends HttpServlet {
     Buyer buyer = new Buyer();
     Member member = new Member();
 
-    //    member.setAuthority(2);
+    member.setAuthority(2);
     member.setId(request.getParameter("id"));
     member.setName(request.getParameter("name"));
     member.setNickname(request.getParameter("nickname"));
-    //    member.setEmail(request.getParameter("email"));
-    //    member.setBirthday(Date.valueOf((request.getParameter("birthday"))));
-    //    member.setPassword((request.getParameter("password")));
-    //    member.setPhoto(request.getParameter("photo"));
-    //    member.setPhoneNumber(request.getParameter("phoneNumber"));
+    member.setEmail(request.getParameter("email"));
+    member.setBirthday(Date.valueOf(request.getParameter("birthday")));
+    member.setPassword(request.getParameter("password"));
+    member.setPhoto(request.getParameter("photo"));
+    member.setPhoneNumber(request.getParameter("phoneNumber"));
 
     //    if (findDeletedByName(buyer.getName()) != -1) {
     //      if (deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getPhoneNumber().equals(buyer.getPhoneNumber()) && 
@@ -60,9 +62,9 @@ public class BuyerAddController extends HttpServlet {
     //      coupon.setPrice(2000);
     //      buyer.getCoupon().add(coupon);
 
-    //    buyer.setZipcode(request.getParameter("zipcode"));
-    //    buyer.setAddress(request.getParameter("address"));
-    //    buyer.setDetailAddress(request.getParameter("detailAddress"));
+    buyer.setZipcode(request.getParameter("zipcode"));
+    buyer.setAddress(request.getParameter("address"));
+    buyer.setDetailAddress(request.getParameter("detailAddress"));
     //    System.out.printf("이름 : %s\n", memberPrompt.findById(id).getName());
     //    member.setRegisteredDate(new Date(System.currentTimeMillis()));
     //    buyer.setNumber(totalNumberList.get(App.MEMBER_NUMBER_INDEX));
@@ -74,7 +76,7 @@ public class BuyerAddController extends HttpServlet {
       buyerDao.insert(buyer);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("BuyerAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("buyer/BuyerAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

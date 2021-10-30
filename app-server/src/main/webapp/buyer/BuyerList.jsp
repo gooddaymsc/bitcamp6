@@ -8,7 +8,7 @@
   <title>회원목록</title>
 </head>
 <body>
-<h1>회원 목록(MVC + EL + JSTL)</h1>
+<h1>회원 목록(구매자)</h1>
 <a href='form'>새회원</a><br>
 <table border='1'>
 <thead>
@@ -43,7 +43,6 @@
     <td>${buyer.member.registeredDate}</td>
 </tr>
 </c:forEach>
-
 </tbody>
 </table>
 </body>

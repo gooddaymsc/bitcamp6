@@ -14,7 +14,6 @@ import com.eomcs.pms.domain.Buyer;
 @WebServlet("/buyer/detail")
 public class BuyerDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
-
   BuyerDao buyerDao;
 
   @Override
@@ -26,7 +25,6 @@ public class BuyerDetailController extends HttpServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-
     try {
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
@@ -34,7 +32,6 @@ public class BuyerDetailController extends HttpServlet {
       if (buyer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
-
       request.setAttribute("buyer", buyer);
       request.getRequestDispatcher("/buyer/BuyerDetail.jsp").forward(request, response);
 
@@ -44,10 +41,4 @@ public class BuyerDetailController extends HttpServlet {
     }
   }
 }
-
-
-
-
-
-
 

@@ -2,7 +2,6 @@ package com.eomcs.pms.servlet;
 
 import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -30,17 +29,12 @@ public class BuyerListController extends HttpServlet {
       throws ServletException, IOException {
     try {
       Collection<Buyer> buyerList =  buyerDao.findAll();
-
       request.setAttribute("buyerList", buyerList);
-
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/buyer/BuyerList.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/buyer/BuyerList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
