@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>상품상세</title>
+  <title>상세보기</title>
   <style>
   label {
     margin-right: 5px;
@@ -15,9 +15,12 @@
   </style>
 </head>
 <body>
-<h1>상품 상세(MVC + EL)</h1>
+<h1>상세보기(MVC + EL)</h1>
 <form action='update'>
-    <label for='f-type'>주종</label> 
+  <label for='f-productNumber'>상품번호</label> 
+    <input id='f-productNumber' type='text' name='productNumber' value='${product.productNumber}' readonly><br>
+    
+    <label for='f-type'>주종</label> 
     <input id='f-type' type='text' name='type' value='${product.productType.type}'><br>
     
     <label for='f-subType'>상세주종</label>
@@ -32,19 +35,19 @@
     <label for='f-volume'>용량</label>
     <input id='f-volume' type='text' name='volume' value='${product.volume}'><br>
     
-    <label for='f-alcoholLevel'>도수</label> 
+    <label for='f-alcoholLevel'>도수</label> 
     <input id='f-alcoholLevel' type='text' name='alcoholLevel' value='${product.alcoholLevel}'><br>
     
-    <label for='f-sugarLevel'>당도</label> 
+    <label for='f-sugarLevel'>당도</label> 
     <input id='f-sugarLevel' type='text' name='sugarLevel' value='${product.sugarLevel}'><br>
     
-    <label for='f-acidity'>산도</label> 
+    <label for='f-acidity'>산도</label> 
     <input id='f-acidity' type='text' name='acidity' value='${product.acidity}'><br>
     
     <label for='f-weight'>바디감</label> 
     <input id='f-weight' type='text' name='weight' value='${product.weight}'><br>
 <button>변경</button>
- <a href='delete?no=${product.productNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='delete?no=${product.productNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
 </form>
 
 </body>

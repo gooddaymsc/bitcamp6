@@ -15,7 +15,8 @@
   <tr>
     <th>번호</th>
     <th>상품명</th>
-    <th>주종-상세주종</th>
+    <th>주종</th>
+    <th>상세주종</th>
     <th>원산지</th>
     <th>용량</th>
     <th>당도</th>
@@ -28,8 +29,8 @@
 
 <c:forEach items="${productList}" var="product">
 <tr>
-    <td>${product.productNumber}</td>
-    <td><a href='detail?no=${product.productNumber}'>${product.productName}</a></td> 
+    <td><a href='detail?no=${product.productNumber}'>${product.productNumber}</a></td>
+    <td>${product.productName}</td> 
     <td>${product.productType.type}</td> 
     <td>${product.productType.subType}</td> 
     <td>${product.countryOrigin}</td> 

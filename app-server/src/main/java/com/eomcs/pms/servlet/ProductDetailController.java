@@ -27,9 +27,8 @@ public class ProductDetailController extends HttpServlet {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
-    int no = Integer.parseInt(request.getParameter("no"));
-
     try {
+      int no = Integer.parseInt(request.getParameter("no"));
       Product product = productDao.findByNo(no);
 
       if (product == null) {
