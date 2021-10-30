@@ -67,7 +67,8 @@
   
    <insert id="insert" parameterType="product">
    insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
-    values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
+    values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, 
+    #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
   </insert>
    
   
