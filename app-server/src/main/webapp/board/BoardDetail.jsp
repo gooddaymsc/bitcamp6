@@ -17,32 +17,34 @@
 <body>
 <h1>게시글 상세</h1>
 <form action='update'>
+    <label for='f-number'>번호</label> 
+    <input id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly ><br>
+
     <label for='f-title'>제목</label> 
     <input id='f-title' type='text' name='title' value='${board.title}' ><br>
     
     <label for='f-content'>내용</label> 
-    <input id='f-content' type='text' name='content' value='${board.content}' readonly><br>
+    <input id='f-content' type='text' name='content' value='${board.content}'><br>
     
     <label for='f-writer'>작성자</label>
-    <input id='f-writer' type='text' name='writer' value='${board.writer}' readonly><br>
+    <input id='f-writer' type='text' name='writer' value='${board.writer.id}'readOnly><br>
         
     <label for='f-registrationDate'>등록일</label> 
-    <input id='f-registrationDate' type='date' name='registrationDate' value='${board.registrationDate}'><br>
+    <input id='f-registrationDate' type='date' name='registrationDate' value='${board.registrationDate}'readOnly><br>
     
     <label for='f-views'>조회수</label> 
-    <input id='f-views' type='number' name='views' value='${board.views}' readonly><br>
-    
-		<label for='f-like'>좋아요 수</label> 
-		<input id='f-email' type='email' name='email' value='${buyer.member.email}' readonly><br>
+    <input id='f-views' type='text' name='views' value='${board.views}'readOnly><br>    
 		
-		<label for='f-birthday'>태그</label> 
-		<input id='f-birthday' type='date' name='birthday' value='${buyer.member.birthday}'><br>
+		<label for='f-like'>좋아요 수</label> 
+		<input id='f-like' type='text' name='like' value='${board.likes}'readOnly><br>
+		
+		<label for='f-tag'>태그</label> 
+		<input id='f-tag' type='text' name='tag' value='${board.tag}'><br>
 		
 		
 <button>변경</button>
- <a href='delete?id=${buyer.member.id}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='delete?no=${board.boardNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
  
 </form>
-
 </body>
 </html>

@@ -12,7 +12,7 @@ public interface BoardDao {
   Board findByBoard(String name) throws Exception;
   void update(Board board) throws Exception;
   void update2(Board board) throws Exception;
-  void delete(int no) throws Exception;
+  void delete(Board board) throws Exception;
   void deleteTag(int no) throws Exception;
   void updateCount(int no) throws Exception;
   //  List<LikeMember> findLikeList(int no) throws Exception;

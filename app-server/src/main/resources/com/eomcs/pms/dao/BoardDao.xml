@@ -123,9 +123,9 @@
     where board_no=#{no}
   </delete>
   
-  <delete id="delete" parameterType="int">
+  <delete id="delete" parameterType="board">
     delete from board 
-    where board_no=#{no}
+    where board_no=#{boardNumber}
   </delete>
     
   <insert id="likeInsert" parameterType="map">
