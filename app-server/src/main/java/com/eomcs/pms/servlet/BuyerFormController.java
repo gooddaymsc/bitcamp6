@@ -17,6 +17,7 @@ public class BuyerFormController extends HttpServlet {
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
     request.getRequestDispatcher("/buyer/BuyerForm.jsp").forward(request, response);
+
   }
 }
 

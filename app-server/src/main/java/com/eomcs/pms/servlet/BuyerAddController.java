@@ -31,18 +31,19 @@ public class BuyerAddController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Member member = new Member();
     Buyer buyer = new Buyer();
+    Member member = new Member();
 
     member.setAuthority(2);
     member.setId(request.getParameter("id"));
-    member.setPassword((request.getParameter("password")));
     member.setName(request.getParameter("name"));
     member.setNickname(request.getParameter("nickname"));
     member.setEmail(request.getParameter("email"));
-    member.setBirthday(Date.valueOf((request.getParameter("birthday"))));
+    member.setBirthday(Date.valueOf(request.getParameter("birthday")));
+    member.setPassword(request.getParameter("password"));
     member.setPhoto(request.getParameter("photo"));
-    member.setPhoto(request.getParameter("phoneNumber"));
+    member.setPhoneNumber(request.getParameter("phoneNumber"));
+
     //    if (findDeletedByName(buyer.getName()) != -1) {
     //      if (deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getPhoneNumber().equals(buyer.getPhoneNumber()) && 
     //          deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getName().equals(buyer.getName())) {
@@ -75,7 +76,7 @@ public class BuyerAddController extends HttpServlet {
       buyerDao.insert(buyer);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("BuyerAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("buyer/BuyerAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
@@ -83,8 +84,4 @@ public class BuyerAddController extends HttpServlet {
     }
   }
 }
-
-
-
-
 

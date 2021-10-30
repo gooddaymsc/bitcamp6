@@ -22,6 +22,7 @@ public class BuyerDeleteController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     buyerDao = (BuyerDao) 웹애플리케이션공용저장소.getAttribute("buyerDao");
   }
 
@@ -29,18 +30,17 @@ public class BuyerDeleteController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     //    if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-    System.out.println("[탈퇴하기]");
     //      String id = ClientApp.getLoginUser().getId();
 
-    try {
-      String id = (request.getParameter("id"));
-
+    try {  
+      String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
+
 
       if (buyer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }   
-      buyerDao.delete(id);
+      buyerDao.delete(buyer.getMember().getNumber());
       sqlSession.commit();
       response.sendRedirect("list");
 
