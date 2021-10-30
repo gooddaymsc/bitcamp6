@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.ProductType;
 
 @WebServlet("/product/update")
-public class ProductUpdateHandler extends HttpServlet {
+public class ProductUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -32,27 +33,45 @@ public class ProductUpdateHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      String name = request.getParameter("productName");
+      Product product = productDao.findByProduct(name);
 
-      Product product = productDao.findByNo(no);
+      //      int no = Integer.parseInt(request.getParameter("productNumber"));
+      //      Product product = productDao.findByNo(no);
 
       if (product == null) {
-        throw new Exception("해당 번호의 상품이 없습니다.");
+        throw new Exception("해당 이름의 상품이 없습니다.");
 
       } else {
 
-        product.setProductName(request.getParameter("name"));
+        ProductType productType = new ProductType();
+        productType.setType(request.getParameter("type"));
+        productType.setSubType(request.getParameter("subType"));
+        String type = request.getParameter("type");
+        String subType = request.getParameter("subType");
+
+        try {
+          product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
+        } catch (Exception e1) {
+          System.out.println(1);
+          e1.printStackTrace();
+        }
+
         product.setCountryOrigin(request.getParameter("countryOrigin"));
+
+        if(product.getProductType().getType().equals("와인")) {
+          product.setVariety(request.getParameter("variety"));
+        }
+
         product.setVolume(Integer.parseInt(request.getParameter("volume")));
-        product.setAlcoholLevel(Integer.parseInt(request.getParameter("alcoholLevel"))); 
+        product.setAlcoholLevel(Integer.parseInt(request.getParameter("alcoholLevel")));
+        product.setSugarLevel(Integer.parseInt(request.getParameter("sugarLevel")));
+        product.setAcidity(Integer.parseInt(request.getParameter("acidity")));
+        product.setWeight(Integer.parseInt(request.getParameter("weight")));
 
         productDao.update(product);
         sqlSession.commit();
       }
-
-      // 리다이렉트(redirect)
-      // 서버의 응답을 받는 즉시 지정한 URL로 요청하도록 웹브라우저에게 명령한다.
-      // 리다이렉트의 경우 서버는 응답할 때 내용을 보내지 않는다.
       response.sendRedirect("list");
 
     } catch (Exception e) {

@@ -14,7 +14,7 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
 @WebServlet("/product/delete")
-public class ProductDeleteHandler extends HttpServlet {
+public class ProductDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ProductDao productDao;
