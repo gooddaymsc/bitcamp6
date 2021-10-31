@@ -62,7 +62,7 @@ public class ProductAddController extends HttpServlet {
     }
 
     product.setVolume(Integer.parseInt(request.getParameter("volume")));
-    product.setAlcoholLevel(Integer.parseInt(request.getParameter("alcoholLevel")));
+    product.setAlcoholLevel(Float.parseFloat(request.getParameter("alcoholLevel")));
     product.setSugarLevel(Integer.parseInt(request.getParameter("sugarLevel")));
     product.setAcidity(Integer.parseInt(request.getParameter("acidity")));
     product.setWeight(Integer.parseInt(request.getParameter("weight")));
