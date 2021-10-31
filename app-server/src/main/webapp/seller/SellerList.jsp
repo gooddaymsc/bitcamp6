@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>회원목록</title>
+  <title>판매자목록</title>
 </head>
 <body>
 <h1>회원 목록(판매자)</h1>
