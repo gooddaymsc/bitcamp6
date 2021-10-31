@@ -1,41 +1,48 @@
 package com.eomcs.pms.servlet;
 
+import java.io.IOException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Review;
-import com.eomcs.util.Prompt;
 
-public class ReviewDeleteHandler implements Command {
+@WebServlet("/product/review/delete")
+public class ReviewDeleteHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  ReviewDao reviewDao;
   SqlSession sqlSession;
+  ReviewDao reviewDao;
 
-  public ReviewDeleteHandler (ReviewDao reviewDao, SqlSession sqlSession) {
-    this.reviewDao = reviewDao;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    reviewDao = (ReviewDao) 웹애플리케이션공용저장소.getAttribute("reviewDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println("[Reviews 삭제]");
-
-    Review review = reviewDao.reviewIs((Integer)request.getAttribute("productNumber"), ClientApp.getLoginUser().getId());
-
-    if (review == null) {
-      System.out.println("해당 상품에 작성하신 리뷰가 없습니다.\n");
-      return;
-    }
-
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("y")) {
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    try {
+      int no = Integer.parseInt(request.getParameter("no"));
+      Review review = reviewDao.findByNo(no);
+      if (review.equals(null)) {
+        throw new Exception("해당 번호의 리뷰가 없습니다.");
+      }
       reviewDao.delete(review.getNo());
       sqlSession.commit();
-      System.out.println("리뷰 삭제 완료\n");
-      return;
+      response.sendRedirect("../detail?no="+review.getProductNo());
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-    System.out.println("리뷰 삭제 취소\n");
-    return;
   }
 } 
 
