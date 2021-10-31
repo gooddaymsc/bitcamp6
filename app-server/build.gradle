@@ -34,30 +34,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-
-  // 서블릿 API
-  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
-  
-  // JSP API
-  providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
-  
-  // JSTL 구현체
-  implementation 'javax.servlet:jstl:1.2'
-
-  // Google JSON 라이브러리
-  implementation 'com.google.code.gson:gson:2.8.8'
-  
-  // MariaDB JDBC 드라이버
-  implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
-  
-  // Mybatis 퍼시스턴스 프레임워크
-  implementation 'org.mybatis:mybatis:3.5.7'
-  
-  implementation 'com.google.guava:guava:30.1-jre'
-  testImplementation 'junit:junit:4.13.2'
-}
-
 eclipse {
     project {
         name = "AlchoholFinder-server"
@@ -85,4 +61,29 @@ eclipse {
             //deployName = 'pms'
 //        }
     }
+}
+
+
+dependencies {
+
+  // 서블릿 API
+  providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+  
+  // JSP API
+  providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+  
+  // JSTL 구현체
+  implementation 'javax.servlet:jstl:1.2'
+
+  // Google JSON 라이브러리
+  implementation 'com.google.code.gson:gson:2.8.8'
+  
+  // MariaDB JDBC 드라이버
+  implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+  
+  // Mybatis 퍼시스턴스 프레임워크
+  implementation 'org.mybatis:mybatis:3.5.7'
+  
+  implementation 'com.google.guava:guava:30.1-jre'
+  testImplementation 'junit:junit:4.13.2'
 }
