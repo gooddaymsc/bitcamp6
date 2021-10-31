@@ -5,10 +5,10 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 
@@ -27,17 +27,13 @@ public class CommentListContoller extends HttpServlet  {
 
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      System.out.println("1");
-      //      int boardNo = (Integer) request.getAttribute("no");
+      //int boardNo = (Integer) request.getAttribute("no");
       int boardNo =1;
-      System.out.println("2");
       Collection<Comment> commentList = commentDao.findAll(boardNo);
-      System.out.println("3");
-      request.setAttribute("commentList", commentList);
-      System.out.println("4");
+      request.setAttribute("commentList", commentList);   
       request.getRequestDispatcher("CommentList.jsp").forward(request, response);
 
     } catch (Exception e) {

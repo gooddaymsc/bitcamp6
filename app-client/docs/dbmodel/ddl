@@ -178,7 +178,7 @@ ALTER TABLE comment
 CREATE TABLE board_like (
   member_no      INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
   board_no       INTEGER  NOT NULL COMMENT '게시글번호', -- 게시글번호
-  registeredDate DATETIME NOT NULL COMMENT '등록일' -- 등록일
+  registeredDate DATETIME NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
 )
 COMMENT '좋아요';
 
@@ -344,6 +344,9 @@ CREATE INDEX IX_tag
   ON tag( -- 태그
     tag ASC -- 태그
   );
+
+ALTER TABLE tag
+  MODIFY COLUMN tag_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '태그번호';
 
 -- 게시글태그
 CREATE TABLE board_tag (
