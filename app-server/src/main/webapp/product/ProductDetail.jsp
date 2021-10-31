@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>상세보기</title>
+  <title>상품상세</title>
   <style>
   label {
     margin-right: 5px;
@@ -16,9 +16,9 @@
   </style>
 </head>
 <body>
-<h1>상세보기(MVC + EL)</h1>
+<h1>상품 상세(MVC + EL)</h1>
 <form action='update'>
-  <label for='f-productNumber'>상품번호</label> 
+    <label for='f-productNumber'>상품번호</label> 
     <input id='f-productNumber' type='text' name='productNumber' value='${product.productNumber}' readonly><br>
     
     <label for='f-type'>주종</label> 
