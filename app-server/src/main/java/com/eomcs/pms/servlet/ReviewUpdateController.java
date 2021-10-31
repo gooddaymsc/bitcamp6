@@ -13,7 +13,7 @@ import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Review;
 
 @WebServlet("/product/review/update")
-public class ReviewUpdateHandler extends HttpServlet {
+public class ReviewUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;

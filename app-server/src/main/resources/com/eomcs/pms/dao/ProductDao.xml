@@ -131,7 +131,16 @@
     delete from product 
     where product_no=#{productNumber}
   </delete>
-  <!-- 
+  
+  <select id="avg" parameterType="int" resultType="float" >
+    select avg(score) 
+    from 
+      review 
+    where 
+      product_no=#{no} 
+    group by 
+      product_no;
+  </select>
    <update id="updateRate" parameterType="product">
      update product set 
        rate=#{rate}
@@ -139,6 +148,7 @@
        product_no=#{productNumber}
   </update>
   
+  <!-- 
   <select id="ranking" resultMap="ProductMap" parameterType="String">
     select p.rate, p.name, p.product_no, p.origin, p.alcoholLevel, 
          

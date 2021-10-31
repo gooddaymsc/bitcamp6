@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/review/form")
+@WebServlet("/product/review/form")
 public class ReviewFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,10 @@ public class ReviewFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/review/ReivewForm.jsp").forward(request, response);
+    int productNumber = Integer.parseInt(request.getParameter("no"));
+    System.out.println(productNumber);
+    request.setAttribute("productNumber", productNumber);
+    request.getRequestDispatcher("/review/ReviewForm.jsp").forward(request, response);
   }
 }
 
