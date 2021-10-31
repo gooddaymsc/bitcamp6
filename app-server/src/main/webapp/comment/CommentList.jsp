@@ -14,6 +14,7 @@
 <table border='1'>
 <thead>
   <tr>
+    <th>댓글번호</th>
     <th>게시글번호</th>
     <th>아이디</th>
     <th>내용</th>
@@ -24,6 +25,7 @@
 
 <c:forEach items="${commentList}" var="comment">
 <tr>
+    <td><a href='detail?no=${comment.commentNumber}'>${comment.commentNumber}</a></td>  
     <td>${comment.boardNumber}</td> 
     <td>${comment.writer.id}</td> 
     <td>${comment.content}</td> 
@@ -35,11 +37,4 @@
 </table>
 </body>
 </html>
-
-
-
-
-
-
-
 
