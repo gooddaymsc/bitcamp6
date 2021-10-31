@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
 
-@WebServlet("/product/update")
+@WebServlet("/cart/update")
 public class CartUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

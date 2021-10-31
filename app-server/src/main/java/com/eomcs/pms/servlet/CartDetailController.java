@@ -29,7 +29,7 @@ public class CartDetailController extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("cartNumber"));
-      String id = request.getParameter("f-buyerId");
+      String id = request.getParameter("buyerId");
       Cart cart = cartDao.findByNo(no, id);
 
       if (cart == null) {

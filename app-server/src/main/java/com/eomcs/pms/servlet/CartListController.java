@@ -32,9 +32,10 @@ public class CartListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Cart> cartList = cartDao.findAll(request.getParameter("buyerId"));
+      Collection<Cart> cartList = cartDao.findAll(request.getParameter("5"));
+      //      Collection<Cart> cartList = cartDao.findAll(request.getParameter("buyerId"));
       request.setAttribute("cartList", cartList);
-      request.getRequestDispatcher("cartList.jsp").forward(request, response);
+      request.getRequestDispatcher("CartList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

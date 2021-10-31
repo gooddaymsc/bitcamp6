@@ -50,8 +50,8 @@ public class CartAddController extends HttpServlet {
     stock.setPrice(Integer.parseInt(request.getParameter("price")));
 
     seller.setMember(member);
-    stock.setProduct(product);
     stock.setSeller(seller);
+    stock.setProduct(product);
     cart.setStock(stock);
 
     try {

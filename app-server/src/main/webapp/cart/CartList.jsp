@@ -9,9 +9,7 @@
 </head>
 <body>
 <h1>장바구니 목록(MVC + EL + JSTL)</h1>
-    <label for='f-buyerId'>상품번호</label> 
-    <input id='f-buyerId' type='text' name='buyerId' value='${cart.id}' readonly><br>
-<a href='form'>새상품</a><br>
+<a href='form'>새장바구니</a><br>
 <table border='1'>
 <thead>
   <tr>
