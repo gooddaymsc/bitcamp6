@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>회원등록</title>
+  <title>리뷰등록</title>
 </head>
 <body>
-<h1>회원등록결과(판매자)</h1>
-<p>회원을 등록했습니다.</p>
+<h1>리뷰등록 결과</h1>
+<p>리뷰를 등록했습니다.</p>
 </body>
 </html>
 
