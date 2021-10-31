@@ -31,22 +31,17 @@ public class ReviewUpdateHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      System.out.println("0");
-      String id = request.getParameter("writer");
-      System.out.println("1-1");
-      Review review = reviewDao.reviewIs((Integer)request.getAttribute("no"), id);
-      System.out.println("1");
-      if(review == null) {
-        System.out.println("작성하신 리뷰가 없습니다.");
+      int no = Integer.parseInt(request.getParameter("reviewNo"));
+      Review review = reviewDao.findByNo(no);
+
+      if (review.equals(null)) {
+        throw new Exception("해당 번호의 리뷰가 없습니다.");
       }
-      System.out.println("2");
-      review.setScore(Float.parseFloat(request.getParameter("scores")));
-      review.setComment(request.getParameter("content"));
-      System.out.println("3");
+      review.setScore(Float.parseFloat(request.getParameter("score")));
+      review.setComment(request.getParameter("comment"));
       reviewDao.update(review);
       sqlSession.commit();
-      System.out.println("4");
-      response.sendRedirect("detail");
+      response.sendRedirect("../detail?no="+review.getProductNo());
 
     } catch (Exception e) {
       request.setAttribute("error", e);
