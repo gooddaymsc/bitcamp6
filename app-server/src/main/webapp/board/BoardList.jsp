@@ -29,7 +29,7 @@
 <tr>
     <td><a href='detail?no=${board.boardNumber}'>${board.boardNumber}</a></td>  
     <td>${board.title}</td> 
-    <td>${board.tag}</td> 
+    <td>${board.boardTag.tag}</td> 
     <td>${board.content}</td> 
     <td>${board.writer.id}</td> 
     <td>${board.views}</td> 
