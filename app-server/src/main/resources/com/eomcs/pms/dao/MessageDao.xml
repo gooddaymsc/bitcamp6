@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.MessageDao">
+  
+  <resultMap type="Message" id="MessageMap">
+    <id column="message_no" property="messageNumber"/> 
+    <result column="id1" property="theOtherId"/>
+    <result column="id2" property="id"/>
+    <result column="room_no" property="roomNumber"/>
+    <result column="content" property="content"/>
+    <result column="registeredDate" property="registrationDate"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="MessageMap">
+    select 
+      m1.id as id1 , m2.id as id2, 
+      mg.member_no,mg.member_no2,mg.room_no,mg.content,mg.registeredDate 
+    from 
+      (select * from message where registeredDate in
+        (select max(registeredDate) from message group by room_no)) as mg 
+      left outer join member = m on mg.member_no=m.member_no 
+      inner join member m1 on mg.member_no = m1.member_no 
+      inner join member m2 on mg.member_no2 = m2.member_no 
+    where 
+      mg.member_no=#{memberNo} or mg.member_no2=#{memberNo}
+    order by
+      registeredDate desc;
+  </select>
+   
+  <select id="findByNo" resultMap="MessageMap" parameterType="int">
+    select 
+      m1.id as id1, 
+      m2.id as id2, 
+      mg.room_no, mg.content, mg.registeredDate 
+    from 
+      message mg 
+      inner join member m1 on mg.member_no = m1.member_no 
+      inner join member m2 on mg.member_no2 = m2.member_no 
+    where 
+      room_no=#{roomNo};
+  </select>
+  
+  <insert id="update" parameterType="message">
+    insert into message(member_no, member_no2, room_no, content) 
+      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
+  </insert>
+  
+  <insert id="insertRoomNo" parameterType="message"
+  useGeneratedKeys="true" keyColumn="room_no" keyProperty="roomNumber">
+    insert into messageRoom values();
+  </insert>
+   
+  <insert id="insert" parameterType="message">
+    insert into message(member_no, member_no2, room_no, content) 
+      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
+  </insert>
+  
+  <delete id="delete" parameterType="message">
+    delete from message 
+    where room_no = #{roomNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

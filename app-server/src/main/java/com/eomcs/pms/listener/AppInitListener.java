@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CommentDao;
+import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -33,6 +34,7 @@ public class AppInitListener implements ServletContextListener {
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
       ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
+      MessageDao messageDao = sqlSession.getMapper(MessageDao.class);
 
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -43,6 +45,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
       웹애플리케이션공용저장소.setAttribute("reviewDao", reviewDao);
+      웹애플리케이션공용저장소.setAttribute("messageDao", messageDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
     } catch (Exception e) {
