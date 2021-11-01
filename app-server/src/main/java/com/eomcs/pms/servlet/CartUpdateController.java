@@ -28,20 +28,25 @@ public class CartUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+    System.out.println("11");
     try {
+      System.out.println("22");
       int no = Integer.parseInt(request.getParameter("cartNumber"));
-      String id = request.getParameter("f-buyerId");
+      System.out.println("33");
+      String id = request.getParameter("buyerId");
 
+      System.out.println("44");
       Cart cart = cartDao.findByNo(no, id);
 
       if (cart == null) {
+        System.out.println("55");
         throw new Exception("해당 번호와 아이디의 장바구니가 없습니다.");
       }
 
       cart.setCartStocks(Integer.parseInt(request.getParameter("stocks")));
-      cart.setCartPrice(Integer.parseInt(request.getParameter("stocks")) * 
-          Integer.parseInt(request.getParameter("price")));
+
+      //      cart.setCartPrice(Integer.parseInt(request.getParameter("stocks")) * 
+      //          Integer.parseInt(request.getParameter("price")));
       cartDao.update(cart);
       sqlSession.commit();
       response.sendRedirect("list");

@@ -36,7 +36,7 @@
 		<input id='f-stocks' type='text' name='stocks' value='${cart.cartStocks}'><br>
 		
 		<label for='f-price'>개당금액</label> 
-		<input id='f-price' type='text' name='price' value='${cart.stock.price}'><br>
+		<input id='f-price' type='text' name='price' value='${cart.stock.price}' readonly><br>
        
 <button>변경</button>
  <a href='delete?no=${cart.cartNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>

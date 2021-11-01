@@ -25,6 +25,7 @@ public class CartAddController extends HttpServlet {
 
   @Override
   public void init(ServletConfig config) throws ServletException {
+    System.out.println("5");
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     cartDao = (CartDao) 웹애플리케이션공용저장소.getAttribute("cartDao");
@@ -33,7 +34,7 @@ public class CartAddController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    System.out.println("5");
+    System.out.println("6");
     // 구매자, 가게명, 판매자, 상품명, 수량, 금액
 
     Cart cart = new Cart();
