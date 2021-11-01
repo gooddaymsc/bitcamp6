@@ -6,10 +6,10 @@ import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
@@ -28,13 +28,13 @@ public class StockListController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
       StockList stockList = new StockList();
-      Collection<Stock> list = stockDao.findAll("s1");
-      stockList.setId("s1");
+      Collection<Stock> list = stockDao.findAll("s2");
+      stockList.setId("s2");
       stockList.setSellerStock((List<Stock>) list);
 
       request.setAttribute("stockList", stockList.getSellerStock());

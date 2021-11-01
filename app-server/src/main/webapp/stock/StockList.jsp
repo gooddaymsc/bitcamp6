@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>재고 목록</h1>
-<a href='form'>재고등록</a><br>
+<a href='form'>새 재고</a><br>
 <table border='1'>
 <thead>
   <tr>

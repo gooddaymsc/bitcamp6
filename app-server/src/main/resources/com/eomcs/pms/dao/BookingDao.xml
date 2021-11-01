@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.BookingDao">
+  
+  <resultMap type="Booking" id="BookingMap">
+    <id column="purchase_no" property="bookingNumber"/> 
+    <result column="pickup_booking_date" property="bookingDate"/>
+    <result column="pickup_time" property="bookingTime"/>
+    <result column="registeredDate" property="registeredDate"/>
+    <result column="payment_no" property="paymentType"/>
+    <result column="payment_status" property="paymentStatus"/>
+    <result column="B_amount" property="bookingStocks"/>
+    <result column="B_price" property="bookingPrice"/>
+    
+    <association property="cart" javaType="Cart">
+      <id column="cart_no" property="cartNumber"/> 
+      <result column="buyerId" property="id"/> <!-- 구매자 id -->
+      <result column="C_amount" property="cartStocks"/>
+    
+      <association property="stock" javaType="Stock">
+        <id column="stock_no" property="stockNumber"/>
+        <result column="S_amount" property="stocks"/>
+        <result column="S_price" property="price"/>
+        
+        <association property="product" javaType="Product">
+        <id column="product_no" property="productNumber"/> 
+        <result column="name" property="productName"/>
+        </association>
+
+        <association property="seller" javaType="Seller">
+          <result column="business_name" property="businessName"/>
+          <result column="business_address" property="businessAddress"/>
+          <result column="business_tel" property="businessPlaceNumber"/>
+          <result column="openingTime" property="businessOpeningTime"/>
+          <result column="closingTime" property="businessClosingTime"/>
+          <association property="member" javaType="member">
+          <id column="sellerNo" property="number"/>
+          <result column="sellerid" property="id"/>
+          </association>
+        </association>
+      </association> 
+    </association> 
+  </resultMap>
+  
+   
+  <select id="findAll1" resultMap="BookingMap">
+    select 
+      b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
+      c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
+      s.stock_no, s.member_no sellerNo, s.price S_price,
+      p.product_no, p.name,
+      m1.id as buyerId, 
+      m2.id as sellerId, 
+      sl.business_name
+    from 
+      purchase b join cart c on b.cart_no=c.cart_no
+      join stock s on c.stock_no=s.stock_no 
+      join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
+      join member m2 on m2.member_no=s.member_no 
+      join seller sl on m2.member_no=sl.member_no
+    where 
+      m1.id=#{id} and b.payment_status not in (-1)
+  </select>
+  
+    <select id="findAll2" resultMap="BookingMap">
+    select 
+      b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
+      c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
+      s.stock_no, s.member_no sellerNo, s.price S_price,
+      p.product_no, p.name,
+      m1.id as buyerId, 
+      m2.id as sellerId 
+    from 
+      purchase b join cart c on b.cart_no=c.cart_no
+      join stock s on c.stock_no=s.stock_no 
+      join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
+      join member m2 on m2.member_no=s.member_no 
+    where 
+      m2.id=#{id} and b.payment_status not in (-1)
+  </select>
+  
+  <select id="findByNo1" resultMap="BookingMap" parameterType="map">
+    select 
+      b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
+      c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
+      s.stock_no, s.member_no sellerNo, s.price S_price,
+      p.product_no, p.name,
+      m1.id as buyerId, 
+      m2.id as sellerId, 
+      sl.business_name, sl.business_address, sl.business_tel, sl.openingTime, sl.closingTime,
+      pl.amount B_amount, pl.price B_price
+    from 
+      purchase b join cart c on b.cart_no=c.cart_no
+      join stock s on c.stock_no=s.stock_no 
+      join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
+      join member m2 on m2.member_no=s.member_no 
+      join seller sl on m2.member_no=sl.member_no
+      join purchase_list pl on b.purchase_no=pl.purchase_no and s.stock_no=pl.stock_no
+    where 
+      m1.id=#{id} and b.purchase_no=#{bookingNo}
+  </select>
+  
+  <select id="findByNo2" resultMap="BookingMap" parameterType="map">
+    select 
+      b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
+      c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
+      s.stock_no, s.member_no sellerNo, s.price S_price,
+      p.product_no, p.name,
+      m1.id as buyerId, 
+      m2.id as sellerId, 
+      sl.business_name, sl.business_address, sl.business_tel,
+      pl.amount B_amount, pl.price B_price
+    from 
+      purchase b join cart c on b.cart_no=c.cart_no
+      join stock s on c.stock_no=s.stock_no 
+      join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
+      join member m2 on m2.member_no=s.member_no 
+      join seller sl on m2.member_no=sl.member_no
+      join purchase_list pl on b.purchase_no=pl.purchase_no and s.stock_no=pl.stock_no
+    where 
+      m2.id=#{id} and b.purchase_no=#{bookingNo}
+  </select>
+  
+  <insert id="insert" parameterType="booking"
+  useGeneratedKeys="true" keyColumn="purchase_no" keyProperty="bookingNumber">
+    insert into purchase(member_no, cart_no, payment_no, date, payment_status, pickup_booking_date, pickup_time) 
+    values((select member_no from member where id = #{cart.id}), #{cart.cartNumber},#{paymentType},#{bookingDate},#{paymentStatus},#{bookingDate},#{bookingTime})
+  </insert>
+  
+  <insert id="insertList" parameterType="booking">
+    insert into purchase_list(purchase_no, stock_no, amount, price) 
+    values(#{bookingNumber}, #{cart.stock.stockNumber}, #{cart.cartStocks} ,#{cart.stock.price})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    update purchase set
+      payment_status = -1
+    where
+      purchase_no=#{bookingNumber}
+  </delete>
+
+  <insert id="update" parameterType="booking">
+    update purchase set 
+      pickup_booking_date=#{bookingDate},
+      pickup_time=#{bookingTime}
+    where 
+      purchase_no=#{bookingNumber}
+  </insert>
+</mapper>
+
+
+
+
+
+
+

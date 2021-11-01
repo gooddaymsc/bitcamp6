@@ -9,6 +9,10 @@ values(2, 'aaa', 'aaa', 'aaa', 'aaa@test.com', '2021-1-1', '1111', 'aaa.gif', '1
 insert into stock(member_no, product_no, amount, price) 
 values((select member_no from member where id='s1'), 1, 3, 12000);
 
+--재고 수정
+update stock set amount=6, price=20 where stock_no=2;
+
+
 insert into board_tag(board_no, tag_no) values(31, 1);
 
 --태그 등록

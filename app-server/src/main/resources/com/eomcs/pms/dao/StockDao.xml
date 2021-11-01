@@ -40,6 +40,12 @@
       </association>
     </association>
   </resultMap>
+      
+  <insert id="insert" parameterType="stock">
+    insert 
+      into stock(member_no,product_no,amount,price) 
+    values((select member_no from member where id=#{seller.member.id}),#{product.productNumber},#{stocks},#{price})
+  </insert>
   
   <select id="findAll" resultMap="StockMap" parameterType="string">
     Select
@@ -67,17 +73,21 @@
       join member m on s.member_no=m.member_no 
       join seller sl on m.member_no=sl.member_no 
     where 
-      p.product_no=#{productNo};
+      s.stock_no=#{stockNumber}
   </select>
   
-  <!--
-    
-  <insert id="insert" parameterType="stock">
-    insert 
-      into stock(member_no,product_no,amount,price) 
-    values((select member_no from member where id=#{seller.member.id}),#{product.productNumber},#{stocks},#{price})
-  </insert>
+    <update id="update" parameterType="stock">
+    update stock set 
+      amount=#{stocks},
+      price=#{price} 
+    where 
+      stock_no=#{stockNumber}
+  </update>
   
+  <delete id="delete" parameterType="stock">
+    delete from stock where stock_no=#{stockNumber}
+  </delete>
+  <!--
     <select id="findByProductNo" resultMap="StockMap" parameterType="int">
     select 
       p.product_no, p.name, 
@@ -125,13 +135,9 @@
     order by s.product_no asc
   </select>
   
-  <update id="update" parameterType="stock">
-    update stock set amount=#{stocks},price=#{price} where stock_no=#{stockNumber}
-  </update>
+
   
-  <delete id="delete" parameterType="stock">
-    delete from stock where stock_no=#{stockNumber}
-  </delete>
+
     -->
 </mapper>
 
