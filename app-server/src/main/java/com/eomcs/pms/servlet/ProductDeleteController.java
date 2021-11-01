@@ -1,7 +1,6 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -31,43 +30,23 @@ public class ProductDeleteController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<html>");
-    out.println("<head>");
-    out.println("  <title>상품삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>상품삭제결과</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Product product = productDao.findByNo(no);
 
       if (product == null) {
-        out.println("해당 번호의 상품이 없습니다.<br>");
-
-      } else {
-        productDao.delete(product);
-        sqlSession.commit();
-
-        out.println("상품을 삭제하였습니다.<br>");
-      }      
-
-      out.println("<a href='list'>[목록]<a><br>");
+        throw new Exception("해당 번호의 상품이 없습니다.");
+      }   
+      productDao.delete(product);
+      sqlSession.commit();
+      response.sendRedirect("list");
 
     } catch (Exception e) {
-      out.println("상품 삭제 오류!");
-      e.printStackTrace();
-    }
-
-    out.println("</body>");
-    out.println("</html>");
-
-    response.sendRedirect("list");
-  }
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    }   
+  } 
 }
 
 
