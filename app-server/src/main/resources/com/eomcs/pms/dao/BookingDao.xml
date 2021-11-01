@@ -63,7 +63,7 @@
       join member m2 on m2.member_no=s.member_no 
       join seller sl on m2.member_no=sl.member_no
     where 
-      m1.id=#{id}
+      m1.id=#{id} and b.payment_status not in (-1)
   </select>
   
     <select id="findAll2" resultMap="BookingMap">
@@ -81,7 +81,7 @@
       join product p on s.product_no = p.product_no
       join member m2 on m2.member_no=s.member_no 
     where 
-      m2.id=#{id}
+      m2.id=#{id} and b.payment_status not in (-1)
   </select>
   
   <select id="findByNo1" resultMap="BookingMap" parameterType="map">

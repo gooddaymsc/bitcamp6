@@ -12,7 +12,7 @@ import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.domain.Booking;
 
 @WebServlet("/booking/detail")
-public class BookingDetailHandler extends HttpServlet {
+public class BookingDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   BookingDao bookingDao;
 

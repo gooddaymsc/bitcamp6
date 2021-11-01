@@ -19,18 +19,6 @@ public class Booking implements Serializable {
   private Date bookingEndTime;  //픽업가능 종료시간
 
 
-  //  public String getTheOtherId() {
-  //    return theOtherId;
-  //  }
-  //  public void setTheOtherId(String theOtherId) {
-  //    this.theOtherId = theOtherId;
-  //  }
-  //  public String getId() {
-  //    return id;
-  //  }
-  //  public void setId(String id) {
-  //    this.id = id;
-  //  }
   public int getBookingStocks() {
     return bookingStocks;
   }
@@ -49,13 +37,7 @@ public class Booking implements Serializable {
   public void setCart(Cart cart) {
     this.cart = cart;
   }
-  //
-  //  public String getBuyerId() {
-  //    return buyerId;
-  //  }
-  //  public void setBuyerId(String buyerId) {
-  //    this.buyerId = buyerId;
-  //  }
+
   public int getBookingNumber() {
     return bookingNumber;
   }
