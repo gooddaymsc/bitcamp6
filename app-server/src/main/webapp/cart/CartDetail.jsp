@@ -24,19 +24,19 @@
     <input id='f-buyerId' type='text' name='buyerId' value='${cart.id}' readonly><br>
     
     <label for='f-businessName'>가게명</label>
-    <input id='f-businessName' type='text' name='businessName' value='${cart.stock.seller.businessName}' readonly><br>
+    <input id='f-businessName' type='text' name='businessName' value='${sellerList.businessName}' readonly><br>
         
     <label for='f-sellerid'>판매자</label> 
-    <input id='f-sellerid' type='text' name='sellerid' value='${cart.seller.member.id}' readonly><br>
+    <input id='f-sellerid' type='text' name='sellerid' value='${cart.stock.seller.member.id}' readonly><br>
     
     <label for='f-productName'>상품명</label> 
     <input id='f-productName' type='text' name='productName' value='${cart.stock.product.productName}' readonly><br>
     
 		<label for='f-stocks'>수량</label> 
-		<input id='f-stocks' type='email' name='stocks' value='${cart.cartStocks}'><br>
+		<input id='f-stocks' type='text' name='stocks' value='${cart.cartStocks}'><br>
 		
 		<label for='f-price'>개당금액</label> 
-		<input id='f-price' type='date' name='price' value='${cart.stock.price}'><br>
+		<input id='f-price' type='text' name='price' value='${cart.stock.price}'><br>
        
 <button>변경</button>
  <a href='delete?no=${cart.cartNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>

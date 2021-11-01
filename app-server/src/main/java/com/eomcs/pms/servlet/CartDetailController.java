@@ -28,8 +28,8 @@ public class CartDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("cartNumber"));
-      String id = request.getParameter("buyerId");
+      int no = Integer.parseInt(request.getParameter("no"));
+      String id = "5";
       Cart cart = cartDao.findByNo(no, id);
 
       if (cart == null) {
