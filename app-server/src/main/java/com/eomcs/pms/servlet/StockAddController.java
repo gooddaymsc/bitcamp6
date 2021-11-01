@@ -13,6 +13,7 @@ import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
 
 @WebServlet("/stock/add")
@@ -36,21 +37,22 @@ public class StockAddController  extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    Stock stock = new Stock(); 
+    int no = Integer.parseInt(request.getParameter("productNumber"));
+
     try {
-      String productName = (String) request.getAttribute("productName");
-      Product product = productDao.findByProduct(productName);
-      Stock stock = new Stock(); 
+      Product product = productDao.findByNo(no);
       stock.setProduct(product);
-      System.out.println("1");
+
       stock.setPrice(Integer.parseInt(request.getParameter("price")));
-      System.out.println("2");
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
-      System.out.println("3");
-      //    Seller seller = sellerDao.findById(nowLoginId);
-      //    stock.setSeller(seller);
+
+      Seller seller = sellerDao.findById("s2");
+      stock.setSeller(seller);
+
       stockDao.insert(stock);
-      System.out.println("4");
       sqlSession.commit();
+
       response.setHeader("Refresh", "1;url=list");
       request.getRequestDispatcher("stock/StockAdd.jsp").forward(request, response);
     } catch(Exception e){
