@@ -8,19 +8,20 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import com.eomcs.pms.dao.CartDao;
-import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.dao.StockDao;
+import com.eomcs.pms.domain.Stock;
 
-@WebServlet("/cart/detail")
-public class CartDetailController extends HttpServlet {
+@WebServlet("/stock/detail")
+public class StockDetailController  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CartDao cartDao;
+  StockDao stockDao;
+
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    cartDao = (CartDao) 웹애플리케이션공용저장소.getAttribute("cartDao");
+    stockDao = (StockDao) 웹애플리케이션공용저장소.getAttribute("stockDao");
   }
 
   @Override
@@ -29,18 +30,24 @@ public class CartDetailController extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      String id = "5";
-      Cart cart = cartDao.findByNo(no, id);
+      Stock stock = stockDao.findByNo(no);
 
-      if (cart == null) {
-        throw new Exception("해당 번호의 장바구니가 없습니다.");
+      if (stock == null) {
+        throw new Exception("해당 번호의 상품이 없습니다.");
 
       }
-      request.setAttribute("cart", cart);
-      request.getRequestDispatcher("/cart/CartDetail.jsp").forward(request, response);
+      request.setAttribute("stock", stock);
+      request.getRequestDispatcher("/stock/StockDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);
     }
   }
+
 }
+
+
+
+
+
+

@@ -33,7 +33,7 @@ public class CartAddController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+    System.out.println("5");
     // 구매자, 가게명, 판매자, 상품명, 수량, 금액
 
     Cart cart = new Cart();
