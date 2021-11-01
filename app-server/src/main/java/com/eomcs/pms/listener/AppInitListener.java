@@ -11,6 +11,7 @@ import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.dao.StockDao;
 
 
 @WebListener
@@ -29,6 +30,7 @@ public class AppInitListener implements ServletContextListener {
       SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
       ProductDao productDao = sqlSession.getMapper(ProductDao.class);
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
+      StockDao stockDao = sqlSession.getMapper(StockDao.class);
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
 
@@ -36,6 +38,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("sellerDao", sellerDao);
       웹애플리케이션공용저장소.setAttribute("productDao", productDao);
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
+      웹애플리케이션공용저장소.setAttribute("stockDao", stockDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
     } catch (Exception e) {
