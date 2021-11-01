@@ -25,12 +25,13 @@
 </thead>
 <tbody>
 
-<c:forEach items="${cartList}" var="cart">
+<%-- <c:forEach items="${cartList}" var="cart" items="${sellerList}" var="sellerList"> --%>
+<c:forEach items="${cartList}" var="cart" varStatus="status">
 <tr>
     <td><a href='detail?no=${cart.cartNumber}'>${cart.cartNumber}</a></td>
     <td>${cart.id}</td> 
-    <td>${cart.stock.seller.businessName}</td> 
-    <td>${cart.seller.member.id}</td> 
+    <td>${sellerList.businessName}</td> 
+    <td>${cart.stock.seller.member.id}</td> 
     <td>${cart.stock.product.productName}</td> 
     <td>${cart.cartStocks}</td> 
     <td>${cart.stock.price}</td> 

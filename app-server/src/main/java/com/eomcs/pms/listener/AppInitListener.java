@@ -8,7 +8,9 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.BoardDao;
+import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
@@ -35,6 +37,8 @@ public class AppInitListener implements ServletContextListener {
       StockDao stockDao = sqlSession.getMapper(StockDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
       ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
+      CartDao cartDao = sqlSession.getMapper(CartDao.class);
+      BookingDao bookingDao = sqlSession.getMapper(BookingDao.class);
 
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -46,7 +50,9 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("stockDao", stockDao);
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
       웹애플리케이션공용저장소.setAttribute("reviewDao", reviewDao);
-      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
+      웹애플리케이션공용저장소.setAttribute("cartDao", cartDao);
+      웹애플리케이션공용저장소.setAttribute("bookingDao", bookingDao);
+      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
