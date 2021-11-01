@@ -24,6 +24,7 @@
     <association property="seller" javaType="Seller">
     <result column="openingTime" property="businessOpeningTime"/>
     <result column="closingTime" property="businessClosingTime"/>
+    <result column="business_name" property="businessName"/>
       <association property="member" javaType="member">
         <id column="sellerNo" property="number"/>
         <result column="sellerid" property="id"/>

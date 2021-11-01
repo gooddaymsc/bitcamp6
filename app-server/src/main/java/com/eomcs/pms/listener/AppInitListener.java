@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -31,6 +32,7 @@ public class AppInitListener implements ServletContextListener {
       ProductDao productDao = sqlSession.getMapper(ProductDao.class);
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
       ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
+      CartDao cartDao = sqlSession.getMapper(CartDao.class);
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
 
@@ -39,7 +41,8 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("productDao", productDao);
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
       웹애플리케이션공용저장소.setAttribute("reviewDao", reviewDao);
-      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
+      웹애플리케이션공용저장소.setAttribute("cartDao", cartDao);
+      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
