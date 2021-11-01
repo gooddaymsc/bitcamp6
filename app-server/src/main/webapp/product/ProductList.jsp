@@ -15,6 +15,7 @@
   <tr>
     <th>번호</th>
     <th>상품명</th>
+    <th>평점</th>
     <th>주종</th>
     <th>상세주종</th>
     <th>원산지</th>
@@ -31,6 +32,7 @@
 <tr>
     <td><a href='detail?no=${product.productNumber}'>${product.productNumber}</a></td>
     <td>${product.productName}</td> 
+    <td>${product.rate}</td> 
     <td>${product.productType.type}</td> 
     <td>${product.productType.subType}</td> 
     <td>${product.countryOrigin}</td> 

@@ -96,12 +96,15 @@
     where review_no=#{no}
   </delete>
 
-  <!-- 
 <select id="avg" parameterType="review" resultType="float" >
-    select product_no, avg(score) from review
-    group by review_no=#{no}
+    select avg(score) 
+    from 
+      review 
+    where 
+      product_no=#{productNo} 
+    group by 
+      product_no;
   </select>
-   -->
   
 </mapper>
 

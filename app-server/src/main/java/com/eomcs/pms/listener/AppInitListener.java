@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.ProductDao;
+import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
 
@@ -31,6 +33,9 @@ public class AppInitListener implements ServletContextListener {
       ProductDao productDao = sqlSession.getMapper(ProductDao.class);
       BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
       StockDao stockDao = sqlSession.getMapper(StockDao.class);
+      CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
+      ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
+
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
 
@@ -39,6 +44,8 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("productDao", productDao);
       웹애플리케이션공용저장소.setAttribute("boardDao", boardDao);
       웹애플리케이션공용저장소.setAttribute("stockDao", stockDao);
+      웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
+      웹애플리케이션공용저장소.setAttribute("reviewDao", reviewDao);
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
     } catch (Exception e) {
