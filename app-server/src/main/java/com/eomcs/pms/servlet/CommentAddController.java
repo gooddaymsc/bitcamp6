@@ -34,10 +34,10 @@ public class CommentAddController extends HttpServlet {
       throws ServletException, IOException {
 
     Comment comment = new Comment();
-    comment.setContent(request.getParameter("내용 : "));
+    comment.setContent(request.getParameter("content"));
 
     Member member = new Member();
-    member.setNumber(1);
+    member.setNumber(2);
     comment.setWriter(member);
 
     Board board = new Board();
@@ -45,13 +45,9 @@ public class CommentAddController extends HttpServlet {
     comment.setBoardNumber(board.getBoardNumber());
 
     try {
-      System.out.println(1);
       commentDao.insert(comment);
-      System.out.println(2);
       sqlSession.commit();
-      System.out.println(3);
       response.setHeader("Refresh", "1;url=list");
-      System.out.println(4);
       request.getRequestDispatcher("comment/CommentAdd.jsp").forward(request, response);
 
     } catch(Exception e){

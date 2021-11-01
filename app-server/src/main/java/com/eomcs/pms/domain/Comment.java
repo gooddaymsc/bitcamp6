@@ -1,10 +1,8 @@
 package com.eomcs.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-@SuppressWarnings("serial")
-public class Comment implements Serializable{
+public class Comment {
   private int commentNumber;
   private int boardNumber;
   private Member writer;
