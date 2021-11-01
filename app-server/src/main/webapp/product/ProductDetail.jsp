@@ -21,6 +21,9 @@
     <label for='f-productNumber'>상품번호</label> 
     <input id='f-productNumber' type='text' name='productNumber' value='${product.productNumber}' readonly><br>
     
+    <label for='f-rate'>평점</label> 
+    <input id='f-rate' type='text' name='rate' value='${product.rate}' readonly><br>
+    
     <label for='f-type'>주종</label> 
     <input id='f-type' type='text' name='type' value='${product.productType.type}'><br>
     
@@ -51,7 +54,9 @@
  <a href='delete?no=${product.productNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
 <hr />
 </form>
+
 <h4>리뷰</h4>
+<a href='review/form?no=${product.productNumber}'>새리뷰</a><br>
 <c:forEach items="${reviewList}" var="review">
 <fieldset>
 <legend>작성자 : ${review.member.id}</legend>

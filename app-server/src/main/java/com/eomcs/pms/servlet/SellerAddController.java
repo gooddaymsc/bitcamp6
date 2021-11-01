@@ -51,15 +51,10 @@ public class SellerAddController extends HttpServlet {
     seller.setBusinessClosingTime(request.getParameter("businessClosingTime"));
     seller.setMember(member);
     try {
-      System.out.println("1");
       sellerDao.insert(seller.getMember());
-      System.out.println("2");
       sellerDao.insertSeller(seller);
-      System.out.println("3");
       sqlSession.commit();
-      System.out.println("4");
       response.setHeader("Refresh", "1;url=list");
-      System.out.println("5");
       request.getRequestDispatcher("seller/SellerAdd.jsp").forward(request, response);
 
     } catch(Exception e){

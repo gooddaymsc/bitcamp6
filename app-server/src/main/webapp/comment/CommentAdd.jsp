@@ -4,29 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>리뷰등록</title>
+  <title>댓글 등록</title>
 </head>
 <body>
-<h1>리뷰등록 결과</h1>
-<p>리뷰를 등록했습니다.</p>
+<h1>댓글 등록결과</h1>
+<p>댓글을 등록했습니다.</p>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
