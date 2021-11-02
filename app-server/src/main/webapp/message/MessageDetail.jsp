@@ -43,6 +43,7 @@
 </head>
 <body>
 <h1>대화목록</h1>
+<a href='delete?no=${roomNo}'>[나가기]</a> 
 <table border='1'>
 <c:set var="theOtherId" value="${newLoginId}"/>
 <c:forEach items="${messages}" var="message">
@@ -65,7 +66,10 @@
 </c:forEach>
 </table>
 
+<form action='update'>
 <div><input id='f-content' type='text' name='content'><br></div>
 <button>전송</button>
+</form>
+
 </body>
 </html>

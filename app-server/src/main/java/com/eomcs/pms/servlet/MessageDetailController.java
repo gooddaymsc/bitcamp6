@@ -33,15 +33,26 @@ public class MessageDetailController extends HttpServlet {
       member.setId("admin");;
 
       String nowLoginId = member.getId();
+      String other = "";
 
       int no = Integer.parseInt(request.getParameter("no"));
       Collection<Message> messages = messageDao.findByNo(no);
+
+      for (Message message : messages) {
+        if (message.getId().equals(nowLoginId)) {
+          other = message.getTheOtherId();
+        } else {
+          other = message.getId();
+        }
+      }
 
       if (messages == null) {
         throw new Exception("해당 번호의 메세지가 없습니다.");
       }
 
-      request.setAttribute("messages", messages);   
+      request.setAttribute("messages", messages); 
+      request.setAttribute("roomNo", no);
+      request.setAttribute("otherId", other); 
       request.setAttribute("nowLoginId", nowLoginId); 
       request.getRequestDispatcher("/message/MessageDetail.jsp").forward(request, response);
 
