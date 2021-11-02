@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.BoardTag;
 import com.eomcs.util.Prompt;
 
 public class BoardUpdateHandler implements Command {
@@ -31,16 +32,17 @@ public class BoardUpdateHandler implements Command {
     }
     String title = Prompt.inputString(String.format("제목(변경 전 : %s) : ", board.getTitle()));
     String content = Prompt.inputString(String.format("내용(변경 전 : %s) : ", board.getContent()));
-    //    BoardTag boardTag = new BoardTag();
-    //    boardTag.setTag(Prompt.inputString(String.format("태그(변경 전 : %s) : ", board.getBoardTag().getTag())));
+    BoardTag boardTag = new BoardTag();
+    boardTag.setTag(Prompt.inputString(String.format("태그(변경 전 : %s) : ", board.getBoardTag().getTag())));
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("y")) {
       board.setTitle(title);
       board.setContent(content);
-      //      board.setBoardTag(boardTag);
+      board.setBoardTag(boardTag);
 
       boardDao.update(board);
+      boardDao.update2(board);
       sqlSession.commit();
       System.out.println("게시글을 변경하였습니다.\n");
       return;

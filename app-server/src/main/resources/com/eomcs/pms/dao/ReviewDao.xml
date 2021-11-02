@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.ReviewDao">
+
+    <resultMap type="Review" id="ReviewMap">
+    <id column="review_no" property="no"/> 
+    <result column="product_no" property="productNo"/>
+    <result column="score" property="score"/>
+    <result column="comment" property="comment"/>
+    <result column="registeredDate" property="registeredDate"/>
+    
+    <association property="member" javaType="member">
+      <id column="member_no" property="number"/>
+      <result column="id" property="id"/>
+    </association>
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="ReviewMap">
+    select 
+      r.review_no, 
+      pro.product_no, 
+      m.id, 
+      r.score, 
+      r.comment, 
+      r.registeredDate 
+    from 
+      review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+    where 
+      pro.product_no = #{productNo}
+  </select>
+  
+  <insert id="insert" parameterType="review">
+    insert into review(product_no, member_no, score, comment)
+      values(#{productNo},#{member.number},#{score},#{comment})
+  </insert>
+  
+    <select id="findByNo" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+      review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     r.review_no = #{no}
+  </select>
+  
+  <select id="reviewIs" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+     review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     pro.product_no = #{productNo}
+   and
+     m.id = #{id};
+  </select>
+  
+  <update id="update" parameterType="review">
+  update review set
+    score=#{score},
+    comment=#{comment}
+  where 
+    review_no=#{no} 
+  </update>
+  
+ 
+  <select id="myReview" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+     review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     m.id = #{id};
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from review 
+    where review_no=#{no}
+  </delete>
+
+<select id="avg" parameterType="review" resultType="float" >
+    select avg(score) 
+    from 
+      review 
+    where 
+      product_no=#{productNo} 
+    group by 
+      product_no;
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+

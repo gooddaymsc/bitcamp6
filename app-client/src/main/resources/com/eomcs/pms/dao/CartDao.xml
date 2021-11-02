@@ -13,14 +13,21 @@
     
    <association property="stock" javaType="Stock">
     <id column="stock_no" property="stockNumber"/>
-    <result column="sellerId" property="id"/> <!-- 판매자 id -->
     <result column="amount" property="stocks"/>
     <result column="price" property="price"/>
-    <!-- stock 안에 product 객체정보를 넣어야한다면? -->
     
     <association property="product" javaType="Product">
       <id column="product_no" property="productNumber"/>
       <result column="name" property="productName"/> 
+    </association>
+    
+    <association property="seller" javaType="Seller">
+    <result column="openingTime" property="businessOpeningTime"/>
+    <result column="closingTime" property="businessClosingTime"/>
+      <association property="member" javaType="member">
+        <id column="sellerNo" property="number"/>
+        <result column="sellerid" property="id"/>
+      </association>
     </association>
   </association> 
 
@@ -48,12 +55,14 @@
       s.stock_no, s.member_no sellerNo, s.price,
       p.product_no, p.name,
       m1.id as buyerId, 
-      m2.id as sellerId 
+      m2.id as sellerId, 
+      sl.openingTime, sl.closingTime
     from 
       cart c join stock s on c.stock_no=s.stock_no 
       join member m1 on m1.member_no=c.member_no 
       join product p on s.product_no = p.product_no
       join member m2 on m2.member_no=s.member_no 
+      join seller sl on m2.member_no=sl.member_no
     where 
       m1.id= #{id}
      And 
@@ -62,26 +71,25 @@
   
   <update id="update" parameterType="Cart">
     update cart set 
-      cart_no = #{cartNumber}, 
       amount = #{cartStocks}
     where 
       cart_no=#{cartNumber}
   </update>
   
   <delete id="delete" parameterType="Cart">
-    delete 
-    from cart
+    update cart set 
+      amount = -1
     where 
-    cart_no=#{cartNumber}
+      cart_no=#{cartNumber}
   </delete>
   
   
-  <!-- 
-   <insert id="insert" parameterType="product">
-   insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
-    values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
+  <insert id="insert" parameterType="cart">
+    insert into cart(member_no, stock_no, amount) 
+    values((select member_no from member where id=#{id}),#{stock.stockNumber},#{cartStocks});
   </insert>
    
+  <!-- 
     
     <select id="findByProduct" resultMap="ProductMap" parameterType="String">
     select 

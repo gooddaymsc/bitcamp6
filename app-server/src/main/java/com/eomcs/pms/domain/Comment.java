@@ -1,15 +1,13 @@
 package com.eomcs.pms.domain;
 
-import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
-@SuppressWarnings("serial")
-public class Comment implements Serializable{
+public class Comment {
   private int commentNumber;
   private int boardNumber;
-  private String id;
+  private Member writer;
   private String content;
-  private Date registrationDate;
+  private Timestamp registrationDate;
 
   public int getCommentNumber() {
     return commentNumber;
@@ -23,11 +21,11 @@ public class Comment implements Serializable{
   public void setBoardNumber(int boardNumber) {
     this.boardNumber = boardNumber;
   }
-  public String getId() {
-    return id;
+  public Member getWriter() {
+    return writer;
   }
-  public void setId(String id) {
-    this.id = id;
+  public void setWriter(Member writer) {
+    this.writer = writer;
   }
   public String getContent() {
     return content;
@@ -35,12 +33,11 @@ public class Comment implements Serializable{
   public void setContent(String content) {
     this.content = content;
   }
-  public Date getRegistrationDate() {
+  public Timestamp getRegistrationDate() {
     return registrationDate;
   }
-  public void setRegistrationDate(Date registrationDate) {
+  public void setRegistrationDate(Timestamp registrationDate) {
     this.registrationDate = registrationDate;
   }
-
 
 }

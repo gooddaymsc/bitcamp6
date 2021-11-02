@@ -1,18 +1,14 @@
 package com.eomcs.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-@SuppressWarnings("serial")
-public class Cart implements Serializable {
+public class Cart {
   private Stock stock; // 장바구니 담을 상품
   private int cartStocks; // 장바구니상품의 갯수
   private int cartPrice; // 총액
   private int cartNumber; //장바구니번호
-  private String sellerId; //판매자 id
-  private String id; // 구매자 id
+  private String id; 
   private Date registeredDate;
-
 
   public String getId() {
     return id;
@@ -20,7 +16,6 @@ public class Cart implements Serializable {
   public void setId(String id) {
     this.id = id;
   }
-
   public int getCartStocks() {
     return cartStocks;
   }
@@ -57,11 +52,4 @@ public class Cart implements Serializable {
   public void setRegistrationDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-  public String getSellerId() {
-    return sellerId;
-  }
-  public void setSellerId(String sellerId) {
-    this.sellerId = sellerId;
-  }
-
 }

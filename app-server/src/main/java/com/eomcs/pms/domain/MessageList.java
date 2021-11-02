@@ -1,11 +1,9 @@
 package com.eomcs.pms.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("serial")
-public class MessageList implements Serializable {
+public class MessageList {
   private String id; // nowLoginId
   private List<Message> message = new ArrayList<>();
   private int messageListNumber = 1;

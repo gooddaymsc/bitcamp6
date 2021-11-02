@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.CartDao">
+  
+  <resultMap type="Cart" id="CartMap">
+    <id column="cart_no" property="cartNumber"/> 
+    <result column="buyerId" property="id"/> <!-- 구매자 id -->
+    <result column="amount" property="cartStocks"/>
+    <result column="registeredDate" property="registeredDate"/>
+    
+   <association property="stock" javaType="Stock">
+    <id column="stock_no" property="stockNumber"/>
+    <result column="amount" property="stocks"/>
+    <result column="price" property="price"/>
+    
+    <association property="product" javaType="Product">
+      <id column="product_no" property="productNumber"/>
+      <result column="name" property="productName"/> 
+    </association>
+    
+    <association property="seller" javaType="Seller">
+    <result column="openingTime" property="businessOpeningTime"/>
+    <result column="closingTime" property="businessClosingTime"/>
+    <result column="business_name" property="businessName"/>
+      <association property="member" javaType="member">
+        <id column="sellerNo" property="number"/>
+        <result column="sellerid" property="id"/>
+      </association>
+    </association>
+  </association> 
+
+  </resultMap>
+   
+  <select id="findAll" resultMap="CartMap">
+    select 
+      c.cart_no, c.member_no buyerNo, c.stock_no, c.amount, c.registeredDate, 
+      s.stock_no, s.member_no sellerNo, s.price,
+      p.product_no, p.name,
+      m1.id as buyerId, 
+      m2.id as sellerId 
+    from 
+      cart c join stock s on c.stock_no=s.stock_no 
+      join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
+      join member m2 on m2.member_no=s.member_no 
+    where 
+      m1.id=#{id}
+  </select>
+  
+   <select id="findByNo" resultMap="CartMap">
+    select 
+      c.cart_no, c.member_no buyerNo, c.stock_no, c.amount, c.registeredDate, 
+      s.stock_no, s.member_no sellerNo, s.price,
+      p.product_no, p.name,
+      m1.id as buyerId, 
+      m2.id as sellerId, 
+      sl.openingTime, sl.closingTime
+    from 
+      cart c join stock s on c.stock_no=s.stock_no 
+      join member m1 on m1.member_no=c.member_no 
+      join product p on s.product_no = p.product_no
+      join member m2 on m2.member_no=s.member_no 
+      join seller sl on m2.member_no=sl.member_no
+    where 
+      m1.id= #{id}
+     And 
+      c.cart_no = #{cartNumber}
+  </select>
+  
+  <update id="update" parameterType="Cart">
+    update cart set 
+      amount = #{cartStocks}
+    where 
+      cart_no=#{cartNumber}
+  </update>
+  
+  <delete id="delete" parameterType="Cart">
+    update cart set 
+      amount = -1
+    where 
+      cart_no=#{cartNumber}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="cart">
+    insert into cart(member_no, stock_no, amount) 
+    values((select member_no from member where id=#{id}),#{stock.stockNumber},#{cartStocks});
+  </insert>
+   
+  <!-- 
+    
+    <select id="findByProduct" resultMap="ProductMap" parameterType="String">
+    select 
+      p.product_no, 
+      p.type_no, 
+      p.name, 
+      p.origin, 
+      p.volume, 
+      p.alcoholLevel, 
+      p.sugarLevel, 
+      p.acidity, 
+      p.weight, 
+      p.rate, 
+      p.variety, 
+      t.type, 
+      t.subType 
+    from product p join product_type t on p.type_no=t.type_no 
+    where 
+      p.name=#{name}
+  </select>
+  -->
+</mapper>
+
+
+
+
+
+
+

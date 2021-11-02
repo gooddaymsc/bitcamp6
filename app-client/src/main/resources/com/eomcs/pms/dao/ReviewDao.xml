@@ -16,7 +16,6 @@
       <id column="member_no" property="number"/>
       <result column="id" property="id"/>
     </association>
-    
   </resultMap>
   
   
@@ -34,12 +33,24 @@
       pro.product_no = #{productNo}
   </select>
   
-  
   <insert id="insert" parameterType="review">
     insert into review(product_no, member_no, score, comment)
       values(#{productNo},#{member.number},#{score},#{comment})
   </insert>
   
+    <select id="findByNo" resultMap="ReviewMap">
+  select 
+     r.review_no, 
+     pro.product_no, 
+     m.id, 
+     r.score, 
+     r.comment, 
+     r.registeredDate 
+   from 
+      review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+   where 
+     r.review_no = #{no}
+  </select>
   
   <select id="reviewIs" resultMap="ReviewMap">
   select 
@@ -85,6 +96,13 @@
     where review_no=#{no}
   </delete>
 
+  <!-- 
+<select id="avg" parameterType="review" resultType="float" >
+    select product_no, avg(score) from review
+    group by review_no=#{no}
+  </select>
+   -->
+  
 </mapper>
 
 

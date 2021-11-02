@@ -1,0 +1,80 @@
+package com.eomcs.pms.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
+import com.eomcs.pms.dao.CommentDao;
+import com.eomcs.pms.domain.Comment;
+
+@WebServlet("/comment/delete")
+public class CommentDeleteController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
+
+  CommentDao commentDao;
+  SqlSession sqlSession;
+
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
+  }
+
+
+  @Override
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    out.println("<html>");
+    out.println("<head>");
+    out.println("  <title>게시글삭제</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>게시글삭제결과</h1>");
+
+
+    try {
+      int no = Integer.parseInt(request.getParameter("no"));
+
+      Comment comment = commentDao.findByNo(no);
+
+      if (comment == null) {
+        System.out.println("해당 번호의 댓글 없습니다.\n");
+        return;
+
+
+      } else {
+        commentDao.delete(comment); 
+        sqlSession.commit();
+
+        out.println("댓글을 삭제하였습니다.<br>");
+      }
+
+      out.println("<a href='list'>[목록]<a><br>");
+    } catch (Exception e) {
+      out.println("댓글 삭제 오류!");
+      e.printStackTrace();
+    }
+
+    out.println("</body>");
+    out.println("</html>");
+
+    response.sendRedirect("list");
+  }
+}
+
+
+
+
+
+

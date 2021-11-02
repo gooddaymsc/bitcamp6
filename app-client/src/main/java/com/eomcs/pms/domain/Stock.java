@@ -6,16 +6,16 @@ import java.io.Serializable;
 public class Stock implements Serializable{
 
   private Product product;
+  private Seller seller;
   private int stockNumber;            //재고번호
   private int stocks;                 //재고 수량
   private int price;                  //가격
-  private String id;
 
-  public String getId() {
-    return id;
+  public Seller getSeller() {
+    return seller;
   }
-  public void setId(String id) {
-    this.id = id;
+  public void setSeller(Seller seller) {
+    this.seller = seller;
   }
   public Product getProduct() {
     return product;

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.MemberDao">
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="number"/> 
+    <result column="id" property="id"/>
+    <result column="password" property="password"/>
+    <result column="authority" property="authority"/>
+    <result column="name" property="name"/>
+    <result column="nickname" property="nickname"/>
+    <result column="email" property="email"/>
+    <result column="birthday" property="birthday"/>
+    <result column="phoneNumber" property="phoneNumber"/>
+    <result column="registeredDate" property="registeredDate"/>
+    <result column="active" property="active"/>
+    <result column="level" property="level"/>
+  </resultMap>
+  
+  <select id="findByIdAndPassword" resultMap="MemberMap">
+    select 
+      member_no,
+      id,
+      name, 
+      email,
+      photo,
+      phoneNumber,
+      authority,
+      registeredDate 
+    from 
+      member
+    where 
+      id=#{id} and password=password(#{password})
+  </select>
+
+  <select id="findById" resultMap="MemberMap">
+    select 
+      member_no,
+      id,
+      authority,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      registeredDate,
+      active,
+      level,
+      zipcode,
+      address,
+      detail_address
+    from 
+      member 
+    where 
+      id = #{id}
+  </select>
+ 
+  <select id="findByName" resultMap="MemberMap">
+    select 
+      member_no,
+      id,
+      authority,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      registeredDate,
+      active,
+      level,
+      zipcode,
+      address,
+      detail_address
+    from 
+      member 
+    where 
+      name = #{name}
+  </select>
+  
+  <update id="update" parameterType="member">
+    update member set 
+      password=password(#{password})
+    where 
+      member_no=#{number}
+  </update>
+  
+</mapper>
+
+
+
+
+
+
+

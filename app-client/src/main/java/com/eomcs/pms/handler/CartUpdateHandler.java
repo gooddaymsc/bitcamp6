@@ -1,5 +1,6 @@
 package com.eomcs.pms.handler;
 import static com.eomcs.pms.handler.CartValidation.checkNum;
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.ClientApp;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.domain.Cart;
@@ -7,8 +8,10 @@ import com.eomcs.util.Prompt;
 
 public class CartUpdateHandler implements Command {
   CartDao cartDao;
-  public CartUpdateHandler(CartDao cartDao) {
+  SqlSession sqlSession;
+  public CartUpdateHandler(CartDao cartDao, SqlSession sqlSession) {
     this.cartDao = cartDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -25,6 +28,8 @@ public class CartUpdateHandler implements Command {
         cart.setCartStocks(cartstocks);
         cart.setCartPrice(cart.getStock().getPrice()*cartstocks);
         cartDao.update(cart);
+        sqlSession.commit();
+
         System.out.println("장바구니를 변경하였습니다.");
         return;
       } else {

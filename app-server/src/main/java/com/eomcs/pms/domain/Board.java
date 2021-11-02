@@ -10,15 +10,16 @@ public class Board implements Serializable {
   private int boardNumber;
   private String title;
   private String content;
-  private String writer;
+  private Member writer;
   private Date registrationDate;
   private int views;
   private String tag;
   private int likes;
   private Date likeDate;
-  private List<String> likeMember = new ArrayList<>();
+  private List<LikeMember> likeMember = new ArrayList<>();
   private int totalCommentNumber = 1;
   private List<Comment> commentList = new ArrayList<>();
+  private BoardTag boardTag;
 
   public int getBoardNumber() {
     return boardNumber;
@@ -38,10 +39,10 @@ public class Board implements Serializable {
   public void setContent(String content) {
     this.content = content;
   }
-  public String getWriter() {
+  public Member getWriter() {
     return writer;
   }
-  public void setWriter(String writer) {
+  public void setWriter(Member writer) {
     this.writer = writer;
   }
   public Date getRegistrationDate() {
@@ -86,12 +87,16 @@ public class Board implements Serializable {
   public void setCommentList(List<Comment> commentList) {
     this.commentList = commentList;
   }
-  public List<String> getLikeMember() {
+  public List<LikeMember> getLikeMember() {
     return likeMember;
   }
-  public void setLikeMember(List<String> likeMember) {
+  public void setLikeMember(List<LikeMember> likeMember) {
     this.likeMember = likeMember;
   }
-
-
+  public BoardTag getBoardTag() {
+    return boardTag;
+  }
+  public void setBoardTag(BoardTag boardTag) {
+    this.boardTag = boardTag;
+  }
 }

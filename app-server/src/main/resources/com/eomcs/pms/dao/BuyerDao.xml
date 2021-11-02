@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.pms.dao.BuyerDao">
+  
+  <resultMap type="Buyer" id="BuyerMap">
+    <result column="zipcode" property="zipcode"/>
+    <result column="address" property="address"/>
+    <result column="detail_address" property="detailAddress"/>
+    
+    <association property="member" javaType="member">
+      <id column="member_no" property="number"/>
+      <result column="id" property="id"/>
+      <result column="password" property="password"/>
+      <result column="authority" property="authority"/>
+      <result column="name" property="name"/>
+      <result column="nickname" property="nickname"/>
+      <result column="email" property="email"/>
+      <result column="birthday" property="birthday"/>
+      <result column="photo" property="photo"/>
+      <result column="phoneNumber" property="phoneNumber"/>
+      <result column="registeredDate" property="registeredDate"/>
+      <result column="active" property="active"/>
+      <result column="level" property="level"/>
+    </association>
+    
+  </resultMap>
+  
+  <select id="findAll" resultMap="BuyerMap">
+    select 
+      member_no,
+      id,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      level,
+      registeredDate 
+    from 
+      member 
+    where
+      authority=2
+    order by 
+      member_no asc
+  </select>
+  
+  <insert id="insert" parameterType="buyer">
+    insert into member(authority,id,password,name,nickname,email,birthday,photo,phoneNumber,zipcode,address,detail_address) 
+    values(#{member.authority},#{member.id},password(#{member.password}),#{member.name},#{member.nickname},#{member.email},
+    #{member.birthday},#{member.photo},#{member.phoneNumber},#{zipcode},#{address},#{detailAddress})
+  </insert>
+  
+  <select id="findById" resultMap="BuyerMap" parameterType="string">
+    select 
+      member_no,
+      id,
+      authority,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      registeredDate,
+      active,
+      level,
+      zipcode,
+      address,
+      detail_address
+    from 
+      member 
+    where 
+      id = #{id}
+  </select>
+  
+  <update id="update" parameterType="buyer">
+    update member set 
+      nickname=#{member.nickname},
+      password=password(#{member.password}),
+      photo=#{member.photo},
+      phoneNumber=#{member.phoneNumber},
+      zipcode=#{zipcode},
+      address=#{address},
+      detail_address=#{detailAddress}
+    where 
+      member_no=#{member.number}
+  </update>
+  
+  
+  <delete id="delete" parameterType="int">
+    update member set 
+      name="none",
+      nickname="none",
+      birthday="0000-00-00",
+      password="none",
+      photo="none",
+      phoneNumber="none",
+      zipcode=0,
+      address="none",
+      detail_address="none",
+      active=1
+    where
+       member_no=#{no}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
