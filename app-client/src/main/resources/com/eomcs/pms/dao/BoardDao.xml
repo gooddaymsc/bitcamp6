@@ -39,8 +39,8 @@
          b.registeredDate,
          b.views,
          m.name,
-         m.id,
-         t.tag
+         m.id
+<!--          t.tag -->
       from board b
         left join member m on b.member_no=m.member_no
         left join board_tag bt on b.board_no=bt.board_no
@@ -60,13 +60,13 @@
       values (#{writer.number}, #{title}, #{content})
   </insert>
   
-  <insert id="insertTag" parameterType="boardTag">
+<!--   <insert id="insertTag" parameterType="boardTag">
     insert
       into tag(tag)
       values (#{boardTag.tag})
   </insert>
   
-<!--   <insert id="insertBoardTag" parameterType="boardTag">
+  <insert id="insertBoardTag" parameterType="board">
     insert
       into board_tag(board_no, tag_no)
       values (#{boardNumber}, #{boardTag.tagNumber})
@@ -95,20 +95,13 @@
     where 
       board_no=#{boardNumber}
   </update>
-  
-<<<<<<< HEAD
-    <update id="update2" parameterType="board">
-    update board set
-      likeMember=#{writer.number},
-      likes=#{likes}
-=======
+
   <select id="findLikeList" resultMap="LikeMap" parameterType="int">
     select 
       member_no,
       registeredDate
     from 
       board_like 
->>>>>>> b654afe235757ba8d3900c248f7467defac0bc1c
     where 
       board_no=#{no}     
   </select>
