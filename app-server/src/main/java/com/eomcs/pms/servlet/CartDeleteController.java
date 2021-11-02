@@ -32,7 +32,7 @@ public class CartDeleteController extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      String id = request.getParameter("buyerId");
+      String id = "5";
 
       Cart cart = cartDao.findByNo(no, id);
 
