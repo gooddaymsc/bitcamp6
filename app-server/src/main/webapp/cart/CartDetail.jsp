@@ -40,7 +40,7 @@
        
 <button>변경</button>
  <a href='delete?no=${cart.cartNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
- 
+ <a href='../booking/form?no=${cart.cartNumber}&id=${cart.id}'>[예약 등록]</a><br>
 </form>
 
 </body>
