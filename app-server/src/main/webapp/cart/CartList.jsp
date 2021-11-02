@@ -28,7 +28,7 @@
 <%-- <c:forEach items="${cartList}" var="cart" items="${sellerList}" var="sellerList"> --%>
 <c:forEach items="${cartList}" var="cart" varStatus="status">
 <tr>
-    <td><a href='detail?no=${cart.cartNumber}'>${cart.cartNumber}</a></td>
+    <td><a href='detail?cartNumber=${cart.cartNumber}&id=${cart.id}'>${cart.cartNumber}</a></td>
     <td>${cart.id}</td> 
     <td>${sellerList.businessName}</td> 
     <td>${cart.stock.seller.member.id}</td> 

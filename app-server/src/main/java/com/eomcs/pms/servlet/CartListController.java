@@ -31,17 +31,12 @@ public class CartListController extends HttpServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-    System.out.println("1");
 
     try {
-      Collection<Cart> cartList = cartDao.findAll("5");
-      System.out.println("2");
+      Collection<Cart> cartList = cartDao.findAll("1");
       Seller sellerList = sellerDao.findById("a");
-      System.out.println("3");
       request.setAttribute("cartList", cartList);
-      System.out.println("4");
       request.setAttribute("sellerList", sellerList);
-      System.out.println("5");
       request.getRequestDispatcher("CartList.jsp").forward(request, response);
 
     } catch (Exception e) {
