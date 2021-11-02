@@ -30,10 +30,9 @@ public class MessageDetailController extends HttpServlet {
       throws ServletException, IOException {
     try {
       Member member = new Member();
-      member.setId("admin");
+      member.setId("admin");;
 
       String nowLoginId = member.getId();
-      String other = "";
 
       int no = Integer.parseInt(request.getParameter("no"));
       Collection<Message> messages = messageDao.findByNo(no);
@@ -41,16 +40,9 @@ public class MessageDetailController extends HttpServlet {
       if (messages == null) {
         throw new Exception("해당 번호의 메세지가 없습니다.");
       }
-      for (Message message : messages) {
-        if (message.getId().equals(nowLoginId)) {
-          other = message.getTheOtherId();
-        } else {
-          other = message.getId();
-        }
-      }
 
-      request.setAttribute("theOtherId", other);
-      request.setAttribute("roomNumber", no);
+      request.setAttribute("messages", messages);   
+      request.setAttribute("nowLoginId", nowLoginId); 
       request.getRequestDispatcher("/message/MessageDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
