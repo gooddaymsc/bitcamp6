@@ -19,7 +19,7 @@
 <form action='update'>
 
 <label for='f-no'>번호</label> 
-<input id='f-no' type='text' name='number' value='${stock.stockNumber}' readonly><br>
+<input id='f-no' type='text' name='no' value='${stock.stockNumber}' readonly><br>
   
 <label for='f-productName'>상품</label> 
 <input id='f-productName' type='text' name='productName' value='${stock.product.productName} 'readonly><br>
