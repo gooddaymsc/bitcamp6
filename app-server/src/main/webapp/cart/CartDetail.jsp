@@ -24,7 +24,7 @@
     <input id='f-buyerId' type='text' name='buyerId' value='${cart.id}' readonly><br>
     
     <label for='f-businessName'>가게명</label>
-    <input id='f-businessName' type='text' name='businessName' value='${sellerList.businessName}' readonly><br>
+    <input id='f-businessName' type='text' name='businessName' value='${cart.}' readonly><br>
         
     <label for='f-sellerid'>판매자</label> 
     <input id='f-sellerid' type='text' name='sellerid' value='${cart.stock.seller.member.id}' readonly><br>

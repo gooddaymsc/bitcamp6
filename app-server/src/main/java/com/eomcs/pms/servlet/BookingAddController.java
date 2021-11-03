@@ -38,6 +38,7 @@ public class BookingAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
+      System.out.println("100");
       Booking booking = new Booking();
       int cartNo = Integer.parseInt(request.getParameter("cartNumber"));
       String id = request.getParameter("id");
@@ -67,7 +68,8 @@ public class BookingAddController extends HttpServlet {
       bookingDao.insertList(booking);
       cartDao.delete(cart);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=list?id="+id);
+      System.out.println("3");
       request.getRequestDispatcher("booking/BookingAdd.jsp").forward(request, response);
 
     } catch(Exception e){

@@ -34,6 +34,8 @@ public class CartListController extends HttpServlet {
 
     try {
       Collection<Cart> cartList = cartDao.findAll("5");
+      //      List<Cart> cart = (List<Cart>)cartList;
+      //      System.out.println(cart.get(0).getStock().getSeller().getBusinessName());
       Seller sellerList = sellerDao.findById("a");
       request.setAttribute("cartList", cartList);
       request.setAttribute("sellerList", sellerList);
