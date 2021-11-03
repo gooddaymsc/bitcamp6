@@ -12,6 +12,7 @@ import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.CommentDao;
+import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
@@ -31,6 +32,7 @@ public class AppInitListener implements ServletContextListener {
       sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
           "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
 
+      MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
       BuyerDao buyerDao = sqlSession.getMapper(BuyerDao.class);
       SellerDao sellerDao = sqlSession.getMapper(SellerDao.class);
       ProductDao productDao = sqlSession.getMapper(ProductDao.class);
@@ -44,7 +46,7 @@ public class AppInitListener implements ServletContextListener {
 
 
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
-
+      웹애플리케이션공용저장소.setAttribute("memberDao", memberDao);
       웹애플리케이션공용저장소.setAttribute("buyerDao", buyerDao);
       웹애플리케이션공용저장소.setAttribute("sellerDao", sellerDao);
       웹애플리케이션공용저장소.setAttribute("productDao", productDao);
