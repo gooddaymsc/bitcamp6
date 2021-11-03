@@ -210,3 +210,4 @@ temp/
 Debug/
 Release/
 html-exam/
+Package-lock.json
