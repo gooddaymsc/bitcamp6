@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
@@ -33,6 +33,7 @@
 
 <button>변경</button>
  <a href='delete?no=${stock.stockNumber}&id=${id}'>[삭제]</a> <a href='list?id=${id}'>[목록]</a><br>
+ <a href='../cart/form?no=${stock.stockNumber}'>[장바구니 등록]</a><br>
  
 </form>
 

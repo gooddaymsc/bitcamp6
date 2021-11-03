@@ -44,7 +44,7 @@ public class StockAddController  extends HttpServlet {
       stock.setProduct(product);
       stock.setPrice(Integer.parseInt(request.getParameter("price")));
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
-      Seller seller = sellerDao.findById("ddd");
+      Seller seller = sellerDao.findById("a");
       stock.setSeller(seller);
       stockDao.insert(stock);
       sqlSession.commit();

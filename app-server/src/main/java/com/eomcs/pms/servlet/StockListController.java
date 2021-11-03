@@ -33,6 +33,7 @@ public class StockListController extends HttpServlet {
 
     try {
       StockList stockList = new StockList();
+
       String id = request.getParameter("id");
       Collection<Stock> list = stockDao.findAll(id);
       stockList.setId(id);

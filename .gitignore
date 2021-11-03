@@ -210,4 +210,8 @@ temp/
 Debug/
 Release/
 html-exam/
+<<<<<<< HEAD
 package-lock.json
+=======
+Package-lock.json
+>>>>>>> b93a64d560d7f1779c9f6cc480dac69e19f294b9
