@@ -33,7 +33,7 @@ public class CartListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Cart> cartList = cartDao.findAll("1");
+      Collection<Cart> cartList = cartDao.findAll("5");
       Seller sellerList = sellerDao.findById("a");
       request.setAttribute("cartList", cartList);
       request.setAttribute("sellerList", sellerList);

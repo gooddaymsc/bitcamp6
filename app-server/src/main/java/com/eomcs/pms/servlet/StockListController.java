@@ -33,8 +33,8 @@ public class StockListController extends HttpServlet {
 
     try {
       StockList stockList = new StockList();
-      Collection<Stock> list = stockDao.findAll("s2");
-      stockList.setId("s2");
+      Collection<Stock> list = stockDao.findAll("a");
+      stockList.setId("a");
       stockList.setSellerStock((List<Stock>) list);
 
       request.setAttribute("stockList", stockList.getSellerStock());
