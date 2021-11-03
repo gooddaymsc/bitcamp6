@@ -12,7 +12,7 @@ import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 
 
-@WebServlet("/comment/detail")
+@WebServlet("/board/comment/detail")
 public class CommentDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

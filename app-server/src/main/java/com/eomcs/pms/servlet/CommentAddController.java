@@ -15,7 +15,7 @@ import com.eomcs.pms.domain.Comment;
 import com.eomcs.pms.domain.Member;
 
 
-@WebServlet("/comment/add")
+@WebServlet("/board/comment/add")
 public class CommentAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -41,6 +41,8 @@ public class CommentAddController extends HttpServlet {
     member.setNumber(10);
     comment.setWriter(member);
 
+    // 로그인 구현전이라 첫번째 게시글에만 댓글 달림
+    // boardNumber에 숫자 바꾸세요
     Board board = new Board();
     board.setBoardNumber(1);
     comment.setBoardNumber(board.getBoardNumber());
@@ -48,8 +50,7 @@ public class CommentAddController extends HttpServlet {
     try {
       commentDao.insert(comment);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("comment/CommentAdd.jsp").forward(request, response);
+      response.sendRedirect("../detail?no="+comment.getBoardNumber());
 
     } catch(Exception e){
       request.setAttribute("error", e);

@@ -32,7 +32,7 @@
 		
 		
 <button>변경</button>
- <a href='delete?no=${comment.commentNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='delete?no=${comment.commentNumber}'>[삭제]</a> <a href='../detail?no=${comment.boardNumber}'>[목록]</a><br>
  
 </form>
 </body>
