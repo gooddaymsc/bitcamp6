@@ -9,35 +9,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.CommentDao;
-import com.eomcs.pms.domain.Comment;
+import com.eomcs.pms.dao.MessageDao;
 
-@WebServlet("/comment/delete")
-public class CommentDeleteController extends HttpServlet {
+@WebServlet("/message/delete")
+public class MessageDeleteController  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CommentDao commentDao;
+  MessageDao messageDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
+    messageDao = (MessageDao) 웹애플리케이션공용저장소.getAttribute("messageDao");
   }
-
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-
-    try {
+    try { 
       int no = Integer.parseInt(request.getParameter("no"));
-
-      Comment comment = commentDao.findByNo(no);
-
-      commentDao.delete(comment); 
+      messageDao.delete(no);
       sqlSession.commit();
       response.sendRedirect("list");
 
@@ -46,7 +39,8 @@ public class CommentDeleteController extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-}
+} 
+
 
 
 

@@ -36,8 +36,9 @@ public class CommentAddController extends HttpServlet {
     Comment comment = new Comment();
     comment.setContent(request.getParameter("content"));
 
+    // 로그인 구현 전엔 자신의 가상 데이터에 맞게 setNumber넣으세요..
     Member member = new Member();
-    member.setNumber(2);
+    member.setNumber(10);
     comment.setWriter(member);
 
     Board board = new Board();

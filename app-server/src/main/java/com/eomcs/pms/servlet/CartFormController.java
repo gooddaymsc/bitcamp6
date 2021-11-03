@@ -16,6 +16,7 @@ public class CartFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
+    request.setAttribute("stockNo", request.getParameter("no"));
     request.getRequestDispatcher("/cart/CartForm.jsp").forward(request, response);
 
   }

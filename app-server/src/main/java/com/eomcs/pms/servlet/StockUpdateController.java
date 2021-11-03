@@ -38,7 +38,7 @@ public class StockUpdateController extends HttpServlet {
 
       stockDao.update(stock);
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("list?id="+stock.getSeller().getMember().getId());
 
     } catch (Exception e) {
       request.setAttribute("error", e);

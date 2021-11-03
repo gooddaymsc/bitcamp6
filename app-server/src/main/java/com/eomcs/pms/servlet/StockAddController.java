@@ -37,24 +37,19 @@ public class StockAddController  extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Stock stock = new Stock(); 
-    int no = Integer.parseInt(request.getParameter("productNumber"));
-
     try {
+      Stock stock = new Stock(); 
+      int no = Integer.parseInt(request.getParameter("productNumber"));
       Product product = productDao.findByNo(no);
       stock.setProduct(product);
-
       stock.setPrice(Integer.parseInt(request.getParameter("price")));
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
-
-      Seller seller = sellerDao.findById("s2");
+      Seller seller = sellerDao.findById("a");
       stock.setSeller(seller);
-
       stockDao.insert(stock);
       sqlSession.commit();
-
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("stock/StockAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=list?id="+seller.getMember().getId());
+      request.getRequestDispatcher("../stock/StockAdd.jsp").forward(request, response);
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

@@ -18,7 +18,7 @@
 <h1>새 재고</h1>
 <form action='add'>
 <label for='f-productNumber'>상품번호</label> 
-<input id='f-productNumber' type='text' name='productNumber'><br>
+<input id='f-productNumber' type='text' name='productNumber' value='${productNo}' readOnly><br>
 
 <label for='f-price'>가격</label> 
 <input id='f-price' type='text' name='price'><br>

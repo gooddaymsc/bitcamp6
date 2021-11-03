@@ -15,6 +15,7 @@ public class CommentFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    request.setAttribute("boardNo", request.getParameter("no"));
     request.getRequestDispatcher("/comment/CommentForm.jsp").forward(request, response);
 
   }
