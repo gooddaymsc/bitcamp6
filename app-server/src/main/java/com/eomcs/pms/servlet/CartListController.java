@@ -34,7 +34,7 @@ public class CartListController extends HttpServlet {
 
     try {
       Collection<Cart> cartList = cartDao.findAll("1");
-      Seller sellerList = sellerDao.findById("a");
+      Seller sellerList = sellerDao.findById("s1");
       request.setAttribute("cartList", cartList);
       request.setAttribute("sellerList", sellerList);
       request.getRequestDispatcher("CartList.jsp").forward(request, response);
