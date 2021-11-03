@@ -16,6 +16,8 @@ public class StockFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
+    int productNo = Integer.parseInt(request.getParameter("productNumber"));
+    request.setAttribute("productNo", productNo);
     request.getRequestDispatcher("/stock/StockForm.jsp").forward(request, response);
   }
 }

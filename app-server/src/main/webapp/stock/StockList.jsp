@@ -23,7 +23,7 @@
 
 <c:forEach items="${stockList}" var="stock">
 <tr>
-    <td><a href='detail?no=${stock.stockNumber}'>${stock.stockNumber}</a></td>
+    <td><a href='detail?no=${stock.stockNumber}&id=${id}'>${stock.stockNumber}</a></td>
     <td>${stock.product.productName}</td> 
     <td>${stock.price}</td> 
     <td>${stock.stocks}</td> 

@@ -46,7 +46,7 @@ public class CartAddController extends HttpServlet {
 
       cart.setCartPrice(cart.getCartStocks() * stock.getPrice());
 
-      cart.setId("5");
+      cart.setId("1");
 
       cartDao.insert(cart);
       sqlSession.commit();
