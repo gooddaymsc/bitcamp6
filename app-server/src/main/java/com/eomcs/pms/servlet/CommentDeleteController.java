@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 
-@WebServlet("/comment/delete")
+@WebServlet("/board/comment/delete")
 public class CommentDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,8 @@ public class CommentDeleteController extends HttpServlet {
 
       commentDao.delete(comment); 
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("../detail?no="+comment.getBoardNumber());
+      //      response.sendRedirect("list");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

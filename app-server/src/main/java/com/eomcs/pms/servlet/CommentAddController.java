@@ -15,7 +15,7 @@ import com.eomcs.pms.domain.Comment;
 import com.eomcs.pms.domain.Member;
 
 
-@WebServlet("/comment/add")
+@WebServlet("/board/comment/add")
 public class CommentAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -38,16 +38,17 @@ public class CommentAddController extends HttpServlet {
 
     try {
       Comment comment = new Comment();
-      int boardNo = Integer.parseInt(request.getParameter("boardNumber"));
-      comment.setBoardNumber(boardNo);
-      comment.setContent(request.getParameter("content"));
-      Member member = memberDao.findById(request.getParameter("writer"));
+
+      // 로그인 구현 전엔 자신의 가상 데이터에 맞게 setNumber넣으세요..
+      Member member = new Member();
+      member.setNumber(10);
       comment.setWriter(member);
+      comment.setBoardNumber(Integer.parseInt(request.getParameter("boardNumber")));
+      comment.setContent(request.getParameter("content"));
       commentDao.insert(comment);
       sqlSession.commit();
+      response.sendRedirect("../detail?no="+comment.getBoardNumber());
 
-      response.setHeader("Refresh", "1;url=../board/detail?no="+boardNo);
-      request.getRequestDispatcher("comment/CommentAdd.jsp").forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);
