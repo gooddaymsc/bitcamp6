@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,18 @@
 		
 <button>변경</button>
  <a href='delete?no=${board.boardNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
- <a href='../comment/form?no=${board.boardNumber}'>[댓글 등록]</a><br>
+<%--  <a href='../comment/form?no=${board.boardNumber}'>[댓글 등록]</a><br> --%>
+<hr />
 </form>
+
+<h4>댓글</h4>
+<a href='comment/form?no=${board.boardNumber}'>새댓글</a><br>
+<c:forEach items= "${commentList}" var="comment">
+<fieldset>
+<legend>작성자 : ${comment.writer.id}</legend>
+     <p>내용 : <a href='comment/detail?no=${comment.commentNumber}'>${comment.content}</a></p>
+     <p>등록일 : ${comment.registrationDate}</p>
+</fieldset>
+</c:forEach>
 </body>
 </html>

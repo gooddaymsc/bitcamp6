@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 
-@WebServlet("/comment/list")
+@WebServlet("/board/comment/list")
 public class CommentListContoller extends HttpServlet  {
 
   private static final long serialVersionUID = 1L;
@@ -31,10 +31,19 @@ public class CommentListContoller extends HttpServlet  {
       throws ServletException, IOException {
     try {
       //int boardNo = (Integer) request.getAttribute("no");
-      int boardNo =1;
-      Collection<Comment> commentList = commentDao.findAll(boardNo);
-      request.setAttribute("commentList", commentList);   
-      request.getRequestDispatcher("CommentList.jsp").forward(request, response);
+      //      int boardNo =1;
+      //      Collection<Comment> commentList = commentDao.findAll(boardNo);
+      //      request.setAttribute("commentList", commentList);   
+      //      request.getRequestDispatcher("CommentList.jsp").forward(request, response);
+
+      int boardNumber = (Integer)request.getAttribute("boardNumber");
+      Collection<Comment> commentList = commentDao.findAll(boardNumber);
+
+      if (commentList.equals(null)) {
+        System.out.println("등록된 댓글이 없습니다.");
+      }
+      request.getRequestDispatcher("BoardDetail.jsp").forward(request, response);
+
 
     } catch (Exception e) {
       request.setAttribute("error", e);
