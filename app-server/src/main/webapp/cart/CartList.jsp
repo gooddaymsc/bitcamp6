@@ -41,16 +41,15 @@
       <td>${cart.cartStocks}</td> 
       <td>${cart.stock.price}</td> 
       <td>${cart.registrationDate}</td> 
-      <td> <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="${cart.stock.product.productName}" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault"></label>
+      <td> <div class="form-check form-inline">
+      <input class="form-check-input" type="checkbox"  name='price' value='${cart.stock.price}' id="flexCheckDefault">
+  <!--     <label class="form-check-label" for="flexCheckDefault"></label> -->
   </div></td> 
 </tr>
 </c:forEach>
 </tbody>
 </table>
 </div><!-- .container -->
-</body>
 </html>
 
 
