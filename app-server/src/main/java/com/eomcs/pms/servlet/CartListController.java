@@ -37,9 +37,15 @@ public class CartListController extends HttpServlet {
       //      List<Cart> cart = (List<Cart>)cartList;
       //      System.out.println(cart.get(0).getStock().getSeller().getBusinessName());
       Seller sellerList = sellerDao.findById("a");
+
       request.setAttribute("cartList", cartList);
       request.setAttribute("sellerList", sellerList);
       request.getRequestDispatcher("CartList.jsp").forward(request, response);
+
+      String [] check = request.getParameterValues("checkbox");
+      for(int i =0; i<check.length; i++) {
+        System.out.println(check[i]);
+      }
 
     } catch (Exception e) {
       request.setAttribute("error", e);
