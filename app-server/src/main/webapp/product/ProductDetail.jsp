@@ -42,7 +42,7 @@
 <div class="mb-3 row">
   <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
   <div class="col-sm-6">
-    <input id='f-subType' type='text' name='productNumber' class="subType" value='${product.productType.subType}' >
+    <input id='f-subType' type='text' name='subType' class="form-control" value='${product.productType.subType}' >
   </div>
 </div>
 <div class="mb-3 row">
@@ -51,6 +51,7 @@
     <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'>
   </div>
 </div>
+
 <div class="mb-3 row">
   <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
   <div class="col-sm-6">
@@ -76,13 +77,13 @@
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-acidity' class="col-sm-2 col-form-label">상품번호</label>
+  <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
   <div class="col-sm-6">
     <input id='f-acidity' type='text' name='acidity' class="form-control" value='${product.acidity}' >
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-weight' class="col-sm-2 col-form-label">상품번호</label>
+  <label for='f-weight' class="col-sm-2 col-form-label">바디감</label>
   <div class="col-sm-6">
     <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' >
   </div>

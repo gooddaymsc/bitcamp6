@@ -45,9 +45,7 @@ public class ProductAddController extends HttpServlet {
       Product product = new Product();
       product.setProductName(request.getParameter("productName"));
       String subType = request.getParameter("subType");
-      System.out.println(subType);
       String type = request.getParameter("type");
-      System.out.println(type);
 
       ProductType productType = new ProductType();
       productType.setType(type);
