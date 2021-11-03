@@ -52,6 +52,7 @@
     <input id='f-weight' type='text' name='weight' value='${product.weight}'><br>
 <button>변경</button>
  <a href='delete?no=${product.productNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
+  <a href='../stock/form?productNumber=${product.productNumber}'>[재고등록]</a><br>
 <hr />
 </form>
 

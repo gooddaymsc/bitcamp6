@@ -33,10 +33,13 @@ public class StockListController extends HttpServlet {
 
     try {
       StockList stockList = new StockList();
-      Collection<Stock> list = stockDao.findAll("a");
-      stockList.setId("a");
+
+      String id = request.getParameter("id");
+      Collection<Stock> list = stockDao.findAll(id);
+      stockList.setId(id);
       stockList.setSellerStock((List<Stock>) list);
 
+      request.setAttribute("id", id);
       request.setAttribute("stockList", stockList.getSellerStock());
       request.getRequestDispatcher("StockList.jsp").forward(request, response);
 

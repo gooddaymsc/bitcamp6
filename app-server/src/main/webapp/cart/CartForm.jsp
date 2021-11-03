@@ -19,7 +19,7 @@
 <form action='add'>
 
 <label for='f-stockNumber'>재고번호</label> 
-<input id='f-stockNumber' type='text' name='stockNumber'><br>
+<input id='f-stockNumber' type='text' name='stockNumber' value='${stockNo}'><br>
 
 <label for='f-stocks'>수량</label> 
 <input id='f-stocks' type='text' name='stocks'><br>

@@ -16,7 +16,8 @@
 </head>
 <body>
 <h1>재고상세</h1>
-<form action='update'>
+<form action='update?id=${stock.seller.member.id}'>
+
 
 <label for='f-no'>번호</label> 
 <input id='f-no' type='text' name='no' value='${stock.stockNumber}' readonly><br>
@@ -31,7 +32,8 @@
 <input id='f-stocks' type='text' name='stocks' value='${stock.stocks}'><br>
 
 <button>변경</button>
- <a href='delete?no=${stock.stockNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='delete?no=${stock.stockNumber}&id=${id}'>[삭제]</a> <a href='list?id=${id}'>[목록]</a><br>
+ <a href='../cart/form?no=${stock.stockNumber}'>[장바구니 등록]</a><br>
  
 </form>
 
