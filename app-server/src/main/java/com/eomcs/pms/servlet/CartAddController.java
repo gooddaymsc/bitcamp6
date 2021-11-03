@@ -46,7 +46,8 @@ public class CartAddController extends HttpServlet {
 
       cart.setCartPrice(cart.getCartStocks() * stock.getPrice());
 
-      cart.setId("1");
+      // 본인에 맞는 아이디 적으세요...
+      cart.setId("5");
 
       cartDao.insert(cart);
       sqlSession.commit();
