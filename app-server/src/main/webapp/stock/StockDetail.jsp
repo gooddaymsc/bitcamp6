@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>재고상세</h1>
-<form action='update?id=${stock.seller.member.id}'>
+<form action='update'>
 
 
 <label for='f-no'>번호</label> 

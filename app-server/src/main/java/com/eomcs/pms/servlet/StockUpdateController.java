@@ -31,8 +31,6 @@ public class StockUpdateController extends HttpServlet {
       throws ServletException, IOException {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      String id = request.getParameter("id");
-      System.out.println(id);
       Stock stock = stockDao.findByNo(no);
 
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
@@ -40,7 +38,7 @@ public class StockUpdateController extends HttpServlet {
 
       stockDao.update(stock);
       sqlSession.commit();
-      response.sendRedirect("list?id="+id);
+      response.sendRedirect("list?id="+stock.getSeller().getMember().getId());
 
     } catch (Exception e) {
       request.setAttribute("error", e);
