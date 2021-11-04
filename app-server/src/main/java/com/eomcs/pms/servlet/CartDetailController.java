@@ -28,9 +28,9 @@ public class CartDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      String id = "5";
-      Cart cart = cartDao.findByNo(no, id);
+      int cartNumber = Integer.parseInt(request.getParameter("cartNumber"));
+      String id = request.getParameter("id");
+      Cart cart = cartDao.findByNo(cartNumber, id);
 
       if (cart == null) {
         throw new Exception("해당 번호의 장바구니가 없습니다.");

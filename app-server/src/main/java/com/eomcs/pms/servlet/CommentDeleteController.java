@@ -1,7 +1,6 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 
-@WebServlet("/comment/delete")
+@WebServlet("/board/comment/delete")
 public class CommentDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -32,44 +31,21 @@ public class CommentDeleteController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<html>");
-    out.println("<head>");
-    out.println("  <title>게시글삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시글삭제결과</h1>");
-
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Comment comment = commentDao.findByNo(no);
 
-      if (comment == null) {
-        System.out.println("해당 번호의 댓글 없습니다.\n");
-        return;
+      commentDao.delete(comment); 
+      sqlSession.commit();
+      response.sendRedirect("../detail?no="+comment.getBoardNumber());
+      //      response.sendRedirect("list");
 
-
-      } else {
-        commentDao.delete(comment); 
-        sqlSession.commit();
-
-        out.println("댓글을 삭제하였습니다.<br>");
-      }
-
-      out.println("<a href='list'>[목록]<a><br>");
     } catch (Exception e) {
-      out.println("댓글 삭제 오류!");
-      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-    out.println("</body>");
-    out.println("</html>");
-
-    response.sendRedirect("list");
   }
 }
 

@@ -91,7 +91,7 @@ public class Board implements Serializable {
     return likeMember;
   }
   public void setLikeMember(List<LikeMember> likeMember) {
-    this.likeMember = likeMember;
+
   }
   public BoardTag getBoardTag() {
     return boardTag;

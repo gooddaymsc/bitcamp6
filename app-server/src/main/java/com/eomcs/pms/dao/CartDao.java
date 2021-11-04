@@ -7,7 +7,7 @@ import com.eomcs.pms.domain.Cart;
 public interface CartDao {
   void insert(Cart cart) throws Exception;
   List<Cart> findAll(String id) throws Exception;
-  Cart findByNo(@Param("cartNumber")int no, @Param("id")String id) throws Exception;
+  Cart findByNo(@Param("cartNumber")int cartNumber, @Param("id")String id) throws Exception;
   void update(Cart cart) throws Exception; 
   void delete(Cart car) throws Exception;
 }

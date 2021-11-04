@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
@@ -18,8 +18,9 @@
 <h1>재고상세</h1>
 <form action='update'>
 
+
 <label for='f-no'>번호</label> 
-<input id='f-no' type='text' name='number' value='${stock.stockNumber}' readonly><br>
+<input id='f-no' type='text' name='no' value='${stock.stockNumber}' readonly><br>
   
 <label for='f-productName'>상품</label> 
 <input id='f-productName' type='text' name='productName' value='${stock.product.productName} 'readonly><br>
@@ -31,7 +32,8 @@
 <input id='f-stocks' type='text' name='stocks' value='${stock.stocks}'><br>
 
 <button>변경</button>
- <a href='delete?no=${stock.stockNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
+ <a href='delete?no=${stock.stockNumber}&id=${id}'>[삭제]</a> <a href='list?id=${id}'>[목록]</a><br>
+ <a href='../cart/form?no=${stock.stockNumber}'>[장바구니 등록]</a><br>
  
 </form>
 

@@ -27,7 +27,7 @@ public class BookingDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      String nowLoginId = "1";
+      String nowLoginId = "5";
 
       int No = Integer.parseInt(request.getParameter("no"));
       Booking booking = bookingDao.findByNo1(No, nowLoginId);

@@ -30,16 +30,15 @@ public class StockUpdateController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      Stock stock = (Stock) request.getAttribute("stock");
-      System.out.println("1");
+      int no = Integer.parseInt(request.getParameter("no"));
+      Stock stock = stockDao.findByNo(no);
+
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
-      System.out.println("2");
       stock.setPrice(Integer.parseInt(request.getParameter("price")));
 
       stockDao.update(stock);
-      System.out.println("3");
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("list?id="+stock.getSeller().getMember().getId());
 
     } catch (Exception e) {
       request.setAttribute("error", e);

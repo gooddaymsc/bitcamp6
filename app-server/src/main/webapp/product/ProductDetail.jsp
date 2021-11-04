@@ -6,57 +6,96 @@
 <html>
 <head>
   <title>상품상세</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
   <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
-  }
+    .container {
+        width: 640px;
+    }
   </style>
 </head>
 <body>
+<div class="container">
 <h1>상품 상세(MVC + EL)</h1>
 <form action='update'>
-    <label for='f-productNumber'>상품번호</label> 
-    <input id='f-productNumber' type='text' name='productNumber' value='${product.productNumber}' readonly><br>
-    
-    <label for='f-rate'>평점</label> 
-    <input id='f-rate' type='text' name='rate' value='${product.rate}' readonly><br>
-    
-    <label for='f-type'>주종</label> 
-    <input id='f-type' type='text' name='type' value='${product.productType.type}'><br>
-    
-    <label for='f-subType'>상세주종</label>
-    <input id='f-subType' type='text' name='subType' value='${product.productType.subType}'><br>
+<div class="mb-3 row">
+  <label for='f-productNumber' class="col-sm-2 col-form-label">상품번호</label>
+  <div class="col-sm-6">
+    <input id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
+  </div>
+</div>
+    <div class="mb-3 row">
+  <label for='f-rate' class="col-sm-2 col-form-label">평점</label>
+  <div class="col-sm-6">
+    <input id='f-rate' type='text' name='rate' class="form-control" value='${product.rate}' readonly>
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-type' class="col-sm-2 col-form-label">주종</label>
+  <div class="col-sm-6">
+    <input id='f-type' type='text' name='type' class="form-control" value='${product.productType.type}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
+  <div class="col-sm-6">
+    <input id='f-subType' type='text' name='subType' class="form-control" value='${product.productType.subType}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
+  <div class="col-sm-6">
+    <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'>
+  </div>
+</div>
 
-    <label for='f-countryOrigin'>원산지</label>
-    <input id='f-countryOrigin' type='text' name='countryOrigin' value='${product.countryOrigin}'><br>
-    
-    <label for='f-variety'>품종</label>
-    <input id='f-variety' type='text' name='variety' value='${product.countryOrigin}'><br>
- 
-    <label for='f-volume'>용량</label>
-    <input id='f-volume' type='text' name='volume' value='${product.volume}'><br>
-    
-    <label for='f-alcoholLevel'>도수</label> 
-    <input id='f-alcoholLevel' type='text' name='alcoholLevel' value='${product.alcoholLevel}'><br>
-    
-    <label for='f-sugarLevel'>당도</label> 
-    <input id='f-sugarLevel' type='text' name='sugarLevel' value='${product.sugarLevel}'><br>
-    
-    <label for='f-acidity'>산도</label> 
-    <input id='f-acidity' type='text' name='acidity' value='${product.acidity}'><br>
-    
-    <label for='f-weight'>바디감</label> 
-    <input id='f-weight' type='text' name='weight' value='${product.weight}'><br>
-<button>변경</button>
- <a href='delete?no=${product.productNumber}'>[삭제]</a> <a href='list'>[목록]</a><br>
+<div class="mb-3 row">
+  <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
+  <div class="col-sm-6">
+    <input id='f-variety' type='text' name='variety' class="form-control" value='${product.variety}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-volume' class="col-sm-2 col-form-label">용량</label>
+  <div class="col-sm-6">
+    <input id='f-volume' type='text' name='volume' class="form-control" value='${product.volume}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-alcoholLevel' class="col-sm-2 col-form-label">도수</label>
+  <div class="col-sm-6">
+    <input id='f-alcoholLevel' type='text' name='alcoholLevel' class="form-control" value='${product.alcoholLevel}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-sugarLevel' class="col-sm-2 col-form-label">당도</label>
+  <div class="col-sm-6">
+    <input id='f-sugarLevel' type='text' name='sugarLevel' class="form-control" value='${product.sugarLevel}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
+  <div class="col-sm-6">
+    <input id='f-acidity' type='text' name='acidity' class="form-control" value='${product.acidity}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-weight' class="col-sm-2 col-form-label">바디감</label>
+  <div class="col-sm-6">
+    <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' >
+  </div>
+</div>
+<button class="btn btn-primary">변경</button>
+ <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a> <a href='list' class="btn btn-primary">목록</a><br>
+  <a href='../stock/form?productNumber=${product.productNumber}' class="btn btn-primary">재고등록</a><br>
 <hr />
 </form>
 
 <h4>리뷰</h4>
-<a href='review/form?no=${product.productNumber}'>새리뷰</a><br>
+<a href='review/form?no=${product.productNumber}' class="btn btn-primary">새리뷰</a><br>
 <c:forEach items="${reviewList}" var="review">
 <fieldset>
 <legend>작성자 : ${review.member.id}</legend>
@@ -65,5 +104,6 @@
      <p>등록일 : ${review.registeredDate}</p>
 </fieldset>
 </c:forEach>
+</div> <!-- container -->
 </body>
 </html>

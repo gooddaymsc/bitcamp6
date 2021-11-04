@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
 
-@WebServlet("/comment/update")
+@WebServlet("/board/comment/update")
 public class CommentUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,8 @@ public class CommentUpdateController extends HttpServlet {
 
       commentDao.update(comment);
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("../detail?no="+comment.getBoardNumber());
+      //      response.sendRedirect("list");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

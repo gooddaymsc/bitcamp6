@@ -29,7 +29,6 @@ public class LikeHandler implements Command {
     for (LikeMember lk : likeList) {
       if (lk.getNumber()==nowLoginNo) {
         System.out.println("좋아요를 취소합니다.\n");
-
         boardDao.likeDelete(nowLoginNo, boardNo);
         board.getLikeMember().remove(i);
         board.setLikes(board.getLikes() - 1);
