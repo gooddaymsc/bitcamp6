@@ -27,10 +27,10 @@ public class BookingDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      String nowLoginId = "5";
+      String id = request.getParameter("id");
 
       int No = Integer.parseInt(request.getParameter("no"));
-      Booking booking = bookingDao.findByNo1(No, nowLoginId);
+      Booking booking = bookingDao.findByNo1(No, id);
       System.out.println("10000");
 
       if (booking == null) {
