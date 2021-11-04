@@ -5,36 +5,54 @@
 <html>
 <head>
   <title>리뷰상세</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
   <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
-  }
+    .container {
+        width: 640px;
+    }
   </style>
 </head>
 <body>
+<div class="container">
 <h1>리뷰 변경</h1>
 <form action='update'>
-  <label for='f-reviewNo'>리뷰번호</label> 
-    <input id='f-reviewNo' type='text' name='reviewNo' value='${review.no}' readonly><br>
-    
-    <label for='f-score'>평점</label> 
-    <input id='f-score' type='text' name='score' value='${review.score}'><br>
-    
-    <label for='f-comment'>코멘트</label>
-    <input id='f-comment' type='text' name='comment' value='${review.comment}'><br>
-
-    <label for='f-writer'>작성자</label>
-    <input id='f-writer' type='text' name='writer' value='${review.member.id}' readOnly><br>
-    
-    <label for='f-registeredDate' >등록일</label> 
-    <input id='f-registeredDate' type='date' name='registeredDate' value='${review.registeredDate}' readOnly><br>
-    
-<button>변경</button>
- <a href='delete?no=${review.no}'>[삭제]</a> <a href='../detail?no=${review.productNo}'>[목록]</a><br>
+<div class="mb-3 row">
+  <label for='f-reviewNo' class="col-sm-2 col-form-label">리뷰번호</label>
+  <div class="col-sm-6">
+    <input id='f-reviewNo' type='text' name='reviewNo' class="form-control" value='${review.no}' readonly>
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-score' class="col-sm-2 col-form-label">평점</label>
+  <div class="col-sm-6">
+    <input id='f-score' type='text' name='score' class="form-control" value='${review.score}' >
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-comment' class="col-sm-2 col-form-label">코멘트</label>
+  <div class="col-sm-6">
+    <input id='f-comment' type='text' name='comment' class="form-control" value='${review.comment}'>
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
+  <div class="col-sm-6">
+    <input id='f-writer' type='text' name='writer' class="form-control" value='${review.member.id}'>
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-registeredDate' class="col-sm-2 col-form-label">등록일</label>
+  <div class="col-sm-6">
+    <input id='f-registeredDate' type='text' name='registeredDate' class="form-control" value='${review.registeredDate}' readonly>
+  </div>
+</div>
+<button class="btn btn-primary">변경</button>
+ <a href='delete?no=${review.no}' class="btn btn-primary">삭제</a> <a href='../detail?no=${review.productNo}' class="btn btn-primary">목록</a><br>
 </form>
-
+</div> <!-- container -->
 </body>
 </html>

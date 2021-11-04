@@ -5,35 +5,53 @@
 <html>
 <head>
   <title>댓글상세</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
   <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
-  }
+    .container {
+        xborder: 1px solid red;
+        width: 640px;
+    }
   </style>
 </head>
 <body>
+<div class="container">
 <h1>댓글 상세</h1>
 <form action='update'>
-    <label for='f-number'>번호</label> 
-    <input id='f-number' type='text' name='commentNumber' value='${comment.commentNumber}' readOnly ><br>
-
-    <label for='f-content'>내용</label> 
-    <input id='f-content' type='text' name='content' value='${comment.content}'><br>
-    
-    <label for='f-writer'>작성자</label>
-    <input id='f-writer' type='text' name='writer' value='${comment.writer.id}'readOnly><br>
-        
-    <label for='f-registrationDate'>등록일</label> 
-    <input id='f-registrationDate' type='date' name='registrationDate' value='${comment.registrationDate}'readOnly><br>
-  
+<div class="mb-3 row">
+  <label for='f-number' class="col-sm-2 col-form-label">번호</label> 
+  <div class="col-sm-6">
+    <input id='f-number' type='text' name='commentNumber' class="form-control" value='${comment.commentNumber}' readOnly ><br>
+  </div>
+</div>
+<div class="mb-3 row">
+  <label for='f-content' class="col-sm-2 col-form-label">내용</label> 
+  <div class="col-sm-6">
+    <input id='f-content' type='text' name='content' class="form-control" value='${comment.content}'><br>
+  </div>
+</div>   
+<div class="mb-3 row">
+  <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
+  <div class="col-sm-6">
+    <input id='f-writer' type='text' name='writer' class="form-control" value='${comment.writer.id}'readOnly><br>
+  </div>
+</div>       
+<div class="mb-3 row"> 
+  <label for='f-registrationDate' class="col-sm-2 col-form-label">등록일</label> 
+  <div class="col-sm-6">
+    <input id='f-registrationDate' type='date' name='registrationDate' class="form-control-plaintext" value='${comment.registrationDate}'readOnly><br>
+  </div>
+</div>  
 		
 		
-<button>변경</button>
- <a href='delete?no=${comment.commentNumber}'>[삭제]</a> <a href='../detail?no=${comment.boardNumber}'>[목록]</a><br>
+<button class="btn btn-primary">변경</button>
+ <a href='delete?no=${comment.commentNumber}' class="btn btn-primary">[삭제]</a> 
+ <a href='../detail?no=${comment.boardNumber}' class="btn btn-primary">[목록]</a><br>
  
 </form>
+</div><!-- .container -->
 </body>
 </html>
