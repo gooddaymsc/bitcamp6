@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
@@ -34,27 +35,35 @@ public class BoardAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    Board board = new Board();
+    HttpSession session = request.getSession(false);
 
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
-
-    Member member = new Member();
-    member.setNumber(1);
-    board.setWriter(member);
-
-    BoardTag boardTag = new BoardTag();
-    boardTag.setTag(request.getParameter("tag"));
-    board.setBoardTag(boardTag);
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
 
     try {
+      Member writer = (Member) request.getSession(false).getAttribute("loginUser");
+      Board board = new Board();
+
+      board.setTitle(request.getParameter("title"));
+      board.setContent(request.getParameter("content"));
+
+      //      Member member = new Member();
+      //      member.setNumber(1);
+      board.setWriter(writer);
+
+      BoardTag boardTag = new BoardTag();
+      boardTag.setTag(request.getParameter("tag"));
+      board.setBoardTag(boardTag);
+
       boardDao.insert(board);
       boardDao.insertTag(board);
       boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
       sqlSession.commit();
 
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("board/BoardAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("/BoardAdd.jsp").forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);

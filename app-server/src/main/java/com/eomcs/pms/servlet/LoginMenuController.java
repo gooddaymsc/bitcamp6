@@ -8,13 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
-import com.eomcs.pms.domain.Member;
 
-@WebServlet("/main/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/login/menu")
+public class LoginMenuController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   SqlSession sqlSession;
   MemberDao memberDao;
@@ -30,19 +28,7 @@ public class LoginController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      String id = request.getParameter("id");
-      String password = request.getParameter("password");
-
-      Member member = memberDao.findByIdAndPassword(id, password);
-
-      if (member != null) {
-        HttpSession session = request.getSession();
-        session.setAttribute("loginUser", member);
-      } else {
-        response.sendRedirect("/drinker/main/LoginError.jsp");    
-      }
-
-      response.sendRedirect("/drinker/main/Menu.jsp");    
+      response.sendRedirect("/drinker/main/Login.jsp");    
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
