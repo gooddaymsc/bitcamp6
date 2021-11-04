@@ -43,7 +43,7 @@
     <div class="mb-3 row">
       <label for='f-businessName' class="col-sm-2 col-form-label">가게명</label>
       <div class="col-sm-6">
-      <input id='f-businessName' type='text' name='businessName' class="form-control" value='${cart.}' readonly>
+      <input id='f-businessName' type='text' name='businessName' class="form-control" value='${cart.stock.seller.businessName}' readonly>
      </div>
     </div>
     
