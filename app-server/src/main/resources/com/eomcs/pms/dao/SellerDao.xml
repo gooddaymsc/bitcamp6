@@ -31,7 +31,7 @@
   </resultMap>
   
   <select id="findAll" resultMap="SellerMap">
-    select 
+     select 
       m.member_no, 
       m.id, 
       m.name,
@@ -45,6 +45,8 @@
       m.registeredDate 
     from 
       member m join seller s on m.member_no = s.member_no 
+    where
+      name not in ('none')
     order by 
       m.member_no desc
   </select>
