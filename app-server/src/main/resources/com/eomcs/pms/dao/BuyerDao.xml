@@ -29,7 +29,7 @@
   </resultMap>
   
   <select id="findAll" resultMap="BuyerMap">
-    select 
+select 
       member_no,
       id,
       name,
@@ -43,7 +43,7 @@
     from 
       member 
     where
-      authority=2
+      authority=2 and name not in ('none')
     order by 
       member_no asc
   </select>
