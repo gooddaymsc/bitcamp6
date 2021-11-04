@@ -5,10 +5,10 @@
 <html>
 <head>
   <title>새리뷰</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
     .container {

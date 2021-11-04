@@ -57,7 +57,7 @@
       p.product_no, p.name,
       m1.id as buyerId, 
       m2.id as sellerId, 
-      sl.openingTime, sl.closingTime
+      sl.openingTime, sl.closingTime, sl.business_name
     from 
       cart c join stock s on c.stock_no=s.stock_no 
       join member m1 on m1.member_no=c.member_no 
