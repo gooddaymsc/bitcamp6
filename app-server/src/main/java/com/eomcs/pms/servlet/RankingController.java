@@ -30,11 +30,8 @@ public class RankingController extends HttpServlet {
   public void service (HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      System.out.println("1");
       Collection<Product> productList = productDao.ranking();
-      System.out.println("2");
       request.setAttribute("productList", productList);
-      System.out.println("3");
       request.getRequestDispatcher("Ranking.jsp").forward(request, response);
 
     }  catch (Exception e) {
