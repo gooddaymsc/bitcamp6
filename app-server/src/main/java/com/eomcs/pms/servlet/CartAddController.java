@@ -52,7 +52,7 @@ public class CartAddController extends HttpServlet {
       cartDao.insert(cart);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("cart/CartAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("CartAdd.jsp").forward(request, response);
     } catch(Exception e){
       System.out.println("20");
       request.setAttribute("error", e);
