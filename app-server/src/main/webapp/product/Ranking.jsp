@@ -29,7 +29,7 @@
 <div class="card" style="width: 14rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">${product.productName}   </h5>
+    <h5><a href="detail?no=${product.productNumber}" class="card-title">${product.productName}</a></h5>
     <p class="card-text">평점: ${product.rate}점 </p> 
   </div>
   <ul class="list-group list-group-flush">
@@ -37,14 +37,10 @@
     <li class="list-group-item">도수:${product.alcoholLevel}</li>
     <li class="list-group-item">원산지:${product.alcoholLevel}</li>
   </ul>
-  <div class="card-body">
-    <a href="detail?no=${product.productNumber}" class="card-link">상품정보보기</a>
-  </div>
 </div>
- 
 </c:forEach>
-</tbody>
 
+</tbody>
 </div> <!-- .container -->
 </body>
 </html>
