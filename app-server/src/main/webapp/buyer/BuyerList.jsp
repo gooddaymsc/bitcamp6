@@ -15,7 +15,7 @@
   <style>
     .container {
       xborder: 1px solid red;
-      width: 640px;
+      width: 1040px;
     }
   </style>
 </head>

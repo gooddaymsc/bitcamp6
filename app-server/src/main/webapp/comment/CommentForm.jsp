@@ -36,7 +36,7 @@
 <div class="mb-3 row">
   <label for='f-writer'>댓글작성자</label> 
   <div class="col-sm-6">
-    <input id='f-writer' type='text' name='writer'><br>
+    <input id='f-writer' type='text' name='writer' value='${member.Id}' readonly><br>
   </div>
 </div>
 <button class="btn btn-primary">등록</button><br>

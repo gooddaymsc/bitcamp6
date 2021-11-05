@@ -12,6 +12,25 @@ values((select member_no from member where id='s1'), 1, 3, 12000);
 --재고 수정
 update stock set amount=6, price=20 where stock_no=2;
 
+--예약 등록
+ insert into purchase(
+ member_no, 
+ cart_no, 
+ payment_no, 
+ date, 
+ payment_status, 
+ pickup_booking_date, 
+ pickup_time) 
+    values((select member_no from member where id = 'b1'), 
+    5,
+    1,
+    '2019-1-1',
+    1,
+    '2019-1-3',
+    1)
+    
+--구매 타입 등록
+insert into payment_type(payment_no, type) values(1,1);
 
 insert into board_tag(board_no, tag_no) values(31, 1);
 

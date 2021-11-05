@@ -76,7 +76,7 @@ public class BuyerAddController extends HttpServlet {
       buyerDao.insert(buyer);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("buyer/BuyerAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("BuyerAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

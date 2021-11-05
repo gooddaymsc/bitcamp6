@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.dao.MemberDao;
@@ -35,13 +36,20 @@ public class CommentAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
 
     try {
       Comment comment = new Comment();
 
       // 로그인 구현 전엔 자신의 가상 데이터에 맞게 setNumber넣으세요..
-      Member member = new Member();
-      member.setNumber(10);
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
+      member.setNumber(member.getNumber());
       comment.setWriter(member);
       comment.setBoardNumber(Integer.parseInt(request.getParameter("boardNumber")));
       comment.setContent(request.getParameter("content"));
