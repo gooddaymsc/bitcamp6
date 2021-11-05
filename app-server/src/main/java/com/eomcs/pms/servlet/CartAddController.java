@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.CartDao;
 import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Cart;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Stock;
 
 @WebServlet("/cart/add")
@@ -32,10 +34,18 @@ public class CartAddController extends HttpServlet {
 
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    // 가게명, 상품명, 수량
+      throws ServletException, IOException {    
+
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
 
     try {
+      Member buyer = (Member) request.getSession(false).getAttribute("loginUser");
+
       Cart cart = new Cart();
       Stock stock = new Stock();
 
@@ -46,15 +56,13 @@ public class CartAddController extends HttpServlet {
 
       cart.setCartPrice(cart.getCartStocks() * stock.getPrice());
 
-      // 본인에 맞는 아이디 적으세요...
-      cart.setId("1");
+      cart.setId(buyer.getId());
 
       cartDao.insert(cart);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("cart/CartAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("CartAdd.jsp").forward(request, response);
     } catch(Exception e){
-      System.out.println("20");
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   
     }

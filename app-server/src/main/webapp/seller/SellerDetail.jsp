@@ -38,7 +38,7 @@
         <label for='f-password' class="col-sm-2 col-form-label">암호</label>
         <div class="col-sm-6">
           <input id='f-password' type='password' name='password' class="form-control"
-            value='${seller.member.password}'><br>
+            ><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -142,8 +142,8 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${seller.member.id}' class="btn btn-primary">[삭제]</a>
-      <a href='list' class="btn btn-primary">[목록]</a><br>
+      <a href='delete?id=${seller.member.id}' class="btn btn-primary">삭제</a>
+      <a href='list' class="btn btn-primary">목록</a><br>
     </form>
   </div>
 </body>

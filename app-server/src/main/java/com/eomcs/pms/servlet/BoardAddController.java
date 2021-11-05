@@ -63,7 +63,7 @@ public class BoardAddController extends HttpServlet {
       sqlSession.commit();
 
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("/BoardAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);
