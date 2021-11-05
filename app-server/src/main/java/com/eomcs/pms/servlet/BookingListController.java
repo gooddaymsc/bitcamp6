@@ -28,7 +28,7 @@ public class BookingListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Booking> bookingList = bookingDao.findAll1("5");
+      Collection<Booking> bookingList = bookingDao.findAll1("b1");
       request.setAttribute("bookingList", bookingList);
       request.getRequestDispatcher("BookingList.jsp").forward(request, response);
 

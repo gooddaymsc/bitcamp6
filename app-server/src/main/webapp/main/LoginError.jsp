@@ -18,5 +18,7 @@
 </head>
 <body>
 <p> 로그인 실패 </p>
+
+<a href='Login.jsp' class="btn btn-primary">로그인</a>
 </body>
 </html>
