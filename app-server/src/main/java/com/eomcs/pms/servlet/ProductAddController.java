@@ -65,10 +65,6 @@ public class ProductAddController extends HttpServlet {
       product.setAcidity(Integer.parseInt(request.getParameter("acidity")));
       product.setWeight(Integer.parseInt(request.getParameter("weight")));
 
-      //    String type = ProductValidation.checkType(request.getParameter("type"));
-      //    String subType = ProductValidation.checkSubType(request.getParameter("subType"));
-      //    product.setProductType(new ProductHandlerHelper(productDao).promptType(type, subType));
-
       productDao.insert(product);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");

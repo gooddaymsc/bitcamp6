@@ -6,11 +6,22 @@
 <html>
 <head>
   <title>재고목록</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
+  <style>
+    .container {
+        xborder: 1px solid red;
+        width: 1000px;
+    }
+  </style>
 </head>
 <body>
+<div class="container">
 <h1>재고 목록</h1>
-<a href='form'>새 재고</a><br>
-<table border='1'>
+<table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
@@ -31,6 +42,7 @@
 </c:forEach>
 </tbody>
 </table>
+</div> <!-- .container -->
 </body>
 </html>
 

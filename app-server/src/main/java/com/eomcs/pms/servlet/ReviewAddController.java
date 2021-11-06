@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
@@ -34,8 +35,15 @@ public class ReviewAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
 
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
     try {
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
       Review review = new Review();
       Product product =  productDao.findByNo(Integer.parseInt(request.getParameter("productNumber")));
       //    if (reviewDao.reviewIs(product.getProductNumber(),"admin") != null) {
@@ -48,10 +56,6 @@ public class ReviewAddController extends HttpServlet {
       review.setProductNo(product.getProductNumber());
       review.setReviewProduct(product.getProductName());
 
-      // 로그인 정보가 없으므로 일단 관리자로 기입.
-      Member member = new Member();
-      member.setId("admin");
-      member.setNumber(1);
       review.setMember(member);
 
       reviewDao.insert(review);

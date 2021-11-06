@@ -38,12 +38,6 @@
     <input id='f-comment' type='text' name='comment' class="form-control">
   </div>
 </div>
-<div class="mb-3 row">
-  <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
-  <div class="col-sm-6">
-    <input id='f-writer' type='text' name='writer' class="form-control">
-  </div>
-</div>
 <button class="btn btn-primary btn-sm">등록</button><br>
 </form>
 </div><!-- .container -->
