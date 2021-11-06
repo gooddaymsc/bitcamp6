@@ -45,20 +45,16 @@
     <input id='f-stocks' type='text' name='stocks' class="form-control" value='${stock.stocks}'>
   </div>
 </div>
-<button class="btn btn-primary">변경</button>
  <c:choose> 
     <c:when test="${loginUser.authority eq 4}">
     <button class="btn btn-primary">변경</button>
-     <a href='delete?no=${stock.stockNumber}' class="btn btn-primary">삭제</a> <a href='list?id=${stock.seller.member.id}' class="btn btn-primary">목록</a><br>
+     <a href='delete?no=${stock.stockNumber}' class="btn btn-primary">삭제</a><br>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
    <a href='../cart/form?no=${stock.stockNumber}' class="btn btn-primary">장바구니 등록</a><br>
-   <a href='list?id=${stock.seller.member.id}' class="btn btn-primary">목록</a><br>
   </c:when>
-    <c:otherwise>
-    <a href='list?id=${stock.seller.member.id}' class="btn btn-primary">목록</a><br>
-    </c:otherwise>
 </c:choose>
+    <a href='list?id=${stock.seller.member.id}' class="btn btn-primary">목록</a><br>
 </form>
 </div> <!-- container -->
 </body>

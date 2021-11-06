@@ -95,25 +95,31 @@
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
     <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a> <a href='list' class="btn btn-primary">목록</a><br>
+    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a><br>
   </c:when>
     <c:when test="${loginUser.authority eq 4}">
     <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a> <a href='list' class="btn btn-primary">목록</a><br>
+    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a><br>
     <a href='../stock/form?productNumber=${product.productNumber}' class="btn btn-primary">재고등록</a><br>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
     <a href='list' class="btn btn-primary">목록</a><br>
+    <!-- 장바구니로 넘어가는 기능 필요 -->
   </c:when>
-    <c:otherwise>
-      <a href='list' class="btn btn-primary">목록</a><br>
-    </c:otherwise>
 </c:choose>
-<hr />
+      <a href='list' class="btn btn-primary">목록</a><br>
 </form>
 
+<hr />
 <h4>리뷰</h4>
-<a href='review/form?no=${product.productNumber}' class="btn btn-primary">새리뷰</a><br>
+<hr />
+
+<c:choose> 
+  <c:when test="${loginUser.authority eq 2}">
+		<a href='review/form?no=${product.productNumber}' class="btn btn-primary">새리뷰</a><br>
+  </c:when>
+</c:choose>
+
 <c:forEach items="${reviewList}" var="review">
 <fieldset>
 <legend>작성자 : ${review.member.id}</legend>

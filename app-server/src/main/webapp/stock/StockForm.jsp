@@ -29,13 +29,13 @@
 <div class="mb-3 row">
   <label for='f-price' class="col-sm-2 col-form-label">가격</label>
   <div class="col-sm-6">
-    <input id='f-price' type='text' name='price' class="form-control">
+    <input id='f-price' type='number' name='price' class="form-control">
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-stocks' class="col-sm-2 col-form-label">수량</label>
   <div class="col-sm-6">
-    <input id='f-stocks' type='text' name='stocks' class="form-control">
+    <input id='f-stocks' type="number" name='stocks' class="form-control">
   </div>
 </div>
 <button class="btn btn-primary btn-sm">등록</button><br>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +52,17 @@
     <input id='f-registeredDate' type='text' name='registeredDate' class="form-control" value='${review.registeredDate}' readonly>
   </div>
 </div>
-<button class="btn btn-primary">변경</button>
- <a href='delete?no=${review.no}' class="btn btn-primary">삭제</a> <a href='../detail?no=${review.productNo}' class="btn btn-primary">목록</a><br>
+<c:choose> 
+  <c:when test="${loginUser.authority eq 8}">
+    <a href='delete?no=${review.no}' class="btn btn-primary">삭제</a> 
+  </c:when>
+  <c:when test="${loginUser.authority eq 2}">
+  <button class="btn btn-primary">변경</button>
+    <a href='delete?no=${review.no}' class="btn btn-primary">삭제</a> 
+  </c:when>
+</c:choose>
+<a href='../detail?no=${review.productNo}' class="btn btn-primary">목록</a><br>
+
 </form>
 </div> <!-- container -->
 </body>

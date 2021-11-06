@@ -49,8 +49,6 @@ public class BoardAddController extends HttpServlet {
       board.setTitle(request.getParameter("title"));
       board.setContent(request.getParameter("content"));
 
-      //      Member member = new Member();
-      //      member.setNumber(1);
       board.setWriter(writer);
 
       BoardTag boardTag = new BoardTag();
