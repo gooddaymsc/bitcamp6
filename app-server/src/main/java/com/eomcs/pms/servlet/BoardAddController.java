@@ -45,12 +45,10 @@ public class BoardAddController extends HttpServlet {
     try {
       Member writer = (Member) request.getSession(false).getAttribute("loginUser");
       Board board = new Board();
-
+      System.out.println(request.getParameter("title"));
       board.setTitle(request.getParameter("title"));
       board.setContent(request.getParameter("content"));
 
-      //      Member member = new Member();
-      //      member.setNumber(1);
       board.setWriter(writer);
 
       BoardTag boardTag = new BoardTag();

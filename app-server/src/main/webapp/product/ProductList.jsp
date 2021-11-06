@@ -39,7 +39,7 @@
   </tr>
 </thead>
 <tbody>
-
+<!-- 검색 기능 구현해야함 -->
 <c:forEach items="${productList}" var="product">
 <tr>
     <td><a href='detail?no=${product.productNumber}'>${product.productNumber}</a></td>

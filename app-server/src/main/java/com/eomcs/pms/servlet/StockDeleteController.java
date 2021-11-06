@@ -32,11 +32,10 @@ public class StockDeleteController extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      String id = request.getParameter("id");
       Stock stock = stockDao.findByNo(no);
       stockDao.delete(stock);
       sqlSession.commit();
-      response.sendRedirect("list?id="+id);
+      response.sendRedirect("list?id="+stock.getSeller().getMember().getId());
 
     } catch (Exception e) {
       request.setAttribute("error", e);
