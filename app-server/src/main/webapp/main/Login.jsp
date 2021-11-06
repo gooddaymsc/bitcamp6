@@ -24,10 +24,10 @@
 비밀번호: <input type='password' name='password'><br>
 <button class="btn btn-primary">로그인</button>
 <a href="FindidForm.jsp">아이디</a>
-<a href="FindpwForm.jsp">비밀번호찾기</a>
+<a href="FindpwForm.jsp">비밀번호찾기</a><br>
+<a href='../buyer/form' >회원가입(구매자 전용)</a><br>
+<a href='../seller/form' >회원가입(판매자 전용)</a>
 </form>
-<a href='../buyer/form' class="btn btn-primary">회원가입(구매자 전용)</a>
-<a href='../seller/form' class="btn btn-primary">회원가입(판매자 전용)</a>
 
 </div><!-- .container -->
 </html>

@@ -5,7 +5,7 @@
 <html>
 
 <head>
-  <title>회원상세(판매자)</title>
+  <title>개인정보변경(판매자)</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -20,7 +20,7 @@
 
 <body>
   <div class="container">
-    <h1>회원 상세(판매자)</h1>
+    <h1>개인정보 변경(판매자)</h1>
     <form action='update'>
       <div class="mb-3 row">
         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
@@ -38,7 +38,7 @@
         <label for='f-password' class="col-sm-2 col-form-label">암호</label>
         <div class="col-sm-6">
           <input id='f-password' type='password' name='password' class="form-control"
-            ><br>
+            value='${seller.member.password}'><br>
         </div>
       </div>
       <div class="mb-3 row">

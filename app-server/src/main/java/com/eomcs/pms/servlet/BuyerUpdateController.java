@@ -43,7 +43,7 @@ public class BuyerUpdateController extends HttpServlet {
 
       buyerDao.update(buyer);
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("../main/login");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

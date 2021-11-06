@@ -31,6 +31,19 @@
 <a href='../cart/list' class="btn btn-primary" >장바구니</a>
 <a href='../booking/list' class="btn btn-primary">예약</a>
 <a href='../message/list' class="btn btn-primary">메세지</a>
+
+<c:choose> 
+  <c:when test="${loginUser.authority eq 2}">
+      <a href='../buyer/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
+  </c:when>
+</c:choose>
+
+<c:choose> 
+  <c:when test="${loginUser.authority eq 4}">
+      <a href='../seller/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
+  </c:when>
+</c:choose>
+
 <a href='logout' class="btn btn-primary">로그아웃</a>
 </body>
 </html>

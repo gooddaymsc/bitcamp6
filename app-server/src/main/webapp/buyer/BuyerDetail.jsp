@@ -5,7 +5,7 @@
 <html>
 
 <head>
-  <title>회원상세(구매자)</title>
+  <title>개인정보변경(구매자)</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -20,7 +20,7 @@
 
 <body>
   <div class="container">
-    <h1>회원 상세(구매자)</h1>
+    <h1>개인정보 변경(구매자)</h1>
     <form action='update'>
       <div class="mb-3 row">
         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
