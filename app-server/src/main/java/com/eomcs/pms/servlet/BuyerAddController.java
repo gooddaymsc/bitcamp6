@@ -31,6 +31,7 @@ public class BuyerAddController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     Buyer buyer = new Buyer();
     Member member = new Member();
 
@@ -75,7 +76,7 @@ public class BuyerAddController extends HttpServlet {
     try {
       buyerDao.insert(buyer);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=../main/Login.jsp");
       request.getRequestDispatcher("BuyerAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

@@ -39,36 +39,5 @@ public class BoardListController extends HttpServlet{
   }
 }
 
-//        if (ClientApp.getLoginUser().getAuthority()==Menu.ACCESS_LOGOUT) {
-//          System.out.println("\n 게시글 등록(A) / 상세보기(R) / 검색(1)");
-//          while (true) {
-//            String choose = Prompt.inputString("선택 > ");
-//
-//            System.out.println();
-//            switch (choose) {
-//              case "0" : return;
-//              case "a" :
-//              case "A" : System.out.println("로그인 후 가능합니다.\n"); return;
-//              case "r" :
-//              case "R" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
-//              case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop ;
-//              default : System.out.println("잘못입력하셨습니다."); continue;
-//            }
-//          }
-//        } else {
-//          System.out.println("\n 상세보기(R) / 검색(1)");
-//          while (true) {
-//            String choose = Prompt.inputString("선택 > ");
-//            System.out.println();
-//            switch (choose) {
-//              case "0" : return;
-//              case "r" :
-//              case "R" : request.getRequestDispatcher("/board/detail").forward(request); continue Loop;
-//              case "1" : request.getRequestDispatcher("/board/search").forward(request); continue Loop;
-//              case "a" :
-//              case "A" : request.getRequestDispatcher("/board/add").forward(request); continue Loop;
-//              default : System.out.println("잘못입력하셨습니다."); continue;
-//            }
-//          }
 
 
