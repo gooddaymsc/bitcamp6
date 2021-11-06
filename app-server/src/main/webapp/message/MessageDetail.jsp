@@ -6,6 +6,11 @@
 <html>
 <head>
   <title>대화목록</title>
+   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  
   <style>
     body {
     font-family: '맑은 고딕', 굴림체, 'Apple SD Gothic Neo', sans-serif;
@@ -19,31 +24,22 @@
     label {
     margin-right: 5px;
     text-align: right;
-    display: inline-block;
-    width: 60px;
+    width: 80px;
   }
-    #f-content{
-    width: 300px;
-    height: 20px;
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: top right;
-    padding-right: 50px;
-    }
     button{
     text-align: right;
-    width: 40px;
-    height: 30px;
     position : relative; 
-        left: 380px;
-        bottom: 25px;
+        left: 300px;
+        bottom: 60px;
     }
     
   </style>
 </head>
 <body>
+<div class="container">
 <h1>대화목록</h1>
-<a href='delete?no=${roomNo}'>[나가기]</a> 
+<form action='update?no=${message.roomNumber}'>
+<a href='delete?no=${message.roomNumber}'>[나가기]</a> 
 <table border='1'>
 <c:set var="theOtherId" value="${newLoginId}"/>
 <c:forEach items="${messages}" var="message">
@@ -66,10 +62,9 @@
 </c:forEach>
 </table>
 
-<form action='update'>
-<div><input id='f-content' type='text' name='content'><br></div>
-<button>전송</button>
+ <input id='f-content' type='text' name='content'><br><br>
+  <button class="btn btn-primary" >전송</button>
 </form>
-
+</div><!-- .container -->
 </body>
 </html>

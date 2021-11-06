@@ -31,9 +31,11 @@ public class MessageUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     String nowLoginId = "admin";
+
     String other = request.getParameter("otherId");
-    System.out.println(0);
-    int no = Integer.parseInt(request.getParameter("roomNo"));
+    System.out.println(request.getParameter("otherId"));
+    System.out.println(request.getParameter("no"));
+    int no = Integer.parseInt(request.getParameter("no"));
     Message message = new Message();
     System.out.println(00);
     message.setRoomNumber(no);
@@ -45,11 +47,8 @@ public class MessageUpdateController extends HttpServlet {
     message.setTheOtherId(other);
 
     try {
-      System.out.println(1);
       messageDao.update(message);
-      System.out.println(2);
       sqlSession.commit();
-      System.out.println(3);
       response.setHeader("Refresh", "1;url=detail");
 
     } catch(Exception e){

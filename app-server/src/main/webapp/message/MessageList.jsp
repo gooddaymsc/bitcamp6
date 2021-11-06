@@ -6,10 +6,25 @@
 <html>
 <head>
   <title>메세지</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+<style>
+    .container {
+        xborder: 1px solid red;
+        width: 540px;
+    }
+       
+  </style>
+  
 </head>
 <body>
+<div class="contaienr">
 <h1>메세지 목록</h1>
-<table border='1'>
+ 
+<table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
@@ -31,6 +46,7 @@
 
 </tbody>
 </table>
+</div><!-- .container -->
 </body>
 </html>
 

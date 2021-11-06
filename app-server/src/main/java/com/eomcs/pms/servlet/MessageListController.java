@@ -54,7 +54,7 @@ public class MessageListController extends HttpServlet{
       messageList.setId(nowLoginId);
       messageList.setMessage((List<Message>) messages);
 
-      request.setAttribute("messages", messages);     
+      request.setAttribute("messages", messages);
       request.getRequestDispatcher("MessageList.jsp").forward(request, response);
 
     }catch (Exception e) {

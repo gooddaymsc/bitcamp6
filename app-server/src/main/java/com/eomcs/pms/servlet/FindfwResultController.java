@@ -38,12 +38,13 @@ public class FindfwResultController extends HttpServlet {
 
       if ((member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || (member.getEmail().equals(request.getParameter("phoneOrEmail")))
           && member.getId().equals(request.getParameter("id")))){
-        member.setPassword(request.getParameter("password"));
 
         request.getRequestDispatcher("FindpwResult.jsp").forward(request, response);
+
+        member.setPassword(request.getParameter("password"));
+
         memberDao.update(member);
         sqlSession.commit();
-
 
       } else {
         request.getRequestDispatcher("FindError.jsp").forward(request, response);
