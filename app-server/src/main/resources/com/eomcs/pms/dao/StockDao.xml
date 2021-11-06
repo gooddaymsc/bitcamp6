@@ -87,6 +87,21 @@
   <delete id="delete" parameterType="stock">
     delete from stock where stock_no=#{stockNumber}
   </delete>
+  
+    <select id="findByNoId" resultMap="StockMap" parameterType="map">
+    Select 
+      s.stock_no, 
+      p.product_no, 
+      s.price, 
+      s.amount
+    From 
+      stock s left outer join product p on s.product_no = p.product_no 
+    where 
+      p.product_no=#{no} and member_no=(select member_no from member where id=#{id})
+    group by p.product_no
+    order by s.product_no asc
+    
+  </select>
   <!--
     <select id="findByProductNo" resultMap="StockMap" parameterType="int">
     select 
@@ -122,19 +137,6 @@
       p.name=#{name}
   </select>
     
-  <select id="findByNameId" resultMap="StockMap" parameterType="map">
-    Select 
-      s.stock_no, 
-      p.name, 
-      s.price, 
-      s.amount
-    From 
-      stock s left outer join product p on s.product_no = p.product_no 
-    where 
-      p.name=#{name} and member_no=(select member_no from member where id=#{id})
-    order by s.product_no asc
-  </select>
-  
 
   
 
