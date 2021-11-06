@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.dao.StockDao;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Seller;
 import com.eomcs.pms.domain.Stock;
@@ -37,14 +39,21 @@ public class StockAddController  extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
     try {
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
       Stock stock = new Stock(); 
       int no = Integer.parseInt(request.getParameter("productNumber"));
       Product product = productDao.findByNo(no);
       stock.setProduct(product);
       stock.setPrice(Integer.parseInt(request.getParameter("price")));
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
-      Seller seller = sellerDao.findById("a");
+      Seller seller = sellerDao.findById(member.getId());
       stock.setSeller(seller);
       stockDao.insert(stock);
       sqlSession.commit();

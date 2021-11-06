@@ -5,10 +5,10 @@
 <html>
 <head>
   <title>리뷰상세</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
     .container {
@@ -41,7 +41,7 @@
 <div class="mb-3 row">
   <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
   <div class="col-sm-6">
-    <input id='f-writer' type='text' name='writer' class="form-control" value='${review.member.id}'>
+    <input id='f-writer' type='text' name='writer' class="form-control" value='${review.member.id}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
