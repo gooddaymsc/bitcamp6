@@ -54,7 +54,7 @@ public class SellerAddController extends HttpServlet {
       sellerDao.insert(seller.getMember());
       sellerDao.insertSeller(seller);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.setHeader("Refresh", "1;url=../main/Login.jsp");
       request.getRequestDispatcher("SellerAdd.jsp").forward(request, response);
 
     } catch(Exception e){

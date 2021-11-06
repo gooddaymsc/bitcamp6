@@ -24,5 +24,8 @@
 비밀번호: <input type='password' name='password'><br>
 <button class="btn btn-primary">로그인</button><br>
 </form>
+<a href='../buyer/form' class="btn btn-primary">회원가입(구매자 전용)</a>
+<a href='../seller/form' class="btn btn-primary">회원가입(판매자 전용)</a>
+
 </div><!-- .container -->
 </html>

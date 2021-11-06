@@ -68,7 +68,7 @@
       <div class="mb-3 row">
         <label for='f-birthday' class="col-sm-2 col-form-label">생일</label>
         <div class="col-sm-6">
-          <input id='f-birthday' type='date' name='birthday' class="form-control" value='${buyer.member.birthday}'><br>
+          <input id='f-birthday' type='date' name='birthday' class="form-control" value='${buyer.member.birthday}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -118,8 +118,8 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${buyer.member.id}' class="btn btn-primary">[삭제]</a>
-      <a href='list' class="btn btn-primary">[목록]</a><br>
+      <a href='delete?id=${buyer.member.id}' class="btn btn-primary">삭제</a>
+      <a href='list' class="btn btn-primary">목록</a><br>
     </form>
   </div>
 </body>

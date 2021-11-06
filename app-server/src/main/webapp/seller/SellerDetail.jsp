@@ -62,14 +62,13 @@
       <div class="mb-3 row">
         <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
         <div class="col-sm-10">
-          <input id='f-email' type='email' name='email' class="form-control" value='${seller.member.email}'
-            readonly><br>
+          <input id='f-email' type='email' name='email' class="form-control" value='${seller.member.email}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-birthday' class="col-sm-2 col-form-label">생일</label>
         <div class="col-sm-6">
-          <input id='f-birthday' type='date' name='birthday' class="form-control" value='${seller.member.birthday}'><br>
+          <input id='f-birthday' type='date' name='birthday' class="form-control" value='${seller.member.birthday}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
