@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>로그인</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -11,20 +11,19 @@
   
   <style>
     .container {
-        xborder: 1px solid red;
         width: 640px;
     }
   </style>
 </head>
 <body>
 <div class="container">
-<h1>로그인</h1>
-<form action='login' method="post">
-아이디: <input type='text' name='id'><br>
-비밀번호: <input type='password' name='password'><br>
-<button class="btn btn-primary">로그인</button>
-<a href="FindidForm.jsp">아이디</a>
-<a href="FindpwForm.jsp">비밀번호찾기</a>
+<h1>아이디찾기 결과</h1>
+<form>
+ <label class='form-control-plaintext'>${id}</label><br> 
+
+ <a href="Login.jsp">로그인</a>
+ <a href="FindpwForm.jsp">비밀번호찾기</a>
+
 </form>
 </div><!-- .container -->
 </html>
