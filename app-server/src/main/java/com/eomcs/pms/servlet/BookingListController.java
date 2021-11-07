@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.domain.Booking;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/booking/list")
 public class BookingListController extends HttpServlet {
@@ -36,7 +37,9 @@ public class BookingListController extends HttpServlet {
     }
 
     try {
-      Collection<Booking> bookingList = bookingDao.findAll1("id");
+      Member buyer = (Member) request.getSession(false).getAttribute("loginUser");
+      String id = buyer.getId();
+      Collection<Booking> bookingList = bookingDao.findAll1(id);
       request.setAttribute("bookingList", bookingList);
       request.getRequestDispatcher("BookingList.jsp").forward(request, response);
 

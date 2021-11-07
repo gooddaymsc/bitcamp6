@@ -4,12 +4,14 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.domain.Booking;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/booking/detail")
 public class BookingDetailController extends HttpServlet {
@@ -23,11 +25,21 @@ public class BookingDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+
     try {
-      String id = request.getParameter("id");
+      Member buyer = (Member) request.getSession(false).getAttribute("loginUser");
+      String id = buyer.getId();
+
+      //      String id = request.getParameter("id");
 
       int No = Integer.parseInt(request.getParameter("no"));
       Booking booking = bookingDao.findByNo1(No, id);
