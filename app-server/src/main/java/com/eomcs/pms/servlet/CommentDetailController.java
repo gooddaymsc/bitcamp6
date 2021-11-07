@@ -1,15 +1,18 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Comment;
+import com.eomcs.pms.domain.Member;
 
 
 @WebServlet("/board/comment/detail")
@@ -24,19 +27,36 @@ public class CommentDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Comment comment = commentDao.findByNo(no);
 
       if (comment == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+        throw new Exception("해당 번호의  댓글이 없습니다.");
       }
 
-      request.setAttribute("comment", comment);
-      request.getRequestDispatcher("/comment/CommentDetail.jsp").forward(request, response);
+      if (comment.getWriter().getId().equals(member.getId())) {
+        request.setAttribute("comment", comment);
+        request.getRequestDispatcher("/comment/CommentDetail.jsp").forward(request, response);
 
+      } else {
+        out.printf("<script>alert('본인 댓글만 수정 및 삭제할 수 있습니다.'); location.href='../detail?no=%d'</script>", comment.getBoardNumber());
+        out.flush();
+      }
     } catch (Exception e) {
       throw new ServletException(e);
     }

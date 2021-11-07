@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 import com.eomcs.pms.domain.BoardTag;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/board/update")
 public class BoardUpdateController extends HttpServlet {
@@ -31,29 +34,45 @@ public class BoardUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     try {
       int no = Integer.parseInt(request.getParameter("boardNumber"));
       Board board = boardDao.findByNo(no);
 
       if (board == null) {
-        throw new Exception("해당 이름의 게시글이 없습니다.");
+        throw new Exception("해당 번호의 게시글이 없습니다.");
       }
+      if (board.getWriter().getId().equals(member.getId())) {
 
-      board.setTitle(request.getParameter("title"));
-      board.setContent(request.getParameter("content"));
+        board.setTitle(request.getParameter("title"));
+        board.setContent(request.getParameter("content"));
 
-      BoardTag boardTag = new BoardTag();
-      boardTag.setTag(request.getParameter("tag"));
-      board.setBoardTag(boardTag);
+        BoardTag boardTag = new BoardTag();
+        boardTag.setTag(request.getParameter("tag"));
+        board.setBoardTag(boardTag);
 
-      boardDao.update(board);
-      sqlSession.commit();
-      response.sendRedirect("list");
+        boardDao.update(board);
+        sqlSession.commit();
+        response.sendRedirect("list");
 
+      } else {
+        out.printf("<script>alert('본인 게시글만 수정 및 삭제할 수 있습니다.'); location.href='detail?no=%d'</script>", board.getBoardNumber());
+        out.flush();
+      }
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
+

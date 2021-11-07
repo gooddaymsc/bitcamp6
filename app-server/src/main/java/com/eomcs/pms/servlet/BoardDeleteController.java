@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/board/delete")
 public class BoardDeleteController extends HttpServlet {
@@ -31,16 +33,17 @@ public class BoardDeleteController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession(false);
 
-    out.println("<html>");
-    out.println("<head>");
-    out.println("  <title>게시글삭제</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시글삭제결과</h1>");
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+
+
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -48,31 +51,35 @@ public class BoardDeleteController extends HttpServlet {
       Board board = boardDao.findByNo(no);
 
       if (board == null) {
-        out.println("해당 번호의 게시글이 없습니다.<br>");
+        throw new Exception("해당 번호의 게시글이 없습니다.<br>");
+      } 
+      if (board.getWriter().getId().equals(member.getId())) {
+        //        out.println("<html>");
+        //        out.println("<head>");
+        //        out.println("  <title>게시글삭제</title>");
+        //        out.println("</head>");
+        //        out.println("<body>");
+        //        out.println("<h1>게시글삭제결과</h1>");
 
-      } else {
         boardDao.delete(board); 
         sqlSession.commit();
 
-        out.println("게시글을 삭제하였습니다.<br>");
-      }      
+        //        out.println("게시글을 삭제하였습니다.<br>");
 
-      out.println("<a href='list'>[목록]<a><br>");
-
+        out.println("<a href='list'>[목록]<a><br>");
+      } else {
+        out.printf("<script>alert('본인 게시글만 수정 및 삭제할 수 있습니다.'); location.href='detail?no=%d'</script>", board.getBoardNumber());
+        out.flush();
+      }
     } catch (Exception e) {
       out.println("게시글 삭제 오류!");
       e.printStackTrace();
+
+      out.println("</body>");
+      out.println("</html>");
+
+      response.sendRedirect("list");
     }
-
-    out.println("</body>");
-    out.println("</html>");
-
-    response.sendRedirect("list");
   }
 }
-
-
-
-
-
 

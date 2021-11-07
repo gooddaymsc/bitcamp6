@@ -5,10 +5,10 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.CommentDao;
 import com.eomcs.pms.domain.Board;
@@ -29,7 +29,7 @@ public class BoardDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -49,12 +49,3 @@ public class BoardDetailController extends HttpServlet {
     }
   }
 }
-
-
-
-
-
-
-
-
-
