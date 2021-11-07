@@ -40,12 +40,12 @@ eclipse {
         
     }
     
-      jdt {
-        //if you want to alter the java versions (by default they are configured with gradle java plugin settings):
-        sourceCompatibility = 11
-        targetCompatibility = 11
-        javaRuntimeName = "JavaSE-11"
-    }
+        jdt {
+          //if you want to alter the java versions (by default they are configured with gradle java plugin settings):
+          sourceCompatibility = 11
+          targetCompatibility = 11
+          javaRuntimeName = "JavaSE-11"
+      }
     
     // 자바 웹 개발 도구에서 사용할 값을 설정한다.
     wtp {

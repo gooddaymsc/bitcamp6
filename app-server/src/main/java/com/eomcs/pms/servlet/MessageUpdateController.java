@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MessageDao;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Message;
 
 @WebServlet("/message/update")
@@ -29,27 +31,33 @@ public class MessageUpdateController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
 
-    String nowLoginId = "admin";
-    String other = request.getParameter("otherId");
-    System.out.println(0);
-    int no = Integer.parseInt(request.getParameter("roomNo"));
-    Message message = new Message();
-    System.out.println(00);
-    message.setRoomNumber(no);
-    System.out.println(000);
-    message.setContent(request.getParameter("content"));
-    System.out.println(0000);
-    message.setId(nowLoginId);
-    System.out.println(00000);
-    message.setTheOtherId(other);
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
 
     try {
-      System.out.println(1);
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
+      String other = request.getParameter("theOtherId");
+      System.out.println(request.getParameter("theOtherId"));
+      System.out.println(request.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("no"));
+      Message message = new Message();
+      System.out.println(00);
+      message.setRoomNumber(no);
+      System.out.println(000);
+      message.setContent(request.getParameter("content"));
+      System.out.println(0000);
+      message.setId(member.getId());
+      System.out.println(00000);
+      message.setTheOtherId(other);
+
+
       messageDao.update(message);
-      System.out.println(2);
       sqlSession.commit();
-      System.out.println(3);
       response.setHeader("Refresh", "1;url=detail");
 
     } catch(Exception e){
