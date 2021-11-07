@@ -1,6 +1,7 @@
 package com.eomcs.pms.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.eomcs.pms.domain.Stock;
 import com.eomcs.pms.domain.StockList;
 
@@ -13,4 +14,5 @@ public interface StockDao {
   Stock checkProduct(String name) throws Exception; 
   void update(Stock stock) throws Exception;
   void delete(Stock stock) throws Exception;
+  Stock findByNoId(@Param("no")int no, @Param("id")String id) throws Exception;
 }
