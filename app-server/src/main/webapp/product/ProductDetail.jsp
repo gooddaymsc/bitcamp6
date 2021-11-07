@@ -103,7 +103,7 @@
     <a href='../stock/form?productNumber=${product.productNumber}' class="btn btn-primary">재고등록</a><br>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
-    <!-- 장바구니로 넘어가는 기능 필요 -->
+  <a href='../stock/sellerList?no=${product.productNumber}' class="btn btn-primary">장바구니등록</a><br>
   </c:when>
 </c:choose>
 <a href='list' class="btn btn-primary">목록</a><br>

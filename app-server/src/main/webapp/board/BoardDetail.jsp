@@ -71,11 +71,22 @@
   </div>
 </div>
 		
-		
-<button class="btn btn-primary">변경</button>
- <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a> 
- <a href='list'  class="btn btn-primary">목록</a><br>
-<%--  <a href='../comment/form?no=${board.boardNumber}'>[댓글 등록]</a><br> --%>
+<c:choose> 
+  <c:when test="${loginUser.authority eq 2 || loginUser.authority eq 4|| loginUser.authority eq 8}">
+    <button class="btn btn-primary">변경</button>
+    <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
+</c:when>
+<%--   
+    <c:when test="${loginUser.authority eq 2}">
+    <button class="btn btn-primary">변경</button>
+    <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
+  </c:when>
+    <c:when test="${loginUser.authority eq 4}">
+    <button class="btn btn-primary">변경</button>
+    <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
+  </c:when> --%>
+</c:choose>		
+    <a href='list' class="btn btn-primary">목록</a><br>
 <hr />
 </form>
 </div><!-- .container -->

@@ -45,19 +45,12 @@ public class CartAddController extends HttpServlet {
 
     try {
       Member buyer = (Member) request.getSession(false).getAttribute("loginUser");
-
       Cart cart = new Cart();
-      Stock stock = new Stock();
-
-      stock = stockDao.findByNo(Integer.parseInt(request.getParameter("stockNumber")));
+      Stock stock = stockDao.findByNo(Integer.parseInt(request.getParameter("stockNumber")));
       cart.setStock(stock);
-
       cart.setCartStocks(Integer.parseInt(request.getParameter("stocks")));
-
       cart.setCartPrice(cart.getCartStocks() * stock.getPrice());
-
       cart.setId(buyer.getId());
-
       cartDao.insert(cart);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");

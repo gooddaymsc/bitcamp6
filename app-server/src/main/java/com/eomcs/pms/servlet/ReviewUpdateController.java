@@ -29,7 +29,6 @@ public class ReviewUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     try {
       int no = Integer.parseInt(request.getParameter("reviewNo"));
       Review review = reviewDao.findByNo(no);
@@ -37,12 +36,13 @@ public class ReviewUpdateController extends HttpServlet {
       if (review.equals(null)) {
         throw new Exception("해당 번호의 리뷰가 없습니다.");
       }
+
       review.setScore(Float.parseFloat(request.getParameter("score")));
       review.setComment(request.getParameter("comment"));
+
       reviewDao.update(review);
       sqlSession.commit();
       response.sendRedirect("../detail?no="+review.getProductNo());
-
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

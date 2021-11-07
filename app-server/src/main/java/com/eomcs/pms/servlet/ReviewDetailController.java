@@ -1,14 +1,17 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.ReviewDao;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Review;
 
 @WebServlet("/product/review/detail")
@@ -25,8 +28,19 @@ public class ReviewDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    // 출력을 담당할 뷰를 호출한다.
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -36,9 +50,14 @@ public class ReviewDetailController extends HttpServlet {
         throw new Exception("해당 번호의 리뷰가 없습니다.");
       }
 
-      request.setAttribute("review", review);
-      request.getRequestDispatcher("/review/ReviewDetail.jsp").forward(request, response);
+      if (review.getMember().getId().equals(member.getId())) {
 
+        request.setAttribute("review", review);
+        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
+      } else {
+        out.printf("<script>alert('본인 리뷰만 수정 및 삭제할 수 있습니다.'); location.href='../detail?no=%d'</script>", review.getProductNo());
+        out.flush();
+      }
     } catch (Exception e) {
       throw new ServletException(e);
     }

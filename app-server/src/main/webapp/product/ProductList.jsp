@@ -22,6 +22,14 @@
 <div class="container">
 <h1>상품 목록(MVC + EL + JSTL)</h1>
 <a href='form' class="btn btn-outline-primary btn-sm">새상품</a><br>
+<form action='search'>  
+<div class="mb-3 row">
+  <label for='f-search' class="col-sm-1 col-form-label">검색</label>
+  <div class="col-sm-2">
+    <input id='f-search' type='text' name='search' class="form-control">
+  </div>
+</div>
+</form>
 <table class="table table-hover">
 <thead>
   <tr>

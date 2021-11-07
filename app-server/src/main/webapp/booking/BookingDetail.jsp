@@ -88,7 +88,7 @@
     <input id='f-id2' type='text' name='id2' value='${booking.cart.id}' readonly><br>
   </div>
 </div>    
-<button>변경</button>
+<button class="btn btn-primary">변경</button>
  <a href='delete?no=${booking.bookingNumber}' class="btn btn-primary">삭제</a> 
  <a href='list' class="btn btn-primary">목록</a><br>
 </form>

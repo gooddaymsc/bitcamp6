@@ -35,6 +35,8 @@
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
       <a href='../buyer/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
+      <a href='../product/review/find' class="btn btn-primary">내가남긴리뷰</a>
+      
   </c:when>
 </c:choose>
 
