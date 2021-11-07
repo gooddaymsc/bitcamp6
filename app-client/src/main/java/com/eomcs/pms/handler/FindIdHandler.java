@@ -7,6 +7,7 @@ import com.eomcs.util.Prompt;
 public class FindIdHandler implements Command {
 
   MemberDao memberDao;
+
   public FindIdHandler(MemberDao memberDao) {
     this.memberDao = memberDao;
   }

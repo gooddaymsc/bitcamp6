@@ -51,7 +51,7 @@ public class SellerUpdateController extends HttpServlet {
       sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSession.commit();
-      response.sendRedirect("list");
+      response.sendRedirect("../main/login");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
