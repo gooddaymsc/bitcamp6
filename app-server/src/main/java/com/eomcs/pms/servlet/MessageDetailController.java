@@ -29,6 +29,7 @@ public class MessageDetailController extends HttpServlet {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
+
       Member member = new Member();
       member.setId("admin");;
 
@@ -53,10 +54,10 @@ public class MessageDetailController extends HttpServlet {
       }
 
       request.setAttribute("messages", messages); 
-      request.setAttribute("roomNo", no);
+      request.setAttribute("roomNumber", no);
       request.setAttribute("theOtherId", other); 
       request.setAttribute("nowLoginId", nowLoginId); 
-      request.getRequestDispatcher("/message/MessageDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("MessageDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

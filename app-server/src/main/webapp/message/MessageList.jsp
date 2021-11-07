@@ -14,7 +14,7 @@
 <style>
     .container {
         xborder: 1px solid red;
-        width: 440px;
+        width: 540px;
     }
        
   </style>
@@ -38,7 +38,7 @@
 <c:forEach items="${messages}" var="message">
 <tr>
     <td><a href='detail?no=${message.roomNumber}'>${message.roomNumber}</a></td>  
-    <td>${message.id}</td> 
+    <td>${message.theOtherId}</td> 
     <td>${message.content}</td> 
     <td>${message.registrationDate}</td> 
 </tr>

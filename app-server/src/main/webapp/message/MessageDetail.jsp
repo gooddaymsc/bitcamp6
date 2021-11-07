@@ -54,7 +54,7 @@
     <c:otherwise>  
     <tr>
     <td>${message.content}</td> 
-    <td>${nowLogintId}</td> 
+    <td>${nowLoginId}</td> 
     <td>${message.registrationDate}</td>   
     </tr>
    </c:otherwise>
