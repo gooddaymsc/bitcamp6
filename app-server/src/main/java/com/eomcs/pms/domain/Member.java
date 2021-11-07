@@ -1,8 +1,10 @@
 package com.eomcs.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Member {
+@SuppressWarnings("serial")
+public class Member implements Serializable {
   private int number;
   private String id;
   private String password;

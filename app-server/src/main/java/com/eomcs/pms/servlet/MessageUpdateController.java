@@ -41,10 +41,10 @@ public class MessageUpdateController extends HttpServlet {
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
-      String other = (String) request.getAttribute("theOtherId");
+      String other = (String) request.getAttribute("other");
       System.out.println(other);
-      System.out.println(request.getAttribute("roomNo"));
-      int no = Integer.parseInt(request.getParameter("roomNo"));
+      System.out.println(request.getAttribute("no"));
+      int no = Integer.parseInt(request.getParameter("no"));
       Message message = new Message();
       System.out.println(00);
       message.setRoomNumber(no);

@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
@@ -37,12 +36,6 @@ public class MessageAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    HttpSession session = request.getSession(false);
-
-    if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
-      return;
-    }
 
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");

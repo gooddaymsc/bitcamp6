@@ -45,7 +45,7 @@
   
   <insert id="update" parameterType="message">
     insert into message(member_no, member_no2, room_no, content) 
-      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
+      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNo}, #{content});
   </insert>
   
   <insert id="insertRoomNo" parameterType="message"
@@ -55,7 +55,7 @@
    
   <insert id="insert" parameterType="message">
     insert into message(member_no, member_no2, room_no, content) 
-      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
+      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNo}, #{content});
   </insert>
   
   <delete id="delete" parameterType="message">

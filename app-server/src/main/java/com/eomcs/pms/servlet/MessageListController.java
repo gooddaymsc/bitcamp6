@@ -32,7 +32,7 @@ public class MessageListController extends HttpServlet{
     messageDao = (MessageDao) 웹애플리케이션공용저장소.getAttribute("messageDao");
   }
 
-  public static int messageNumber = 1;
+  //  public static int messageNumber = 1;
 
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
@@ -71,3 +71,5 @@ public class MessageListController extends HttpServlet{
     }
   }
 }
+
+

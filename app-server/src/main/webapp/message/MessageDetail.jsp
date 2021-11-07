@@ -38,7 +38,7 @@
 <body>
 <div class="container">
 <h1>대화목록</h1>
-<form action='update'>
+<form action='update?=${message.roomNumber}'>
 <a href='delete?no=${message.roomNumber}'>[나가기]</a> 
 <table border='1'>
 <c:set var="id" value="${nowLoginId}"/>
