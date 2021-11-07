@@ -38,7 +38,7 @@
 <body>
 <div class="container">
 <h1>대화목록</h1>
-<form action='update?no=${message.roomNumber}'>
+<form action='update'>
 <a href='delete?no=${message.roomNumber}'>[나가기]</a> 
 <table border='1'>
 <c:set var="theOtherId" value="${newLoginId}"/>
@@ -63,7 +63,8 @@
 </table>
 
  <input id='f-content' type='text' name='content'><br><br>
-  <button class="btn btn-primary" >전송</button>
+ <!--  <button class="btn btn-primary" >전송</button> -->
+  <button class="btn btn-primary ">전송</button> 
 </form>
 </div><!-- .container -->
 </body>

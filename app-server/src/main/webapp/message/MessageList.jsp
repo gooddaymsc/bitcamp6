@@ -14,7 +14,7 @@
 <style>
     .container {
         xborder: 1px solid red;
-        width: 540px;
+        width: 440px;
     }
        
   </style>
@@ -23,7 +23,7 @@
 <body>
 <div class="contaienr">
 <h1>메세지 목록</h1>
- 
+ <a href='form' class="btn btn-outline-primary btn-sm">새 채팅</a><br>
 <table class="table table-hover">
 <thead>
   <tr>
