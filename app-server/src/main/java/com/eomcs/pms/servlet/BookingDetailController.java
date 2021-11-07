@@ -43,13 +43,10 @@ public class BookingDetailController extends HttpServlet {
 
       int No = Integer.parseInt(request.getParameter("no"));
       Booking booking = bookingDao.findByNo1(No, id);
-      System.out.println("10000");
 
       if (booking == null) {
-        System.out.println("20000");
         throw new Exception("해당 상품의 예약이 없습니다.");
       }
-      System.out.println("30000");
       request.setAttribute("booking", booking);
       request.getRequestDispatcher("/booking/BookingDetail.jsp").forward(request, response);
 

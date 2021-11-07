@@ -34,6 +34,9 @@
     <input id='f-businessName' type='text' name='businessName' value='${booking.cart.stock.seller.businessName}' readonly><br>
   </div>
 </div>    
+<a href='../message/form?id=${booking.cart.stock.seller.member.id}' class="btn btn-primary">판매자에게 문의하기</a> 
+
+
 <div class="mb-3 row">
   <label for='f-id'>판매자</label>
   <div class="col-sm-6">

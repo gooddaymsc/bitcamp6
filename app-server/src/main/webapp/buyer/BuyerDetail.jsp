@@ -36,9 +36,9 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-password' class="col-sm-2 col-form-label">* 암호</label>
+        <label for='f-password' class="col-sm-2 col-form-label">암호</label>
         <div class="col-sm-6">
-          <input id='f-password' type='password' name='password' class="form-control" required><br>
+          <input id='f-password' type='password' name='password' class="form-control" value='${buyer.member.password}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">

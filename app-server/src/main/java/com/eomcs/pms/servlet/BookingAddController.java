@@ -80,7 +80,7 @@ public class BookingAddController extends HttpServlet {
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list?id="+id);
       System.out.println("3");
-      request.getRequestDispatcher("booking/BookingAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("BookingAdd.jsp").forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);
