@@ -40,17 +40,16 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("loginUser", member);
 
-        System.out.println(member.getName());
+        System.out.println("Login ID : "+ member.getId());
         page = "Menu.jsp";    
       } else {
-        System.out.println("2");
+        System.out.println("Error");
         page = "LoginError.jsp";    
       }
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
-      System.out.println("3");
       page = "Error.jsp";
     }
     request.getRequestDispatcher(page).forward(request, response);

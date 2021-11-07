@@ -21,6 +21,7 @@
 <body>
   <div class="container">
     <h1>개인정보 변경(판매자)</h1>
+    <h5>* 필수 입력</h5>
     <form action='update'>
       <div class="mb-3 row">
         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
@@ -37,8 +38,7 @@
       <div class="mb-3 row">
         <label for='f-password' class="col-sm-2 col-form-label">암호</label>
         <div class="col-sm-6">
-          <input id='f-password' type='password' name='password' class="form-control"
-            value='${seller.member.password}'><br>
+          <input id='f-password' type='password' name='password' class="form-control" value='${buyer.seller.password}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -48,9 +48,9 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
+        <label for='f-nickname' class="col-sm-2 col-form-label">* 닉네임</label>
         <div class="col-sm-6">
-          <input id='f-nickname' type='text' name='nickname' class="form-control" value='${seller.member.nickname}'><br>
+          <input id='f-nickname' type='text' name='nickname' class="form-control" value='${seller.member.nickname}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -78,52 +78,52 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-phoneNumber' class="col-sm-2 col-form-label">전화</label>
+        <label for='f-phoneNumber' class="col-sm-2 col-form-label">* 전화</label>
         <div class="col-sm-10">
           <input id='f-phoneNumber' type='tel' name='phoneNumber' class="form-control"
-            value='${seller.member.phoneNumber}'><br>
+            value='${seller.member.phoneNumber}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-businessName' class="col-sm-2 col-form-label">가게명</label>
+        <label for='f-businessName' class="col-sm-2 col-form-label">* 가게명</label>
         <div class="col-sm-6">
           <input id='f-businessName' type='text' name='businessName' class="form-control"
-            value='${seller.businessName}'><br>
+            value='${seller.businessName}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-businessNumber' class="col-sm-2 col-form-label">사업자번호</label>
+        <label for='f-businessNumber' class="col-sm-2 col-form-label">* 사업자번호</label>
         <div class="col-sm-10">
           <input id='f-businessNumber' type='text' name='businessNumber' class="form-control"
-            value='${seller.businessNumber}'><br>
+            value='${seller.businessNumber}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-businessAddress' class="col-sm-2 col-form-label">사업장주소</label>
+        <label for='f-businessAddress' class="col-sm-2 col-form-label">* 사업장주소</label>
         <div class="col-sm-10">
           <input id='f-businessAddress' type='text' name='businessAddress' class="form-control"
             value='${seller.businessAddress}'><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-businessPlaceNumber' class="col-sm-2 col-form-label">사업장번호</label>
+        <label for='f-businessPlaceNumber' class="col-sm-2 col-form-label">* 사업장번호</label>
         <div class="col-sm-10">
           <input id='f-businessPlaceNumber' type='text' name='businessPlaceNumber' class="form-control"
-            value='${seller.businessPlaceNumber}'><br>
+            value='${seller.businessPlaceNumber}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-businessOpeningTime' class="col-sm-2 col-form-label">오픈시간</label>
+        <label for='f-businessOpeningTime' class="col-sm-2 col-form-label">* 오픈시간</label>
         <div class="col-sm-6">
-          <input id='f-businessOpeningTime' type='text' name='businessOpeningTime' class="form-control"
-            value='${seller.businessOpeningTime}'><br>
+          <input id='f-businessOpeningTime' type='time' name='businessOpeningTime' class="form-control"
+            value='${seller.businessOpeningTime}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-businessClosingTime' class="col-sm-2 col-form-label">마감시간</label>
+        <label for='f-businessClosingTime' class="col-sm-2 col-form-label">* 마감시간</label>
         <div class="col-sm-6">
-          <input id='f-businessClosingTime' type='text' name='businessClosingTime' class="form-control"
-            value='${seller.businessClosingTime}'><br>
+          <input id='f-businessClosingTime' type='time' name='businessClosingTime' class="form-control"
+            value='${seller.businessClosingTime}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -136,8 +136,8 @@
       <div class="mb-3 row">
         <label for='f-registeredDate' class="col-sm-2 col-form-label">등록일</label>
         <div class="col-sm-6">
-          <input id='f-registeredDate' type="text" readonly class="form-control-plaintext"
-            value="${seller.member.registeredDate}">
+          <input id='f-registeredDate' type="text"  class="form-control-plaintext"
+            value="${seller.member.registeredDate}" readonly>
         </div>
       </div>
       <button class="btn btn-primary">변경</button>

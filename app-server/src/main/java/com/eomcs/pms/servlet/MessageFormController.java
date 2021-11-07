@@ -15,7 +15,7 @@ public class MessageFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
+    request.setAttribute("theOtherId", request.getParameter("id"));
     request.getRequestDispatcher("/message/MessageForm.jsp").forward(request, response);
 
   }

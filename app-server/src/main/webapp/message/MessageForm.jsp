@@ -24,7 +24,7 @@
 <div class="mb-3 row">
   <label for='f-theOtherId' class="col-sm-2 col-form-label">대화할 상대(id)</label> 
   <div class="col-sm-6">
-    <input id='f-theOtherId' type='text' name='theOtherId'><br>
+    <input id='f-theOtherId' type='text' name='theOtherId' value='${theOtherId}'><br>
   </div>
 </div>
 

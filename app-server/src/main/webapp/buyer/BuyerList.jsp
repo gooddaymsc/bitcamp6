@@ -23,7 +23,6 @@
 <body>
   <div class="container">
     <h1>회원 목록(구매자)</h1>
-    <a href='form' class="btn btn-outline-primary btn-sm">새회원</a><br>
     <table class="table table-hover">
       <thead>
         <tr>
