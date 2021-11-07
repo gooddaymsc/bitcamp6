@@ -41,10 +41,10 @@ public class MessageAddController extends HttpServlet {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
       String memberId = request.getParameter("theOtherId");
-      if (memberDao.findById(memberId)==null) {
-        System.out.println("없는 Id 입니다.\n");
-        return;
-      }
+      //      if (memberDao.findById(memberId)==null) {
+      //        System.out.println("없는 Id 입니다.\n");
+      //        return;
+      //      }
 
       Collection<Message> messages = messageDao.findAll(member.getNumber());
 

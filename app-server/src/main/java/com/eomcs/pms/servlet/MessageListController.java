@@ -50,12 +50,6 @@ public class MessageListController extends HttpServlet{
       int nowLoginNo = member.getNumber();
       String nowLoginId = member.getId();
 
-      //      if (ClientApp.getLoginUser().isMessageUpdate()) {
-      //        //메시지 알림 보내기
-      //        //        memberPrompt.returnMessageUpdate(nowLoginId);
-      //      }
-
-
       Collection<Message> messages = messageDao.findAll(nowLoginNo);
 
       MessageList messageList = new MessageList(); 

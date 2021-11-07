@@ -41,25 +41,22 @@ public class MessageUpdateController extends HttpServlet {
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
-      String other = (String) request.getAttribute("other");
-      System.out.println(other);
-      System.out.println(request.getAttribute("no"));
+      String other = request.getParameter("other");
       int no = Integer.parseInt(request.getParameter("no"));
+      System.out.println("1");
       Message message = new Message();
-      System.out.println(00);
+
       message.setRoomNumber(no);
-      System.out.println(000);
       message.setContent(request.getParameter("content"));
-      System.out.println(0000);
       message.setId(member.getId());
-      System.out.println(00000);
       message.setTheOtherId(other);
+      System.out.println(no);
+      System.out.println(message.getContent());
+      System.out.println(message.getId());
+      System.out.println(message.getTheOtherId());
 
       messageDao.update(message);
-
-      request.setAttribute("roomNumber", no);
-      request.setAttribute("theOtherId", other); 
-      response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
+      request.getRequestDispatcher("detail?no="+no).forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);

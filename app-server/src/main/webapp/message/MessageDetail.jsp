@@ -35,29 +35,31 @@
 <body>
 <div class="container">
 <h1>대화목록</h1>
-<form action='update?=${message.roomNumber}'>
+<form action='update'>
 <table border='1'>
-<c:set var="id" value="${nowLoginId}"/>
+<c:set var="id" value="${loginUser.id}"/>
 <c:forEach items="${messages}" var="message">
 <c:choose>
-<c:when test="${theOtherId eq nowLoginId}">
+<c:when test="${theOtherId eq loginUser.id}">
     <tr> 
     <td>${message.content}</td> 
-    <td>${message.theOtherId}</td> 
+    <td>${loginUser.id}</td> 
     <td>${message.registrationDate}</td>  
     </tr>   
 </c:when>
     <c:otherwise>  
     <tr>
     <td>${message.content}</td> 
-    <td>${nowLoginId}</td> 
+    <td>${message.theOtherId}</td> 
     <td>${message.registrationDate}</td>   
     </tr>
    </c:otherwise>
 </c:choose>
 </c:forEach>
 </table>
-
+<!-- type='hidden' -->
+ <input type='hidden' id='f-roomNo' type='text' name='no' value="${roomNumber}"><br><br>
+ <input type='hidden' id='f-other' type='text' name='other' value="${theOtherId}"><br><br>
  <input id='f-content' type='text' name='content'><br><br>
  <!--  <button class="btn btn-primary" >전송</button> -->
   <button class="btn btn-primary ">전송</button> 
