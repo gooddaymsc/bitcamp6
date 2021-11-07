@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
 
-@WebServlet("/login/menu")
+@WebServlet("/main/loginMenu")
 public class LoginMenuController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   SqlSession sqlSession;
@@ -28,7 +28,7 @@ public class LoginMenuController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      response.sendRedirect("/drinker/main/Login.jsp");    
+      response.sendRedirect("./Login.jsp");    
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
