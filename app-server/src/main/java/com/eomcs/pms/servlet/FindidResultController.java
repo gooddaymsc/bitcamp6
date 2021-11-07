@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,17 +27,19 @@ public class FindidResultController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    try {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
 
+    try {
       Member member = memberDao.findByName(request.getParameter("name"));
 
       if (member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || (member.getEmail().equals(request.getParameter("phoneOrEmail")))) {
         String id = member.getId();
         request.setAttribute("id", id);
 
-      }  else {
-        String id = "해당하는 아이디가 없습니다";
-        request.setAttribute("id", id);
+      } else{
+        out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");
+        out.flush();
       }
 
       request.getRequestDispatcher("FindidResult.jsp").forward(request, response);

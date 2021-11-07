@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,6 +30,9 @@ public class FindfwResultController extends HttpServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
     try {
       Member member = memberDao.findByName(request.getParameter("name"));
 
@@ -36,8 +40,8 @@ public class FindfwResultController extends HttpServlet {
       request.setAttribute("id", id);
 
 
-      if ((member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || (member.getEmail().equals(request.getParameter("phoneOrEmail")))
-          && member.getId().equals(request.getParameter("id")))){
+      if (((member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || member.getEmail().equals(request.getParameter("phoneOrEmail"))))
+          && (member.getId().equals(request.getParameter("id")))){
 
         request.getRequestDispatcher("FindpwResult.jsp").forward(request, response);
 
@@ -47,7 +51,8 @@ public class FindfwResultController extends HttpServlet {
         sqlSession.commit();
 
       } else {
-        request.getRequestDispatcher("FindError.jsp").forward(request, response);
+        out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");
+        out.flush();
       }
     } catch (Exception e) {
       request.setAttribute("error", e);

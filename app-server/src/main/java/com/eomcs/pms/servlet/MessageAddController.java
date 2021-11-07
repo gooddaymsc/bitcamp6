@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -36,14 +37,15 @@ public class MessageAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
       String memberId = request.getParameter("theOtherId");
       if (memberDao.findById(memberId)==null) {
-        System.out.println("없는 Id 입니다.\n");
-        return;
+        out.printf("<script>alert('아이디를 다시 확인해주세요'); location.href='form' </script>");
+        out.flush();
       }
 
       Collection<Message> messages = messageDao.findAll(member.getNumber());
