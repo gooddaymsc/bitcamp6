@@ -28,7 +28,7 @@
 <thead>
   <tr>
     <th>번호</th>
-    <th>보낸사람</th>
+    <th>채팅상대</th>
     <th>내용</th>
     <th>등록일</th>
   </tr>
@@ -41,6 +41,7 @@
     <td>${message.theOtherId}</td> 
     <td>${message.content}</td> 
     <td>${message.registrationDate}</td> 
+    <td><a href='delete?no=${message.roomNumber}'>[나가기]</a></td>
 </tr>
 </c:forEach>
 

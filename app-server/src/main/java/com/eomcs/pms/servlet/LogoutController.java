@@ -17,7 +17,8 @@ public class LogoutController extends HttpServlet {
       throws ServletException, IOException {
 
     HttpSession loginUser = request.getSession();
+    loginUser.setAttribute("loginUser", null);
     loginUser.invalidate();
-    response.sendRedirect("Login.jsp");
+    response.sendRedirect("Menu.jsp");
   }
 }

@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.dao.MessageDao;
@@ -37,12 +36,6 @@ public class MessageAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    HttpSession session = request.getSession(false);
-
-    if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
-      return;
-    }
 
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
@@ -60,7 +53,7 @@ public class MessageAddController extends HttpServlet {
         if (message.getTheOtherId().equals(memberId) ||
             message.getId().equals(memberId)) {
           request.setAttribute("roomNo", message.getRoomNumber());
-          response.setHeader("Refresh", "1;url=update?no="+message.getRoomNumber());
+          response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
         }
       }
       // 없으면
@@ -69,10 +62,11 @@ public class MessageAddController extends HttpServlet {
       try {
         messageDao.insertRoomNo(message);
         message.setContent(request.getParameter("content"));
-        message.setTheOtherId(memberId);
+        message.setTheOtherId(request.getParameter("theOtherId"));
         message.setId(member.getId());
         messageDao.insert(message);
         sqlSession.commit();
+        response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
       } catch (Exception e) {
         sqlSession.rollback();
       }

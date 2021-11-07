@@ -43,13 +43,19 @@
   <label for='f-bookingTime'>예약시간</label>
   <div class="col-sm-6">
     <input id='f-bookingTime' type="time" name='bookingTime'><br>
-    <p>1.카드결제 / 2.실시간 계좌이체 / 3.무통장입금 / 4.휴대폰 결제 / 5.현장결제</p>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-paymentType'>결제방법</label>
   <div class="col-sm-6">
-    <input id='f-paymentType' type="text" name='paymentType'><br>
+    <select id='f-paymentType' onchange="categoryChange(this)" class="form-select" name='paymentType' aria-label="Default select example">
+      <option selected>결제방법선택</option>
+      <option value="1" >카드결제</option>
+      <option value="2">실시간 계좌이체</option>
+      <option value="3">무통장입금</option>
+      <option value="4">휴대폰 결제</option>
+      <option value="5">현장결제</option>
+    </select>
   </div>
 </div>
 <button class="btn btn-primary btn-sm">등록</button><br>
