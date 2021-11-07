@@ -55,10 +55,11 @@ public class MessageUpdateController extends HttpServlet {
       System.out.println(00000);
       message.setTheOtherId(other);
 
-
       messageDao.update(message);
-      sqlSession.commit();
-      response.setHeader("Refresh", "1;url=detail");
+
+      request.setAttribute("roomNumber", no);
+      request.setAttribute("theOtherId", other); 
+      response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
 
     } catch(Exception e){
       request.setAttribute("error", e);

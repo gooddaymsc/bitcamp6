@@ -56,7 +56,6 @@ public class MessageDetailController extends HttpServlet {
       request.setAttribute("messages", messages); 
       request.setAttribute("roomNumber", no);
       request.setAttribute("theOtherId", other); 
-      request.setAttribute("nowLoginId", nowLoginId); 
       request.getRequestDispatcher("MessageDetail.jsp").forward(request, response);
 
     } catch (Exception e) {

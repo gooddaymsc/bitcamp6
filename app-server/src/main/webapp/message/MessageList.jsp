@@ -14,7 +14,7 @@
 <style>
     .container {
         xborder: 1px solid red;
-        width: 540px;
+        width: 440px;
     }
        
   </style>
@@ -41,6 +41,7 @@
     <td>${message.theOtherId}</td> 
     <td>${message.content}</td> 
     <td>${message.registrationDate}</td> 
+    <td><a href='delete?no=${message.roomNumber}'>[나가기]</a></td>
 </tr>
 </c:forEach>
 

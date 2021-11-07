@@ -12,14 +12,11 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
-    body {
-    font-family: '맑은 고딕', 굴림체, 'Apple SD Gothic Neo', sans-serif;
-    font-size: medium;
-    }
+   
     tr{
       border-style: dotted;
-        border-width: 5px;
-        border-color: wheat;
+      border-width: 7px;
+      border-color: wheat;
     }
     label {
     margin-right: 5px;
@@ -39,7 +36,6 @@
 <div class="container">
 <h1>대화목록</h1>
 <form action='update?=${message.roomNumber}'>
-<a href='delete?no=${message.roomNumber}'>[나가기]</a> 
 <table border='1'>
 <c:set var="id" value="${nowLoginId}"/>
 <c:forEach items="${messages}" var="message">
