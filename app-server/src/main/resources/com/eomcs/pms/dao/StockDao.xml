@@ -102,7 +102,6 @@
     order by s.product_no asc
     
   </select>
-  <!--
     <select id="findByProductNo" resultMap="StockMap" parameterType="int">
     select 
       p.product_no, p.name, 
@@ -113,9 +112,13 @@
       join member m on s.member_no=m.member_no 
       join seller sl on m.member_no=sl.member_no 
     where 
-      p.product_no=#{productNo};
+      p.product_no=#{productNo} and sl.business_name not in ("none")
+    order by 
+     s.price asc, s.stock_no desc 
+
   </select>
   
+  <!--
   <select id="checkProduct" resultMap="StockMap" parameterType="string">
     select
       p.product_no,

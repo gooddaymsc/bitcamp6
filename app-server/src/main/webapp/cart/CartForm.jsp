@@ -27,7 +27,7 @@
 <div class="mb-3 row">
   <label for='f-stockNumbr' class="col-sm-2 col-form-label">재고번호</label>
   <div class="col-sm-2">
-    <input id='f-stockNumber' type='text' name='stockNumber' value='${stockNo}'><br>
+    <input id='f-stockNumber' type='text' name='stockNumber' value='${stockNo}' readOnly><br>
   </div>
 </div>
 <div class="mb-3 row">
