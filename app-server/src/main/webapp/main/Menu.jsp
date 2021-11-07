@@ -20,6 +20,7 @@
 </head>
 <body>
 <a href='../board/list' class="btn btn-primary">게시판</a>
+<a href='../product/ranking' class="btn btn-primary">오늘의 술</a>
 <a href='../product/list' class="btn btn-primary">상품</a>
 <c:set var="name" value="코요" />
  

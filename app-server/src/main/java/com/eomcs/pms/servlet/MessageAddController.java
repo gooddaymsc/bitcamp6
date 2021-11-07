@@ -60,7 +60,7 @@ public class MessageAddController extends HttpServlet {
         if (message.getTheOtherId().equals(memberId) ||
             message.getId().equals(memberId)) {
           request.setAttribute("roomNo", message.getRoomNumber());
-          response.setHeader("Refresh", "1;url=update?no="+message.getRoomNumber());
+          response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
         }
       }
       // 없으면
@@ -69,10 +69,11 @@ public class MessageAddController extends HttpServlet {
       try {
         messageDao.insertRoomNo(message);
         message.setContent(request.getParameter("content"));
-        message.setTheOtherId(memberId);
+        message.setTheOtherId(request.getParameter("theOtherId"));
         message.setId(member.getId());
         messageDao.insert(message);
         sqlSession.commit();
+        response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
       } catch (Exception e) {
         sqlSession.rollback();
       }

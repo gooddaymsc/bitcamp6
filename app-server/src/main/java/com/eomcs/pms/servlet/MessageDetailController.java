@@ -41,8 +41,10 @@ public class MessageDetailController extends HttpServlet {
       for (Message message : messages) {
         if (message.getId().equals(nowLoginId)) {
           other = message.getTheOtherId();
+          return;
         } else {
           other = message.getId();
+          return;
         }
       }
 
@@ -52,7 +54,7 @@ public class MessageDetailController extends HttpServlet {
 
       request.setAttribute("messages", messages); 
       request.setAttribute("roomNo", no);
-      request.setAttribute("otherId", other); 
+      request.setAttribute("theOtherId", other); 
       request.setAttribute("nowLoginId", nowLoginId); 
       request.getRequestDispatcher("/message/MessageDetail.jsp").forward(request, response);
 

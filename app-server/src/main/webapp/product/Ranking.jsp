@@ -35,7 +35,7 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">주종:${product.productType.type} - ${product.productType.subType}</li>
     <li class="list-group-item">도수:${product.alcoholLevel}</li>
-    <li class="list-group-item">원산지:${product.alcoholLevel}</li>
+    <li class="list-group-item">원산지:${product.countryOrigin}</li>
   </ul>
 </div>
 </c:forEach>

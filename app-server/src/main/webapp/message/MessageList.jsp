@@ -28,7 +28,7 @@
 <thead>
   <tr>
     <th>번호</th>
-    <th>보낸사람</th>
+    <th>채팅상대</th>
     <th>내용</th>
     <th>등록일</th>
   </tr>
@@ -38,7 +38,7 @@
 <c:forEach items="${messages}" var="message">
 <tr>
     <td><a href='detail?no=${message.roomNumber}'>${message.roomNumber}</a></td>  
-    <td>${message.theOtherId}</td> 
+    <td>${message.id}</td> 
     <td>${message.content}</td> 
     <td>${message.registrationDate}</td> 
 </tr>

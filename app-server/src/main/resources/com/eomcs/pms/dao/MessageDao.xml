@@ -8,7 +8,7 @@
   <resultMap type="Message" id="MessageMap">
     <id column="message_no" property="messageNumber"/> 
     <result column="id1" property="theOtherId"/>
-    <result column="id2" property="id"/>
+    <result column="id2" property="id"/>  
     <result column="room_no" property="roomNumber"/>
     <result column="content" property="content"/>
     <result column="registeredDate" property="registrationDate"/>

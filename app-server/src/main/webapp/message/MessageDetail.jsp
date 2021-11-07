@@ -41,10 +41,10 @@
 <form action='update'>
 <a href='delete?no=${message.roomNumber}'>[나가기]</a> 
 <table border='1'>
-<c:set var="theOtherId" value="${newLoginId}"/>
+<c:set var="id" value="${nowLoginId}"/>
 <c:forEach items="${messages}" var="message">
 <c:choose>
-<c:when test="${theOtherId eq newLoginId}">
+<c:when test="${theOtherId eq nowLoginId}">
     <tr> 
     <td>${message.content}</td> 
     <td>${message.theOtherId}</td> 
