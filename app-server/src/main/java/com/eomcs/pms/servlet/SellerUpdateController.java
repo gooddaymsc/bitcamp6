@@ -35,6 +35,7 @@ public class SellerUpdateController extends HttpServlet {
       if (seller == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       } 
+
       seller.getMember().setNickname(request.getParameter("nickname"));
       seller.getMember().setEmail(request.getParameter("email"));
       seller.getMember().setPassword(request.getParameter("password"));

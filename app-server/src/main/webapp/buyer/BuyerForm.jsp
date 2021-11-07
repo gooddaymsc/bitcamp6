@@ -21,29 +21,30 @@
 <body>
   <div class="container">
     <h1>새회원(구매자)</h1>
+    <h5>* 필수 입력</h5>
     <form action='add'>
       <div class="mb-3 row">
-        <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
+        <label for='f-id' class="col-sm-2 col-form-label">* 아이디</label>
         <div class="col-sm-6">
-          <input id='f-id' type='text' name='id' class="form-control"><br>
+          <input id='f-id' type='text' name='id' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-name' class="col-sm-2 col-form-label">이름</label>
+        <label for='f-name' class="col-sm-2 col-form-label">* 이름</label>
         <div class="col-sm-6">
-          <input id='f-name' type='text' name='name' class="form-control"><br>
+          <input id='f-name' type='text' name='name' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
+        <label for='f-nickname' class="col-sm-2 col-form-label">* 닉네임</label>
         <div class="col-sm-6">
-          <input id='f-nickname' type='text' name='nickname' class="form-control"><br>
+          <input id='f-nickname' type='text' name='nickname' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
+        <label for='f-email' class="col-sm-2 col-form-label">* 이메일</label>
         <div class="col-sm-10">
-          <input id='f-email' type='email' name='email' class="form-control"><br>
+          <input id='f-email' type='email' name='email' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -53,9 +54,9 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-password' class="col-sm-2 col-form-label">암호</label>
+        <label for='f-password' class="col-sm-2 col-form-label">* 암호</label>
         <div class="col-sm-6">
-          <input id='f-password' type='password' name='password' class="form-control"><br>
+          <input id='f-password' type='password' name='password' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -65,9 +66,9 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-phoneNumber' class="col-sm-2 col-form-label">전화</label>
+        <label for='f-phoneNumber' class="col-sm-2 col-form-label">* 전화</label>
         <div class="col-sm-10">
-          <input id='f-phoneNumber' type='tel' name='phoneNumber' class="form-control"><br>
+          <input id='f-phoneNumber' type='tel' name='phoneNumber' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">

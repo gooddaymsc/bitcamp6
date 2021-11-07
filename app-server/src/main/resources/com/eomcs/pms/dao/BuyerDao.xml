@@ -60,6 +60,7 @@ select
       id,
       authority,
       name,
+      password,
       nickname,
       email,
       birthday,
