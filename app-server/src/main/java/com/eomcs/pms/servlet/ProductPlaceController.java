@@ -9,19 +9,19 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.domain.Product;
+import com.eomcs.pms.dao.StockDao;
+import com.eomcs.pms.domain.Stock;
 
-@WebServlet("/product/search")
-public class ProductSearchController extends HttpServlet {
+@WebServlet("/product/place")
+public class ProductPlaceController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  ProductDao productDao;
+  StockDao stockDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    productDao = (ProductDao) 웹애플리케이션공용저장소.getAttribute("productDao");
+    stockDao = (StockDao) 웹애플리케이션공용저장소.getAttribute("stockDao");
 
   }
 
@@ -30,11 +30,12 @@ public class ProductSearchController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      String input = "%"+request.getParameter("search")+"%";
-      Collection<Product> productList = productDao.search(input);
+      String input = request.getParameter("place");
+      System.out.println(input);
+
+      Collection<Stock> stockSellerList = (Collection<Stock>)request.getParameter("stockSellerList");
       request.setAttribute("productList", productList);
       request.getRequestDispatcher("ProductList.jsp").forward(request, response);
-
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

@@ -21,6 +21,15 @@
 <body>
 <div class="container">
 <h1>재고판매자목록</h1>
+<form action='place'>  
+<div class="mb-3 row">
+  <label for='f-place' class="col-sm-1.5 col-form-label">주소검색</label>
+    <div class="col-sm-3">
+    <input id='f-place' type='text' name='place' class="form-control">
+    <input type="hidden" id='list' type='text' name='list' class="form-control" value="${stockSellerList}" >
+  </div>
+</div>
+</form>
 <table class="table table-hover">
 <thead>
   <tr>
