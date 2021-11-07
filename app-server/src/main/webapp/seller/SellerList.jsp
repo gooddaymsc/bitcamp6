@@ -51,6 +51,9 @@
         </c:forEach>
       </tbody>
     </table>
+  </div><!-- .container -->
+<footer>
+<a href='../main/logout' class="btn btn-primary">로그아웃</a>
+</footer>
 </body>
-
 </html>
