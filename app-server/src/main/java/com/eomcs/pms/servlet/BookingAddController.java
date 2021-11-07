@@ -54,6 +54,7 @@ public class BookingAddController extends HttpServlet {
       Cart cart = cartDao.findByNo(cartNo, id);
       int rest = cart.getStock().getStocks() - cart.getCartStocks();
       if (rest<0) {
+        System.out.println("200");
         throw new Exception("재고가 부족합니다.");
       }
 

@@ -5,10 +5,11 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.BookingDao;
 import com.eomcs.pms.domain.Booking;
 
@@ -24,11 +25,18 @@ public class BookingListController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+
     try {
-      Collection<Booking> bookingList = bookingDao.findAll1("b1");
+      Collection<Booking> bookingList = bookingDao.findAll1("id");
       request.setAttribute("bookingList", bookingList);
       request.getRequestDispatcher("BookingList.jsp").forward(request, response);
 
