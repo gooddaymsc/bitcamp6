@@ -29,7 +29,13 @@
 <div class="mb-3 row">
   <label for='f-score' class="col-sm-2 col-form-label">평점</label>
   <div class="col-sm-6">
-    <input id='f-score' type='text' name='score' class="form-control">
+    <select id='f-score' class="form-select" name='score' aria-label="Default select example">
+      <option value="1" selected>1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
   </div>
 </div>
 <div class="mb-3 row">

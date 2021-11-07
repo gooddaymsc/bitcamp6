@@ -2,6 +2,7 @@ package com.eomcs.pms.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,9 +15,8 @@ import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Review;
 
-
-@WebServlet("/product/review/form")
-public class ReviewFormController extends HttpServlet {
+@WebServlet("/product/review/find")
+public class ReviewFindController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   ReviewDao reviewDao;
 
@@ -38,28 +38,21 @@ public class ReviewFormController extends HttpServlet {
       response.sendRedirect("/drinker/login/menu");
       return;
     }
-    // 출력을 담당할 뷰를 호출한다.
-    int productNumber = Integer.parseInt(request.getParameter("no"));
+
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
     try {
-      Review review = reviewDao.reviewIs(productNumber, member.getId());
-      if (review != null) {
-        out.printf("<script>alert('이미 등록된 리뷰가 있습니다.'); location.href='../detail?no=%d'</script>", productNumber);
-        out.flush();
-      } else {
-        request.setAttribute("productNumber", productNumber);
-        request.getRequestDispatcher("./ReviewForm.jsp").forward(request, response);
+      Collection<Review> reviewList = reviewDao.myReview(member.getId());
+      if (reviewList.equals(null)) {
+        out.println("작성한 리뷰가 없습니다.");
       }
-    } catch(Exception e) {
+      request.setAttribute("reviewList", reviewList);
+      request.getRequestDispatcher("./FindReviewList.jsp").forward(request, response);
+
+    } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
 
 

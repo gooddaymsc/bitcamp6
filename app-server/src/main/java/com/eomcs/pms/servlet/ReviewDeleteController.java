@@ -38,7 +38,6 @@ public class ReviewDeleteController extends HttpServlet {
       reviewDao.delete(review.getNo());
       sqlSession.commit();
       response.sendRedirect("../detail?no="+review.getProductNo());
-
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

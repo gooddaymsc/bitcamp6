@@ -8,6 +8,7 @@
     <resultMap type="Review" id="ReviewMap">
     <id column="review_no" property="no"/> 
     <result column="product_no" property="productNo"/>
+    <result column="name" property="reviewProduct"/>
     <result column="score" property="score"/>
     <result column="comment" property="comment"/>
     <result column="registeredDate" property="registeredDate"/>
@@ -81,6 +82,7 @@
   select 
      r.review_no, 
      pro.product_no, 
+     pro.name,
      m.id, 
      r.score, 
      r.comment, 

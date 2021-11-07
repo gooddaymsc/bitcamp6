@@ -46,10 +46,6 @@ public class ReviewAddController extends HttpServlet {
 
       Review review = new Review();
       Product product =  productDao.findByNo(Integer.parseInt(request.getParameter("productNumber")));
-      //    if (reviewDao.reviewIs(product.getProductNumber(),"admin") != null) {
-      //      out.println("이미 등록한 리뷰가 있습니다.<br>");
-      //      request.getRequestDispatcher("/product/ProductDetail.jsp").forward(request, response);
-      //    }
       review.setComment(request.getParameter("comment"));
       review.setScore(Float.parseFloat(request.getParameter("score"))); //개인별 평점
       product.setReviewerNum(product.getReviewerNum()+1);

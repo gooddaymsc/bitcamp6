@@ -34,7 +34,7 @@ public class ReviewListController extends HttpServlet {
       if (reviewList.equals(null)) {
         System.out.println("등록된 댓글이 없습니다.");
       }
-      request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("../ProductDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
