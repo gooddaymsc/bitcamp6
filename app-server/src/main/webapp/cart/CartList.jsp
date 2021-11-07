@@ -15,7 +15,6 @@
 <form name="form">
 <div class="container">
 <h1>장바구니 목록</h1>
-<a href='form' class="btn btn-outline-primary btn-sm">새장바구니</a><br>
 <table class="table table-hover">
 <thead>
   <tr>

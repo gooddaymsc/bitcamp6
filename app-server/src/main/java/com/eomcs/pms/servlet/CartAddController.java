@@ -1,5 +1,6 @@
 package com.eomcs.pms.servlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,7 +36,8 @@ public class CartAddController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {    
-
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
@@ -49,12 +51,18 @@ public class CartAddController extends HttpServlet {
       Stock stock = stockDao.findByNo(Integer.parseInt(request.getParameter("stockNumber")));
       cart.setStock(stock);
       cart.setCartStocks(Integer.parseInt(request.getParameter("stocks")));
-      cart.setCartPrice(cart.getCartStocks() * stock.getPrice());
-      cart.setId(buyer.getId());
-      cartDao.insert(cart);
-      sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("CartAdd.jsp").forward(request, response);
+      if (cart.getStock().getStocks() >= Integer.parseInt(request.getParameter("stocks"))) {
+        cart.setCartPrice(cart.getCartStocks() * stock.getPrice());
+        cart.setId(buyer.getId());
+        cartDao.insert(cart);
+        sqlSession.commit();
+        response.setHeader("Refresh", "1;url=list");
+        request.getRequestDispatcher("CartAdd.jsp").forward(request, response);
+
+      } else {        
+        out.printf("<script>alert('재고 수량을 초과해서 장바구니에 담을 수 없습니다.'); location.href='../cart/form?no=%d'</script>", stock.getStockNumber());
+        out.flush();
+      }
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

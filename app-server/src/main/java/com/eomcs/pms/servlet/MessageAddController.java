@@ -43,6 +43,7 @@ public class MessageAddController extends HttpServlet {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
       String memberId = request.getParameter("theOtherId");
+
       if (memberDao.findById(memberId)==null) {
         out.printf("<script>alert('아이디를 다시 확인해주세요'); location.href='form' </script>");
         out.flush();
