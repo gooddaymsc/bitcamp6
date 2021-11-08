@@ -28,6 +28,12 @@
   </div>
 </div>
     <div class="mb-3 row">
+  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+  <div class="col-sm-6">
+    <input id='f-photo' type='text' name='photo' class="form-control" value='${product.photo}' readonly>
+  </div>
+</div>
+    <div class="mb-3 row">
   <label for='f-rate' class="col-sm-2 col-form-label">평점</label>
   <div class="col-sm-6">
     <input id='f-rate' type='text' name='rate' class="form-control" value='${product.rate}' readonly>

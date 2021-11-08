@@ -40,7 +40,7 @@
 <c:forEach items="${bookingList}" var="booking">
 <tr>
     <td>${booking.bookingNumber}</td>
-    <td><a href='detail?no=${booking.bookingNumber}'>${booking.cart.id}</a></td> 
+    <td>${booking.cart.id}</td> 
     <td>${booking.cart.stock.product.productName}</td> 
     <td>${booking.registeredDate}</td> 
     <td>${booking.bookingDate}</td> 

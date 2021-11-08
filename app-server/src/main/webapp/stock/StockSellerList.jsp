@@ -59,7 +59,7 @@
 </c:forEach>
 </tbody>
 </table>
-  <a href='../product/detail?no=${stock.product.productNumber}' class="btn btn-primary">이전</a><br>
+  <a href='../product/detail?no=${productNo}' class="btn btn-primary">이전</a><br>
 </div> <!-- .container -->
 </body>
 </html>

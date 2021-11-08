@@ -21,7 +21,12 @@
 <body>
 <div class="container">
 <h1>상품 목록(MVC + EL + JSTL)</h1>
+<c:choose> 
+  <c:when  test="${loginUser.authority eq 4}">
 <a href='form' class="btn btn-outline-primary btn-sm">새상품</a>
+  </c:when>
+</c:choose>
+
 <a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">이전</a><br><br>
 <form action='search'>  
 <div class="mb-3 row">

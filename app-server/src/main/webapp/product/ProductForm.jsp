@@ -29,6 +29,12 @@
   </div>
 </div>
 <div class="mb-3 row">
+  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+  <div class="col-sm-6">
+    <input id='f-photo' type='text' name='photo' class="form-control">
+  </div>
+</div>
+<div class="mb-3 row">
   <label for='f-type' class="col-sm-2 col-form-label">주종</label>
   <div class="col-sm-6">
      <select id='f-type' onchange="categoryChange(this)" class="form-select" name='type' aria-label="Default select example">

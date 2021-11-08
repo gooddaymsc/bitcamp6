@@ -36,14 +36,16 @@ public class BookingDetailController extends HttpServlet {
     }
 
     try {
-      Member buyer = (Member) request.getSession(false).getAttribute("loginUser");
-      String id = buyer.getId();
-
-      //      String id = request.getParameter("id");
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+      String id = member.getId();
 
       int No = Integer.parseInt(request.getParameter("no"));
-      Booking booking = bookingDao.findByNo1(No, id);
-
+      Booking booking = null;
+      if (member.getAuthority()==2) {
+        booking = bookingDao.findByNo1(No, id);
+      } else {
+        booking = bookingDao.findByNo2(No, id);
+      }
       if (booking == null) {
         throw new Exception("해당 상품의 예약이 없습니다.");
       }

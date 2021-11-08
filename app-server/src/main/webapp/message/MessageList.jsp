@@ -23,7 +23,9 @@
 <body>
 <div class="contaienr">
 <h1>메세지 목록</h1>
- <a href='form' class="btn btn-outline-primary btn-sm">새 채팅</a><br>
+ <a href='form' class="btn btn-outline-primary btn-sm">새 채팅</a>
+ <a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">메인</a><br><br>
+ 
 <table class="table table-hover">
 <thead>
   <tr>
