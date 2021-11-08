@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
 
-@WebServlet("/buyer/update")
-public class BuyerUpdateController extends HttpServlet {
+@WebServlet("/buyer/update2")
+public class BuyerUpdateController2 extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -33,17 +33,11 @@ public class BuyerUpdateController extends HttpServlet {
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
 
-      buyer.getMember().setNickname(request.getParameter("nickname"));
-      buyer.getMember().setPassword(request.getParameter("password"));
-      buyer.getMember().setPhoto(request.getParameter("photo"));
-      buyer.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
-      buyer.setZipcode(request.getParameter("zipcode"));
-      buyer.setAddress(request.getParameter("address"));
-      buyer.setDetailAddress(request.getParameter("detailAddress"));
+      buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
 
       buyerDao.update(buyer);
       sqlSession.commit();
-      response.sendRedirect("../main/Menu.jsp");
+      response.sendRedirect("../main/login");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
