@@ -6,10 +6,10 @@
 <html>
 <head>
   <title>댓글</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
     .container {
@@ -37,8 +37,8 @@
 
 <c:forEach items="${commentList}" var="comment">
 <tr>
-    <td><a href='detail?no=${comment.commentNumber}'>${comment.commentNumber}</a></td>  
-    <td>${comment.boardNumber}</td> 
+    <td>${comment.commentNumber}</td>  
+    <td><a href='../../board/detail?no=${comment.boardNumber}'>${comment.boardNumber}</a></td> 
     <td>${comment.writer.id}</td> 
     <td>${comment.content}</td> 
     <td>${comment.registrationDate}</td> 

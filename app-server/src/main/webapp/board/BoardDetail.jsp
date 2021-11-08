@@ -94,8 +94,14 @@
 </div><!-- .container -->
 
 <div class="container">
-<h4>댓글</h4>
-<a href='comment/form?no=${board.boardNumber}' class="btn btn-primary">새댓글</a><br>
+<h4>댓글 <a href='comment/form?no=${board.boardNumber}' class="btn btn-primary">새댓글</a><br>
+</h4>
+<form action='./comment/add'>
+<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
+내용 <input id='f-content' type='text' name='content'>
+<input type='hidden' id='f-writer' type='text' name='writer' value='${loginUser.id}' readonly>
+<button class="btn btn-primary">등록</button><br><br>
+</form>
 <c:forEach items= "${commentList}" var="comment">
 <fieldset>
 <legend>작성자 : ${comment.writer.id}</legend>
