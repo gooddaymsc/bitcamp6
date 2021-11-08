@@ -62,17 +62,13 @@
   </style>
 </head>
 <body>
-<<<<<<< HEAD
 <div class="container">
 
 <jsp:include page="../header.jsp"></jsp:include>
 <jsp:include page="../sidebar.jsp"></jsp:include>
 
 <div id="content">
-=======
-<%-- 
-<jsp:include page = "../header.jsp"></jsp:include> --%>
->>>>>>> fb43bcd4d6ba7c9023c7f28c5be5a4b88a517e78
+
 <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
