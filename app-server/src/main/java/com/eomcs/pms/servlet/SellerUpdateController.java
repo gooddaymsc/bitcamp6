@@ -52,7 +52,7 @@ public class SellerUpdateController extends HttpServlet {
       sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSession.commit();
-      response.sendRedirect("../main/login");
+      response.sendRedirect("../main/Menu.jsp");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

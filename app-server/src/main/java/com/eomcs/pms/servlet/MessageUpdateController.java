@@ -43,17 +43,12 @@ public class MessageUpdateController extends HttpServlet {
 
       String other = request.getParameter("other");
       int no = Integer.parseInt(request.getParameter("no"));
-      System.out.println("1");
       Message message = new Message();
 
       message.setRoomNumber(no);
       message.setContent(request.getParameter("content"));
       message.setId(member.getId());
       message.setTheOtherId(other);
-      System.out.println(no);
-      System.out.println(message.getContent());
-      System.out.println(message.getId());
-      System.out.println(message.getTheOtherId());
 
       messageDao.update(message);
       request.getRequestDispatcher("detail?no="+no).forward(request, response);

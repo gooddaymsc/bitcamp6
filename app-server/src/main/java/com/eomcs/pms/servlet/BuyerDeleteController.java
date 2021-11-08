@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/buyer/delete")
 public class BuyerDeleteController extends HttpServlet {
@@ -29,10 +31,16 @@ public class BuyerDeleteController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    //    if (ClientApp.getLoginUser().getAuthority() != Menu.ACCESS_ADMIN) {
-    //      String id = ClientApp.getLoginUser().getId();
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
 
     try {  
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
 
@@ -42,8 +50,11 @@ public class BuyerDeleteController extends HttpServlet {
       }   
       buyerDao.delete(buyer.getMember().getNumber());
       sqlSession.commit();
-      response.sendRedirect("list");
 
+      if (member.getId().equals(id)) {
+        response.setHeader("Refresh", "1;url=../main/logout");
+        request.getRequestDispatcher("BuyerDelete.jsp").forward(request, response);
+      }
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
