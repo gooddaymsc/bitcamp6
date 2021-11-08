@@ -9,16 +9,18 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
   <link rel="stylesheet" href="../css/common.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
   
   <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
+   .container {
+      border: 1px solid red;
     }
+    
     tr a {
         text-decoration: none;
         color: black;
@@ -29,17 +31,28 @@
     tr:hover {
         cursor: pointer;
     }
-
-    .intro_bg{
-      background-image:url("../image/alcohol.jpg");
-      width:100%;
-      heigth:818px;
+    .d-flex{
+      width: 440px;
+      border: 1px solid green;
     }
+    
+    .intro_bg{
+      background-image:url("../image/alcohol3.jpg");
+      width:100%;
+      height:518px;
+      background-repeat: no-repeat;
+      float: left;
+    }
+    
+    .header{
+      margin:auto;
+      border: 1px solid red;
+    }
+    
   </style>
 </head>
 <body>
-<div class="container">
-
+<div class="header">
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Drinker</a>
@@ -57,20 +70,23 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../board/list">Board</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li> -->
-        <!-- <li class="nav-item">
+      <!--   <li class="nav-item">
+          <a class="nav-link" href="../board/list">Link</a>
+        </li>  -->
+      <!--   <li class="nav-item">
           <a class="nav-link disabled">Finder</a>
-        </li> -->
+        </li>  -->
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
+       <span><button class="btn btn-outline-success" type="submit">Search</button></span>
       </form>
     </div>
   </div>
-</nav>
+  </nav>
+</div>
+
+  <div class="intro_bg"><div></div>
 
  <div id="content">
 <c:choose> 
