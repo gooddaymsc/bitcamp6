@@ -7,19 +7,68 @@
 <head>
   <title>메인메뉴</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+  <link rel="stylesheet" href="../css/common.css">
+        <!--font-family-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+        <!-- For favicon png -->
+    <link rel="shortcut icon" type="image/icon" href="../logo/favicon.png"/>
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+        <!--linear icon css-->
+    <link rel="stylesheet" href="../css/linearicons.css">
+
+    <!--animate.css-->
+        <link rel="stylesheet" href="../css/animate.css">
+
+        <!--owl.carousel.css-->
+        <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+    
+    <!-- bootsnav -->
+    <link rel="stylesheet" href="../css/bootsnav.css" > 
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="../css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="../css/responsive.css">
+  
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
   
   <style>
     .container {
         xborder: 1px solid red;
         width: 640px;
     }
+    tr a {
+        text-decoration: none;
+        color: black;
+    }
+    tr a:visited {
+        color: black;
+    }
+    tr:hover {
+        cursor: pointer;
+    }
   </style>
 </head>
 <body>
+<div class="container">
 
+<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../sidebar.jsp"></jsp:include>
+
+<div id="content">
 <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
@@ -65,5 +114,8 @@
       <a href='../message/list' class="btn btn-primary">메세지</a>
   </c:when>
 </c:choose>
+</div><!-- #content -->
+<jsp:include page="../footer.jsp"></jsp:include>
+</div><!-- .container -->
 </body>
 </html>
