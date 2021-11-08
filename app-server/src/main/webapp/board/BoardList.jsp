@@ -22,7 +22,8 @@
 <div class="container">
 <h1>게시글 목록(MVC + EL + JSTL)</h1>
 <!-- <a href='form'>이전</a><br> -->
-<a href='form' class="btn btn-outline-primary btn-sm">게시글 작성</a><br>
+<a href='form' class="btn btn-outline-primary btn-sm">게시글 작성</a>
+<a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">메인</a><br><br>
 <table class="table table-hover">
 <thead>
   <tr>

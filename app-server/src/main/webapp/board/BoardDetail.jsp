@@ -86,7 +86,9 @@
     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
   </c:when> --%>
 </c:choose>		
-    <a href='list' class="btn btn-primary">목록</a><br>
+    <a href='list' class="btn btn-primary">목록</a>
+    <a href='like?no=${board.boardNumber}' class="btn btn-primary">좋아요</a><br>
+    
 <hr />
 </form>
 </div><!-- .container -->
