@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>재고목록</title>
+  <title>예약목록</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -14,37 +14,47 @@
   <style>
     .container {
         xborder: 1px solid red;
-        width: 1000px;
+        width: 640px;
     }
   </style>
 </head>
 <body>
 <div class="container">
-<h1>재고 목록</h1>
+<h1>예약 목록</h1>
 <a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">메인</a><br><br>
-
 <table class="table table-hover">
 <thead>
   <tr>
     <th>번호</th>
-    <th>상품</th>
-    <th>가격</th>
-    <th>수량</th>
+    <th>예약자</th>
+    <th>상품명</th>
+    <th>주문일시</th>
+    <th>픽업날짜</th>
+    <th>픽업시간</th>
+    <th>결제상태</th>
+    <th>픽업상태</th>
   </tr>
 </thead>
 <tbody>
 
-<c:forEach items="${stockList}" var="stock">
+<c:forEach items="${bookingList}" var="booking">
 <tr>
-    <td><a href='detail?no=${stock.stockNumber}&id=${id}'>${stock.stockNumber}</a></td>
-    <td>${stock.product.productName}</td> 
-    <td>${stock.price}</td> 
-    <td>${stock.stocks}</td> 
+    <td>${booking.bookingNumber}</td>
+    <td><a href='detail?no=${booking.bookingNumber}'>${booking.cart.id}</a></td> 
+    <td>${booking.cart.stock.product.productName}</td> 
+    <td>${booking.registeredDate}</td> 
+    <td>${booking.bookingDate}</td> 
+    <td>${booking.bookingTime}</td> 
+    <td>${booking.paymentType}</td> 
+    <td>${booking.confirm}</td> 
 </tr>
 </c:forEach>
 </tbody>
 </table>
-</div> <!-- .container -->
+</div><!-- .container -->
+<footer>
+<a href='../main/logout' class="btn btn-primary">로그아웃</a>
+</footer>
 </body>
 </html>
 

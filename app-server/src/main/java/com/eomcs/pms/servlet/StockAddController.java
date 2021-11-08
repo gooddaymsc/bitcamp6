@@ -46,6 +46,7 @@ public class StockAddController  extends HttpServlet {
       return;
     }
     try {
+      //원래 되는 코든데 갑자기 안된다면 sql 에 seller table에 제대로 들어갔는지 확인.
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
       Stock stock = new Stock(); 
       int no = Integer.parseInt(request.getParameter("productNumber"));
@@ -54,6 +55,7 @@ public class StockAddController  extends HttpServlet {
       stock.setPrice(Integer.parseInt(request.getParameter("price")));
       stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
       Seller seller = sellerDao.findById(member.getId());
+
       stock.setSeller(seller);
       stockDao.insert(stock);
       sqlSession.commit();

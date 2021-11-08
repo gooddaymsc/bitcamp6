@@ -41,11 +41,14 @@ public class BookingListController extends HttpServlet {
       Collection<Booking> bookingList = null;
       if (member.getAuthority()==2) {
         bookingList = bookingDao.findAll1(member.getId());
+        request.setAttribute("bookingList", bookingList);
+        request.getRequestDispatcher("BookingBuyerList.jsp").forward(request, response);
       } else {
         bookingList = bookingDao.findAll2(member.getId());
+        request.setAttribute("bookingList", bookingList);
+        request.getRequestDispatcher("BookingSellerList.jsp").forward(request, response);
+
       }
-      request.setAttribute("bookingList", bookingList);
-      request.getRequestDispatcher("BookingList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

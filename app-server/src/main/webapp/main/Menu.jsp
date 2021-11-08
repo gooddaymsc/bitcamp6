@@ -107,6 +107,8 @@
       <a href='../stock/list?id=${loginUser.id}' class="btn btn-primary">재고</a>
       <a href='../message/list' class="btn btn-primary">메세지</a>
       <a href='../seller/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
+      <a href='../booking/list' class="btn btn-primary">예약</a>
+      
   </c:when>
   <c:when test="${loginUser.authority eq 8}">
       <a href='../board/list' class="btn btn-primary">게시판</a>
