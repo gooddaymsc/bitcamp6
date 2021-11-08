@@ -35,6 +35,7 @@
 <body>
 <div class="container">
 <h1>대화목록</h1>
+   <a href='list' class="btn btn-outline-primary btn-sm">이전</a><br><br>
 <form action='update'>
 <table border='1'>
 <c:set var="id" value="${loginUser.id}"/>
@@ -63,6 +64,7 @@
  <input id='f-content' type='text' name='content'><br><br>
  <!--  <button class="btn btn-primary" >전송</button> -->
   <button class="btn btn-primary ">전송</button> 
+  
 </form>
 </div><!-- .container -->
 </body>

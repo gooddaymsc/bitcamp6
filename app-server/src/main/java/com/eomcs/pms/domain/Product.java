@@ -18,6 +18,7 @@ public class Product implements Serializable{
   private int acidity;              //산도
   private int weight;               //바디감
   private float rate;               //평점
+  private String photo;
   private int reviewerNum;          //댓글 남긴 사람의 
   private int totalReviewNumber = 1; 
   private ProductType productType;
@@ -124,6 +125,12 @@ public class Product implements Serializable{
   }
   public void setProductType(ProductType productType) {
     this.productType = productType;
+  }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
 
 }

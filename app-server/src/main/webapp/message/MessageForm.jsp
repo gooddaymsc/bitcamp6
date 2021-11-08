@@ -20,6 +20,8 @@
 <body>
 <div class="container">
 <h1>새 메세지</h1>
+<a href='list' class="btn btn-outline-primary btn-sm">이전</a><br>
+
 <form action='add'>
 <div class="mb-3 row">
   <label for='f-theOtherId' class="col-sm-2 col-form-label">대화할 상대(id)</label> 

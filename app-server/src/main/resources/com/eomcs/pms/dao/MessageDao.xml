@@ -40,7 +40,7 @@
       inner join member m1 on mg.member_no = m1.member_no 
       inner join member m2 on mg.member_no2 = m2.member_no 
     where 
-      room_no=#{roomNo};
+      room_no=#{roomNumber};
   </select>
   
   <insert id="update" parameterType="message">
@@ -55,12 +55,12 @@
    
   <insert id="insert" parameterType="message">
     insert into message(member_no, member_no2, room_no, content) 
-      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNo}, #{content});
+      values((select member_no from member where id = #{id}), (select member_no from member where id =#{theOtherId}), #{roomNumber}, #{content});
   </insert>
   
   <delete id="delete" parameterType="message">
     delete from message 
-    where room_no = #{roomNo}
+    where room_no = #{roomNumber}
   </delete>
 </mapper>
 
