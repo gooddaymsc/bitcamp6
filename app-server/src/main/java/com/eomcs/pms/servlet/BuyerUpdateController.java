@@ -50,32 +50,6 @@ public class BuyerUpdateController extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
-  //  else {
-  //      System.out.println("[회원 변경]\n");
-  //      String id = (String) request.getAttribute("id");
-  //
-  //      Buyer buyer = buyerDao.findById(id);
-
-
-  // 닉네임, 레벨, 판매자/구매자(회원) 변경 가능
-  //      int level =BuyerValidation.checkLevel(String.format("등급(변경 전 : %d) : ", buyer.getMember().getLevel())); 
-  //      String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-  //      if (input.equalsIgnoreCase("y")) {
-  //        buyer.getMember().setLevel(level);
-  //        buyerDao.update(buyer);
-  //        sqlSession.commit();
-  //        System.out.println("회원정보를 변경했습니다.\n");
-  //        return;
-  //      }
-  //      System.out.println("회원정보 변경을 취소하였습니다.\n");
-  //}
-
 }
-
-
-
-
-
 
 

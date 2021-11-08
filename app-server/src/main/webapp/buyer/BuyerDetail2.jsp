@@ -5,7 +5,7 @@
 <html>
 
 <head>
-  <title>개인정보변경(구매자)</title>
+  <title>등급 변경(구매자)</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -20,9 +20,9 @@
 
 <body>
   <div class="container">
-    <h1>개인정보 변경(구매자)</h1>
+    <h1>등급 변경(구매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update'>
+    <form action='update2'>
       <div class="mb-3 row">
         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
         <div class="col-sm-6">
@@ -50,13 +50,13 @@
       <div class="mb-3 row">
         <label for='f-nickname' class="col-sm-2 col-form-label">* 닉네임</label>
         <div class="col-sm-6">
-          <input id='f-nickname' type='text' name='nickname' class="form-control" value='${buyer.member.nickname}' required><br>
+          <input id='f-nickname' type='text' name='nickname' class="form-control" value='${buyer.member.nickname}' required readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-level' class="col-sm-2 col-form-label">레벨</label>
         <div class="col-sm-6">
-          <input id='f-level' type='text' name='level' class="form-control" value='${buyer.member.level}' readonly><br>
+          <input id='f-level' type='text' name='level' class="form-control" value='${buyer.member.level}'><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -74,33 +74,33 @@
       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
-          <input id='f-photo' type='text' name='photo' class="form-control" value='${buyer.member.photo}'><br>
+          <input id='f-photo' type='text' name='photo' class="form-control" value='${buyer.member.photo}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-phoneNumber' class="col-sm-2 col-form-label">* 전화</label>
         <div class="col-sm-6">
           <input id='f-phoneNumber' type='tel' name='phoneNumber' class="form-control"
-            value='${buyer.member.phoneNumber}' required><br>
+            value='${buyer.member.phoneNumber}' required readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-zipcode' class="col-sm-2 col-form-label">우편번호</label>
         <div class="col-sm-6">
-          <input id='f-zipcode' type='text' name='zipcode' class="form-control" value='${buyer.zipcode}'><br>
+          <input id='f-zipcode' type='text' name='zipcode' class="form-control" value='${buyer.zipcode}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-address' class="col-sm-2 col-form-label">주소</label>
         <div class="col-sm-6">
-          <input id='f-address' type='text' name='address' class="form-control" value='${buyer.address}'><br>
+          <input id='f-address' type='text' name='address' class="form-control" value='${buyer.address}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-detailAddress' class="col-sm-2 col-form-label">상세주소</label>
         <div class="col-sm-6">
           <input id='f-detailAddress' type='text' name='detailAddress' class="form-control"
-            value='${buyer.detailAddress}'><br>
+            value='${buyer.detailAddress}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">

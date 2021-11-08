@@ -7,7 +7,8 @@
 <head>
   <title>메인메뉴</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
+  <link rel="stylesheet" href="../css/common.css">
+     
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
@@ -19,7 +20,8 @@
   </style>
 </head>
 <body>
-
+<%-- 
+<jsp:include page = "../header.jsp"></jsp:include> --%>
 <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
@@ -60,6 +62,8 @@
       <a href='../seller/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
   </c:when>
   <c:when test="${loginUser.authority eq 8}">
+      <a href='../board/list' class="btn btn-primary">게시판</a>
+      <a href='../product/list' class="btn btn-primary">상품</a>
       <a href='../buyer/list' class="btn btn-primary">회원(구매자)관리</a>
       <a href='../seller/list' class="btn btn-primary">회원(판매자)관리</a>
       <a href='../message/list' class="btn btn-primary">메세지</a>

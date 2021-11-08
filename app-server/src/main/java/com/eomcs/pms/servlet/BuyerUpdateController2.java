@@ -8,55 +8,42 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
-import com.eomcs.pms.domain.Member;
 
-@WebServlet("/buyer/detail")
-public class BuyerDetailController extends HttpServlet {
+@WebServlet("/buyer/update2")
+public class BuyerUpdateController2 extends HttpServlet {
   private static final long serialVersionUID = 1L;
+
+  SqlSession sqlSession;
   BuyerDao buyerDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     buyerDao = (BuyerDao) 웹애플리케이션공용저장소.getAttribute("buyerDao");
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {   
-    String page = "";
-
-    HttpSession session = request.getSession(false);
-
-    if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
-      return;
-    }
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
     try {
-      Member member = (Member) request.getSession(false).getAttribute("loginUser");
-
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
 
-      if (buyer == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
-      }
+      buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
 
-      request.setAttribute("buyer", buyer);
-
-      if (member.getAuthority() == 8) {
-        page = "BuyerDetail2.jsp";
-      }
-      page = "BuyerDetail.jsp";
+      buyerDao.update(buyer);
+      sqlSession.commit();
+      response.sendRedirect("../main/login");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      page = "Error.jsp";
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-    request.getRequestDispatcher(page).forward(request, response);
   }
 }
+
 
