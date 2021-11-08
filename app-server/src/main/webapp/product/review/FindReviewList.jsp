@@ -6,10 +6,10 @@
 <html>
 <head>
   <title>내가남긴리뷰목록</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
     .container {
@@ -21,6 +21,8 @@
 <body>
 <div class="container">
 <h1>내가남긴리뷰목록</h1>
+<a href='../../main/Menu.jsp' class="btn btn-outline-primary btn-sm">이전</a><br><br>
+
 <table class="table table-hover">
 <thead>
   <tr>

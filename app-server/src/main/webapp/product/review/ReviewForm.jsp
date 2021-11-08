@@ -20,12 +20,7 @@
 <div class="container">
 <h1>새리뷰</h1>
 <form action='add'>  
-<div class="mb-3 row">
-  <label for='f-productNumber' class="col-sm-2 col-form-label">상품번호</label>
-  <div class="col-sm-6">
-    <input id='f-productNumber' type='text' name='productNumber' class="form-control" value='${productNumber}' readOnly>
-  </div>
-</div>
+    <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${productNumber}' readOnly>
 <div class="mb-3 row">
   <label for='f-score' class="col-sm-2 col-form-label">평점</label>
   <div class="col-sm-6">

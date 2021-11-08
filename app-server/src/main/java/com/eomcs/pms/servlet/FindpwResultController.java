@@ -14,7 +14,7 @@ import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 
 @WebServlet("/main/findpwResult")
-public class FindfwResultController extends HttpServlet {
+public class FindpwResultController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
@@ -34,21 +34,14 @@ public class FindfwResultController extends HttpServlet {
     PrintWriter out = response.getWriter();
 
     try {
-      Member member = memberDao.findByName(request.getParameter("name"));
-
-      String id = member.getId();
-      request.setAttribute("id", id);
+      Member member = memberDao.findById(request.getParameter("id"));
 
 
       if (((member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || member.getEmail().equals(request.getParameter("phoneOrEmail"))))
           && (member.getId().equals(request.getParameter("id")))){
 
+        request.setAttribute("member_no", member.getNumber());
         request.getRequestDispatcher("FindpwResult.jsp").forward(request, response);
-
-        member.setPassword(request.getParameter("password"));
-
-        memberDao.update(member);
-        sqlSession.commit();
 
       } else {
         out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");
