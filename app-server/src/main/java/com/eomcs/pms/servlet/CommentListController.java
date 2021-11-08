@@ -30,11 +30,6 @@ public class CommentListController extends HttpServlet  {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      //int boardNo = (Integer) request.getAttribute("no");
-      //      int boardNo =1;
-      //      Collection<Comment> commentList = commentDao.findAll(boardNo);
-      //      request.setAttribute("commentList", commentList);   
-      //      request.getRequestDispatcher("CommentList.jsp").forward(request, response);
 
       int boardNumber = (Integer)request.getAttribute("boardNumber");
       Collection<Comment> commentList = commentDao.findAll(boardNumber);

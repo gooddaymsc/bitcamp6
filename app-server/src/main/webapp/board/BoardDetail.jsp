@@ -86,14 +86,22 @@
     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
   </c:when> --%>
 </c:choose>		
-    <a href='list' class="btn btn-primary">목록</a><br>
+    <a href='list' class="btn btn-primary">목록</a>
+    <a href='like?no=${board.boardNumber}' class="btn btn-primary">좋아요</a><br>
+    
 <hr />
 </form>
 </div><!-- .container -->
 
 <div class="container">
-<h4>댓글</h4>
-<a href='comment/form?no=${board.boardNumber}' class="btn btn-primary">새댓글</a><br>
+<h4>댓글 <a href='comment/form?no=${board.boardNumber}' class="btn btn-primary">새댓글</a><br>
+</h4>
+<form action='./comment/add'>
+<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
+내용 <input id='f-content' type='text' name='content'>
+<input type='hidden' id='f-writer' type='text' name='writer' value='${loginUser.id}' readonly>
+<button class="btn btn-primary">등록</button><br><br>
+</form>
 <c:forEach items= "${commentList}" var="comment">
 <fieldset>
 <legend>작성자 : ${comment.writer.id}</legend>

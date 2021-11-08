@@ -21,18 +21,8 @@
 <div class="container">
 <h1>새예약</h1>
 <form action='add'>
-<div class="mb-3 row">
-  <label for='f-cartNumber'>장바구니번호</label> 
-  <div class="col-sm-6">
-    <input id='f-cartNumber' type='text' name='cartNumber' value='${cartNo}'><br>
-  </div>
-</div>
-<div class="mb-3 row">
-  <label for='f-id'>구매자</label> 
-  <div class="col-sm-6">
-    <input id='f-id' type='text' name='id' value='${id}'><br>
-  </div>
-</div>
+<input type='hidden' id='f-cartNumber' type='text' name='cartNumber' value='${cartNo}'><br>
+<input type='hidden' id='f-id' type='text' name='id' value='${id}'><br>
 <div class="mb-3 row">
   <label for='f-bookingDate'>예약날짜</label>
   <div class="col-sm-6">

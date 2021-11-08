@@ -47,7 +47,25 @@
         left join tag t on bt.tag_no = t.tag_no
       order by b.board_no desc
   </select>
-  
+  <select id="findMine" resultMap="BoardMap">
+      select
+         b.board_no,
+         b.member_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.name,
+         m.id,
+         t.tag 
+      from board b
+        left join member m on b.member_no=m.member_no
+        left join board_tag bt on b.board_no=bt.board_no
+        left join tag t on bt.tag_no = t.tag_no
+      where
+        m.member_no = #{no}
+      order by b.board_no desc
+  </select>
   <update id="updateCount" parameterType="int">
     update board set
       views = views + 1
@@ -116,6 +134,16 @@
       board_like 
     where 
       board_no=#{no}     
+  </select>
+  
+    <select id="findLike" resultMap="LikeMap" parameterType="map">
+    select 
+      member_no,
+      registeredDate
+    from 
+      board_like 
+    where 
+      board_no=#{boardNo} and member_no=#{memberNo}    
   </select>
      
   <delete id="deleteTag" parameterType="int">

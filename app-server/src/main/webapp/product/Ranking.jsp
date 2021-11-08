@@ -23,10 +23,10 @@
 <div class="container">
 <h1> 오늘의 술 </h1>
 
-<tbody>
+<table>
 <tr>
 <c:forEach items="${productList}" var="product">
-<div class="card" style="width: 14rem;">
+<div class="card" style="width: 14rem;" >
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5><a href="detail?no=${product.productNumber}" class="card-title">${product.productName}</a></h5>
@@ -39,9 +39,14 @@
   </ul>
 </div>
 </c:forEach>
-
-</tbody>
+</tr>
+</table>
 </div> <!-- .container -->
+<script type="text/javascript">
+function location(e) {
+	
+}
+</script>
 </body>
 </html>
 

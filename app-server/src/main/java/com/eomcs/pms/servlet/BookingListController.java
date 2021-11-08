@@ -37,11 +37,18 @@ public class BookingListController extends HttpServlet {
     }
 
     try {
-      Member buyer = (Member) request.getSession(false).getAttribute("loginUser");
-      String id = buyer.getId();
-      Collection<Booking> bookingList = bookingDao.findAll1(id);
-      request.setAttribute("bookingList", bookingList);
-      request.getRequestDispatcher("BookingList.jsp").forward(request, response);
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+      Collection<Booking> bookingList = null;
+      if (member.getAuthority()==2) {
+        bookingList = bookingDao.findAll1(member.getId());
+        request.setAttribute("bookingList", bookingList);
+        request.getRequestDispatcher("BookingBuyerList.jsp").forward(request, response);
+      } else {
+        bookingList = bookingDao.findAll2(member.getId());
+        request.setAttribute("bookingList", bookingList);
+        request.getRequestDispatcher("BookingSellerList.jsp").forward(request, response);
+
+      }
 
     } catch (Exception e) {
       request.setAttribute("error", e);

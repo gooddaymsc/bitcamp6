@@ -20,9 +20,8 @@
 </head>
 <body>
 <div class="container">
-<h1>예약 목록(구매자)</h1>
-<!-- <a href='form'>새회원</a><br>
- -->
+<h1>예약 목록</h1>
+<a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">메인</a><br><br>
 <table class="table table-hover">
 <thead>
   <tr>

@@ -22,7 +22,7 @@
 <div class="container">
 <h1>상품 목록(MVC + EL + JSTL)</h1>
 <a href='form' class="btn btn-outline-primary btn-sm">새상품</a>
-<a href='list' class="btn btn-outline-primary btn-sm">이전</a><br><br>
+<a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">이전</a><br><br>
 <form action='search'>  
 <div class="mb-3 row">
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>

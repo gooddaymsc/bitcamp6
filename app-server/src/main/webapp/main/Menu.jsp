@@ -72,7 +72,7 @@
   </div>
 </nav>
 
-<%-- <div id="content">
+ <div id="content">
 <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
@@ -86,13 +86,13 @@
   <br>
   <a href='logout' class="btn btn-primary">로그아웃</a>
   </c:otherwise>
-</c:choose> --%> 
+</c:choose> 
 
 <%-- <a href='../board/list' class="btn btn-primary">게시판</a>
 <a href='../product/ranking' class="btn btn-primary">오늘의 술</a>
 <a href='../product/list' class="btn btn-primary">상품</a>
 <c:set var="name" value="코요" /> --%>
- <%-- 
+
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
       <a href='../board/list' class="btn btn-primary">게시판</a>
@@ -119,8 +119,8 @@
       <a href='../seller/list' class="btn btn-primary">회원(판매자)관리</a>
       <a href='../message/list' class="btn btn-primary">메세지</a>
   </c:when>
-</c:choose> --%>
-<!-- </div>#content -->
+</c:choose> 
+</div> <!-- content -->
 <jsp:include page="../footer.jsp"></jsp:include>
 </div><!-- .container -->
 </body>
