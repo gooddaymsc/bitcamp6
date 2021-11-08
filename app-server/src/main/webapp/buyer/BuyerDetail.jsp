@@ -24,9 +24,9 @@
     <h5>* 필수 입력</h5>
     <form action='update'>
       <div class="mb-3 row">
-        <label for='f-no' class="col-sm-2 col-form-label">번호</label>
-        <div class="col-sm-6">
-          <input id='f-no' type='text' name='number' class="form-control" value='${buyer.member.number}' readonly><br>
+<!--         <label  for='f-no' class="col-sm-2 col-form-label">번호</label>
+ -->        <div class="col-sm-6">
+          <input type='hidden' id='f-no' type='text' name='number' class="form-control" value='${buyer.member.number}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -118,10 +118,9 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${buyer.member.id}' class="btn btn-primary">탈퇴</a>
-      <a href='list' class="btn btn-primary">목록</a><br>
+      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴하기</a>
+      <a href='../main/Menu.jsp' class="btn btn-primary">이전</a><br>
     </form>
-  </div>
+  </div>  <!-- .container -->
 </body>
-
 </html>
