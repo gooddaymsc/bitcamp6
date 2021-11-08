@@ -61,7 +61,7 @@
       </div>
       <div class="mb-3 row">
         <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
           <input id='f-email' type='email' name='email' class="form-control" value='${seller.member.email}' readonly><br>
         </div>
       </div>
@@ -73,13 +73,13 @@
       </div>
       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
           <input id='f-photo' type='text' name='photo' class="form-control" value='${seller.member.photo}'><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-phoneNumber' class="col-sm-2 col-form-label">* 전화</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
           <input id='f-phoneNumber' type='tel' name='phoneNumber' class="form-control"
             value='${seller.member.phoneNumber}' required><br>
         </div>
@@ -93,21 +93,21 @@
       </div>
       <div class="mb-3 row">
         <label for='f-businessNumber' class="col-sm-2 col-form-label">* 사업자번호</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
           <input id='f-businessNumber' type='text' name='businessNumber' class="form-control"
             value='${seller.businessNumber}' required><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-businessAddress' class="col-sm-2 col-form-label">* 사업장주소</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
           <input id='f-businessAddress' type='text' name='businessAddress' class="form-control"
             value='${seller.businessAddress}'><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-businessPlaceNumber' class="col-sm-2 col-form-label">* 사업장번호</label>
-        <div class="col-sm-10">
+        <div class="col-sm-6">
           <input id='f-businessPlaceNumber' type='text' name='businessPlaceNumber' class="form-control"
             value='${seller.businessPlaceNumber}' required><br>
         </div>

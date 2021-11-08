@@ -1,6 +1,10 @@
 -- 외래키 설정 해제
 set foreign_key_checks =0;
 
+-- 관리자 등록
+insert into member(id, password,authority,name,nickname,email,phoneNumber,level) 
+values("admin",password("0000"),8,"admin","admin","admin@test.com","1111",5);
+
 -- 회원 등록
 insert into member(authority,id,name,nickname,email,birthday,password,photo,phoneNumber,zipcode,address,detail_address) 
 values(2, 'aaa', 'aaa', 'aaa', 'aaa@test.com', '2021-1-1', '1111', 'aaa.gif', '1111', '1111', '1111', '1111');

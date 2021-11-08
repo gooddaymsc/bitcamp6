@@ -4,12 +4,14 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/buyer/detail")
 public class BuyerDetailController extends HttpServlet {
@@ -23,22 +25,38 @@ public class BuyerDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
-      throws ServletException, IOException {
+  public void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {   
+    String page = "";
+
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
     try {
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
 
       if (buyer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
+
       request.setAttribute("buyer", buyer);
-      request.getRequestDispatcher("/buyer/BuyerDetail.jsp").forward(request, response);
+
+      if (member.getAuthority() == 8) {
+        page = "BuyerDetail2.jsp";
+      }
+      page = "BuyerDetail.jsp";
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      page = "Error.jsp";
     }
+    request.getRequestDispatcher(page).forward(request, response);
   }
 }
 
