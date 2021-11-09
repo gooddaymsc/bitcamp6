@@ -30,7 +30,10 @@ public class BoardListController extends HttpServlet{
     try {
       Collection<Board> boardList = boardDao.findAll();
       request.setAttribute("boardList", boardList);
-      request.getRequestDispatcher("BoardList.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "게시글목록");
+      request.setAttribute("contentUrl", "/board/BoardList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
