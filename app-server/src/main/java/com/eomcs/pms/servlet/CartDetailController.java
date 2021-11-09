@@ -37,7 +37,9 @@ public class CartDetailController extends HttpServlet {
 
       }
       request.setAttribute("cart", cart);
-      request.getRequestDispatcher("/cart/CartDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "장바구니상세보기");
+      request.setAttribute("contentUrl", "/cart/CartDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

@@ -50,7 +50,9 @@ public class BookingDetailController extends HttpServlet {
         throw new Exception("해당 상품의 예약이 없습니다.");
       }
       request.setAttribute("booking", booking);
-      request.getRequestDispatcher("/booking/BookingDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "예약상세보기");
+      request.setAttribute("contentUrl", "/booking/BookingDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

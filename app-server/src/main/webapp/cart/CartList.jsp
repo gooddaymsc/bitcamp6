@@ -2,18 +2,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>장바구니목록</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-</head>
-<body>
-<form name="form">
-<div class="container">
+<style>
+tr a {
+    text-decoration: none;
+    color: black;
+}
+tr a:visited {
+    color: black;
+}
+tr:hover {
+    cursor: pointer;
+}
+</style>
+
 <h1>장바구니 목록</h1>
 <table class="table table-hover">
 <thead>
@@ -62,7 +63,6 @@
                 <td><input name="total_sum"  type="text" size="20" readonly></td>
             </tbody>            
         </table>
-</div><!-- .container -->
 <footer>
 <a href='../main/logout' class="btn btn-primary">로그아웃</a>
 </footer>
@@ -79,6 +79,18 @@ function itemSum(frm)
    frm.total_sum.value = sum;
 }
 </script>
-</form>
-</body>
-</html>
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+    //console.log(e.currentTarget.querySelector("a").href);
+    //e.currentTarget.querySelector("a").click();
+    window.location.href = e.currentTarget.querySelector("a").href;
+    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
+  };
+});
+</script>
