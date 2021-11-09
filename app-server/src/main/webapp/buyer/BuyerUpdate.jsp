@@ -22,7 +22,7 @@
   <div class="container">
     <h1>등급 변경(구매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update2'>
+    <form action='update'>
       <div class="mb-3 row">
         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
         <div class="col-sm-6">
@@ -118,7 +118,7 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-primary">탈퇴하기</a>
+      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-primary">탈퇴시키기</a>
       <a href='../main/Menu.jsp' class="btn btn-primary">이전</a><br>
     </form>
   </div>

@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
+import com.eomcs.pms.domain.Member;
 
 @WebServlet("/buyer/update")
 public class BuyerUpdateController extends HttpServlet {
@@ -29,20 +31,40 @@ public class BuyerUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
+    System.out.println("1");
     try {
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
 
-      buyer.getMember().setNickname(request.getParameter("nickname"));
-      buyer.getMember().setPassword(request.getParameter("password"));
-      buyer.getMember().setPhoto(request.getParameter("photo"));
-      buyer.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
-      buyer.setZipcode(request.getParameter("zipcode"));
-      buyer.setAddress(request.getParameter("address"));
-      buyer.setDetailAddress(request.getParameter("detailAddress"));
+      System.out.println("2");
+      if (member.getId().equals(buyer.getMember().getId())) {
+
+        buyer.getMember().setNickname(request.getParameter("nickname"));
+        buyer.getMember().setPassword(request.getParameter("password"));
+        buyer.getMember().setPhoto(request.getParameter("photo"));
+        buyer.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
+        buyer.setZipcode(request.getParameter("zipcode"));
+        buyer.setAddress(request.getParameter("address"));
+        buyer.setDetailAddress(request.getParameter("detailAddress"));
+        System.out.println("3");
+
+      } else if (member.getAuthority() == 8) {
+        buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
+        System.out.println("4");
+      }
+
 
       buyerDao.update(buyer);
       sqlSession.commit();
+      System.out.println("5");
       response.sendRedirect("../main/Menu.jsp");
 
     } catch (Exception e) {
