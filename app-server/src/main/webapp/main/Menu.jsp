@@ -20,6 +20,7 @@
   <style>
    .container {
       border: 1px solid red;
+      width:100%;
     }
     
     tr a {
@@ -38,11 +39,12 @@
     }
     
     .intro_bg{
-      background-image:url("../image/alcohol3.jpg");
+      background-image:url("../image/alcohol5.jpg");
       width:100%;
-      height:518px;
+      height:618px;
       background-repeat: no-repeat;
-      float: left;
+      background-position: center;
+      background-size:contain;
     }
     
     .header{
@@ -78,10 +80,10 @@
           <a class="nav-link disabled">Finder</a>
         </li>  -->
       </ul>
-      <form class="d-flex">
+      <!-- <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
        <span><button class="btn btn-outline-success" type="submit">Search</button></span>
-      </form>
+      </form> -->
     </div>
   </div>
   </nav>
