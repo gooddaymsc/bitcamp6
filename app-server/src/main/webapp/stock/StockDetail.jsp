@@ -20,7 +20,7 @@
 <body>
 <div class="container">
 <h1>재고상세</h1>
-<form action='update'>
+<form action='update' method='post'>
 <div class="mb-3 row">
   <label for='f-no' class="col-sm-2 col-form-label">재고번호</label>
   <div class="col-sm-6">

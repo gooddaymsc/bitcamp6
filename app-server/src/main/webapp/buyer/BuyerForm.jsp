@@ -24,7 +24,7 @@
     <a href='../seller/form' class="btn btn-outline-primary btn-sm">판매자로 회원가입하기</a>
     <a href="../main/Menu.jsp" class="btn btn-outline-primary btn-sm">메인</a><br><br>
     <h5>* 필수 입력</h5>
-    <form action='add'>
+    <form action='add' method='post'>
       <div class="mb-3 row">
         <label for='f-id' class="col-sm-2 col-form-label">* 아이디</label>
         <div class="col-sm-6">

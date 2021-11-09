@@ -19,7 +19,7 @@
 <body>
 <div class="container">
 <h1>새리뷰</h1>
-<form action='add'>  
+<form action='add' method='post'>  
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${productNumber}' readOnly>
 <div class="mb-3 row">
   <label for='f-score' class="col-sm-2 col-form-label">평점</label>

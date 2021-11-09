@@ -21,7 +21,7 @@
 <body>
 <div class="container">
 <h1>새상품(MVC)</h1>
-<form action='add'>
+<form action='add' method='post'>
 <div class="mb-3 row">
   <label for='f-productName' class="col-sm-2 col-form-label">상품명</label>
   <div class="col-sm-6">

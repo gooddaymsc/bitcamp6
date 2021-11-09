@@ -21,7 +21,7 @@
 <body>
 <div class="container">
 <h1>리뷰 변경</h1>
-<form action='update'>
+<form action='update' method='post'>
     <input type='hidden' id='f-reviewNo' type='text' name='reviewNo' class="form-control" value='${review.no}' readonly>
 <div class="mb-3 row">
   <label for='f-score' class="col-sm-2 col-form-label">평점</label>
