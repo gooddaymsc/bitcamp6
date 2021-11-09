@@ -22,7 +22,7 @@
   <div class="container">
     <h1>등급 변경(판매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update'>
+    <form action='update' method='post'>
       <div class="mb-3 row">
 <!--         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
  -->        <div class="col-sm-6">

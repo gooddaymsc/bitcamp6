@@ -20,7 +20,7 @@
 <body>
 <div class="container">
 <h1>게시글 작성</h1>
-<form action='add'>
+<form action='add' method='post'>
 <div class="mb-3 row">
   <label for='f-title' class="col-sm-2 col-form-label">제목</label> 
   <div class="col-sm-6">

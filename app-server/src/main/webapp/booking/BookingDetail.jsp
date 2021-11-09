@@ -21,7 +21,7 @@
 <body>
 <div class="container">
 <h1>예약 상세보기(구매자)</h1>
-<form action='update'>
+<form action='update' method='post'>
 <div class="mb-3 row">
   <label for='f-bookingNumber'>예약번호</label> 
   <div class="col-sm-6">

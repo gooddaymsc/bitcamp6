@@ -18,7 +18,7 @@
 <body>
 <div class="container">
 <h1>비밀번호찾기</h1>
-<form action=findpwResult>
+<form action=findpwResult method='post'>
 <label for='f-name' class="col-sm-2 col-form-label">이름</label>
  <input id='f-name'  type='text' name='name'><br>
  <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
