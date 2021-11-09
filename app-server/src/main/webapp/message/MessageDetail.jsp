@@ -2,38 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>대화목록</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-   
-    tr{
-      border-style: dotted;
-      border-width: 7px;
-      border-color: wheat;
-    }
-    label {
-    margin-right: 5px;
-    text-align: right;
-    width: 80px;
-  }
-    button{
-    text-align: right;
-    position : relative; 
-        left: 300px;
-        bottom: 60px;
-    }
-    
-  </style>
-</head>
-<body>
-<div class="container">
 <h1>대화목록</h1>
    <a href='list' class="btn btn-outline-primary btn-sm">이전</a><br><br>
 <form action='update' method='post'>
@@ -66,6 +34,3 @@
   <button class="btn btn-primary ">전송</button> 
   
 </form>
-</div><!-- .container -->
-</body>
-</html>

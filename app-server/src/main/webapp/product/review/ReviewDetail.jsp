@@ -3,23 +3,6 @@
     trimDirectiveWhitespaces="true" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<!DOCTYPE html>
-<html>
-<head>
-  <title>리뷰상세</title>
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        width: 640px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
 <h1>리뷰 변경</h1>
 <form action='update' method='post'>
     <input type='hidden' id='f-reviewNo' type='text' name='reviewNo' class="form-control" value='${review.no}' readonly>
@@ -49,6 +32,3 @@
 <a href='../detail?no=${review.productNo}' class="btn btn-primary">목록</a><br>
 
 </form>
-</div> <!-- container -->
-</body>
-</html>

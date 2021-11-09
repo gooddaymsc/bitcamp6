@@ -51,7 +51,10 @@ public class CommentDetailController extends HttpServlet {
 
       if (comment.getWriter().getId().equals(member.getId())) {
         request.setAttribute("comment", comment);
-        request.getRequestDispatcher("/comment/CommentDetail.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "댓글상세보기");
+        request.setAttribute("contentUrl", "/comment/CommentDetail.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        //        request.getRequestDispatcher("/comment/CommentDetail.jsp").forward(request, response);
 
       } else {
         out.printf("<script>alert('본인 댓글만 수정 및 삭제할 수 있습니다.'); location.href='../detail?no=%d'</script>", comment.getBoardNumber());
