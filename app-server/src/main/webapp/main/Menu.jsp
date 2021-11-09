@@ -17,27 +17,7 @@
   <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
   <script src="https://kit.fontawesome.com/26add2f61b.js" crossorigin="anonymous"></script>
   
-  <style>
-   .container {
-      border: 1px solid red;
-      width:100%;
-    }
-    
-    tr a {
-        text-decoration: none;
-        color: black;
-    }
-    tr a:visited {
-        color: black;
-    }
-    tr:hover {
-        cursor: pointer;
-    }
-    .d-flex{
-      width: 440px;
-      border: 1px solid green;
-    }
-    
+  <style> 
     .intro_bg{
       background-image:url("../image/alcohol5.jpg");
       width:100%;
@@ -45,22 +25,16 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size:contain;
-    }
-    
-    .header{
-      margin:auto;
-      border: 1px solid red;
-    }
-    
+    } 
   </style>
 </head>
 <body>
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Drinker</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <div class="logo" id='logo'>
+      <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
+      </div>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -139,7 +113,7 @@
       <a href='../message/list' class="btn btn-primary">메세지</a>
   </c:when>
 </c:choose> 
-</div> <!-- content -->
+</div> content
 <jsp:include page="../footer.jsp"></jsp:include>
 </div><!-- .container -->
 </body>
