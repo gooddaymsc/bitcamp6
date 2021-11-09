@@ -43,8 +43,8 @@ public class BuyerUpdateController extends HttpServlet {
 
       String id = request.getParameter("id");
       Buyer buyer = buyerDao.findById(id);
-
       System.out.println("2");
+
       if (member.getId().equals(buyer.getMember().getId())) {
 
         buyer.getMember().setNickname(request.getParameter("nickname"));
