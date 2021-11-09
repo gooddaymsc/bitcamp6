@@ -47,16 +47,19 @@ public class BuyerDetailController extends HttpServlet {
       request.setAttribute("buyer", buyer);
 
       if (member.getAuthority() == 8) {
-        page = "BuyerUpdate.jsp";
+        page = "/buyer/BuyerUpdate.jsp";
       } else {
-        page = "BuyerDetail.jsp";
+        page = "/buyer/BuyerDetail.jsp";
       }
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       page = "Error.jsp";
     }
-    request.getRequestDispatcher(page).forward(request, response);
+    request.setAttribute("pageTitle", "회원(구매자)상세보기");
+    request.setAttribute("contentUrl", page);
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    //    request.getRequestDispatcher(page).forward(request, response);
   }
 }
 
