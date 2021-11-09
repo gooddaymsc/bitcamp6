@@ -14,10 +14,20 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
-    }  
+.container {
+    xborder: 1px solid red;
+    width: 640px;
+}  
+tr a {
+    text-decoration: none;
+    color: black;
+}
+tr a:visited {
+    color: black;
+}
+tr:hover {
+    cursor: pointer;
+}
   </style>
 </head>
 <body>
@@ -64,6 +74,23 @@
 </footer>
 <jsp:include page="../footer.jsp"></jsp:include>
 </div><!-- .container -->
+
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+    //console.log(e.currentTarget.querySelector("a").href);
+    //e.currentTarget.querySelector("a").click();
+    window.location.href = e.currentTarget.querySelector("a").href;
+    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
+  };
+});
+</script>
+
 </body>
 </html>
 

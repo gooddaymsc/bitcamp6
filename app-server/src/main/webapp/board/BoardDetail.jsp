@@ -110,5 +110,18 @@
 </fieldset>
 </c:forEach>
 </div><!-- .container -->
+
+<!-- <script>
+document.querySelector("#member-form").onsubmit = () => {
+  if (document.querySelector("#f-name").value == "" ||
+      document.querySelector("#f-email").value == "" ||
+      document.querySelector("#f-password").value == "") {
+    //window.alert("필수 입력 항목이 비어 있습니다.")
+    Swal.fire("필수 입력 항목이 비어 있습니다.")
+    return false;
+  }
+};
+</script> -->
+
 </body>
 </html>
