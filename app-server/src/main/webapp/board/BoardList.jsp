@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <style>
+
 tr a {
     text-decoration: none;
     color: black;

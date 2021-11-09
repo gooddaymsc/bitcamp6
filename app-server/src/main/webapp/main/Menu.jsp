@@ -20,8 +20,8 @@
   <style> 
     .intro_bg{
       background-image:url("../image/alcohol5.jpg");
-      width:100%;
-      height:618px;
+      width:100px;
+      height:60px;
       background-repeat: no-repeat;
       background-position: center;
       background-size:contain;
@@ -38,6 +38,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <!-- 
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../product/list">Alcohol</a>
         </li>
@@ -47,7 +48,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../board/list">Board</a>
         </li>
-      <!--   <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href="../board/list">Link</a>
         </li>  -->
       <!--   <li class="nav-item">
