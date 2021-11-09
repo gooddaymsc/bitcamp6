@@ -25,7 +25,7 @@
 </head>
 <body>
 <h1>장바구니 상세</h1>
-  <form action='update'>
+  <form action='update' method='post'>
     <div class="mb-3 row">
      <label for='f-cartNumber' class="col-sm-2 col-form-label">번호</label>
      <div class="col-sm-6">

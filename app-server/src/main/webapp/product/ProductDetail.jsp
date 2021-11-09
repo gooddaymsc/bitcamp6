@@ -20,7 +20,7 @@
 <body>
 <div class="container">
 <h1>상품 상세(MVC + EL)</h1>
-<form action='update'>
+<form action='update' method='post'>
 <div class="mb-3 row">
   <label for='f-productNumber' class="col-sm-2 col-form-label">상품번호</label>
   <div class="col-sm-6">

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<style>
+ #logo {
+ width: 140px;
+ height: 100px;
+ float:right;
+ }
+</style>
 <header>
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
@@ -27,4 +33,8 @@
     </div>
   </div>
   </nav>    
+
+<div id='logo'>
+    <a href="../main/Menu.jsp"><img src="../image/logo.png"></a>
+</div>
 </header>

@@ -20,7 +20,7 @@
 <body>
 <div class="container">
 <h1>새예약</h1>
-<form action='add'>
+<form action='add' method='post'>
 <input type='hidden' id='f-cartNumber' type='text' name='cartNumber' value='${cartNo}'><br>
 <input type='hidden' id='f-id' type='text' name='id' value='${id}'><br>
 <div class="mb-3 row">

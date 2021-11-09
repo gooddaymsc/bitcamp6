@@ -36,7 +36,7 @@
 <div class="container">
 <h1>대화목록</h1>
    <a href='list' class="btn btn-outline-primary btn-sm">이전</a><br><br>
-<form action='update'>
+<form action='update' method='post'>
 <table border='1'>
 <c:set var="id" value="${loginUser.id}"/>
 <c:forEach items="${messages}" var="message">
