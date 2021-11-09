@@ -63,8 +63,12 @@ public class BoardAddController extends HttpServlet {
       boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
       sqlSession.commit();
 
+      request.setAttribute("pageTitle", "게시판등록");
+      request.setAttribute("contentUrl", "BoardAdd.jsp");
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
+      //      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);

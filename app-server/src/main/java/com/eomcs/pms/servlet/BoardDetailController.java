@@ -49,7 +49,9 @@ public class BoardDetailController extends HttpServlet {
       sqlSession.commit();
       request.setAttribute("board", board);
       request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/board/BoardDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "게시판상세보기");
+      request.setAttribute("contentUrl", "/board/BoardDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);
