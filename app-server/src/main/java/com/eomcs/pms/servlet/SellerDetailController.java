@@ -4,11 +4,13 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.eomcs.pms.dao.SellerDao;
+import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 
 @WebServlet("/seller/detail")
@@ -23,22 +25,38 @@ public class SellerDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    String page = "";
 
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("/drinker/login/menu");
+      return;
+    }
     try {
+      Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
       String id = request.getParameter("id");
       Seller seller = sellerDao.findById(id);
+
       if (seller == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
       request.setAttribute("seller", seller);
-      request.getRequestDispatcher("/seller/SellerDetail.jsp").forward(request, response);
+
+      if (member.getAuthority() == 8) {
+        page = "SellerUpdate.jsp";
+      } else {
+        page = "SellerDetail.jsp";
+      }
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      page = "Error.jsp";
     }
+    request.getRequestDispatcher(page).forward(request, response);
   }
 }
 

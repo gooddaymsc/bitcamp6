@@ -44,13 +44,13 @@ public class BuyerDetailController extends HttpServlet {
       if (buyer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
-
       request.setAttribute("buyer", buyer);
 
       if (member.getAuthority() == 8) {
-        page = "BuyerDetail2.jsp";
+        page = "BuyerUpdate.jsp";
+      } else {
+        page = "BuyerDetail.jsp";
       }
-      page = "BuyerDetail.jsp";
 
     } catch (Exception e) {
       request.setAttribute("error", e);

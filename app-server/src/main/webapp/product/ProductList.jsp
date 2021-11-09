@@ -28,7 +28,7 @@
 </c:choose>
 
 <a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">이전</a><br><br>
-<form action='search'>  
+<form action='search' method='post'>  
 <div class="mb-3 row">
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>
     <div class="col-sm-2">

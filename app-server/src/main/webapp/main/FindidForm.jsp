@@ -18,7 +18,7 @@
 <body>
 <div class="container">
 <h1>아이디찾기</h1>
-<form action=findidResult>
+<form action=findidResult method='post'>
  <label for='f-name' class="col-sm-2 col-form-label">이름</label>
  <input id='f-name'  type='text' name='name'><br>
  
