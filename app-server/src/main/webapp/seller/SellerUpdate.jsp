@@ -1,25 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>등급 변경(판매자)</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <style>
-    .container {
-      xborder: 1px solid red;
-      width: 640px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
     <h1>등급 변경(판매자)</h1>
     <h5>* 필수 입력</h5>
     <form action='update' method='post'>
@@ -144,8 +125,3 @@
       <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-primary">탈퇴하기</a>
       <a href='../main/Menu.jsp' class="btn btn-primary">이전</a><br>
     </form>
-  </div>
-
-</body>
-
-</html>

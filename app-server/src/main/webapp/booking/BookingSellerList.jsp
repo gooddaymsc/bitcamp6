@@ -2,26 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>예약목록</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
 <h1>예약 목록</h1>
-<a href='../main/Menu.jsp' class="btn btn-outline-primary btn-sm">메인</a><br><br>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -51,12 +32,6 @@
 </c:forEach>
 </tbody>
 </table>
-</div><!-- .container -->
-<footer>
-<a href='../main/logout' class="btn btn-primary">로그아웃</a>
-</footer>
-</body>
-</html>
 
 
 

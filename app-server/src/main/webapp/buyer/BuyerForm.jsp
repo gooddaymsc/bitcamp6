@@ -1,28 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>새회원</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-
-  <style>
-    .container {
-      xborder: 1px solid red;
-      width: 640px;
-  </style>
-</head>
-
-<body>
-  <div class="container">
     <h1>회원가입(구매자)</h1>     
     <a href='../seller/form' class="btn btn-outline-primary btn-sm">판매자로 회원가입하기</a>
-    <a href="../main/Menu.jsp" class="btn btn-outline-primary btn-sm">메인</a><br><br>
     <h5>* 필수 입력</h5>
     <form action='add' method='post'>
       <div class="mb-3 row">
@@ -99,7 +79,6 @@
       </div>
       <button class="btn btn-primary btn-sm">등록</button><br>
     </form>
-  </div>
   <script>
         function check_pw(){
  
@@ -132,6 +111,3 @@
             }
         }
     </script>
-</body>
-
-</html>

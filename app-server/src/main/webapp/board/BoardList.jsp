@@ -34,7 +34,7 @@ tr:hover {
 <tbody>
 
 <c:forEach items="${boardList}" var="board">
-<tr data-no="${boardList.number}">
+<tr>
     <td><a href='detail?no=${board.boardNumber}'>${board.boardNumber}</a></td>  
     <td>${board.title}</td> 
     <td>${board.boardTag.tag}</td> 

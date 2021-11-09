@@ -46,7 +46,10 @@ public class CommentFindController extends HttpServlet  {
     try {
       Collection<Comment> commentList = commentDao.findMine(member.getNumber());
       request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("../../comment/CommentList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내댓글");
+      request.setAttribute("contentUrl", "/comment/CommentList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+
 
     } catch (Exception e) {
       request.setAttribute("error", e);

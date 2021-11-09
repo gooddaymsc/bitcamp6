@@ -46,7 +46,10 @@ public class ReviewFindController extends HttpServlet {
         out.println("작성한 리뷰가 없습니다.");
       }
       request.setAttribute("reviewList", reviewList);
-      request.getRequestDispatcher("./FindReviewList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내리뷰");
+      request.setAttribute("contentUrl", "/product/review/FindReviewList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+
 
     } catch (Exception e) {
       request.setAttribute("error", e);

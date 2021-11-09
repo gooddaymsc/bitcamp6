@@ -16,7 +16,9 @@ public class MessageFormController extends HttpServlet {
       throws ServletException, IOException {
 
     request.setAttribute("theOtherId", request.getParameter("id"));
-    request.getRequestDispatcher("/message/MessageForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "메시지작성");
+    request.setAttribute("contentUrl", "/message/MessageForm.jsp");
+    request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
   }
 }

@@ -64,8 +64,10 @@ public class BuyerUpdateController extends HttpServlet {
 
       buyerDao.update(buyer);
       sqlSession.commit();
-      System.out.println("5");
-      response.sendRedirect("../main/Menu.jsp");
+
+      request.setAttribute("pageTitle", "개인정보변경");
+      request.setAttribute("contentUrl", "/main/Menu.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

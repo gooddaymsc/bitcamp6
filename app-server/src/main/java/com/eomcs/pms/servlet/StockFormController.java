@@ -47,7 +47,10 @@ public class StockFormController extends HttpServlet {
         out.flush();
       } else {
         request.setAttribute("productNo", productNo);
-        request.getRequestDispatcher("/stock/StockForm.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "재고담기");
+        request.setAttribute("contentUrl", "/stock/StockForm.jsp");
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
+
       }
     } catch(Exception e){
       request.setAttribute("error", e);

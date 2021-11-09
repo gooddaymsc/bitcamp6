@@ -32,7 +32,9 @@ public class RankingController extends HttpServlet {
     try {
       Collection<Product> productList = productDao.ranking();
       request.setAttribute("productList", productList);
-      request.getRequestDispatcher("Ranking.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "오늘의술");
+      request.setAttribute("contentUrl", "/product/Ranking.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     }  catch (Exception e) {
       request.setAttribute("error", e);
