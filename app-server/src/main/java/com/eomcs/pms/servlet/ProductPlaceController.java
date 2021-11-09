@@ -33,7 +33,10 @@ public class ProductPlaceController extends HttpServlet {
       //
       //      Collection<Stock> stockSellerList = (Collection<Stock>)request.getParameter("stockSellerList");
       //      request.setAttribute("productList", productList);
-      request.getRequestDispatcher("ProductList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "장소찾기");
+      request.setAttribute("contentUrl", "/product/ProductList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

@@ -52,8 +52,12 @@ public class BuyerDeleteController extends HttpServlet {
       sqlSession.commit();
 
       if (member.getId().equals(id)) {
+
         response.setHeader("Refresh", "1;url=../main/logout");
-        request.getRequestDispatcher("BuyerDelete.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "회원탈퇴");
+        request.setAttribute("contentUrl", "/buyer/BuyerDelete.jsp");
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
+
       }
     } catch (Exception e) {
       request.setAttribute("error", e);

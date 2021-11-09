@@ -18,7 +18,9 @@ public class BookingFormController extends HttpServlet {
     // 출력을 담당할 뷰를 호출한다.
     request.setAttribute("cartNo", request.getParameter("no"));
     request.setAttribute("id", request.getParameter("id"));
-    request.getRequestDispatcher("BookingForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "새예약");
+    request.setAttribute("contentUrl", "/booking/BookingForm.jsp");
+    request.getRequestDispatcher("/template2.jsp").forward(request, response);
   }
 }
 

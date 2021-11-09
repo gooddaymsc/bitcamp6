@@ -53,7 +53,9 @@ public class SellerDeleteController extends HttpServlet {
 
       if (member.getId().equals(id)) {
         response.setHeader("Refresh", "1;url=../main/logout");
-        request.getRequestDispatcher("SellerDelete.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "회원탈퇴");
+        request.setAttribute("contentUrl", "/seller/SellerDelete.jsp");
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
       }
 
     } catch (Exception e) {

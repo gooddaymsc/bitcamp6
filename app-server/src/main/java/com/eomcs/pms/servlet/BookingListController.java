@@ -42,12 +42,17 @@ public class BookingListController extends HttpServlet {
       if (member.getAuthority()==2) {
         bookingList = bookingDao.findAll1(member.getId());
         request.setAttribute("bookingList", bookingList);
-        request.getRequestDispatcher("BookingBuyerList.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "예약목록");
+        request.setAttribute("contentUrl", "/booking/BookingBuyerList.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        //        request.getRequestDispatcher("BookingBuyerList.jsp").forward(request, response);
       } else {
         bookingList = bookingDao.findAll2(member.getId());
         request.setAttribute("bookingList", bookingList);
-        request.getRequestDispatcher("BookingSellerList.jsp").forward(request, response);
-
+        request.setAttribute("pageTitle", "예약목록");
+        request.setAttribute("contentUrl", "/booking/BookingSellerList.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        //        request.getRequestDispatcher("BookingSellerList.jsp").forward(request, response);
       }
 
     } catch (Exception e) {

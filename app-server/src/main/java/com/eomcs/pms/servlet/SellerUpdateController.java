@@ -65,7 +65,9 @@ public class SellerUpdateController extends HttpServlet {
       sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSession.commit();
-      response.sendRedirect("../main/Menu.jsp");
+      request.setAttribute("pageTitle", "개인정보변경");
+      request.setAttribute("contentUrl", "/main/Menu.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

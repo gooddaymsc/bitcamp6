@@ -48,7 +48,9 @@ public class ReviewFormController extends HttpServlet {
         out.flush();
       } else {
         request.setAttribute("productNumber", productNumber);
-        request.getRequestDispatcher("./ReviewForm.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "새리뷰");
+        request.setAttribute("contentUrl", "/review/ReviewForm.jsp");
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
       }
     } catch(Exception e) {
       request.setAttribute("error", e);

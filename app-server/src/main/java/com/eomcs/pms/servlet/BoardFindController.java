@@ -46,7 +46,9 @@ public class BoardFindController extends HttpServlet {
     try {
       Collection<Board> boardList = boardDao.findMine(member.getNumber());
       request.setAttribute("boardList", boardList);
-      request.getRequestDispatcher("BoardList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내게시글목록");
+      request.setAttribute("contentUrl", "/board/BoardList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

@@ -37,7 +37,10 @@ public class CommentListController extends HttpServlet  {
       if (commentList.equals(null)) {
         System.out.println("등록된 댓글이 없습니다.");
       }
-      request.getRequestDispatcher("BoardDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "댓글목록");
+      request.setAttribute("contentUrl", "/board/BoardDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      //      request.getRequestDispatcher("BoardDetail.jsp").forward(request, response);
 
 
     } catch (Exception e) {

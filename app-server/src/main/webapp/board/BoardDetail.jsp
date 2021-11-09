@@ -75,7 +75,7 @@
 </form>
 
 <div class="container">
-<h4>댓글 <a href='comment/form?no=${board.boardNumber}' class="btn btn-primary">새댓글</a><br>
+<h4>댓글 <a class="btn btn-primary">새댓글</a><br>
 </h4>
 <form action='./comment/add'>
 <input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>

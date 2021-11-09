@@ -1,24 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>새 게시글</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
 <h1>게시글 작성</h1>
 <form action='add' method='post'>
 <div class="mb-3 row">
@@ -44,9 +26,6 @@
 
 <button class="btn btn-primary btn-sm">등록</button><br>
 </form>
-</div><!-- .container -->
-</body>
-</html>
 
 
 

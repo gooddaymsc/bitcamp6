@@ -37,7 +37,9 @@ public class StockDetailController  extends HttpServlet {
 
       }
       request.setAttribute("stock", stock);
-      request.getRequestDispatcher("/stock/StockDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "재고상세보기");
+      request.setAttribute("contentUrl", "/stock/StockDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

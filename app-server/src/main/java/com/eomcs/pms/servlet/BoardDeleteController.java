@@ -64,7 +64,6 @@ public class BoardDeleteController extends HttpServlet {
         boardDao.delete(board); 
         sqlSession.commit();
 
-        //        out.println("게시글을 삭제하였습니다.<br>");
 
         out.println("<a href='list'>[목록]<a><br>");
       } else {
