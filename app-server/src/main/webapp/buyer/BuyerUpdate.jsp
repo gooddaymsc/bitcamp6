@@ -100,5 +100,4 @@
       </div>
       <button class="btn btn-primary">변경</button>
       <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-primary">탈퇴시키기</a>
-      <a href='../main/Menu.jsp' class="btn btn-primary">이전</a><br>
     </form>

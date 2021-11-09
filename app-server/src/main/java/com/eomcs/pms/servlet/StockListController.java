@@ -41,7 +41,9 @@ public class StockListController extends HttpServlet {
 
       request.setAttribute("id", id);
       request.setAttribute("stockList", stockList.getSellerStock());
-      request.getRequestDispatcher("StockList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "재고목록");
+      request.setAttribute("contentUrl", "/stock/StockList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

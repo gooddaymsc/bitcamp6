@@ -10,7 +10,9 @@
 <header>
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Drinker</a>
+  <div class="logo" id="logo">
+    <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -34,7 +36,4 @@
   </div>
   </nav>    
 
-<div id='logo'>
-    <a href="../main/Menu.jsp"><img src="../image/logo.png"></a>
-</div>
 </header>

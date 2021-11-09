@@ -32,6 +32,25 @@
 </c:forEach>
 </tbody>
 </table>
+<footer>
+<a href='../main/logout' class="btn btn-primary">로그아웃</a>
+</footer>
+
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+    //console.log(e.currentTarget.querySelector("a").href);
+    //e.currentTarget.querySelector("a").click();
+    window.location.href = e.currentTarget.querySelector("a").href;
+    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
+  };
+});
+</script>
 
 
 

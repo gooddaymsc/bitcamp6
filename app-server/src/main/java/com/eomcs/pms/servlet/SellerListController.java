@@ -30,7 +30,9 @@ public class SellerListController extends HttpServlet {
     try {
       Collection<Seller> sellerList = sellerDao.findAll();
       request.setAttribute("sellerList", sellerList);
-      request.getRequestDispatcher("SellerList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "회원(판매자)목록");
+      request.setAttribute("contentUrl", "/seller/SellerList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
