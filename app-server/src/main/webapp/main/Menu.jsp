@@ -37,41 +37,9 @@
   </style>
 </head>
 <body>
-<div class="header">
-<nav class="navbar navbar-expand-lg navbar-light ">
-  <div class="container-fluid">
-    <div class="logo">
-      <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.png"></a>
-      </div>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <!-- 
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">Alcohol</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/ranking">Ranking</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../board/list">Board</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../board/list">Link</a>
-        </li>  -->
-      <!--   <li class="nav-item">
-          <a class="nav-link disabled">Finder</a>
-        </li>  -->
-      </ul>
-      <!-- <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
-       <span><button class="btn btn-outline-success" type="submit">Search</button></span>
-      </form> -->
-    </div>
-  </div>
-  </nav>
-</div>
+<div class="container">
 
-  <div class="intro_bg"><div></div>
+<jsp:include page="../header.jsp"></jsp:include>
 
  <div id="content">
  <form action='search' method='post'>  

@@ -1,19 +1,25 @@
 @charset "UTF-8";
 
+html{
+margin:0;
+ padding: 0;
+width:100%;
+height:100%;
+}
+ 
+body {
+  margin-top: 100px;
+ padding: 0;
+width:100%;
+height:100%;
+}
+
 .container {
-    border: 1px solid red;
-    width: 640px;
+    border: 1px solid white;
 }
  
 header {
   border: 1px solid red;
-  height: 80px; 
-  margin:auto;
-}
-
-.logo{
-  border: 1px solid #73f75d;
-  width: 40px;
   height: 80px; 
   margin:auto;
 }
