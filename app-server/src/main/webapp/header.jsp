@@ -41,7 +41,7 @@
     text-align: center;
   }
 
-  /* 버튼 중앙 정렬 */
+  /* 햄버거 버튼 중앙 정렬 */
   .navbar-toggler {
     margin-top: 10px;
   }
@@ -83,8 +83,31 @@
     text-decoration: none;
     font-weight: normal;
   }
+  /* 검색창 */
+.xans-layout-searchheader #f-search {
+    text-indent: 5px;
+    padding: 0;
+    line-height: 32px;
+    border: 2px solid #530030;
+    border: 2px solid #3b1358;
+    font-size: 12px;
+    color: #7c8389;
+    background: #fff;
+    width: 298px;
+    height: 35px;
+    float: right;
+}
 
-/*검색바 아래 키워드 */
+.search-button {
+    width: 55px;
+    height: 35px;
+    margin-left: -2px;
+    background-color: #3b1358;
+    color: #fff;
+    float: right;
+}
+
+/*검색창 아래 키워드 */
   .top_popular a {
     color: #ababab;
     padding: 0 5px;
@@ -95,32 +118,37 @@
     content: "#";
     display: inline;
 }
+  .top_popular a:hover {
+    color: #000;
+    display: inline;
+}
   .top_popular a:hover::before {
     color: #000;
     display: inline;
 }
+.topArea .log {
+  float: right;
+}
+ .topArea2 {
+  float: right;
+ }
 </style>
 
 <header>
-    <!--  
-  <nav class="navbar2 navbar-expand-lg navbar-light">
-    <div class="container-top">
-      <form action='search' method='post'>
-        <div class="mb-3 row">
-          <label for='f-search' class="col-sm-1 col-form-label">검색</label>
-          <div class="col-sm-2">
-            <input id='f-search' type='text' name='search' class="form-control" placeholder="검색어를 입력해주세요">
-          </div>
-        </div>
-      </form>
-    </div>
-    <div>
-      <div class="xans-element- xans-layout xans-layout-searchheader header-form ">
+<div class="wrap">
+  <div class="topArea">
+  <div class="log">
+<a href='./loginMenu'>로그인</a>
+<a href='../buyer/form'>회원가입</a>
+  </div>
+  </div>
+    <div class="topArea2">
+      <div class="xans-element- xans-layout xans-layout-searchheader header-form">
         <fieldset class="search-bar-fieldset">
-          <legend>검색</legend>
-          <input id="keyword" name="keyword" fw-filter="" fw-label="검색어" fw-msg="" class="inputTypeText" placeholder=""
-            onmousedown="SEARCH_BANNER.clickSearchForm(this)" value="" type="text">
-          <button onclick="SEARCH_BANNER.submitSearchBanner(this); return false;" class="search-button">검색</button>
+        <form action='search' method='post'>
+          <button  class="search-button">검색</button>
+          <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
+         </form>
         </fieldset>
         <div class="xans-element- xans-search xans-search-hotkeyword top_popular -hover">
           <p>
@@ -132,15 +160,24 @@
         </div>
       </div>
     </div>
-    -->
-  </nav>
+    <!--  
+ <form action='search' method='post'>  
+<div class="mb-3 row">
+  <label for='f-search' class="col-sm-1 col-form-label">검색</label>
+    <div class="col-sm-2">
+    <input id='f-search' type='text' name='search' class="form-control">
+  </div>
+</div>
+</form>
+-->
+    
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-header">
       <div class="logo">
         <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
       </div>
       <div id="menu">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+ `         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
           aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -204,5 +241,5 @@
       </div>
     </div>
   </nav>
-
+</div>
 </header>
