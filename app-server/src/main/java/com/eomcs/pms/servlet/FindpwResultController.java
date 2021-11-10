@@ -41,7 +41,9 @@ public class FindpwResultController extends HttpServlet {
           && (member.getId().equals(request.getParameter("id")))){
 
         request.setAttribute("member_no", member.getNumber());
-        request.getRequestDispatcher("FindpwResult.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "비밀번호 변경");
+        request.setAttribute("contentUrl", "/main/FindpwResult.jsp");
+        request.getRequestDispatcher("/template3.jsp").forward(request, response);
 
       } else {
         out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");

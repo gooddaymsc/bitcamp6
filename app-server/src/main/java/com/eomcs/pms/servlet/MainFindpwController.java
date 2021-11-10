@@ -15,7 +15,9 @@ public class MainFindpwController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("FindpwForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "비밀번호찾기");
+    request.setAttribute("contentUrl", "/main/FindpwForm.jsp");
+    request.getRequestDispatcher("/template3.jsp").forward(request, response);
   }
 }
 
