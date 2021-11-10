@@ -35,7 +35,8 @@ public class CommentDetailController extends HttpServlet {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
@@ -61,7 +62,8 @@ public class CommentDetailController extends HttpServlet {
         out.flush();
       }
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

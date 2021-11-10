@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
-@WebServlet("/main/Manu")
+@WebServlet("/main/manu")
 public class MainMenuController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   SqlSession sqlSession;
@@ -25,7 +25,7 @@ public class MainMenuController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      response.sendRedirect("./Menu.jsp");    
+      request.getRequestDispatcher("/Menu.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

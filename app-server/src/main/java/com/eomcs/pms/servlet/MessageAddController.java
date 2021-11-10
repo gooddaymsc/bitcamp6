@@ -67,8 +67,7 @@ public class MessageAddController extends HttpServlet {
       messageDao.insert(message);
 
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
-
+      response.sendRedirect("detail?no="+message.getRoomNumber());
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -38,11 +39,13 @@ public class BookingAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
@@ -78,8 +81,7 @@ public class BookingAddController extends HttpServlet {
       bookingDao.insertList(booking);
       cartDao.delete(cart);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list?id="+id);
-
+      response.sendRedirect("list?id="+id);
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

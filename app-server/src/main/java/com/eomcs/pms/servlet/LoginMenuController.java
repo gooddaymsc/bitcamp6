@@ -28,7 +28,8 @@ public class LoginMenuController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      response.sendRedirect("./Login.jsp");    
+      request.getRequestDispatcher("./Login.jsp").forward(request, response);
+
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

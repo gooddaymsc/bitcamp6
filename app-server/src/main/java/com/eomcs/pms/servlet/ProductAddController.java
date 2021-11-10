@@ -67,7 +67,7 @@ public class ProductAddController extends HttpServlet {
 
       productDao.insert(product);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+      response.sendRedirect("list");
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   
