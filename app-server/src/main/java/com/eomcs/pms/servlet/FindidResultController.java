@@ -42,7 +42,9 @@ public class FindidResultController extends HttpServlet {
         out.flush();
       }
 
-      request.getRequestDispatcher("FindidResult.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "아이디찾기 결과");
+      request.setAttribute("contentUrl", "/main/FindidResult.jsp");
+      request.getRequestDispatcher("/template3.jsp").forward(request, response);
 
     }  catch (Exception e) {
       request.setAttribute("error", e);

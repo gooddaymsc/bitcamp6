@@ -21,12 +21,15 @@ header {
   margin:auto;
 }
 
+.wrap {
+    border: 2px solid grey;
+}
+
 .container-header {
 	padding-left: 30px;
 	padding-right: 30px;
-	/* position:fixed; */
-    border: 2px solid grey;
-    width: 100%;
+/* 	 position:fixed; 
+ */    width: 100%;
 }
 
 #content {

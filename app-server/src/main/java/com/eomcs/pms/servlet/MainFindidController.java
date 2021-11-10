@@ -15,7 +15,9 @@ public class MainFindidController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("FindidForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "아이디찾기");
+    request.setAttribute("contentUrl", "/main/FindidForm.jsp");
+    request.getRequestDispatcher("/template3.jsp").forward(request, response);
   } 
 }
 
