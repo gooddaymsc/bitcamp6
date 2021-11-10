@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -40,9 +41,12 @@ public class StockAddController  extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     HttpSession session = request.getSession(false);
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
     try {
@@ -59,7 +63,7 @@ public class StockAddController  extends HttpServlet {
       stock.setSeller(seller);
       stockDao.insert(stock);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list?id="+seller.getMember().getId());
+      response.sendRedirect("list?id="+seller.getMember().getId());
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

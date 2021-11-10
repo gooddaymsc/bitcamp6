@@ -63,8 +63,7 @@ public class BoardAddController extends HttpServlet {
       boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
       sqlSession.commit();
 
-      response.setHeader("Refresh", "1;url=detail?no="+board.getBoardNumber());
-
+      response.sendRedirect("detail?no="+board.getBoardNumber());
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

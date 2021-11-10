@@ -168,6 +168,25 @@
   </delete>
   
   
+  <select id="search" resultMap="BoardMap" parameterType="String">
+      select
+         b.board_no,
+         b.member_no,
+         b.title,
+         b.content,
+         b.registeredDate,
+         b.views,
+         m.name,
+         m.id,
+         t.tag 
+      from board b
+        left join member m on b.member_no=m.member_no
+        left join board_tag bt on b.board_no=bt.board_no
+        left join tag t on bt.tag_no = t.tag_no
+      where 
+        b.title like #{input} or b.content like #{input} or t.tag like #{input}
+      order by b.board_no desc
+  </select>
   <!-- 
   <select id="findByKeyword" resultMap="BoardMap" parameterType="String">
   </select>

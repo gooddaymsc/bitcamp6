@@ -19,8 +19,8 @@
 <body>
 <p> 로그인 실패 </p>
 
-<a href='Login.jsp' class="btn btn-primary">로그인</a>
-<a href="FindidForm.jsp">아이디</a>
-<a href="FindpwForm.jsp">비밀번호찾기</a>
+<a href='./loginMenu' class="btn btn-primary">로그인</a>
+<a href="./findidMenu">아이디</a>
+<a href="./findpwMenu">비밀번호찾기</a>
 </body>
 </html>

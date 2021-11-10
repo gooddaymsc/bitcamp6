@@ -34,7 +34,7 @@
 
   #main-holder {
   width: 50%;
-  height: 80%; 
+  height: 60%; 
   display: grid; 
   justify-items: center; 
   align-items: center; 
@@ -43,7 +43,7 @@
   box-shadow: 0px 0px 5px 2px black; } 
   
   #loginLogo{
-      margin-left:150px;
+      margin-left:200px;
       align-self: flex-start; 
       width: 40%;
       height: 50%; 
@@ -112,6 +112,7 @@
   
 </head>
 <body>
+
 <main id="main-holder">
 <a class="loginLogo" href="../main/Menu.jsp"><img src="../image/loginLogo.jpeg" id="loginLogo"></a>
     
@@ -137,8 +138,8 @@
 <button class="btn btn-primary" id="login-form-submit">LOGIN</button><br>
 
 <div>
-<a href="FindidForm.jsp">아이디 </a>
-<a href="FindpwForm.jsp">비밀번호찾기 </a>
+<a href="./findidMenu">아이디 </a>
+<a href="./findpwMenu">비밀번호찾기 </a>
 <a href='../buyer/form' >회원가입</a>
 </div>
 </form>

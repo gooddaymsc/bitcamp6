@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.ServletConfig;
@@ -37,8 +38,12 @@ public class CartListController extends HttpServlet {
 
     HttpSession session = request.getSession(false);
 
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
@@ -56,7 +61,6 @@ public class CartListController extends HttpServlet {
       request.setAttribute("pageTitle", "장바구니목록");
       request.setAttribute("contentUrl", "/cart/CartList.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
-      request.getRequestDispatcher("CartList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
