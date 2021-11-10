@@ -8,6 +8,7 @@ import com.eomcs.pms.domain.ProductType;
 public interface ProductDao {
   void insert(Product product) throws Exception;
   List<Product> findAll() throws Exception;
+  List<Product> findWineAll() throws Exception;
   List<Product> search(@Param("input")String input) throws Exception;
   Product findByNo(int no) throws Exception;
   Product findByProduct(String name) throws Exception;

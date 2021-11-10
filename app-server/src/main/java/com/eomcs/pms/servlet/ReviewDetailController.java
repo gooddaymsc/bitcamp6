@@ -61,7 +61,8 @@ public class ReviewDetailController extends HttpServlet {
         out.flush();
       }
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

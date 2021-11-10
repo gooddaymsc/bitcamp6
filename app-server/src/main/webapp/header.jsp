@@ -12,6 +12,7 @@ right:0;
 }
  .logo  {
  position: relative;
+ float:left;
   width: 100px;
   height: 60px;
   overflow: hidden;
@@ -26,18 +27,21 @@ right:0;
   object-fit: cover;
  }
  
-body {
-margin-top:100px;
-}
+ #menu {
+ float:right;
+ position: relative;
+ }
+
  .nav-item .nav-link {
  padding-left :30px;
  }
+ 
  .navbar{
   display: inline-block;
   font-size:bold;
   text-align: center;
 }
- .container-fluid{
+ .container{
 position:relative;
  }
  nav {
@@ -49,19 +53,18 @@ position:relative;
 
 <header>
 <nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
+  <div class="container">
     <div class="logo">
-         <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
+         <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
     </div>
-
-    <div class="menu">
+    <div id="menu">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">와인</a>
+          <a class="nav-link active" aria-current="page" href="../product/listWine">와인</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../product/list">위스키</a>

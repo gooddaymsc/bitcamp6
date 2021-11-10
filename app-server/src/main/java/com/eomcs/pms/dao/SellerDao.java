@@ -1,6 +1,7 @@
 package com.eomcs.pms.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 
@@ -15,4 +16,6 @@ public interface SellerDao {
   void delete(int no) throws Exception;
   void deleteSeller(int no) throws Exception;
   List<Seller> findByStock(int no) throws Exception;
+  List<Seller> search(@Param("input")String input) throws Exception;
+
 }
