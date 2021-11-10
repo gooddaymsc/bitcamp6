@@ -38,15 +38,15 @@
       <div class="mb-3 row">
         <label for='f-password' class="col-sm-2 col-form-label">* 암호</label>
         <div class="col-sm-6">
-          <input id='f-password' type='password' name='password' class="form-control" onchange="check_pw()" required><br>
+          <input id='f-password' type='password' name='password' class="form-control" required><br>
         </div>
       </div>
-      <div class="mb-3 row">
+     <!--  <div class="mb-3 row">
         <label for='f-password2' class="col-sm-2 col-form-label">* 암호 확인</label>
         <div class="col-sm-6">
           <input id='f-password2' type='password' name='password2' class="form-control" onchange="check_pw()" required><span id="check"></span><br>
         </div>
-      </div>
+      </div> -->
       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
@@ -80,7 +80,7 @@
       <button class="btn btn-primary btn-sm">등록</button><br>
     </form>
   <script>
-        function check_pw(){
+        /* function check_pw(){
  
             var pw = document.getElementById('f-password').value;
             var SC = ["!","@","#","$","%"];
@@ -109,5 +109,5 @@
                     document.getElementById('check').style.color='red';
                 }
             }
-        }
+        } */
     </script>

@@ -89,6 +89,97 @@
      order by p.product_no asc
   </select>
   
+    <select id="findWhiskeyAll" resultMap="ProductMap">
+     Select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety, 
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (6,7,8,9)
+     order by p.product_no asc
+  </select>
+  
+    <select id="findBrandyAll" resultMap="ProductMap">
+     Select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety, 
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (10,11,12)
+     order by p.product_no asc
+  </select>
+  
+    <select id="findVodkaAll" resultMap="ProductMap">
+     Select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety, 
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (13,14,15,16,17,18)
+     order by p.product_no asc
+  </select>
+  
+    <select id="findTradAll" resultMap="ProductMap">
+     Select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety, 
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (19,20,21,22)
+     order by p.product_no asc
+  </select>
    <insert id="insert" parameterType="product">
    insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight, photo)
     values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, 
@@ -194,6 +285,126 @@
      From 
        product p
      left outer join product_type t on t.type_no = p.type_no 
+     order by p.rate desc
+     limit 0,5
+  </select>
+  
+    <select id="rankingWine" resultMap="ProductMap">
+    select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety,
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (1,2,3,4,5)
+     order by p.rate desc
+     limit 0,5
+  </select>
+  
+    <select id="rankingWhiskey" resultMap="ProductMap">
+    select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety,
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (6,7,8,9)
+     order by p.rate desc
+     limit 0,5
+  </select>
+  
+    <select id="rankingBrandy" resultMap="ProductMap">
+    select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety,
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (10,11,12)
+     order by p.rate desc
+     limit 0,5
+  </select>
+  
+    <select id="rankingVodka" resultMap="ProductMap">
+    select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety,
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+    where
+      p.type_no in (13,14,15,16,17,18)
+     order by p.rate desc
+     limit 0,5
+  </select>
+  
+    <select id="rankingTrad" resultMap="ProductMap">
+    select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety,
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (19,20,21,22)
      order by p.rate desc
      limit 0,5
   </select>
