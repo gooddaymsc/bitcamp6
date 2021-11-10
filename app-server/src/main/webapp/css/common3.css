@@ -1,22 +1,19 @@
 @charset "UTF-8";
 
-.container {
-    border: 1px solid red;
-    width: 640px;
-}
+
  
-header {
+/* header {
   border: 1px solid red;
   height: 80px; 
   margin:auto;
-}
-
-footer {
+} 
+ */
+ footer {
   border: 1px solid blue;
   clear: left;
-}
+} 
 
-aside {
+/* aside {
   border: 1px solid green;
   float: left;
   width: 90px;
@@ -28,3 +25,4 @@ aside {
   margin-left: 100px; 
 }
 
+ */
