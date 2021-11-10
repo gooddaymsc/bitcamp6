@@ -3,13 +3,8 @@
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<<<<<<< HEAD
-<h1>상품 상세(MVC + EL)</h1>
-<form action='update' method='post' enctype="multipart/form-data">
-=======
 <h1>상품 상세</h1>
-<form action='update' method='post'>
->>>>>>> e4744774b40be15be1edd24b287e3806291c0c28
+<form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
 <div class="mb-3 row">
   <label for='f-name' class="col-sm-2 col-form-label">상품명</label>

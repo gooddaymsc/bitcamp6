@@ -128,7 +128,7 @@
 <div class="wrap">
   <div class="topArea">
   <div class="log">
-<a href='./loginMenu'>로그인</a>
+<a href='../main/loginMenu'>로그인</a>
 <a href='../buyer/form'>회원가입</a>
   </div>
   </div>
