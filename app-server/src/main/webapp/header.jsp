@@ -38,7 +38,6 @@
 <<<<<<< HEAD
   /* 버튼 중앙 정렬 */
 =======
-
   /* 햄버거 버튼 중앙 정렬 */
 >>>>>>> e8a7721b2279855918e1cb971342dd1f8065c970
   .navbar-toggler {
@@ -97,7 +96,6 @@
     height: 35px;
     float: right;
 }
-
 .search-button {
     width: 55px;
     height: 35px;
@@ -106,7 +104,6 @@
     color: #fff;
     float: right;
 }
-
 /*검색창 아래 키워드 */
 >>>>>>> e8a7721b2279855918e1cb971342dd1f8065c970
   .top_popular a {
