@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
 <header>
-상단 페이지의 메뉴 출력!
+<nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
 </header>
