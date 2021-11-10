@@ -29,7 +29,6 @@ public class LoginController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    String page = "";
     try {
       String id = request.getParameter("id");
       String password = request.getParameter("password");
@@ -41,19 +40,18 @@ public class LoginController extends HttpServlet {
         session.setAttribute("loginUser", member);
 
         System.out.println("Login ID : "+ member.getId());
-        page = "main/Menu.jsp";    
+        response.sendRedirect("./menu");
       } else {
         System.out.println("Error");
         request.setAttribute("pageTitle", "로그인실패");
-        page = "/main/LoginError.jsp"; 
+        request.setAttribute("contentUrl", "/main/LoginError.jsp");
+        request.getRequestDispatcher("/template3.jsp").forward(request, response);
       }
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
-      page = "/Error.jsp";
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-    request.setAttribute("contentUrl", page);
-    request.getRequestDispatcher("/template3.jsp").forward(request, response);
   }
 }

@@ -121,11 +121,12 @@
     </c:forEach>
  </table>
  <script>
+ <!--td.card a  td.card div.card-->
 document.querySelectorAll("table a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
 
-var trList = document.querySelectorAll("table tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll("table div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     //console.log(e.currentTarget.querySelector("a").href);
