@@ -18,24 +18,31 @@
   <script src="https://kit.fontawesome.com/26add2f61b.js" crossorigin="anonymous"></script>
   
   <style> 
-    .intro_bg{
-      background-image:url("../image/alcohol5.jpg");
-      width:100px;
-      height:60px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size:contain;
-    } 
+.logo  {
+ position: relative;
+  width: 100px;
+  height: 60px;
+  overflow: hidden;
+ }
+ 
+ .logo img {
+ position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+ }
+ 
   </style>
 </head>
 <body>
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <div class="logo" id='logo'>
-      <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
+    <div class="logo">
+      <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.png"></a>
       </div>
-    </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <!-- 
