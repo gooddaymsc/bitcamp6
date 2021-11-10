@@ -204,7 +204,7 @@ gradle-app.setting
 
 
 *.exe
-# node_modules/
+node_modules/
 temp/
 Debug/
 Release/
