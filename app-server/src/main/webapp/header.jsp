@@ -35,11 +35,7 @@
     font-size: bold;
     text-align: center;
   }
-<<<<<<< HEAD
-  /* 버튼 중앙 정렬 */
-=======
   /* 햄버거 버튼 중앙 정렬 */
->>>>>>> e8a7721b2279855918e1cb971342dd1f8065c970
   .navbar-toggler {
     margin-top: 10px;
   }
@@ -79,9 +75,6 @@
     text-decoration: none;
     font-weight: normal;
   }
-<<<<<<< HEAD
-/*검색바 아래 키워드 */
-=======
   /* 검색창 */
 .xans-layout-searchheader #f-search {
     text-indent: 5px;
@@ -105,7 +98,6 @@
     float: right;
 }
 /*검색창 아래 키워드 */
->>>>>>> e8a7721b2279855918e1cb971342dd1f8065c970
   .top_popular a {
     color: #ababab;
     padding: 0 5px;
@@ -158,11 +150,6 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-    -->
-<!--   </nav>
- -->  <nav class="navbar navbar-expand-lg navbar-light">
-=======
     <!--  
  <form action='search' method='post'>  
 <div class="mb-3 row">
@@ -175,7 +162,6 @@
 -->
     
   <nav class="navbar navbar-expand-lg navbar-light">
->>>>>>> e8a7721b2279855918e1cb971342dd1f8065c970
     <div class="container-header">
       <div class="logo">
         <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
@@ -198,7 +184,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/listWhiskey">위스키</a>
+              <a class="nav-link active" aria-current="page" href="../product/list">위스키</a>
               <ul class="dropdown-menu">
                 <li><a href=>아메리칸</a></li>
                 <li><a href=>스카치(몰트)</a></li>
@@ -207,7 +193,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/listBrandy">브랜디 · 꼬냑</a>
+              <a class="nav-link active" aria-current="page" href="../product/list">브랜디 · 꼬냑</a>
               <ul class="dropdown-menu">
                 <li><a href=>브랜디</a></li>
                 <li><a href=>꼬냑</a></li>
@@ -215,7 +201,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/listVodka">리큐르 · 보드카</a>
+              <a class="nav-link active" aria-current="page" href="../product/list">리큐르 · 보드카</a>
               <ul class="dropdown-menu">
                 <li><a href=>리큐르</a></li>
                 <li><a href=>진</a></li>
@@ -226,7 +212,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/listTrad">전통주</a>
+              <a class="nav-link active" aria-current="page" href="../product/list">전통주</a>
               <ul class="dropdown-menu">
                 <li><a href=>한국</a></li>
                 <li><a href=>중국</a></li>
