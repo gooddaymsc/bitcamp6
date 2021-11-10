@@ -88,4 +88,7 @@ dependencies {
   testImplementation 'junit:junit:4.13.2'
   
   implementation 'commons-fileupload:commons-fileupload:1.4'
+  
+    // Thumbnailator 썸네일 생성 라이브러리
+  implementation 'net.coobird:thumbnailator:0.4.14'
 }
