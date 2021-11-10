@@ -1,96 +1,208 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <style>
-header{
-position: fixed;
-top:0;
- left:0;
-right:0;
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 
-  background-color: rgb(88, 1, 88);
-}
- .logo  {
- position: relative;
- float:left;
-  width: 100px;
-  height: 60px;
-  overflow: hidden;
- }
- 
- .logo img {
- position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
- }
- 
- #menu {
- float:right;
- position: relative;
- }
+  .logo {
+    position: relative;
+    float: left;
+    width: 100px;
+    height: 60px;
+    overflow: hidden;
+  }
 
- .nav-item .nav-link {
- padding-left :30px;
- }
- 
- .navbar{
-  display: inline-block;
-  font-size:bold;
-  text-align: center;
+  .logo img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #menu {
+    float: left;
+    position: relative;
+  }
+
+  .nav-item .nav-link {
+    padding-left: 30px;
+  }
+
+  .navbar {
+    display: inline-block;
+    font-size: bold;
+    text-align: center;
+  }
+
+  /* 버튼 중앙 정렬 */
+  .navbar-toggler {
+    margin-top: 10px;
+  }
+
+  /* 버튼 중앙 정렬 */
+  .collapse {
+    padding-top: 10px;
+  }
+
+  .navbar-nav li {
+    padding-left: 10px;
+    font-weight: bold;
+    color:blue;
+  }
+  /* 네비바 마우스 오버시 밑줄 */
+  .nav-item a::after {
+    content: "";
+    display: block;
+    border-bottom: 3px solid #000;
+    transition: width 250ms ease-out;
+    left: auto;
+    right: 0;
+    width: 0;
+  }
+  /* 네비바 마우스 오버시 밑줄 */
+  .nav-item a:hover::after {
+    width: 100%;
+    left: 0;
+    right: auto;
+  }
+ /* 메뉴 마우스 오버시 드롭다운 */
+  .nav-item:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+ /* 드롭다운 메뉴 속성 */
+  .dropdown-menu a {
+    color: #000;
+    text-decoration: none;
+    font-weight: normal;
+  }
+
+/*검색바 아래 키워드 */
+  .top_popular a {
+    color: #ababab;
+    padding: 0 5px;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .top_popular a:before {
+    content: "#";
+    display: inline;
 }
- .container{
-position:relative;
- }
- nav {
-  margin-left: auto;
+  .top_popular a:hover::before {
+    color: #000;
+    display: inline;
 }
-  .nav-item a::after {content:""; display: block; border-bottom: 3px solid #000; transition: width 250ms ease-out; left: auto; right: 0; width: 0;}
-  .nav-item a:hover::after {width: 100%; left: 0; right: auto;}
 </style>
 
 <header>
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container">
-    <div class="logo">
-         <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
+    <!--  
+  <nav class="navbar2 navbar-expand-lg navbar-light">
+    <div class="container-top">
+      <form action='search' method='post'>
+        <div class="mb-3 row">
+          <label for='f-search' class="col-sm-1 col-form-label">검색</label>
+          <div class="col-sm-2">
+            <input id='f-search' type='text' name='search' class="form-control" placeholder="검색어를 입력해주세요">
+          </div>
+        </div>
+      </form>
     </div>
-    <div id="menu">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/listWine">와인</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">위스키</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">브랜디 · 꼬냑</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">리큐르 · 보드카</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">민속주</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/ranking">Ranking</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../board/list">Board</a>
-        </li>
-      </ul>
-      <!-- <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
-       <span><button class="btn btn-outline-success" type="submit">Search</button></span>
-      </form> -->
-    </div>
-    </div>
+    <div>
+      <div class="xans-element- xans-layout xans-layout-searchheader header-form ">
+        <fieldset class="search-bar-fieldset">
+          <legend>검색</legend>
+          <input id="keyword" name="keyword" fw-filter="" fw-label="검색어" fw-msg="" class="inputTypeText" placeholder=""
+            onmousedown="SEARCH_BANNER.clickSearchForm(this)" value="" type="text">
+          <button onclick="SEARCH_BANNER.submitSearchBanner(this); return false;" class="search-button">검색</button>
+        </fieldset>
+        <div class="xans-element- xans-search xans-search-hotkeyword top_popular -hover">
+          <p>
+            <a href="" class="xans-record-">발렌타인</a>
+            <a href="" class="xans-record-">조니워커</a>
+            <a href="" class="xans-record-">앱솔루트</a>
+            <a href="" class="xans-record-">예거마이스터</a>
+          </p>
+        </div>
       </div>
-  </nav>    
+    </div>
+    -->
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-header">
+      <div class="logo">
+        <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
+      </div>
+      <div id="menu">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../product/listWine">와인</a>
+              <ul class="dropdown-menu">
+                <li><a href="">레드</a></li>
+                <li><a href="">화이트</a></li>
+                <li><a href="">로제</a></li>
+                <li><a href="">스위트</a></li>
+                <li><a href="">스파클링</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../product/list">위스키</a>
+              <ul class="dropdown-menu">
+                <li><a href=>아메리칸</a></li>
+                <li><a href=>스카치(몰트)</a></li>
+                <li><a href=>아이리쉬</a></li>
+                <li><a href=>캐나다 위스키</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../product/list">브랜디 · 꼬냑</a>
+              <ul class="dropdown-menu">
+                <li><a href=>브랜디</a></li>
+                <li><a href=>꼬냑</a></li>
+                <li><a href=>알마냑</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../product/list">리큐르 · 보드카</a>
+              <ul class="dropdown-menu">
+                <li><a href=>리큐르</a></li>
+                <li><a href=>진</a></li>
+                <li><a href=>럼</a></li>
+                <li><a href=>보드카</a></li>
+                <li><a href=>데낄라</a></li>
+                <li><a href=>음료 · 시럽</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../product/list">전통주</a>
+              <ul class="dropdown-menu">
+                <li><a href=>한국</a></li>
+                <li><a href=>중국</a></li>
+                <li><a href=>일본</a></li>
+                <li><a href=>기타</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../product/ranking">Ranking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../board/list">Board</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
 </header>
