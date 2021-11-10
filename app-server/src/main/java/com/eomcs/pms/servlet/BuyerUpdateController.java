@@ -76,7 +76,6 @@ public class BuyerUpdateController extends HttpServlet {
         System.out.println("4");
       }
 
-
       buyerDao.update(buyer);
       sqlSession.commit();
 

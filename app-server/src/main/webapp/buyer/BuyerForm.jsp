@@ -4,7 +4,7 @@
     <h1>회원가입(구매자)</h1>     
     <a href='../seller/form' class="btn btn-outline-primary btn-sm">판매자로 회원가입하기</a>
     <h5>* 필수 입력</h5>
-    <form action='add' method='post'>
+    <form action='add' method='post' enctype="multipart/form-data">
       <div class="mb-3 row">
         <label for='f-id' class="col-sm-2 col-form-label">* 아이디</label>
         <div class="col-sm-6">

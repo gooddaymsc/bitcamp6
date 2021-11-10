@@ -2,6 +2,7 @@ package com.eomcs.pms.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -9,10 +10,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/buyer/add")
@@ -45,25 +51,25 @@ public class BuyerAddController extends HttpServlet {
       member.setBirthday(Date.valueOf(request.getParameter("birthday")));
       member.setPassword(request.getParameter("password"));
       member.setPhoneNumber(request.getParameter("phoneNumber"));
-      member.setPhoto(request.getParameter("photo"));
+      //      member.setPhoto(request.getParameter("photo"));
 
-      //      Part photoPart = request.getPart("photo");
-      //      if (photoPart.getSize() > 0) {
-      //        String filename = UUID.randomUUID().toString();
-      //        photoPart.write(getServletContext().getRealPath("/upload/buyer") + "/" + filename);
-      //        member.setPhoto(filename);
-      //
-      //        Thumbnails.of(getServletContext().getRealPath("/upload/buyer") + "/" + filename)
-      //        .size(100, 100)
-      //        .outputFormat("jpg")
-      //        .crop(Positions.CENTER)
-      //        .toFiles(new Rename() {
-      //          @Override
-      //          public String apply(String name, ThumbnailParameter param) {
-      //            return name + "_100x100";
-      //          }
-      //        });
-      //    }
+      Part photoPart = request.getPart("photo");
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoPart.write(getServletContext().getRealPath("/upload/buyer") + "/" + filename);
+        member.setPhoto(filename);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/buyer") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
 
       //    if (findDeletedByName(buyer.getName()) != -1) {
       //      if (deletedMemberList.get(memberPrompt.findDeletedByName(buyer.getName())).getPhoneNumber().equals(buyer.getPhoneNumber()) && 

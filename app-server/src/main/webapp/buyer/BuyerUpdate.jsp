@@ -52,10 +52,19 @@
           <input id='f-birthday' type='date' name='birthday' class="form-control" value='${buyer.member.birthday}' readonly><br>
         </div>
       </div>
-      <div class="mb-3 row">
+ <%--      <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
           <input id='f-photo' type='text' name='photo' class="form-control" value='${buyer.member.photo}' readonly><br>
+        </div>
+      </div> --%>
+      <div class="mb-3 row">
+        <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+        <div class="col-sm-6">
+          <a href="../upload/buyer/${buyer.member.photo}" >
+            <img id="f-photo-image" src="../upload/buyer/${buyer.member.photo}_100x100.jpg">
+          </a>
+<!--           <input id='f-photo' type='file' name='photo' class="form-control"><br> -->
         </div>
       </div>
       <div class="mb-3 row">

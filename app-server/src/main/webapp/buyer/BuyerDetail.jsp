@@ -4,7 +4,7 @@
 
     <h1>개인정보 변경(구매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update' method='post'>
+    <form action='update' method='post' enctype="multipart/form-data">
       <div class="mb-3 row">
 <!--         <label  for='f-no' class="col-sm-2 col-form-label">번호</label>
  -->        <div class="col-sm-6">
