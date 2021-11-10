@@ -18,8 +18,11 @@
 <body>
 <div class="container">
 <h1>비밀번호 변경</h1>
-<form action=login>
+<form action=findpwForm method='post'>
+  <input type='hidden' name='member_no' id='member_no' value="${member_no}"/>
+
   <label class='form-control-plaintext'>변경할 새 비밀번호를 입력해주세요.</label>
+
 <div>비밀번호  
   <input type='password' name='password' id='pw' onchange="isSame()"/></div>
   

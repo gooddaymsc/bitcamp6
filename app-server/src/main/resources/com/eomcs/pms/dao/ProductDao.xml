@@ -16,6 +16,7 @@
     <result column="sugarLevel" property="sugarLevel"/> 
     <result column="acidity" property="acidity"/>
     <result column="weight" property="weight"/>
+    <result column="photo" property="photo"/>
     <result column="rate" property="rate"/>
     <result column="reviewerNum" property="reviewerNum"/>
     
@@ -57,7 +58,8 @@
 	     p.acidity, 
 	     p.weight, 
 	     p.rate, 
-	     p.variety 
+	     p.variety, 
+       p.photo
 	   From 
 	     product p
      left outer join product_type t on t.type_no = p.type_no 
@@ -86,7 +88,8 @@
       p.rate, 
       p.variety, 
       t.type, 
-      t.subType 
+      t.subType,
+      p.photo
     from product p join product_type t on p.type_no=t.type_no 
     where 
       p.product_no=#{no}
@@ -106,7 +109,8 @@
       p.rate, 
       p.variety, 
       t.type, 
-      t.subType 
+      t.subType,
+      p.photo
     from product p join product_type t on p.type_no=t.type_no 
     where 
       p.name=#{name}
@@ -122,7 +126,8 @@
       sugarLevel=#{sugarLevel}, 
       acidity=#{acidity}, 
       weight=#{weight}, 
-      variety=#{variety}
+      variety=#{variety},
+      photo=#{photo}
     where 
       product_no=#{productNumber}
   </update>
@@ -162,7 +167,8 @@
        p.acidity, 
        p.weight, 
        p.rate, 
-       p.variety 
+       p.variety,
+       p.photo
      From 
        product p
      left outer join product_type t on t.type_no = p.type_no 
@@ -183,7 +189,8 @@
        p.acidity, 
        p.weight, 
        p.rate, 
-       p.variety 
+       p.variety,
+       p.photo 
     From 
        product p
      left outer join product_type t on t.type_no = p.type_no 

@@ -41,16 +41,13 @@ public class MessageAddController extends HttpServlet {
     PrintWriter out = response.getWriter();
     try {
       Member member = (Member) request.getSession(false).getAttribute("loginUser");
-
       String memberId = request.getParameter("theOtherId");
 
       if (memberDao.findById(memberId)==null) {
         out.printf("<script>alert('아이디를 다시 확인해주세요'); location.href='form' </script>");
         out.flush();
       }
-
       Collection<Message> messages = messageDao.findAll(member.getNumber());
-
       // 이미 상대id랑 주고 받은 대화가 있는가
       for (Message message : messages) {
         if (message.getTheOtherId().equals(memberId) ||
@@ -60,19 +57,17 @@ public class MessageAddController extends HttpServlet {
         }
       }
       // 없으면
-
       Message message = new Message();
-      try {
-        messageDao.insertRoomNo(message);
-        message.setContent(request.getParameter("content"));
-        message.setTheOtherId(request.getParameter("theOtherId"));
-        message.setId(member.getId());
-        messageDao.insert(message);
-        sqlSession.commit();
-        response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
-      } catch (Exception e) {
-        sqlSession.rollback();
-      }
+      messageDao.insertRoomNo(message);
+
+      message.setContent(request.getParameter("content"));
+      message.setTheOtherId(request.getParameter("theOtherId"));
+
+      message.setId(member.getId());
+      messageDao.insert(message);
+
+      sqlSession.commit();
+      response.setHeader("Refresh", "1;url=detail?no="+message.getRoomNumber());
 
     } catch (Exception e) {
       request.setAttribute("error", e);

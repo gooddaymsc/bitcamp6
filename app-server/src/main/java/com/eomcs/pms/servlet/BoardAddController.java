@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,11 +35,13 @@ public class BoardAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
@@ -60,8 +63,7 @@ public class BoardAddController extends HttpServlet {
       boardDao.insertBoardTag(board.getBoardNumber(), board.getBoardTag().getTagNumber());
       sqlSession.commit();
 
-      response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("BoardAdd.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=detail?no="+board.getBoardNumber());
 
     } catch(Exception e){
       request.setAttribute("error", e);

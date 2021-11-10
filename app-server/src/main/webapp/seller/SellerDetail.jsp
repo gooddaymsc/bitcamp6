@@ -1,28 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
 
-<head>
-  <title>개인정보변경(판매자)</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <style>
-    .container {
-      xborder: 1px solid red;
-      width: 640px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
     <h1>개인정보 변경(판매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update'>
+    <form action='update' method='post'>
       <div class="mb-3 row">
 <!--         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
  -->        <div class="col-sm-6">
@@ -141,11 +123,5 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴하기</a>
-      <a href='../main/Menu.jsp' class="btn btn-primary">이전</a><br>
+      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴시키기</a>
     </form>
-  </div>
-
-</body>
-
-</html>

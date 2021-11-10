@@ -33,7 +33,10 @@ public class StockSellerListController extends HttpServlet {
       int productNo = Integer.parseInt(request.getParameter("no"));
       Collection<Stock> stockSellerList = stockDao.findByProductNo(productNo);
       request.setAttribute("stockSellerList", stockSellerList);
-      request.getRequestDispatcher("StockSellerList.jsp").forward(request, response);
+      request.setAttribute("productNo", productNo);
+      request.setAttribute("pageTitle", "재고판매자목록");
+      request.setAttribute("contentUrl", "/stock/StockSellerList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

@@ -44,19 +44,22 @@ public class BuyerDetailController extends HttpServlet {
       if (buyer == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
-
       request.setAttribute("buyer", buyer);
 
       if (member.getAuthority() == 8) {
-        page = "BuyerDetail2.jsp";
+        page = "/buyer/BuyerUpdate.jsp";
+      } else {
+        page = "/buyer/BuyerDetail.jsp";
       }
-      page = "BuyerDetail.jsp";
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       page = "Error.jsp";
     }
-    request.getRequestDispatcher(page).forward(request, response);
+    request.setAttribute("pageTitle", "회원(구매자)상세보기");
+    request.setAttribute("contentUrl", page);
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    //    request.getRequestDispatcher(page).forward(request, response);
   }
 }
 

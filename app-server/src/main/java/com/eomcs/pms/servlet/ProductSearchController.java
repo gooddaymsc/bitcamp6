@@ -33,7 +33,9 @@ public class ProductSearchController extends HttpServlet {
       String input = "%"+request.getParameter("search")+"%";
       Collection<Product> productList = productDao.search(input);
       request.setAttribute("productList", productList);
-      request.getRequestDispatcher("ProductList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "상품검색");
+      request.setAttribute("contentUrl", "/product/ProductList.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

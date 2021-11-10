@@ -9,66 +9,64 @@
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
   <link rel="stylesheet" href="../css/common.css">
-        <!--font-family-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-
-        <!-- For favicon png -->
-    <link rel="shortcut icon" type="image/icon" href="../logo/favicon.png"/>
-       
-        <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="../css/font-awesome.min.css">
-
-        <!--linear icon css-->
-    <link rel="stylesheet" href="../css/linearicons.css">
-
-    <!--animate.css-->
-        <link rel="stylesheet" href="../css/animate.css">
-
-        <!--owl.carousel.css-->
-        <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    
-        <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
-    <!-- bootsnav -->
-    <link rel="stylesheet" href="../css/bootsnav.css" > 
-        
-        <!--style.css-->
-        <link rel="stylesheet" href="../css/style.css">
-        
-        <!--responsive.css-->
-        <link rel="stylesheet" href="../css/responsive.css">
-
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
+  <script src="https://kit.fontawesome.com/26add2f61b.js" crossorigin="anonymous"></script>
   
-  <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
-    }
-    tr a {
-        text-decoration: none;
-        color: black;
-    }
-    tr a:visited {
-        color: black;
-    }
-    tr:hover {
-        cursor: pointer;
-    }
+  <style> 
+    .intro_bg{
+      background-image:url("../image/alcohol5.jpg");
+      width:100px;
+      height:60px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size:contain;
+    } 
   </style>
 </head>
 <body>
-<div class="container">
+<div class="header">
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <div class="container-fluid">
+    <div class="logo" id='logo'>
+      <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
+      </div>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <!-- 
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../product/list">Alcohol</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../product/ranking">Ranking</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="../board/list">Board</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../board/list">Link</a>
+        </li>  -->
+      <!--   <li class="nav-item">
+          <a class="nav-link disabled">Finder</a>
+        </li>  -->
+      </ul>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="상품검색" aria-label="Search">
+       <span><button class="btn btn-outline-success" type="submit">Search</button></span>
+      </form> -->
+    </div>
+  </div>
+  </nav>
+</div>
 
-<jsp:include page="../header.jsp"></jsp:include>
-<jsp:include page="../sidebar.jsp"></jsp:include>
+  <div class="intro_bg"><div></div>
 
-<div id="content">
-
+ <div id="content">
 <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
@@ -82,13 +80,13 @@
   <br>
   <a href='logout' class="btn btn-primary">로그아웃</a>
   </c:otherwise>
-</c:choose>
+</c:choose> 
 
 <%-- <a href='../board/list' class="btn btn-primary">게시판</a>
 <a href='../product/ranking' class="btn btn-primary">오늘의 술</a>
 <a href='../product/list' class="btn btn-primary">상품</a>
 <c:set var="name" value="코요" /> --%>
- 
+
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
       <a href='../board/list' class="btn btn-primary">게시판</a>
@@ -115,8 +113,8 @@
       <a href='../seller/list' class="btn btn-primary">회원(판매자)관리</a>
       <a href='../message/list' class="btn btn-primary">메세지</a>
   </c:when>
-</c:choose>
-</div><!-- #content -->
+</c:choose> 
+</div> content
 <jsp:include page="../footer.jsp"></jsp:include>
 </div><!-- .container -->
 </body>

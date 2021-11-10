@@ -16,7 +16,10 @@ public class SellerFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     // 출력을 담당할 뷰를 호출한다.
-    request.getRequestDispatcher("/seller/SellerForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "회원가입(판매자)");
+    request.setAttribute("contentUrl", "/seller/SellerForm.jsp");
+    request.getRequestDispatcher("/template2.jsp").forward(request, response);
+
   }
 }
 

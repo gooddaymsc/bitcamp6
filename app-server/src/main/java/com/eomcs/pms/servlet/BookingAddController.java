@@ -79,8 +79,6 @@ public class BookingAddController extends HttpServlet {
       cartDao.delete(cart);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list?id="+id);
-      System.out.println("3");
-      request.getRequestDispatcher("BookingAdd.jsp").forward(request, response);
 
     } catch(Exception e){
       request.setAttribute("error", e);

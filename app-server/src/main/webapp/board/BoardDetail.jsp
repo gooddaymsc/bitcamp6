@@ -2,26 +2,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>게시글상세</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
 <h1>게시글 상세</h1>
-<form action='update'>
+<form action='update' method='post'>
 <div class="mb-3 row">
   <label for='f-number' class="col-sm-2 col-form-label">번호</label> 
   <div class="col-sm-6">
@@ -86,14 +68,21 @@
     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
   </c:when> --%>
 </c:choose>		
-    <a href='list' class="btn btn-primary">목록</a><br>
+    <a href='list' class="btn btn-primary">목록</a>
+    <a href='like?no=${board.boardNumber}' class="btn btn-primary">좋아요</a><br>
+    
 <hr />
 </form>
-</div><!-- .container -->
 
 <div class="container">
-<h4>댓글</h4>
-<a href='comment/form?no=${board.boardNumber}' class="btn btn-primary">새댓글</a><br>
+<h4>댓글 <a class="btn btn-primary">새댓글</a><br>
+</h4>
+<form action='./comment/add'>
+<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
+내용 <input id='f-content' type='text' name='content'>
+<input type='hidden' id='f-writer' type='text' name='writer' value='${loginUser.id}' readonly>
+<button class="btn btn-primary">등록</button><br><br>
+</form>
 <c:forEach items= "${commentList}" var="comment">
 <fieldset>
 <legend>작성자 : ${comment.writer.id}</legend>
@@ -102,5 +91,15 @@
 </fieldset>
 </c:forEach>
 </div><!-- .container -->
-</body>
-</html>
+
+<!-- <script>
+document.querySelector("#member-form").onsubmit = () => {
+  if (document.querySelector("#f-name").value == "" ||
+      document.querySelector("#f-email").value == "" ||
+      document.querySelector("#f-password").value == "") {
+    //window.alert("필수 입력 항목이 비어 있습니다.")
+    Swal.fire("필수 입력 항목이 비어 있습니다.")
+    return false;
+  }
+};
+</script> -->

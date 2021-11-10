@@ -30,11 +30,6 @@ public class CommentListController extends HttpServlet  {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      //int boardNo = (Integer) request.getAttribute("no");
-      //      int boardNo =1;
-      //      Collection<Comment> commentList = commentDao.findAll(boardNo);
-      //      request.setAttribute("commentList", commentList);   
-      //      request.getRequestDispatcher("CommentList.jsp").forward(request, response);
 
       int boardNumber = (Integer)request.getAttribute("boardNumber");
       Collection<Comment> commentList = commentDao.findAll(boardNumber);
@@ -42,7 +37,10 @@ public class CommentListController extends HttpServlet  {
       if (commentList.equals(null)) {
         System.out.println("등록된 댓글이 없습니다.");
       }
-      request.getRequestDispatcher("BoardDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "댓글목록");
+      request.setAttribute("contentUrl", "/board/BoardDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      //      request.getRequestDispatcher("BoardDetail.jsp").forward(request, response);
 
 
     } catch (Exception e) {

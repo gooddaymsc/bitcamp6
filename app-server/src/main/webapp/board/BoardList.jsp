@@ -2,27 +2,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>게시판</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        xborder: 1px solid red;
-        width: 640px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
-<h1>게시글 목록(MVC + EL + JSTL)</h1>
+<style>
+
+tr a {
+    text-decoration: none;
+    color: black;
+}
+tr a:visited {
+    color: black;
+}
+tr:hover {
+    cursor: pointer;
+}
+</style>
+
+<h1>게시글 목록</h1>
 <!-- <a href='form'>이전</a><br> -->
-<a href='form' class="btn btn-outline-primary btn-sm">게시글 작성</a><br>
+<a href='form' class="btn btn-outline-primary btn-sm">게시글 작성</a>
 <table class="table table-hover">
 <thead>
   <tr>
@@ -51,12 +47,22 @@
 
 </tbody>
 </table>
-</div><!-- .container -->
-<footer>
-<a href='../main/logout' class="btn btn-primary">로그아웃</a>
-</footer>
-</body>
-</html>
+
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+    //console.log(e.currentTarget.querySelector("a").href);
+    //e.currentTarget.querySelector("a").click();
+    window.location.href = e.currentTarget.querySelector("a").href;
+    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
+  };
+});
+</script>
 
 
 

@@ -32,16 +32,15 @@ public class ReviewDetailController extends HttpServlet {
       throws ServletException, IOException {
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
-    // 출력을 담당할 뷰를 호출한다.
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Review review = reviewDao.findByNo(no);
@@ -53,7 +52,10 @@ public class ReviewDetailController extends HttpServlet {
       if (review.getMember().getId().equals(member.getId())) {
 
         request.setAttribute("review", review);
-        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "리뷰상세보기");
+        request.setAttribute("contentUrl", "/review/ReviewDetail.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        //        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
       } else {
         out.printf("<script>alert('본인 리뷰만 수정 및 삭제할 수 있습니다.'); location.href='../detail?no=%d'</script>", review.getProductNo());
         out.flush();

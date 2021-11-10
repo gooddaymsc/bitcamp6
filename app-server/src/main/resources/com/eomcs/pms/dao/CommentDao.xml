@@ -25,6 +25,14 @@
     where c.board_no=#{boardNo}
   </select>
   
+    <select id="findMine" resultMap="CommentMap" parameterType="int">
+    select 
+      c.comment_no, c.content, c.registeredDate, c.board_no, 
+      m.member_no, m.id 
+    from comment c join member m on c.member_no=m.member_no 
+    where m.member_no=#{memberNo}
+  </select>
+  
   <select id="insert" parameterType="comment">
     insert into 
     comment(content, board_no, member_no) 

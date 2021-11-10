@@ -30,7 +30,9 @@ public class BuyerListController extends HttpServlet {
     try {
       Collection<Buyer> buyerList =  buyerDao.findAll();
       request.setAttribute("buyerList", buyerList);
-      request.getRequestDispatcher("/buyer/BuyerList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "회원(구매자)목록");
+      request.setAttribute("contentUrl", "/buyer/BuyerList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

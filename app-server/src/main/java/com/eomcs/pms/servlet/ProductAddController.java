@@ -68,7 +68,6 @@ public class ProductAddController extends HttpServlet {
       productDao.insert(product);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("ProductAdd.jsp").forward(request, response);
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

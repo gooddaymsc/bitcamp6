@@ -31,7 +31,9 @@ public class ProductListController extends HttpServlet {
     try {
       Collection<Product> productList = productDao.findAll();
       request.setAttribute("productList", productList);
-      request.getRequestDispatcher("ProductList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "상품목록");
+      request.setAttribute("contentUrl", "/product/ProductList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

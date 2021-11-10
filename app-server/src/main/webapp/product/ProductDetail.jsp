@@ -2,29 +2,19 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>상품상세</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        width: 640px;
-    }
-  </style>
-</head>
-<body>
-<div class="container">
+
 <h1>상품 상세(MVC + EL)</h1>
-<form action='update'>
+<form action='update' method='post'>
 <div class="mb-3 row">
   <label for='f-productNumber' class="col-sm-2 col-form-label">상품번호</label>
   <div class="col-sm-6">
     <input id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
+  </div>
+</div>
+    <div class="mb-3 row">
+  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+  <div class="col-sm-6">
+    <input id='f-photo' type='text' name='photo' class="form-control" value='${product.photo}' readonly>
   </div>
 </div>
     <div class="mb-3 row">
@@ -127,6 +117,3 @@
      <p>등록일 : ${review.registeredDate}</p>
 </fieldset>
 </c:forEach>
-</div> <!-- container -->
-</body>
-</html>

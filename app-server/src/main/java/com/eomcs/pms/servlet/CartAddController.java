@@ -57,7 +57,6 @@ public class CartAddController extends HttpServlet {
         cartDao.insert(cart);
         sqlSession.commit();
         response.setHeader("Refresh", "1;url=list");
-        request.getRequestDispatcher("CartAdd.jsp").forward(request, response);
 
       } else {        
         out.printf("<script>alert('재고 수량을 초과해서 장바구니에 담을 수 없습니다.'); location.href='../cart/form?no=%d'</script>", stock.getStockNumber());

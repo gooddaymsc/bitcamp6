@@ -64,7 +64,6 @@ public class BoardDeleteController extends HttpServlet {
         boardDao.delete(board); 
         sqlSession.commit();
 
-        //        out.println("게시글을 삭제하였습니다.<br>");
 
         out.println("<a href='list'>[목록]<a><br>");
       } else {
@@ -72,13 +71,8 @@ public class BoardDeleteController extends HttpServlet {
         out.flush();
       }
     } catch (Exception e) {
-      out.println("게시글 삭제 오류!");
-      e.printStackTrace();
-
-      out.println("</body>");
-      out.println("</html>");
-
-      response.sendRedirect("list");
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);   
     }
   }
 }

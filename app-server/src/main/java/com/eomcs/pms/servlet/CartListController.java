@@ -53,6 +53,9 @@ public class CartListController extends HttpServlet {
 
       request.setAttribute("id", id);
       request.setAttribute("cartList", cartList.getPrivacyCart());
+      request.setAttribute("pageTitle", "장바구니목록");
+      request.setAttribute("contentUrl", "/cart/CartList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
       request.getRequestDispatcher("CartList.jsp").forward(request, response);
 
     } catch (Exception e) {
