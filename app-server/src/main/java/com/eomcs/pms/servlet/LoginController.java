@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
         session.setAttribute("loginUser", member);
 
         System.out.println("Login ID : "+ member.getId());
-        page = "./menu";    
+        page = "main/Menu.jsp";    
       } else {
         System.out.println("Error");
         request.setAttribute("pageTitle", "로그인실패");
