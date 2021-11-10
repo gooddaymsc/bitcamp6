@@ -10,10 +10,7 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
   <style>
- html { 
-  height: 100%; 
- } 
- 
+
  body {
   height: 100%
   margin: 0; 
@@ -24,13 +21,13 @@
   } 
 
   html, body {
-       height: 100%; 
-    } 
+  height: 100%; 
+  } 
 
   #main-holder {
-       width: 50%; 
-       height: 70%; 
-    }
+  width: 50%; 
+  height: 70%; 
+  }
 
   #main-holder {
   width: 50%;
@@ -40,16 +37,17 @@
   align-items: center; 
   background-color: white; 
   border-radius: 7px; 
-  box-shadow: 0px 0px 5px 2px black; } 
+  box-shadow: 0px 0px 5px 2px black; 
+  } 
   
   #loginLogo{
-      margin-left:200px;
-      align-self: flex-start; 
-      width: 40%;
-      height: 50%; 
-      display:grid;
-      justify-items: center; 
-      align-items: center; 
+   margin-left:200px;
+   align-self: flex-start; 
+   width: 40%;
+   height: 50%; 
+   display:grid;
+   justify-items: center; 
+   align-items: center; 
   }
   
   #login-error-msg-holder { 
@@ -77,11 +75,11 @@
   }
   
   #login-form { 
-      align-self: flex-start; 
-      display: grid; 
-      justify-items: center; 
-      align-items: center; 
-    }
+  align-self: flex-start; 
+  display: grid; 
+  justify-items: center; 
+  align-items: center; 
+  }
 
   .login-form-field::placeholder { 
   color: #3a3a3a; 
@@ -104,7 +102,7 @@
   border-radius: 5px; 
   color: white; 
   font-weight: bold;
-  bold; background-color: #3a3a3a; 
+  background-color: #3a3a3a; 
   cursor: pointer; 
   outline: none; 
   }
@@ -138,8 +136,8 @@
 <button class="btn btn-primary" id="login-form-submit">LOGIN</button><br>
 
 <div>
-<a href="./findidMenu">아이디 </a>
-<a href="./findpwMenu">비밀번호찾기 </a>
+<a href="./findidMenu">아이디 |</a>
+<a href="./findpwMenu">비밀번호찾기 |</a>
 <a href='../buyer/form' >회원가입</a>
 </div>
 </form>
@@ -147,3 +145,4 @@
 </body>
 <jsp:include page="../footer.jsp"></jsp:include>
 </html>
+
