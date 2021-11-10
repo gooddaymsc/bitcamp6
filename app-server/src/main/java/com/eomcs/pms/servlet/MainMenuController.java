@@ -25,6 +25,10 @@ public class MainMenuController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
+      //      request.setAttribute("pageTitle", "메인");
+      //      request.setAttribute("contentUrl", "/main/Menu.jsp");
+      //      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
       request.getRequestDispatcher("./Menu.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();

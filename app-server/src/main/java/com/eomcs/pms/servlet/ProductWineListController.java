@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
-@WebServlet("/product/listType")
-public class ProductTypeListController extends HttpServlet {
+@WebServlet("/product/listWine")
+public class ProductWineListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ProductDao productDao;

@@ -8,7 +8,7 @@
     <c:forEach items="${productList}" var="product">
      <td>
       <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" style="width:14rem; height:300px;">
+        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
         <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
         <p class="card-text"> - 평점: ${product.rate}점</p>
         <p class="card-text"> - 주종: ${product.productType.type} </p>
