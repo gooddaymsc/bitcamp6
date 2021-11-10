@@ -32,9 +32,9 @@
 <div class="header">
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <div class="logo" id='logo'>
+<!--     <div class="logo" id='logo'>
       <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
-      </div>
+      </div> -->
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -67,6 +67,14 @@
   <div class="intro_bg"><div></div>
 
  <div id="content">
+ <form action='search' method='post'>  
+<div class="mb-3 row">
+  <label for='f-search' class="col-sm-1 col-form-label">검색</label>
+    <div class="col-sm-2">
+    <input id='f-search' type='text' name='search' class="form-control">
+  </div>
+</div>
+</form>
 <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
