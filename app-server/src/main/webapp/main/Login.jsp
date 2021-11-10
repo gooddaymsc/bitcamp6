@@ -62,9 +62,6 @@
 </head>
 <body>
 <div class="container">
-<div class='outer' id='outer'>
-    <a class="loginLogo" id="loginLogo" href="../main/Menu.jsp"><img src="../image/loginLogo.jpeg"></a>
-</div>
 <br>
 <br>
 <form action='login' method="post">
@@ -86,8 +83,8 @@
 </div> 
 <br>
 <div>
-<a href="FindidForm.jsp">아이디 </a>
-<a href="FindpwForm.jsp">비밀번호찾기 </a>
+<a href="./findidMenu">아이디 </a>
+<a href="./findpwMenu">비밀번호찾기 </a>
 <a href='../buyer/form' >회원가입</a>
 </div>
 </form>
