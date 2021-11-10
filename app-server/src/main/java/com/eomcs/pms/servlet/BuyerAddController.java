@@ -76,10 +76,13 @@ public class BuyerAddController extends HttpServlet {
     try {
       buyerDao.insert(buyer);
       sqlSession.commit();
+      System.out.println(1);
       request.setAttribute("pageTitle", "회원가입(구매자)");
+      System.out.println(1);
       request.setAttribute("contentUrl", "/bueyr/BuyerAdd.jsp");
+      System.out.println(1);
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
-
+      System.out.println(1);
       response.setHeader("Refresh", "1;url=../main/loginMenu");
 
     } catch (Exception e) {

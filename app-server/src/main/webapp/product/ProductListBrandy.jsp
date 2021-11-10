@@ -3,8 +3,19 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <h1> 브랜디 </h1>
+<style>
+td a {
+    text-decoration: none;
+    color: black;
+}
+td a:visited {
+    color: black;
+}
+div.card:hover {
+    cursor: pointer;
+}
+</style>
 <form action='search' method='post'>  
 <div class="mb-3 row">
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>
@@ -13,20 +24,19 @@
   </div>
 </div>
 </form>
-<body>
  <c:set var="i" value="0" />
  <c:set var="j" value="4" />
- <table border=1>
+ <table class="table table-hover">
   <c:choose>
    <c:when test="${productList ne null}">
     <c:forEach items="${productList}" var="product">
      <c:if test="{i%j == 0}">
       <tr>
      </c:if>
-     <td>
-      <div class="card" style="width: 15rem;" >
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" style="width:14rem; height:300px;">
-        <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
+     <td >
+      <div class="card" style="width: 15rem; position: relative;" >
+        <p><img align="middle" class = "image" src = "../image/${product.photo}.jpg" style="width:14rem; height:300px;"></p>
+        <p><a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a></p>
         <p class="card-text"> - 평점: ${product.rate}점</p>
         <p class="card-text"> - 주종: ${product.productType.type}</p>
         <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
@@ -34,7 +44,7 @@
       </div> 
     </td>
     <c:if test="${i%j == j-1}">
-     </tr>
+     <tr>
     </c:if> 
    <c:set var="i" value="${i+1}" />
     </c:forEach>
@@ -46,14 +56,13 @@
   </c:otherwise>
   </c:choose>
  </table>
-</body> 
-
-<script>
-document.querySelectorAll("div a").forEach((aTag) => {
+ <script>
+ <!--td.card a  td.card div.card-->
+document.querySelectorAll("table a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
 
-var trList = document.querySelectorAll("td div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll("table div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     //console.log(e.currentTarget.querySelector("a").href);
@@ -63,3 +72,5 @@ trList.forEach(function(trTag) {
   };
 });
 </script>
+
+

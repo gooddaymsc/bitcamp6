@@ -22,4 +22,11 @@ public interface ProductDao {
   void delete(Product product) throws Exception;
   List<ProductType> findAllProductType() throws Exception;
   List<Product> ranking() throws Exception;
+  List<Product> rankingWine() throws Exception;
+  List<Product> rankingWhiskey() throws Exception;
+  List<Product> rankingBrandy() throws Exception;
+  List<Product> rankingVodka() throws Exception;
+  List<Product> rankingTrad() throws Exception;
+
+
 }
