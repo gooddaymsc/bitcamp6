@@ -12,6 +12,7 @@ right:0;
 }
  .logo  {
  position: relative;
+ float:left;
   width: 100px;
   height: 60px;
   overflow: hidden;
@@ -26,18 +27,21 @@ right:0;
   object-fit: cover;
  }
  
-body {
-margin-top:100px;
-}
+ #menu {
+ float:right;
+ position: relative;
+ }
+
  .nav-item .nav-link {
  padding-left :30px;
  }
+ 
  .navbar{
   display: inline-block;
   font-size:bold;
   text-align: center;
 }
- .container-fluid{
+ .container{
 position:relative;
  }
  nav {
@@ -49,11 +53,11 @@ position:relative;
 
 <header>
 <nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid">
+  <div class="container">
     <div class="logo">
          <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
     </div>
-    <div class="menu">
+    <div id="menu">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

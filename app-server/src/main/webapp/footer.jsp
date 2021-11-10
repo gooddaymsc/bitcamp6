@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style>
+  footer {
+  position:fixed;
+  width:100%;
+  }
+</style>
+
 <footer>
 <div class="container">
         <div class="hm-footer-copyright text-center">
