@@ -31,7 +31,7 @@ tr:hover {
 <!-- 검색 기능 구현해야함 -->
 <c:forEach items="${productList}" var="product">
 <tr>
-    <td><a href='detail?no=${product.productNumber}'>${product.productName}</a></td> 
+    <td><a href='../product/detail?no=${product.productNumber}'>${product.productName}</a></td> 
     <td>${product.rate}</td> 
     <td>${product.productType.type}</td> 
     <td>${product.volume}</td> 
@@ -53,8 +53,7 @@ tr:hover {
 
         <c:forEach items="${sellerList}" var="seller">
           <tr>
-            <td><a href='detail?id=${seller.member.id}'>${seller.member.id}</a></td>
-            <td>${seller.businessName}</td>
+            <td><a href='../stock/detail?id=${seller.member.id}'>${seller.businessName}</a></td>
             <td>${seller.businessName}</td>
             
             <td>${seller.businessName}</td>
@@ -77,7 +76,7 @@ tr:hover {
 
 <c:forEach items="${boardList}" var="board">
 <tr>
-    <td><a href='detail?no=${board.boardNumber}'>${board.title}</a></td> 
+    <td><a href='../board/detail?no=${board.boardNumber}'>${board.title}</a></td> 
     <td>${board.boardTag.tag}</td> 
     <td>${board.content}</td> 
     <td>${board.registrationDate}</td> 

@@ -21,8 +21,8 @@
 <form>
  <label class='form-control-plaintext'>${id}</label><br> 
 
- <a href="Login.jsp">로그인</a>
- <a href="FindpwForm.jsp">비밀번호찾기</a>
+ <a href="./loginMenu">로그인</a>
+ <a href="./findpwMenu">비밀번호찾기</a>
 
 </form>
 </div><!-- .container -->
