@@ -2,13 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <style>
+
 header{
 position: fixed;
 top:0;
  left:0;
 right:0;
-
-  background-color: rgb(88, 1, 88);
 }
  .logo  {
  position: relative;
@@ -42,18 +41,29 @@ right:0;
   text-align: center;
 }
  .container{
-position:relative;
  }
- nav {
-  margin-left: auto;
-}
+ 
+ .navbar-toggler {
+  margin-top:10px;
+ }
+ 
+ .collapse {
+  padding-top:10px;  
+ }
+ 
+ .navbar-nav li {
+  padding-left:10px;  
+  font-weight: bold;
+  color: 
+ }
+  
   .nav-item a::after {content:""; display: block; border-bottom: 3px solid #000; transition: width 250ms ease-out; left: auto; right: 0; width: 0;}
   .nav-item a:hover::after {width: 100%; left: 0; right: auto;}
 </style>
 
 <header>
 <nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container">
+  <div class="container-header">
     <div class="logo">
          <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
     </div>
@@ -76,7 +86,7 @@ position:relative;
           <a class="nav-link active" aria-current="page" href="../product/list">리큐르 · 보드카</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">민속주</a>
+          <a class="nav-link active" aria-current="page" href="../product/list">전통주</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../product/ranking">Ranking</a>
