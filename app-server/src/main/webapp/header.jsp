@@ -51,7 +51,7 @@ position:relative;
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <div class="logo">
-         <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.png"></a>
+         <a class="navbar-brand" href="../main/Menu.jsp"><img src="../image/logo.jpeg"></a>
     </div>
     <div class="menu">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

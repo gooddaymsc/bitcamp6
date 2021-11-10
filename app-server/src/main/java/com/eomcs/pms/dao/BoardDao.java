@@ -22,4 +22,5 @@ public interface BoardDao {
   void likeInsert(@Param("memberNo")int memberNo, @Param("boardNo")int boardNo) throws Exception;
   void likeDelete(@Param("memberNo")int memberNo, @Param("boardNo")int boardNo) throws Exception;
   void insertBoardTag(@Param("boardNo")int boardNo, @Param("tagNo")int tagNo) throws Exception;
+  List<Board> search(@Param("input")String input) throws Exception;
 }

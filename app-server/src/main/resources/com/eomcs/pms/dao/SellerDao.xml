@@ -46,7 +46,7 @@
     from 
       member m join seller s on m.member_no = s.member_no 
     where
-      name not in ('none')
+      m.name not in ('none')
     order by 
       m.member_no desc
   </select>
@@ -145,7 +145,27 @@
     where 
       member_no=#{no}
   </delete>
-
+  
+<select id="search" resultMap="SellerMap" parameterType="String">
+     select 
+      m.member_no, 
+      m.id, 
+      m.name,
+      m.nickname,
+      m.level,
+      s.business_name, 
+      s.business_address,
+      s.business_tel,
+      s.openingTime,
+      s.closingTime,
+      m.registeredDate 
+    from 
+      member m join seller s on m.member_no = s.member_no 
+    where
+      m.name not in ('none') and (s.business_address like #{input} or s.business_name like #{input})
+    order by 
+      m.member_no desc
+  </select>
 </mapper>
 
 
