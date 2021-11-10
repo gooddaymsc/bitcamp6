@@ -66,6 +66,28 @@
      order by p.product_no asc
   </select>
   
+  <select id="findWineAll" resultMap="ProductMap">
+     Select 
+       p.product_no, 
+       t.type, 
+       t.subType, 
+       p.name, 
+       p.origin, 
+       p.volume, 
+       p.alcoholLevel, 
+       p.sugarLevel,
+       p.acidity, 
+       p.weight, 
+       p.rate, 
+       p.variety, 
+       p.photo
+     From 
+       product p
+     left outer join product_type t on t.type_no = p.type_no 
+     where
+      p.type_no in (1,2,3,4,5)
+     order by p.product_no asc
+  </select>
   
    <insert id="insert" parameterType="product">
    insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
@@ -172,7 +194,7 @@
      From 
        product p
      left outer join product_type t on t.type_no = p.type_no 
-     order by p.rate 
+     order by p.rate desc
      limit 0,5
   </select>
 

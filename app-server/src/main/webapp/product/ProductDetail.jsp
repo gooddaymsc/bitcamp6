@@ -5,10 +5,11 @@
 
 <h1>상품 상세(MVC + EL)</h1>
 <form action='update' method='post'>
+    <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
 <div class="mb-3 row">
-  <label for='f-productNumber' class="col-sm-2 col-form-label">상품번호</label>
+  <label for='f-name' class="col-sm-2 col-form-label">상품명</label>
   <div class="col-sm-6">
-    <input id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
+    <input id='f-name' type='text' name='name' class="form-control" value='${product.productName}' readonly>
   </div>
 </div>
     <div class="mb-3 row">
