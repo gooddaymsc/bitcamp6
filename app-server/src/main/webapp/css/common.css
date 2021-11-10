@@ -24,9 +24,28 @@ header {
 .container-header {
 	padding-left: 30px;
 	padding-right: 30px;
-	position:fixed;
+	/* position:fixed; */
     border: 2px solid grey;
     width: 100%;
+}
+
+#content {
+  border: 2px dashed yellow;
+  margin-left: 100px; 
+  min-height: 500px; 
+}
+
+
+aside {
+  border: 2px solid green;
+  float: left;
+  width: 90px;
+  min-height: 300px; 
+}
+
+footer {
+  border: 1px solid blue;
+  clear: left;
 }
 
  /* 
@@ -63,21 +82,4 @@ header {
       border: 1px solid green;
     }
 
-footer {
-  border: 1px solid blue;
-  clear: left;
-}
-
-aside {
-  border: 2px solid green;
-  float: left;
-  width: 90px;
-  min-height: 300px; 
-}
-
-#content {
-  border: 2px dashed yellow;
-  margin-left: 100px; 
-  min-height: 500px; 
-}
 
