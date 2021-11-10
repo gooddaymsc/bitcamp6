@@ -77,16 +77,16 @@ right:0;
           <a class="nav-link active" aria-current="page" href="../product/listWine">와인</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">위스키</a>
+          <a class="nav-link active" aria-current="page" href="../product/listWhiskey">위스키</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">브랜디 · 꼬냑</a>
+          <a class="nav-link active" aria-current="page" href="../product/listBrandy">브랜디 · 꼬냑</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">리큐르 · 보드카</a>
+          <a class="nav-link active" aria-current="page" href="../product/listVodka">리큐르 · 보드카</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../product/list">전통주</a>
+          <a class="nav-link active" aria-current="page" href="../product/listTrad">전통주</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../product/ranking">Ranking</a>
