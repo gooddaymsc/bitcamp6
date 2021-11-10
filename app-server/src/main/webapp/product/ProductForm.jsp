@@ -3,7 +3,7 @@
     trimDirectiveWhitespaces="true" %>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>새상품(MVC)</h1>
-<form action='add' method='post'>
+<form action='add' method='post' enctype="multipart/form-data">
 <div class="mb-3 row">
   <label for='f-productName' class="col-sm-2 col-form-label">상품명</label>
   <div class="col-sm-6">
@@ -13,7 +13,7 @@
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='text' name='photo' class="form-control">
+    <input id='f-photo' type='file' name='photo' class="form-control">
   </div>
 </div>
 <div class="mb-3 row">

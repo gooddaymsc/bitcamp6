@@ -2,19 +2,22 @@ package com.eomcs.pms.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletConfig;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/seller/update")
 public class SellerUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -23,8 +26,8 @@ public class SellerUpdateController extends HttpServlet {
   SellerDao sellerDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     sellerDao = (SellerDao) 웹애플리케이션공용저장소.getAttribute("sellerDao");
   }
@@ -54,8 +57,16 @@ public class SellerUpdateController extends HttpServlet {
         seller.getMember().setNickname(request.getParameter("nickname"));
         seller.getMember().setEmail(request.getParameter("email"));
         seller.getMember().setPassword(request.getParameter("password"));
-        seller.getMember().setPhoto(request.getParameter("photo"));
         seller.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
+        //        seller.getMember().setPhoto(request.getParameter("photo"));
+
+        Part photoPart = request.getPart("photo");
+        if (photoPart.getSize() > 0) {
+          String filename = UUID.randomUUID().toString();
+          photoPart.write(getServletContext().getRealPath("/upload/seller") + "/" + filename);
+          seller.getMember().setPhoto(filename);
+        }
+
         seller.setBusinessName(request.getParameter("businessName"));
         seller.setBusinessNumber(request.getParameter("businessNumber"));
         seller.setBusinessAddress(request.getParameter("businessAddress"));

@@ -4,7 +4,7 @@
 
     <h1>개인정보 변경(구매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update' method='post'>
+    <form action='update' method='post' enctype="multipart/form-data">
       <div class="mb-3 row">
 <!--         <label  for='f-no' class="col-sm-2 col-form-label">번호</label>
  -->        <div class="col-sm-6">
@@ -56,7 +56,10 @@
       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
-          <input id='f-photo' type='text' name='photo' class="form-control" value='${buyer.member.photo}'><br>
+          <a href="../upload/buyer/${buyer.member.photo}" >
+            <img id="f-photo-image" src="../upload/buyer/${buyer.member.photo}_100x100.jpg">
+          </a>
+          <input id='f-photo' type='file' name='photo' class="form-control"><br>
         </div>
       </div>
       <div class="mb-3 row">
