@@ -17,12 +17,16 @@
           <input id='f-id' type='text' name='id' class="form-control" value='${buyer.member.id}' readonly><br>
         </div>
       </div>
-      <div class="mb-3 row">
+      
+      
+<%--       <div class="mb-3 row">
         <label for='f-password' class="col-sm-2 col-form-label">암호</label>
         <div class="col-sm-6">
           <input id='f-password' type='password' name='password' class="form-control" value='${buyer.member.password}' readonly><br>
         </div>
-      </div>
+      </div> --%>
+      
+  
       <div class="mb-3 row">
         <label for='f-name' class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-6">
@@ -103,5 +107,6 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
+      <a href='detail2?id=${buyer.member.id}' class="btn btn-primary">암호변경</a>
       <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴하기</a>
     </form>
