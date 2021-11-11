@@ -8,21 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.eomcs.pms.dao.SellerDao;
-import com.eomcs.pms.domain.Seller;
+import com.eomcs.pms.dao.BuyerDao;
+import com.eomcs.pms.domain.Buyer;
 
-@WebServlet("/seller/update2")
-public class SellerUpdate2Controller extends HttpServlet {
+@WebServlet("/buyer/passwordUpdate")
+public class BuyerPasswordUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
-  SellerDao sellerDao;
+  BuyerDao buyerDao;
 
   @Override
   public void init() {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    sellerDao = (SellerDao) 웹애플리케이션공용저장소.getAttribute("sellerDao");
+    buyerDao = (BuyerDao) 웹애플리케이션공용저장소.getAttribute("buyerDao");
   }
 
   @Override
@@ -32,19 +32,18 @@ public class SellerUpdate2Controller extends HttpServlet {
     try {
 
       String id = request.getParameter("id");
-      Seller seller = sellerDao.findById(id);
+      Buyer buyer = buyerDao.findById(id);
 
-      //      if (seller == null) {
+      //      if (buyer == null) {
       //        throw new Exception("해당 번호의 회원이 없습니다.");
-      //      } 
+      //      }
 
-      seller.getMember().setPassword(request.getParameter("password"));
+      buyer.getMember().setPassword(request.getParameter("password"));
 
-      sellerDao.update(seller.getMember());
-      sellerDao.updateSeller(seller);
+      buyerDao.update(buyer);
       sqlSession.commit();
 
-      request.setAttribute("pageTitle", "회원(판매자)비밀번호 변경");
+      request.setAttribute("pageTitle", "회원(구매자)비밀번호 변경");
       request.setAttribute("contentUrl", "/main/Menu.jsp");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
@@ -54,3 +53,5 @@ public class SellerUpdate2Controller extends HttpServlet {
     }
   }
 }
+
+
