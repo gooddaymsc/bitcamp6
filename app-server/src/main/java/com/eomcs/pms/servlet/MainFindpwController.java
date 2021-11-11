@@ -7,17 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/main/findidForm")
-public class FindidFormController extends HttpServlet {
+@WebServlet("/main/findpwMenu")
+public class MainFindpwController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getParameter("name");
-    request.getParameter("phoneOrEmail");
-    request.getRequestDispatcher("FindidForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "비밀번호찾기");
+    request.setAttribute("contentUrl", "/main/FindpwForm.jsp");
+    request.getRequestDispatcher("/template3.jsp").forward(request, response);
   }
 }
 

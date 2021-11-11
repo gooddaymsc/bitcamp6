@@ -1,27 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
+
 <html>
 <head>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        width: 640px;
-    }
-  </style>
+ <title>비밀번호 변경</title>
 </head>
+<style>
+
+#findpw-submit { 
+    width: 40%;
+    xmargin-top:80px;
+    xmargin-left:35px;
+    padding: 7px; 
+    border: none; 
+    border-radius: 5px; 
+    color: white; 
+    font-weight: bold;
+    background-color: #3a3a3a; 
+    cursor: pointer; 
+    outline: none; 
+  }  
+
+</style>
 <body>
-<div class="container">
+<main id="main-holder">
 <h1>비밀번호 변경</h1>
-<form action=findpwForm method='post'>
+<form action=findpwForm method='post' id=findpwForm>
   <input type='hidden' name='member_no' id='member_no' value="${member_no}"/>
 
-  <label class='form-control-plaintext'>변경할 새 비밀번호를 입력해주세요.</label>
+  <label class='form-control-plaintext'>변경할 새 비밀번호를 입력해주세요.</label><br>
 
 <div>비밀번호  
   <input type='password' name='password' id='pw' onchange="isSame()"/></div>
@@ -31,9 +39,11 @@
   <input type='password' name='passwordConfirm' id='pwCheck' onchange="isSame()"/>&nbsp;&nbsp;<span id="same"></span></div>
   
 <br><br>
-<button class="btn btn-primary btn-sm" > 비밀번호 변경 </button>
- <a href="Login.jsp">로그인</a>
- <a href="FindidForm.jsp">아이디찾기</a>
+<button class="btn btn-primary btn-sm" id="findpw-submit" > 비밀번호 변경 </button>
+ <a href="./loginMenu">로그인</a>
+ <a href="./findidMenu">아이디찾기</a>
+
+</form>
 
 
 <script type="text/javascript">
@@ -66,7 +76,6 @@ function isSame() {
     }
   }
 </script>
-</form>
-</div><!-- .container -->
+</main>
 </body>
 </html>

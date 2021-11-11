@@ -1,6 +1,7 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -32,9 +33,12 @@ public class MessageUpdateController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     HttpSession session = request.getSession(false);
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
@@ -51,8 +55,7 @@ public class MessageUpdateController extends HttpServlet {
       message.setTheOtherId(other);
 
       messageDao.update(message);
-      request.getRequestDispatcher("detail?no="+no).forward(request, response);
-
+      response.sendRedirect("detail?no="+no);
     } catch(Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);   

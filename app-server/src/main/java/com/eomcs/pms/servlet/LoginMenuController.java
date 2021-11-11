@@ -28,11 +28,14 @@ public class LoginMenuController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      response.sendRedirect("./Login.jsp");    
+      request.setAttribute("pageTitle", "로그인");
+      request.setAttribute("contentUrl", "/main/Login.jsp");
+      request.getRequestDispatcher("/template3.jsp").forward(request, response);
+
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
-      request.getRequestDispatcher("Error.jsp").forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

@@ -41,7 +41,8 @@ public class CartAddController extends HttpServlet {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("/drinker/login/menu");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
       return;
     }
 
@@ -56,8 +57,7 @@ public class CartAddController extends HttpServlet {
         cart.setId(buyer.getId());
         cartDao.insert(cart);
         sqlSession.commit();
-        response.setHeader("Refresh", "1;url=list");
-
+        response.sendRedirect("list");
       } else {        
         out.printf("<script>alert('재고 수량을 초과해서 장바구니에 담을 수 없습니다.'); location.href='../cart/form?no=%d'</script>", stock.getStockNumber());
         out.flush();

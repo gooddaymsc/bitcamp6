@@ -15,7 +15,7 @@ tr:hover {
 }
 </style>
 
-<h1>상품 목록(MVC + EL + JSTL)</h1>
+<h1>상품 목록</h1>
 <c:choose> 
   <c:when  test="${loginUser.authority eq 4}">
 <a href='form' class="btn btn-outline-primary btn-sm">새상품</a>

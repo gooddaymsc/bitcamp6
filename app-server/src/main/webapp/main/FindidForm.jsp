@@ -1,32 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
+
 <html>
 <head>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <style>
-    .container {
-        width: 640px;
-    }
-  </style>
+ <title>아이디 찾기</title>
 </head>
+<style>
+ #findid-submit { 
+    width: 56%;
+    margin-top:80px;
+    margin-left:35px;
+    padding: 7px; 
+    border: none; 
+    border-radius: 5px; 
+    color: white; 
+    font-weight: bold;
+    background-color: #3a3a3a; 
+    cursor: pointer; 
+    outline: none; 
+  }  
+</style>
 <body>
-<div class="container">
-<h1>아이디찾기</h1>
-<form action=findidResult method='post'>
- <label for='f-name' class="col-sm-2 col-form-label">이름</label>
+<main id="main-holder">
+
+<h1>아이디찾기 <img src="../image/icon/004-magnifying-glass.png"></h1>
+
+<form action='findidResult' method='post'>
+ 이름<br>
  <input id='f-name'  type='text' name='name'><br>
+<br>
+  전화번호 또는 이메일<br>
+ <input id='f-phoneOrEmail' type='text' name='phoneOrEmail' ><br>
  
- <label for='f-phoneOrEmail' class="col-sm-2 col-form-label">전화번호/이메일</label>
- <input id='f-phoneOrEmail' type='text' name='phoneOrEmail'><br><br>
- <button class="btn btn-primary btn-sm">아이디찾기</button><br>
- 
+<button class="btn btn-primary" id="findid-submit">아이디 찾기</button><br>
 </form>
-</div><!-- .container -->
+</main>
+</body>
 </html>
 
