@@ -56,7 +56,7 @@ public class BuyerUpdateController extends HttpServlet {
       if (member.getId().equals(buyer.getMember().getId())) {
 
         buyer.getMember().setNickname(request.getParameter("nickname"));
-        buyer.getMember().setPassword(request.getParameter("password"));
+        //        buyer.getMember().setPassword(request.getParameter("password"));
         buyer.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
         buyer.setZipcode(request.getParameter("zipcode"));
         buyer.setAddress(request.getParameter("address"));

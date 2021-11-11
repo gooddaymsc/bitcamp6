@@ -1,7 +1,6 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
-import com.eomcs.pms.domain.Product;
 
 @WebServlet("/main/menu")
 public class MainMenuController extends HttpServlet {
@@ -33,17 +31,11 @@ public class MainMenuController extends HttpServlet {
       //      request.setAttribute("pageTitle", "메인");
       //      request.setAttribute("contentUrl", "/main/Menu.jsp");
       //      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-      Collection<Product> rankingWine = productDao.rankingWine();
-      Collection<Product> rankingWhiskey = productDao.rankingWhiskey();
-      Collection<Product> rankingBrandy = productDao.rankingBrandy();
-      Collection<Product> rankingVodka = productDao.rankingVodka();
-      Collection<Product> rankingTrad = productDao.rankingTrad();
-
-      request.setAttribute("rankingWine", rankingWine);
-      request.setAttribute("rankingWhiskey", rankingWhiskey);
-      request.setAttribute("rankingBrandy", rankingBrandy);
-      request.setAttribute("rankingVodka", rankingVodka);
-      request.setAttribute("rankingTrad", rankingTrad);
+      request.setAttribute("rankingWine", productDao.rankingType("와인"));
+      request.setAttribute("rankingWhiskey", productDao.rankingType("위스키"));
+      request.setAttribute("rankingBrandy", productDao.rankingType("브랜디/꼬냑"));
+      request.setAttribute("rankingVodka", productDao.rankingType("리큐르/보드카"));
+      request.setAttribute("rankingTrad", productDao.rankingType("전통주"));
 
       request.setAttribute("pageTitle", "메인");
       request.setAttribute("contentUrl", "/main/Menu.jsp");

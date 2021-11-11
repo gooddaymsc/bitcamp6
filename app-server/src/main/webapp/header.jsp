@@ -174,50 +174,50 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/listWine">와인</a>
+              <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">와인</a>
               <ul class="dropdown-menu">
-                <li><a href="">레드</a></li>
-                <li><a href="">화이트</a></li>
-                <li><a href="">로제</a></li>
-                <li><a href="">스위트</a></li>
-                <li><a href="">스파클링</a></li>
+                <li><a href="../product/listSubType?no=1">레드</a></li>
+                <li><a href="../product/listSubType?no=2">화이트</a></li>
+                <li><a href="../product/listSubType?no=3">로제</a></li>
+                <li><a href="../product/listSubType?no=4">스위트</a></li>
+                <li><a href="../product/listSubType?no=5">스파클링</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/list">위스키</a>
+              <a class="nav-link active" aria-current="page" href="../product/listType?type=위스키">위스키</a>
               <ul class="dropdown-menu">
-                <li><a href=>아메리칸</a></li>
-                <li><a href=>스카치(몰트)</a></li>
-                <li><a href=>아이리쉬</a></li>
-                <li><a href=>캐나다 위스키</a></li>
+                <li><a href="../product/listSubType?no=6">아메리칸</a></li>
+                <li><a href="../product/listSubType?no=7">스카치(몰트)</a></li>
+                <li><a href="../product/listSubType?no=8">아이리쉬</a></li>
+                <li><a href="../product/listSubType?no=9">캐나다 위스키</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/list">브랜디 · 꼬냑</a>
+              <a class="nav-link active" aria-current="page" href="../product/listType?type=브랜디/꼬냑">브랜디 · 꼬냑</a>
               <ul class="dropdown-menu">
-                <li><a href=>브랜디</a></li>
-                <li><a href=>꼬냑</a></li>
-                <li><a href=>알마냑</a></li>
+                <li><a href="../product/listSubType?no=10">브랜디</a></li>
+                <li><a href="../product/listSubType?no=11">꼬냑</a></li>
+                <li><a href="../product/listSubType?no=12">알마냑</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/list">리큐르 · 보드카</a>
+              <a class="nav-link active" aria-current="page" href="../product/listType?type=리큐르/보드카">리큐르 · 보드카</a>
               <ul class="dropdown-menu">
-                <li><a href=>리큐르</a></li>
-                <li><a href=>진</a></li>
-                <li><a href=>럼</a></li>
-                <li><a href=>보드카</a></li>
-                <li><a href=>데낄라</a></li>
-                <li><a href=>음료 · 시럽</a></li>
+                <li><a href="../product/listSubType?no=13">리큐르</a></li>
+                <li><a href="../product/listSubType?no=14">진</a></li>
+                <li><a href="../product/listSubType?no=15">럼</a></li>
+                <li><a href="../product/listSubType?no=16">보드카</a></li>
+                <li><a href="../product/listSubType?no=17">데낄라</a></li>
+                <li><a href="../product/listSubType?no=18">음료 · 시럽</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/list">전통주</a>
+              <a class="nav-link active" aria-current="page" href="../product/listType?type=전통주">전통주</a>
               <ul class="dropdown-menu">
-                <li><a href=>한국</a></li>
-                <li><a href=>중국</a></li>
-                <li><a href=>일본</a></li>
-                <li><a href=>기타</a></li>
+                <li><a href="../product/listSubType?no=19">한국</a></li>
+                <li><a href="../product/listSubType?no=20">중국</a></li>
+                <li><a href="../product/listSubType?no=21">일본</a></li>
+                <li><a href="../product/listSubType?no=22">기타</a></li>
               </ul>
             </li>
             <li class="nav-item">

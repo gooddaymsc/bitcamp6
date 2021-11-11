@@ -56,7 +56,7 @@ public class SellerUpdateController extends HttpServlet {
       if (member.getId().equals(seller.getMember().getId())) {
         seller.getMember().setNickname(request.getParameter("nickname"));
         seller.getMember().setEmail(request.getParameter("email"));
-        seller.getMember().setPassword(request.getParameter("password"));
+        //        seller.getMember().setPassword(request.getParameter("password"));
         seller.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
         //        seller.getMember().setPhoto(request.getParameter("photo"));
 

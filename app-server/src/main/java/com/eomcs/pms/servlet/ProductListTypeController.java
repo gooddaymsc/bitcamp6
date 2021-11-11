@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
-@WebServlet("/product/listTrad")
-public class ProductListTradController extends HttpServlet {
+@WebServlet("/product/listType")
+public class ProductListTypeController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ProductDao productDao;
@@ -29,10 +29,12 @@ public class ProductListTradController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Product> productList = productDao.findTradAll();
+      String type = request.getParameter("type");
+      Collection<Product> productList = productDao.findTypeAll(type);
+      request.setAttribute("type", type);
       request.setAttribute("productList", productList);
-      request.setAttribute("pageTitle", "전통주목록");
-      request.setAttribute("contentUrl", "/product/ProductListTrad.jsp");
+      request.setAttribute("pageTitle", "주류목록");
+      request.setAttribute("contentUrl", "/product/ProductListType.jsp");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {

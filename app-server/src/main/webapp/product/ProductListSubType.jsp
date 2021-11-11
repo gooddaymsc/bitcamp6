@@ -15,7 +15,7 @@ div.card:hover {
     cursor: pointer;
 }
 </style>
-<h1> 전통주 </h1>
+<h1> ${product.subType} </h1>
 <form action='search' method='post'>  
 <div class="mb-3 row">
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>
