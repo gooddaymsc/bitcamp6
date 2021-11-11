@@ -22,7 +22,7 @@
 <body>
 
 <main id="main-holder">
-<a class="loginLogo" href="../main/Menu.jsp"><img src="../image/loginLogo.jpeg" id="loginLogo"></a>
+<a class="loginLogo" href="../main/Menu"><img src="../image/loginLogo.jpeg" id="loginLogo"></a>
     
 <div id="login-error-msg-holder"> 
 <p id="login-error-msg">잘못된 아이디/ 비밀번호 입니다.</p></div>

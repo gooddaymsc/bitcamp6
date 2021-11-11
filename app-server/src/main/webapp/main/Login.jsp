@@ -21,7 +21,7 @@
 <body>
 
 <main id="main-holder">
-<a class="loginLogo" href="../main/Menu.jsp"><img src="../image/loginLogo.jpeg" id="loginLogo"></a>
+<a class="loginLogo" href="/main/menu"><img src="../image/loginLogo.jpeg" id="loginLogo"></a>
     
 <form action='login' method="post" id="login-form">
 

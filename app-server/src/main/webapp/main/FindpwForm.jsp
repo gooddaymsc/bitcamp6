@@ -7,15 +7,15 @@
  <title>비밀번호 찾기</title>
  
   <style>
-	#form{
-	  margin-left: 100px;
-	  }
-	  
-	 #tel{
-	  width:40%;
-	  }
-	  
-	 #findpw-submit { 
+  #form{
+    margin-left: 100px;
+    }
+    
+   #tel{
+    width:40%;
+    }
+    
+   #findpw-submit { 
     width: 56%;
     margin-top:80px;
     margin-left:10px;
@@ -28,7 +28,7 @@
     cursor: pointer; 
     outline: none; 
   } 
-	  
+    
   </style>
   
 </head>

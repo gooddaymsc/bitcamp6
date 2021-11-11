@@ -37,6 +37,7 @@
 <div id="find-id-msg-holder"> 
 <p id="find-id-msg">아이디는 ${id}  입니다 </p></div>
 
+<br><br>
  <a href="./loginMenu">로그인</a>
  <a href="./findpwMenu">비밀번호찾기</a>
 

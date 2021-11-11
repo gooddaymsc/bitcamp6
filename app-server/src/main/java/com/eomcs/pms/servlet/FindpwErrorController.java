@@ -12,9 +12,10 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.MemberDao;
 import com.eomcs.pms.domain.Member;
 
-@WebServlet("/main/findpwForm")
-public class FindpwFormController extends HttpServlet {
+@WebServlet("/main/FindpwError")
+public class FindpwErrorController extends HttpServlet {
   private static final long serialVersionUID = 1L;
+
   SqlSession sqlSession;
   MemberDao memberDao;
 
@@ -34,15 +35,26 @@ public class FindpwFormController extends HttpServlet {
     member.setNumber(Integer.parseInt(request.getParameter("member_no")));
 
     try {
-      memberDao.update(member);
-      sqlSession.commit();
-      request.getRequestDispatcher("./Login.jsp").forward(request, response);
+
+      if() {
+        memberDao.update(member);
+        sqlSession.commit();
+
+
+        request.setAttribute("pageTitle", "로그인");
+        request.setAttribute("contentUrl", "/main/Login.jsp");
+        request.getRequestDispatcher("/template3.jsp").forward(request, response);
+
+      } else {
+        request.setAttribute("pageTitle", "비밀번호 변경 실패");
+        request.setAttribute("contentUrl", "/main/FindpwError.jsp");
+        request.getRequestDispatcher("/template3.jsp").forward(request, response);        
+      }
+
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-

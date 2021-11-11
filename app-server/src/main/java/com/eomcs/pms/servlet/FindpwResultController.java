@@ -36,15 +36,24 @@ public class FindpwResultController extends HttpServlet {
     try {
       Member member = memberDao.findById(request.getParameter("id"));
 
-
       if (((member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || member.getEmail().equals(request.getParameter("phoneOrEmail"))))
           && (member.getId().equals(request.getParameter("id")))){
-
-        request.setAttribute("member_no", member.getNumber());
-        request.setAttribute("pageTitle", "비밀번호 변경");
-        request.setAttribute("contentUrl", "/main/FindpwResult.jsp");
-        request.getRequestDispatcher("/template3.jsp").forward(request, response);
-
+        System.out.println(1);
+        System.out.println(request.getAttribute("pwCheck2"));       //check2 값 못가져옴. 확인 필요
+        if(request.getAttribute("pwCheck2").equals("0")) {
+          System.out.println(11);       
+          request.setAttribute("member_no", member.getNumber());
+          request.setAttribute("pageTitle", "비밀번호 변경");
+          System.out.println(2);   
+          request.setAttribute("contentUrl", "/main/FindpwResult.jsp");
+          request.getRequestDispatcher("/template3.jsp").forward(request, response);
+        } else {
+          System.out.println(3);
+          request.setAttribute("pageTitle", "비밀번호 변경 실패");
+          request.setAttribute("contentUrl", "/main/FindpwError.jsp");
+          request.getRequestDispatcher("/template3.jsp").forward(request, response);
+          System.out.println(4);
+        }
       } else {
         out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");
         out.flush();
@@ -55,4 +64,3 @@ public class FindpwResultController extends HttpServlet {
     }
   }
 }
-
