@@ -4,7 +4,7 @@
 
     <h1>개인정보 변경(판매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update' method='post'>
+    <form action='update' method='post' enctype="multipart/form-data">
       <div class="mb-3 row">
 <!--         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
  -->        <div class="col-sm-6">
@@ -17,12 +17,15 @@
           <input id='f-id' type='text' name='id' class="form-control" value='${seller.member.id}' readonly><br>
         </div>
       </div>
-      <div class="mb-3 row">
+      
+      
+<%--       <div class="mb-3 row">
         <label for='f-password' class="col-sm-2 col-form-label">암호</label>
         <div class="col-sm-6">
           <input id='f-password' type='password' name='password' class="form-control" value='${buyer.seller.password}' readonly><br>
         </div>
-      </div>
+      </div> --%>
+      
       <div class="mb-3 row">
         <label for='f-name' class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-6">
@@ -53,10 +56,19 @@
           <input id='f-birthday' type='date' name='birthday' class="form-control" value='${seller.member.birthday}' readonly><br>
         </div>
       </div>
-      <div class="mb-3 row">
+<%--       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
           <input id='f-photo' type='text' name='photo' class="form-control" value='${seller.member.photo}'><br>
+        </div>
+      </div> --%>
+      <div class="mb-3 row">
+        <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+        <div class="col-sm-6">
+          <a href="../upload/seller/${seller.member.photo}" >
+              <img id="f-photo-image" src="../upload/seller/${seller.member.photo}_100x100.jpg">
+          </a>
+          <input id='f-photo' type='file' name='photo' class="form-control"><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -123,5 +135,6 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴시키기</a>
+      <a href='detail2?id=${seller.member.id}' class="btn btn-primary">암호변경</a>
+      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴하기</a>
     </form>

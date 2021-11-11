@@ -3,8 +3,19 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<h1> 와인 </h1>
+<style>
+td a {
+    text-decoration: none;
+    color: black;
+}
+td a:visited {
+    color: black;
+}
+div.card:hover {
+    cursor: pointer;
+}
+</style>
+<h1> ${type} </h1>
 <form action='search' method='post'>  
 <div class="mb-3 row">
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>
@@ -13,10 +24,9 @@
   </div>
 </div>
 </form>
-<body>
  <c:set var="i" value="0" />
  <c:set var="j" value="4" />
- <table border=1>
+ <table class="table table-hover">
   <c:choose>
    <c:when test="${productList ne null}">
     <c:forEach items="${productList}" var="product">
@@ -34,7 +44,7 @@
       </div> 
     </td>
     <c:if test="${i%j == j-1}">
-     </tr>
+     <tr>
     </c:if> 
    <c:set var="i" value="${i+1}" />
     </c:forEach>
@@ -46,14 +56,13 @@
   </c:otherwise>
   </c:choose>
  </table>
-</body> 
-
-<script>
-document.querySelectorAll("div a").forEach((aTag) => {
+ <script>
+ <!--td.card a  td.card div.card-->
+document.querySelectorAll("table a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
 
-var trList = document.querySelectorAll("td div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll("table div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     //console.log(e.currentTarget.querySelector("a").href);
@@ -63,3 +72,5 @@ trList.forEach(function(trTag) {
   };
 });
 </script>
+
+

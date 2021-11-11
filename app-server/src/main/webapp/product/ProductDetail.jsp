@@ -3,8 +3,8 @@
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h1>상품 상세(MVC + EL)</h1>
-<form action='update' method='post'>
+<h1>상품 상세</h1>
+<form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
 <div class="mb-3 row">
   <label for='f-name' class="col-sm-2 col-form-label">상품명</label>
@@ -12,10 +12,19 @@
     <input id='f-name' type='text' name='name' class="form-control" value='${product.productName}' readonly>
   </div>
 </div>
-    <div class="mb-3 row">
+<%--     <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
     <input id='f-photo' type='text' name='photo' class="form-control" value='${product.photo}' readonly>
+  </div>
+</div> --%>
+<div class="mb-3 row">
+  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+  <div class="col-sm-6">
+    <a href="../upload/product/${product.photo}" >
+        <img id="f-photo-image" src="../upload/product/${product.photo}_100x100.jpg">
+    </a>
+    <input id='f-photo' type='file' name='photo' class="form-control" >
   </div>
 </div>
     <div class="mb-3 row">

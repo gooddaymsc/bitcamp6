@@ -1,18 +1,25 @@
 package com.eomcs.pms.servlet;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.ProductType;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/product/update")
 public class ProductUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -21,8 +28,8 @@ public class ProductUpdateController extends HttpServlet {
   ProductDao productDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     productDao = (ProductDao) 웹애플리케이션공용저장소.getAttribute("productDao");
   }
@@ -54,6 +61,25 @@ public class ProductUpdateController extends HttpServlet {
       product.setSugarLevel(Integer.parseInt(request.getParameter("sugarLevel")));
       product.setAcidity(Integer.parseInt(request.getParameter("acidity")));
       product.setWeight(Integer.parseInt(request.getParameter("weight")));
+      //      product.setPhoto(request.getParameter("photo"));
+
+      Part photoPart = request.getPart("photo");
+      if (photoPart.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoPart.write(getServletContext().getRealPath("/upload/product") + "/" + filename);
+        product.setPhoto(filename);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/product") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
       productDao.update(product);
       sqlSession.commit();
       response.sendRedirect("list");

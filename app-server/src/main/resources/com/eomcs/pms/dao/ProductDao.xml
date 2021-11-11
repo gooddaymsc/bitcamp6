@@ -33,43 +33,11 @@
     <result column="type" property="type"/>  
     <result column="subType" property="subType"/>  
   </resultMap> 
-   
-  <select id="findAllProductType" resultMap="ProductTypeMap">
-    select 
-      type_no,
-      type, 
-      subType 
-    from 
-      product_type
-    order by 
-      type_no asc
-  </select>
- 
-  <select id="findAll" resultMap="ProductMap">
-	   Select 
-	     p.product_no, 
-	     t.type, 
-	     t.subType, 
-	     p.name, 
-	     p.origin, 
-	     p.volume, 
-	     p.alcoholLevel, 
-	     p.sugarLevel,
-	     p.acidity, 
-	     p.weight, 
-	     p.rate, 
-	     p.variety, 
-       p.photo
-	   From 
-	     product p
-     left outer join product_type t on t.type_no = p.type_no 
-     order by p.product_no asc
-  </select>
   
-  <select id="findWineAll" resultMap="ProductMap">
-     Select 
+   <sql id='productSql'>
+       Select 
        p.product_no, 
-       t.type, 
+       t.type,
        t.subType, 
        p.name, 
        p.origin, 
@@ -84,15 +52,51 @@
      From 
        product p
      left outer join product_type t on t.type_no = p.type_no 
-     where
-      p.type_no in (1,2,3,4,5)
+   </sql>
+   
+  <select id="findAllProductType" resultMap="ProductTypeMap">
+    select 
+      type_no,
+      type, 
+      subType 
+    from 
+      product_type
+    order by 
+      type_no asc
+  </select>
+ 
+  <select id="findAll" resultMap="ProductMap">
+    <include refid="productSql"/>
      order by p.product_no asc
   </select>
   
+  <select id="findTypeAll" resultMap="ProductMap" parameterType="string">
+  <include refid="productSql"/>
+    where
+      t.type = #{input}
+    order by p.product_no asc
+  </select>
+  
+    <select id="findSubTypeAll" resultMap="ProductMap" parameterType="int">
+  <include refid="productSql"/>
+    where
+      p.type_no = #{typeNo}
+    order by p.product_no asc
+  </select>
+  
+  <select id="findSubType" resultMap="ProductTypeMap" parameterType="int">
+    select 
+      type_no, type, subType 
+    from 
+      product_type 
+    where 
+      type_no=#{no}
+  </select>
+  
    <insert id="insert" parameterType="product">
-   insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight)
+   insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight, photo)
     values(#{productType.number}, #{productName}, #{variety}, #{countryOrigin}, #{volume}, 
-    #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}) 
+    #{alcoholLevel}, #{sugarLevel}, #{acidity}, #{weight}, #{photo}) 
   </insert>
    
   
@@ -177,45 +181,23 @@
   </update>
   
   <select id="ranking" resultMap="ProductMap">
-    select 
-       p.product_no, 
-       t.type, 
-       t.subType, 
-       p.name, 
-       p.origin, 
-       p.volume, 
-       p.alcoholLevel, 
-       p.sugarLevel,
-       p.acidity, 
-       p.weight, 
-       p.rate, 
-       p.variety,
-       p.photo
-     From 
-       product p
-     left outer join product_type t on t.type_no = p.type_no 
+    <include refid="productSql"/>
+
+     order by p.rate desc
+     limit 0,5
+  </select>
+
+    <select id="rankingType" resultMap="ProductMap" parameterType="string">
+    <include refid="productSql"/>
+     where
+      t.type = #{input}
      order by p.rate desc
      limit 0,5
   </select>
 
   <select id="search" resultMap="ProductMap" parameterType="String">
-     Select 
-       p.product_no, 
-       t.type, 
-       t.subType, 
-       p.name, 
-       p.origin, 
-       p.volume, 
-       p.alcoholLevel, 
-       p.sugarLevel,
-       p.acidity, 
-       p.weight, 
-       p.rate, 
-       p.variety,
-       p.photo 
-    From 
-       product p
-     left outer join product_type t on t.type_no = p.type_no 
+    <include refid="productSql"/>
+
     where 
       p.name like #{input}
     order by 

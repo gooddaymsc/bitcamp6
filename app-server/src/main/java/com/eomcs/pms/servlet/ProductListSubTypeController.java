@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
-@WebServlet("/product/listWine")
-public class ProductWineListController extends HttpServlet {
+@WebServlet("/product/listSubType")
+public class ProductListSubTypeController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ProductDao productDao;
@@ -29,11 +29,13 @@ public class ProductWineListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Product> productList = productDao.findWineAll();
+      int typeNo = Integer.parseInt(request.getParameter("no"));
+      Collection<Product> productList = productDao.findSubTypeAll(typeNo);
+      request.setAttribute("product", productDao.findSubType(typeNo));
       request.setAttribute("productList", productList);
-      request.setAttribute("pageTitle", "와인목록");
-      request.setAttribute("contentUrl", "/product/ProductTypeList.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "주류목록");
+      request.setAttribute("contentUrl", "/product/ProductListSubType.jsp");
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
