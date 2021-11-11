@@ -24,10 +24,8 @@ header {
   margin:auto;
   z-index:10;
 }
-
 .wrap {
     xborder: 2px solid grey;
-
 }
 
 .container-header {
@@ -56,7 +54,10 @@ aside {
 
 footer {
   border: 1px solid blue;
-  clear: left;
+  width:100%;
+  margin-top:55px;
+  right: 0;
+clear: left; 
 }
 
  /* 

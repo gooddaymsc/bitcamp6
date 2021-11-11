@@ -3,7 +3,9 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <style>
+
 td a {
     text-decoration: none;
     color: black;
@@ -14,6 +16,59 @@ td a:visited {
 div.card:hover {
     cursor: pointer;
 }
+
+/* -기존 코드-  */
+
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+  cursor: pointer;
+}
+
+div.gallery img {
+  width: 250px;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 10px 6px;
+  margin-left: 30px;
+   float: left;
+  width: 250px;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* 
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+   */
+}
+
 </style>
 <h1> ${type} </h1>
 <form action='search' method='post'>  
@@ -24,8 +79,40 @@ div.card:hover {
   </div>
 </div>
 </form>
+
  <c:set var="i" value="0" />
  <c:set var="j" value="4" />
+ 
+<!--  갤러리   -->
+  <c:choose>
+   <c:when test="${productList ne null}">
+    <c:forEach items="${productList}" var="product">
+     <c:if test="{i%j == 0}">
+     </c:if>
+<div class="responsive">
+      <div class="gallery">
+        <img src = "../image/${product.photo}.jpg"  name="photo" align="middle"  width="600" height="400">
+        <div class="desc">
+        <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
+        <p class=""> - 평점: ${product.rate}점</p>
+        <p class=""> - 주종: ${product.productType.type}</p>
+        <p class=""> - 도수: ${product.alcoholLevel}</p>
+        <p class=""> - 용량: ${product.volume} </p>
+        </div>
+      </div> 
+    </div>
+    <c:if test="${i%j == j-1}">
+    </c:if> 
+   <c:set var="i" value="${i+1}" />
+    </c:forEach>
+   </c:when>
+  <c:otherwise>
+<div>존재하지 않습니다.</div>
+  </c:otherwise>
+  </c:choose>
+ 
+<!--  *********기존 테이블********** -->
+<%-- 
  <table class="table table-hover">
   <c:choose>
    <c:when test="${productList ne null}">
@@ -56,13 +143,14 @@ div.card:hover {
   </c:otherwise>
   </c:choose>
  </table>
+ --%>
  <script>
  <!--td.card a  td.card div.card-->
-document.querySelectorAll("table a").forEach((aTag) => {
+ 
+document.querySelectorAll("desc a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
-
-var trList = document.querySelectorAll("table div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll("responsive"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     //console.log(e.currentTarget.querySelector("a").href);

@@ -135,6 +135,6 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
-      <a href='detail2?id=${seller.member.id}' class="btn btn-primary">암호변경</a>
+      <a href='passwordDetail?id=${seller.member.id}' class="btn btn-primary">암호변경</a>
       <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴하기</a>
     </form>
