@@ -14,6 +14,10 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.ProductType;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/product/update")
@@ -64,6 +68,17 @@ public class ProductUpdateController extends HttpServlet {
         String filename = UUID.randomUUID().toString();
         photoPart.write(getServletContext().getRealPath("/upload/product") + "/" + filename);
         product.setPhoto(filename);
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/product") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
       }
       productDao.update(product);
       sqlSession.commit();
