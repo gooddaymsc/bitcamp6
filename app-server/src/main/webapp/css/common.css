@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 html{
 margin:0;
@@ -8,8 +9,8 @@ height:100%;
 }
  
 body {
-  margin-top: 100px;
- padding: 0;
+margin-top: 100px;
+padding: 0;
 width:100%;
 height:100%;
 }
@@ -29,7 +30,7 @@ header {
 	padding-left: 30px;
 	padding-right: 30px;
 /* 	 position:fixed; 
- */    width: 100%;
+ */ width: 100%;
 }
 
 #content {
@@ -38,19 +39,25 @@ header {
   min-height: 500px; 
 }
 
-
 aside {
-  border: 2px solid green;
-  float: left;
-  width: 90px;
-  min-height: 300px; 
+	position: fixed;
+  top: 180px; 
+  border: 2px solid white;
+  float: right;
+  width: 80px;
+  border-radius: 7px; 
+  background-color: #3a3a3a; 
+  box-shadow: 0px 0px 5px 2px black; 
+  right: 50%; 
+  margin-right: -720px; 
+  text-align:center; 
+  
 }
 
 footer {
   border: 1px solid blue;
   clear: left;
 }
-
  /* 
  @media (min-width: 768px) {
   .container {

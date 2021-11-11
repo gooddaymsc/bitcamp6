@@ -2,8 +2,28 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
- 
-<c:choose> 
+<html>
+<head>
+
+<style>
+.h1{
+color:red;
+}
+
+#wine_border{
+position:center;
+border:1px red;
+}
+
+
+</style>
+
+</head>
+<body>
+
+
+<aside>
+ <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='./loginMenu' class="btn btn-primary">로그인</a>
   <a href='../buyer/form' class="btn btn-primary">회원가입</a><br>
@@ -17,7 +37,6 @@
   <a href='logout' class="btn btn-primary">로그아웃</a>
   </c:otherwise>
 </c:choose> 
-
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
       <a href='../board/list' class="btn btn-primary">게시판</a>
@@ -45,21 +64,42 @@
       <a href='../message/list' class="btn btn-primary">메세지</a>
   </c:when>
 </c:choose> 
-<h1> 와인 </h1>
- <table border=1>
+</aside>
+
+<h1> 오늘의 술 </h1>
+
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+  <label class="btn btn-outline-primary" for="btnradio1">와인</label>
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio2">위스키</label>
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio3">브랜디/꼬냑</label>
+  
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio4">리큐르/보드카</label>
+  
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio5">전통주</label>
+</div>
+
+ <table border=1 id="wine_border">
     <c:forEach items="${rankingWine}" var="product">
      <td>
-      <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
+      <div class="card" style="width: 10rem;">
+        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol6.jpg'" 
+        style="width:10rem; height:220px; padding:3px">
         <a href="../product/detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-        <p class="card-text"> - 평점: ${product.rate}점</p>
-        <p class="card-text"> - 주종: ${product.productType.type} </p>
-        <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
-        <p class="card-text"> - 용량: ${product.volume} </p>
-      </div> 
+        <p class="card-text"> 평점: ${product.rate}점</p>
+     </div> 
     </td>
-    </c:forEach>
- </table>
+    </c:forEach>    
+</table>
+
+<%--  
+<div id="wiskey">
  <h1> 위스키 </h1>
  <table border=1>
     <c:forEach items="${rankingWhiskey}" var="product">
@@ -75,6 +115,8 @@
     </td>
     </c:forEach>
  </table>
+</div>
+
  <h1> 브랜디 </h1>
  <table border=1>
     <c:forEach items="${rankingBrandy}" var="product">
@@ -120,8 +162,18 @@
     </td>
     </c:forEach>
  </table>
- <script>
- <!--td.card a  td.card div.card-->
+ --%>
+<script>
+  function distplay(){    
+	  if($('input:radio[id=btnradio1]').is(':checked')){
+		  $('#wine').hide();
+    } else{
+  	  $('#wine').show();
+ }
+</script>
+ 
+<script>
+<!-- d.card div.card-->
 document.querySelectorAll("table a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
@@ -136,3 +188,6 @@ trList.forEach(function(trTag) {
   };
 });
 </script>
+
+</body> 
+</html>

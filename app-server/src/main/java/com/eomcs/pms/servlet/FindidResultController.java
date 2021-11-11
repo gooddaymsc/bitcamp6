@@ -38,7 +38,7 @@ public class FindidResultController extends HttpServlet {
         request.setAttribute("id", id);
 
       } else{
-        out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");
+        out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='../main/menu'</script>");
         out.flush();
       }
 
