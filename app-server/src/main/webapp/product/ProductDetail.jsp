@@ -4,8 +4,12 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h1>상품 상세</h1>
+<img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
+        align="left" width="300px" height="500px" >
 <form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
+    
+<div class="mb-3 row">        
 <div class="mb-3 row">
   <label for='f-name' class="col-sm-2 col-form-label">상품명</label>
   <div class="col-sm-6">
@@ -21,8 +25,8 @@
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
-    <a href="../upload/product/${product.photo}" >
-        <img id="f-photo-image" src="../upload/product/${product.photo}_100x100.jpg">
+    <a href="../upload/product/${product.photo}">
+<img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" width="100px" height="100px">
     </a>
     <input id='f-photo' type='file' name='photo' class="form-control" >
   </div>
@@ -92,38 +96,43 @@
     <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' >
   </div>
 </div>
+</div> 
+
+
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
     <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a><br>
+    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a>
   </c:when>
     <c:when test="${loginUser.authority eq 4}">
     <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a><br>
+    <a href='delete?no=${product.productNumber}' class="btn btn-primary">삭제</a>
     <a href='../stock/form?productNumber=${product.productNumber}' class="btn btn-primary">재고등록</a><br>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
-  <a href='../stock/sellerList?no=${product.productNumber}' class="btn btn-primary">장바구니등록</a><br>
+  <a href='../stock/sellerList?no=${product.productNumber}' class="btn btn-primary">장바구니등록</a>
   </c:when>
 </c:choose>
 <a href='list' class="btn btn-primary">목록</a><br>
 </form>
 
 <hr />
-<h4>리뷰</h4>
-<hr />
+<h4><i class="far fa-star"></i>최근 리뷰<i class="far fa-star"></i></h4>
 
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
-		<a href='review/form?no=${product.productNumber}' class="btn btn-primary">새리뷰</a><br>
+  <i class="far fa-hand-point-right"></i>
+    <a href='review/form?no=${product.productNumber}'> 리뷰남기기</a><br>
   </c:when>
 </c:choose>
+<hr />
+
 
 <c:forEach items="${reviewList}" var="review">
 <fieldset>
-<legend>작성자 : ${review.member.id}</legend>
-     <p>평점 : ${review.score}</p>
-     <p>코멘트 : <a href='review/detail?no=${review.no}'>${review.comment}</a></p>
-     <p>등록일 : ${review.registeredDate}</p>
+<h4><i class="far fa-id-badge"></i> ${review.member.id}><a href='review/detail?no=${review.no}'>${review.comment}</a></h4>
+     <i class="far fa-thumbs-up"></i> ${review.score} / 
+     <i class="far fa-calendar-alt"></i> ${review.registeredDate}
+     <hr />
 </fieldset>
 </c:forEach>
