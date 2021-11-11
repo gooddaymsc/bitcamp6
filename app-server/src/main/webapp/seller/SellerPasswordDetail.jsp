@@ -4,7 +4,7 @@
 
     <h1>비밀번호 변경(판매자)</h1>
     <h5>* 필수 입력</h5>
-    <form action='update2' method='post'>
+    <form action='passwordUpdate' method='post'>
       <div class="mb-3 row">
 <!--         <label for='f-no' class="col-sm-2 col-form-label">번호</label>
  -->        <div class="col-sm-6">

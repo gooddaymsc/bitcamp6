@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Seller;
 
-@WebServlet("/seller/detail2")
-public class SellerDetail2Controller extends HttpServlet {
+@WebServlet("/seller/passwordDetail")
+public class SellerPasswordDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   SellerDao sellerDao;
 
@@ -37,7 +37,7 @@ public class SellerDetail2Controller extends HttpServlet {
       request.setAttribute("seller", seller);
 
       request.setAttribute("pageTitle", "회원(판매자)비밀번호 변경");
-      request.setAttribute("contentUrl", "/seller/SellerDetail2.jsp");
+      request.setAttribute("contentUrl", "/seller/SellerPasswordDetail.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
