@@ -9,6 +9,10 @@ values("admin",password("0000"),8,"admin","admin","admin@test.com","1111",5);
 insert into member(authority,id,name,nickname,email,birthday,password,photo,phoneNumber,zipcode,address,detail_address) 
 values(2, 'aaa', 'aaa', 'aaa', 'aaa@test.com', '2021-1-1', '1111', 'aaa.gif', '1111', '1111', '1111', '1111');
 
+-- 상품 등록
+ insert into product(type_no, name, variety, origin, volume, alcoholLevel, sugarLevel, acidity, weight, photo)
+    values(2, "화이트와인", "와인", "1", 1, 
+    1.0, 1, 2, 2, #{photo}) 
 -- 재고 등록
 insert into stock(member_no, product_no, amount, price) 
 values((select member_no from member where id='s1'), 1, 3, 12000);

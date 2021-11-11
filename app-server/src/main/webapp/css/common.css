@@ -19,6 +19,7 @@ header {
   width:100%;
   height: 80px; 
   margin:auto;
+  
 }
 
 .wrap {
@@ -48,7 +49,10 @@ aside {
 
 footer {
   border: 1px solid blue;
-  clear: left;
+  width:100%;
+  margin-top:55px;
+  right: 0;
+clear: left; 
 }
 
  /* 
