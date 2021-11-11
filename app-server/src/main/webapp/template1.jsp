@@ -28,9 +28,9 @@
 <jsp:include page="${contentUrl}"/>
 </div><!-- .content -->
 
-<jsp:include page="/footer.jsp"/>
 
 </div><!-- .container -->
 
 </body>
+<jsp:include page="/footer.jsp"/>
 </html>

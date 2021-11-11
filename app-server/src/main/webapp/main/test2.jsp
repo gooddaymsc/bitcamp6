@@ -10,12 +10,12 @@
     right: 0;
   }
   .logo {
-    xborder: 1px solid #5f6;
+    border: 1px solid #5f6;
     position: absolute;
     float: left;
     xpadding: 20px;
-    left:100px;
-    top:30px;
+    margin: 30 0 0 100;
+
     width: 120px;
     height: 80px;
     xoverflow: hidden;
@@ -33,7 +33,7 @@
   }
   .wrap {
   position: absolute;
-    xborder: 2px solid grey;
+    border: 2px solid grey;
       width: 950px;
     height: 60px;
     float: left;
@@ -48,7 +48,7 @@
   top: 10px;
   right: -950px;
   margin-right: 10px;
-  xborder: 1px solid;
+  border: 1px solid;
   height: 35px;
   
 }

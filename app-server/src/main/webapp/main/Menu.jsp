@@ -6,9 +6,18 @@
 <head>
 
 <style>
-.h1{
-color:red;
+.a{
+font-size: 22px; 
+font-weight: bold; 
+color:#3a3a3a;
+fantasy; 
 }
+.b{
+font-size: 19px; 
+font-weight: bold; 
+color:#3a3a3a;
+}
+
 
 #wine_border{
 position:center;
@@ -66,9 +75,9 @@ border:1px red;
 </c:choose> 
 </aside>
 
-<h1> 오늘의 술 </h1>
+<h1 class='a'> Top Lists </h1>
 
-<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+<!-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
   <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
   <label class="btn btn-outline-primary" for="btnradio1">와인</label>
 
@@ -84,11 +93,24 @@ border:1px red;
   <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
   <label class="btn btn-outline-primary" for="btnradio5">전통주</label>
 </div>
-
+ -->
  <table border=1 id="wine_border">
     <c:forEach items="${rankingWine}" var="product">
      <td>
-      <div class="card" style="width: 10rem;">
+       <div class="wine_ranking" style="width:12rem">
+        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol6.jpg'" 
+        style="width:10rem; height:220px; padding:3px">
+        <label><a href="../product/detail?no=${product.productNumber}">${product.productName}</a></label>
+         <p class="b">${product.rate}</p>
+     </div> 
+    </td>
+    </c:forEach>    
+</table>
+
+<%--  <table border=1 id="wine_border">
+    <c:forEach items="${rankingWine}" var="product">
+     <td>
+      <div class="card" style="width: 10rem;  ">
         <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol6.jpg'" 
         style="width:10rem; height:220px; padding:3px">
         <a href="../product/detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
@@ -96,7 +118,7 @@ border:1px red;
      </div> 
     </td>
     </c:forEach>    
-</table>
+</table> --%>
 
 <%--  
 <div id="wiskey">

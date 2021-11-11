@@ -16,6 +16,10 @@ import org.apache.ibatis.session.SqlSession;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Seller;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/seller/update")
@@ -65,6 +69,17 @@ public class SellerUpdateController extends HttpServlet {
           String filename = UUID.randomUUID().toString();
           photoPart.write(getServletContext().getRealPath("/upload/seller") + "/" + filename);
           seller.getMember().setPhoto(filename);
+
+          Thumbnails.of(getServletContext().getRealPath("/upload/seller") + "/" + filename)
+          .size(100, 100)
+          .outputFormat("jpg")
+          .crop(Positions.CENTER)
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_100x100";
+            }
+          });
         }
 
         seller.setBusinessName(request.getParameter("businessName"));
