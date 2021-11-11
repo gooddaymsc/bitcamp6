@@ -12,29 +12,37 @@ body {
  padding: 0;
 width:100%;
 height:100%;
+z-index:7;
 }
 
 header {
-  border: 2px solid red;
+  background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
+  xborder-bottom: 4px solid #14148C;
+  xborder: 4px solid red;
   width:100%;
-  height: 80px; 
+  height: 120px; 
   margin:auto;
+  z-index:10;
 }
 
 .wrap {
-    border: 2px solid grey;
+    xborder: 2px solid grey;
+
 }
 
 .container-header {
-	padding-left: 30px;
-	padding-right: 30px;
+	xpadding-left: 30px;
+	xpadding-right: 30px;
 /* 	 position:fixed; 
- */    width: 100%;
+ */    xwidth: 100%;
+ height:100%;
+
 }
 
 #content {
   border: 2px dashed yellow;
   margin-left: 100px; 
+  margin-top : 150px;
   min-height: 500px; 
 }
 
