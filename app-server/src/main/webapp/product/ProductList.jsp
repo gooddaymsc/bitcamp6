@@ -50,7 +50,7 @@ tr:hover {
 <!-- 검색 기능 구현해야함 -->
 <c:forEach items="${productList}" var="product">
 <tr>
-    <td><a href='detail?no=${product.productNumber}'>${product.productNumber}</a></td>
+    <td><a href='show?no=${product.productNumber}'>${product.productNumber}</a></td>
     <td>${product.productName}</td> 
     <td>${product.rate}</td> 
     <td>${product.productType.type}</td> 

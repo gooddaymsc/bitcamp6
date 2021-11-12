@@ -11,12 +11,11 @@ a {
 button {
   float: right;
 }
-
 </style>
 
-<h1>상품 정보수정</h1>
+<h1>상품 상세</h1>
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
-        align="left" width="300px" height="700px">
+        align="left" width="300px" height="500px">
 <form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
     
@@ -27,21 +26,7 @@ button {
     <input id='f-name' type='text' name='name' class="form-control" value='${product.productName}' readonly>
   </div>
 </div>
-<%--     <div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
-  <div class="col-sm-6">
-    <input id='f-photo' type='text' name='photo' class="form-control" value='${product.photo}' readonly>
-  </div>
-</div> --%>
-<div class="mb-3 row">
-  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
-  <div class="col-sm-6">
-    <a href="../upload/product/${product.photo}">
-<img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" width="100px" height="100px">
-    </a>
-    <input id='f-photo' type='file' name='photo' class="form-control" >
-  </div>
-</div>
+
     <div class="mb-3 row">
   <label for='f-rate' class="col-sm-2 col-form-label">평점</label>
   <div class="col-sm-6">
@@ -51,19 +36,19 @@ button {
 <div class="mb-3 row">
   <label for='f-type' class="col-sm-2 col-form-label">주종</label>
   <div class="col-sm-6">
-    <input id='f-type' type='text' name='type' class="form-control" value='${product.productType.type}' >
+    <input id='f-type' type='text' name='type' class="form-control" value='${product.productType.type}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
   <div class="col-sm-6">
-    <input id='f-subType' type='text' name='subType' class="form-control" value='${product.productType.subType}' >
+    <input id='f-subType' type='text' name='subType' class="form-control" value='${product.productType.subType}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
   <div class="col-sm-6">
-    <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'>
+    <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'readonly>
   </div>
 </div>
 <c:choose> 
@@ -71,7 +56,7 @@ button {
     <div class="mb-3 row">
       <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
       <div class="col-sm-6">
-        <input id='f-variety' type='text' name='variety' class="form-control" value='${product.variety}' >
+        <input id='f-variety' type='text' name='variety' class="form-control" value='${product.variety}' readonly>
       </div>
     </div>
   </c:when>
@@ -80,38 +65,67 @@ button {
 <div class="mb-3 row">
   <label for='f-volume' class="col-sm-2 col-form-label">용량</label>
   <div class="col-sm-6">
-    <input id='f-volume' type='text' name='volume' class="form-control" value='${product.volume}' >
+    <input id='f-volume' type='text' name='volume' class="form-control" value='${product.volume}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-alcoholLevel' class="col-sm-2 col-form-label">도수</label>
   <div class="col-sm-6">
-    <input id='f-alcoholLevel' type='text' name='alcoholLevel' class="form-control" value='${product.alcoholLevel}' >
+    <input id='f-alcoholLevel' type='text' name='alcoholLevel' class="form-control" value='${product.alcoholLevel}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-sugarLevel' class="col-sm-2 col-form-label">당도</label>
   <div class="col-sm-6">
-    <input id='f-sugarLevel' type='text' name='sugarLevel' class="form-control" value='${product.sugarLevel}' >
+    <input id='f-sugarLevel' type='text' name='sugarLevel' class="form-control" value='${product.sugarLevel}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
   <div class="col-sm-6">
-    <input id='f-acidity' type='text' name='acidity' class="form-control" value='${product.acidity}' >
+    <input id='f-acidity' type='text' name='acidity' class="form-control" value='${product.acidity}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-weight' class="col-sm-2 col-form-label">바디감</label>
   <div class="col-sm-6">
-    <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' >
+    <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' readonly>
   </div>
 </div>
 </div> 
 
 
+<button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
+<c:choose> 
+  <c:when test="${loginUser.authority eq 8}">
+    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-success">상품정보수정</button>
+  </c:when>
+  <c:when test="${loginUser.authority eq 4}">
+    <button type="button" onclick="location.href='../stock/form?productNumber=${product.productNumber}'" class="btn btn-outline-success">재고등록</button>
+    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-success">상품정보수정</button>
+  </c:when>
+  <c:when test="${loginUser.authority eq 2}">
+    <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-success">장바구니등록</button>
+  </c:when>
+</c:choose>
+</form><br>
 
-  <button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
-  <button type="button" onclick="location.href='delete?no=${product.productNumber}'" class="btn btn-outline-success">삭제</button>
-  <button class="btn btn-outline-success">변경</button>
-</form>
+<h4><i class="far fa-star"></i>최근 리뷰<i class="far fa-star"></i></h4>
+
+<c:choose> 
+  <c:when test="${loginUser.authority eq 2}">
+  <i class="far fa-hand-point-right"></i>
+    <a href='review/form?no=${product.productNumber}'> 리뷰남기기</a><br>
+  </c:when>
+</c:choose>
+<hr />
+
+
+<c:forEach items="${reviewList}" var="review">
+<fieldset>
+<h4><i class="far fa-id-badge"></i> ${review.member.id}><a href='review/detail?no=${review.no}'>${review.comment}</a></h4>
+     <i class="far fa-thumbs-up"></i> ${review.score} / 
+     <i class="far fa-calendar-alt"></i> ${review.registeredDate}
+     <hr />
+</fieldset>
+</c:forEach>
