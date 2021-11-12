@@ -20,6 +20,3 @@ public class MainFindpwController extends HttpServlet {
     request.getRequestDispatcher("/template3.jsp").forward(request, response);
   }
 }
-
-
-

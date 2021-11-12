@@ -5,10 +5,10 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
@@ -25,12 +25,25 @@ public class ProductListTypeController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
+
       String type = request.getParameter("type");
       Collection<Product> productList = productDao.findTypeAll(type);
+
+      //      Thumbnails.of(getServletContext().getRealPath("/upload/product") + "/" + filename)
+      //      .size(100, 100)
+      //      .outputFormat("jpg")
+      //      .crop(Positions.CENTER)
+      //      .toFiles(new Rename() {
+      //        @Override
+      //        public String apply(String name, ThumbnailParameter param) {
+      //          return name + "_100x100";
+      //        }
+      //      });
+
       request.setAttribute("type", type);
       request.setAttribute("productList", productList);
       request.setAttribute("pageTitle", "주류목록");

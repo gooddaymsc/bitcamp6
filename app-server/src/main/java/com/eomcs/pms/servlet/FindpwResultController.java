@@ -46,7 +46,7 @@ public class FindpwResultController extends HttpServlet {
         request.getRequestDispatcher("/template3.jsp").forward(request, response);
 
       } else {
-        out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='Login.jsp'</script>");
+        out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='../main/menu'</script>");
         out.flush();
       }
     } catch (Exception e) {
@@ -55,4 +55,3 @@ public class FindpwResultController extends HttpServlet {
     }
   }
 }
-

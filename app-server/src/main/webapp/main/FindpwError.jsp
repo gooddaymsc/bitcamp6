@@ -4,9 +4,10 @@
 
 <html>
 <head>
- <title>비밀번호 변경</title>
+ <title>비밀번호 변경 실패</title>
 </head>
 <style>
+
 #findpw-submit { 
     width: 40%;
     xmargin-top:80px;
@@ -20,12 +21,17 @@
     cursor: pointer; 
     outline: none; 
   }  
+
 </style>
 <body>
 <main id="main-holder">
-<h1>비밀번호 변경</h1>
-<form action=findpwForm method='post' id=findpwResult>
+<h1>비밀번호 변경 실패</h1>
+<form>
   <input type='hidden' name='member_no' id='member_no' value="${member_no}"/>
+
+  <div id="login-error-msg-holder"> 
+  <p id="login-error-msg">비밀번호가 서로 일치하지 않습니다.</p></div>
+
 
   <label class='form-control-plaintext'>변경할 새 비밀번호를 입력해주세요.</label><br>
 
@@ -38,6 +44,7 @@
   
 <br><br>
 <button class="btn btn-primary btn-sm" id="findpw-submit" > 비밀번호 변경 </button>
+ 
  <a href="./loginMenu">로그인</a>
  <a href="./findidMenu">아이디찾기</a>
 

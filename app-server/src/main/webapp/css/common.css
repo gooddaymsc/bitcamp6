@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 html{
 margin:0;
@@ -8,49 +9,63 @@ height:100%;
 }
  
 body {
-  margin-top: 100px;
- padding: 0;
+margin-top: 100px;
+padding: 0;
 width:100%;
 height:100%;
+z-index:7;
 }
 
 header {
-  border: 2px solid red;
+  background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
+  xborder-bottom: 4px solid #14148C;
+  xborder: 4px solid red;
   width:100%;
-  height: 80px; 
+  height: 120px; 
   margin:auto;
+  z-index:10;
 }
-
 .wrap {
-    border: 2px solid grey;
+    xborder: 2px solid grey;
 }
 
 .container-header {
-	padding-left: 30px;
-	padding-right: 30px;
+	xpadding-left: 30px;
+	xpadding-right: 30px;
 /* 	 position:fixed; 
- */    width: 100%;
+ */    xwidth: 100%;
+ height:100%;
 }
 
 #content {
   border: 2px dashed yellow;
   margin-left: 100px; 
+  margin-top : 150px;
   min-height: 500px; 
 }
 
-
 aside {
-  border: 2px solid green;
-  float: left;
-  width: 90px;
-  min-height: 300px; 
+	position: fixed;
+  top: 180px; 
+  border: 2px solid white;
+  float: right;
+  width: 80px;
+  border-radius: 7px; 
+  background-color: #3a3a3a; 
+  box-shadow: 0px 0px 5px 2px black; 
+  right: 50%; 
+  margin-right: -720px; 
+  text-align:center; 
+  
 }
 
 footer {
   border: 1px solid blue;
-  clear: left;
+  width:100%;
+  margin-top:55px;
+  right: 0;
+clear: left; 
 }
-
  /* 
  @media (min-width: 768px) {
   .container {

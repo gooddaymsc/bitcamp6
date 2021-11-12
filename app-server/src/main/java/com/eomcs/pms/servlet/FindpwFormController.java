@@ -36,13 +36,11 @@ public class FindpwFormController extends HttpServlet {
     try {
       memberDao.update(member);
       sqlSession.commit();
-      request.getRequestDispatcher("./Login.jsp").forward(request, response);
+      request.getRequestDispatcher("../main/menu").forward(request, response);
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
 
