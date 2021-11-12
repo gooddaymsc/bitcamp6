@@ -17,13 +17,23 @@ font-size: 19px;
 font-weight: bold; 
 color:#3a3a3a;
 }
-
+.id{
+font-size: 15px; 
+font-weight: bold; 
+color:black;
+}
+#aside{
+width:170px;
+padding:20px;
+background-color: white;
+}
 
 #wine_border{
 position:center;
 border:1px red;
 }
 
+.root_daum_roughmap { margin: auto !important; }
 
 </style>
 
@@ -31,46 +41,55 @@ border:1px red;
 <body>
 
 
-<aside>
+<aside id="aside">
  <c:choose> 
   <c:when  test="${loginUser eq null}">
-  <a href='./loginMenu' class="btn btn-primary">로그인</a>
-  <a href='../buyer/form' class="btn btn-primary">회원가입</a><br>
-  <a href='../board/list' class="btn btn-primary">게시판</a>
-  <a href='../product/ranking' class="btn btn-primary">오늘의 술</a>
-  <a href='../product/list' class="btn btn-primary">상품</a>
+  <a href='./loginMenu' class="btn btn-light">로그인</a>
+  <a href='../buyer/form' class="btn btn-light">회원가입</a><br>
+  <a href='../board/list' class="btn btn-light">게시판</a>
+  <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
+  <a href='../product/list' class="btn btn-light">상품</a>
   </c:when>
   <c:otherwise>
-  <p>아이디 : ${loginUser.id}</p>
+  <p class="id">${loginUser.id}님</p>
   <br>
-  <a href='logout' class="btn btn-primary">로그아웃</a>
+  
   </c:otherwise>
 </c:choose> 
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
-      <a href='../board/list' class="btn btn-primary">게시판</a>
-      <a href='../product/ranking' class="btn btn-primary">오늘의 술</a>
-      <a href='../product/list' class="btn btn-primary">상품</a>
-      <a href='../product/review/find' class="btn btn-primary">내가남긴리뷰</a>
-      <a href='../cart/list' class="btn btn-primary" >장바구니</a>
-      <a href='../booking/list' class="btn btn-primary">예약</a>
-      <a href='../message/list' class="btn btn-primary">메세지</a>
-      <a href='../buyer/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
+  <div class="btn-group-vertical">
+      <a href='logout' class="btn btn-light" >로그아웃</a>
+      <a href='../board/list' class="btn btn-light">게시판</a>
+      <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
+      <a href='../product/list' class="btn btn-light">상품</a>
+      <a href='../product/review/find' class="btn btn-light">내가남긴리뷰</a>
+      <a href='../cart/list' class="btn btn-light" >장바구니</a>
+      <a href='../booking/list' class="btn btn-light">예약</a>
+      <a href='../message/list' class="btn btn-light">메세지</a>
+      <a href='../buyer/detail?id=${loginUser.id}' class="btn btn-light">개인정보변경</a>
+  </div>
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
-      <a href='../board/list' class="btn btn-primary">게시판</a>
-      <a href='../product/ranking' class="btn btn-primary">오늘의 술</a>
-      <a href='../product/list' class="btn btn-primary">상품</a>
-      <a href='../stock/list?id=${loginUser.id}' class="btn btn-primary">재고</a>
-      <a href='../message/list' class="btn btn-primary">메세지</a>
-      <a href='../seller/detail?id=${loginUser.id}' class="btn btn-primary">개인정보변경</a>
+  <div class="btn-group-vertical">
+      <a href='logout' class="btn btn-light">로그아웃</a>
+      <a href='../board/list' class="btn btn-light">게시판</a>
+      <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
+      <a href='../product/list' class="btn btn-light">상품</a>
+      <a href='../stock/list?id=${loginUser.id}' class="btn btn-light">재고</a>
+      <a href='../message/list' class="btn btn-light">메세지</a>
+      <a href='../seller/detail?id=${loginUser.id}' class="btn btn-light">개인정보변경</a>
+  </div>
   </c:when>
   <c:when test="${loginUser.authority eq 8}">
-      <a href='../board/list' class="btn btn-primary">게시판</a>
-      <a href='../product/list' class="btn btn-primary">상품</a>
-      <a href='../buyer/list' class="btn btn-primary">회원(구매자)관리</a>
-      <a href='../seller/list' class="btn btn-primary">회원(판매자)관리</a>
-      <a href='../message/list' class="btn btn-primary">메세지</a>
+  <div class="btn-group-vertical">
+      <a href='logout' class="btn btn-light">로그아웃</a>
+      <a href='../board/list' class="btn btn-light">게시판</a>
+      <a href='../product/list' class="btn btn-light">상품</a>
+      <a href='../buyer/list' class="btn btn-light">회원(구매자)관리</a>
+      <a href='../seller/list' class="btn btn-light">회원(판매자)관리</a>
+      <a href='../message/list' class="btn btn-light">메세지</a>
+  </div>
   </c:when>
 </c:choose> 
 </aside>
@@ -209,6 +228,19 @@ trList.forEach(function(trTag) {
     //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
   };
 });
+</script>
+
+<div id="daumRoughmapContainer1636730805461" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<script charset="UTF-8">
+  new daum.roughmap.Lander({
+    "timestamp" : "1636730805461",
+    "key" : "282de",
+    "mapWidth" : "640",
+    "mapHeight" : "360"
+  }).render();
 </script>
 
 </body> 

@@ -14,8 +14,8 @@ import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 
-@WebServlet("/product/detail")
-public class ProductDetailController extends HttpServlet {
+@WebServlet("/product/show")
+public class ProductShowController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ProductDao productDao;
@@ -47,8 +47,9 @@ public class ProductDetailController extends HttpServlet {
 
       }
       request.setAttribute("product", product);
-      request.setAttribute("pageTitle", "상품정보수정");
-      request.setAttribute("contentUrl", "/product/ProductDetail.jsp");
+      request.setAttribute("reviewList", reviewList);
+      request.setAttribute("pageTitle", "상품상세보기");
+      request.setAttribute("contentUrl", "/product/ProductShow.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
