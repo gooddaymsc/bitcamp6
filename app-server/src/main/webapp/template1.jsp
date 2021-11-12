@@ -12,12 +12,18 @@
   <link rel="stylesheet" href="${contextRoot}/css/common.css"> 
   <link rel="shortcut icon" href="${contextRoot}/favicon.ico" type="image/x-icon">
   <link rel="icon" href="${contextRoot}/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet" >
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Praise&display=swap" rel="stylesheet"> 
   
   <script src="https://kit.fontawesome.com/26add2f61b.js" crossorigin="anonymous"></script>
   <script src="${contextRoot}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="${contextRoot}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script src="${contextRoot}/node_modules/sweetalert2/dist/sweetalert2.js"></script>
 </head>
+
+
 <body>
 <div class="container">
 
