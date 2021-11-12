@@ -91,7 +91,7 @@ div.desc {
      </c:if>
 <div class="responsive">
       <div class="gallery">
-        <img src = "../image/${product.photo}.jpg"  name="photo" align="middle"  width="600" height="400">
+        <img src = "../upload/product/${product.photo}_100x100.jpg"  name="photo" align="middle"  width="600" height="400">
         <div class="desc">
         <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
         <p class=""> - 평점: ${product.rate}점</p>
