@@ -4,8 +4,10 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h1>상품 상세</h1>
+ <a href="../upload/product/${product.photo}">
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="500px" >
+        </a>
 <form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
     
@@ -25,9 +27,7 @@
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
-    <a href="../upload/product/${product.photo}">
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" width="100px" height="100px">
-    </a>
     <input id='f-photo' type='file' name='photo' class="form-control" >
   </div>
 </div>
