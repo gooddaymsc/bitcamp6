@@ -25,7 +25,7 @@ tr:hover {
           <th>닉네임</th>
           <th>이메일</th>
           <th>생일</th>
-          <th>사진</th>
+          <!-- <th>사진</th> -->
           <th>전화번호</th>
           <th>레벨</th>
           <th>상태</th>
@@ -42,7 +42,7 @@ tr:hover {
             <td>${buyer.member.nickname}</td>
             <td>${buyer.member.email}</td>
             <td>${buyer.member.birthday}</td>
-            <td>${buyer.member.photo}</td>
+            <%-- <td>${buyer.member.photo}</td> --%>
             <td>${buyer.member.phoneNumber}</td>
             <td>${buyer.member.level}</td>
             <td>${buyer.member.active}</td>
@@ -51,9 +51,6 @@ tr:hover {
         </c:forEach>
       </tbody>
     </table>
-<footer>
-<a href='../main/logout' class="btn btn-primary">로그아웃</a>
-</footer>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
