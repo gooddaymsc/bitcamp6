@@ -4,21 +4,25 @@
 
 <style>
   header {
-  background: linear-gradient(#983246 15%, #700F33 85%);
+  height: 400px;
+  background-image: url('../image/menu.jpg');
     position: fixed;
-    height:150px;
     top: 0;
     left: 0;
     right: 0;
+    background-repeat : no-repeat;
+    background-size : cover;
   }
   .logo {
-    xborder: 1px solid #5f6;
-    position: absolute;
-    float: left;
+    border: 1px solid #5f6;
+    position: fixed;
+    width:120px;
+    top:60px;
+    float: middle;
     xpadding: 20px;
-    left:100px;
-    top:30px;
-    width: 120px;
+    xmargin: 40 0 0 100;
+    xmargin: 40 600;
+    margin-left:50%;
     height: 80px;
     xoverflow: hidden;
     z-index: 10;
@@ -34,45 +38,75 @@
     z-index: 10;
   }
   .wrap {
-  position: absolute;
-    xborder: 2px solid grey;
+  position: fixed;
+    border: 2px solid grey;
+    
       width: 950px;
     height: 60px;
     float: left;
-    left: 270px;
-    top: 50px;
+    left: 200px;
+    top: 200px;
     xpadding-right : 150px;
   }
 
 .search-class { 
-  position: relative;
-  width: 400px;
-  top: 10px;
-  right: -950px;
-  margin-right: 10px;
-  xborder: 1px solid;
+  position: fixed;
+  background-color: #443C3C;
+  width: 1280px;
+  top: 0px;
+  xright: -950px;
+  xmargin-right: 10px;
+  border: 1px solid;
   height: 35px;
   
 }
 .search-class a {
+  position: relative;
+  top:0px;
+  left: 1000px;
     text-decoration: none;
     color: white;
     cursor: pointer;
-    vertical-align : middle;
+    xvertical-align : middle;
     font-weight:bolder;
-    margin-left:5px;
+    xmargin-left:5px;
     font-size : small;
+        xz-index: 10;
     
 }
 
 .f-text:hover {
     color: black;
 } 
-.search-bar-fieldset #f-search {
+  
+/* .search-button{
+    xposition: absolute;
+    xrigth: -900px;
+    xmargin-rigth: 100px;
+    xtop: 0;
+    xleft: -1100px;
+    width: 20x;
+    height: 20px;
+    xobject-fit: fill;
+    xz-index: 10;
+}  */
+.search-button img{
+  position: absolute;
+  top:5px;
+  right:120px;
+      width: 20x;
+    height: 20px;
+    object-fit: fill;
+} 
+button 
+  {border:0; padding:0; background:transparent; cursor:pointer; *overflow:visible; }
+
+ .search-bar-fieldset #f-search {
     position:absolute;
     top: 0px;
-    right: -2px;
-    height: 35px;
+    xmargin-right: 40px;
+    right: 50px;
+    height: 30px;
     text-indent: 5px;
     padding: 10px;
     line-height: 32px;
@@ -83,35 +117,28 @@
     background: #fff;
     width: 200px;
     margin-right: 65px;
-    
-}
-.search-button {
-    position:absolute;
-    top: 0px;
-    right : 10px;
-    width: 55px;
-    height: 35px;
-    xmargin-right: 10px;
-    xmargin-left: -2px;
-    background-color: #3b1358;
-    color: #fff;
-}
+} 
+
  .nav a {
     position:relative;
     bottom: -20px;
     text-decoration: none;
-    color: white;
+    color: black;
     cursor: pointer;
     padding-left: 30px;
     padding-right: 30px;
-    font-weight:bolder;
+    xfont-weight:bolder;
     margin-left:5px;
+    font-family: fantasy;
 }
 .nav a:hover {
     color: black;
     }
 /* 네비바 마우스 오버시 밑줄 */
 .dropdown-menu a::after {
+}
+.nav-item {
+  border: 2px solid #000;
 }
 .nav-item a::after {
   content: "";
@@ -133,6 +160,24 @@
     display: block;
     margin-top: 20px;
   }
+  .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
  /* 드롭다운 메뉴 속성 */
   .dropdown-menu a {
     position:relative;
@@ -146,6 +191,7 @@
   width: 1250px;
  }
 </style>
+
 <head>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
@@ -170,15 +216,15 @@
   </div>
   <fieldset class="search-bar-fieldset">
     <form action='search' method='post'>
-      <button  class="search-button">검색</button>
       <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
+      <button class="search-button"><img class="search-img" src="../image/magnifying-glass.png"></button>
     </form>
   </fieldset>
 </div>
 <div class='wrap'>
 <ul class="nav">
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">와인</a>
+  <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">Wine</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=1">레드</a></li>
     <li><a href="../product/listSubType?no=2">화이트</a></li>
@@ -188,7 +234,7 @@
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=위스키">위스키</a>
+  <a class="nav-link active" aria-current="page" href="../product/listType?type=위스키">Whiskey</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=6">아메리칸</a></li>
     <li><a href="../product/listSubType?no=7">스카치(몰트)</a></li>
@@ -197,7 +243,7 @@
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=브랜디/꼬냑">브랜디 · 꼬냑</a>
+  <a class="nav-link active" aria-current="page" href="../product/listType?type=브랜디/꼬냑">Brandy · Cognac</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=10">브랜디</a></li>
     <li><a href="../product/listSubType?no=11">꼬냑</a></li>
@@ -205,7 +251,7 @@
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=리큐르/보드카">리큐르 · 보드카</a>
+  <a class="nav-link active" aria-current="page" href="../product/listType?type=리큐르/보드카">liqueur · Vodka</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=13">리큐르</a></li>
     <li><a href="../product/listSubType?no=14">진</a></li>
@@ -216,7 +262,7 @@
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=전통주">전통주</a>
+  <a class="nav-link active" aria-current="page" href="../product/listType?type=전통주">Traditional</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=19">한국</a></li>
     <li><a href="../product/listSubType?no=20">중국</a></li>
