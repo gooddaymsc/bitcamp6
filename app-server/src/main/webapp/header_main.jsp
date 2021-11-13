@@ -1,40 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <html>
 
 <style>
 
-img {
-height:400px;
-}
 footer { 
   position:absolute;
   top:1600px;
 }
 
- header {
- xboarder:2px solid yellow;
-  xheight: 400px;
-  xbackground-image: url('../image/menu.jpg');
-      xbackground-repeat : no-repeat;
-    xbackground-size : cover;
-    xposition: fixed;
-    xtop: 0;
-    xleft: 0;
-    xright: 0;
-  } 
-
   .logo1 {
-  display:inline-block;
-  text-algin:center;
-  xborder: 1px solid #5f6;
     position: absolute;
-    left: 41%;
+    xborder: 3px solid red;
+    xleft: 41%;
     top:50px;
-    width: 200px;
+    left:50%;
+    transform:translate(-50%,0);
+    width: 300px;
     height: 120px;
     xoverflow: hidden;
-    z-index: 10;
+    xz-index: 10;
     }
 
     .logo1 img {
@@ -46,7 +33,7 @@ footer {
     object-fit: fill;
     z-index: 10;
   }
-@media(max-width:1000px){
+@media(max-width:800px){
   .logo1 {
   display:none;
   }
@@ -54,14 +41,16 @@ footer {
     display:none;
   }
 }
-@media(min-width:1000px){
+@media(min-width:800px){
   .logo2 {
   display:none;
   }
 } 
+
+
   .logo2 {
     xborder: 1px solid #5f6;
-    position: relative;
+    position: absolute;
     xfloat: left;
     xpadding: 20px;
     left:50px;
@@ -83,36 +72,24 @@ footer {
   }
 .search-class { 
   xborder : 2px solid black;
-  position: absolute;
-  width: 600px;
+  position: relative;
+  width: 620px;
   top: 0;
-  right:150px;
+  left:650px;
   xmargin-right: 150px;
   height: 35px;
-      z-index: 10;
-  
+  z-index: 1;
 }
-.search-class a {
-  position: relative;
-    top: 4px;
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-    xvertical-align : bottom;
-    xmargin-top:10px;
-    padding:5px;
-    font-weight:bolder;
-        z-index: 10;
-}
+
 .f-text:hover {
     color: black;
 } 
 .search-bar-fieldset #f-search {
-xborder : 2px solid green;
+  xborder : 2px solid green;
     position:absolute;
     top: 0;
-    xright:0;
-    height: 35px;
+    left:375px;
+    height: 30px;
     text-indent: 5px;
     padding: 10px;
     line-height: 32px;
@@ -120,18 +97,38 @@ xborder : 2px solid green;
     font-size: 12px;
     color: #7c8389;
     background: #fff;
-    width: 230px;
-    margin-right: 0;
-        xz-index: 10;
-    
-    
+    width: 180px;
+    xmargin-right: 0;
+    xz-index: 10;
+}
+.search-class-menu {
+  position:absolute;
+  right:250px;
+  xmargin-right: 200px;
+  xright : 110px;
+  xborder: 2px solid yellow;
+  weight: 150px;
+  height: 35px;
+}
+.search-class-menu a {
+  position: relative;
+    top: 4px;
+    font-weight:bold;
+    font-size : 10px;
+    text-decoration: none;
+    color: #c5c6c2;
+    cursor: pointer;
+    xvertical-align : bottom;
+    xmargin-top:10px;
+    padding:5px;
 }
 .wrap {
   position: absolute;
   top:0;
   right:0;
   left:0;
-  border: 2px solid black;
+  xborder: 2px solid white;
+  text-align:center;
       wegiht: 100%;
       height: 400px;
       z-index:10;
@@ -139,26 +136,25 @@ xborder : 2px solid green;
  .nav {
   position: absolute;
     xborder: 2px solid grey;
-    left:25%;
-      width: 950px;
+      width: 880px;
     height: 60px;
-    xleft: 300px;
     top: 230px;
-    xpadding-right : 150px;
-        text-align: center;
+    left:50%;
+    transform:translate(-50%,0);
+      text-align: center;
+    display:inline-block;
     
   } 
  .nav a {
- 
     position:relative;
     bottom: -20px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
     padding-left: 30px;
     padding-right: 30px;
     xfont-weight:bolder;
-    margin-left:10px;
+    xmargin-left:10px;
     font-size : x-large;
     font-family: fantasy;
     
@@ -166,10 +162,18 @@ xborder : 2px solid green;
 .nav a:hover {
     color: black;
     }
-/* 네비바 마우스 오버시 밑줄 */
 .dropdown-menu a::after {
+  xcontent: "";
+  display: block;
+  xfont-weight: 700;
+  xborder-bottom: 3px solid #000;
+  transition: width 250ms ease-out;
+  left: 0;
+  right: 0;
+  width: 0;
 }
-.nav-item a::after {
+/* 네비바 마우스 오버시 밑줄 */
+.nav-item > a::after {
   content: "";
   display: block;
   border-bottom: 3px solid #000;
@@ -178,7 +182,7 @@ xborder : 2px solid green;
   right: 0;
   width: 0;
 }
-  /* 네비바 마우스 오버시 밑줄 */
+
   .nav-item a:hover::after {
     width: 100%;
     left: 0;
@@ -186,44 +190,53 @@ xborder : 2px solid green;
   }
 /* 메뉴 마우스 오버시 드롭다운 */
   .nav-item:hover .dropdown-menu {
+    xborder: 2px solid blue;
     display: block;
     margin-top: 20px;
+        weight:100px;
+    
   }
+  .dropdown-menu {
+  position:relative;
+  xborder : 2px solid green;
+  }
+  
  /* 드롭다운 메뉴 속성 */
   .dropdown-menu a {
     position:relative;
     top :5px;
     color: #000;
+    xborder: 2px solid black;
     text-decoration: none;
     font-weight: normal;
     text-align: center;
     font-size: small;
   }
-   .nav-link active {
+/*    .nav-link active {
   width: 1250px;
-  }
+  } */
 button 
   {border:0; padding:0; background:transparent; cursor:pointer; *overflow:visible; }
 
  .search-button {
-  border: 5px solid black;
-  xfloat:right;
-    position:relative;
-    top: 0px;
+  xborder: 5px solid black;
+    position:absolute;
+    top: 1px;
+    right: 70px;
     xright : 17px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     background-repeat : repeat;
     background-size : cover;
-    xz-index:6;
+    z-index:2;
     
 } 
 .search-button img{
   xposition: absolute;
   xtop:5px;
   xright:120px;
-      width: 30x;
-    height: 30px;
+      width: 20x;
+    height: 20px;
         object-fit: fill;
     
         xz-index: 10;
@@ -251,15 +264,26 @@ button
 <div class='wrap'>
 <!-- 검색 -->
 	<div class="logo1">
-	  <a class="navbar-brand1" href="../main/menu"><img src="../image/logo.png"></a>
+	  <a class="navbar-brand1" href="../main/menu"><img src="../image/logoW.png"></a>
 	</div>
 	<div class="logo2">
-	  <a class="navbar-brand2" href="../main/menu"><img src="../image/logo.png"></a>
+	  <a class="navbar-brand2" href="../main/menu"><img src="../image/logoW.png"></a>
 	</div>
 	<div class="search-class">
 	  <div class="search-class-menu">
-	    <a class='f-text' href='../main/loginMenu'>로그인</a>
-	    <a class='f-text' href='../buyer/form'>회원가입</a>
+	   <c:choose> 
+      <c:when  test="${loginUser eq null}">
+	    <a id='visitor' class='f-text' href='../main/loginMenu'>로그인</a>
+	    <a id='visitor' class='f-text' href='../buyer/form'>회원가입</a>
+	    </c:when>
+      <c:when  test="${(loginUser.authority eq 2) ||(loginUser.authority eq 4)}">
+	    <a id='loginUser'class='f-text' href=''>MyPage</a>
+      </c:when>
+      <c:when  test="${loginUser.authority eq 8}">
+	    <a id='admin' class='f-text' href=''>관리자페이지</a>
+      </c:when>
+	    
+	   </c:choose>
 	  </div>
 	  <fieldset class="search-bar-fieldset">
 	    <form action='search' method='post'>
@@ -270,7 +294,7 @@ button
 	</div>
 <ul class="nav">
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">Wine</a>
+  <a id='type-menu' class="nav-link active" aria-current="page" href="../product/listType?type=와인">Wine</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=1">레드</a></li>
     <li><a href="../product/listSubType?no=2">화이트</a></li>

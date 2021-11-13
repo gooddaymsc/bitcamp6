@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url('https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
@@ -26,25 +27,6 @@ html{
 	  height: 500px;
 	     z-index:-1;
 }  */
-.html-white1 {
-	xborder: 2px solid blue;
-  position: absolute;
-    width: 100%;
- height: 600px;
-  background-color:white;
-   z-index:-1;
-
-}
-.html-color2 {
-	top:600px;
-	xborder: 2px solid yellow;
-  position: absolute;
-    width: 100%; 
- height: 600px;
-   background-color:#f5d6bb;
-   z-index:-1;
-   
-}
 
 @font-face {
     font-family: 'Cafe24Oneprettynight';
@@ -61,7 +43,7 @@ height:100%;
 z-index:7;
 }
 
-header {
+.header {
   xbackground-color: #983246;
   xborder: 4px solid #14148C;
   xborder: 4px solid red;
@@ -69,6 +51,7 @@ header {
   xheight: 125px; 
   xmargin:auto;
   xz-index:10;
+    z-index:10;
 }
 .wrap {
     xborder: 2px solid grey;
@@ -76,10 +59,12 @@ header {
 
 
 #content {
+	 xposition: relative;
   border: 2px dashed yellow;
   margin-top : 50px;
   min-height: 500px; 
   max-height:100%;
+  z-index:0;
 }
 
 aside {

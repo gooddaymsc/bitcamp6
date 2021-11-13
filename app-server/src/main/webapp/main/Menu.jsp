@@ -68,13 +68,6 @@ font-weight: bold;
 color:black;
 }
 
-#aside{ 
-top:410px;
-  width:170px;
-  padding:20px;
-  background-color: white;
-}
-
 #border{
   margin-left: 115px;
   margin-top: 30px;
@@ -87,72 +80,16 @@ top:410px;
 
 }
 
-#f-map-daum {
-xpositon: fix;
+.map {
   background-color:yellow;
   border: 4px solid #14148C;
   height:500px;
-  weight:100%;
   
 }
 </style>
 
 </head>
 <body>
-
-
-<aside id="aside">
- <c:choose> 
-  <c:when  test="${loginUser eq null}">
-  <a href='./loginMenu' class="btn btn-light">로그인</a>
-  <a href='../buyer/form' class="btn btn-light">회원가입</a><br>
-  <a href='../board/list' class="btn btn-light">게시판</a>
-  <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
-  <a href='../product/list' class="btn btn-light">상품</a>
-  </c:when>
-  <c:otherwise>
-  <p class="id">${loginUser.id}님</p>
-  <br>
-  
-  </c:otherwise>
-</c:choose> 
-<c:choose> 
-  <c:when test="${loginUser.authority eq 2}">
-  <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light" >로그아웃</a>
-      <a href='../board/list' class="btn btn-light">게시판</a>
-      <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
-      <a href='../product/list' class="btn btn-light">상품</a>
-      <a href='../product/review/find' class="btn btn-light">내가남긴리뷰</a>
-      <a href='../cart/list' class="btn btn-light" >장바구니</a>
-      <a href='../booking/list' class="btn btn-light">예약</a>
-      <a href='../message/list' class="btn btn-light">메세지</a>
-      <a href='../buyer/detail?id=${loginUser.id}' class="btn btn-light">개인정보변경</a>
-  </div>
-  </c:when>
-  <c:when test="${loginUser.authority eq 4}">
-  <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light">로그아웃</a>
-      <a href='../board/list' class="btn btn-light">게시판</a>
-      <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
-      <a href='../product/list' class="btn btn-light">상품</a>
-      <a href='../stock/list?id=${loginUser.id}' class="btn btn-light">재고</a>
-      <a href='../message/list' class="btn btn-light">메세지</a>
-      <a href='../seller/detail?id=${loginUser.id}' class="btn btn-light">개인정보변경</a>
-  </div>
-  </c:when>
-  <c:when test="${loginUser.authority eq 8}">
-  <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light">로그아웃</a>
-      <a href='../board/list' class="btn btn-light">게시판</a>
-      <a href='../product/list' class="btn btn-light">상품</a>
-      <a href='../buyer/list' class="btn btn-light">회원(구매자)관리</a>
-      <a href='../seller/list' class="btn btn-light">회원(판매자)관리</a>
-      <a href='../message/list' class="btn btn-light">메세지</a>
-  </div>
-  </c:when>
-</c:choose> 
-</aside>
 
 <div class = 'container-ranking' >
 <h1 class='b'> Top Lists </h1>
@@ -263,11 +200,6 @@ xpositon: fix;
   </button>
 </div>
 </div>
-
-<div class="f-map-daum" id="f-map-daum">
-  <div id="daumRoughmapContainer1636730805461" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-</div>
-
 <script>
   function distplay(){    
 	  if($('input:radio[id=btnradio1]').is(':checked')){

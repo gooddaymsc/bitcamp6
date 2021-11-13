@@ -18,28 +18,16 @@ footer {
   top:1600px;
 }
 
- header {
- position:fixed;
- xboarder:2px solid yellow;
-  xheight: 400px;
-  xbackground-image: url('../image/menu.jpg');
-      xbackground-repeat : no-repeat;
-    xbackground-size : cover;
-    xposition: fixed;
-    xtop: 0;
-    xleft: 0;
-    xright: 0;
-  } 
-
   .logo1 {
   display:inline-block;
   text-algin:center;
   xborder: 1px solid #5f6;
     position: fixed;
     top:0;
-    left:30px;
-    width: 200px;
+    width: 300px;
     height: 100px;
+    left:50%;
+    transform:translate(-50%,0);
     xoverflow: hidden;
     z-index: 10;
     }
@@ -54,7 +42,7 @@ footer {
     z-index: 10;
   }
 @media(max-width:1000px){
-  .logo1 {
+  .logo2 {
   display:none;
   }
   .nav a{
@@ -62,19 +50,19 @@ footer {
   }
 }
 @media(min-width:1000px){
-  .logo2 {
+  .logo1 {
   display:none;
   }
 } 
   .logo2 {
     xborder: 1px solid #5f6;
-    position: relative;
+    position: fixed;
     xfloat: left;
     xpadding: 20px;
     left:50px;
-    top:20px;
-    width: 120px;
-    height: 80px;
+    top:10px;
+    width: 140px;
+    height: 100px;
     xoverflow: hidden;
     z-index: 10;
     
@@ -83,8 +71,8 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 120px;
-    height: 80px;
+    width: 140px;
+    height: 100px;
     object-fit: fill;
     z-index: 10;
   }
@@ -132,24 +120,14 @@ footer {
     
     
 }
-.wrap {
-  position: absolute;
-  top:0;
-  right:0;
-  left:0;
-  border: 2px solid black;
-      wegiht: 100%;
-      height: 400px;
-      z-index:10;
-  } 
  .nav {
   position:fixed;
-    border: 2px solid grey;
+    xborder: 2px solid grey;
     left:25%;
       width: 950px;
     height: 60px;
     xleft: 300px;
-    top: 5px;
+    top: 30px;
     xpadding-right : 150px;
         text-align: center;
     
@@ -158,23 +136,31 @@ footer {
     position:relative;
     bottom: -20px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
     padding-left: 30px;
     padding-right: 30px;
     xfont-weight:bolder;
     margin-left:10px;
-    font-size : x-large;
+    font-size : large;
     font-family: fantasy;
     
 }
 .nav a:hover {
     color: black;
     }
-/* 네비바 마우스 오버시 밑줄 */
 .dropdown-menu a::after {
+  xcontent: "";
+  display: block;
+  xfont-weight: 700;
+  xborder-bottom: 3px solid #000;
+  transition: width 250ms ease-out;
+  left: 0;
+  right: 0;
+  width: 0;
 }
-.nav-item a::after {
+/* 네비바 마우스 오버시 밑줄 */
+.nav-item > a::after {
   content: "";
   display: block;
   border-bottom: 3px solid #000;
@@ -183,7 +169,7 @@ footer {
   right: 0;
   width: 0;
 }
-  /* 네비바 마우스 오버시 밑줄 */
+
   .nav-item a:hover::after {
     width: 100%;
     left: 0;
@@ -191,47 +177,28 @@ footer {
   }
 /* 메뉴 마우스 오버시 드롭다운 */
   .nav-item:hover .dropdown-menu {
+    xborder: 2px solid blue;
     display: block;
     margin-top: 20px;
+        weight:100px;
+    
   }
+  .dropdown-menu {
+  position:relative;
+  xborder : 2px solid green;
+  }
+  
  /* 드롭다운 메뉴 속성 */
   .dropdown-menu a {
     position:relative;
     top :5px;
     color: #000;
+    xborder: 2px solid black;
     text-decoration: none;
     font-weight: normal;
     text-align: center;
     font-size: small;
   }
-   .nav-link active {
-  width: 1250px;
-  }
-button 
-  {border:0; padding:0; background:transparent; cursor:pointer; *overflow:visible; }
-
- .search-button {
-  border: 5px black;
-  xfloat:right;
-    position:relative;
-    top: 0px;
-    right : 17px;
-    width: 55px;
-    height: 35px;
-    background-repeat : repeat;
-    background-size : cover;
-    z-index:6;
-    
-} 
-.search-button img{
-  xposition: absolute;
-  xtop:5px;
-  xright:120px;
-      width: 20x;
-    height: 20px;
-        z-index: 10;
-    
-} 
 </style>
 <head>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
@@ -254,10 +221,10 @@ button
 <div class='wrap'>
 <!-- 검색 -->
   <div class="logo1">
-    <a class="navbar-brand1" href="../main/menu"><img src="../image/logo.png"></a>
+    <a class="navbar-brand1" href="../main/menu"><img src="../image/logoW.png"></a>
   </div>
   <div class="logo2">
-    <a class="navbar-brand2" href="../main/menu"><img src="../image/logo.png"></a>
+    <a class="navbar-brand2" href="../main/menu"><img src="../image/logoW.png"></a>
   </div>
   <div class="search-class">
     <div class="search-class-menu">
@@ -273,7 +240,7 @@ button
   </div>
 <ul class="nav">
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">Wine</a>
+  <a id='type-menu' class="nav-link active" aria-current="page" href="../product/listType?type=와인">Wine</a>
   <ul class="dropdown-menu">
     <li><a href="../product/listSubType?no=1">레드</a></li>
     <li><a href="../product/listSubType?no=2">화이트</a></li>
