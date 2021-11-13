@@ -2,19 +2,96 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1> 오늘의 술 </h1>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
+
+#ranking_container{
+  xborder:1px dashed red;
+  xmargin-top: 30px;
+  
+}
+
+
+h1 {
+    margin-top:30px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Praise', cursive;
+    text-align: center;
+}
+
+tr a {
+    font-size: 18px; 
+    font-weight: bold; 
+    text-decoration: none;
+    color: black;
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+tr a:visited {
+    color: black;
+}
+tr:hover {
+    cursor: pointer;
+}
+
+#product_info{
+    font-size: 16px; 
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+
+#product_rate{
+    font-size: 25px; 
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+
+#product_find{
+    font-size: 14px; 
+    font-family: Cafe24Oneprettynight;
+    padding: 10px;  
+    color: white; 
+    background-color: black; 
+    cursor: pointer; 
+    outline: none; 
+    margin-left:55px;
+}
+
+#best_label{
+  font-family: Cafe24Oneprettynight;
+  padding: 39px; 
+  font-size: 23px; 
+  word-spacing:146px;
+  font-weight: bold; 
+  color: #fb8b12;
+  margin-left:58px;
+}
+
+
+</style>
+
+
+<h1> Ranking </h1>
+<Br>
 <body>
- <table border=1>
+<label id="best_label">
+ Best1 Best2 Best3 Best4 Best5 
+</label>
+ <table>
     <c:forEach items="${productList}" var="product">
      <td>
-      <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
-        <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-        <p class="card-text"> - 평점: ${product.rate}점</p>
-        <p class="card-text"> - 주종: ${product.productType.type} </p>
-        <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
-        <p class="card-text"> - 용량: ${product.volume} </p>
-      </div> 
+      <div id="ranking_container" style="width: 13rem;">
+        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:13rem; height:270px;">
+        <a href="detail?no=${product.productNumber}" class="productName">${product.productName}</a>
+        <p class="rate" id="product_rate">${product.rate}</p>
+        <p class="type" id="product_info">  주종: ${product.productType.type} </p>
+        <p class="level" id="product_info"> 도수: ${product.alcoholLevel}%</p>
+        <p class="volume" id="product_info"> 용량: ${product.volume}ml</p>
+       <span role="button" id="product_find">판매처찾기 <i class="fas fa-search"></i></span>
+      </div>
     </td>
     </c:forEach>
  </table>

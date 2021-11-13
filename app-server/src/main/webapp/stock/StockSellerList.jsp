@@ -35,7 +35,9 @@
     <td>${stock.stocks}</td> 
     <td>${stock.price}</td> 
     <td><a href='../cart/form?no=${stock.stockNumber}'>
-    <img src="https://media.istockphoto.com/vectors/add-to-cart-icon-shopping-cart-icon-vector-illustration-vector-id1179275901?k=20&m=1179275901&s=170667a&w=0&h=YN3VNlg_HuhSrcscbxZAdXIaYDF5Mr1CjOFAix7VLaU=" alt="장바구니" height="30" width="30" ></a></td>
+    <img src="https://media.istockphoto.com/vectors/add-to-cart-icon-shopping-cart-icon-vector-illustration-vector-id1179275901?k=20&m=1179275901&s=170667a&w=0&h=YN3VNlg_HuhSrcscbxZAdXIaYDF5Mr1CjOFAix7VLaU=" alt="장바구니" height="30" width="30" >
+    </a>
+    </td>
     
 </tr>
 </c:forEach>
