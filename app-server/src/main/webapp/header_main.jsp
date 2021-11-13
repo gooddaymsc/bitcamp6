@@ -3,6 +3,7 @@
 <html>
 
 <style>
+
 img {
 height:400px;
 }
@@ -10,28 +11,27 @@ footer {
   position:absolute;
   top:1600px;
 }
-.wrap {
-  position:
-}
+
  header {
-  height: 400px;
+ xboarder:2px solid yellow;
+  xheight: 400px;
   xbackground-image: url('../image/menu.jpg');
       xbackground-repeat : no-repeat;
     xbackground-size : cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    xposition: fixed;
+    xtop: 0;
+    xleft: 0;
+    xright: 0;
   } 
 
   .logo1 {
-    xborder: 1px solid #5f6;
+  display:inline-block;
+  text-algin:center;
+  xborder: 1px solid #5f6;
     position: absolute;
-    xfloat: left;
-    xpadding: 20px;
-    left:600px;
-    top:80px;
-    width: 160px;
+    left: 41%;
+    top:50px;
+    width: 200px;
     height: 120px;
     xoverflow: hidden;
     z-index: 10;
@@ -61,7 +61,7 @@ footer {
 } 
   .logo2 {
     xborder: 1px solid #5f6;
-    position: absolute;
+    position: relative;
     xfloat: left;
     xpadding: 20px;
     left:50px;
@@ -82,54 +82,74 @@ footer {
     z-index: 10;
   }
 .search-class { 
-  position: relative;
-  width: 400px;
-  top: 10px;
-  right: -950px;
-  margin-right: 10px;
-  xborder: 1px solid;
+  xborder : 2px solid black;
+  position: absolute;
+  width: 600px;
+  top: 0;
+  right:150px;
+  xmargin-right: 150px;
   height: 35px;
+      z-index: 10;
+  
 }
 .search-class a {
+  position: relative;
+    top: 4px;
     text-decoration: none;
     color: black;
     cursor: pointer;
     xvertical-align : bottom;
-    margin-top:10px;
+    xmargin-top:10px;
+    padding:5px;
     font-weight:bolder;
+        z-index: 10;
 }
-
 .f-text:hover {
     color: black;
 } 
 .search-bar-fieldset #f-search {
+xborder : 2px solid green;
     position:absolute;
-    top: -2px;
-    right: 30px;
+    top: 0;
+    xright:0;
     height: 35px;
     text-indent: 5px;
     padding: 10px;
     line-height: 32px;
-    border: 2px solid #530030;
-    border: 2px solid #3b1358;
+    border: 2px solid #45483c;
     font-size: 12px;
     color: #7c8389;
     background: #fff;
     width: 230px;
-    xmargin-right: 60px;
+    margin-right: 0;
+        xz-index: 10;
+    
     
 }
-
-  .nav {
-  xposition: absolute;
-    border: 2px solid grey;
+.wrap {
+  position: absolute;
+  top:0;
+  right:0;
+  left:0;
+  border: 2px solid black;
+      wegiht: 100%;
+      height: 400px;
+      z-index:10;
+  } 
+ .nav {
+  position: absolute;
+    xborder: 2px solid grey;
+    left:25%;
       width: 950px;
     height: 60px;
-    left: 300px;
-    top: 170px;
+    xleft: 300px;
+    top: 230px;
     xpadding-right : 150px;
-  }
+        text-align: center;
+    
+  } 
  .nav a {
+ 
     position:relative;
     bottom: -20px;
     text-decoration: none;
@@ -186,24 +206,28 @@ button
   {border:0; padding:0; background:transparent; cursor:pointer; *overflow:visible; }
 
  .search-button {
-  border: 5px black;
+  border: 5px solid black;
   xfloat:right;
-    position:absolute;
+    position:relative;
     top: 0px;
-    right : 17px;
-    width: 55px;
-    height: 35px;
+    xright : 17px;
+    width: 30px;
+    height: 30px;
     background-repeat : repeat;
     background-size : cover;
-    z-index:6;
+    xz-index:6;
     
 } 
 .search-button img{
   xposition: absolute;
   xtop:5px;
   xright:120px;
-      width: 20x;
-    height: 20px;
+      width: 30x;
+    height: 30px;
+        object-fit: fill;
+    
+        xz-index: 10;
+    
 } 
 </style>
 <head>
@@ -222,29 +246,28 @@ button
 
 <header>
 <!-- 로고 -->
-<div class="logo1">
-  <a class="navbar-brand1" href="../main/menu"><img src="../image/Bdrinker.png"></a>
-</div>
-<div class="logo2">
-  <a class="navbar-brand2" href="../main/menu"><img src="../image/Bdrinker.png"></a>
-</div>
-
-<!-- 검색 -->
-<div class="search-class">
-  <div class="search-class-menu">
-    <a class='f-text' href='../main/loginMenu'>로그인</a>
-    <a class='f-text' href='../buyer/form'>회원가입</a>
-  </div>
-  <fieldset class="search-bar-fieldset">
-    <form action='search' method='post'>
-      <button  class="search-button"><img class="search-img" src="../image/search.png"></button>
-      <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
-    </form>
-  </fieldset>
-</div>
 
 <!-- 메인로고 -->
 <div class='wrap'>
+<!-- 검색 -->
+	<div class="logo1">
+	  <a class="navbar-brand1" href="../main/menu"><img src="../image/logo.png"></a>
+	</div>
+	<div class="logo2">
+	  <a class="navbar-brand2" href="../main/menu"><img src="../image/logo.png"></a>
+	</div>
+	<div class="search-class">
+	  <div class="search-class-menu">
+	    <a class='f-text' href='../main/loginMenu'>로그인</a>
+	    <a class='f-text' href='../buyer/form'>회원가입</a>
+	  </div>
+	  <fieldset class="search-bar-fieldset">
+	    <form action='search' method='post'>
+	      <button  class="search-button"><img class="search-img" src="../image/search.png"></button>
+	      <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
+	    </form>
+	  </fieldset>
+	</div>
 <ul class="nav">
 <li class="nav-item">
   <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">Wine</a>

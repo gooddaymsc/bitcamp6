@@ -1,5 +1,8 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+@import url('https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
 
 html{
   margin:0;
@@ -8,14 +11,14 @@ html{
   height:100%;
   text-align: center;
 }
-img {
+/* img {
 	border: 2px solid red;
   width: 100%;
   xheight: 400px;
   position:relative;
   object-fit: cover;
      z-index:-1;
-}
+} */
 /* .html-line {
 	  position:absolute;
 	 border: 2px solid black;
@@ -24,7 +27,7 @@ img {
 	     z-index:-1;
 }  */
 .html-white1 {
-	border: 2px solid blue;
+	xborder: 2px solid blue;
   position: absolute;
     width: 100%;
  height: 600px;
@@ -34,7 +37,7 @@ img {
 }
 .html-color2 {
 	top:600px;
-	border: 2px solid yellow;
+	xborder: 2px solid yellow;
   position: absolute;
     width: 100%; 
  height: 600px;
@@ -42,6 +45,14 @@ img {
    z-index:-1;
    
 }
+
+@font-face {
+    font-family: 'Cafe24Oneprettynight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ 
 body {
 	margin:0;
 padding: 0;
@@ -66,17 +77,17 @@ header {
 
 #content {
   border: 2px dashed yellow;
-  margin-top : 150px;
+  margin-top : 50px;
   min-height: 500px; 
-  height:100%;
+  max-height:100%;
 }
 
 aside {
 	position: fixed;
-  top: 300px; 
+  xtop: 300px; 
   border: 2px solid white;
   float: right;
-  width: 50px;
+  width: 100px;
   border-radius: 7px; 
   background-color: #3a3a3a; 
   box-shadow: 0px 0px 5px 2px black; 
