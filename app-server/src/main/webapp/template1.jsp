@@ -19,9 +19,17 @@
   <script src="${contextRoot}/node_modules/sweetalert2/dist/sweetalert2.js"></script>
 </head>
 <body>
-<div class="container">
-
-<jsp:include page="/header.jsp"/>
+<div class = "first-container"> 
+  <img class = "html-img" src="../image/menu.jpg" ></img>
+  <div class="html-line" >
+    <div class = "html-white1">
+    <div class = "html-color2">
+    </div> 
+  </div> 
+  </div>
+</div>
+  <div class="container">
+<jsp:include page="/header_all.jsp"/>
 <jsp:include page="/sidebar.jsp"/>
 
 <div id="content">

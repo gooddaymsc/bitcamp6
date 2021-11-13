@@ -3,11 +3,21 @@
 <html>
 
 <style>
+img {
+height:400px;
+}
+footer { 
+  position:absolute;
+  top:1600px;
+}
+.wrap {
+  position:
+}
  header {
   height: 400px;
-  background-image: url('../image/menu.jpg');
-      background-repeat : no-repeat;
-    background-size : cover;
+  xbackground-image: url('../image/menu.jpg');
+      xbackground-repeat : no-repeat;
+    xbackground-size : cover;
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +27,7 @@
   .logo1 {
     xborder: 1px solid #5f6;
     position: absolute;
-    float: left;
+    xfloat: left;
     xpadding: 20px;
     left:600px;
     top:80px;
@@ -52,7 +62,7 @@
   .logo2 {
     xborder: 1px solid #5f6;
     position: absolute;
-    float: left;
+    xfloat: left;
     xpadding: 20px;
     left:50px;
     top:20px;
@@ -111,10 +121,8 @@
 }
 
   .nav {
-  position: relative;
-    float: left;
-  xfloat: center;
-    xborder: 2px solid grey;
+  xposition: absolute;
+    border: 2px solid grey;
       width: 950px;
     height: 60px;
     left: 300px;
@@ -179,7 +187,7 @@ button
 
  .search-button {
   border: 5px black;
-  float:right;
+  xfloat:right;
     position:absolute;
     top: 0px;
     right : 17px;
@@ -211,13 +219,17 @@ button
   <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
 </head>
 <body>
+
 <header>
+<!-- 로고 -->
 <div class="logo1">
-  <a class="navbar-brand1" href="../main/menu"><img src="../image/Dinker.png"></a>
+  <a class="navbar-brand1" href="../main/menu"><img src="../image/Bdrinker.png"></a>
 </div>
 <div class="logo2">
-  <a class="navbar-brand2" href="../main/menu"><img src="../image/Dinker.png"></a>
+  <a class="navbar-brand2" href="../main/menu"><img src="../image/Bdrinker.png"></a>
 </div>
+
+<!-- 검색 -->
 <div class="search-class">
   <div class="search-class-menu">
     <a class='f-text' href='../main/loginMenu'>로그인</a>
@@ -230,6 +242,8 @@ button
     </form>
   </fieldset>
 </div>
+
+<!-- 메인로고 -->
 <div class='wrap'>
 <ul class="nav">
 <li class="nav-item">

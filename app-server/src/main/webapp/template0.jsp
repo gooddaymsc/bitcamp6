@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <c:set scope="page" var="contextRoot" value="${pageContext.servletContext.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -21,9 +19,18 @@
   <script src="${contextRoot}/node_modules/sweetalert2/dist/sweetalert2.js"></script>
 </head>
 <body>
-<div class="container">
-
-<jsp:include page="/header_all.jsp"/>
+<div class = "first-container"> 
+  <div class="html-line" >
+    <img class = "html-img" src="../image/menu.jpg" ></img>
+    <div class = "html-white1">
+    <div class = "html-color2">
+    </div> 
+  </div> 
+  </div>
+</div>
+  <div class="container">
+<jsp:include page="/header_main.jsp"/>
+<jsp:include page="/sidebar.jsp"/>
 
 <div id="content">
 <jsp:include page="${contentUrl}"/>
@@ -32,6 +39,6 @@
 
 </div><!-- .container -->
 
-<jsp:include page="/footer.jsp"/>
 </body>
+<jsp:include page="/footer.jsp"/>
 </html>

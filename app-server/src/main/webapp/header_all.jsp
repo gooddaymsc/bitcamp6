@@ -4,8 +4,9 @@
 
 <style>
  header {
-  height: 400px;
+  height: 200px;
   background-image: url('../image/menu.jpg');
+  background-position: center 25%;
       background-repeat : no-repeat;
     background-size : cover;
     position: fixed;
@@ -13,42 +14,6 @@
     left: 0;
     right: 0;
   } 
-
-  .logo1 {
-    xborder: 1px solid #5f6;
-    position: absolute;
-    float: left;
-    xpadding: 20px;
-    left:600px;
-    top:80px;
-    width: 160px;
-    height: 120px;
-    xoverflow: hidden;
-    z-index: 10;
-    }
-
-    .logo1 img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 120px;
-    object-fit: fill;
-    z-index: 10;
-  }
-@media(max-width:1000px){
-  .logo1 {
-  display:none;
-  }
-  .nav a{
-    display:none;
-  }
-}
-@media(min-width:1000px){
-  .logo2 {
-  display:none;
-  }
-} 
   .logo2 {
     xborder: 1px solid #5f6;
     position: absolute;
@@ -125,7 +90,7 @@
     position:relative;
     bottom: -20px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
     padding-left: 30px;
     padding-right: 30px;

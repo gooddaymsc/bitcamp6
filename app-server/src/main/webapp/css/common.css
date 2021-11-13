@@ -2,14 +2,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 html{
-margin:0;
- padding: 0;
-width:100%;
-height:100%;
+  margin:0;
+  padding: 0;
+  width:100%;
+  height:100%;
+  text-align: center;
 }
- 
+img {
+	border: 2px solid red;
+  width: 100%;
+  xheight: 400px;
+  position:relative;
+  object-fit: cover;
+     z-index:-1;
+}
+/* .html-line {
+	  position:absolute;
+	 border: 2px solid black;
+	     width: 100%;
+	  height: 500px;
+	     z-index:-1;
+}  */
+.html-white1 {
+	border: 2px solid blue;
+  position: absolute;
+    width: 100%;
+ height: 600px;
+  background-color:white;
+   z-index:-1;
+
+}
+.html-color2 {
+	top:600px;
+	border: 2px solid yellow;
+  position: absolute;
+    width: 100%; 
+ height: 600px;
+   background-color:#f5d6bb;
+   z-index:-1;
+   
+}
 body {
-margin-top: 100px;
+	margin:0;
 padding: 0;
 width:100%;
 height:100%;
@@ -18,38 +52,31 @@ z-index:7;
 
 header {
   xbackground-color: #983246;
-  xborder-bottom: 4px solid #14148C;
+  xborder: 4px solid #14148C;
   xborder: 4px solid red;
-  width:100%;
+  xwidth:100%;
   xheight: 125px; 
-  margin:auto;
-  z-index:10;
+  xmargin:auto;
+  xz-index:10;
 }
 .wrap {
     xborder: 2px solid grey;
 }
 
-.container-header {
-	xpadding-left: 30px;
-	xpadding-right: 30px;
-/* 	 position:fixed; 
- */    xwidth: 100%;
- height:100%;
-}
 
 #content {
   border: 2px dashed yellow;
-  margin-left: 100px; 
   margin-top : 150px;
   min-height: 500px; 
+  height:100%;
 }
 
 aside {
 	position: fixed;
-  top: 180px; 
+  top: 300px; 
   border: 2px solid white;
   float: right;
-  width: 80px;
+  width: 50px;
   border-radius: 7px; 
   background-color: #3a3a3a; 
   box-shadow: 0px 0px 5px 2px black; 
@@ -60,6 +87,7 @@ aside {
 }
 
 footer {
+	  xposition: absolute;
 	background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
   width:100%;
   margin-top:55px;

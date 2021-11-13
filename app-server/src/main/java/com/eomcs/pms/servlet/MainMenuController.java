@@ -39,7 +39,7 @@ public class MainMenuController extends HttpServlet {
 
       request.setAttribute("pageTitle", "메인");
       request.setAttribute("contentUrl", "/main/Menu.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template0.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
