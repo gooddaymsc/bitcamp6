@@ -89,7 +89,7 @@ body {
     border-radius: 3px; 
     outline: none; 
     padding: 0px 0px 5px 5px
-    outline: none; ; 
+    outline: none; 
   }
  
   #login-form-submit { 

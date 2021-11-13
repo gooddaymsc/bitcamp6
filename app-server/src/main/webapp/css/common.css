@@ -70,12 +70,19 @@ aside {
 }
 
 footer {
-  border: 1px solid blue;
+	background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
   width:100%;
   margin-top:55px;
   right: 0;
-clear: left; 
+  clear: left; 
+  *position:fixed;
+  bottom:0px;
 }
+
+/* img {max-width: 100%; height: auto;}
+span.imageblock {max-width: 100%; height: auto;}
+ */
+ 
  /* 
  @media (min-width: 768px) {
   .container {
