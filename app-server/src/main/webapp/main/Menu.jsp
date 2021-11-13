@@ -30,30 +30,37 @@ h1{
 }
 
 .b{
-font-size: 38px; 
-color:#3a3a3a;
-text-decoration: none;
-font-family: 'Praise', cursive;
-text-align: center;
+  margin-top:30px;
+  
+	font-size: 38px; 
+	color:#3a3a3a;
+	text-decoration: none;
+	font-family: 'Praise', cursive;
+	text-align: center;
 }
 .c{
-font-size: 23px; 
-font-weight: bold; 
-color:#3a3a3a;
-font-family: 'Cafe24Oneprettynight';
-text-align: center;
+	font-size: 23px; 
+	font-weight: bold; 
+	color:#3a3a3a;
+	font-family: 'Cafe24Oneprettynight';
+	text-align: center;
 }
 
 #next-icon{
-xmargin-left:300px;
+	xmargin-left:300px;
 }
 
 #prev-icon{
-xmargin-right:500px;
+	xmargin-right:500px;
 }
 
 #carousel-indicators{
-margin-top:400px;
+	margin-top:400px;
+}
+
+#border{
+  margin-left: 115px;
+  margin-top: 30px;
 }
 
 
@@ -120,7 +127,7 @@ margin-top:400px;
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="10000">
      <h1> 와인 </h1>
-    <table border=1 id="wine_border">
+    <table id="border">
     <c:forEach items="${rankingWine}" var="product">
      <td>
        <div class="wine_ranking" style="width:12rem">
@@ -137,7 +144,7 @@ margin-top:400px;
     </div>
     <div class="carousel-item" data-bs-interval="2000">
      <h1> 위스키 </h1>
-     <table border=1 id="wiskey_border">
+     <table id="border" >
        <c:forEach items="${rankingWhiskey}" var="product">
      <td>
       <div class="wiskey_ranking" style="width: 12rem">
@@ -153,8 +160,8 @@ margin-top:400px;
   </table>   
       </div>
        <div class="carousel-item" data-bs-interval="2000">
-        <h1> 브랜디 꼬냑 </h1>
-     <table border=1 id="brandy_border">
+        <h1> 브랜디/꼬냑 </h1>
+     <table id="border">
        <c:forEach items="${rankingBrandy}" var="product">
      <td>
       <div class="brandy_ranking" style="width: 12rem">
@@ -170,8 +177,8 @@ margin-top:400px;
   </table>   
       </div>
        <div class="carousel-item" data-bs-interval="2000">
-        <h1> 전통주 </h1>
-     <table border=1 id="vodka_border">
+        <h1> 리큐르/보드카 </h1>
+     <table id="border">
        <c:forEach items="${rankingVodka}" var="product">
      <td>
       <div class="vodka_ranking" style="width: 12rem">
@@ -188,7 +195,7 @@ margin-top:400px;
       </div>
   <div class="carousel-item">
    <h1> 전통주 </h1>
-     <table border=1 id="trade_border">
+     <table id="border">
        <c:forEach items="${rankingTrad}" var="product">
      <td>
       <div class="wiskey_ranking" style="width: 12rem">
@@ -216,56 +223,6 @@ margin-top:400px;
   </button>
 </div>
 
-
-
-<%--  
-
- <h1> 브랜디 </h1>
- <table border=1>
-    <c:forEach items="${rankingBrandy}" var="product">
-     <td>
-      <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
-        <a href="../product/detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-        <p class="card-text"> - 평점: ${product.rate}점</p>
-        <p class="card-text"> - 주종: ${product.productType.type} </p>
-        <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
-        <p class="card-text"> - 용량: ${product.volume} </p>
-      </div> 
-    </td>
-    </c:forEach>
- </table>
- <h1> 보드카 </h1>
- <table border=1>
-    <c:forEach items="${rankingVodka}" var="product">
-     <td>
-      <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
-        <a href="../product/detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-        <p class="card-text"> - 평점: ${product.rate}점</p>
-        <p class="card-text"> - 주종: ${product.productType.type} </p>
-        <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
-        <p class="card-text"> - 용량: ${product.volume} </p>
-      </div> 
-    </td>
-    </c:forEach>
- </table>
- <h1> 전통주 </h1>
- <table border=1>
-    <c:forEach items="${rankingTrad}" var="product">
-     <td>
-      <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
-        <a href="../product/detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-        <p class="card-text"> - 평점: ${product.rate}점</p>
-        <p class="card-text"> - 주종: ${product.productType.type} </p>
-        <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
-        <p class="card-text"> - 용량: ${product.volume} </p>
-      </div> 
-    </td>
-    </c:forEach>
- </table>
- --%>
 <script>
   function distplay(){    
 	  if($('input:radio[id=btnradio1]').is(':checked')){

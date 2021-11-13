@@ -2,19 +2,75 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1> 오늘의 술 </h1>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
+
+#ranking_container{
+  xborder:1px dashed red;
+  margin-top: 30px;
+}
+
+
+h1 {
+    margin-top:30px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Praise', cursive;
+    text-align: center;
+}
+
+tr a {
+    font-size: 18px; 
+    font-weight: bold; 
+    text-decoration: none;
+    color: black;
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+tr a:visited {
+    color: black;
+}
+tr:hover {
+    cursor: pointer;
+}
+
+#product_info{
+    font-size: 16px; 
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+
+#product_find{
+font-size: 16px; 
+    font-family: Cafe24Oneprettynight;
+    padding: 10px;
+    font-weight: bold; 
+    color: #b62e29;
+}
+
+
+
+
+</style>
+
+
+<h1> Ranking </h1>
+<br>
 <body>
- <table border=1>
+ <table >
     <c:forEach items="${productList}" var="product">
      <td>
-      <div class="card" style="width: 15rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:14rem; height:300px;">
-        <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-        <p class="card-text"> - 평점: ${product.rate}점</p>
-        <p class="card-text"> - 주종: ${product.productType.type} </p>
-        <p class="card-text"> - 도수: ${product.alcoholLevel}</p>
-        <p class="card-text"> - 용량: ${product.volume} </p>
-      </div> 
+      <div id="ranking_container" style="width: 14rem;">
+        <p class="rate" id="product_info">BEST1${product.rate}</p>
+        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:13rem; height:270px;">
+        <a href="detail?no=${product.productNumber}" class="productName">${product.productName}</a>
+        <p class="type" id="product_info"> 주종: ${product.productType.type} </p>
+        <p class="level" id="product_info"> 도수: ${product.alcoholLevel}%</p>
+        <p class="volume" id="product_info"> 용량: ${product.volume}ml</p>
+       <label id="product_find"> 주변 찾기 <i class="fas fa-search"></i></label>
+      </div>
     </td>
     </c:forEach>
  </table>
