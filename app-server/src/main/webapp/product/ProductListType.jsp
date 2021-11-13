@@ -91,7 +91,7 @@ div.desc {
      </c:if>
 <div class="responsive">
       <div class="gallery">
-        <img src = "../image/${product.photo}.jpg"  name="photo" align="middle"  width="600" height="400">
+        <img src = "../upload/product/${product.photo}_300x300.jpg"  name="photo" align="middle"  width="600" height="400">
         <div class="desc">
         <a href="detail?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
         <p class=""> - 평점: ${product.rate}점</p>
@@ -147,10 +147,10 @@ div.desc {
  <script>
  <!--td.card a  td.card div.card-->
  
-document.querySelectorAll("desc a").forEach((aTag) => {
+document.querySelectorAll(".list-group-item").forEach((aTag) => {
   aTag.onclick = () => false;
 });
-var trList = document.querySelectorAll("responsive"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll(".responsive"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     //console.log(e.currentTarget.querySelector("a").href);

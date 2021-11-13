@@ -70,6 +70,17 @@ public class ProductUpdateController extends HttpServlet {
         product.setPhoto(filename);
 
         Thumbnails.of(getServletContext().getRealPath("/upload/product") + "/" + filename)
+        .size(300, 300)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_300x300";
+          }
+        });
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/product") + "/" + filename)
         .size(1000, 1000)
         .outputFormat("jpg")
         .crop(Positions.CENTER)

@@ -33,6 +33,17 @@ public class ProductListTypeController extends HttpServlet {
       String type = request.getParameter("type");
       Collection<Product> productList = productDao.findTypeAll(type);
 
+      //      Thumbnails.of(getServletContext().getRealPath("/upload/product") + "/" + filename)
+      //      .size(100, 100)
+      //      .outputFormat("jpg")
+      //      .crop(Positions.CENTER)
+      //      .toFiles(new Rename() {
+      //        @Override
+      //        public String apply(String name, ThumbnailParameter param) {
+      //          return name + "_100x100";
+      //        }
+      //      });
+
       request.setAttribute("type", type);
       request.setAttribute("productList", productList);
       request.setAttribute("pageTitle", "주류목록");
