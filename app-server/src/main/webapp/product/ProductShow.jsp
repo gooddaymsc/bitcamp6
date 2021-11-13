@@ -96,7 +96,7 @@ button {
 
 
 
-<button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
+<button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button>
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
     <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-success">상품정보수정</button>
