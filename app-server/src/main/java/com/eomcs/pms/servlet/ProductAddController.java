@@ -60,11 +60,8 @@ public class ProductAddController extends HttpServlet {
       product.setSugarLevel(Integer.parseInt(request.getParameter("sugarLevel")));
       product.setAcidity(Integer.parseInt(request.getParameter("acidity")));
       product.setWeight(Integer.parseInt(request.getParameter("weight")));
-      //      product.setPhoto(request.getParameter("photo"));
 
-      System.out.println("yyyyy");
       Part photoPart = request.getPart("photo");
-      System.out.println("kkkkk");
       if (photoPart.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         photoPart.write(getServletContext().getRealPath("/upload/product") + "/" + filename);
