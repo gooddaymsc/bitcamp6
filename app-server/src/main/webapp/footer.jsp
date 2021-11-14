@@ -3,18 +3,6 @@
 
 <style>
 
-  .fa-facebook {
-  color: black;
-}
-  .fa-instagram {
-  color: black;
-}
-  .fa-twitter {
-  color: black;
-}
-  .fa-linkedin {
-  color: black;
-}
 div {
     display: block;
 }
