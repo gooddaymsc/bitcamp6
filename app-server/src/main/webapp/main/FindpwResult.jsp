@@ -48,7 +48,7 @@
 function isSame() {
     var pw = document.getElementById('pw');
     var confirmPW = document.getElementById('pwCheck');
-    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi');
     var num = pw.search(/[0-9]/g);
     var eng = pw.search(/[a-z]/ig);
     if (pw.value.length < 8 || pw.value.length > 12) {

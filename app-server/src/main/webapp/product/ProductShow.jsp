@@ -1,33 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<style>
-#product_top_detail{
- float:right;
- margin-right: 700px;
 
+    
+<style>/* 
+
+/* @font-face {
+  font-family: "NotoSansKR";
+  src: url("../fonts/notoSansKR/NotoSans-Bold.woff") format("woff");
+  font-style: normal;
 }
 
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("../fonts/openSans/OpenSans-SemiBold.woff") format("woff");
+  unicode-range: U+0020-007E;
+  font-style: normal;
+} */
+
+
+#product_top_detail{
+ float:right;
+ margin-right: 50%;
+}
+
+#product_bottom_detail{
+font-size: 17px; 
+font-family: Cafe24Oneprettynight;
+margin-top:10%;
+clear:both;
+}
+
+
 #product_title{
-font-size: 30px; 
+font-size: 27px; 
 font-weight: bold; 
 font-family: Cafe24Oneprettynight;
-
 }
 
 #product_type{
-font-size: 25px; 
+font-size: 22px; 
 font-family: Cafe24Oneprettynight;
 color: #777777;
 }
 
 
 #product_detail2{
-font-size: 23px; 
+font-size: 20px; 
 font-family: Cafe24Oneprettynight;
 }
 
+#product_detail_label{
+font-weight: bold; 
+font-size: 19px; 
+color: #777777;
+font-family: Cafe24Oneprettynight;
+}
 
 a {
     text-decoration: none;
@@ -35,6 +63,16 @@ a {
 }
 button {
   float: right;
+}
+
+h2 {font-size:8px;}
+.star-rating {width:304px; }
+.star-rating,.star-rating span {display:inline-block; height:55px; overflow:hidden; background:url(../image/icon/star.png)no-repeat; }
+.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
+
+f-rate{
+font-size: 20px; 
+display:inline-block;
 }
 
 
@@ -51,49 +89,40 @@ button {
   <div id='f-name'> ${product.productType.type} > ${product.productType.subType} </div>
  </div>
   <br>
-  <div  id="product_title">
+  <div id="product_title">
     <div id='f-name'> ${product.productName} </div>
   </div>
  
-
   <div id="product_detail2">
-   <div id='f-rate'> ${product.rate}</div>
-   <div id='f-rate'> 당도> ${product.sugarLevel}</div>
-   <div id='f-rate'> 산도> ${product.acidity}</div>
-   <div id='f-rate'> 바디감> ${product.weight}</div>
-  </div>
+<div class="wrap-star">
+    <div class='star-rating'>
+        <span style=${product.rate}/5*100;></span>
+    </div>
+
+<div id='f-rat2' onchange="isSame()" > &nbsp;&nbsp;<span id="same"></span></div>
+<div id='f-rate'> ${product.rate}</div>
+</div>
+   <div id='f-sugarLevel'> 당도> ${product.sugarLevel}</div>
+   <div id='f-acidity'> 산도> ${product.acidity}</div>
+   <div id='f-weight'> 바디감> ${product.weight}</div>
+  </div>  
 </div>
 
-<div class="mb-3 row">
-<label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
-  <div class="col-sm-6">
-    <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'readonly>
-  </div>
-</div>
+<div id="product_bottom_detail" > 
+<br/>
+<hr/>
+<label id="product_detail_label">상품상세정보</label>
+<br>
+<label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지 : ${product.countryOrigin}</label><br>
 <c:choose> 
   <c:when test="${product.productType.type eq '와인'}">
-    <div class="mb-3 row">
-      <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
-      <div class="col-sm-6">
-        <input id='f-variety' type='text' name='variety' class="form-control" value='${product.variety}' readonly>
-      </div>
-    </div>
+      <label for='f-variety' class="col-sm-2 col-form-label">품종 : ${product.variety}</label><br>
   </c:when>
 </c:choose>
 
-<div class="mb-3 row">
-  <label for='f-volume' class="col-sm-2 col-form-label">용량</label>
-  <div class="col-sm-6">
-    <input id='f-volume' type='text' name='volume' class="form-control" value='${product.volume}' readonly>
-  </div>
+ <label for='f-volume' class="col-sm-2 col-form-label">용량 : ${product.volume}</label><br>
+ <label for='f-alcoholLevel' class="col-sm-2 col-form-label">도수 : ${product.alcoholLevel}</label><br>
 </div>
-<div class="mb-3 row">
-  <label for='f-alcoholLevel' class="col-sm-2 col-form-label">도수</label>
-  <div class="col-sm-6">
-    <input id='f-alcoholLevel' type='text' name='alcoholLevel' class="form-control" value='${product.alcoholLevel}' readonly>
-  </div>
-</div>
-
 
 
 <button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button>
@@ -119,7 +148,7 @@ button {
     <a href='review/form?no=${product.productNumber}'> 리뷰남기기</a><br>
   </c:when>
 </c:choose>
-<hr />
+<hr/>
 
 
 <c:forEach items="${reviewList}" var="review">
@@ -130,3 +159,14 @@ button {
      <hr />
 </fieldset>
 </c:forEach>
+
+<script>
+function isSame(){
+var rate=(${product.rate}/5)*100;
+document.ex_form.target_name.value = "100";
+return rate;
+}
+
+</script>
+
+
