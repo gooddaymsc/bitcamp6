@@ -46,6 +46,7 @@ color: #777777;
 
 
 #product_detail2{
+position: absolute; 
 font-size: 20px; 
 font-family: Cafe24Oneprettynight;
 }
@@ -62,7 +63,9 @@ a {
     color: black;
 }
 button {
+
   float: right;
+
 }
 
 h2 {font-size:8px;}
@@ -71,10 +74,25 @@ h2 {font-size:8px;}
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 
 f-rate{
-font-size: 20px; 
+font-size: 30px; 
 display:inline-block;
 }
 
+#find-product { 
+    float:right;
+    margin-right: 55%;
+    margin-top: 160px;
+    width: 250px;
+    height: 50px; 
+    padding: 7px; 
+    border: none; 
+    border-radius: 5px; 
+    color: white; 
+    font-weight: bold;
+    background-color: #3a3a3a; 
+    cursor: pointer; 
+    outline: none; 
+  } 
 
 
 </style>
@@ -98,15 +116,19 @@ display:inline-block;
     <div class='star-rating'>
         <span style=${product.rate}/5*100;></span>
     </div>
+</div>
 
 <div id='f-rat2' onchange="isSame()" > &nbsp;&nbsp;<span id="same"></span></div>
-<div id='f-rate'> ${product.rate}</div>
-</div>
+
    <div id='f-sugarLevel'> 당도> ${product.sugarLevel}</div>
    <div id='f-acidity'> 산도> ${product.acidity}</div>
    <div id='f-weight'> 바디감> ${product.weight}</div>
   </div>  
 </div>
+<br>
+<br>
+<br>
+<button class="btn btn-primary" id="find-product">상품찾아보기</button><br>
 
 <div id="product_bottom_detail" > 
 <br/>

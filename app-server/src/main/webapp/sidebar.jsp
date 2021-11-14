@@ -4,9 +4,8 @@
 
 <style>
 #aside{ 
-top:380px;
-  width:170px;
-  padding:20px;
+ top:380px;
+  width:100px;
   background-color: white;
 }
 </style>

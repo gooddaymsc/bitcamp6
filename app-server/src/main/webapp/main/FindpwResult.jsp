@@ -72,7 +72,7 @@ function isSame() {
             document.getElementById('same').style.color='red';
       }
     }
-  }
+  } 
 </script>
 </main>
 </body>
