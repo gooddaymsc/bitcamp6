@@ -52,9 +52,7 @@ public class SellerAddController extends HttpServlet {
       member.setPhoneNumber(request.getParameter("phoneNumber"));
       //      member.setPhoto(request.getParameter("photo"));
 
-      System.out.println("aaaaa");
       Part photoPart = request.getPart("photo");
-      System.out.println("bbbbb");
       if (photoPart.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         photoPart.write(getServletContext().getRealPath("/upload/seller") + "/" + filename);

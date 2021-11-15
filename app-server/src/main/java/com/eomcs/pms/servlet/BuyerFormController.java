@@ -18,7 +18,9 @@ public class BuyerFormController extends HttpServlet {
     // 출력을 담당할 뷰를 호출한다.
     request.setAttribute("pageTitle", "회원가입(구매자)");
     request.setAttribute("contentUrl", "/buyer/BuyerForm.jsp");
+    System.out.println("aaa");
     request.getRequestDispatcher("/template2.jsp").forward(request, response);
+    System.out.println("bbb");
 
 
   }

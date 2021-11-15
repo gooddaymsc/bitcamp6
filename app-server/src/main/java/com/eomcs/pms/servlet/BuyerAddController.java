@@ -38,6 +38,7 @@ public class BuyerAddController extends HttpServlet {
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    System.out.println("ccc");
 
     try {
       Buyer buyer = new Buyer();
@@ -98,16 +99,17 @@ public class BuyerAddController extends HttpServlet {
       //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
       //    memberList.add(buyer);
       buyer.setMember(member);
-
+      System.out.println("ddd");
       buyerDao.insert(buyer);
+      System.out.println("DDDD");
       sqlSession.commit();
-      System.out.println(1);
+      System.out.println("eee");
       request.setAttribute("pageTitle", "회원가입(구매자)");
-      System.out.println(1);
-      request.setAttribute("contentUrl", "/bueyr/BuyerAdd.jsp");
-      System.out.println(1);
+      System.out.println("fff");
+      request.setAttribute("contentUrl", "/buyer/BuyerAdd.jsp");
+      System.out.println("ggg");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
-      System.out.println(1);
+      System.out.println("hhh");
       response.setHeader("Refresh", "1;url=../main/loginMenu");
 
     } catch (Exception e) {
