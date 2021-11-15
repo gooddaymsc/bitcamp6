@@ -170,8 +170,11 @@ tr:hover {
       </div>
     </div>
 </label>
+
+  <div class="ranking_container">
     <c:forEach items="${productList}" var="product">
       <div class="ranking" style="width: 13rem;">
+      <h2 id ="best_label">Best${product.productNumber}</h2>
         <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg"
           onError="this.src='../image/logo.jpeg'" style="width:13rem; height:270px;">
         <a href="show?no=${product.productNumber}" class="productName">${product.productName}</a>
@@ -182,14 +185,14 @@ tr:hover {
         <span role="button" id="product_find">판매처찾기 <i class="fas fa-search"></i></span>
       </div>
     </c:forEach>
-
+</div>
 
 <script>
-  document.querySelectorAll("div a").forEach((aTag) => {
+  document.querySelectorAll("").forEach((aTag) => {
     aTag.onclick = () => false;
   });
 
-  var trList = document.querySelectorAll("td div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+  var trList = document.querySelectorAll(""); // 리턴 객체는 HTMLCollection 타입 객체이다.
   trList.forEach(function (trTag) {
     trTag.onclick = (e) => {
       //console.log(e.currentTarget.querySelector("a").href);

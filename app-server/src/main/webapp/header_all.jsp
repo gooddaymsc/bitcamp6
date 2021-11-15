@@ -130,6 +130,7 @@ footer {
     top: 30px;
     xpadding-right : 150px;
         text-align: center;
+      z-index:4;
     
   } 
  .nav a {
@@ -199,6 +200,11 @@ footer {
     text-align: center;
     font-size: small;
   }
+  
+  .wrap img{
+  z-index: 3;
+  }
+  
 </style>
 <head>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
@@ -219,6 +225,7 @@ footer {
 
 <!-- 메인로고 -->
 <div class='wrap'>
+<img class="html-img" src="../image/menuD.jpg">
 <!-- 검색 -->
   <div class="logo1">
     <a class="navbar-brand1" href="../main/menu"><img src="../image/logoW.png"></a>

@@ -13,9 +13,6 @@
     top: 0;
     width: 100%;
     height: 100px;
-        left: 0;
-    z-index: 10;
-    
   }
 
   .html-img {
@@ -46,8 +43,8 @@
     position: absolute;
     width: 100%;
     height: 600px;
-    background-color: #f5d6bb;
-    z-index: -1;
+/*     background-color: #f5d6bb;
+ */    z-index: -1;
 
   }
 </style>
@@ -67,7 +64,8 @@
 </head>
 
 <body>
-  <div class="first-container">
+ <!--
+   <div class="first-container">
     <div class="html-line">
       <div class="html-img-container">
         <img class="html-img" src="../image/menuD.jpg"></img>
@@ -78,7 +76,7 @@
       </div>
     </div>
   </div>
-
+ -->
   <div class="container">
     <jsp:include page="/header_all.jsp" />
     <jsp:include page="/sidebar.jsp" />

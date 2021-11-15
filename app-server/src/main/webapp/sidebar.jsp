@@ -6,6 +6,9 @@
 #aside{ 
  top:380px;
   width:100px;
+  top:14em;
+  width:10em;
+  padding:20px;
   background-color: white;
 }
 </style>
