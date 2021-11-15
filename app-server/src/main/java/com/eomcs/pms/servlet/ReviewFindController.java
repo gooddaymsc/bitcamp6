@@ -29,7 +29,7 @@ public class ReviewFindController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    response.setContentType("text/html; charset=UTF-8");
+
     PrintWriter out = response.getWriter();
     // 출력을 담당할 뷰를 호출한다.
     HttpSession session = request.getSession(false);
@@ -49,7 +49,7 @@ public class ReviewFindController extends HttpServlet {
       request.setAttribute("reviewList", reviewList);
       request.setAttribute("pageTitle", "내리뷰");
       request.setAttribute("contentUrl", "/product/review/FindReviewList.jsp");
-      request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
 
     } catch (Exception e) {

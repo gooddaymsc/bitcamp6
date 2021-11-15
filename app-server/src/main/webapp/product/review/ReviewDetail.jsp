@@ -32,3 +32,4 @@
 <a href='../detail?no=${review.productNo}' class="btn btn-primary">목록</a><br>
 
 </form>
+ 

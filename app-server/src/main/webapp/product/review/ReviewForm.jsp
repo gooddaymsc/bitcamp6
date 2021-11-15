@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+ 
 <h1>새리뷰</h1>
 <form action='add' method='post'>  
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${productNumber}' readOnly>

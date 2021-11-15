@@ -36,7 +36,7 @@ public class ReviewListController extends HttpServlet {
       }
       request.setAttribute("pageTitle", "리뷰목록");
       request.setAttribute("contentUrl", "/product/ProductDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
       //      request.getRequestDispatcher("../ProductDetail.jsp").forward(request, response);
 
     } catch (Exception e) {

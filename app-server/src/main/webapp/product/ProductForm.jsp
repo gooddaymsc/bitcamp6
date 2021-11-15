@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1>새상품(MVC)</h1>
+<h1>새상품</h1>
 <form action='add' method='post' enctype="multipart/form-data">
 <div class="mb-3 row">
   <label for='f-productName' class="col-sm-2 col-form-label">상품명</label>
