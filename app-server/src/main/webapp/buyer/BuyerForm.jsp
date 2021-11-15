@@ -30,9 +30,9 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-birthday' class="col-sm-2 col-form-label">생일</label>
+        <label for='f-birthday' class="col-sm-2 col-form-label">* 생일</label>
         <div class="col-sm-6">
-          <input id='f-birthday' type='date' name='birthday' class="form-control"><br>
+          <input id='f-birthday' type='date' name='birthday' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -60,21 +60,21 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-zipcode' class="col-sm-2 col-form-label">우편번호</label>
+        <label for='f-zipcode' class="col-sm-2 col-form-label">* 우편번호</label>
         <div class="col-sm-6">
-          <input id='f-zipcode' type='text' name='zipcode' class="form-control"><br>
+          <input id='f-zipcode' type='text' name='zipcode' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-address' class="col-sm-2 col-form-label">주소</label>
+        <label for='f-address' class="col-sm-2 col-form-label">* 주소</label>
         <div class="col-sm-6">
-          <input id='f-address' type='text' name='address' class="form-control"><br>
+          <input id='f-address' type='text' name='address' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
-        <label for='f-detailAddress' class="col-sm-2 col-form-label">상세주소</label>
+        <label for='f-detailAddress' class="col-sm-2 col-form-label">* 상세주소</label>
         <div class="col-sm-6">
-          <input id='f-detailAddress' type='text' name='detailAddress' class="form-control"><br>
+          <input id='f-detailAddress' type='text' name='detailAddress' class="form-control" required><br>
         </div>
       </div>
       <button class="btn btn-primary btn-sm">등록</button><br>
