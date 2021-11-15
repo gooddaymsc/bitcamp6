@@ -99,17 +99,11 @@ public class BuyerAddController extends HttpServlet {
       //    totalNumberList.set(App.MEMBER_NUMBER_INDEX, buyer.getNumber()+1);
       //    memberList.add(buyer);
       buyer.setMember(member);
-      System.out.println("ddd");
       buyerDao.insert(buyer);
-      System.out.println("DDDD");
       sqlSession.commit();
-      System.out.println("eee");
       request.setAttribute("pageTitle", "회원가입(구매자)");
-      System.out.println("fff");
       request.setAttribute("contentUrl", "/buyer/BuyerAdd.jsp");
-      System.out.println("ggg");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
-      System.out.println("hhh");
       response.setHeader("Refresh", "1;url=../main/loginMenu");
 
     } catch (Exception e) {
