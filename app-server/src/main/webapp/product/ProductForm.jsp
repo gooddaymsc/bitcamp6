@@ -24,7 +24,8 @@
       <option value="와인" >와인</option>
       <option value="위스키">위스키</option>
       <option value="브랜디/꼬냑">브랜디/꼬냑</option>
-      <option value="리큐르/보드카">리큐르/보드카</option>
+      <option value="리큐르/보드카">리큐르/보드카</option> 
+      <option value="전통주">전통주</option>
     </select>
   </div>
 </div>
@@ -105,11 +106,13 @@
     var good_b = ["상세주종", "아메리칸위스키(버번)", "스카치위스키(몰트)", "아이리쉬위스키", "캐나다위스키"];
     var good_c = ["상세주종", "브랜디", "꼬냑", "알마냑"];
     var good_d = ["상세주종", "리큐르", "진", "럼", "보드카", "데낄라", "음료.시럽"];
+    var good_e = ["상세주종", "한국", "중국", "일본", "기타"];
     var target = document.getElementById("good");
     if(e.value == "와인") var d = good_a;
     else if(e.value == "위스키") var d = good_b;
     else if(e.value == "브랜디/꼬냑") var d = good_c;
     else if(e.value == "리큐르/보드카") var d = good_d;
+    else if(e.value == "전통주") var d = good_e;
 
     target.options.length = 0;
  
