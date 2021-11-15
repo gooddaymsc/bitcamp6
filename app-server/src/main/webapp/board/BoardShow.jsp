@@ -89,32 +89,32 @@
 </div>
 <div class="mb-3 row">
   <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
-  <div class="col-sm-6">
-    <input id='f-writer' type='text' name='writer' value='${board.writer.id}'readOnly><br>
+    <div class="col-sm-6">
+  <label for="f-content" class="col-sm-2 col-form-label">${board.writer.id}</label>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-registrationDate' class="col-sm-2 col-form-label">등록일</label> 
   <div class="col-sm-6">
-    <input id='f-registrationDate' type='date' name='registrationDate' value='${board.registrationDate}'readOnly><br>
+     <label for='f-registrationDate' class="col-sm-2 col-form-label">${board.registrationDate}</label>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-views' class="col-sm-2 col-form-label">조회수</label> 
   <div class="col-sm-6">
-    <input id='f-views' type='text' name='views' value='${board.views}'readOnly><br>    
+  <label for='f-views' class="col-sm-2 col-form-label">${board.views}</label>    
   </div>
 </div>
 <div class="mb-3 row">
 	<label for='f-like' class="col-sm-2 col-form-label">좋아요 수</label> 
   <div class="col-sm-6">
-		<input id='f-like' type='text' name='like' value='${board.likes}'readOnly><br>
+  <label for='f-views' class="col-sm-2 col-form-label">${board.views}</label>
   </div>
 </div>
 <div class="mb-3 row">
 	<label for='f-tag' class="col-sm-2 col-form-label">태그</label> 
   <div class="col-sm-6">
-		<input id='f-tag' type='text' name='tag' value='${board.tag}'><br>
+  <label for='f-tag' class="col-sm-2 col-form-label">${board.tag}</label>
   </div>
 </div>
 
@@ -140,7 +140,7 @@
 </form>
 </div>
 </div>
-</section>
+</section>w
 
 <div class="container">
 <h4>댓글 <a class="btn btn-outline-secondary btn-sm">새댓글</a><br>

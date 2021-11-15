@@ -14,7 +14,7 @@
 <aside id="aside">
  <c:choose> 
   <c:when  test="${loginUser eq null}">
-  <a href='./loginMenu' class="btn btn-light">로그인</a>
+  <a href='../main/loginMenu' class="btn btn-light">로그인</a>
   <a href='../buyer/form' class="btn btn-light">회원가입</a><br>
   <a href='../board/list' class="btn btn-light">게시판</a>
   <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
@@ -29,7 +29,7 @@
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
   <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light" >로그아웃</a>
+      <a href='../main/logout' class="btn btn-light" >로그아웃</a>
       <a href='../board/list' class="btn btn-light">게시판</a>
       <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
       <a href='../product/list' class="btn btn-light">상품</a>
@@ -42,7 +42,7 @@
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
   <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light">로그아웃</a>
+      <a href='../main/logout' class="btn btn-light">로그아웃</a>
       <a href='../board/list' class="btn btn-light">게시판</a>
       <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
       <a href='../product/list' class="btn btn-light">상품</a>
@@ -53,7 +53,7 @@
   </c:when>
   <c:when test="${loginUser.authority eq 8}">
   <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light">로그아웃</a>
+      <a href='../main/logout' class="btn btn-light">로그아웃</a>
       <a href='../board/list' class="btn btn-light">게시판</a>
       <a href='../product/list' class="btn btn-light">상품</a>
       <a href='../buyer/list' class="btn btn-light">회원(구매자)관리</a>

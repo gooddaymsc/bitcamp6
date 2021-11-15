@@ -148,10 +148,9 @@ tr:hover {
 }
 </style>
 
-
 <h1> Ranking </h1>
+<body>
 <Br>
-
 <label id="best_label">
     <div class="best_container">
       <div class="col-sm">
@@ -170,8 +169,7 @@ tr:hover {
         Best5
       </div>
     </div>
-    </label>
-  <div class="ranking_container">
+</label>
     <c:forEach items="${productList}" var="product">
       <div class="ranking" style="width: 13rem;">
         <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg"
@@ -184,7 +182,7 @@ tr:hover {
         <span role="button" id="product_find">판매처찾기 <i class="fas fa-search"></i></span>
       </div>
     </c:forEach>
-  </div>
+
 
 <script>
   document.querySelectorAll("div a").forEach((aTag) => {
@@ -201,7 +199,7 @@ tr:hover {
     };
   });
 </script>
-
+</body>
 <%-- 
 <h1> Ranking </h1>
 <Br>

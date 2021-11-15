@@ -63,9 +63,7 @@ a {
     color: black;
 }
 button {
-
-  float: right;
-
+  position: absolute; 
 }
 
 h2 {font-size:8px;}
