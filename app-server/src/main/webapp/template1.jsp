@@ -46,8 +46,9 @@
     height: 600px;
     background-color: #f5d6bb;
     z-index: -1;
-
   }
+  
+  
 </style>
 
 <head>
@@ -83,16 +84,16 @@
     </div>
   </div>
 
-  <div class="container">
+ <div class="container"> 
     <jsp:include page="/header_all.jsp" />
-    <jsp:include page="/sidebar.jsp" />
+    <jsp:include page="/sidebar.jsp"/>
 
     <div id="content">
       <jsp:include page="${contentUrl}" />
     </div><!-- .content -->
 
 
-  </div><!-- .container -->
+  </div>.container
 
   <jsp:include page="/footer.jsp" />
 </body>

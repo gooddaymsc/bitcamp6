@@ -63,7 +63,7 @@ public class ReviewAddController extends HttpServlet {
       product.setRate(reviewDao.avg(review));
       productDao.updateRate(product);
       sqlSession.commit();
-      response.sendRedirect("../detail?no="+review.getProductNo());
+      response.sendRedirect("../show?no="+review.getProductNo());
 
     } catch (Exception e) {
       request.setAttribute("error", e);

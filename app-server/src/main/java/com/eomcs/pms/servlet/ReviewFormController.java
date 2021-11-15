@@ -18,6 +18,7 @@ import com.eomcs.pms.domain.Review;
 @WebServlet("/product/review/form")
 public class ReviewFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
+
   ReviewDao reviewDao;
 
   @Override
@@ -31,7 +32,6 @@ public class ReviewFormController extends HttpServlet {
       throws ServletException, IOException {
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
-    // 출력을 담당할 뷰를 호출한다.
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
@@ -39,18 +39,18 @@ public class ReviewFormController extends HttpServlet {
       out.flush();
       return;
     }
-    // 출력을 담당할 뷰를 호출한다.
     int productNumber = Integer.parseInt(request.getParameter("no"));
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
     try {
       Review review = reviewDao.reviewIs(productNumber, member.getId());
+
       if (review != null) {
         out.printf("<script>alert('이미 등록된 리뷰가 있습니다.'); location.href='../detail?no=%d'</script>", productNumber);
         out.flush();
       } else {
         request.setAttribute("productNumber", productNumber);
         request.setAttribute("pageTitle", "새리뷰");
-        request.setAttribute("contentUrl", "/review/ReviewForm.jsp");
+        request.setAttribute("contentUrl","product/review/ReviewForm.jsp");
         request.getRequestDispatcher("/template2.jsp").forward(request, response);
       }
     } catch(Exception e) {
