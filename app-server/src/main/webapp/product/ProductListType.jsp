@@ -76,11 +76,7 @@
   .p-top {
   margin: 0;
   }
-  /* 
-  .top-row {
-  height:100px;
-  }
-   */
+
   .p-bottom {
   height: 48px;
   }

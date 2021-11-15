@@ -33,7 +33,7 @@ public class ProductListController extends HttpServlet {
       request.setAttribute("productList", productList);
       request.setAttribute("pageTitle", "상품목록");
       request.setAttribute("contentUrl", "/product/ProductList.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
