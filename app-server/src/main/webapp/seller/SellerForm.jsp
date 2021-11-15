@@ -80,13 +80,13 @@
       <div class="mb-3 row">
         <label for='f-businessOpeningTime' class="col-sm-2 col-form-label">* 오픈시간</label>
         <div class="col-sm-6">
-          <input id='f-businessOpeningTime' type='text' name='businessOpeningTime' class="form-control" required><br>
+          <input id='f-businessOpeningTime' type='time' name='businessOpeningTime' class="form-control" required><br>
         </div>
       </div>
       <div class="mb-3 row">
         <label for='f-businessClosingTime' class="col-sm-2 col-form-label">* 마감시간</label>
         <div class="col-sm-6">
-          <input id='f-businessClosingTime' type='text' name='businessClosingTime' class="form-control" required><br>
+          <input id='f-businessClosingTime' type='time' name='businessClosingTime' class="form-control" required><br>
         </div>
       </div>
       <button class="btn btn-primary btn-sm">등록</button><br>
