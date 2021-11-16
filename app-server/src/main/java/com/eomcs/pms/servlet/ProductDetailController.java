@@ -49,7 +49,7 @@ public class ProductDetailController extends HttpServlet {
       request.setAttribute("product", product);
       request.setAttribute("pageTitle", "상품정보수정");
       request.setAttribute("contentUrl", "/product/ProductDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);
