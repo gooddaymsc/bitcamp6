@@ -4,7 +4,6 @@
 
 <style>
 #aside{ 
-  z-index:5;
   top:14em;
   width:10em;
   padding:20px;

@@ -34,6 +34,7 @@ public class ProductDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      System.out.println("AAA");
       int no = Integer.parseInt(request.getParameter("no"));
       Product product = productDao.findByNo(no);
       Collection<Review> reviewList = reviewDao.findAll(no);
