@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
@@ -14,6 +14,10 @@ button {
 </style>
 
  <h1>상품 정보수정</h1>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
  <a href="../upload/product/${product.photo}">
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="700px" >
@@ -23,8 +27,13 @@ button {
     
 <div class="mb-3 row">        
 <div class="mb-3 row">
+<<<<<<< HEAD
   <label for='f-name' class="col-sm-2 col-form-label">상품명</label>
   <div class="col-sm-6">
+=======
+
+  <label for='f-name' class="col-sm-2 col-form-label">상품명</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
     <input id='f-name' type='text' name='name' class="form-control" value='${product.productName}' readonly>
   </div>
 </div>
@@ -48,19 +57,31 @@ button {
   </div>
 </div>
 <div class="mb-3 row">
+<<<<<<< HEAD
   <label for='f-type' class="col-sm-2 col-form-label">주종</label>
+=======
+  <label for='f-type' class="col-sm-2 col-form-label">주종</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
   <div class="col-sm-6">
     <input id='f-type' type='text' name='type' class="form-control" value='${product.productType.type}' >
   </div>
 </div>
 <div class="mb-3 row">
+<<<<<<< HEAD
   <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
+=======
+  <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
   <div class="col-sm-6">
     <input id='f-subType' type='text' name='subType' class="form-control" value='${product.productType.subType}' >
   </div>
 </div>
 <div class="mb-3 row">
+<<<<<<< HEAD
   <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
+=======
+  <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
   <div class="col-sm-6">
     <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'>
   </div>
@@ -68,7 +89,11 @@ button {
 <c:choose> 
   <c:when test="${product.productType.type eq '와인'}">
     <div class="mb-3 row">
+<<<<<<< HEAD
       <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
+=======
+      <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
       <div class="col-sm-6">
         <input id='f-variety' type='text' name='variety' class="form-control" value='${product.variety}' >
       </div>
@@ -95,22 +120,35 @@ button {
   </div>
 </div>
 <div class="mb-3 row">
+<<<<<<< HEAD
   <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
+=======
+  <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
   <div class="col-sm-6">
     <input id='f-acidity' type='text' name='acidity' class="form-control" value='${product.acidity}' >
   </div>
 </div>
 <div class="mb-3 row">
+<<<<<<< HEAD
   <label for='f-weight' class="col-sm-2 col-form-label">바디감</label>
+=======
+  <label for='f-weight' class="col-sm-2 col-form-label">바디감</label>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
   <div class="col-sm-6">
     <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' >
   </div>
 </div>
-</div> 
 
 
 
+<<<<<<< HEAD
   <button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
   <button type="button" onclick="location.href='delete?no=${product.productNumber}'" class="btn btn-outline-success">삭제</button>
+=======
+
+  <button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
+  <button type="button" onclick="location.href='delete?no=${product.productNumber}'" class="btn btn-outline-success">삭제</button>
+>>>>>>> 36b17bf2ecc01c09a3bbfc433591c7d562736d58
   <button class="btn btn-outline-success">변경</button>
 </form>

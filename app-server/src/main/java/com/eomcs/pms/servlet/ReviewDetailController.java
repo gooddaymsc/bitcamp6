@@ -39,7 +39,6 @@ public class ReviewDetailController extends HttpServlet {
       out.flush();
       return;
     }
-
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -57,7 +56,7 @@ public class ReviewDetailController extends HttpServlet {
         request.getRequestDispatcher("/template1.jsp").forward(request, response);
         //        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
       } else {
-        out.printf("<script>alert('본인 리뷰만 수정 및 삭제할 수 있습니다.'); location.href='../detail?no=%d'</script>", review.getProductNo());
+        out.printf("<script>alert('본인 리뷰만 수정 및 삭제할 수 있습니다.'); location.href='../show?no=%d'</script>", review.getProductNo());
         out.flush();
       }
     } catch (Exception e) {
