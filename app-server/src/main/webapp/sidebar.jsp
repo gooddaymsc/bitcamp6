@@ -13,7 +13,7 @@
 </style>
 
 
-<aside id="aside">
+<aside id="aside" >
  <c:choose> 
   <c:when  test="${loginUser eq null}">
   <a href='../main/loginMenu' class="btn btn-light">로그인</a>

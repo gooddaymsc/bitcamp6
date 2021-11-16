@@ -34,6 +34,8 @@ public class BoardUpdateController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    System.out.println("boardError1");
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
@@ -54,6 +56,8 @@ public class BoardUpdateController extends HttpServlet {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
       if (board.getWriter().getId().equals(member.getId())) {
+
+        System.out.println("boardError2");
 
         board.setTitle(request.getParameter("title"));
         board.setContent(request.getParameter("content"));
