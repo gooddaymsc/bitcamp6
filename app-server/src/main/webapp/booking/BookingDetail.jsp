@@ -14,7 +14,7 @@ button {
 }
 .booking-all {
 position: absolute;
-  border:2px solid black;
+  xborder:2px solid black;
 
 width : 1200px;
 height:450px;
