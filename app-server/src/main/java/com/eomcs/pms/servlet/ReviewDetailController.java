@@ -56,7 +56,7 @@ public class ReviewDetailController extends HttpServlet {
         request.getRequestDispatcher("/template2.jsp").forward(request, response);
         //        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
       } else {
-        out.printf("<script>alert('본인 리뷰만 수정 및 삭제할 수 있습니다.'); location.href='../detail?no=%d'</script>", review.getProductNo());
+        out.printf("<script>alert('본인 리뷰만 수정 및 삭제할 수 있습니다.'); location.href='../show?no=%d'</script>", review.getProductNo());
         out.flush();
       }
     } catch (Exception e) {
