@@ -106,7 +106,6 @@ footer {
   xmargin-right: 200px;
   xright : 110px;
   xborder: 2px solid yellow;
-  weight: 150px;
   height: 35px;
 }
 .search-class-menu a {
@@ -192,7 +191,6 @@ footer {
     xborder: 2px solid blue;
     display: block;
     margin-top: 20px;
-        weight:100px;
     
   }
   .dropdown-menu {
@@ -276,10 +274,10 @@ button
 	    <a id='visitor' class='f-text' href='../buyer/form'>회원가입</a>
 	    </c:when>
       <c:when  test="${(loginUser.authority eq 2) ||(loginUser.authority eq 4)}">
-	    <a id='loginUser'class='f-text' href=''>MyPage</a>
+	    <a id='loginUser'class='f-text' href='../main/myPage'>MyPage</a>
       </c:when>
       <c:when  test="${loginUser.authority eq 8}">
-	    <a id='admin' class='f-text' href=''>관리자페이지</a>
+	    <a id='admin' class='f-text' href='../main/myPage'>관리자페이지</a>
       </c:when>
 	    
 	   </c:choose>

@@ -15,7 +15,7 @@ tr:hover {
 }
 </style>
 
-<h1>댓글 목록(MVC + EL + JSTL)</h1>
+<h1>댓글 목록</h1>
 <!-- <a href='form'>이전</a><br> -->
 <a href='form' class="btn btn-outline-primary btn-sm">댓글 작성</a><br>
 <table class="table table-hover">
