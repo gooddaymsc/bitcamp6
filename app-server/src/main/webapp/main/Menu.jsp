@@ -73,17 +73,20 @@ color:black;
   margin-top: 30px;
 }
 
-.root_daum_roughmap { margin: auto !important; 
+.root_daum_roughmap { 
+  margin: auto !important; 
   background-color:yellow;
   border: 4px solid #14148C;
   height:500px;
+  z-index:-2;
 
 }
 
-.map {
-  background-color:yellow;
+#map {
+  background-color:red;
   border: 4px solid #14148C;
   height:500px;
+  z-index:-2;
   
 }
 </style>
@@ -200,14 +203,6 @@ color:black;
   </button>
 </div>
 </div>
-<script>
-  function distplay(){    
-	  if($('input:radio[id=btnradio1]').is(':checked')){
-		  $('#wine').hide();
-    } else{
-  	  $('#wine').show();
- }
-</script>
  
 <script>
 <!-- d.card div.card-->
@@ -226,8 +221,8 @@ trList.forEach(function(trTag) {
 });
 </script>
 
-<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js" ></script>
 <script charset="UTF-8">
   new daum.roughmap.Lander({
     "timestamp" : "1636730805461",

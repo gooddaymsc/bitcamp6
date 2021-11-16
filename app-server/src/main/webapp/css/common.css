@@ -28,12 +28,12 @@ html{
 	     z-index:-1;
 }  */
 
- @font-face {
-    font-family: 'Cafe24Oneprettynight';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
- }
+@font-face {
+   font-family: 'Cafe24Oneprettynight';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
  
 body {
 	margin:0;
@@ -64,7 +64,7 @@ z-index:7;
   margin-top : 50px;
   min-height: 500px; 
   max-height:100%;
-  z-index:0;
+  z-index:2;
 }
 
 aside {

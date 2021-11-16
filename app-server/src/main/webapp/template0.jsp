@@ -28,7 +28,7 @@
   xborder: 2px solid yellow;
   position: absolute;
     width: 100%; 
- height: 600px;
+   height: 600px;
    background-color:#f5d6bb;
    z-index:-1;
    
@@ -51,7 +51,7 @@
 <body>
 <div class = "first-container"> 
   <div class="html-line" >
-    <img id="html-img" class = "html-img" src="../image/menuD.jpg" ></img>
+    <img id="html-img" class = "html-img" src="../image/menuC.jpg" ></img>
     <div class = "html-white1">
     <div class = "html-color2">
     </div> 
