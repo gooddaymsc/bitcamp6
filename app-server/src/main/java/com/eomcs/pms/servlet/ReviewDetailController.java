@@ -39,11 +39,12 @@ public class ReviewDetailController extends HttpServlet {
       out.flush();
       return;
     }
-
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
+    System.out.println("1");
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Review review = reviewDao.findByNo(no);
+      System.out.println(member.getId());
 
       if (review.equals(null)) {
         throw new Exception("해당 번호의 리뷰가 없습니다.");
@@ -53,7 +54,7 @@ public class ReviewDetailController extends HttpServlet {
 
         request.setAttribute("review", review);
         request.setAttribute("pageTitle", "리뷰상세보기");
-        request.setAttribute("contentUrl", "/review/ReviewDetail.jsp");
+        request.setAttribute("contentUrl", "/product/review/ReviewDetail.jsp");
         request.getRequestDispatcher("/template2.jsp").forward(request, response);
         //        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
       } else {
