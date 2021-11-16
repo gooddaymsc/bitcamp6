@@ -13,9 +13,6 @@ tr a:visited {
 tr:hover {
     cursor: pointer;
 }
-table {
-    width: 50%;
-}
 </style>
 
 <h1>메세지 목록</h1>
