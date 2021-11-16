@@ -54,7 +54,7 @@ public class CommentDetailController extends HttpServlet {
         request.setAttribute("comment", comment);
         request.setAttribute("pageTitle", "댓글상세보기");
         request.setAttribute("contentUrl", "/comment/CommentDetail.jsp");
-        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
         //        request.getRequestDispatcher("/comment/CommentDetail.jsp").forward(request, response);
 
       } else {

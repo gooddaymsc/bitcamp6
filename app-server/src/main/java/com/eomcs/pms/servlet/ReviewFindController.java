@@ -30,11 +30,11 @@ public class ReviewFindController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    PrintWriter out = response.getWriter();
     // 출력을 담당할 뷰를 호출한다.
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
+      PrintWriter out = response.getWriter();
       out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
       out.flush();
       return;
@@ -44,12 +44,12 @@ public class ReviewFindController extends HttpServlet {
     try {
       Collection<Review> reviewList = reviewDao.myReview(member.getId());
       if (reviewList.equals(null)) {
-        out.println("작성한 리뷰가 없습니다.");
+        throw new Exception("작성한 리뷰가 없습니다.");
       }
       request.setAttribute("reviewList", reviewList);
       request.setAttribute("pageTitle", "내리뷰");
       request.setAttribute("contentUrl", "/product/review/FindReviewList.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
 
     } catch (Exception e) {

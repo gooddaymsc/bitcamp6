@@ -148,14 +148,20 @@ display:inline-block;
 <button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button>
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
+  <div>
     <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-success">상품정보수정</button>
+  </div>
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
+  <div>
     <button type="button" onclick="location.href='../stock/form?productNumber=${product.productNumber}'" class="btn btn-outline-success">재고등록</button>
     <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-success">상품정보수정</button>
+  </div>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
+  <div>
     <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-success">장바구니등록</button>
+  </div>
   </c:when>
 </c:choose>
 </form><br>
@@ -188,5 +194,4 @@ return rate;
 }
 
 </script>
-
 
