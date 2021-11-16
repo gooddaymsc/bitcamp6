@@ -7,13 +7,12 @@
 <!DOCTYPE html>
 <html>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
 
-@font-face {
-   font-family: 'Cafe24Oneprettynight';
-   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
-   font-weight: normal;
-   font-style: normal;
+body{
+font-family: 'Praise', cursive;
 }
+
 </style>
 
 <head>
