@@ -21,7 +21,6 @@ footer {
     width: 300px;
     height: 120px;
     xoverflow: hidden;
-    xz-index: 10;
     }
 
     .logo1 img {
@@ -31,7 +30,7 @@ footer {
     width: 300px;
     height: 120px;
     object-fit: fill;
-    z-index: 10;
+    z-index: 4;
   }
 @media(max-width:800px){
   .logo1 {
@@ -131,7 +130,7 @@ footer {
   text-align:center;
       wegiht: 100%;
       height: 400px;
-      z-index:10;
+      z-index:4;
   } 
  .nav {
   position: absolute;

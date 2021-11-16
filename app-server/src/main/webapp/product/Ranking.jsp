@@ -86,7 +86,14 @@ tr:hover {
   font-weight: bold; 
   color: #fb8b12;
   }
-
+  
+  .ranking {
+  text-align: center;
+  width:150px;
+  padding: 0;
+/*   border: 2px solid blue;
+ */  }  
+  
  .ranking a {
     font-size: 18px; 
     font-weight: bold; 
@@ -103,15 +110,10 @@ tr:hover {
 }
 
   .col-sm {
-    float:left;
-  padding:0 60px;
     font-family: Cafe24Oneprettynight;
   font-size: 23px; 
   font-weight: bold; 
   color: #fb8b12;
-  }
-  .ranking_container {
-  float:left;
   }
   
 #product_info{
@@ -134,7 +136,6 @@ tr:hover {
     background-color: black; 
     cursor: pointer; 
     outline: none; 
-    margin-left:55px;
 }
 
 #best_label{
@@ -142,41 +143,31 @@ tr:hover {
   font-size: 23px; 
   font-weight: bold; 
   color: #fb8b12;
-  padding: 39px; 
-  word-spacing:146px;
-  margin-left:58px;
+  padding: 5px; 
 }
+  .ranking_container {/* 
+      border: 2px solid;
+   */
+  }
+  
+
+   .image {
+  width:100%;
+  height:auto;
+      margin-bottom: 10px;
+  
+  }
+  
 </style>
 
 <h1> Ranking </h1>
 <body>
-<Br>
-<label id="best_label">
-    <div class="best_container">
-      <div class="col-sm">
-        Best1
-      </div>
-      <div class="col-sm">
-        Best2
-      </div>
-      <div class="col-sm">
-        Best3
-      </div>
-      <div class="col-sm">
-        Best4
-      </div>
-      <div class="col-sm">
-        Best5
-      </div>
-    </div>
-</label>
-
-  <div class="ranking_container">
+<br>
+  <div class="ranking_container row">
     <c:forEach items="${productList}" var="product">
-      <div class="ranking" style="width: 13rem;">
+      <div class="ranking col-sm">
       <h2 id ="best_label">Best${product.productNumber}</h2>
-        <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg"
-          onError="this.src='../image/logo.jpeg'" style="width:13rem; height:270px;">
+        <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg">
         <a href="show?no=${product.productNumber}" class="productName">${product.productName}</a>
         <p class="rate" id="product_rate">${product.rate}</p>
         <p class="type" id="product_info"> 주종: ${product.productType.type} </p>
@@ -200,42 +191,3 @@ tr:hover {
   });
 </script>
 </body>
-<%-- 
-<h1> Ranking </h1>
-<Br>
-<body>
-<label id="best_label">
- Best1 Best2 Best3 Best4 Best5 
-</label>
- <table>
-    <c:forEach items="${productList}" var="product">
-     <td>
-      <div id="ranking_container" style="width: 13rem;">
-        <img align="middle" class = "image" src = "../upload/product/${product.photo}_300x300.jpg" onError="this.src='../image/logo.jpeg'" style="width:13rem; height:270px;">
-        <a href="show?no=${product.productNumber}" class="productName">${product.productName}</a>
-        <p class="rate" id="product_rate">${product.rate}</p>
-        <p class="type" id="product_info">  주종: ${product.productType.type} </p>
-        <p class="level" id="product_info"> 도수: ${product.alcoholLevel}%</p>
-        <p class="volume" id="product_info"> 용량: ${product.volume}ml</p>
-       <span role="button" id="product_find">판매처찾기 <i class="fas fa-search"></i></span>
-      </div>
-    </td>
-    </c:forEach>
- </table>
-</body> 
-
-<script>
-document.querySelectorAll("div a").forEach((aTag) => {
-  aTag.onclick = () => false;
-});
-
-var trList = document.querySelectorAll("td div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
-trList.forEach(function(trTag) {
-  trTag.onclick = (e) => {
-    //console.log(e.currentTarget.querySelector("a").href);
-    //e.currentTarget.querySelector("a").click();
-    window.location.href = e.currentTarget.querySelector("a").href;
-    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
-  };
-});
-</script> --%>
