@@ -130,7 +130,7 @@ footer {
     top: 30px;
     xpadding-right : 150px;
         text-align: center;
-      z-index:4;
+      z-index:10;
     
   } 
  .nav a {
