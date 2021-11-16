@@ -40,11 +40,9 @@ public class ReviewDetailController extends HttpServlet {
       return;
     }
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
-    System.out.println("1");
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Review review = reviewDao.findByNo(no);
-      System.out.println(member.getId());
 
       if (review.equals(null)) {
         throw new Exception("해당 번호의 리뷰가 없습니다.");
