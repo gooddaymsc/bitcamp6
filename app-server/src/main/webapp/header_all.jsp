@@ -4,19 +4,17 @@
 
 <style>
 
-/* img {
-height:150px;
-position:fixed;
-left:0;
-top:0;
-right:0;
-weight:100%;
-xz-index:3;
-} */
-footer { 
-  position:absolute;
-  top:1600px;
-}
+  .html-img {
+    xborder: 2px solid red;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    object-fit: cover;
+    xz-index: 4;
+  }
+  
 
   .logo1 {
   display:inline-block;
@@ -199,6 +197,10 @@ footer {
     font-weight: normal;
     text-align: center;
     font-size: small;
+  }
+  
+  .wrap {
+  margin-top:120px;
   }
   
   .wrap img{
