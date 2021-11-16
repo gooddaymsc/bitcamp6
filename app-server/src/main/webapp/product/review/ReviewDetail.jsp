@@ -3,7 +3,7 @@
     trimDirectiveWhitespaces="true" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<h1>리뷰 변경</h1>
+<h1>review</h1>
 <form action='update' method='post'>
     <input type='hidden' id='f-reviewNo' type='text' name='reviewNo' class="form-control" value='${review.no}' readonly>
 <div class="mb-3 row">
@@ -29,6 +29,7 @@
     <a href='delete?no=${review.no}' class="btn btn-primary">삭제</a> 
   </c:when>
 </c:choose>
-<a href='../detail?no=${review.productNo}' class="btn btn-primary">목록</a><br>
+<a href='../show?no=${review.productNo}' class="btn btn-primary">목록</a><br>
 
 </form>
+ 

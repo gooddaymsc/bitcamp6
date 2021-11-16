@@ -6,7 +6,7 @@
 <style>
 #chat-room {
     height:400px;
-    width:1100px;
+    width:600px;
     background-color:#6884b3;
     /* 임시 */
     outline:2px solid black;
@@ -25,15 +25,16 @@
     display:block;
     background-color:rgba(0,0,0,0.15);
     border-radius:1rem;
-    text-align:center;
+    text-align:left;
     padding:0.3rem 0;
     color:white;
-    font-size:1.6rem;
+    font-size:0.5rem;
 }
 
 #chat-room .chat-message {
     margin-left:3rem;
     position:relative;
+    padding:10px;
 }
 
 #chat-room .chat-message > section {
@@ -63,19 +64,21 @@
     border-radius:1rem;
     clear:both;
     font-weight:bold;
-    font-size:1.46rem;
+    font-size:1rem;
     box-shadow: 1px 1px 0 rgba(0,0,0,0.3);
 }
 
 #chat-room .chat-message.mine > div {
     background-color:#FDF01B;
+    text-align:right;
     float:right;
     box-shadow: -1px 1px 0 rgba(0,0,0,0.3);
 }
 
 #chat-room .chat-message.other > div {
     background-color:#FDF01B;
-    float:left:0px;
+    text-align:left;
+    float:left;
     box-shadow: -1px 1px 0 rgba(0,0,0,0.3);
 }
 
@@ -157,46 +160,47 @@
 <form action='update' method='post'>
 
 <div id="chat-room">
-    <div class="message-box">
+    <div class="message-box" id="message-box">
 
 <c:set var="id" value="${loginUser.id}"/>
 <c:forEach items="${messages}" var="message">
 <c:choose>
-<c:when test="${theOtherId eq loginUser.id}">
-<div class="chat-message other">
+<c:when test="${message.theOtherId eq loginUser.id}">
+<div class="chat-message mine">
 <div class="message-group" data-date-str="${message.registrationDate}">
-    <section><i class="fa fa-user"></i></section>
-    <span>${loginUser.id}</span> : ${message.content}
+    ${message.content}
 </div></div>
 </c:when>
     <c:otherwise>  
-    <div class="chat-message mine" style = float:right:0px>
+    <div class="chat-message other">
     <div class="message-group" data-date-str="${message.registrationDate}">
-    <section><i class="fa fa-user"></i></section>
-    <span>${message.theOtherId}</span> : ${message.content}
+    <i class="fa fa-user"></i><span> ${message.theOtherId}</span> : ${message.content}
     </div></div>
    </c:otherwise>
 </c:choose>
 </c:forEach>
 
-</div></div>
-
+</div>
+        <input type='hidden' id='text-input' type='text' name='no' value="${roomNumber}"><br><br>
+        <input type='hidden' id='text-input' type='text' name='other' value="${theOtherId}"><br><br>
     <div class="input-box">
-    <div class="btn-plus">
-<!-- type='hidden' -->
- <input type='hidden' id='f-roomNo' type='text' name='no' value="${roomNumber}"><br><br>
- <input type='hidden' id='f-other' type='text' name='other' value="${theOtherId}"><br><br>
- <input id='f-content' type='text' name='content'><br><br>
- <!--  <button class="btn btn-primary" >전송</button> -->
-  <button class="btn btn-primary ">전송</button> 
-  </div></div>
+        <input type="text" id="text-input" name='content'>
+        <div class="btn-plus">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </div>
+        <div class="btn-emo">
+            <i class="fa fa-smile-o" aria-hidden="true"></i>
+        </div>
+            <button class="btn-submit">전송</button>
+    </div>
+</div>
   
    <a href='list' class="btn btn-outline-primary btn-sm">이전</a><br><br>
 </form>
 
-<!-- 오른쪽 바 하단 가르키기? -->
-<!-- <script type="text/javascript">
-$(".message-box").scrollTop($(".message-box")[0].scrollHeight);
-</script> -->
+<script>
+var element = document.getElementById("message-box");
+element.scrollTop = element.scrollHeight;
+</script>
 
 

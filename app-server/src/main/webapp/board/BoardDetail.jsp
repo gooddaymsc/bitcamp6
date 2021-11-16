@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+    
 <h1>게시글 상세</h1>
 <form action='update' method='post'>
-<div class="mb-3 row">
-  <label for='f-number' class="col-sm-2 col-form-label">번호</label> 
+<div class="mb-3 row" id="board-no">
+  <label for='f-number' class="col-sm-2 col-form-label" >번호</label> 
   <div class="col-sm-6">
-    <input id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly ><br>
+    <input id='f-number' type='text' name='boardNumber' value='${board.boardNumber}'  ><br>
   </div>
 </div>
 <div class="mb-3 row">
@@ -68,20 +70,20 @@
     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
   </c:when> --%>
 </c:choose>		
-    <a href='list' class="btn btn-primary">목록</a>
-    <a href='like?no=${board.boardNumber}' class="btn btn-primary">좋아요</a><br>
+    <a href='list' class="btn-outline-secondary">목록</a>
+    <a href='like?no=${board.boardNumber}' class="btn btn-outline-secondary btn-sm">좋아요</a><br>
     
 <hr />
 </form>
 
 <div class="container">
-<h4>댓글 <a class="btn btn-primary">새댓글</a><br>
+<h4>댓글 <a class="btn btn-outline-secondary btn-sm">새댓글</a><br>
 </h4>
 <form action='./comment/add'>
 <input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
 내용 <input id='f-content' type='text' name='content'>
 <input type='hidden' id='f-writer' type='text' name='writer' value='${loginUser.id}' readonly>
-<button class="btn btn-primary">등록</button><br><br>
+<button class="btn btn-outline-secondary btn-sm">등록</button><br><br>
 </form>
 <c:forEach items= "${commentList}" var="comment">
 <fieldset>

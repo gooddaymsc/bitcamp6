@@ -6,60 +6,65 @@
 
 
 html{
-margin:0;
- padding: 0;
-width:100%;
-height:100%;
+  margin:0;
+  padding: 0;
+  width:100%;
+  height:100%;
+<<<<<<< HEAD
+ 
+=======
+  xtext-align: center;
+>>>>>>> e15f1500b0456f79bbfbb6946607015ade5b6278
 }
+/* img {
+	border: 2px solid red;
+  width: 100%;
+  xheight: 400px;
+  position:relative;
+  object-fit: cover;
+     z-index:-1;
+} */
+/* .html-line {
+	  position:absolute;
+	 border: 2px solid black;
+	     width: 100%;
+	  height: 500px;
+	     z-index:-1;
+}  */
 
-@font-face {
-    font-family: 'Cafe24Oneprettynight';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
  
 body {
-margin-top: 100px;
+margin:0;
 padding: 0;
 width:100%;
 height:100%;
 z-index:7;
 }
 
-header {
-  background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
-  xborder-bottom: 4px solid #14148C;
-  xborder: 4px solid red;
-  width:100%;
-  height: 120px; 
-  margin:auto;
-  z-index:10;
+.header {
+    z-index:10;
 }
 .wrap {
     xborder: 2px solid grey;
 }
 
-.container-header {
-	xpadding-left: 30px;
-	xpadding-right: 30px;
-/* 	 position:fixed; 
- */    xwidth: 100%;
- height:100%;
-}
 
 #content {
+	 xposition: relative;
   border: 2px dashed yellow;
-  margin-top : 150px;
+  margin-top : 50px;
   min-height: 500px; 
+  max-height:100%;
+  z-index:2;
 }
 
 aside {
 	position: fixed;
-  top: 180px; 
+  xtop: 300px; 
   border: 2px solid white;
   float: right;
-  width: 80px;
+  width: 100px;
   border-radius: 7px; 
   background-color: #3a3a3a; 
   box-shadow: 0px 0px 5px 2px black; 
@@ -70,19 +75,20 @@ aside {
 }
 
 footer {
+<<<<<<< HEAD
+	xposition: absolute;
+=======
+	 
+>>>>>>> e15f1500b0456f79bbfbb6946607015ade5b6278
 	background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
   width:100%;
   margin-top:55px;
   right: 0;
   clear: left; 
   *position:fixed;
-  bottom:0px;
+  /*bottom:0px; */
 }
 
-/* img {max-width: 100%; height: auto;}
-span.imageblock {max-width: 100%; height: auto;}
- */
- 
  /* 
  @media (min-width: 768px) {
   .container {
@@ -102,19 +108,5 @@ span.imageblock {max-width: 100%; height: auto;}
   }
  */
 
-/*  tr a {
-        text-decoration: none;
-        color: black;
-    }
-    tr a:visited {
-        color: black;
-    }
-    tr:hover {
-        cursor: pointer;
-    }
-    .d-flex{
-      width: 440px;
-      border: 1px solid green;
-    } */
 
 

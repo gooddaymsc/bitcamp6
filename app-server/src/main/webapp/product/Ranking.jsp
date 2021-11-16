@@ -5,14 +5,15 @@
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
 
-#ranking_container{
-  xborder:1px dashed red;
-  xmargin-top: 30px;
-  
-}
+  #ranking_container {
+    xborder: 1px dashed red;
+    xmargin-top: 30px;
 
+  }
+
+  /* 
 
 h1 {
     margin-top:30px;
@@ -62,53 +63,131 @@ tr:hover {
 
 #best_label{
   font-family: Cafe24Oneprettynight;
-  padding: 39px; 
   font-size: 23px; 
-  word-spacing:146px;
   font-weight: bold; 
   color: #fb8b12;
+  padding: 39px; 
+  word-spacing:146px;
   margin-left:58px;
 }
+ */
+
+  /*  수정중 */
 
 
+  h1 {
+    margin-top: 30px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Praise', cursive;
+    text-align: center;
+      font-family: Cafe24Oneprettynight;
+  font-size: 23px; 
+  font-weight: bold; 
+  color: #fb8b12;
+  }
+  
+  .ranking {
+  text-align: center;
+  width:150px;
+  padding: 0;
+/*   border: 2px solid blue;
+ */  }  
+  
+ .ranking a {
+    font-size: 18px; 
+    font-weight: bold; 
+    text-decoration: none;
+    color: black;
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+ .ranking a:visited {
+    color: black;
+}
+ .ranking :hover {
+    cursor: pointer;
+}
+
+  .col-sm {
+    font-family: Cafe24Oneprettynight;
+  font-size: 23px; 
+  font-weight: bold; 
+  color: #fb8b12;
+  }
+  
+#product_info{
+    font-size: 16px; 
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+
+#product_rate{
+    font-size: 25px; 
+    font-family: Cafe24Oneprettynight;
+    text-align: center;
+}
+
+#product_find{
+    font-size: 14px; 
+    font-family: Cafe24Oneprettynight;
+    padding: 10px;  
+    color: white; 
+    background-color: black; 
+    cursor: pointer; 
+    outline: none; 
+}
+
+#best_label{
+  font-family: Cafe24Oneprettynight;
+  font-size: 23px; 
+  font-weight: bold; 
+  color: #fb8b12;
+  padding: 5px; 
+}
+  .ranking_container {/* 
+      border: 2px solid;
+   */
+  }
+  
+
+   .image {
+  width:100%;
+  height:auto;
+      margin-bottom: 10px;
+  
+  }
+  
 </style>
 
-
 <h1> Ranking </h1>
-<Br>
 <body>
-<label id="best_label">
- Best1 Best2 Best3 Best4 Best5 
-</label>
- <table>
+<br>
+  <div class="ranking_container row">
     <c:forEach items="${productList}" var="product">
-     <td>
-      <div id="ranking_container" style="width: 13rem;">
-        <img align="middle" class = "image" src = "../image/${product.photo}.jpg" onError="this.src='../image/logo.jpeg'" style="width:13rem; height:270px;">
-        <a href="detail?no=${product.productNumber}" class="productName">${product.productName}</a>
+      <div class="ranking col-sm">
+      <h2 id ="best_label">Best${product.productNumber}</h2>
+        <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg">
+        <a href="show?no=${product.productNumber}" class="productName">${product.productName}</a>
         <p class="rate" id="product_rate">${product.rate}</p>
-        <p class="type" id="product_info">  주종: ${product.productType.type} </p>
+        <p class="type" id="product_info"> 주종: ${product.productType.type} </p>
         <p class="level" id="product_info"> 도수: ${product.alcoholLevel}%</p>
         <p class="volume" id="product_info"> 용량: ${product.volume}ml</p>
-       <span role="button" id="product_find">판매처찾기 <i class="fas fa-search"></i></span>
+        <span role="button" id="product_find">판매처찾기 <i class="fas fa-search"></i></span>
       </div>
-    </td>
     </c:forEach>
- </table>
-</body> 
+</div>
 
 <script>
-document.querySelectorAll("div a").forEach((aTag) => {
-  aTag.onclick = () => false;
-});
+  document.querySelectorAll(".productName").forEach((aTag) => {
+    aTag.onclick = () => false;
+  });
 
-var trList = document.querySelectorAll("td div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
-trList.forEach(function(trTag) {
-  trTag.onclick = (e) => {
-    //console.log(e.currentTarget.querySelector("a").href);
-    //e.currentTarget.querySelector("a").click();
-    window.location.href = e.currentTarget.querySelector("a").href;
-    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
-  };
-});
+  var trList = document.querySelectorAll(".ranking");
+  trList.forEach(function (trTag) {
+    trTag.onclick = (e) => {
+      window.location.href = e.currentTarget.querySelector("a").href;
+    };
+  });
 </script>
+</body>

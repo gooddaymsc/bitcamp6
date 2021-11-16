@@ -5,10 +5,10 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
@@ -30,10 +30,11 @@ public class ProductDetailController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
+      System.out.println("AAA");
       int no = Integer.parseInt(request.getParameter("no"));
       Product product = productDao.findByNo(no);
       Collection<Review> reviewList = reviewDao.findAll(no);
@@ -49,7 +50,7 @@ public class ProductDetailController extends HttpServlet {
       request.setAttribute("product", product);
       request.setAttribute("pageTitle", "상품정보수정");
       request.setAttribute("contentUrl", "/product/ProductDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

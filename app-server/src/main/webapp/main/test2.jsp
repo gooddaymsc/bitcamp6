@@ -4,18 +4,19 @@
 
 <style>
   header {
+    background-color: #983246;
     position: fixed;
+    height:150px;
     top: 0;
     left: 0;
     right: 0;
   }
   .logo {
-    border: 1px solid #5f6;
+    xborder: 1px solid #5f6;
     position: absolute;
     float: left;
     xpadding: 20px;
-    margin: 30 0 0 100;
-
+    margin: 40 0 0 100;
     width: 120px;
     height: 80px;
     xoverflow: hidden;
@@ -33,28 +34,31 @@
   }
   .wrap {
   position: absolute;
-    border: 2px solid grey;
+    xborder: 2px solid grey;
       width: 950px;
     height: 60px;
     float: left;
     left: 270px;
-    top: 50px;
+    top: 55px;
     xpadding-right : 150px;
   }
 
 .search-class { 
   position: relative;
-  width: 400px;
-  top: 10px;
-  right: -950px;
-  margin-right: 10px;
-  border: 1px solid;
+  background-color:#700F33;
+  width: 100%;
+  top: 0px;
+  xright: -950px;
+  xmargin-right: 10px;
+  xborder: 1px solid;
   height: 35px;
   
 }
 .search-class a {
+  position: relative;
+  left: 1080px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
     vertical-align : middle;
     font-weight:bolder;
@@ -66,11 +70,35 @@
 .f-text:hover {
     color: black;
 } 
-.search-bar-fieldset #f-search {
+  
+/* .search-button{
+    xposition: absolute;
+    xrigth: -900px;
+    xmargin-rigth: 100px;
+    xtop: 0;
+    xleft: -1100px;
+    width: 20x;
+    height: 20px;
+    xobject-fit: fill;
+    xz-index: 10;
+}  */
+.search-button img{
+  position: absolute;
+  top:5px;
+  right:120px;
+      width: 20x;
+    height: 20px;
+    object-fit: fill;
+} 
+button 
+  {border:0; padding:0; background:transparent; cursor:pointer; *overflow:visible; }
+
+ .search-bar-fieldset #f-search {
     position:absolute;
     top: 0px;
-    right: -2px;
-    height: 35px;
+    xmargin-right: 40px;
+    right: 50px;
+    height: 30px;
     text-indent: 5px;
     padding: 10px;
     line-height: 32px;
@@ -81,24 +109,13 @@
     background: #fff;
     width: 200px;
     margin-right: 65px;
-    
-}
-.search-button {
-    position:absolute;
-    top: 0px;
-    right : 10px;
-    width: 55px;
-    height: 35px;
-    xmargin-right: 10px;
-    xmargin-left: -2px;
-    background-color: #3b1358;
-    color: #fff;
-}
+} 
+
  .nav a {
     position:relative;
     bottom: -20px;
     text-decoration: none;
-    color: black;
+    color: white;
     cursor: pointer;
     padding-left: 30px;
     padding-right: 30px;
@@ -110,6 +127,9 @@
     }
 /* 네비바 마우스 오버시 밑줄 */
 .dropdown-menu a::after {
+}
+.nav-item {
+  xborder: 2px solid #000;
 }
 .nav-item a::after {
   content: "";
@@ -131,7 +151,28 @@
     display: block;
     margin-top: 20px;
   }
- /* 드롭다운 메뉴 속성 */
+  .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+@media(max-width:1000px){
+  .search-class-menu {
+  display:none;}
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+ /* /* 드롭다운 메뉴 속성 */
   .dropdown-menu a {
     position:relative;
     top :5px;
@@ -142,7 +183,7 @@
   }
    .nav-link active {
   width: 1250px;
- }
+ } */
 </style>
 <head>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
@@ -162,15 +203,19 @@
   <a class="navbar-brand" href="../main/menu"><img src="../image/logo.jpeg"></a>
 </div>
 <div class="search-class">
-  <div class="search-class-menu">
+<!--   <div class="search-class-menu">
     <a class='f-text' href='../main/loginMenu'>로그인</a>
     <a class='f-text' href='../buyer/form'>회원가입</a>
-  </div>
+  </div> -->
   <fieldset class="search-bar-fieldset">
-    <form action='search' method='post'>
-      <button  class="search-button">검색</button>
-      <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
-    </form>
+    <div class="search-class-menu">
+      <a class='f-text' href='../main/loginMenu'>로그인</a>
+      <a class='f-text' href='../buyer/form'>회원가입</a>
+      <form action='search' method='post'>
+        <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
+        <button class="search-button"><img class="search-img" src="../image/search.png"></button>
+      </form>
+    </div>
   </fieldset>
 </div>
 <div class='wrap'>

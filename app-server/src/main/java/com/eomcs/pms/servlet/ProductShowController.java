@@ -50,7 +50,7 @@ public class ProductShowController extends HttpServlet {
       request.setAttribute("reviewList", reviewList);
       request.setAttribute("pageTitle", "상품상세보기");
       request.setAttribute("contentUrl", "/product/ProductShow.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
 
     } catch (Exception e) {
       throw new ServletException(e);

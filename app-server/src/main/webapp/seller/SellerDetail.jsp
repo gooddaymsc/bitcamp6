@@ -66,7 +66,8 @@
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
           <a href="../upload/seller/${seller.member.photo}" >
-              <img id="f-photo-image" src="../upload/seller/${seller.member.photo}_100x100.jpg">
+              <img id="f-photo-image" src="../upload/seller/${seller.member.photo}_100x100.jpg" onError="this.src='../image/profile.png'"
+     style="width:10rem; height:200px; padding:3px">
           </a>
           <input id='f-photo' type='file' name='photo' class="form-control"><br>
         </div>
@@ -135,6 +136,7 @@
         </div>
       </div>
       <button class="btn btn-primary">변경</button>
+      <a href='../main/myPage' class="btn btn-primary">이전</a>
       <a href='passwordDetail?id=${seller.member.id}' class="btn btn-primary">암호변경</a>
       <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-primary">탈퇴하기</a>
     </form>

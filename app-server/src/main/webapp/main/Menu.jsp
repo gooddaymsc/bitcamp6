@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 
@@ -8,6 +8,11 @@
 
 
 <style>
+.container-ranking {
+  border: 2px solid green;
+  height:500px;
+  
+}
 tr a {
     text-decoration: none;
     color: black;
@@ -63,79 +68,33 @@ font-weight: bold;
 color:black;
 }
 
-#aside{ 
-  width:170px;
-  padding:20px;
-  background-color: white;
-}
-
 #border{
   margin-left: 115px;
   margin-top: 30px;
 }
 
-.root_daum_roughmap { margin: auto !important; }
+.root_daum_roughmap { 
+  margin: auto !important; 
+  background-color:yellow;
+  border: 4px solid #14148C;
+  height:500px;
+  z-index:-2;
 
+}
+
+#map {
+  background-color:red;
+  border: 4px solid #14148C;
+  height:500px;
+  z-index:-2;
+  
+}
 </style>
 
 </head>
 <body>
 
-
-<aside id="aside">
- <c:choose> 
-  <c:when  test="${loginUser eq null}">
-  <a href='./loginMenu' class="btn btn-light">로그인</a>
-  <a href='../buyer/form' class="btn btn-light">회원가입</a><br>
-  <a href='../board/list' class="btn btn-light">게시판</a>
-  <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
-  <a href='../product/list' class="btn btn-light">상품</a>
-  </c:when>
-  <c:otherwise>
-  <p class="id">${loginUser.id}님</p>
-  <br>
-  
-  </c:otherwise>
-</c:choose> 
-<c:choose> 
-  <c:when test="${loginUser.authority eq 2}">
-  <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light" >로그아웃</a>
-      <a href='../board/list' class="btn btn-light">게시판</a>
-      <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
-      <a href='../product/list' class="btn btn-light">상품</a>
-      <a href='../product/review/find' class="btn btn-light">내가남긴리뷰</a>
-      <a href='../cart/list' class="btn btn-light" >장바구니</a>
-      <a href='../booking/list' class="btn btn-light">예약</a>
-      <a href='../message/list' class="btn btn-light">메세지</a>
-      <a href='../buyer/detail?id=${loginUser.id}' class="btn btn-light">개인정보변경</a>
-  </div>
-  </c:when>
-  <c:when test="${loginUser.authority eq 4}">
-  <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light">로그아웃</a>
-      <a href='../board/list' class="btn btn-light">게시판</a>
-      <a href='../product/ranking' class="btn btn-light">오늘의 술</a>
-      <a href='../product/list' class="btn btn-light">상품</a>
-      <a href='../stock/list?id=${loginUser.id}' class="btn btn-light">재고</a>
-      <a href='../message/list' class="btn btn-light">메세지</a>
-      <a href='../seller/detail?id=${loginUser.id}' class="btn btn-light">개인정보변경</a>
-  </div>
-  </c:when>
-  <c:when test="${loginUser.authority eq 8}">
-  <div class="btn-group-vertical">
-      <a href='logout' class="btn btn-light">로그아웃</a>
-      <a href='../board/list' class="btn btn-light">게시판</a>
-      <a href='../product/list' class="btn btn-light">상품</a>
-      <a href='../buyer/list' class="btn btn-light">회원(구매자)관리</a>
-      <a href='../seller/list' class="btn btn-light">회원(판매자)관리</a>
-      <a href='../message/list' class="btn btn-light">메세지</a>
-  </div>
-  </c:when>
-</c:choose> 
-</aside>
-
-
+<div class = 'container-ranking' >
 <h1 class='b'> Top Lists </h1>
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -243,16 +202,9 @@ color:black;
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
-<script>
-  function distplay(){    
-	  if($('input:radio[id=btnradio1]').is(':checked')){
-		  $('#wine').hide();
-    } else{
-  	  $('#wine').show();
- }
-</script>
+</div>
  
+
 <script>
 <!-- d.card div.card-->
 document.querySelectorAll("table a").forEach((aTag) => {
@@ -270,18 +222,21 @@ trList.forEach(function(trTag) {
 });
 </script>
 
-<div id="daumRoughmapContainer1636730805461" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
+<!-- 1. 약도 노드 -->
+<div id="daumRoughmapContainer1585876020881" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!-- 2. 설치 스크립트 -->
 <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
+<!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
   new daum.roughmap.Lander({
-    "timestamp" : "1636730805461",
-    "key" : "282de",
+    "timestamp" : "1585876020881",
+    "key" : "xs22",
     "mapWidth" : "640",
     "mapHeight" : "360"
   }).render();
 </script>
-
 </body> 
 </html>

@@ -1,20 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <style>
 
-  .fa-facebook {
-  color: black;
-}
-  .fa-instagram {
-  color: black;
-}
-  .fa-twitter {
-  color: black;
-}
-  .fa-linkedin {
-  color: black;
-}
 div {
     display: block;
 }
@@ -85,10 +72,10 @@ style attribute {
 <div class="container">
   <div class="hm-footer-copyright text-center">
     <div class="c">
-        <a href="#"><i class="fab fa-facebook"></i></a>  
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>  
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+        <a href="https://kr.linkedin.com/"><i class="fab fa-linkedin"></i></a>
         </div>
         <p>
         ©copyright. designed and developed by <a href="https://www.alchoholFinder.com/">AlchoholFinder</a>

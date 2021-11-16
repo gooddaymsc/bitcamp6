@@ -31,11 +31,13 @@ tr:hover {
 
 <c:forEach items="${messages}" var="message">
 <tr>
-    <td><a href='detail?no=${message.roomNumber}'>${message.roomNumber}</a></td>  
-    <td>${message.theOtherId}</td> 
-    <td>${message.content}</td> 
+    <td><a href='detail?no=${message.roomNumber}' >${message.roomNumber}</a></td>  
+    <td>${message.theOtherId} <i class="fas fa-arrow-right"></i> ${message.Id}</td> 
+    <td>${message.content}</td>
     <td>${message.registrationDate}</td> 
-    <td><a href='delete?no=${message.roomNumber}'>[나가기]</a></td>
+    <td onclick="event.cancelBubble=true">
+     <button type="button" onclick="location.href='delete?no=${message.roomNumber}'" class="btn btn-outline-success">나가기</button>  
+    </td>
 </tr>
 </c:forEach>
 

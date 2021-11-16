@@ -19,7 +19,7 @@
 <body>
 <div class="container">
 
-<jsp:include page="/header.jsp"/>
+<jsp:include page="/header_all.jsp"/>
 <jsp:include page="/sidebar.jsp"/>
  
 <div id="content">

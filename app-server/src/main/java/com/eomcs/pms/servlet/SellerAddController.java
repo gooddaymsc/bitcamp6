@@ -52,9 +52,7 @@ public class SellerAddController extends HttpServlet {
       member.setPhoneNumber(request.getParameter("phoneNumber"));
       //      member.setPhoto(request.getParameter("photo"));
 
-      System.out.println("aaaaa");
       Part photoPart = request.getPart("photo");
-      System.out.println("bbbbb");
       if (photoPart.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         photoPart.write(getServletContext().getRealPath("/upload/seller") + "/" + filename);
@@ -82,10 +80,10 @@ public class SellerAddController extends HttpServlet {
       sellerDao.insert(seller.getMember());
       sellerDao.insertSeller(seller);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=../main/loginMenu");
       request.setAttribute("pageTitle", "회원가입(판매자)");
       request.setAttribute("contentUrl", "/seller/SellerAdd.jsp");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=../main/loginMenu");
 
     } catch(Exception e){
       request.setAttribute("error", e);
