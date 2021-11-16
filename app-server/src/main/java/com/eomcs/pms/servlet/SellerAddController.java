@@ -80,10 +80,10 @@ public class SellerAddController extends HttpServlet {
       sellerDao.insert(seller.getMember());
       sellerDao.insertSeller(seller);
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=../main/loginMenu");
       request.setAttribute("pageTitle", "회원가입(판매자)");
       request.setAttribute("contentUrl", "/seller/SellerAdd.jsp");
       request.getRequestDispatcher("/template2.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=../main/loginMenu");
 
     } catch(Exception e){
       request.setAttribute("error", e);

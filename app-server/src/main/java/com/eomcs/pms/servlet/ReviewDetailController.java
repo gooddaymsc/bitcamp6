@@ -39,7 +39,6 @@ public class ReviewDetailController extends HttpServlet {
       out.flush();
       return;
     }
-
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -53,7 +52,7 @@ public class ReviewDetailController extends HttpServlet {
 
         request.setAttribute("review", review);
         request.setAttribute("pageTitle", "리뷰상세보기");
-        request.setAttribute("contentUrl", "/review/ReviewDetail.jsp");
+        request.setAttribute("contentUrl", "/product/review/ReviewDetail.jsp");
         request.getRequestDispatcher("/template2.jsp").forward(request, response);
         //        request.getRequestDispatcher("./ReviewDetail.jsp").forward(request, response);
       } else {
