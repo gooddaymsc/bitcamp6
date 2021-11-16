@@ -63,7 +63,7 @@ a {
     color: black;
 }
 button {
-  position: absolute; 
+  position: relative; 
 }
 
 h2 {font-size:8px;}
@@ -145,7 +145,9 @@ display:inline-block;
 </div>
 
 
-<button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button>
+<%-- <button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button> --%>
+<button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
+
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
   <div>
