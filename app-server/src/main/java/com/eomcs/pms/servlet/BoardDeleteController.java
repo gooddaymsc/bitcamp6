@@ -33,6 +33,7 @@ public class BoardDeleteController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    System.out.println("board Error333333");
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
@@ -42,15 +43,15 @@ public class BoardDeleteController extends HttpServlet {
       out.flush();
       return;
     }
-
+    System.out.println("board Error44444");
 
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
+    int nowLoginNo = member.getNumber();
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Board board = boardDao.findByNo(no);
-
       if (board == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.<br>");
       } 
@@ -61,11 +62,12 @@ public class BoardDeleteController extends HttpServlet {
         //        out.println("</head>");
         //        out.println("<body>");
         //        out.println("<h1>게시글삭제결과</h1>");
-
+        boardDao.deleteTag(no);
+        boardDao.likeDelete(nowLoginNo, board.getBoardNumber()); // nowLoginNo말고 방법 찾아야함.(다른회원도 눌렀을때)
         boardDao.delete(board); 
         sqlSession.commit();
 
-
+        System.out.println("board Error77777");
         out.println("<a href='list'>[목록]<a><br>");
       } else {
         out.printf("<script>alert('본인 게시글만 수정 및 삭제할 수 있습니다.'); location.href='detail?no=%d'</script>", board.getBoardNumber());

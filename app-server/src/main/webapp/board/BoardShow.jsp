@@ -108,7 +108,7 @@
 <div class="mb-3 row">
 	<label for='f-like' class="col-sm-2 col-form-label">좋아요 수</label> 
   <div class="col-sm-6">
-  <label for='f-views' class="col-sm-2 col-form-label">${board.views}</label>
+  <label for='f-views' class="col-sm-2 col-form-label">${board.likes}</label>
   </div>
 </div>
 <div class="mb-3 row">
@@ -121,8 +121,9 @@
 		
 <c:choose> 
   <c:when test="${loginUser.authority eq 2 || loginUser.authority eq 4|| loginUser.authority eq 8}">
-    <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
+  <button type="button" onclick="location.href='detail?no=${board.boardNumber}'" class="btn btn-outline-success">수정</button>
+<!--     <button class="btn btn-primary">변경</button> -->
+<%--     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br> --%>
 </c:when>
 <%--   
     <c:when test="${loginUser.authority eq 2}">
@@ -140,7 +141,7 @@
 </form>
 </div>
 </div>
-</section>w
+</section>
 
 <div class="container">
 <h4>댓글 <a class="btn btn-outline-secondary btn-sm">새댓글</a><br>

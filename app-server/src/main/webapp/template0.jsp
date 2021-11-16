@@ -6,13 +6,24 @@
 <!DOCTYPE html>
 <html>
 <style>
+
+@font-face {
+   font-family: 'Cafe24Oneprettynight';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+	html{
+	 text-align: center;
+	}
+
 .html-img {
   xborder: 2px solid red;
   width: 100%;
   height: 400px;
   position:relative;
   object-fit: cover;
-     z-index:-1;
+  z-index:-1;
 }
 .html-white1 {
   xborder: 2px solid blue;
