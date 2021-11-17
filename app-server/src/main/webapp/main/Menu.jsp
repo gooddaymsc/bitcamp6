@@ -36,11 +36,10 @@ h1{
 
 .b{
   margin-top:30px;
-  
-	font-size: 38px; 
+	font-size: 35px; 
 	color:#3a3a3a;
 	text-decoration: none;
-	font-family: 'Praise', cursive;
+	font-size: 38px; 
 	text-align: center;
 }
 .c{

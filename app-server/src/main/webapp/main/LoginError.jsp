@@ -30,7 +30,7 @@
 <form action='login' method="post" id="login-form">
 
 <div class='input_row' id="id_line">
-<img src="../image/icon/001-user.png">
+<img src="../image/icons/001-user.png">
 <input type='text' name='id' placeholder="아이디" maxlength="41">
 <span role='button' class='btn btn-outline-primary' id='id_clear' style='display:none;'></span>
 </div><!--id_line-->
