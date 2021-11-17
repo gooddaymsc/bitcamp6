@@ -85,8 +85,8 @@
 
 
  <div class="container"> 
-    <jsp:include page="/header_all.jsp" />
-    <jsp:include page="/sidebar.jsp"/> 
+    <jsp:include page="header_all.jsp" />
+    <jsp:include page="sidebar.jsp"/> 
 
     <div id="content">
       <jsp:include page="${contentUrl}" />

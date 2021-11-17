@@ -221,7 +221,7 @@ trList.forEach(function(trTag) {
 
 
 <!-- 1. 약도 노드 -->
-<div id="daumRoughmapContainer1585876020881" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<div id="daumRoughmapContainer1637139287479" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!-- 2. 설치 스크립트 -->
 <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
@@ -229,10 +229,10 @@ trList.forEach(function(trTag) {
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
   new daum.roughmap.Lander({
-    "timestamp" : "1585876020881",
-    "key" : "xs22",
+    "timestamp" : "1637139287479",
+    "key" : "28476",
     "mapWidth" : "640",
-    "mapHeight" : "360"
+    "mapHeight" : "360",
   }).render();
 </script>
 </body> 
