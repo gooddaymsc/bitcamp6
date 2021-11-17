@@ -43,7 +43,7 @@
 </c:forEach>
 </tbody>
 </table>
-  <a href='../product/detail?no=${productNo}' class="btn btn-primary">이전</a><br>
+  <a href='../product/detail?no=${productNo}' class="btn btn-outline-secondary btn-sm">이전</a><br>
   
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {

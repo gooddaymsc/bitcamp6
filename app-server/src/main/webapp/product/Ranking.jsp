@@ -10,70 +10,7 @@
   #ranking_container {
     xborder: 1px dashed red;
     xmargin-top: 30px;
-
   }
-
-  /* 
-
-h1 {
-    margin-top:30px;
-    text-decoration: none;
-    color: black;
-    font-family: 'Praise', cursive;
-    text-align: center;
-}
-
-tr a {
-    font-size: 18px; 
-    font-weight: bold; 
-    text-decoration: none;
-    color: black;
-    font-family: Cafe24Oneprettynight;
-    text-align: center;
-}
-tr a:visited {
-    color: black;
-}
-tr:hover {
-    cursor: pointer;
-}
-
-#product_info{
-    font-size: 16px; 
-    font-family: Cafe24Oneprettynight;
-    text-align: center;
-}
-
-#product_rate{
-    font-size: 25px; 
-    font-family: Cafe24Oneprettynight;
-    text-align: center;
-}
-
-#product_find{
-    font-size: 14px; 
-    font-family: Cafe24Oneprettynight;
-    padding: 10px;  
-    color: white; 
-    background-color: black; 
-    cursor: pointer; 
-    outline: none; 
-    margin-left:55px;
-}
-
-#best_label{
-  font-family: Cafe24Oneprettynight;
-  font-size: 23px; 
-  font-weight: bold; 
-  color: #fb8b12;
-  padding: 39px; 
-  word-spacing:146px;
-  margin-left:58px;
-}
- */
-
-  /*  수정중 */
-
 
   h1 {
     margin-top: 30px;
@@ -93,13 +30,16 @@ tr:hover {
   padding: 0;
 /*   border: 2px solid blue;
  */  }  
+ 
+    .productName {
+  }
   
  .ranking a {
+    font-family: Cafe24Oneprettynight;
     font-size: 18px; 
     font-weight: bold; 
+  color: #fb8b12;
     text-decoration: none;
-    color: black;
-    font-family: Cafe24Oneprettynight;
     text-align: center;
 }
  .ranking a:visited {
@@ -145,14 +85,10 @@ tr:hover {
   color: #fb8b12;
   padding: 5px; 
 }
-  .ranking_container {/* 
-      border: 2px solid;
-   */
-  }
-  
 
+  
    .image {
-  width:100%;
+  width:300px;
   height:auto;
       margin-bottom: 10px;
   
@@ -168,7 +104,9 @@ tr:hover {
       <div class="ranking col-sm">
       <h2 id ="best_label">Best${product.productNumber}</h2>
         <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg">
-        <a href="show?no=${product.productNumber}" class="productName">${product.productName}</a>
+        <p class="productName">
+        <a href="show?no=${product.productNumber}">${product.productName}</a>
+        </p>
         <p class="rate" id="product_rate">${product.rate}</p>
         <p class="type" id="product_info"> 주종: ${product.productType.type} </p>
         <p class="level" id="product_info"> 도수: ${product.alcoholLevel}%</p>

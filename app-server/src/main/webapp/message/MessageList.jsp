@@ -16,7 +16,7 @@ tr:hover {
 </style>
 
 <h1>메세지 목록</h1>
- <a href='form' class="btn btn-outline-primary btn-sm">새 채팅</a>
+ <a href='form' class="btn btn-outline-secondary btn-sm">새 채팅</a>
  
 <table class="table table-hover">
 <thead>
@@ -36,7 +36,7 @@ tr:hover {
     <td>${message.content}</td>
     <td>${message.registrationDate}</td> 
     <td onclick="event.cancelBubble=true">
-     <button type="button" onclick="location.href='delete?no=${message.roomNumber}'" class="btn btn-outline-success">나가기</button>  
+     <button type="button" onclick="location.href='delete?no=${message.roomNumber}'" class="btn btn-outline-secondary btn-sm">나가기</button>  
     </td>
 </tr>
 </c:forEach>
