@@ -5,7 +5,6 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,7 @@ import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/product/add")
+//@WebServlet("/product/add")
 public class ProductAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
