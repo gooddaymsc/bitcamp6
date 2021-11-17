@@ -78,7 +78,6 @@ color:black;
   border: 4px solid #14148C;
   height:500px;
   z-index:-2;
-
 }
 
 #map {
@@ -86,7 +85,6 @@ color:black;
   border: 4px solid #14148C;
   height:500px;
   z-index:-2;
-  
 }
 </style>
 

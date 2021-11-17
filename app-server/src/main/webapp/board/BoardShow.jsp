@@ -121,7 +121,7 @@
 		
 <c:choose> 
   <c:when test="${loginUser.authority eq 2 || loginUser.authority eq 4|| loginUser.authority eq 8}">
-  <button type="button" onclick="location.href='detail?no=${board.boardNumber}'" class="btn btn-outline-success">수정</button>
+  <button type="button" onclick="location.href='detail?no=${board.boardNumber}'" class="btn btn-outline-secondary btn-sm">수정</button>
 <!--     <button class="btn btn-primary">변경</button> -->
 <%--     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br> --%>
 </c:when>

@@ -97,7 +97,7 @@
   </div>
 </div>
 
-<button  class="btn btn-primary btn-sm">등록</button><br>
+<button  class="btn btn-outline-secondary btn-sm">등록</button><br>
 </form>
 
 <script>
