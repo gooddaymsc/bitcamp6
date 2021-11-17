@@ -34,7 +34,7 @@
 </head>
 <body>
 <main id="main-holder">
-<br><h1>비밀번호찾기 <img src="../image/icon/004-magnifying-glass.png"></h1>
+<br><h1>비밀번호찾기 <img src="../image/icons/004-magnifying-glass.png"></h1>
 
 <form action=findpwResult method='post'id='form'>
 <label for='f-name' class="col-sm-2 col-form-label">
