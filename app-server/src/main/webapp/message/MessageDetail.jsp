@@ -195,7 +195,7 @@
     </div>
 </div>
   
-   <a href='list' class="btn btn-outline-primary btn-sm">이전</a><br><br>
+   <a href='list' class="btn btn-outline-secondary btn-sm">이전</a><br><br>
 </form>
 
 <script>

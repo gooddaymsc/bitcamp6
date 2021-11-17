@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <h1>새 메세지</h1>
-<a href='list' class="btn btn-outline-primary btn-sm">이전</a><br>
+<a href='list' class="btn btn-outline-secondary btn-sm">이전</a><br>
 
 <form action='add' method='post'>
 <div class="mb-3 row">
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<button class="btn btn-primary btn-sm">보내기</button><br>
+<button class="btn btn-outline-secondary btn-sm">보내기</button><br>
 </form>
 
 
