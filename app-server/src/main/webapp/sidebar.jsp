@@ -9,16 +9,19 @@
   background-color: white;
   z-index: 11;
 }
+
 </style>
 
 
 <aside id="aside" >
  <c:choose> 
   <c:when  test="${loginUser eq null}">
-  <a href='${contextRoot}/drinker/main/loginMenu' class="btn btn-light">로그인</a>
-  <a href='${contextRoot}/drinker/buyer/form' class="btn btn-light">회원가입</a><br>
-  <a href='${contextRoot}/drinker/board/list' class="btn btn-light">게시판</a>
-  <a href='${contextRoot}/drinker/product/ranking' class="btn btn-light">오늘의 술</a>
+    <div class="btn-group-vertical">
+	  <a href='${contextRoot}/drinker/main/loginMenu' class="btn btn-light">로그인</a>
+	  <a href='${contextRoot}/drinker/buyer/form' class="btn btn-light">회원가입</a>
+	  <a href='${contextRoot}/drinker/board/list' class="btn btn-light">게시판</a>
+	  <a href='${contextRoot}/drinker/product/ranking' class="btn btn-light">오늘의 술</a>
+    </div>
   </c:when>
   <c:otherwise>
   <p class="id">${loginUser.id}님</p>
@@ -50,9 +53,9 @@
   </c:when>
   <c:when test="${loginUser.authority eq 8}">
   <div class="btn-group-vertical">
+      <a href='${contextRoot}/drinker/main/myPage' class="btn btn-light">관리자<br>페이지</a>
       <a href='${contextRoot}/drinker/board/list' class="btn btn-light">게시판</a>
       <a href='${contextRoot}/drinker/product/ranking' class="btn btn-light">오늘의 술</a>
-      <a href='${contextRoot}/drinker/main/myPage' class="btn btn-light">관리자페이지</a>
       <a href='${contextRoot}/drinker/message/list' class="btn btn-light">메세지</a>
       <a href='${contextRoot}/drinker/main/logout' class="btn btn-light">로그아웃</a>
   </div>

@@ -19,14 +19,15 @@ trimDirectiveWhitespaces="true" %>
 } */
 
 
+
 #product_top_detail{
  float:right;
  margin-right: 50%;
+ font-family: 'Praise', cursive;
 }
 
 #product_bottom_detail{
 font-size: 17px; 
-font-family: Cafe24Oneprettynight;
 margin-top:10%;
 clear:both;
 }
@@ -35,12 +36,10 @@ clear:both;
 #product_title{
 font-size: 27px; 
 font-weight: bold; 
-font-family: Cafe24Oneprettynight;
 }
 
 #product_type{
 font-size: 22px; 
-font-family: Cafe24Oneprettynight;
 color: #777777;
 }
 
@@ -48,27 +47,28 @@ color: #777777;
 #product_detail2{
 position: absolute; 
 font-size: 20px; 
-font-family: Cafe24Oneprettynight;
 }
 
 #product_detail_label{
 font-weight: bold; 
 font-size: 19px; 
 color: #777777;
-font-family: Cafe24Oneprettynight;
 }
 
 a {
     text-decoration: none;
     color: black;
 }
+<<<<<<< HEAD
+=======
 button {
   position: relative; 
 }
+>>>>>>> 41feeb9e26b7d2a1a42fe2913063f1bb12033468
 
-h2 {font-size:8px;}
-.star-rating {width:304px; }
-.star-rating,.star-rating span {display:inline-block; height:55px; overflow:hidden; background:url(../image/icon/star.png)no-repeat; }
+h2 
+.star-rating {width:205px;}
+.star-rating,.star-rating span {display:inline-block; height:39px; overflow:hidden; background:url(../image/icon/star.png)no-repeat; }
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 
 f-rate{
@@ -78,13 +78,13 @@ display:inline-block;
 
 #find-product { 
     float:right;
-    margin-right: 55%;
-    margin-top: 160px;
-    width: 250px;
-    height: 50px; 
+    margin-right: 25%;
+    margin-top: 350px;
+    width: 130px;
+    height: 42px; 
     padding: 7px; 
     border: none; 
-    border-radius: 5px; 
+    border-radius: 4px; 
     color: white; 
     font-weight: bold;
     background-color: #3a3a3a; 
@@ -112,7 +112,7 @@ display:inline-block;
   <div id="product_detail2">
 <div class="wrap-star">
     <div class='star-rating'>
-        <span style=${product.rate}/5*100;></span>
+        <span style="width:40%"></span>
     </div>
 </div>
 

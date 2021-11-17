@@ -114,6 +114,7 @@
 
 <form action='search' method='post'>  
 <div class="mb-3 row">
+ <button  class="search-button"><img class="search-img" src="${contextRoot}/image/search.png"></button>
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>
     <div class="col-sm-2">
     <input id='f-search' type='text' name='search' class="form-control">

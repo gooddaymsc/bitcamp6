@@ -24,28 +24,26 @@
     object-fit: cover;
     z-index: 10;
   }
+  .html-board{
+    top: 100px;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-color: #fbfbe3;
+    z-index: -1;
+  }
 
   .html-white1 {
     xborder: 2px solid blue;
     top: 100px;
     position: absolute;
     width: 100%;
-    height: 600px;
-    background-color: white;
+    height: 100%;
+    xbackground-color: #f2f8fc;
     z-index: -1;
 
   }
 
-  .html-color2 {
-    top: 600px;
-    xborder: 2px solid yellow;
-    position: absolute;
-    width: 100%;
-    height: 600px;
-    background-color: #f5d6bb;
-    z-index: -1;
-  }
-  
   
 </style>
 
@@ -75,16 +73,15 @@
       <div class="html-img-container">
         <img class="html-img" src="../image/menuD.jpg"></img>
       </div>
-      <div class="html-white1">
-        <div class="html-color2">
+      <div class="html-board">
         </div>
       </div>
     </div>
-  </div>
+
 
  <div class="container"> 
     <jsp:include page="/header_all.jsp" />
-    <jsp:include page="/sidebar.jsp"/>
+    <jsp:include page="/sidebar.jsp"/> 
 
     <div id="content">
       <jsp:include page="${contentUrl}" />
@@ -93,7 +90,7 @@
 
   </div><!-- .container -->
 
-  <jsp:include page="/footer.jsp" />
+<%--   <jsp:include page="/footer.jsp" /> --%>
 </body>
 
 </html>
