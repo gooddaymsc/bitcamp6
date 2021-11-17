@@ -108,7 +108,7 @@
 <h1>상품 목록</h1>
 <c:choose> 
   <c:when  test="${loginUser.authority eq 4}">
-<a href='form' class="btn btn-outline-primary btn-sm">새상품</a>
+<a href='form' class="btn btn-outline-secondary btn-sm">새상품</a>
   </c:when>
 </c:choose>
 
