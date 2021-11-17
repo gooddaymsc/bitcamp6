@@ -104,9 +104,9 @@ left:750px;
   </div>
 </div>    
 </div>  
-<button type="button" onclick="location.href='../message/form?id=${booking.cart.stock.seller.member.id}'" class="btn btn-outline-success">판매자에게 문의하기</button>
-<button class="btn btn-outline-success">변경</button>
-<button type="button" onclick="location.href='delete?no=${booking.bookingNumber}'" class="btn btn-outline-success">삭제</button>
-<button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
+<button type="button" onclick="location.href='../message/form?id=${booking.cart.stock.seller.member.id}'" class="btn btn-outline-secondary btn-sm">판매자에게 문의하기</button>
+<button class="btn btn-outline-secondary btn-sm">변경</button>
+<button type="button" onclick="location.href='delete?no=${booking.bookingNumber}'" class="btn btn-outline-secondary btn-sm">삭제</button>
+<button type="button" onclick="location.href='list'" class="btn btn-outline-secondary btn-sm">목록</button>
 </form>
 </div>

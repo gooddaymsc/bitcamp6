@@ -65,8 +65,8 @@ button {
     </div>
     
 
-<button class="btn btn-outline-success">변경</button>
-<button type="button" onclick="location.href='delete?no=${cart.cartNumber}'" class="btn btn-outline-success">삭제</button>
-<button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
-<button type="button" onclick="location.href='../booking/form?no=${cart.cartNumber}&id=${cart.id}'" class="btn btn-outline-success">예약 등록</button>
+<button class="btn btn-outline-secondary btn-sm">변경</button>
+<button type="button" onclick="location.href='delete?no=${cart.cartNumber}'" class="btn btn-outline-secondary btn-sm">삭제</button>
+<button type="button" onclick="location.href='list'" class="btn btn-outline-secondary btn-sm">목록</button>
+<button type="button" onclick="location.href='../booking/form?no=${cart.cartNumber}&id=${cart.id}'" class="btn btn-outline-secondary btn-sm">예약 등록</button>
 </form>
