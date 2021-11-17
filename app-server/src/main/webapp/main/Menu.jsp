@@ -9,7 +9,7 @@
 
 <style>
 .container-ranking {
-  border: 2px solid green;
+  xborder: 2px solid green;
   height:500px;
   
 }

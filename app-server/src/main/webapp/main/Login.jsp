@@ -32,7 +32,7 @@
 </div><!--id_line-->
 <br>
 <div class='input_row' id="pw_line">
-<img src="../image/icon/007-key.png">
+<img src="../image/icons/007-key.png">
 <input type='password' name='password' placeholder="비밀번호" maxlength="16">
 <span role='button' class='btn_delete' id='pw_clear' style='display:none;'></span>
 <br></div><!--pw_line-->

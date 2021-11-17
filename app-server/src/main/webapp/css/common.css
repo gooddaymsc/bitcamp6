@@ -48,7 +48,7 @@ z-index:7;
 
 #content {
 	xposition: relative;
-  border: 2px dashed yellow;
+  xborder: 2px dashed yellow;
   xmargin-top : 50px;
   min-height: 500px; 
   max-height:100%;

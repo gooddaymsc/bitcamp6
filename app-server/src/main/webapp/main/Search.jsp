@@ -40,6 +40,7 @@ tr:hover {
 </c:forEach>
 </tbody>
 </table>
+<br><br>
 <h5>판매점</h5>
 <table class="table table-hover">
       <thead>
@@ -62,6 +63,7 @@ tr:hover {
         </c:forEach>
       </tbody>
     </table>
+<br><br>
 <h5>게시판</h5>
 <table class="table table-hover">
 <thead>
