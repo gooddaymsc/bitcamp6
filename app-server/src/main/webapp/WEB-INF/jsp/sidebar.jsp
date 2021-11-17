@@ -17,7 +17,7 @@
  <c:choose> 
   <c:when  test="${loginUser eq null}">
     <div class="btn-group-vertical">
-	  <a href='${contextRoot}/drinker/main/loginMenu' class="btn btn-light">로그인</a>
+	  <a href='${contextRoot}/drinker/app/main/loginForm' class="btn btn-light">로그인</a>
 	  <a href='${contextRoot}/drinker/buyer/form' class="btn btn-light">회원가입</a>
 	  <a href='${contextRoot}/drinker/board/list' class="btn btn-light">게시판</a>
 	  <a href='${contextRoot}/drinker/product/ranking' class="btn btn-light">오늘의 술</a>
@@ -37,7 +37,7 @@
       <a href='${contextRoot}/drinker/cart/list' class="btn btn-light" >장바구니</a>
       <a href='${contextRoot}/drinker/booking/list' class="btn btn-light">예약</a>
       <a href='${contextRoot}/drinker/message/list' class="btn btn-light">메세지</a>
-      <a href='${contextRoot}/drinker/main/logout' class="btn btn-light" >로그아웃</a>
+      <a href='${contextRoot}/drinker/app/main/logout' class="btn btn-light" >로그아웃</a>
   </div>
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
@@ -49,7 +49,7 @@
       <a href='${contextRoot}/drinker/stock/list?id=${loginUser.id}' class="btn btn-light">재고</a>
       <a href='${contextRoot}/drinker/booking/list' class="btn btn-light">예약</a>
       <a href='${contextRoot}/drinker/message/list' class="btn btn-light">메세지</a>
-      <a href='${contextRoot}/drinker/main/logout' class="btn btn-light">로그아웃</a>
+      <a href='${contextRoot}/drinker/app/main/logout' class="btn btn-light">로그아웃</a>
   </div>
   </c:when>
   <c:when test="${loginUser.authority eq 8}">
@@ -58,7 +58,7 @@
       <a href='${contextRoot}/drinker/board/list' class="btn btn-light">게시판</a>
       <a href='${contextRoot}/drinker/product/ranking' class="btn btn-light">오늘의 술</a>
       <a href='${contextRoot}/drinker/message/list' class="btn btn-light">메세지</a>
-      <a href='${contextRoot}/drinker/main/logout' class="btn btn-light">로그아웃</a>
+      <a href='${contextRoot}/drinker/app/main/logout' class="btn btn-light">로그아웃</a>
   </div>
   </c:when>
 </c:choose> 
