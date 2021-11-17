@@ -48,6 +48,9 @@ insert into tag(tag) values ('');
 --auto_increment
 ALTER TABEL tag MODIFY tag_no INT NOT NULL AUTO_INCREMENT;
 
+--
+alter table product add photo varchar(255) not null;
+--
 insert into product_type(type, subType) values("와인","레드와인");
 insert into product_type(type, subType) values("와인","화이트와인");
 insert into product_type(type, subType) values("와인","로제와인");

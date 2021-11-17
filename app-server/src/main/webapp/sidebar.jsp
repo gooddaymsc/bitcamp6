@@ -45,6 +45,7 @@
       <a href='${contextRoot}/drinker/main/myPage' class="btn btn-light">MyPage</a>
       <a href='${contextRoot}/drinker/board/list' class="btn btn-light">게시판</a>
       <a href='${contextRoot}/drinker/product/ranking' class="btn btn-light">오늘의 술</a>
+      <a href='${contextRoot}/drinker/product/form' class="btn btn-light">상품등록</a>
       <a href='${contextRoot}/drinker/stock/list?id=${loginUser.id}' class="btn btn-light">재고</a>
       <a href='${contextRoot}/drinker/booking/list' class="btn btn-light">예약</a>
       <a href='${contextRoot}/drinker/message/list' class="btn btn-light">메세지</a>
