@@ -4,7 +4,71 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-    :root {
+	  body {
+	    height: 100%
+	    margin: 0; 
+	    font-family: Arial, Helvetica, sans-serif; 
+	    display: grid; justify-items: center; 
+	    align-items: center; 
+	    min-width:80%; 
+	  }  
+	  
+	  html, body {
+	    height: 100%; 
+	    min-width:80%; 
+	  } 
+	  
+	  #main-holder {
+	   width: 80%;
+	   height: 90%; 
+	   display: grid; 
+	   background-color: #f7f7fc;
+	   border: 2px solid lightgray; 
+	   min-width:700px; 
+	 } 
+	 
+	 #top-title{
+	  font-size: 19px;
+	  text-align: center;
+	 }
+	 
+	 #title-label{
+	  margin-top:16px;
+	  margin-bottom: -7px;
+	  text-align: center;
+	 }
+	 
+	 #board-title{
+	  margin-left:47px;
+	  margin-top:15px; 
+	 }
+	 
+	 #f-title{
+	  margin-left: 18px;
+	  margin-top: -16px;
+	  width: 95%;
+	  font-size: 36px;
+	 }
+
+  #board-header{
+    font-size: 14px;
+    margin-left: 20px;
+   }
+  
+
+  #f-writer{
+    font-size: 16px;
+    font-weight: bold; 
+  }
+  
+  #f-content{
+    margin-left: 20px;
+    width:90%;
+  }
+  
+  
+
+ /*    :root {
       --article-list__cell-id__width:100px;
       --article-list__cell-reg-date__width:250px;
       --article-list__cell-writer__width:150px;
@@ -62,10 +126,26 @@
     
     .article-list > main > div {
       border-top:2px solid black;
-    }
+    } */
+  
+}
+
+body {
+  text-align: center;
+}
+    
   </style>
+  
+<div class="html-board">
+<br>
+<h2>게시판</h2>
+<h7>게시글보기</h7>
+</div>
+  
+<main id= "main-holder">  
+
  <section class="section-1 con-min-width">
-  <div class="con">
+  <div class="con">  
 <div class="article-list">
 <form action='update' method='post'>
 <div class="mb-3 row" style= 'display:none;'>
@@ -75,38 +155,38 @@
   </div>
 </div>
 
-<div class="mb-3 row">
-  <label for='f-title' class="col-sm-2 col-form-label">제목</label>
+<div id="title-label">
+<div class="mb-3 row"  id="title-container">
+  <label for='f-title' class="col-sm-2 col-form-label"></label>
   <div class="col-sm-6">
-    <label for='f-title' class="col-sm-2 col-form-label">${board.title}</label>
+    <label for='f-title' id='f-title' class="col-sm-2 col-form-label">${board.title}</label>
   </div>
 </div>
-<div class="mb-3 row">
-  <label for='f-content' class="col-sm-2 col-form-label">내용</label> 
-  <div class="col-sm-6">
-   <label for='f-content' class="col-sm-2 col-form-label">${board.content}</label>
+</div>
+
+<div class="board-header" id="board-header">
+  <label for='f-writer' class="col-sm-2 col-form-label"></label>
+    <div class="board-header-second">
+     <label for="f-writer" id='f-writer' class="col-sm-2 col-form-label">${board.writer.id}</label>
+     <br><label for='f-registrationDate' class="col-sm-2 col-form-label">${board.registrationDate}</label>
+     <label for='f-views' class="col-sm-2 col-form-label">조회 ${board.views}</label>    
   </div>
 </div>
-<div class="mb-3 row">
-  <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
-    <div class="col-sm-6">
-  <label for="f-content" class="col-sm-2 col-form-label">${board.writer.id}</label>
+
+<hr>
+<br>
+<div id="title block">
+<div class="board-content" id="board-content">
+   <label for='f-content' id="f-content">${board.content}</label>
   </div>
 </div>
+<br>
+<br>
+<br>
 <div class="mb-3 row">
-  <label for='f-registrationDate' class="col-sm-2 col-form-label">등록일</label> 
-  <div class="col-sm-6">
-     <label for='f-registrationDate' class="col-sm-2 col-form-label">${board.registrationDate}</label>
-  </div>
-</div>
-<div class="mb-3 row">
-  <label for='f-views' class="col-sm-2 col-form-label">조회수</label> 
-  <div class="col-sm-6">
-  <label for='f-views' class="col-sm-2 col-form-label">${board.views}</label>    
-  </div>
-</div>
-<div class="mb-3 row">
-	<label for='f-like' class="col-sm-2 col-form-label">좋아요 수</label> 
+
+
+	<label for='f-like' class="col-sm-2 col-form-label">좋아요 </label> 
   <div class="col-sm-6">
   <label for='f-views' class="col-sm-2 col-form-label">${board.likes}</label>
   </div>
@@ -114,10 +194,10 @@
 <div class="mb-3 row">
 	<label for='f-tag' class="col-sm-2 col-form-label">태그</label> 
   <div class="col-sm-6">
-  <label for='f-tag' class="col-sm-2 col-form-label">${board.tag}</label>
+  <button id='f-tag' class="btn">${board.tag}</button>
   </div>
 </div>
-
+</div>
 		
 <c:choose> 
   <c:when test="${loginUser.authority eq 2 || loginUser.authority eq 4|| loginUser.authority eq 8}">
@@ -137,11 +217,11 @@
 </c:choose>		
     <a href='list' class="btn btn-outline-secondary btn-sm">목록</a>
     <a href='like?no=${board.boardNumber}' class="btn btn-outline-secondary btn-sm">좋아요</a><br> 
-<hr />
+</div>
+</div>
 </form>
-</div>
-</div>
 </section>
+</main>
 
 <div class="container">
 <h4>댓글 <a class="btn btn-outline-secondary btn-sm">새댓글</a><br>
@@ -161,14 +241,6 @@
 </c:forEach>
 </div><!-- .container -->
 
-<!-- <script>
-document.querySelector("#member-form").onsubmit = () => {
-  if (document.querySelector("#f-name").value == "" ||
-      document.querySelector("#f-email").value == "" ||
-      document.querySelector("#f-password").value == "") {
-    //window.alert("필수 입력 항목이 비어 있습니다.")
-    Swal.fire("필수 입력 항목이 비어 있습니다.")
-    return false;
-  }
-};
-</script> -->
+<script>
+
+</script> 

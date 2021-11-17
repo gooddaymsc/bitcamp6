@@ -4,6 +4,11 @@
 <!DOCTYPE html>
 <html>
 <style>
+
+	h2,h7{
+	  display:inline;
+	}
+
   .html-img-container {
     position: relative;
     top: 0;

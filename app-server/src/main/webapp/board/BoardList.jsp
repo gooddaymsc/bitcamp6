@@ -4,11 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 
-h2,h7{
-  display:inline;
-}
-
-
 /* .btn-group{
   margin-left: 35%;
   width: 400px;
@@ -82,15 +77,12 @@ tr:hover {
 </div> -->
 
 
-
-
  <fieldset class="input-group-append">
   <form action='search' method='post'>
     <input type="text" id="boardFind" class="form-control rounded-pill" name="boardFind" title="검색 키워드를 입력해주세요." placeholder="검색 키워드를 입력해주세요." value="">
  </form>
 </fieldset>
    
-
 
 <br>
 <table class="table table-hover">

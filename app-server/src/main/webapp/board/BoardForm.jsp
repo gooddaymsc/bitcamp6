@@ -9,7 +9,6 @@
     font-family: Arial, Helvetica, sans-serif; 
     display: grid; justify-items: center; 
     align-items: center; 
-  xbackground-color: #3a3a3a;
     min-width:80%; 
   }  
   
@@ -68,6 +67,11 @@
  
 </style>
 
+<div class="html-board">
+<br>
+<h2>게시판</h2>
+<h7>게시글쓰기</h7>
+</div>
 
 <main id= "main-holder">
 <form action='add' method='post'>
@@ -92,9 +96,7 @@
 
 <button id="board-btn" class="btn btn-outline-secondary btn-sm">등록</button><br>
 </form>
-
 </main>
-
 
 
 
