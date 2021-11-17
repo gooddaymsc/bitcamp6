@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    
+        <head>
+    <style>
+    #content {
+    text-align:center;
+    }
+    </style>
+    </head>
+    
     <h1>회원가입(판매자)</h1>     
     <a href='../buyer/form' class="btn btn-outline-primary btn-sm">구매자로 회원가입하기</a>
     <h5>* 필수 입력</h5>
