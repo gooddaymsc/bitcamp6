@@ -45,9 +45,6 @@ tr:hover {
 </c:forEach>
 </tbody>
 </table>
-<footer>
-<a href='../main/logout' class="btn btn-primary">로그아웃</a>
-</footer>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
