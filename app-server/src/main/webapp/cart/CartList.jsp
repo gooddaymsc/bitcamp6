@@ -19,7 +19,7 @@ tr:hover {
 <table class="table table-hover">
 <thead>
   <tr>
-    <th>선택</th>
+    <th><input type='checkbox' /></th>
     <th>번호</th>
     <th>구매자</th>
     <th>가게명</th>
@@ -32,21 +32,19 @@ tr:hover {
   </tr>
 </thead>
 <tbody>
-<%-- <c:forEach items="${cartList}" var="cart" items="${sellerList}" var="sellerList"> --%>
-  <c:forEach items="${cartList}" var="cart" varStatus="status">
+<c:forEach items="${cartList}" var="cart" varStatus="status">
     <tr>
-      <td> 
-      <input name='chkbox' type="checkbox"  value="${cart.cartStocks*cart.stock.price}" onClick="itemSum(this.form);">
-  </td> 
-      <td> <a href='detail?cartNumber=${cart.cartNumber}&id=${cart.id}'>${cart.cartNumber}</a></td>
-      <td>${cart.id}</td> 
-      <td>${sellerList.businessName}</td>  
-      <td>${cart.stock.seller.member.id}</td> 
-      <td>${cart.stock.product.productName}</td> 
-      <td>${cart.cartStocks}</td> 
-      <td>${cart.stock.price}</td> 
-      <td>${cart.registrationDate}</td> 
-      <td>${cart.cartStocks*cart.stock.price}</td>
+    <td><input type="checkbox" /></td>
+<%--       <input name='chkbox' type="checkbox"  value="${cart.cartStocks*cart.stock.price}" onClick="itemSum(this.form);">
+ --%>      <td class='chk'> <a href='detail?cartNumber=${cart.cartNumber}&id=${cart.id}'>${cart.cartNumber}</a></td>
+      <td class='chk'>${cart.id}</td> 
+      <td class='chk'>${sellerList.businessName}</td>  
+      <td class='chk'>${cart.stock.seller.member.id}</td> 
+      <td class='chk'>${cart.stock.product.productName}</td> 
+      <td class='chk'>${cart.cartStocks}</td> 
+      <td class='chk'>${cart.stock.price}</td> 
+      <td class='chk'>${cart.registrationDate}</td> 
+      <td class='chk'>${cart.cartStocks*cart.stock.price}</td>
 </tr>
 </c:forEach>
 </tbody>
@@ -84,7 +82,7 @@ document.querySelectorAll("tbody a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
 
-var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+var trList = document.querySelectorAll("tbody .chk"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     //console.log(e.currentTarget.querySelector("a").href);

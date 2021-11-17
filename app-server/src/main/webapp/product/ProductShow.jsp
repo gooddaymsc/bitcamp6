@@ -59,6 +59,12 @@ a {
     text-decoration: none;
     color: black;
 }
+<<<<<<< HEAD
+=======
+button {
+  position: relative; 
+}
+>>>>>>> 41feeb9e26b7d2a1a42fe2913063f1bb12033468
 
 h2 
 .star-rating {width:205px;}
@@ -139,7 +145,9 @@ display:inline-block;
 </div>
 
 
-<button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button>
+<%-- <button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button> --%>
+<button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
+
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
   <div>

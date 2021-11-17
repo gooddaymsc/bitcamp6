@@ -9,9 +9,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
 
-body{
-font-family: 'Praise', cursive;
-}
 
 </style>
 

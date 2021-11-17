@@ -14,7 +14,6 @@ button {
 </style>
 
  <h1>상품 정보수정</h1>
-
  <a href="../upload/product/${product.photo}">
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="700px" >
@@ -23,7 +22,7 @@ button {
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>
     
 <div class="mb-3 row">        
-<div class="mb-3 row">
+  <div class="col-sm-6">
 
   <label for='f-name' class="col-sm-2 col-form-label">상품명</label>
     <input id='f-name' type='text' name='name' class="form-control" value='${product.productName}' readonly>
@@ -55,13 +54,13 @@ button {
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
+  <label for='f-subType' class="col-sm-2 col-form-label">상세주종</label>
   <div class="col-sm-6">
     <input id='f-subType' type='text' name='subType' class="form-control" value='${product.productType.subType}' >
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
+  <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
   <div class="col-sm-6">
     <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" value='${product.countryOrigin}'>
   </div>
@@ -96,7 +95,7 @@ button {
   </div>
 </div>
 <div class="mb-3 row">
-  <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
+  <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
   <div class="col-sm-6">
     <input id='f-acidity' type='text' name='acidity' class="form-control" value='${product.acidity}' >
   </div>
@@ -107,8 +106,6 @@ button {
     <input id='f-weight' type='text' name='weight' class="form-control" value='${product.weight}' >
   </div>
 </div>
-
-
 
 
   <button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
