@@ -15,6 +15,7 @@ import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.ProductType;
 import com.eomcs.pms.domain.Review;
+import com.eomcs.pms.servlet.ProductHandlerHelper;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -39,10 +40,14 @@ public class ProductController {
 
   @PostMapping("/product/add")
   public ModelAndView add(Product product, ProductType productType, Part photoFile) throws Exception {
+    System.out.println("1111");
     if (photoFile.getSize() > 0) {
+      System.out.println("aaaa");
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/product") + "/" + filename);
       product.setPhoto(filename);
+      product.setProductType(new ProductHandlerHelper(
+          productDao).promptType(productType.getType(), productType.getSubType()));
 
       Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
       .size(1000, 1000)
@@ -55,6 +60,8 @@ public class ProductController {
         }
       });
     }
+
+    System.out.println("bbbb");
 
     productDao.insert(product);
     sqlSessionFactory.openSession().commit();
@@ -110,11 +117,14 @@ public class ProductController {
     }
 
     product.setPhoto(oldProduct.getPhoto());
+    product.setProductName(oldProduct.getProductName());
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/product") + "/" + filename);
       product.setPhoto(filename);
+      product.setProductType(new ProductHandlerHelper(
+          productDao).promptType(productType.getType(), productType.getSubType()));
 
       Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
       .size(300, 300)
@@ -189,6 +199,7 @@ public class ProductController {
 
   @GetMapping("/product/listType")
   public ModelAndView listType(String type) throws Exception {
+    System.out.println("typeerror");
     Collection<Product> productList = productDao.findTypeAll(type);
 
     ModelAndView mv = new ModelAndView();
@@ -225,9 +236,9 @@ public class ProductController {
     return mv;
   }
 
-  @GetMapping("/product/search")
+  @PostMapping("/product/search")
   public ModelAndView search(String search) throws Exception {
-    String input = "%"+"search"+"%";
+    String input = "%"+search+"%";
     Collection<Product> productList = productDao.search(input);
 
     ModelAndView mv = new ModelAndView();
