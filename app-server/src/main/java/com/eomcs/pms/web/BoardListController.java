@@ -7,12 +7,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.domain.Board;
 
-@WebServlet("/board/list")
+//@WebServlet("/board/list")
 public class BoardListController extends HttpServlet{
   private static final long serialVersionUID = 1L;
 

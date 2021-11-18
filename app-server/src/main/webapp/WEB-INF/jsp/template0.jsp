@@ -70,8 +70,8 @@
   </div>
 </div>
   <div class="container">
-<jsp:include page="/header_main.jsp"/>
-<jsp:include page="/sidebar.jsp"/>
+<jsp:include page="header_main.jsp"/>
+<jsp:include page="sidebar.jsp"/>
 
 <div id="content">
 <jsp:include page="${contentUrl}"/>
@@ -81,5 +81,5 @@
 </div><!-- .container -->
 
 </body>
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 </html>

@@ -19,8 +19,8 @@
 <body>
 <div class="container">
 
-<jsp:include page="/header_all.jsp"/>
-<jsp:include page="/sidebar.jsp"/>
+<jsp:include page="header_all.jsp"/>
+<jsp:include page="sidebar.jsp"/>
  
 <div id="content">
 <pre>
@@ -31,7 +31,7 @@ error.printStackTrace(new PrintWriter(out));
 </pre>
 </div><!-- #content --> 
 
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 
 </div><!-- .container -->
 

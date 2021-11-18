@@ -71,7 +71,7 @@
   <div class="first-container">
     <div class="html-line">
       <div class="html-img-container">
-        <img class="html-img" src="../image/menuD.jpg"></img>
+        <img class="html-img" src="${contextRoot}/image/menuD.jpg"></img>
       </div>
       <div class="html-board">
         </div>
@@ -80,8 +80,8 @@
 
 
  <div class="container"> 
-    <jsp:include page="/header_all.jsp" />
-    <jsp:include page="/sidebar.jsp"/> 
+    <jsp:include page="header_all.jsp" />
+    <jsp:include page="sidebar.jsp"/> 
 
     <div id="content">
       <jsp:include page="${contentUrl}" />
