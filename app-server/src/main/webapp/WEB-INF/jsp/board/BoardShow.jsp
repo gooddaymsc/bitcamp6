@@ -67,7 +67,15 @@
   }
   
   
-
+.comment-container {
+  position: relative;
+  margin-top : 50px;
+  border : 2px solid red;
+  width: 80%;
+} 
+#f-newComment {
+  
+}
  /*    :root {
       --article-list__cell-id__width:100px;
       --article-list__cell-reg-date__width:250px;
@@ -211,22 +219,52 @@ body {
 </section>
 </main>
 
-<div class="container">
-<h4>댓글 <a class="btn btn-outline-secondary btn-sm">새댓글</a><br>
-</h4>
-<form action='./comment/add'>
-<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
-내용 <input id='f-content' type='text' name='content'>
-<input type='hidden' id='f-writer' type='text' name='writer' value='${loginUser.id}' readonly>
-<button class="btn btn-outline-secondary btn-sm">등록</button><br><br>
-</form>
-<c:forEach items= "${commentList}" var="comment">
-<fieldset>
-<legend>작성자 : ${comment.writer.id}</legend>
-     <p>내용 : <a href='comment/detail?no=${comment.commentNumber}'>${comment.content}</a></p>
-     <p>등록일 : ${comment.registrationDate}</p>
-</fieldset>
-</c:forEach>
+<div class="comment-container">
+	<h4>댓글 <br>
+	</h4>
+	<form action='./comment/add' method='post'>
+	<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
+	내용 <input id='f-content' type='text' name='content'>
+	<button class="btn btn-outline-secondary btn-sm">등록</button><br><br>
+	</form>
+	<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">내용</th>
+      <th scope="col">작성자</th>
+      <th scope="col">등록일</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+	<c:forEach items= "${commentList}" var="comment">
+	<fieldset>
+	<legend>작성자 : ${comment.writer.id}</legend>
+	     <p>내용 : <a href='comment/detail?no=${comment.commentNumber}'>${comment.content}</a></p>
+	     <p>등록일 : ${comment.registrationDate}</p>
+	     <button class="btn btn-outline-secondary btn-sm">변경</button>
+	     <button class="btn btn-outline-secondary btn-sm">삭제</button>
+	</fieldset>
+	</c:forEach>
 </div><!-- .container -->
 
 <script>
