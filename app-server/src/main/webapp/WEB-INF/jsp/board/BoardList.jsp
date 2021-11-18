@@ -1,13 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-
-h2,h7{
-  display:inline;
-}
-
 
 /* .btn-group{
   margin-left: 35%;
@@ -82,15 +77,12 @@ tr:hover {
 </div> -->
 
 
-
-
  <fieldset class="input-group-append">
   <form action='search' method='post'>
     <input type="text" id="boardFind" class="form-control rounded-pill" name="boardFind" title="검색 키워드를 입력해주세요." placeholder="검색 키워드를 입력해주세요." value="">
  </form>
 </fieldset>
    
-
 
 <br>
 <table class="table table-hover">
@@ -119,7 +111,7 @@ tr:hover {
 </tbody>
 </table>
 
-<a href='form' id="board-btn" class="btn btn-outline-secondary btn-sm">글쓰기</a>
+<a href='#' id="board-btn" onclick="btn_add(${loginUser.authority})" class="btn btn-outline-secondary btn-sm">글쓰기</a>
 
 <div class="pagination_btn">
 <nav aria-label="...">
@@ -139,6 +131,20 @@ tr:hover {
 </nav>
 </div>
 
+<script>
+function btn_add(authority) {
+	if ((authority==2) || (authority==4)||(authority==8)) {
+    location.href="${contextRoot}/drinker/app/board/form";
+	} else {
+		  if (confirm("로그인 후 가능합니다.")==true) {
+			  location.href="${contextRoot}/drinker/app/main/loginForm";
+		  } else {
+		    /* location.href="${contextRoot}/drinker/app/board/list" */
+		    return false;
+		  }
+	}
+}
+</script>
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
   aTag.onclick = () => false;

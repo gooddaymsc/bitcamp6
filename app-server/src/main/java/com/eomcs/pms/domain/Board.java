@@ -14,6 +14,7 @@ public class Board implements Serializable {
   private Date registrationDate;
   private int views;
   private String tag;
+  private int tagNumber;
   private int likes;
   private Date likeDate;
   private List<LikeMember> likeMember = new ArrayList<>();
@@ -99,4 +100,11 @@ public class Board implements Serializable {
   public void setBoardTag(BoardTag boardTag) {
     this.boardTag = boardTag;
   }
+  public int getTagNumber() {
+    return tagNumber;
+  }
+  public void setTagNumber(int tagNumber) {
+    this.tagNumber = tagNumber;
+  }
+
 }

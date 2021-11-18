@@ -28,9 +28,6 @@ public class MainMenuController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      //      request.setAttribute("pageTitle", "메인");
-      //      request.setAttribute("contentUrl", "/main/Menu.jsp");
-      //      request.getRequestDispatcher("/template1.jsp").forward(request, response);
       request.setAttribute("rankingWine", productDao.rankingType("와인"));
       request.setAttribute("rankingWhiskey", productDao.rankingType("위스키"));
       request.setAttribute("rankingBrandy", productDao.rankingType("브랜디/꼬냑"));
@@ -38,7 +35,7 @@ public class MainMenuController extends HttpServlet {
       request.setAttribute("rankingTrad", productDao.rankingType("전통주"));
 
       request.setAttribute("pageTitle", "메인");
-      request.setAttribute("contentUrl", "/main/Menu.jsp");
+      request.setAttribute("contentUrl", "/Menu.jsp");
       request.getRequestDispatcher("/template0.jsp").forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();

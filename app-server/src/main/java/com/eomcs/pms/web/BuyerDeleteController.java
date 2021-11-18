@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,7 @@ import com.eomcs.pms.dao.BuyerDao;
 import com.eomcs.pms.domain.Buyer;
 import com.eomcs.pms.domain.Member;
 
-@WebServlet("/buyer/delete")
+//@WebServlet("/buyer/delete")
 public class BuyerDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

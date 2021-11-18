@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,7 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Stock;
 
 
-@WebServlet("/stock/form")
+//@WebServlet("/stock/form")
 public class StockFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   StockDao stockDao;

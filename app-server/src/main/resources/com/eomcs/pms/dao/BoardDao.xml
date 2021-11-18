@@ -11,6 +11,7 @@
     <result column="content" property="content"/>
     <result column="registeredDate" property="registrationDate"/>
     <result column="views" property="views"/>
+    <result column="tag" property="tag"/>
 
   <association property="writer" javaType="member">    
     <id column="member_no" property="number"/>
@@ -103,7 +104,8 @@
          m.id, 
          m.name,
          m.email,
-         t.tag
+         t.tag,
+         t.tag_no
        from board b 
         left join member m on b.member_no=m.member_no
         left join board_tag bt on b.board_no=bt.board_no

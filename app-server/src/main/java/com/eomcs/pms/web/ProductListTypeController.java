@@ -5,14 +5,13 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.domain.Product;
 
-@WebServlet("/product/listType")
+//@WebServlet("/product/listType")
 public class ProductListTypeController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

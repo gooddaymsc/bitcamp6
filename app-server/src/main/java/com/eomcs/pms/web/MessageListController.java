@@ -69,7 +69,7 @@ public class MessageListController extends HttpServlet{
       request.setAttribute("messages", messages);
       request.setAttribute("pageTitle", "메세지목록");
       request.setAttribute("contentUrl", "/message/MessageList.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
       //      request.getRequestDispatcher("MessageList.jsp").forward(request, response);
 
     }catch (Exception e) {
