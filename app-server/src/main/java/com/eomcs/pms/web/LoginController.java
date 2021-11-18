@@ -1,4 +1,4 @@
-package com.eomcs.pms.servlet;
+package com.eomcs.pms.web;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

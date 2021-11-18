@@ -67,7 +67,15 @@
   }
   
   
-
+.comment-container {
+  position: relative;
+  margin-top : 50px;
+  border : 2px solid red;
+  width: 80%;
+} 
+#f-newComment {
+  
+}
  /*    :root {
       --article-list__cell-id__width:100px;
       --article-list__cell-reg-date__width:250px;
@@ -139,7 +147,7 @@ body {
 <div class="html-board">
 <br>
 <h2>게시판</h2>
-<h7>게시글보기</h7>
+<h6>게시글보기</h6>
 </div>
   
 <main id= "main-holder">  
@@ -147,7 +155,6 @@ body {
  <section class="section-1 con-min-width">
   <div class="con">  
 <div class="article-list">
-<form action='update' method='post'>
 <div class="mb-3 row" style= 'display:none;'>
   <label for='f-number' class="col-sm-2 col-form-label">번호</label> 
   <div class="col-sm-6">
@@ -167,6 +174,7 @@ body {
 <div class="board-header" id="board-header">
   <label for='f-writer' class="col-sm-2 col-form-label"></label>
     <div class="board-header-second">
+    <input type='hidden' id='btn-writer' type='text' name='writer' value='${board.writer.id}'readOnly><br>
      <label for="f-writer" id='f-writer' class="col-sm-2 col-form-label">${board.writer.id}</label>
      <br><label for='f-registrationDate' class="col-sm-2 col-form-label">${board.registrationDate}</label>
      <label for='f-views' class="col-sm-2 col-form-label">조회 ${board.views}</label>    
@@ -200,47 +208,90 @@ body {
 </div>
 		
 <c:choose> 
-  <c:when test="${loginUser.authority eq 2 || loginUser.authority eq 4|| loginUser.authority eq 8}">
-  <button type="button" onclick="location.href='detail?no=${board.boardNumber}'" class="btn btn-outline-secondary btn-sm">수정</button>
-<!--     <button class="btn btn-primary">변경</button> -->
-<%--     <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br> --%>
+  <c:when test="${not empty loginUser}">
+  <a href='#' onclick="btn_detail('${loginUser.id}')" class="btn btn-outline-secondary btn-sm">수정</a>
+  <a href='#' onclick="btn_delete('${loginUser.id}')" class="btn btn-outline-secondary btn-sm">삭제</a>
+  <a href='like?no=${board.boardNumber}' class="btn btn-outline-secondary btn-sm">좋아요</a><br> 
 </c:when>
-<%--   
-    <c:when test="${loginUser.authority eq 2}">
-    <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
-  </c:when>
-    <c:when test="${loginUser.authority eq 4}">
-    <button class="btn btn-primary">변경</button>
-    <a href='delete?no=${board.boardNumber}' class="btn btn-primary">삭제</a><br>
-  </c:when> --%>
 </c:choose>		
     <a href='list' class="btn btn-outline-secondary btn-sm">목록</a>
-    <a href='like?no=${board.boardNumber}' class="btn btn-outline-secondary btn-sm">좋아요</a><br> 
 </div>
-</div>
-</form>
 </section>
 </main>
 
-<div class="container">
-<h4>댓글 <a class="btn btn-outline-secondary btn-sm">새댓글</a><br>
-</h4>
-<form action='./comment/add'>
-<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
-내용 <input id='f-content' type='text' name='content'>
-<input type='hidden' id='f-writer' type='text' name='writer' value='${loginUser.id}' readonly>
-<button class="btn btn-outline-secondary btn-sm">등록</button><br><br>
-</form>
-<c:forEach items= "${commentList}" var="comment">
-<fieldset>
-<legend>작성자 : ${comment.writer.id}</legend>
-     <p>내용 : <a href='comment/detail?no=${comment.commentNumber}'>${comment.content}</a></p>
-     <p>등록일 : ${comment.registrationDate}</p>
-</fieldset>
-</c:forEach>
+<div class="comment-container">
+	<h4>댓글 <br>
+	</h4>
+	<form action='./comment/add' method='post'>
+	<input type='hidden' id='f-number' type='text' name='boardNumber' value='${board.boardNumber}' readOnly><br>
+	내용 <input id='f-content' type='text' name='content'>
+	<button class="btn btn-outline-secondary btn-sm">등록</button><br><br>
+	</form>
+	<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">내용</th>
+      <th scope="col">작성자</th>
+      <th scope="col">등록일</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+	<c:forEach items= "${commentList}" var="comment">
+	<fieldset>
+	<legend>작성자 : ${comment.writer.id}</legend>
+	     <p>내용 : <a href='comment/detail?no=${comment.commentNumber}'>${comment.content}</a></p>
+	     <p>등록일 : ${comment.registrationDate}</p>
+	     <button class="btn btn-outline-secondary btn-sm">변경</button>
+	     <button class="btn btn-outline-secondary btn-sm">삭제</button>
+	</fieldset>
+	</c:forEach>
 </div><!-- .container -->
 
 <script>
-
+function btn_detail(id) {
+ var no = document.getElementById('f-number').value;
+ const board_id = document.getElementById('btn-writer').value;
+   if (id==board_id) {
+      location.href="${contextRoot}/drinker/app/board/detail?no="+no;
+   } else {
+     alert("작성자가 아니므로 수정할 수 없습니다.");
+     return false;
+   }
+ }
+</script>
+<script>
+function btn_delete(id) {
+	var no = document.getElementById('f-number').value;
+	const board_id = document.getElementById('btn-writer').value;
+    if ((id==board_id)||(id=="admin")) {
+      if (confirm("정말 삭제하시겠습니까?")==true) {
+    	   location.href="${contextRoot}/drinker/app/board/delete?no="+no;
+      } else {
+    	  return false;
+      }
+    } else {
+    	alert("작성자가 아니므로 삭제할 수 없습니다.");
+    	return false;
+    }
+  }
 </script> 

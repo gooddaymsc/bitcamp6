@@ -164,9 +164,9 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../product/listType?type=와인">와인</a>
+              <a class="nav-link active" aria-current="page" href="${contextPath}/app/product/listType?type=와인">와인</a>
               <ul class="dropdown-menu">
-                <li><a href="../product/listSubType?no=1">레드</a></li>
+                <li><a href="${contextPath}/app/product/listSubType?no=1">레드</a></li>
                 <li><a href="../product/listSubType?no=2">화이트</a></li>
                 <li><a href="../product/listSubType?no=3">로제</a></li>
                 <li><a href="../product/listSubType?no=4">스위트</a></li>
