@@ -58,7 +58,7 @@ public class MessageDetailController extends HttpServlet {
       request.setAttribute("theOtherId", other); 
       request.setAttribute("pageTitle", "메세지상세보기");
       request.setAttribute("contentUrl", "/message/MessageDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      request.getRequestDispatcher("/template2.jsp").forward(request, response);
       //      request.getRequestDispatcher("MessageDetail.jsp").forward(request, response);
 
     } catch (Exception e) {

@@ -27,7 +27,7 @@ public class BoardFormController extends HttpServlet {
     }
     request.setAttribute("pageTitle", "새게시글");
     request.setAttribute("contentUrl", "/board/BoardForm.jsp");
-    request.getRequestDispatcher("/template2.jsp").forward(request, response);
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
   }
 }

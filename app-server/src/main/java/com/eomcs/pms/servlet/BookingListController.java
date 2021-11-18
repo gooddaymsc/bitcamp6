@@ -44,14 +44,14 @@ public class BookingListController extends HttpServlet {
         request.setAttribute("bookingList", bookingList);
         request.setAttribute("pageTitle", "예약목록");
         request.setAttribute("contentUrl", "/booking/BookingBuyerList.jsp");
-        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
         //        request.getRequestDispatcher("BookingBuyerList.jsp").forward(request, response);
       } else {
         bookingList = bookingDao.findAll2(member.getId());
         request.setAttribute("bookingList", bookingList);
         request.setAttribute("pageTitle", "예약목록");
         request.setAttribute("contentUrl", "/booking/BookingSellerList.jsp");
-        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+        request.getRequestDispatcher("/template2.jsp").forward(request, response);
         //        request.getRequestDispatcher("BookingSellerList.jsp").forward(request, response);
       }
 

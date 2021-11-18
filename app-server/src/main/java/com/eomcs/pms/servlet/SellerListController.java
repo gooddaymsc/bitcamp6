@@ -7,12 +7,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import com.eomcs.pms.dao.SellerDao;
 import com.eomcs.pms.domain.Seller;
 
-@WebServlet("/seller/list")
+//@WebServlet("/seller/list")
 public class SellerListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   SellerDao sellerDao;
