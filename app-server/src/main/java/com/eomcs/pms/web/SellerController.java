@@ -42,14 +42,14 @@ public class SellerController {
   @PostMapping("/seller/add")
   public ModelAndView add(Seller seller, HttpServletRequest request, Part photoFile) throws Exception {
     Member member = new Member();
-    member.setAuthority(4);
-    member.setId(request.getParameter("id"));
-    member.setName(request.getParameter("name"));
-    member.setNickname(request.getParameter("nickname"));
-    member.setEmail(request.getParameter("email"));
-    member.setBirthday(Date.valueOf(request.getParameter("birthday")));
-    member.setPassword(request.getParameter("password"));
-    member.setPhoneNumber(request.getParameter("phoneNumber"));
+    seller.getMember().setAuthority(4);
+    seller.getMember().setId(request.getParameter("id"));
+    seller.getMember().setName(request.getParameter("name"));
+    seller.getMember().setNickname(request.getParameter("nickname"));
+    seller.getMember().setEmail(request.getParameter("email"));
+    seller.getMember().setBirthday(Date.valueOf(request.getParameter("birthday")));
+    seller.getMember().setPassword(request.getParameter("password"));
+    seller.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
@@ -68,7 +68,7 @@ public class SellerController {
       });
     }
 
-    seller.setMember(member);
+//    seller.setMember(member);
     sellerDao.insert(seller.getMember());
     sellerDao.insertSeller(seller);
     sqlSessionFactory.openSession().commit();
@@ -116,15 +116,55 @@ public class SellerController {
   }
 
   @PostMapping("/seller/update")
-  public ModelAndView update(Seller seller, HttpSession session) throws Exception {
+  public ModelAndView update(Seller seller, String id, HttpServletRequest request, HttpSession session) throws Exception {
 
-    System.out.println(seller.getMember().getId());
+    //Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
     Seller oldSeller = sellerDao.findById(seller.getMember().getId());
+
     if(oldSeller == null) {
       throw new Exception("해당 아이디의 회원이 없습니다.");
     }
 
+    //    if (member.getId().equals(oldSeller.getMember().getId())) {
+    //    seller.getMember().setNickname(request.getParameter("nickname"));
+    //    seller.getMember().setEmail(request.getParameter("email"));
+    //    //        seller.getMember().setPassword(request.getParameter("password"));
+    //    seller.getMember().setPhoneNumber(request.getParameter("phoneNumber"));
+    //    //        seller.getMember().setPhoto(request.getParameter("photo"));
+    //
+    //    Part photoPart = request.getPart("photo");
+    //    if (photoPart.getSize() > 0) {
+    //      String filename = UUID.randomUUID().toString();
+    //      photoPart.write(sc.getRealPath("/upload/seller") + "/" + filename);
+    //      seller.getMember().setPhoto(filename);
+    //
+    //      Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+    //      .size(100, 100)
+    //      .outputFormat("jpg")
+    //      .crop(Positions.CENTER)
+    //      .toFiles(new Rename() {
+    //        @Override
+    //        public String apply(String name, ThumbnailParameter param) {
+    //          return name + "_100x100";
+    //        }
+    //      });
+    //    }
+    //    }
+    //    
+    seller.setBusinessName(oldSeller.getBusinessName());
+    seller.setBusinessNumber(oldSeller.getBusinessNumber());
+    seller.setBusinessAddress(oldSeller.getBusinessAddress());
+    seller.setBusinessPlaceNumber(oldSeller.getBusinessPlaceNumber());  
+    seller.setBusinessOpeningTime(oldSeller.getBusinessOpeningTime());
+    seller.setBusinessClosingTime(oldSeller.getBusinessClosingTime());
+
+    //  } else if (member.getAuthority() == 8) {
+    seller.getMember().setLevel(oldSeller.getMember().getLevel());
+    // }
+
     sellerDao.update(seller.getMember());
+    sellerDao.updateSeller(seller);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

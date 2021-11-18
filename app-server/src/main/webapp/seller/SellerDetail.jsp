@@ -14,7 +14,7 @@
       <div class="mb-3 row">
         <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
         <div class="col-sm-6">
-          <input id='f-id' type='text' name='id' class="form-control" value='${seller.member.id}' readonly><br>
+          <input id='f-id' type='text' name='member.id' class="form-control" value='${seller.member.id}' readonly><br>
         </div>
       </div>
       
@@ -41,7 +41,7 @@
       <div class="mb-3 row">
         <label for='f-level' class="col-sm-2 col-form-label">레벨</label>
         <div class="col-sm-6">
-          <input id='f-level' type='text' name='level' class="form-control" value='${seller.member.level}' readonly><br>
+          <input id='f-level' type='text' name='member.level' class="form-control" value='${seller.member.level}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
