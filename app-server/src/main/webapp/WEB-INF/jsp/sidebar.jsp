@@ -17,7 +17,7 @@
  <c:choose> 
   <c:when  test="${loginUser eq null}">
     <div class="btn-group-vertical">
-	  <a href='${contextRoot}/drinker/app/app/main/loginForm' class="btn btn-light">로그인</a>
+	  <a href='${contextRoot}/drinker/app/main/loginForm' class="btn btn-light">로그인</a>
 	  <a href='${contextRoot}/drinker/app/buyer/form' class="btn btn-light">회원가입</a>
 	  <a href='${contextRoot}/drinker/app/board/list' class="btn btn-light">게시판</a>
 	  <a href='${contextRoot}/drinker/app/product/ranking' class="btn btn-light">오늘의 술</a>

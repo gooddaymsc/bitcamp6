@@ -45,11 +45,12 @@ public class StockController {
   }
 
   @PostMapping("/stock/add")
-  public ModelAndView add(Stock stock, HttpServletRequest request, HttpSession session) throws Exception {
+  public ModelAndView add(HttpServletRequest request, HttpSession session) throws Exception {
+    int productNo = Integer.parseInt(request.getParameter("productNumber"));
 
     Member member = (Member) session.getAttribute("loginUser");
-
-    Product product = productDao.findByNo(stock.getProduct().getProductNumber());
+    Stock stock = new Stock();
+    Product product = productDao.findByNo(productNo);
     stock.setProduct(product);
     stock.setPrice(Integer.parseInt(request.getParameter("price")));
     stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
@@ -69,7 +70,7 @@ public class StockController {
     StockList stockList = new StockList();
 
     Member member = (Member) session.getAttribute("loginUser");
-
+    System.out.println(member.getId());
     Collection<Stock> list = stockDao.findAll(member.getId());
     stockList.setId(member.getId());
     stockList.setSellerStock((List<Stock>) list);
@@ -78,7 +79,7 @@ public class StockController {
     mv.addObject("id", member.getId());
     mv.addObject("stockList", stockList.getSellerStock());
     mv.addObject("pageTitle", "재고목록");
-    mv.addObject("contentUrl", "stock/stockList.jsp");
+    mv.addObject("contentUrl", "stock/StockList.jsp");
     mv.setViewName("template1");
     return mv;
   }
@@ -110,7 +111,7 @@ public class StockController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("stock", stock);
     mv.addObject("pageTitle", "재고상세보기");
-    mv.addObject("contentUrl", "stock/stockDetail.jsp");
+    mv.addObject("contentUrl", "stock/StockDetail.jsp");
     mv.setViewName("template1");
     return mv;
   }
