@@ -12,7 +12,7 @@ import com.eomcs.pms.dao.ProductDao;
 public class MainController {
 
   @Autowired MemberDao memberDao;
-  @Autowired ProductDao productDao;;
+  @Autowired ProductDao productDao;
   //  @Autowired ServletContext sc;
 
   @GetMapping("/main/menu")
