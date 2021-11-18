@@ -55,14 +55,11 @@ public class BuyerController {
 
     //    member.setPhoto(request.getParameter("photo"));
 
-    System.out.println(11111);
 
     if (photoFile.getSize() > 0) { 
-      System.out.println(2222);
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
       buyer.getMember().setPhoto(filename);
-      System.out.println(3333);
 
       Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
       .size(20, 20)
@@ -138,18 +135,18 @@ public class BuyerController {
   }
 
   @PostMapping("/buyer/update")
-  public ModelAndView update(Buyer buyer, String id, Part photoFile, HttpSession session) throws Exception {
+  public ModelAndView update(Buyer buyer, Part photoFile, HttpSession session,  HttpServletRequest request) throws Exception {
 
     Member member = (Member) session.getAttribute("loginUser");
 
-    Buyer oldBuyer = buyerDao.findById(id);
+    Buyer oldBuyer = buyerDao.findById(buyer.getMember().getId());
 
     if (oldBuyer == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
-    } 
+    }
 
     buyer.getMember().setNickname(oldBuyer.getMember().getNickname());
-    //        buyer.getMember().setPassword(request.getParameter("password"));
+    //  buyer.getMember().setPassword(request.getParameter("password"));
     buyer.getMember().setPhoneNumber(oldBuyer.getMember().getPhoneNumber());
     buyer.setZipcode(oldBuyer.getZipcode());
     buyer.setAddress(oldBuyer.getAddress());
@@ -182,11 +179,12 @@ public class BuyerController {
         }
       });
 
-      //    } else if (member.getAuthority() == 8) {
-      //      //        buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
+    } else if (member.getAuthority() == 8) {
+      buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
 
     }
 
+    buyer.setMember(member);
     buyerDao.update(buyer);
     sqlSessionFactory.openSession().commit();
 

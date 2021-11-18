@@ -69,7 +69,7 @@
               <img id="f-photo-image" src="../upload/seller/${seller.member.photo}_100x100.jpg" onError="this.src='../image/profile.png'"
      style="width:10rem; height:200px; padding:3px">
           </a>
-          <input id='f-photo' type='file' name='photo' class="form-control"><br>
+          <input id='f-photo' type='file' name='photoFile' class="form-control"><br>
         </div>
       </div>
       <div class="mb-3 row">

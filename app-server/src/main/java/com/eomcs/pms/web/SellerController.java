@@ -42,9 +42,8 @@ public class SellerController {
   @PostMapping("/seller/add")
   public ModelAndView add(Seller seller, HttpServletRequest request, Part photoFile) throws Exception {
     Member member = new Member();
-
-    member.setId(request.getParameter("id"));
     member.setAuthority(4);
+    member.setId(request.getParameter("id"));
     member.setName(request.getParameter("name"));
     member.setNickname(request.getParameter("nickname"));
     member.setEmail(request.getParameter("email"));
@@ -71,6 +70,7 @@ public class SellerController {
 
     seller.setMember(member);
     sellerDao.insert(seller.getMember());
+    sellerDao.insertSeller(seller);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

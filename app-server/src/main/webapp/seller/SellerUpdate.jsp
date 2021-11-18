@@ -64,7 +64,7 @@
           <a href="../upload/seller/${seller.member.photo}" >
               <img id="f-photo-image" src="../upload/seller/${seller.member.photo}_100x100.jpg">
           </a>
-<!--           <input id='f-photo' type='file' name='photo' class="form-control"><br> -->
+           <input id='f-photo' type='file' name='photoFile' class="form-control" readonly><br> 
         </div>
       </div>
       <div class="mb-3 row">
