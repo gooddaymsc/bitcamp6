@@ -38,7 +38,7 @@ button {
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" width="100px" height="100px">
-    <input id='f-photo' type='file' name='photo' class="form-control" >
+    <input id='f-photo' type='file' name='photoFile' class="form-control" >
   </div>
 </div>
     <div class="mb-3 row">
