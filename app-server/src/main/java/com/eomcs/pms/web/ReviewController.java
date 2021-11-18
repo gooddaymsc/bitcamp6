@@ -52,7 +52,7 @@ public class ReviewController {
       ModelAndView mv = new ModelAndView();
       mv.addObject("productNumber", productNumber);
       mv.addObject("pageTitle", "새리뷰");
-      mv.addObject("contentUrl", "/product/review/ReviewForm.jsp");
+      mv.addObject("contentUrl", "product/review/ReviewForm.jsp");
       mv.setViewName("template2");
       return mv;
     }
@@ -101,7 +101,7 @@ public class ReviewController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "리뷰목록");
-    mv.addObject("contentUrl", "/product/ProductDetail.jsp");
+    mv.addObject("contentUrl", "product/ProductDetail.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -130,7 +130,7 @@ public class ReviewController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("review", review);
         mv.addObject("pageTitle", "리뷰상세보기");
-        mv.addObject("contentUrl", "/product/review/ReviewDetail.jsp");
+        mv.addObject("contentUrl", "product/review/ReviewDetail.jsp");
         mv.setViewName("template1");
         return mv;
       } else {
@@ -200,7 +200,7 @@ public class ReviewController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("reviewList", reviewList);
     mv.addObject("pageTitle", "내리뷰");
-    mv.addObject("contentUrl", "/product/review/FindReviewList.jsp");
+    mv.addObject("contentUrl", "product/review/FindReviewList.jsp");
     mv.setViewName("template2"); 
 
     return mv;
