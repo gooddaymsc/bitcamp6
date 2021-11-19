@@ -59,12 +59,11 @@ a {
     text-decoration: none;
     color: black;
 }
-<<<<<<< HEAD
-=======
+
 button {
   position: relative; 
 }
->>>>>>> 41feeb9e26b7d2a1a42fe2913063f1bb12033468
+
 
 h2 
 .star-rating {width:205px;}
@@ -91,8 +90,6 @@ display:inline-block;
     cursor: pointer; 
     outline: none; 
   } 
-
-
 </style>
 
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
@@ -149,8 +146,8 @@ display:inline-block;
 <button type="button" onclick="location.href='list'" class="btn btn-outline-secondary btn-sm">목록</button>
 
 <c:choose> 
-  <c:when test="${loginUser.authority eq 8}">
-  <div>
+  <c:when test="${not empty loginUser}">
+ <div>
     <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
   </div>
   </c:when>
@@ -165,7 +162,7 @@ display:inline-block;
     <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">장바구니등록</button>
   </div>
   </c:when>
-</c:choose>
+</c:choose> 
 </form><br>
 
 <h4><i class="far fa-star"></i>최근 리뷰<i class="far fa-star"></i></h4>
@@ -194,6 +191,13 @@ var rate=(${product.rate}/5)*100;
 document.ex_form.target_name.value = "100";
 return rate;
 }
-
 </script>
 
+<script>
+function btn_detail(id) {
+  var no = document.getElementById('f-productNumber').value;
+  const 
+}
+
+
+</script>

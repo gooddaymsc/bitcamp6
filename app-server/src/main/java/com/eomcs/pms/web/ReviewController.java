@@ -33,10 +33,10 @@ public class ReviewController {
     PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
 
-    if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
-      out.flush();
-    }
+    //    if (session.getAttribute("loginUser") == null) {
+    //      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+    //      out.flush();
+    //    }
 
     System.out.println("review1");
     int productNumber = no;

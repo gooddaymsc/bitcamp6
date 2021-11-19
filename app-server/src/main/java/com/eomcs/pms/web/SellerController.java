@@ -97,23 +97,25 @@ public class SellerController {
   @GetMapping("/seller/detail")
   public ModelAndView detail(String id, HttpSession session) throws Exception {
     String page = "";
-    //    Member member = (Member)session.getAttribute("loginUser");
+
+    Member member = (Member)session.getAttribute("loginUser");
+
     Seller seller = sellerDao.findById(id);
 
     if (seller == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
-    //    if (member.getAuthority() == 8) {
-    //      page = "/seller/SellerUpdate.jsp";
-    //    } else {
-    //      page = "/seller/SellerDetail.jsp";
-    //    }
+    if (member.getAuthority() == 8) {
+      page = "seller/SellerUpdate.jsp";
+    } else {
+      page = "seller/SellerDetail.jsp";
+    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("seller", seller);
     mv.addObject("pageTitle", "회원(판매자)상세보기");
-    mv.addObject("contentUrl", "seller/SellerUpdate.jsp");
+    mv.addObject("contentUrl", page);
     mv.setViewName("template2");
     return mv;
   }

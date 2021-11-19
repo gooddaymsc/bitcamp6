@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,9 +116,9 @@ public class BuyerController {
   }
 
   @GetMapping("/buyer/detail")
-  public ModelAndView detail(String id) throws Exception{
-    //    String page = "";
-    //    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+  public ModelAndView detail(String id, HttpSession session) throws Exception{
+    String page = "";
+    Member member = (Member)session.getAttribute("loginUser");
 
     Buyer buyer = buyerDao.findById(id);
 
@@ -125,83 +126,77 @@ public class BuyerController {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
-    //    if (member.getAuthority() == 8) {
-    //      page = "/buyer/BuyerUpdate.jsp";
-    //    } else {
-    //      page = "/buyer/BuyerDetail.jsp";
-    //    }
+    if (member.getAuthority() == 8) {
+      page = "buyer/BuyerUpdate.jsp";
+    } else {
+      page = "buyer/BuyerDetail.jsp";
+    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("buyer", buyer);
     mv.addObject("pageTitle", "회원(구매자)상세보기");
-    mv.addObject("contentUrl", "buyer/BuyerUpdate.jsp");
+    mv.addObject("contentUrl", page);
     mv.setViewName("template2");
     return mv;
   }
 
   @PostMapping("/buyer/update")
-  public ModelAndView update(Buyer buyer, Part photoFile) throws Exception {
+  public ModelAndView update(Buyer buyer, Part photoFile, HttpSession session) throws Exception {
 
-    //Member member = (Member) session.getAttribute("loginUser");
-
-    Member member = new Member();
+    Member member = (Member) session.getAttribute("loginUser");
 
     Buyer oldBuyer = buyerDao.findById(buyer.getMember().getId());
 
-    if (oldBuyer == null) {
-      throw new Exception("해당 번호의 회원이 없습니다.");
+    Member members = new Member();
+
+    if (member.getId().equals(buyer.getMember().getId())) {
+      members.setNickname(buyer.getMember().getNickname());
+      //  buyer.getMember().setPassword(request.getParameter("password"));
+      members.setPhoneNumber(buyer.getMember().getPhoneNumber());
+
+      oldBuyer.setZipcode(buyer.getZipcode());
+      oldBuyer.setAddress(buyer.getAddress());
+      oldBuyer.setDetailAddress(buyer.getDetailAddress());
+
+      if (photoFile.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
+        members.setPhoto(filename);
+
+        Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
+        .size(100, 100)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_100x100";
+          }
+        });
+      }
+    } else if (member.getAuthority() == 8) {
+      oldBuyer.getMember().setLevel(buyer.getMember().getLevel());
     }
 
-    member.setNickname(oldBuyer.getMember().getNickname());
-    //  buyer.getMember().setPassword(request.getParameter("password"));
-    member.setPhoneNumber(oldBuyer.getMember().getPhoneNumber());
-    buyer.setZipcode(oldBuyer.getZipcode());
-    buyer.setAddress(oldBuyer.getAddress());
-    buyer.setDetailAddress(oldBuyer.getDetailAddress());
-    member.setPhoto(oldBuyer.getMember().getPhoto());
-
-    if (photoFile.getSize() > 0) {
-      String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
-      member.setPhoto(filename);
-      buyer.setMember(member);
-
-
-      Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
-      .size(20, 20)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_20x20";
-        }
-      });
-
-      Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
-      .size(100, 100)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_100x100";
-        }
-      });
-
-      // } else if (member.getAuthority() == 8) {
-      //buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
-
-      // }
-    }
-    buyer.setMember(member);
-    buyerDao.update(buyer);
+    buyer.setMember(members);
+    buyerDao.update(oldBuyer);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "개인정보변경");
     mv.addObject("contentUrl", "main/Menu.jsp");
-    mv.setViewName("/template2.jsp");
+    mv.setViewName("template2");
     return mv;
   }
 
@@ -211,7 +206,6 @@ public class BuyerController {
     //    if (session.getAttribute("loginUser") == null) {
     //      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
     //      out.flush();
-    //      return;
     //    }
 
     Buyer buyer = buyerDao.findById(id);

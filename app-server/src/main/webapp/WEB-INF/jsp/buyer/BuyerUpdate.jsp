@@ -31,7 +31,7 @@
       <div class="mb-3 row">
         <label for='f-nickname' class="col-sm-2 col-form-label">* 닉네임</label>
         <div class="col-sm-6">
-          <input id='f-nickname' type='text' name='nickname' class="form-control" value='${buyer.member.nickname}' required readonly><br>
+          <input id='f-nickname' type='text' name='member.nickname' class="form-control" value='${buyer.member.nickname}' required readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -70,7 +70,7 @@
       <div class="mb-3 row">
         <label for='f-phoneNumber' class="col-sm-2 col-form-label">* 전화</label>
         <div class="col-sm-6">
-          <input id='f-phoneNumber' type='tel' name='phoneNumber' class="form-control"
+          <input id='f-phoneNumber' type='tel' name='member.phoneNumber' class="form-control"
             value='${buyer.member.phoneNumber}' required readonly><br>
         </div>
       </div>

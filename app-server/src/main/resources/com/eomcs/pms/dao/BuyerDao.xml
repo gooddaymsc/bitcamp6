@@ -5,7 +5,7 @@
 
 <mapper namespace="com.eomcs.pms.dao.BuyerDao">
   
-  <resultMap type="Buyer" id="BuyerMap">
+  <resultMap type="Buyer" id="BuyerMap"> 
     <result column="zipcode" property="zipcode"/>
     <result column="address" property="address"/>
     <result column="detail_address" property="detailAddress"/>
@@ -80,17 +80,13 @@ select
   
   <update id="update" parameterType="buyer">
     update member set 
-      nickname=#{member.nickname},
       password=password(#{member.password}),
-      photo=#{member.photo},
-      phoneNumber=#{member.phoneNumber},
       zipcode=#{zipcode},
       address=#{address},
       detail_address=#{detailAddress}
     where 
       member_no=#{member.number}
   </update>
-  
   
   <delete id="delete" parameterType="int">
     update member set 

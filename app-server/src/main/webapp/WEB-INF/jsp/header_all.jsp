@@ -237,10 +237,10 @@
 <img class="html-img" src="${contextRoot}/image/menuD.jpg">
 <!-- 검색 -->
   <div class="logo1">
-    <a class="navbar-brand1" href="${contextRoot}/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
+    <a class="navbar-brand1" href="${contextRoot}/app/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
   </div>
   <div class="logo2">
-    <a class="navbar-brand2" href="${contextRoot}/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
+    <a class="navbar-brand2" href="${contextRoot}/app/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
   </div>
   <div class="search-class">
     <div class="search-class-menu">

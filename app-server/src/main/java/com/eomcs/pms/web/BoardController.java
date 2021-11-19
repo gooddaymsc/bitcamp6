@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.CommentDao;
@@ -67,19 +66,6 @@ public class BoardController {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:show?no="+no);
     return mv;
-  }
-
-  @GetMapping("/board/checkLike")
-  @ResponseBody
-  public String checkEmail(int no, HttpSession session) throws Exception {
-    Member member = (Member)session.getAttribute("loginUser");
-    int nowLoginNo = member.getNumber();
-    LikeMember likeMember = boardDao.findLike(nowLoginNo, no);
-    if (likeMember == null) {
-      return "false";
-    } else {
-      return "true";
-    }
   }
   @GetMapping("/board/detail")
   public ModelAndView detail(int no) throws Exception {
@@ -195,6 +181,4 @@ public class BoardController {
     mv.setViewName("redirect:list");
     return mv;
   }
-
-
 }
