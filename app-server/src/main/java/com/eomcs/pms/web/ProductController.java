@@ -118,13 +118,14 @@ public class ProductController {
 
     product.setPhoto(oldProduct.getPhoto());
     product.setProductName(oldProduct.getProductName());
+    product.setProductType(oldProduct.getProductType());
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/product") + "/" + filename);
       product.setPhoto(filename);
-      product.setProductType(new ProductHandlerHelper(
-          productDao).promptType(productType.getType(), productType.getSubType()));
+      //      product.setProductType(new ProductHandlerHelper(
+      //          productDao).promptType(productType.getType(), productType.getSubType()));
 
       Thumbnails.of(sc.getRealPath("upload/product") + "/" + filename)
       .size(300, 300)
