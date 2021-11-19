@@ -49,7 +49,6 @@ public class SellerController {
     member.setEmail(request.getParameter("email"));
     member.setBirthday(Date.valueOf(request.getParameter("birthday")));
     member.setPassword(request.getParameter("password"));
-    System.out.println("sososoo");
     member.setPhoneNumber(request.getParameter("phoneNumber"));
     System.out.println("baddd");
 
@@ -58,6 +57,7 @@ public class SellerController {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
       member.setPhoto(filename);
+      seller.setMember(member);
 
       Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
       .size(1000, 1000)
@@ -70,8 +70,6 @@ public class SellerController {
         }
       });
     }
-
-    System.out.println("awesome");
 
     seller.setMember(member);
     sellerDao.insert(seller.getMember());

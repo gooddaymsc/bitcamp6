@@ -44,6 +44,7 @@ public class BuyerController {
     Member member = new Member();
 
     member.setAuthority(2);
+
     member.setId(request.getParameter("id"));
     member.setName(request.getParameter("name"));
     member.setNickname(request.getParameter("nickname"));
@@ -58,8 +59,11 @@ public class BuyerController {
     if (photoFile.getSize() > 0) { 
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
+
       member.setPhoto(filename);
       buyer.setMember(member);
+
+      System.out.println(3333);
 
       Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
       .size(20, 20)
@@ -90,6 +94,7 @@ public class BuyerController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("refresh", "2;url=list");
+    mv.addObject("buyer", buyer);
     mv.addObject("pageTitle", "회원가입(구매자)");
     mv.addObject("contentUrl", "buyer/BuyerAdd.jsp");
     mv.setViewName("template2");
@@ -104,7 +109,7 @@ public class BuyerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("buyerList", buyerList);
     mv.addObject("pageTitle", "회원(구매자)목록");
-    mv.addObject("contentUrl", "/buyer/BuyerList.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerList.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -129,7 +134,7 @@ public class BuyerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("buyer", buyer);
     mv.addObject("pageTitle", "회원(구매자)상세보기");
-    mv.addObject("contentUrl", "/buyer/BuyerUpdate.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerUpdate.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -139,24 +144,28 @@ public class BuyerController {
 
     //Member member = (Member) session.getAttribute("loginUser");
 
-    System.out.println(buyer.getMember().getId());
+    Member member = new Member();
+
     Buyer oldBuyer = buyerDao.findById(buyer.getMember().getId());
 
     if (oldBuyer == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
-    buyer.getMember().setNickname(oldBuyer.getMember().getNickname());
+    member.setNickname(oldBuyer.getMember().getNickname());
     //  buyer.getMember().setPassword(request.getParameter("password"));
-    buyer.getMember().setPhoneNumber(oldBuyer.getMember().getPhoneNumber());
+    member.setPhoneNumber(oldBuyer.getMember().getPhoneNumber());
     buyer.setZipcode(oldBuyer.getZipcode());
     buyer.setAddress(oldBuyer.getAddress());
     buyer.setDetailAddress(oldBuyer.getDetailAddress());
+    member.setPhoto(oldBuyer.getMember().getPhoto());
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
-      buyer.getMember().setPhoto(filename);   
+      member.setPhoto(filename);
+      buyer.setMember(member);
+
 
       Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
       .size(20, 20)
@@ -185,6 +194,7 @@ public class BuyerController {
 
       // }
     }
+    buyer.setMember(member);
     buyerDao.update(buyer);
     sqlSessionFactory.openSession().commit();
 

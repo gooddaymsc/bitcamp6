@@ -13,7 +13,7 @@
       <div class="mb-3 row">
         <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
         <div class="col-sm-6">
-          <input id='f-id' type='text' name='id' class="form-control" value='${buyer.member.id}' readonly><br>
+          <input id='f-id' type='text' name='member.id' class="form-control" value='${buyer.member.id}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -62,7 +62,7 @@
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
           <a href="../upload/buyer/${buyer.member.photo}" >
-            <img id="f-photo-image"  name='photoFile' src="../upload/buyer/${buyer.member.photo}_100x100.jpg">
+            <img id="f-photo-image"  src="../upload/buyer/${buyer.member.photo}_100x100.jpg">
           </a>
         <input id='f-photo' type='file' name='photoFile' class="form-control" readonly><br>  
         </div>
