@@ -101,7 +101,12 @@
     width: 20px;
     height: auto;
   }
-
+  
+  .search-img {
+  
+    width: 20px;
+  }
+  
 
 </style>
 
@@ -113,8 +118,8 @@
 </c:choose>
 
 <form action='search' method='post'>  
-<div class="mb-3 row">
- <button  class="search-button"><img class="search-img" src="${contextRoot}/image/search.png"></button>
+<div class="mb-3 row"><!-- 
+ <button  class="search-button"><img class="search-img" src="../../image/search.png"></button> -->
   <label for='f-search' class="col-sm-1 col-form-label">검색</label>
     <div class="col-sm-2">
     <input id='f-search' type='text' name='search' class="form-control">
@@ -133,7 +138,7 @@
       </c:if>
       <div class="responsive">
         <div class="gallery">
-          <img id="thumbnail" src="../upload/product/${product.photo}_300x300.jpg" name="photo" align="middle"
+          <img id="thumbnail" src="../../upload/product/${product.photo}_300x300.jpg" name="photo" align="middle"
             width="600" height="400">
           <div class="desc">
             <h4>
@@ -172,7 +177,7 @@
                 <div class="rate col-sm">
                   <p>
                     <a id="review" href="../product/show?no=${product.productNumber}">
-                      <img src="../image/favourite.png"> <br> ${product.rate}
+                      <img src="../../image/favourite.png"> <br> ${product.rate}
                     </a>
                   </p>
                 </div>
@@ -191,43 +196,6 @@
   </c:otherwise>
 </c:choose>
 
-<%-- 
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>상품명</th>
-    <th>평점</th>
-    <th>주종</th>
-    <th>상세주종</th>
-    <th>원산지</th>
-    <th>용량</th>
-    <th>당도</th>
-    <th>산도</th>
-    <th>바디감</th>
-    <th>도수</th>
-  </tr>
-</thead>
-<tbody>
-<!-- 검색 기능 구현해야함 -->
-<c:forEach items="${productList}" var="product">
-<tr>
-    <td><a href='show?no=${product.productNumber}'>${product.productNumber}</a></td>
-    <td>${product.productName}</td> 
-    <td>${product.rate}</td> 
-    <td>${product.productType.type}</td> 
-    <td>${product.productType.subType}</td> 
-    <td>${product.countryOrigin}</td> 
-    <td>${product.volume}</td> 
-    <td>${product.sugarLevel}</td> 
-    <td>${product.acidity}</td> 
-    <td>${product.weight}</td> 
-    <td>${product.alcoholLevel}</td> 
-</tr>
-</c:forEach>
-</tbody>
-</table>
- --%>
 <script>
 document.querySelectorAll(".list-group-item").forEach((aTag) => {
   aTag.onclick = () => false;
@@ -241,20 +209,6 @@ trList.forEach(function(trTag) {
 });
 
 </script>
-
-<!--  document.querySelectorAll("tbody a").forEach((aTag) => {
-  aTag.onclick = () => false;
-});
-
-var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
-trList.forEach(function(trTag) {
-  trTag.onclick = (e) => {
-    //console.log(e.currentTarget.querySelector("a").href);
-    //e.currentTarget.querySelector("a").click();
-    window.location.href = e.currentTarget.querySelector("a").href;
-    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
-  };
-});  -->
 
 
 

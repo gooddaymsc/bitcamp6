@@ -24,9 +24,9 @@
 <body>
 <main id="main-holder">
 
-<h1>아이디찾기 <img src="../image/icons/004-magnifying-glass.png"></h1>
+<h1>아이디찾기 <img src="../../image/icons/004-magnifying-glass.png"></h1>
 
-<form action='findidResult' method='post'>
+<form action='findidResult' method="post">
  이름<br>
  <input id='f-name'  type='text' name='name'><br>
 <br>

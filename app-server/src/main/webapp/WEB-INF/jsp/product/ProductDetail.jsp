@@ -14,7 +14,7 @@ button {
 </style>
 
  <h1>상품 정보수정</h1>
- <a href="../upload/product/${product.photo}">
+ <a href="../../upload/product/${product.photo}">
 <img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="700px" >
         </a>
@@ -37,7 +37,7 @@ button {
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
-<img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" width="100px" height="100px">
+<img id="f-photo-image" src="../../upload/product/${product.photo}_1000x1000.jpg" width="100px" height="100px">
     <input id='f-photo' type='file' name='photoFile' class="form-control" >
   </div>
 </div>

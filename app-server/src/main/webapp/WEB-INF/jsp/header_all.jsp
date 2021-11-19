@@ -234,15 +234,15 @@
 
 <!-- 메인로고 -->
 <div class='wrap'>
-<img class="html-img" src="${contextRoot}/image/menuD.jpg">
+<img class="html-img" src="${contextRoot}/image/menuD.jpg"> 
 <!-- 검색 -->
   <div class="logo1">
-    <a class="navbar-brand1" href="${contextRoot}/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
+    <a class="navbar-brand1" href="${contextRoot}/app/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
   </div>
   <div class="logo2">
-    <a class="navbar-brand2" href="${contextRoot}/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
+    <a class="navbar-brand2" href="${contextRoot}/app/main/menu"><img src="${contextRoot}/image/logoW.png"></a>
   </div>
-  <div class="search-class">
+<%--   <div class="search-class">
     <div class="search-class-menu">
       <a class='f-text' href='../main/loginMenu'>로그인</a>
       <a class='f-text' href='../buyer/form'>회원가입</a>
@@ -253,7 +253,8 @@
         <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
       </form>
     </fieldset>
-  </div>
+  </div> 
+  --%>
 <ul class="nav">
 <li class="nav-item">
   <a id='type-menu' class="nav-link active" aria-current="page" href="${contextRoot}/app/product/listType?type=와인">Wine</a>

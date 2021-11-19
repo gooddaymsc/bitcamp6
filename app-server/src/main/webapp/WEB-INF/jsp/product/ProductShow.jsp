@@ -95,7 +95,7 @@ display:inline-block;
 
 </style>
 
-<img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
+<img id="f-photo-image" src="../../upload/product/${product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="500px">
 <form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>

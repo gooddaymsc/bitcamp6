@@ -49,6 +49,17 @@ public class ProductController {
       product.setProductType(new ProductHandlerHelper(
           productDao).promptType(productType.getType(), productType.getSubType()));
 
+      Thumbnails.of(sc.getRealPath("upload/product") + "/" + filename)
+      .size(300, 300)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x300";
+        }
+      });
+
       Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
       .size(1000, 1000)
       .outputFormat("jpg")
@@ -248,4 +259,17 @@ public class ProductController {
     mv.setViewName("template2"); 
     return mv;
   }
+
+  @GetMapping("/product/ranking")
+  public ModelAndView ranking() throws Exception {
+    ModelAndView mv = new ModelAndView();
+    Collection<Product> productList = productDao.ranking();
+    mv.addObject("productList", productList);
+
+    mv.addObject("pageTitle", "오늘의술");
+    mv.addObject("contentUrl", "product/Ranking.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
+
 }
