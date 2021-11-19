@@ -33,7 +33,7 @@ public class ProductController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "새상품");
-    mv.addObject("contentUrl", "/product/ProductForm.jsp");
+    mv.addObject("contentUrl", "product/ProductForm.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -102,7 +102,7 @@ public class ProductController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("product", product);
     mv.addObject("pageTitle", "상품정보수정");
-    mv.addObject("contentUrl", "/product/ProductDetail.jsp");
+    mv.addObject("contentUrl", "product/ProductDetail.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -126,7 +126,7 @@ public class ProductController {
       product.setProductType(new ProductHandlerHelper(
           productDao).promptType(productType.getType(), productType.getSubType()));
 
-      Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
+      Thumbnails.of(sc.getRealPath("upload/product") + "/" + filename)
       .size(300, 300)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -137,7 +137,7 @@ public class ProductController {
         }
       });
 
-      Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
+      Thumbnails.of(sc.getRealPath("upload/product") + "/" + filename)
       .size(1000, 1000)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -192,7 +192,7 @@ public class ProductController {
     mv.addObject("product", product);
     mv.addObject("reviewList", reviewList);
     mv.addObject("pageTitle", "상품상세보기");
-    mv.addObject("contentUrl", "/product/ProductShow.jsp");
+    mv.addObject("contentUrl", "product/ProductShow.jsp");
     mv.setViewName("template2"); 
     return mv;
   }
@@ -219,7 +219,7 @@ public class ProductController {
     mv.addObject("product", productDao.findSubType(no));
     mv.addObject("productList", productList);
     mv.addObject("pageTitle", "주류목록");
-    mv.addObject("contentUrl", "/product/ProductListSubType.jsp");
+    mv.addObject("contentUrl", "product/ProductListSubType.jsp");
     mv.setViewName("template2"); 
     return mv;
   }
@@ -231,7 +231,7 @@ public class ProductController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "장소찾기");
-    mv.addObject("contentUrl", "/product/ProductList.jsp");
+    mv.addObject("contentUrl", "product/ProductList.jsp");
     mv.setViewName("template2"); 
     return mv;
   }
@@ -244,7 +244,7 @@ public class ProductController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("productList", productList);
     mv.addObject("pageTitle", "상품검색");
-    mv.addObject("contentUrl", "/product/ProductList.jsp");
+    mv.addObject("contentUrl", "product/ProductList.jsp");
     mv.setViewName("template2"); 
     return mv;
   }
