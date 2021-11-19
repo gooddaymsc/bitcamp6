@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,10 +134,11 @@ public class BuyerController {
   }
 
   @PostMapping("/buyer/update")
-  public ModelAndView update(Buyer buyer, Part photoFile, HttpSession session,  HttpServletRequest request) throws Exception {
+  public ModelAndView update(Buyer buyer, Part photoFile) throws Exception {
 
-    Member member = (Member) session.getAttribute("loginUser");
+    //Member member = (Member) session.getAttribute("loginUser");
 
+    System.out.println(buyer.getMember().getId());
     Buyer oldBuyer = buyerDao.findById(buyer.getMember().getId());
 
     if (oldBuyer == null) {
@@ -179,18 +179,17 @@ public class BuyerController {
         }
       });
 
-    } else if (member.getAuthority() == 8) {
-      buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
+      // } else if (member.getAuthority() == 8) {
+      //buyer.getMember().setLevel(Integer.parseInt(request.getParameter("level")));
 
+      // }
     }
-
-    buyer.setMember(member);
     buyerDao.update(buyer);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "개인정보변경");
-    mv.addObject("contentUrl", "/main/Menu.jsp");
+    mv.addObject("contentUrl", "main/Menu.jsp");
     mv.setViewName("/template2.jsp");
     return mv;
   }
