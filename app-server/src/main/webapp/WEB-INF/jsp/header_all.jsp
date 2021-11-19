@@ -256,50 +256,50 @@
   </div>
 <ul class="nav">
 <li class="nav-item">
-  <a id='type-menu' class="nav-link active" aria-current="page" href="${contextRoot}/product/listType?type=와인">Wine</a>
+  <a id='type-menu' class="nav-link active" aria-current="page" href="${contextRoot}/app/product/listType?type=와인">Wine</a>
   <ul class="dropdown-menu">
-    <li><a href="${contextRoot}/product/listSubType?no=1">레드</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=2">화이트</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=3">로제</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=4">스위트</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=5">스파클링</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=1">레드</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=2">화이트</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=3">로제</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=4">스위트</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=5">스파클링</a></li>
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="${contextRoot}/product/listType?type=위스키">Whiskey</a>
+  <a class="nav-link active" aria-current="page" href="${contextRoot}/app/product/listType?type=위스키">Whiskey</a>
   <ul class="dropdown-menu">
-    <li><a href="${contextRoot}/product/listSubType?no=6">아메리칸</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=7">스카치(몰트)</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=8">아이리쉬</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=9">캐나다 위스키</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=6">아메리칸</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=7">스카치(몰트)</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=8">아이리쉬</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=9">캐나다 위스키</a></li>
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="${contextRoot}/product/listType?type=브랜디/꼬냑">Brandy · Cognac</a>
+  <a class="nav-link active" aria-current="page" href="${contextRoot}/app/product/listType?type=브랜디/꼬냑">Brandy · Cognac</a>
   <ul class="dropdown-menu">
-    <li><a href="${contextRoot}/product/listSubType?no=10">브랜디</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=11">꼬냑</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=12">알마냑</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=10">브랜디</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=11">꼬냑</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=12">알마냑</a></li>
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="${contextRoot}/product/listType?type=리큐르/보드카">liqueur · Vodka</a>
+  <a class="nav-link active" aria-current="page" href="${contextRoot}/app/product/listType?type=리큐르/보드카">liqueur · Vodka</a>
   <ul class="dropdown-menu">
-    <li><a href="${contextRoot}/product/listSubType?no=13">리큐르</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=14">진</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=15">럼</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=16">보드카</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=17">데낄라</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=18">음료 · 시럽</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=13">리큐르</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=14">진</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=15">럼</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=16">보드카</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=17">데낄라</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=18">음료 · 시럽</a></li>
   </ul>
 </li>
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="${contextRoot}/product/listType?type=전통주">Traditional</a>
+  <a class="nav-link active" aria-current="page" href="${contextRoot}/app/product/listType?type=전통주">Traditional</a>
   <ul class="dropdown-menu">
-    <li><a href="${contextRoot}/product/listSubType?no=19">한국</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=20">중국</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=21">일본</a></li>
-    <li><a href="${contextRoot}/product/listSubType?no=22">기타</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=19">한국</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=20">중국</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=21">일본</a></li>
+    <li><a href="${contextRoot}/app/product/listSubType?no=22">기타</a></li>
   </ul>
 <!-- </li>
   <li class="nav-item">

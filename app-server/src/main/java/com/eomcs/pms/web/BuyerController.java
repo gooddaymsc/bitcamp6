@@ -34,7 +34,7 @@ public class BuyerController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원가입(구매자)"); 
-    mv.addObject("contentUrl", "/buyer/BuyerForm.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerForm.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -61,7 +61,9 @@ public class BuyerController {
       System.out.println(2222);
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
-      buyer.getMember().setPhoto(filename);
+      member.setPhoto(filename);
+      buyer.setMember(member);
+      //      buyer.getMember().setPhoto(filename);
       System.out.println(3333);
 
       Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
@@ -94,7 +96,7 @@ public class BuyerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("refresh", "2;url=list");
     mv.addObject("pageTitle", "회원가입(구매자)");
-    mv.addObject("contentUrl", "/buyer/BuyerAdd.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerAdd.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -107,7 +109,7 @@ public class BuyerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("buyerList", buyerList);
     mv.addObject("pageTitle", "회원(구매자)목록");
-    mv.addObject("contentUrl", "/buyer/BuyerList.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerList.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -132,7 +134,7 @@ public class BuyerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("buyer", buyer);
     mv.addObject("pageTitle", "회원(구매자)상세보기");
-    mv.addObject("contentUrl", "/buyer/BuyerUpdate.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerUpdate.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -192,7 +194,7 @@ public class BuyerController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "개인정보변경");
-    mv.addObject("contentUrl", "/main/Menu.jsp");
+    mv.addObject("contentUrl", "main/Menu.jsp");
     mv.setViewName("/template2.jsp");
     return mv;
   }

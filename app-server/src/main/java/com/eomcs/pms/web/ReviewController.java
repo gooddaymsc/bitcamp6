@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,12 +18,12 @@ import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.Review;
 
+@Controller
 public class ReviewController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired ReviewDao reviewDao;
   @Autowired ProductDao productDao;
-  @Autowired Member member;
   @Autowired ServletContext sc;
 
   @GetMapping("/product/review/form")
@@ -37,7 +38,9 @@ public class ReviewController {
       out.flush();
     }
 
+    System.out.println("review1");
     int productNumber = no;
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     Review review = reviewDao.reviewIs(productNumber, member.getId());
 
@@ -49,7 +52,7 @@ public class ReviewController {
       ModelAndView mv = new ModelAndView();
       mv.addObject("productNumber", productNumber);
       mv.addObject("pageTitle", "새리뷰");
-      mv.addObject("contentUrl", "/product/review/ReviewForm.jsp");
+      mv.addObject("contentUrl", "product/review/ReviewForm.jsp");
       mv.setViewName("template2");
       return mv;
     }
@@ -57,7 +60,25 @@ public class ReviewController {
   }
 
   @PostMapping("/product/review/add")
-  public ModelAndView add(Product product, Review review, HttpServletResponse response) throws Exception {
+  public ModelAndView add(Product product, Review review, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
+    }
+
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
+    Product oldProduct =  productDao.findByNo(product.getProductNumber());
+    oldProduct.setReviewerNum(product.getReviewerNum()+1);
+    review.setProductNo(product.getProductNumber());
+    //    review.setReviewProduct(product.getProductName());
+    review.setMember(member);
 
     reviewDao.insert(review);
     product.setRate(reviewDao.avg(review));
@@ -65,15 +86,14 @@ public class ReviewController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    response.sendRedirect("../show?no="+review.getProductNo());
-    mv.setViewName("redirect:list");
+    mv.setViewName("redirect:../show?no="+review.getProductNo());
     return mv;
   }
 
   @GetMapping("/product/review/list")
-  public ModelAndView list(int no) throws Exception {
+  public ModelAndView list(Product product) throws Exception {
 
-    Collection<Review> reviewList = reviewDao.findAll(no);
+    Collection<Review> reviewList = reviewDao.findAll(product.getProductNumber());
 
     if (reviewList.equals(null)) {
       System.out.println("등록된 댓글이 없습니다.");
@@ -81,7 +101,7 @@ public class ReviewController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "리뷰목록");
-    mv.addObject("contentUrl", "/product/ProductDetail.jsp");
+    mv.addObject("contentUrl", "product/ProductDetail.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -110,7 +130,7 @@ public class ReviewController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("review", review);
         mv.addObject("pageTitle", "리뷰상세보기");
-        mv.addObject("contentUrl", "/product/review/ReviewDetail.jsp");
+        mv.addObject("contentUrl", "product/review/ReviewDetail.jsp");
         mv.setViewName("template1");
         return mv;
       } else {
@@ -121,14 +141,15 @@ public class ReviewController {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-    return null; // ???
+    return null;
   }
 
-  @PostMapping("/product/review/update")
-  public ModelAndView update(int no, HttpServletResponse response) throws Exception {
-    Review review = reviewDao.findByNo(no);
+  @PostMapping("/product/review/update") // 아... 모르겠다!!!!
+  public ModelAndView update(int reviewNo, Review review) throws Exception {
+    Review oldReview = reviewDao.findByNo(reviewNo);
+    System.out.println("review10000");
 
-    if (review.equals(null)) {
+    if (oldReview.equals(null)) {
       throw new Exception("해당 번호의 리뷰가 없습니다.");
     }
 
@@ -136,24 +157,24 @@ public class ReviewController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    //    mv.setViewName("redirect:detail");
-    response.sendRedirect("../detail?no="+review.getProductNo());
+    mv.setViewName("redirect:../show?no="+oldReview.getProductNo());
     return mv;
   }
 
   @GetMapping("/product/review/delete")
-  public ModelAndView delete(int no, HttpServletResponse response) throws Exception {
-    Review review = reviewDao.findByNo(no);
-    if (review.equals(null)) {
+  public ModelAndView delete(Review review) throws Exception {
+    Review oldReview = reviewDao.findByNo(review.getNo());
+    if (oldReview.equals(null)) {
       throw new Exception("해당 번호의 리뷰가 없습니다.");
     }
 
-    reviewDao.delete(review.getNo());
+    int no = oldReview.getProductNo();
+
+    reviewDao.delete(oldReview.getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    //    mv.setViewName("redirect:detail");
-    response.sendRedirect("../detail?no="+review.getProductNo());
+    mv.setViewName("redirect:../show?no="+no);
     return mv;
   }
 
@@ -167,7 +188,6 @@ public class ReviewController {
     if (session.getAttribute("loginUser") == null) {
       out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginMenu'</script>");
       out.flush();
-      return null;
     }
 
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
@@ -180,7 +200,7 @@ public class ReviewController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("reviewList", reviewList);
     mv.addObject("pageTitle", "내리뷰");
-    mv.addObject("contentUrl", "/product/review/FindReviewList.jsp");
+    mv.addObject("contentUrl", "product/review/FindReviewList.jsp");
     mv.setViewName("template2"); 
 
     return mv;

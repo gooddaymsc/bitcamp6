@@ -111,7 +111,7 @@ tr:hover {
 </tbody>
 </table>
 
-<a href='form' id="board-btn" class="btn btn-outline-secondary btn-sm">글쓰기</a>
+<a href='#' id="board-btn" onclick="btn_add(${loginUser.authority})" class="btn btn-outline-secondary btn-sm">글쓰기</a>
 
 <div class="pagination_btn">
 <nav aria-label="...">
@@ -131,6 +131,20 @@ tr:hover {
 </nav>
 </div>
 
+<script>
+function btn_add(authority) {
+	if ((authority==2) || (authority==4)||(authority==8)) {
+    location.href="${contextRoot}/drinker/app/board/form";
+	} else {
+		  if (confirm("로그인 후 가능합니다.")==true) {
+			  location.href="${contextRoot}/drinker/app/main/loginForm";
+		  } else {
+		    /* location.href="${contextRoot}/drinker/app/board/list" */
+		    return false;
+		  }
+	}
+}
+</script>
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
   aTag.onclick = () => false;

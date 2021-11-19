@@ -34,7 +34,7 @@ public class SellerController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원가입(판매자)"); 
-    mv.addObject("contentUrl", "/seller/SellerForm.jsp");
+    mv.addObject("contentUrl", "seller/SellerForm.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -86,7 +86,7 @@ public class SellerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("sellerList", sellerList);
     mv.addObject("pageTitle", "회원(판매자)목록");
-    mv.addObject("contentUrl", "/seller/SellerList.jsp");
+    mv.addObject("contentUrl", "seller/SellerList.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -110,7 +110,7 @@ public class SellerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("seller", seller);
     mv.addObject("pageTitle", "회원(판매자)상세보기");
-    mv.addObject("contentUrl", "/seller/SellerUpdate.jsp");
+    mv.addObject("contentUrl", "seller/SellerUpdate.jsp");
     mv.setViewName("template2");
     return mv;
   }

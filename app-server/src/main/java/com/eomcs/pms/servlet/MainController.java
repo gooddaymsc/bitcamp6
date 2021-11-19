@@ -1,4 +1,4 @@
-package com.eomcs.pms.web;
+package com.eomcs.pms.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
