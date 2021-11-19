@@ -49,24 +49,29 @@ public class SellerController {
     member.setEmail(request.getParameter("email"));
     member.setBirthday(Date.valueOf(request.getParameter("birthday")));
     member.setPassword(request.getParameter("password"));
+    System.out.println("sososoo");
     member.setPhoneNumber(request.getParameter("phoneNumber"));
+    System.out.println("baddd");
 
     if (photoFile.getSize() > 0) {
+      System.out.println("gooood");
       String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("upload/seller") + "/" + filename);
+      photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
       member.setPhoto(filename);
 
-      Thumbnails.of(sc.getRealPath("upload/seller") + "/" + filename)
-      .size(100, 100)
+      Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+      .size(1000, 1000)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
       .toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
-          return name + "_100x100";
+          return name + "_1000x1000";
         }
       });
     }
+
+    System.out.println("awesome");
 
     seller.setMember(member);
     sellerDao.insert(seller.getMember());

@@ -33,7 +33,7 @@ public class BuyerController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원가입(구매자)"); 
-    mv.addObject("contentUrl", "/buyer/BuyerForm.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerForm.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -58,7 +58,8 @@ public class BuyerController {
     if (photoFile.getSize() > 0) { 
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
-      buyer.getMember().setPhoto(filename);
+      member.setPhoto(filename);
+      buyer.setMember(member);
 
       Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
       .size(20, 20)
@@ -90,7 +91,7 @@ public class BuyerController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("refresh", "2;url=list");
     mv.addObject("pageTitle", "회원가입(구매자)");
-    mv.addObject("contentUrl", "/buyer/BuyerAdd.jsp");
+    mv.addObject("contentUrl", "buyer/BuyerAdd.jsp");
     mv.setViewName("template2");
     return mv;
   }
