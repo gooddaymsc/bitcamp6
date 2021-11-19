@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +19,8 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/seller/update")
+//@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
+//@WebServlet("/seller/update")
 public class SellerUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

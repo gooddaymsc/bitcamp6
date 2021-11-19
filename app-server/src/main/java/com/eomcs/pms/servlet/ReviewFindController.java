@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,7 @@ import com.eomcs.pms.dao.ReviewDao;
 import com.eomcs.pms.domain.Member;
 import com.eomcs.pms.domain.Review;
 
-@WebServlet("/product/review/find")
+//@WebServlet("/product/review/find")
 public class ReviewFindController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   ReviewDao reviewDao;

@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,7 @@ import com.eomcs.pms.domain.Comment;
 import com.eomcs.pms.domain.Member;
 
 
-@WebServlet("/board/comment/add")
+//@WebServlet("/board/comment/add")
 public class CommentAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

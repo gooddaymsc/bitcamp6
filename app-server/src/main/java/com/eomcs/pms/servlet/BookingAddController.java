@@ -75,11 +75,16 @@ public class BookingAddController extends HttpServlet {
       // 판매자 재고에서 예약(결제)한 상품 재고 수 빼기 > 서버에서 구현해야함.
       cart.getStock().setStocks(cart.getStock().getStocks() - cart.getCartStocks());
 
+      System.out.println("3");
       // 구매자 장바구니에서 예약(결제)한 상품 빼기
       stockDao.update(cart.getStock());
+      System.out.println("4");
       bookingDao.insert(booking);
+      System.out.println("5");
       bookingDao.insertList(booking);
+      System.out.println("6");
       cartDao.delete(cart);
+      System.out.println("7");
       sqlSession.commit();
       response.sendRedirect("list?id="+id);
     } catch(Exception e){

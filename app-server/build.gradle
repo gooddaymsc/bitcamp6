@@ -67,14 +67,19 @@ eclipse {
 dependencies {
 
   // 서블릿 API
+  // - 서블릿 컨테이너에 있는 라이브러리다. 따라서 배포할 때 제외해야 한다.
+  // - 프로그램을 개발하는 동안 컴파일할 때 사용해야 하기 때문에 providedCompile 로 설정한다.
   providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
   
   // JSP API
+  // - 서블릿 컨테이너에 있는 라이브러리다. 따라서 배포할 때 제외해야 한다.
+  // - 프로그램을 개발하는 동안 컴파일할 때 사용해야 하기 때문에 providedCompile 로 설정한다.
   providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
-  
-  // JSTL 구현체
-  implementation 'javax.servlet:jstl:1.2'
 
+  // JSTL 구현체
+  implementation 'javax.servlet:jstl:1.2' // JSTL API + JSTL 구현체
+  //implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.2' // JSTL API 만 있다.
+    
   // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.8'
   
@@ -84,9 +89,35 @@ dependencies {
   // Mybatis 퍼시스턴스 프레임워크
   implementation 'org.mybatis:mybatis:3.5.7'
   
+  // Thumbnailator 썸네일 생성 라이브러리
+  implementation 'net.coobird:thumbnailator:0.4.14'
+  
+  // Spring WebMVC 프레임워크
+  implementation 'org.springframework:spring-webmvc:5.3.13'
+  
+  // Spring JDBC 연동 라이브러리(Spring에서 JDBC를 다룰 때 필요한 클래스들)
+  implementation 'org.springframework:spring-jdbc:5.3.13'
+  
+  // Spring Mybatis 연동 라이브러리(Spring에서 Mybatis를 다룰 때 필요한 클래스들)
+  implementation 'org.mybatis:mybatis-spring:2.0.6'
+  
+  // Log4j 라이브러리
+  implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+
   implementation 'com.google.guava:guava:30.1-jre'
   testImplementation 'junit:junit:4.13.2'
   
     // Thumbnailator 썸네일 생성 라이브러리
   implementation 'net.coobird:thumbnailator:0.4.14'
+  
+    implementation 'org.springframework:spring-webmvc:5.3.13'
+  
+  // Spring JDBC 연동 라이브러리(Spring에서 JDBC를 다룰 때 필요한 클래스들)
+  implementation 'org.springframework:spring-jdbc:5.3.13'
+  
+  // Spring Mybatis 연동 라이브러리(Spring에서 Mybatis를 다룰 때 필요한 클래스들)
+  implementation 'org.mybatis:mybatis-spring:2.0.6'
+  
+  // Log4j 라이브러리
+  implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
 }
