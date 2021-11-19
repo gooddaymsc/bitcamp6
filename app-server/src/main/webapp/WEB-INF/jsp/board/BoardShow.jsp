@@ -299,7 +299,7 @@ xfloat: right;
 	   <div class="comment-cng">
 	   <c:choose> 
 			 <c:when test="${loginUser.id eq comment.writer.id}">
-			  <a href='#' class="btn btn-outline-secondary btn-sm">수정</a>
+			  <a href='comment/detail?no=${comment.commentNumber}' class="btn btn-outline-secondary btn-sm">수정</a>
 			  <a href='#' onclick="btn_delete_comment(${comment.commentNumber})" class="btn btn-outline-secondary btn-sm">삭제</a>
 			</c:when>
 		</c:choose>

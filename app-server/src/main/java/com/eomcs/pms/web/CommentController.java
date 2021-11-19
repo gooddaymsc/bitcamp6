@@ -30,7 +30,20 @@ public class CommentController {
     mv.setViewName("template2");
     return mv;
   }
+  @GetMapping("/board/comment/detail")
+  public ModelAndView detail(int no) throws Exception {
+    Comment comment = commentDao.findByNo(no);
+    if (comment == null) {
+      throw new Exception("해당 번호의 게시글이 없습니다.");
+    }
 
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("comment", comment);
+    mv.addObject("pageTitle", "댓글");
+    mv.addObject("contentUrl", "board/comment/CommentDetail.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
   @PostMapping("/board/comment/add")
   public ModelAndView add(Comment comment, HttpSession session) throws Exception {
     Member member = (Member)session.getAttribute("loginUser");
@@ -55,7 +68,7 @@ public class CommentController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:show?no="+comment.getBoardNumber());
+    mv.setViewName("redirect:../show?no="+comment.getBoardNumber());
     return mv;
   }
 
