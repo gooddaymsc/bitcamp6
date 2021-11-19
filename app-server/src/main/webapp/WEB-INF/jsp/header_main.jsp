@@ -293,7 +293,7 @@ button
 <li class="nav-item">
   <a id='type-menu' class="nav-link active" aria-current="page" href="${contextRoot}/drinker/app/product/listType?type=와인">Wine</a>
   <ul class="dropdown-menu">
-    <li><a href="../product/listSubType?no=1">레드</a></li>
+    <li><a href="${contextRoot}/drinker/app/product/listSubType?no=1">레드</a></li>
     <li><a href="../product/listSubType?no=2">화이트</a></li>
     <li><a href="../product/listSubType?no=3">로제</a></li>
     <li><a href="../product/listSubType?no=4">스위트</a></li>
