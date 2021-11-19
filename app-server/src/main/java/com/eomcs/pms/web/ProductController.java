@@ -80,7 +80,7 @@ public class ProductController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("productList", productList);
     mv.addObject("pageTitle", "상품목록");
-    mv.addObject("contentUrl", "/product/ProductList.jsp");
+    mv.addObject("contentUrl", "product/ProductList.jsp");
     mv.setViewName("template2");
     return mv;
   }
@@ -206,7 +206,7 @@ public class ProductController {
     mv.addObject("type", type);
     mv.addObject("productList", productList);
     mv.addObject("pageTitle", "주류목록");
-    mv.addObject("contentUrl", "/product/ProductListType.jsp");
+    mv.addObject("contentUrl", "product/ProductListType.jsp");
     mv.setViewName("template2"); 
     return mv;
   }

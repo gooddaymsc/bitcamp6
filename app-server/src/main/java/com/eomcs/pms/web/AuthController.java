@@ -1,4 +1,4 @@
-package com.eomcs.pms.servlet;
+package com.eomcs.pms.web;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
