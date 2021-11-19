@@ -34,7 +34,7 @@ tr:hover {
 <tbody>
 <c:forEach items="${cartList}" var="cart" varStatus="status">
     <tr>
-    <td><input type="checkbox" /></td>
+    <td onclick="event.cancelBubble=true"><input type="checkbox" /></td>
 <%--       <input name='chkbox' type="checkbox"  value="${cart.cartStocks*cart.stock.price}" onClick="itemSum(this.form);">
  --%>      <td class='chk'> <a href='detail?cartNumber=${cart.cartNumber}&id=${cart.id}'>${cart.cartNumber}</a></td>
       <td class='chk'>${cart.id}</td> 

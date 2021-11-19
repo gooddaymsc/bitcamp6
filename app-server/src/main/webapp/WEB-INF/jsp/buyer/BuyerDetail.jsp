@@ -14,7 +14,7 @@
       <div class="mb-3 row">
         <label for='f-id' class="col-sm-2 col-form-label">아이디</label>
         <div class="col-sm-6">
-          <input id='f-id' type='text' name='id' class="form-control" value='${buyer.member.id}' readonly><br>
+          <input id='f-id' type='text' name='member.id' class="form-control" value='${buyer.member.id}' readonly><br>
         </div>
       </div>
       
@@ -64,7 +64,7 @@
             <img id="f-photo-image" src="../upload/buyer/${buyer.member.photo}_100x100.jpg" onError="this.src='../image/profile.png'" 
         style="width:10rem; height:200px; padding:3px">
           </a>
-          <input id='f-photo' type='file' name='photo' class="form-control"><br>
+          <input id='f-photo' type='file' name='photoFile' class="form-control"><br>
         </div>
       </div>
       <div class="mb-3 row">

@@ -3,6 +3,7 @@
     trimDirectiveWhitespaces="true" %>
 <h1>댓글 상세</h1>
 <form action='update' method='post'>
+<input type='hidden' id='f-boardNumber' name='boardNumber' class="form-control" value='${comment.boardNumber}' readOnly ><br>
 <div class="mb-3 row">
   <label for='f-number' class="col-sm-2 col-form-label">번호</label> 
   <div class="col-sm-6">
@@ -18,7 +19,7 @@
 <div class="mb-3 row">
   <label for='f-writer' class="col-sm-2 col-form-label">작성자</label>
   <div class="col-sm-6">
-    <input id='f-writer' type='text' name='writer' class="form-control" value='${comment.writer.id}'readOnly><br>
+    <input id='f-writer' type='text' name='writer.id' class="form-control" value='${comment.writer.id}'readOnly><br>
   </div>
 </div>       
 <div class="mb-3 row"> 
@@ -29,8 +30,7 @@
 </div>  
 		
 		
-<button class="btn btn-primary">변경</button>
- <a href='delete?no=${comment.commentNumber}' class="btn btn-primary">삭제</a> 
- <a href='../detail?no=${comment.boardNumber}' class="btn btn-primary">목록</a><br>
+<button class="btn btn-outline-secondary btn-sm">변경</button>
+ <a href='../show?no=${comment.boardNumber}' class="btn btn-outline-secondary btn-sm">취소</a><br>
  
 </form>
