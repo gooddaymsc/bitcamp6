@@ -30,30 +30,20 @@ public class CommentController {
     mv.setViewName("template2");
     return mv;
   }
-  //
-  //  @GetMapping("/board/comment/detail")
-  //  public ModelAndView detail(int no) throws Exception {
-  //    Board board = boardDao.findByNo(no);
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    }
-  //
-  //    Collection<LikeMember> likeList = boardDao.findLikeList(no);
-  //    board.setLikeMember((List<LikeMember>) likeList);
-  //    board.setLikes(likeList.size());
-  //    board.setViews(board.getViews()+1);
-  //
-  //    boardDao.updateCount(no);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.addObject("board", board);
-  //    mv.addObject("pageTitle", "게시글");
-  //    mv.addObject("contentUrl", "board/BoardDetail.jsp");
-  //    mv.setViewName("template1");
-  //    return mv;
-  //  }
-  //
+  @GetMapping("/board/comment/detail")
+  public ModelAndView detail(int no) throws Exception {
+    Comment comment = commentDao.findByNo(no);
+    if (comment == null) {
+      throw new Exception("해당 번호의 게시글이 없습니다.");
+    }
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("comment", comment);
+    mv.addObject("pageTitle", "댓글");
+    mv.addObject("contentUrl", "board/comment/CommentDetail.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
   @PostMapping("/board/comment/add")
   public ModelAndView add(Comment comment, HttpSession session) throws Exception {
     Member member = (Member)session.getAttribute("loginUser");
@@ -66,43 +56,35 @@ public class CommentController {
     mv.setViewName("redirect:../show?no="+comment.getBoardNumber());
     return mv;
   }
-  //  @PostMapping("/board/comment/update")
-  //  public ModelAndView update(Board board) throws Exception {
-  //    Board oldBoard = boardDao.findByNo(board.getBoardNumber());
-  //    if (oldBoard == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    }
-  //    oldBoard.setTitle(board.getTitle());
-  //    oldBoard.setContent(board.getContent());
-  //
-  //    BoardTag boardTag = new BoardTag();
-  //    boardTag.setTag(board.getTag());
-  //    boardTag.setTagNumber(oldBoard.getBoardTag().getTagNumber());
-  //    oldBoard.setBoardTag(boardTag);
-  //
-  //    boardDao.update(oldBoard);
-  //    boardDao.update2(oldBoard);
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.setViewName("redirect:show?no="+board.getBoardNumber());
-  //    return mv;
-  //  }
-  //  @GetMapping("/board/comment/delete")
-  //  public ModelAndView delete(int no, HttpSession session) throws Exception {
-  //
-  //    Board board = boardDao.findByNo(no);
-  //    if (board == null) {
-  //      throw new Exception("해당 번호의 게시글이 없습니다.");
-  //    }
-  //
-  //    boardDao.deleteTag(no);
-  //    boardDao.likeDelete(((Member)session.getAttribute("loginUser")).getNumber(), board.getBoardNumber()); // nowLoginNo말고 방법 찾아야함.(다른회원도 눌렀을때)
-  //    boardDao.delete(board); 
-  //    sqlSessionFactory.openSession().commit();
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //    mv.setViewName("redirect:list");
-  //    return mv;
-  //  }
+  @PostMapping("/board/comment/update")
+  public ModelAndView update(Comment comment) throws Exception {
+    Comment oldComment = commentDao.findByNo(comment.getCommentNumber());
+    if (oldComment == null) {
+      throw new Exception("해당 번호의 댓글이 없습니다.");
+    }
+    oldComment.setContent(comment.getContent());
+
+    commentDao.update(comment);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../show?no="+comment.getBoardNumber());
+    return mv;
+  }
+
+  @GetMapping("/board/comment/delete")
+  public ModelAndView delete(int no, HttpSession session) throws Exception {
+
+    Comment comment = commentDao.findByNo(no);
+    if (comment == null) {
+      throw new Exception("해당 번호의 댓글이 없습니다.");
+    }
+
+    commentDao.delete(comment); 
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../show?no="+comment.getBoardNumber());
+    return mv;
+  }
 }
