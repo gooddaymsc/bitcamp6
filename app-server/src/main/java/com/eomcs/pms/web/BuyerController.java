@@ -115,9 +115,9 @@ public class BuyerController {
   }
 
   @GetMapping("/buyer/detail")
-  public ModelAndView detail(String id) throws Exception{
-    //    String page = "";
-    //    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+  public ModelAndView detail(String id, HttpServletRequest request) throws Exception{
+    String page = "";
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
 
     Buyer buyer = buyerDao.findById(id);
 
@@ -125,16 +125,16 @@ public class BuyerController {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
-    //    if (member.getAuthority() == 8) {
-    //      page = "/buyer/BuyerUpdate.jsp";
-    //    } else {
-    //      page = "/buyer/BuyerDetail.jsp";
-    //    }
+    if (member.getAuthority() == 8) {
+      page = "buyer/BuyerUpdate.jsp";
+    } else {
+      page = "buyer/BuyerDetail.jsp";
+    }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("buyer", buyer);
     mv.addObject("pageTitle", "회원(구매자)상세보기");
-    mv.addObject("contentUrl", "buyer/BuyerUpdate.jsp");
+    mv.addObject("contentUrl", page);
     mv.setViewName("template2");
     return mv;
   }
