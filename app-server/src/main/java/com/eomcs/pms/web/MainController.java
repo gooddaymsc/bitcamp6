@@ -124,7 +124,7 @@ public class MainController {
   }
 
   @GetMapping("findpwMenu")
-  public ModelAndView findpwMenu(ServletRequest request,   HttpSession session) throws Exception {
+  public ModelAndView findpwMenu() throws Exception {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "비밀번호찾기");
     mv.addObject("contentUrl", "main/FindpwForm.jsp");
@@ -133,11 +133,14 @@ public class MainController {
   }
 
   @RequestMapping("findpwForm")
-  public ModelAndView findpwForm(HttpServletRequest request, HttpServletResponse response,  HttpSession session) throws Exception {
+  public ModelAndView findpwForm(String id, String name) throws Exception {
     ModelAndView mv = new ModelAndView();
+    Member oldMember = memberDao.findById(id);
     Member member = new Member();
-    member.setPassword(request.getParameter("password"));
-    member.setNumber(Integer.parseInt(request.getParameter("member_no")));
+
+    //    member.setPassword(oldMember.getPassword());
+    //        member.setNumber(Integer.parseInt(request.getParameter("member_no")));
+    member.setNumber(oldMember.getNumber());
 
     memberDao.update(member);
     sqlSessionFactory.openSession().commit();

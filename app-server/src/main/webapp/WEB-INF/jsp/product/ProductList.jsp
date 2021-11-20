@@ -111,12 +111,13 @@
 </style>
 
 <h1>상품 목록</h1>
+<%-- 
 <c:choose> 
   <c:when  test="${loginUser.authority eq 4}">
 <a href='form' class="btn btn-outline-secondary btn-sm">새상품</a>
   </c:when>
 </c:choose>
-
+ --%>
 <form action='search' method='post'>  
 <div class="mb-3 row"><!-- 
  <button  class="search-button"><img class="search-img" src="../../image/search.png"></button> -->

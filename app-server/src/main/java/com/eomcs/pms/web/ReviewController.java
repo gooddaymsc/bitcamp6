@@ -34,7 +34,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginForm'</script>");
       out.flush();
     }
 
@@ -68,7 +68,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginForm'</script>");
       out.flush();
     }
 
@@ -114,7 +114,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginForm'</script>");
       out.flush();
       return null;
     }
@@ -186,7 +186,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginForm'</script>");
       out.flush();
     }
 
