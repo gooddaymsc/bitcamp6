@@ -8,9 +8,6 @@
   <div class="col-sm-6">
     <input id='f-productNumber' type='text' name='product.productNumber' class="form-control" value='${productNo}' readOnly>
   </div>
-    <div class="col-auto">
-    <button id="x-name-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
-  </div>
 </div>
 <div class="mb-3 row">
   <label for='f-price' class="col-sm-2 col-form-label">가격</label>
