@@ -30,7 +30,7 @@
       <div class="mb-3 row">
         <label for='f-name' class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-6">
-          <input id='f-name' type='text' name='name' class="form-control" value='${buyer.member.name}' readonly><br>
+          <input id='f-name' type='text' name='member.name' class="form-control" value='${buyer.member.name}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
