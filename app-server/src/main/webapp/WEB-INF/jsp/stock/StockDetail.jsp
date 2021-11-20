@@ -5,11 +5,11 @@
 
 <h1>재고상세</h1>
 <form action='update' method='post'>
-  <input type='hidden' id='btn-seller' type='text' name='seller' value='${stock.seller.member.id}'readOnly><br>
+  <input type='hidden' id='btn-seller' type='text' name='seller.member.id' value='${stock.seller.member.id}'readOnly><br>
 <div class="mb-3 row">
   <label for='f-no' class="col-sm-2 col-form-label">재고번호</label>
   <div class="col-sm-6">
-    <input id='f-no' type='text' name='no' class="form-control" value='${stock.stockNumber}' readonly>
+    <input id='f-no' type='text' name='stockNumber' class="form-control" value='${stock.stockNumber}' readonly>
   </div>
 </div>
 <div class="mb-3 row">
@@ -47,7 +47,7 @@ function btn_update(id) {
  var no = document.getElementById('f-no').value;
  const seller_id = document.getElementById('btn-seller').value;
    if (id==seller_id) {
-      location.href="${contextRoot}/drinker/app/stock/update?no="+no;
+      location.href="${contextRoot}/drinker/app/stock/update";
    } else {
      alert("해당 판매자가 아니므로 수정할 수 없습니다.");
      return false;

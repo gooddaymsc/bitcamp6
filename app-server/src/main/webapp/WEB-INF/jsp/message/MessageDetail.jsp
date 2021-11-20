@@ -181,8 +181,8 @@
 </c:forEach>
 
 </div>
-        <input type='hidden' id='text-input' type='text' name='no' value="${roomNumber}"><br><br>
-        <input type='hidden' id='text-input' type='text' name='other' value="${theOtherId}"><br><br>
+        <input type='hidden' id='text-input' type='text' name='roomNumber' value="${roomNumber}"><br><br>
+        <input type='hidden' id='text-input' type='text' name='theOtherId' value="${theOtherId}"><br><br>
     <div class="input-box">
         <input type="text" id="text-input" name='content'>
         <div class="btn-plus">
@@ -194,9 +194,8 @@
             <button class="btn-submit">전송</button>
     </div>
 </div>
-  
-   <a href='list' class="btn btn-outline-secondary btn-sm">이전</a><br><br>
 </form>
+   <a href='list' class="btn btn-outline-secondary btn-sm">이전</a><br><br>
 
 <script>
 var element = document.getElementById("message-box");

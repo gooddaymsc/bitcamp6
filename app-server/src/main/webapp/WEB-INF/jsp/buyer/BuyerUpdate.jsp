@@ -64,7 +64,7 @@
           <a href="../upload/buyer/${buyer.member.photo}" >
             <img id="f-photo-image"  src="../upload/buyer/${buyer.member.photo}_100x100.jpg">
           </a>
-        <input id='f-photo' type='file' name='photoFile' class="form-control" readonly><br>  
+        <!-- <input id='f-photo' type='file' name='photoFile' class="form-control" readonly><br>   -->
         </div>
       </div>
       <div class="mb-3 row">
@@ -107,6 +107,6 @@
             value="${buyer.member.registeredDate}">
         </div>
       </div>
-      <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-primary">탈퇴시키기</a>
+      <button class="btn btn-outline-success">변경</button>
+      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-outline-success">탈퇴시키기</a>
     </form>

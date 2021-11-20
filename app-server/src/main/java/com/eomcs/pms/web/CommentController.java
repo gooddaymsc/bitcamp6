@@ -1,6 +1,9 @@
 package com.eomcs.pms.web;
 
+import java.io.PrintWriter;
 import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +48,16 @@ public class CommentController {
     return mv;
   }
   @PostMapping("/board/comment/add")
-  public ModelAndView add(Comment comment, HttpSession session) throws Exception {
-    Member member = (Member)session.getAttribute("loginUser");
+  public ModelAndView add(Comment comment, HttpServletRequest request,HttpSession session, HttpServletResponse response) throws Exception {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
     comment.setWriter(member);
+
+    if (session.getAttribute("loginUser") == null) {
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginForm'</script>");
+      out.flush();
+    }
 
     commentDao.insert(comment);
     sqlSessionFactory.openSession().commit();
@@ -56,6 +66,7 @@ public class CommentController {
     mv.setViewName("redirect:../show?no="+comment.getBoardNumber());
     return mv;
   }
+
   @PostMapping("/board/comment/update")
   public ModelAndView update(Comment comment) throws Exception {
     Comment oldComment = commentDao.findByNo(comment.getCommentNumber());

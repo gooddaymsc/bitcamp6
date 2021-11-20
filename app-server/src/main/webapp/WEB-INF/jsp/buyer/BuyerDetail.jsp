@@ -107,19 +107,9 @@
             value="${buyer.member.registeredDate}">
         </div>
       </div>
-      <button class="btn btn-outline-secondary btn-sm">변경</button>
-      <a href='../main/myPage' class="btn btn-outline-secondary btn-sm">이전</a>
-      <a href='passwordDetail?id=${buyer.member.id}' class="btn btn-outline-secondary btn-sm">암호변경</a>
-      <a href='#' onclick="btn_delete_member(${buyer.member.id})"  class="btn btn-outline-secondary btn-sm">계정탈퇴</a>
+      <button class="btn btn-outline-success">변경</button>
+      <a href='../main/myPage' class="btn btn-outline-success">이전</a>
+      <%-- <a href='passwordDetail?id=${buyer.member.id}' class="btn btn-outline-success">암호변경</a> --%>
+      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-outline-success">탈퇴하기</a>
     </form>
     
-    
-  <script>
-  function btn_delete_member(id) {
-    if (confirm("정말 탈퇴하시겠습니까?")==true) {
-       location.href="${contextRoot}/drinker/app/buyer/delete?id=?"+id;
-    } else {
-      return false;
-    }
-  }
-</script> 

@@ -33,10 +33,10 @@ public class ReviewController {
     PrintWriter out = response.getWriter();
     HttpSession session = request.getSession(false);
 
-    //    if (session.getAttribute("loginUser") == null) {
-    //      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
-    //      out.flush();
-    //    }
+    if (session.getAttribute("loginUser") == null) {
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginForm'</script>");
+      out.flush();
+    }
 
     System.out.println("review1");
     int productNumber = no;
@@ -68,7 +68,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginForm'</script>");
       out.flush();
     }
 
@@ -114,7 +114,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginForm'</script>");
       out.flush();
       return null;
     }
@@ -126,7 +126,7 @@ public class ReviewController {
         throw new Exception("해당 번호의 리뷰가 없습니다.");
       }
 
-      if (review.getMember().getId().equals(member.getId())) {
+      if (review.getMember().getId().equals(member.getId()) || member.getId().equals("admin") ) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("review", review);
         mv.addObject("pageTitle", "리뷰상세보기");
@@ -144,16 +144,20 @@ public class ReviewController {
     return null;
   }
 
-  @PostMapping("/product/review/update") // 아... 모르겠다!!!!
-  public ModelAndView update(int reviewNo, Review review) throws Exception {
+  @PostMapping("/product/review/update") 
+  public ModelAndView update(int reviewNo, Product product, Review review, HttpServletRequest request) throws Exception {
     Review oldReview = reviewDao.findByNo(reviewNo);
-    System.out.println("review10000");
 
     if (oldReview.equals(null)) {
       throw new Exception("해당 번호의 리뷰가 없습니다.");
     }
 
-    reviewDao.update(review);
+    oldReview.setScore(review.getScore());
+    oldReview.setComment(review.getComment());
+
+    reviewDao.update(oldReview);
+    product.setRate(reviewDao.avg(oldReview));
+    productDao.updateRate(product);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -186,7 +190,7 @@ public class ReviewController {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginMenu'</script>");
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../../main/loginForm'</script>");
       out.flush();
     }
 

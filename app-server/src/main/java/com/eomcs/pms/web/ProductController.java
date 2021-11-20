@@ -42,9 +42,7 @@ public class ProductController {
 
   @PostMapping("/product/add")
   public ModelAndView add(Product product, ProductType productType, Part photoFile) throws Exception {
-    System.out.println("1111");
     if (photoFile.getSize() > 0) {
-      System.out.println("aaaa");
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/product") + "/" + filename);
       product.setPhoto(filename);
@@ -73,8 +71,6 @@ public class ProductController {
         }
       });
     }
-
-    System.out.println("bbbb");
 
     productDao.insert(product);
     sqlSessionFactory.openSession().commit();

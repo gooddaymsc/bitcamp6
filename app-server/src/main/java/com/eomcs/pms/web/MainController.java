@@ -1,10 +1,6 @@
 package com.eomcs.pms.web;
 
-import java.io.PrintWriter;
 import java.util.Collection;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.pms.dao.BoardDao;
 import com.eomcs.pms.dao.CommentDao;
@@ -39,24 +36,22 @@ public class MainController {
   @Autowired ReviewDao reviewDao;
 
   @GetMapping("menu")
-  public ModelAndView menu(HttpServletRequest request) throws Exception {
+  public ModelAndView menu() throws Exception {
     ModelAndView mv = new ModelAndView();
-    request.setAttribute("rankingWine", productDao.rankingType("와인"));
-    request.setAttribute("rankingWhiskey", productDao.rankingType("위스키"));
-    request.setAttribute("rankingBrandy", productDao.rankingType("브랜디/꼬냑"));
-    request.setAttribute("rankingVodka", productDao.rankingType("리큐르/보드카"));
-    request.setAttribute("rankingTrad", productDao.rankingType("전통주"));
-
-    mv.addObject("pageTitle", "메인");
+    mv.addObject("rankingWine", productDao.rankingType("와인"));
+    mv.addObject("rankingWhiskey", productDao.rankingType("위스키"));
+    mv.addObject("rankingBrandy", productDao.rankingType("브랜디/꼬냑"));
+    mv.addObject("rankingVodka", productDao.rankingType("리큐르/보드카"));
+    mv.addObject("rankingTrad", productDao.rankingType("전통주"));
     mv.addObject("contentUrl", "main/Menu.jsp");
     mv.setViewName("template0");
     return mv;
   }
 
   @PostMapping("search")
-  public ModelAndView search(ServletRequest request) throws Exception {
+  public ModelAndView search(String search) throws Exception {
     ModelAndView mv = new ModelAndView();
-    String input = "%"+request.getParameter("search")+"%";
+    String input = "%"+search+"%";
     Collection<Product> productList = productDao.search(input);
     Collection<Seller> sellerList = sellerDao.search(input);
     Collection<Board> boardList = boardDao.search(input);
@@ -71,7 +66,7 @@ public class MainController {
   }
 
   @GetMapping("myPage")
-  public ModelAndView myPage(ServletRequest request,   HttpSession session) throws Exception {
+  public ModelAndView myPage(HttpSession session) throws Exception {
     ModelAndView mv = new ModelAndView();
     Member member = (Member) session.getAttribute("loginUser");
 
@@ -92,7 +87,7 @@ public class MainController {
   }
 
   @GetMapping("findidMenu")
-  public ModelAndView findidMenu(ServletRequest request,   HttpSession session) throws Exception {
+  public ModelAndView findidMenu() throws Exception {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "아이디찾기");
     mv.addObject("contentUrl", "main/FindidForm.jsp");
@@ -101,30 +96,36 @@ public class MainController {
   }
 
   @RequestMapping("findidResult")
-  public ModelAndView findidResult(HttpServletRequest request, HttpServletResponse response,  HttpSession session) throws Exception {
+  public ModelAndView findidResult(Member member) throws Exception {
     ModelAndView mv = new ModelAndView();
-    response.setContentType("text/html; charset=UTF-8");
-    PrintWriter out = response.getWriter();
 
-    Member member = memberDao.findByName(request.getParameter("name"));
+    Member oldMember = memberDao.findByName(member.getName());
 
-    if (member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || (member.getEmail().equals(request.getParameter("phoneOrEmail")))) {
-      String id = member.getId();
-      request.setAttribute("id", id);
-
+    if (oldMember.getPhoneNumber().equals(member.getPhoneOrEmail()) || (oldMember.getEmail().equals(member.getPhoneOrEmail()))) {
+      String id = oldMember.getId();
+      mv.addObject("id", id);
       mv.addObject("pageTitle", "아이디찾기 결과");
       mv.addObject("contentUrl", "main/FindidResult.jsp");
       mv.setViewName("template3");
       return mv;
     } else {
-      out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='../main/menu'</script>");
-      out.flush();
+      return null;
     }
-    return null;
+  }
+  @RequestMapping("checkId")
+  @ResponseBody
+  public String checkId(String name, String phoneOrEmail) throws Exception {
+    Member oldMember = memberDao.findByName(name);
+    // 이름과 폰/이메일 일치하는 회원이 있으면 false 없으면 true
+    if (oldMember.getPhoneNumber().equals(phoneOrEmail) || (oldMember.getEmail().equals(phoneOrEmail))) {
+      return "false";
+    } else {
+      return "true";
+    }
   }
 
   @GetMapping("findpwMenu")
-  public ModelAndView findpwMenu(ServletRequest request,   HttpSession session) throws Exception {
+  public ModelAndView findpwMenu() throws Exception {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "비밀번호찾기");
     mv.addObject("contentUrl", "main/FindpwForm.jsp");
@@ -133,42 +134,42 @@ public class MainController {
   }
 
   @RequestMapping("findpwForm")
-  public ModelAndView findpwForm(HttpServletRequest request, HttpServletResponse response,  HttpSession session) throws Exception {
-    ModelAndView mv = new ModelAndView();
-    Member member = new Member();
-    member.setPassword(request.getParameter("password"));
-    member.setNumber(Integer.parseInt(request.getParameter("member_no")));
-
+  public ModelAndView findpwForm(Member member) throws Exception {
     memberDao.update(member);
     sqlSessionFactory.openSession().commit();
 
-    mv.addObject("contentUrl", "main/menu");
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "로그인");
+    mv.addObject("contentUrl", "main/Login.jsp");
     mv.setViewName("template3");
     return mv;
   }
 
+  @RequestMapping("checkPw")
+  @ResponseBody
+  public String checkPw(String name, String phoneOrEmail, String id) throws Exception {
+    Member oldMember = memberDao.findByIdName(id, name);
+    // 이름과 폰/이메일 일치하는 회원이 있으면 false 없으면 true
+    if (oldMember.getPhoneNumber().equals(phoneOrEmail) || (oldMember.getEmail().equals(phoneOrEmail))) {
+      return "false";
+    } else {
+      return "true";
+    }
+  }
   @RequestMapping("findpwResult")
-  public ModelAndView findpwResult(HttpServletRequest request, HttpServletResponse response,  HttpSession session) throws Exception {
+  public ModelAndView findpwResult(Member member, HttpSession session) throws Exception {
     ModelAndView mv = new ModelAndView();
-    response.setContentType("text/html; charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    Member member = memberDao.findById(request.getParameter("id"));
+    Member oldMember = memberDao.findByIdName(member.getId(), member.getName());
 
 
-    if (((member.getPhoneNumber().equals(request.getParameter("phoneOrEmail")) || member.getEmail().equals(request.getParameter("phoneOrEmail"))))
-        && (member.getId().equals(request.getParameter("id")))){
-
+    if (oldMember.getPhoneNumber().equals(member.getPhoneOrEmail()) || (oldMember.getEmail().equals(member.getPhoneOrEmail()))) {
+      mv.addObject("member_no", oldMember.getNumber());
       mv.addObject("pageTitle", "비밀번호 변경");
       mv.addObject("contentUrl", "main/FindpwResult.jsp");
       mv.setViewName("template3");
       return mv;
     } else {
-      out.printf("<script>alert('일치하는 회원정보를 찾을 수 없습니다.'); location.href='../main/menu'</script>");
-      out.flush();
+      return null;
     }
-    return null;
   }
-
-
-
 }

@@ -80,7 +80,10 @@ select
   
   <update id="update" parameterType="buyer">
     update member set 
-      password=password(#{member.password}),
+      nickname=#{member.nickname},
+<!--       password=password(#{member.password}),
+ -->  photo=#{member.photo},
+      phoneNumber=#{member.phoneNumber},
       zipcode=#{zipcode},
       address=#{address},
       detail_address=#{detailAddress}
