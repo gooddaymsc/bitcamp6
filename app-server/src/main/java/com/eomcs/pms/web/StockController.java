@@ -1,11 +1,7 @@
 package com.eomcs.pms.web;
 
-import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -34,43 +31,20 @@ public class StockController {
   @Autowired StockDao stockDao;
 
   @GetMapping("form")
-  public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public ModelAndView form(int no, HttpSession session) throws Exception {
     ModelAndView mv = new ModelAndView();
-    response.setContentType("text/html; charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    HttpSession session = request.getSession(false);
-
-    if (session.getAttribute("loginUser") == null) {
-      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
-      out.flush();
-    }
-
-    int productNo = Integer.parseInt(request.getParameter("productNumber"));
-    Member member = (Member) request.getSession(false).getAttribute("loginUser");
-    Stock stock = stockDao.findByNoId(productNo, member.getId());
-    if (stock!= null) {
-      out.printf("<script>alert('이미 재고에 등록되어있는 상품입니다.'); location.href='./list?id=%s'</script>", member.getId());
-      out.flush();
-    } else {
-      mv.addObject("productNo", productNo);
-      mv.addObject("pageTitle", "재고담기");
-      mv.addObject("contentUrl", "stock/StockForm.jsp");
-      mv.setViewName("template2");
-      return mv;
-    }
-    return null;
+    mv.addObject("productNo", no);
+    mv.addObject("pageTitle", "재고담기");
+    mv.addObject("contentUrl", "stock/StockForm.jsp");
+    mv.setViewName("template2");
+    return mv;
   }
 
   @PostMapping("add")
-  public ModelAndView add(HttpServletRequest request, HttpSession session) throws Exception {
-    int productNo = Integer.parseInt(request.getParameter("productNumber"));
-
+  public ModelAndView add(Stock stock, HttpSession session) throws Exception {
     Member member = (Member) session.getAttribute("loginUser");
-    Stock stock = new Stock();
-    Product product = productDao.findByNo(productNo);
+    Product product = productDao.findByNo(stock.getProduct().getProductNumber());
     stock.setProduct(product);
-    stock.setPrice(Integer.parseInt(request.getParameter("price")));
-    stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
     Seller seller = sellerDao.findById(member.getId());
     stock.setSeller(seller);
 
@@ -87,7 +61,6 @@ public class StockController {
     StockList stockList = new StockList();
 
     Member member = (Member) session.getAttribute("loginUser");
-    System.out.println(member.getId());
     Collection<Stock> list = stockDao.findAll(member.getId());
     stockList.setId(member.getId());
     stockList.setSellerStock((List<Stock>) list);
@@ -102,14 +75,13 @@ public class StockController {
   }
 
   @GetMapping("sellerList")
-  public ModelAndView sellerlist(ServletRequest request) throws Exception {
-    int productNo = Integer.parseInt(request.getParameter("no"));
+  public ModelAndView sellerlist(int no) throws Exception {
 
-    Collection<Stock> stockSellerList = stockDao.findByProductNo(productNo);
+    Collection<Stock> stockSellerList = stockDao.findByProductNo(no);
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("stockSellerList", stockSellerList);
-    mv.addObject("productNo", productNo);
+    mv.addObject("productNo", no);
     mv.addObject("pageTitle", "재고판매자목록");
     mv.addObject("contentUrl", "stock/StockSellerList.jsp");
     mv.setViewName("template1");
@@ -117,8 +89,7 @@ public class StockController {
   }
 
   @GetMapping("detail")
-  public ModelAndView detail(ServletRequest request) throws Exception {
-    int no = Integer.parseInt(request.getParameter("no"));
+  public ModelAndView detail(int no) throws Exception {
     Stock stock = stockDao.findByNo(no);
 
     if (stock == null) {
@@ -134,13 +105,7 @@ public class StockController {
   }
 
   @PostMapping("update")
-  public ModelAndView update(HttpServletRequest request) throws Exception {
-    int no = Integer.parseInt(request.getParameter("no"));
-    Stock stock = stockDao.findByNo(no);
-
-    stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
-    stock.setPrice(Integer.parseInt(request.getParameter("price")));
-
+  public ModelAndView update(Stock stock) throws Exception {
     stockDao.update(stock);
     sqlSessionFactory.openSession().commit();
 
@@ -149,12 +114,22 @@ public class StockController {
     return mv;
   }
 
+  @GetMapping("checkStock")
+  @ResponseBody
+  public String checkStock(int no , HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
+    Stock stock = stockDao.findByNoId(no, member.getId());
+    if (stock == null) {
+      return "false";
+    } else {
+      return "true";
+    }
+  }
+
   @GetMapping("delete")
-  public ModelAndView delete(HttpServletRequest request) throws Exception {
+  public ModelAndView delete(int no) throws Exception {
 
-    int no = Integer.parseInt(request.getParameter("no"));
     Stock stock = stockDao.findByNo(no);
-
     stockDao.delete(stock);
     sqlSessionFactory.openSession().commit();
 

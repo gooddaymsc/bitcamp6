@@ -102,6 +102,18 @@
     order by s.product_no asc
     
   </select>
+    <select id="findByNameId" resultMap="StockMap" parameterType="map">
+    Select 
+      s.stock_no, 
+      p.product_no, 
+      s.price, 
+      s.amount
+    From 
+      stock s left outer join product p on s.product_no = p.product_no 
+    where 
+      p.name=#{name} and member_no=(select member_no from member where id=#{id})
+    
+  </select>
     <select id="findByProductNo" resultMap="StockMap" parameterType="int">
     select 
       p.product_no, p.name, 

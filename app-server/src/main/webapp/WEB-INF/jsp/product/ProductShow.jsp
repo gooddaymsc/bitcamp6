@@ -156,8 +156,10 @@ display:inline-block;
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
   <div>
-    <button type="button" onclick="location.href='../stock/form?productNumber=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">재고등록</button>
-    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+    <a href='#' onclick="btn_add('${product.productNumber}')" class="btn btn-outline-secondary btn-sm">재고등록</a>
+  
+<%--     <button type="button" onclick="location.href='../stock/form?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">재고등록</button>
+ --%>    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
   </div>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
@@ -194,6 +196,16 @@ var rate=(${product.rate}/5)*100;
 document.ex_form.target_name.value = "100";
 return rate;
 }
-
 </script>
-
+<script>
+function btn_add(no) {
+ var no = document.getElementById('f-number').value;
+ const board_id = document.getElementById('btn-writer').value;
+   if (id==board_id) {
+      location.href="../stock/form?no="+no;
+   } else {
+     alert("작성자가 아니므로 수정할 수 없습니다.");
+     return false;
+   }
+ }
+</script>
