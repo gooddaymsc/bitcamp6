@@ -78,7 +78,7 @@ tr:hover {
       <a class="nav-link" href="../seller/detail?id=${loginUser.id}">개인정보</a>
     </div>
     </c:when >
-    <c:when test="${loginUser.authority eq 2}">
+    <c:when test="${loginUser.authority eq 8}">
     <div class="col">
       <a class="nav-link" href='../buyer/list' class="btn btn-light">회원(구매자)관리</a>
     </div>

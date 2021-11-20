@@ -126,7 +126,7 @@ public class ReviewController {
         throw new Exception("해당 번호의 리뷰가 없습니다.");
       }
 
-      if (review.getMember().getId().equals(member.getId())) {
+      if (review.getMember().getId().equals(member.getId()) || member.getId().equals("admin") ) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("review", review);
         mv.addObject("pageTitle", "리뷰상세보기");

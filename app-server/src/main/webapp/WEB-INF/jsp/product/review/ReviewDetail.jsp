@@ -29,6 +29,7 @@
     <input type='hidden' id='f-registeredDate' type='text' name='registeredDate' class="form-control" value='${review.registeredDate}' readonly>
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
+  <button class="btn btn-outline-secondary btn-sm">변경</button>
     <a href='delete?no=${review.no}' class="btn btn-outline-secondary btn-sm">삭제</a> 
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
