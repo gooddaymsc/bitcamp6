@@ -147,7 +147,6 @@ public class ReviewController {
   @PostMapping("/product/review/update") 
   public ModelAndView update(int reviewNo, Product product, Review review, HttpServletRequest request) throws Exception {
     Review oldReview = reviewDao.findByNo(reviewNo);
-    System.out.println("review10000");
 
     if (oldReview.equals(null)) {
       throw new Exception("해당 번호의 리뷰가 없습니다.");
