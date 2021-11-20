@@ -37,7 +37,7 @@
       <div class="mb-3 row">
         <label for='f-level' class="col-sm-2 col-form-label">레벨</label>
         <div class="col-sm-6">
-          <input id='f-level' type='text' name='level' class="form-control" value='${seller.member.level}'><br>
+          <input id='f-level' type='text' name='member.level' class="form-control" value='${seller.member.level}'><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -130,6 +130,6 @@
             value="${seller.member.registeredDate}" readonly>
         </div>
       </div>
-      <button class="btn btn-primary">변경</button>
-      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-primary">탈퇴시키기</a>
+      <button class="btn btn-outline-success">변경</button>
+      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴시키겠습니까?');" class="btn btn-outline-success">탈퇴시키기</a>
     </form>
