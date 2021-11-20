@@ -24,7 +24,7 @@
     <id column="type_no" property="number"/>
     <result column="type" property="type"/>
     <result column="subType" property="subType"/>
-  </association> 
+  </association>
 
   </resultMap>
    

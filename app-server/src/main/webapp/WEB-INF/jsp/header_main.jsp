@@ -70,7 +70,7 @@ footer {
     height: 80px;
     object-fit: fill;
     z-index: 10;
-  }
+  } 
 .search-class { 
   xborder : 2px solid black;
   position: relative;
@@ -132,7 +132,7 @@ footer {
       wegiht: 100%;
       height: 400px;
       z-index:4;
-  } 
+  }  
  .nav {
   position: absolute;
     xborder: 2px solid grey;
@@ -142,7 +142,7 @@ footer {
     left:50%;
     transform:translate(-50%,0);
       text-align: center;
-    display:inline-block;
+    xdisplay:inline-block;
     
   } 
  .nav a {
@@ -196,7 +196,7 @@ footer {
     
   }
   .dropdown-menu {
-  position:relative;
+  xposition:relative;
   xborder : 2px solid green;
   }
   
@@ -263,16 +263,16 @@ button
 <div class='wrap'>
 <!-- 검색 -->
 	<div class="logo1">
-	  <a class="navbar-brand1" href="../main/menu"><img src="../image/logoW.png"></a>
+	  <a class="navbar-brand1" href="../main/menu"><img src="../../image/logoW.png"></a>
 	</div>
 	<div class="logo2">
-	  <a class="navbar-brand2" href="../main/menu"><img src="../image/logoW.png"></a>
+	  <a class="navbar-brand2" href="../main/menu"><img src="../../image/logoW.png"></a>
 	</div>
 	<div class="search-class">
 	  <div class="search-class-menu">
 	   <c:choose> 
       <c:when  test="${loginUser eq null}">
-	    <a id='visitor' class='f-text' href='../main/loginMenu'>로그인</a>
+	    <a id='visitor' class='f-text' href='../main/loginForm'>로그인</a>
 	    <a id='visitor' class='f-text' href='../buyer/form'>회원가입</a>
 	    </c:when>
       <c:when  test="${(loginUser.authority eq 2) ||(loginUser.authority eq 4)}">
@@ -286,7 +286,7 @@ button
 	  </div>
 	  <fieldset class="search-bar-fieldset">
 	    <form action='search' method='post'>
-	      <button  class="search-button"><img class="search-img" src="../image/search.png"></button>
+	      <button  class="search-button"><img class="search-img" src="../../image/search.png"></button>
 	      <input id="f-search" type="text" name="search" class="form-control" placeholder="검색어를 입력해주세요">
 	    </form>
 	  </fieldset>

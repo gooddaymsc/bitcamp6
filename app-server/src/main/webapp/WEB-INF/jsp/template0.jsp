@@ -62,7 +62,7 @@
 <body>
 <div class = "first-container"> 
   <div class="html-line" >
-    <img id="html-img" class = "html-img" src="../image/menuC.jpg" ></img>
+    <img id="html-img" class = "html-img" src="../../image/menuC.jpg" ></img>
     <div class = "html-white1">
     <div class = "html-color2">
     </div> 

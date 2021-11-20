@@ -10,6 +10,7 @@ public interface ReviewDao {
   Review findByNo(int no) throws Exception;
   void update(Review review) throws Exception;    
   void delete(int no) throws Exception;
+  void delete2(int no) throws Exception;
   Review reviewIs(@Param("productNo")int productNumber, @Param("id")String id) throws Exception;
   List<Review> myReview(String id) throws Exception;
   boolean findPurchased(String productName) throws Exception;

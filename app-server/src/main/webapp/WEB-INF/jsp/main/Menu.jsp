@@ -108,9 +108,9 @@ color:black;
     <c:forEach items="${rankingWine}" var="product">
      <td>
        <div class="wine_ranking" style="width:12rem">
-        <img align="middle" class="d-block w-100" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol6.jpg'" 
+        <img align="middle" class="d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol6.jpg'" 
         style="width:10rem; height:220px; padding:3px">
-        <h5><a href="../product/detail?no=${product.productNumber}">${product.productName}</a></h5>
+        <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
          <p class="c">${product.rate}</p>
          <div class="carousel-caption d-none d-md-block">
            </div>
@@ -125,9 +125,9 @@ color:black;
        <c:forEach items="${rankingWhiskey}" var="product">
      <td>
       <div class="wiskey_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol5.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol5.jpg'" 
         style="width:10rem; height:220px; padding:3px">
-        <h5><a href="../product/detail?no=${product.productNumber}">${product.productName}</a></h5>
+        <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
          <div class="carousel-caption d-none d-md-block">
       </div> 
@@ -142,9 +142,9 @@ color:black;
        <c:forEach items="${rankingBrandy}" var="product">
      <td>
       <div class="brandy_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol7.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol7.jpg'" 
         style="width:10rem; height:220px; padding:3px">
-        <h5><a href="../product/detail?no=${product.productNumber}">${product.productName}</a></h5>
+        <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
          <div class="carousel-caption">
       </div> 
@@ -159,9 +159,9 @@ color:black;
        <c:forEach items="${rankingVodka}" var="product">
      <td>
       <div class="vodka_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../image/ ${product.photo}.jpg" onError="this.src='../image/alcohol9.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../image/ ${product.photo}.jpg" onError="this.src='../../image/alcohol9.jpg'" 
         style="width:10rem; height:220px; padding:3px">
-        <h5><a href="../product/detail?no=${product.productNumber}">${product.productName}</a></h5>
+        <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
          <div class="carousel-caption d-none d-md-block">
       </div> 
@@ -176,9 +176,9 @@ color:black;
        <c:forEach items="${rankingTrad}" var="product">
      <td>
       <div class="wiskey_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../image/${product.photo}.jpg" onError="this.src='../image/alcohol8.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol8.jpg'" 
         style="width:10rem; height:220px; padding:3px">
-        <h5><a href="../product/detail?no=${product.productNumber}">${product.productName}</a></h5>
+        <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
          <div class="carousel-caption d-none d-md-block">
        </div> 

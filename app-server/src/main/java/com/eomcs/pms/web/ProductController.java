@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
+import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.ProductType;
 import com.eomcs.pms.domain.Review;
@@ -26,6 +27,7 @@ public class ProductController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired ProductDao productDao;
+  @Autowired StockDao stockDao;
   @Autowired ReviewDao reviewDao;
   @Autowired ServletContext sc;
 
@@ -48,6 +50,17 @@ public class ProductController {
       product.setPhoto(filename);
       product.setProductType(new ProductHandlerHelper(
           productDao).promptType(productType.getType(), productType.getSubType()));
+
+      Thumbnails.of(sc.getRealPath("upload/product") + "/" + filename)
+      .size(300, 300)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_300x300";
+        }
+      });
 
       Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
       .size(1000, 1000)
@@ -118,13 +131,14 @@ public class ProductController {
 
     product.setPhoto(oldProduct.getPhoto());
     product.setProductName(oldProduct.getProductName());
+    product.setProductType(oldProduct.getProductType());
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/product") + "/" + filename);
       product.setPhoto(filename);
-      product.setProductType(new ProductHandlerHelper(
-          productDao).promptType(productType.getType(), productType.getSubType()));
+      //      product.setProductType(new ProductHandlerHelper(
+      //          productDao).promptType(productType.getType(), productType.getSubType()));
 
       Thumbnails.of(sc.getRealPath("upload/product") + "/" + filename)
       .size(300, 300)
@@ -162,10 +176,13 @@ public class ProductController {
   @GetMapping("/product/delete")
   public ModelAndView delete(int no) throws Exception {
     Product product = productDao.findByNo(no);
+
     if (product == null) {
       throw new Exception("해당 번호의 상품이 없습니다.");
     }  
 
+    stockDao.delete2(product.getProductNumber());
+    reviewDao.delete2(product.getProductNumber());
     productDao.delete(product);
     sqlSessionFactory.openSession().commit();
 
@@ -248,4 +265,17 @@ public class ProductController {
     mv.setViewName("template2"); 
     return mv;
   }
+
+  @GetMapping("/product/ranking")
+  public ModelAndView ranking() throws Exception {
+    ModelAndView mv = new ModelAndView();
+    Collection<Product> productList = productDao.ranking();
+    mv.addObject("productList", productList);
+
+    mv.addObject("pageTitle", "오늘의술");
+    mv.addObject("contentUrl", "product/Ranking.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
+
 }

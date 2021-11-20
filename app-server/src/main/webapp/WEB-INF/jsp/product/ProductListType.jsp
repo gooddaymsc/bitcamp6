@@ -128,7 +128,7 @@
       </c:if>
       <div class="responsive">
         <div class="gallery">
-          <img id="thumbnail" src="../upload/product/${product.photo}_300x300.jpg" name="photo" align="middle"
+          <img id="thumbnail" src="../../upload/product/${product.photo}_300x300.jpg" name="photo" align="middle"
             width="600" height="400">
           <div class="desc">
             <h4>
@@ -167,7 +167,7 @@
                 <div class="rate col-sm">
                   <p>
                     <a id="review" href="../product/show?no=${product.productNumber}">
-                      <img src="../image/favourite.png"> <br> ${product.rate}
+                      <img src="../../image/favourite.png"> <br> ${product.rate}
                     </a>
                   </p>
                 </div>

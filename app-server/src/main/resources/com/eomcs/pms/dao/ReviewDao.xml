@@ -97,6 +97,11 @@
     delete from review 
     where review_no=#{no}
   </delete>
+  
+   <delete id="delete2" parameterType="int">
+    delete from review 
+    where product_no=#{no}
+  </delete>
 
 <select id="avg" parameterType="review" resultType="float" >
     select avg(score) 

@@ -218,7 +218,8 @@ public class BuyerController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list");
+    mv.addObject("Refresh", "1;url=../main/logout");    
+
     return mv;
   }
 

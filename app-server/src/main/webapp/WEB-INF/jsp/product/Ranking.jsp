@@ -88,7 +88,7 @@
 
   
    .image {
-  width:300px;
+  width:250px;
   height:auto;
       margin-bottom: 10px;
   
@@ -103,7 +103,7 @@
     <c:forEach items="${productList}" var="product">
       <div class="ranking col-sm">
       <h2 id ="best_label">Best${product.productNumber}</h2>
-        <img align="middle" class="image" src="../upload/product/${product.photo}_300x300.jpg">
+        <img align="middle" class="image" src="../../upload/product/${product.photo}_300x300.jpg">
         <p class="productName">
         <a href="show?no=${product.productNumber}">${product.productName}</a>
         </p>

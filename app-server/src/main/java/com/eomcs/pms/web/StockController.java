@@ -1,15 +1,18 @@
 package com.eomcs.pms.web;
 
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.SellerDao;
@@ -22,6 +25,7 @@ import com.eomcs.pms.domain.StockList;
 
 
 @Controller
+@RequestMapping("/stock")
 public class StockController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
@@ -29,22 +33,35 @@ public class StockController {
   @Autowired SellerDao sellerDao;
   @Autowired StockDao stockDao;
 
-  @GetMapping("stock/form")
-  public ModelAndView form(HttpServletRequest request) throws Exception {
+  @GetMapping("form")
+  public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
     ModelAndView mv = new ModelAndView();
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
+      out.flush();
+    }
+
     int productNo = Integer.parseInt(request.getParameter("productNumber"));
     Member member = (Member) request.getSession(false).getAttribute("loginUser");
-
-    //    Stock stock = stockDao.findByNoId(productNo, member.getId());
-
-    mv.addObject("productNo", productNo);
-    mv.addObject("pageTitle", "재고담기");
-    mv.addObject("contentUrl", "stock/StockForm.jsp");
-    mv.setViewName("template2");
-    return mv;
+    Stock stock = stockDao.findByNoId(productNo, member.getId());
+    if (stock!= null) {
+      out.printf("<script>alert('이미 재고에 등록되어있는 상품입니다.'); location.href='./list?id=%s'</script>", member.getId());
+      out.flush();
+    } else {
+      mv.addObject("productNo", productNo);
+      mv.addObject("pageTitle", "재고담기");
+      mv.addObject("contentUrl", "stock/StockForm.jsp");
+      mv.setViewName("template2");
+      return mv;
+    }
+    return null;
   }
 
-  @PostMapping("/stock/add")
+  @PostMapping("add")
   public ModelAndView add(HttpServletRequest request, HttpSession session) throws Exception {
     int productNo = Integer.parseInt(request.getParameter("productNumber"));
 
@@ -56,8 +73,8 @@ public class StockController {
     stock.setStocks(Integer.parseInt(request.getParameter("stocks")));
     Seller seller = sellerDao.findById(member.getId());
     stock.setSeller(seller);
-    stockDao.insert(stock);
 
+    stockDao.insert(stock);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -65,7 +82,7 @@ public class StockController {
     return mv;
   }
 
-  @GetMapping("/stock/list")
+  @GetMapping("list")
   public ModelAndView list(HttpSession session) throws Exception {
     StockList stockList = new StockList();
 
@@ -84,7 +101,7 @@ public class StockController {
     return mv;
   }
 
-  @GetMapping("/stock/sellerList")
+  @GetMapping("sellerList")
   public ModelAndView sellerlist(ServletRequest request) throws Exception {
     int productNo = Integer.parseInt(request.getParameter("no"));
 
@@ -99,7 +116,7 @@ public class StockController {
     return mv;
   }
 
-  @GetMapping("/stock/detail")
+  @GetMapping("detail")
   public ModelAndView detail(ServletRequest request) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
     Stock stock = stockDao.findByNo(no);
@@ -116,7 +133,7 @@ public class StockController {
     return mv;
   }
 
-  @PostMapping("/stock/update")
+  @PostMapping("update")
   public ModelAndView update(HttpServletRequest request) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
     Stock stock = stockDao.findByNo(no);
@@ -132,7 +149,7 @@ public class StockController {
     return mv;
   }
 
-  @GetMapping("/stock/delete")
+  @GetMapping("delete")
   public ModelAndView delete(HttpServletRequest request) throws Exception {
 
     int no = Integer.parseInt(request.getParameter("no"));

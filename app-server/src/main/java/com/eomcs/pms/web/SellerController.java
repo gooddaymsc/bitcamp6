@@ -41,6 +41,7 @@ public class SellerController {
 
   @PostMapping("/seller/add")
   public ModelAndView add(Seller seller, HttpServletRequest request, Part photoFile) throws Exception {
+
     Member member = new Member();
     member.setAuthority(4);
     member.setId(request.getParameter("id"));

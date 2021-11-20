@@ -75,8 +75,8 @@
 <body>
   <div class="first-container">
     <div class="html-line">
-      <div class="html-img-container">
-        <img class="html-img" src="${contextRoot}/image/menuD.jpg"></img>
+      <div class="html-img-container"><!-- 
+        <img class="html-img" src="../../image/menuD.jpg"></img> -->
       </div>
       <div class="html-board">
         </div>

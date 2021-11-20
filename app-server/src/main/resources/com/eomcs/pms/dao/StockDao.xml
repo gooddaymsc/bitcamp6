@@ -88,6 +88,10 @@
     delete from stock where stock_no=#{stockNumber}
   </delete>
   
+   <delete id="delete2" parameterType="int">
+    delete from stock where product_no=#{productNumber}
+  </delete>
+  
     <select id="findByNoId" resultMap="StockMap" parameterType="map">
     Select 
       s.stock_no, 

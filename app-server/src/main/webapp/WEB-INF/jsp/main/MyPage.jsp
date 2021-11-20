@@ -71,7 +71,7 @@ tr:hover {
     <c:when test="${loginUser.authority eq 2}">
     <div class="col">
       <a class="nav-link" href="../buyer/detail?id=${loginUser.id}">개인정보</a>
-    </div>
+    </div>ß
     </c:when >
     <c:when test="${loginUser.authority eq 4}">
     <div class="col">
