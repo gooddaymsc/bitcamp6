@@ -49,7 +49,7 @@ tr:hover {
 </c:forEach>
 </tbody>
 </table>
-<table class="table table-bordered" id="tbl-total">
+<!-- <table class="table table-bordered" id="tbl-total">
             <thead>
                 <tr>
                     <th>선택 품목</th>
@@ -73,7 +73,7 @@ function itemSum(frm)
    }
    frm.total_sum.value = sum;
 }
-</script>
+</script> -->
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
   aTag.onclick = () => false;

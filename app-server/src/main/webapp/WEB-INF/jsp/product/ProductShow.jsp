@@ -59,12 +59,10 @@ a {
     text-decoration: none;
     color: black;
 }
-<<<<<<< HEAD
-=======
-button {
+ button {
   position: relative; 
-}
->>>>>>> 41feeb9e26b7d2a1a42fe2913063f1bb12033468
+  z-index:10;
+} 
 
 h2 
 .star-rating {width:205px;}
@@ -156,10 +154,8 @@ display:inline-block;
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
   <div>
-    <a href='#' onclick="btn_add('${product.productNumber}')" class="btn btn-outline-secondary btn-sm">재고등록</a>
-  
-<%--     <button type="button" onclick="location.href='../stock/form?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">재고등록</button>
- --%>    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+  <button type="button" onclick="btn_add(${product.productNumber})" class="btn btn-outline-secondary btn-sm" >재고등록</button>
+  <button type="button"  onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
   </div>
   </c:when>
   <c:when test="${loginUser.authority eq 2}">
@@ -198,14 +194,17 @@ return rate;
 }
 </script>
 <script>
-function btn_add(no) {
- var no = document.getElementById('f-number').value;
- const board_id = document.getElementById('btn-writer').value;
-   if (id==board_id) {
-      location.href="../stock/form?no="+no;
-   } else {
-     alert("작성자가 아니므로 수정할 수 없습니다.");
-     return false;
-   }
- }
+function btn_add(no){
+	var xhr = new XMLHttpRequest();
+	xhr.addEventListener("load", function() {
+	      if (this.responseText == "false") {
+	          location.href='../stock/form?no='+ no;
+	      } else {
+	          alert("이미 재고에 추가된 상품입니다.");
+	          return false;
+	      }
+	    })
+	xhr.open("get", "../stock/checkStock?no=" + no);
+	xhr.send();
+}
 </script>
