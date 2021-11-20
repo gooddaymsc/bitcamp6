@@ -119,6 +119,7 @@ public class StockController {
   public String checkStock(int no , HttpSession session) throws Exception {
     Member member = (Member) session.getAttribute("loginUser");
     Stock stock = stockDao.findByNoId(no, member.getId());
+
     if (stock == null) {
       return "false";
     } else {

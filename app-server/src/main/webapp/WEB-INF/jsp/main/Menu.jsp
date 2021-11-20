@@ -36,30 +36,30 @@ h1{
 
 .b{
   margin-top:30px;
-	font-size: 35px; 
-	color:#3a3a3a;
-	text-decoration: none;
-	font-size: 38px; 
-	text-align: center;
+  font-size: 35px; 
+  color:#3a3a3a;
+  text-decoration: none;
+  font-size: 38px; 
+  text-align: center;
 }
 .c{
-	font-size: 23px; 
-	font-weight: bold; 
-	color:#3a3a3a;
-	font-family: 'Cafe24Oneprettynight';
-	text-align: center;
+  font-size: 23px; 
+  font-weight: bold; 
+  color:#3a3a3a;
+  font-family: 'Cafe24Oneprettynight';
+  text-align: center;
 }
 
 #next-icon{
-	xmargin-left:300px;
+  xmargin-left:300px;
 }
 
 #prev-icon{
-	xmargin-right:500px;
+  xmargin-right:500px;
 }
 
 #carousel-indicators{
-	margin-top:400px;
+  margin-top:400px;
 
 .id{
 font-size: 15px; 
@@ -104,11 +104,11 @@ color:black;
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="10000">
      <h1> 와인 </h1>
-    <table id="border">
+    <table style="margin-left: 165px;"id="border">
     <c:forEach items="${rankingWine}" var="product">
      <td>
        <div class="wine_ranking" style="width:12rem">
-        <img align="middle" class="d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol6.jpg'" 
+        <img align="middle" class="d-block w-100" src = "../../upload/product/${product.photo}_300x300.jpg" onError="this.src='../../image/alcohol6.jpg'" 
         style="width:10rem; height:220px; padding:3px">
         <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
          <p class="c">${product.rate}</p>
@@ -121,11 +121,11 @@ color:black;
     </div>
     <div class="carousel-item" data-bs-interval="2000">
      <h1> 위스키 </h1>
-     <table id="border" >
+     <table style="margin-left: 165px;"id="border" >
        <c:forEach items="${rankingWhiskey}" var="product">
      <td>
       <div class="wiskey_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol5.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../upload/product/${product.photo}_300x300.jpg" onError="this.src='../../image/alcohol5.jpg'" 
         style="width:10rem; height:220px; padding:3px">
         <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
@@ -138,11 +138,11 @@ color:black;
       </div>
        <div class="carousel-item" data-bs-interval="2000">
         <h1> 브랜디/꼬냑 </h1>
-     <table id="border">
+     <table style="margin-left: 165px;"id="border">
        <c:forEach items="${rankingBrandy}" var="product">
      <td>
       <div class="brandy_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol7.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../upload/product/${product.photo}_300x300.jpg" onError="this.src='../../image/alcohol7.jpg'" 
         style="width:10rem; height:220px; padding:3px">
         <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
@@ -155,11 +155,11 @@ color:black;
       </div>
        <div class="carousel-item" data-bs-interval="2000">
         <h1> 리큐르/보드카 </h1>
-     <table id="border">
+     <table style="margin-left: 165px;"id="border">
        <c:forEach items="${rankingVodka}" var="product">
      <td>
       <div class="vodka_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../../image/ ${product.photo}.jpg" onError="this.src='../../image/alcohol9.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../upload/product/ ${product.photo}_300x300.jpg" onError="this.src='../../image/alcohol9.jpg'" 
         style="width:10rem; height:220px; padding:3px">
         <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
@@ -172,11 +172,11 @@ color:black;
       </div>
   <div class="carousel-item">
    <h1> 전통주 </h1>
-     <table id="border">
+     <table style="margin-left: 165px;"id="border">
        <c:forEach items="${rankingTrad}" var="product">
      <td>
       <div class="wiskey_ranking" style="width: 12rem">
-        <img align="middle" class = "d-block w-100" src = "../../image/${product.photo}.jpg" onError="this.src='../../image/alcohol8.jpg'" 
+        <img align="middle" class = "d-block w-100" src = "../../upload/product/${product.photo}_300x300.jpg" onError="this.src='../../image/alcohol8.jpg'" 
         style="width:10rem; height:220px; padding:3px">
         <h5><a href="../product/show?no=${product.productNumber}">${product.productName}</a></h5>
         <p class="c"> ${product.rate}</p>
