@@ -81,7 +81,28 @@
     where 
       name = #{name}
   </select>
-  
+  <select id="findByIdName" resultMap="MemberMap">
+    select 
+      member_no,
+      id,
+      authority,
+      name,
+      nickname,
+      email,
+      birthday,
+      photo,
+      phoneNumber,
+      registeredDate,
+      active,
+      level,
+      zipcode,
+      address,
+      detail_address
+    from 
+      member 
+    where 
+      name = #{name} and id = #{id}
+  </select>
   <update id="update" parameterType="member">
     update member set 
       password=password(#{password})

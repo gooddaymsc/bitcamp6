@@ -18,6 +18,7 @@ public class Member implements Serializable {
   private Date registeredDate;
   private int active;
   private int level;
+  private String phoneOrEmail;
   private boolean bookingUpdate;
   private boolean commentUpdate;
   private boolean MessageUpdate;
@@ -125,4 +126,11 @@ public class Member implements Serializable {
   public void setActive(int active) {
     this.active = active;
   }
+  public String getPhoneOrEmail() {
+    return phoneOrEmail;
+  }
+  public void setPhoneOrEmail(String phoneOrEmail) {
+    this.phoneOrEmail = phoneOrEmail;
+  }
+
 }
