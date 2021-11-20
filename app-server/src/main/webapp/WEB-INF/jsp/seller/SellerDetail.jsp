@@ -3,6 +3,7 @@
     trimDirectiveWhitespaces="true" %>
 
     <h1>개인정보 변경(판매자)</h1>
+      <a href='passwordForm' class="btn btn-outline-secondary btn-sm">비밀번호변경</a>
     <h5>* 필수 입력</h5>
     <form action='update' method='post' enctype="multipart/form-data">
       <div class="mb-3 row">

@@ -38,6 +38,34 @@ public class BuyerController {
     mv.setViewName("template2");
     return mv;
   }
+  @GetMapping("/buyer/passwordForm")
+  public ModelAndView passwordForm(HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
+    Buyer buyer = buyerDao.findById(member.getId());
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("buyer", buyer);
+    mv.addObject("pageTitle", "비밀번호 변경");
+    mv.addObject("contentUrl", "buyer/BuyerPassword.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
+
+  @PostMapping("/buyer/passwordResult")
+  public ModelAndView passwordResult(Member member, HttpSession session) throws Exception {
+    memberDao.update(member);
+    sqlSessionFactory.openSession().commit();
+
+    Member oldMember = (Member) session.getAttribute("loginUser");
+    Buyer buyer = buyerDao.findById(oldMember.getId());
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("buyer", buyer);
+    mv.addObject("pageTitle", "개인정보변경");
+    mv.addObject("contentUrl", "buyer/BuyerDetail.jsp");
+    mv.setViewName("template2");
+    return mv;
+  }
 
   @PostMapping("/buyer/add")
   public ModelAndView add(Buyer buyer, HttpServletRequest request, Part photoFile) throws Exception{
