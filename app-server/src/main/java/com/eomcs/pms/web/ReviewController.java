@@ -144,8 +144,8 @@ public class ReviewController {
     return null;
   }
 
-  @PostMapping("/product/review/update") // 아... 모르겠다!!!!
-  public ModelAndView update(int reviewNo, Review review) throws Exception {
+  @PostMapping("/product/review/update") 
+  public ModelAndView update(int reviewNo, Product product, Review review, HttpServletRequest request) throws Exception {
     Review oldReview = reviewDao.findByNo(reviewNo);
     System.out.println("review10000");
 
@@ -153,7 +153,12 @@ public class ReviewController {
       throw new Exception("해당 번호의 리뷰가 없습니다.");
     }
 
-    reviewDao.update(review);
+    oldReview.setScore(review.getScore());
+    oldReview.setComment(review.getComment());
+
+    reviewDao.update(oldReview);
+    product.setRate(reviewDao.avg(oldReview));
+    productDao.updateRate(product);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

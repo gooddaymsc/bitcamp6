@@ -37,9 +37,10 @@ public class MessageController {
   }
 
   @GetMapping("/message/form")
-  public ModelAndView form() {
+  public ModelAndView form(String id) {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "메시지작성");
+    mv.addObject("theOtherId", id);
     mv.addObject("contentUrl", "message/MessageForm.jsp");
     mv.setViewName("template2");
     return mv;
