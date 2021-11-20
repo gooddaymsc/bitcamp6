@@ -1,5 +1,6 @@
 package com.eomcs.pms.web;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +30,16 @@ public class CartController {
   @Autowired ServletContext sc;
 
   @GetMapping("/cart/form")
-  public ModelAndView form(int no) {
+  public ModelAndView form(int no, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("text/html; charset=UTF-8");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession(false);
+
+    if (session.getAttribute("loginUser") == null) {
+      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginForm'</script>");
+      out.flush();
+    }
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("stockNo", no);
     mv.addObject("pageTitle", "장바구니담기");

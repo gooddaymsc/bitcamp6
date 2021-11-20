@@ -197,7 +197,7 @@ public class BuyerController {
       sqlSessionFactory.openSession().commit();
 
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "개인정보변경");
+      mv.addObject("pageTitle", "개인정보 변경");
       mv.addObject("contentUrl", "main/MyPage.jsp");
       mv.setViewName("template2");
       return mv;
@@ -205,11 +205,12 @@ public class BuyerController {
     } else if (loginUser.getAuthority() == 8) {
       oldBuyer.setMember(member);
 
-      buyerDao.update(oldBuyer);
+      buyerDao.updateLevel(oldBuyer);
       sqlSessionFactory.openSession().commit();
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "개인정보변경");
-      mv.setViewName("redirect:list");
+      mv.addObject("pageTitle", "등급 변경");
+      mv.addObject("contentUrl", "main/MyPage.jsp");
+      //      mv.setViewName("redirect:list");
       mv.setViewName("template2");
       return mv;
     }

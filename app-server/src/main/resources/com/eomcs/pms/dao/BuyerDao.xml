@@ -91,6 +91,13 @@ select
       member_no=#{member.number}
   </update>
   
+  <update id="updateLevel" parameterType="buyer">
+    update member set 
+      level=#{member.level}
+    where 
+      member_no=#{member.number}
+  </update>
+  
   
   <delete id="delete" parameterType="int">
     update member set 

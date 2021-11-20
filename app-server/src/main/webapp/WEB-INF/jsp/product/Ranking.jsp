@@ -93,16 +93,36 @@
       margin-bottom: 10px;
   
   }
-  
+  .best {
+  float:left;
+  text-align:center;
+  }
 </style>
 
 <h1> Ranking </h1>
 <body>
 <br>
+  <div class="best row">
+	  <div class="col-sm">
+	  Best1
+	  </div>
+	  <div class="col-sm">
+	  Best2
+	  </div>
+	  <div class="col-sm">
+	  Best3
+	  </div>
+	  <div class="col-sm">
+	  Best4
+	  </div>
+	  <div class="col-sm">
+	  Best5
+	  </div>
+
   <div class="ranking_container row">
     <c:forEach items="${productList}" var="product">
-      <div class="ranking col-sm">
-      <h2 id ="best_label">Best${product.productNumber}</h2>
+      <div class="ranking col-sm"><%-- 
+      <h2 id ="best_label">Best${product.productNumber}</h2> --%>
         <img align="middle" class="image" src="../../upload/product/${product.photo}_300x300.jpg">
         <p class="productName">
         <a href="show?no=${product.productNumber}">${product.productName}</a>
@@ -115,7 +135,7 @@
       </div>
     </c:forEach>
 </div>
-
+</div>
 <script>
   document.querySelectorAll(".productName").forEach((aTag) => {
     aTag.onclick = () => false;

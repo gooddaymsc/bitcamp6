@@ -89,9 +89,9 @@
   </select>
   
   <update id="updateLevel" parameterType="member">
-  update member set
-    level=#{level}
-      where 
+    update member set
+      level=#{level}
+    where 
       member_no=#{number}
   </update>
   
