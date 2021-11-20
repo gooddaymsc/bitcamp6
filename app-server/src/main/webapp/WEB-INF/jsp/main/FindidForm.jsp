@@ -20,10 +20,17 @@
     cursor: pointer; 
     outline: none; 
   }  
+  
+  .btn-sm {
+  width:50px;
+  margin-right:400px;
+  }
+  
 </style>
 <body>
 <main id="main-holder">
-
+<a href='loginForm' class="btn btn-outline-secondary btn-sm">이전</a>
+  
 <h1>아이디찾기 <img src="../../image/icons/004-magnifying-glass.png"></h1>
 
 <form action='findidResult' method="post">

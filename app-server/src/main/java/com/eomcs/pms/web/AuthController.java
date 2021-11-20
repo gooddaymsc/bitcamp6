@@ -41,7 +41,7 @@ public class AuthController {
       mv.addObject("refresh", "2;url=login");
       mv.addObject("pageTitle", "로그인오류!");
       mv.addObject("contentUrl", "main/LoginError.jsp");
-      mv.setViewName("template1");
+      mv.setViewName("template3");
     }
     return mv;
   }
