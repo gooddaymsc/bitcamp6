@@ -3,6 +3,8 @@
     trimDirectiveWhitespaces="true" %>
 
     <h1>개인정보 변경(구매자)</h1>
+      <a href='passwordForm' class="btn btn-outline-secondary btn-sm">비밀번호변경</a>
+    
     <h5>* 필수 입력</h5>
     <form action='update' method='post' enctype="multipart/form-data">
       <div class="mb-3 row">
@@ -107,9 +109,9 @@
             value="${buyer.member.registeredDate}">
         </div>
       </div>
-      <button class="btn btn-outline-success">변경</button>
-      <a href='../main/myPage' class="btn btn-outline-success">이전</a>
+      <button class="btn btn-outline-secondary btn-sm">변경</button>
+      <a href='../main/myPage' class="btn btn-outline-secondary btn-sm">이전</a>
       <%-- <a href='passwordDetail?id=${buyer.member.id}' class="btn btn-outline-success">암호변경</a> --%>
-      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-outline-success">탈퇴하기</a>
+      <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-outline-secondary btn-sm">탈퇴하기</a>
     </form>
     
