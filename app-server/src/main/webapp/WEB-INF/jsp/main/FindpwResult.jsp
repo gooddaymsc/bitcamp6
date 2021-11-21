@@ -38,7 +38,7 @@
   
 <br><br>
 <button class="btn btn-primary btn-sm" id="findpw-submit" > 비밀번호 변경 </button>
- <a href="./loginMenu">로그인</a>
+ <a href="./loginForm">로그인</a>
  <a href="./findidMenu">아이디찾기</a>
 
 </form>

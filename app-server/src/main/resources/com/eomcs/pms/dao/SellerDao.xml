@@ -100,7 +100,7 @@
     update member set 
       nickname=#{nickname},
       email=#{email},
-      password=password(#{password}), 
+<!--       password=password(#{password}),  -->
       photo=#{photo},
       phoneNumber=#{phoneNumber} 
     where 

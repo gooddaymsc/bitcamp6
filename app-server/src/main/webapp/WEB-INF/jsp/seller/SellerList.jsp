@@ -16,6 +16,8 @@ tr:hover {
 </style>
 
     <h1>회원 목록(판매자)</h1>
+    
+<a href='../main/myPage' class="btn btn-outline-secondary btn-sm">이전</a>
     <table class="table table-hover">
       <thead>
         <tr>

@@ -1,6 +1,7 @@
 package com.eomcs.pms.web;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,8 +48,9 @@ public class AuthController {
   }
 
   @GetMapping("logout")
-  public ModelAndView logout(HttpSession session) throws Exception {
+  public ModelAndView logout(HttpSession session, HttpServletRequest request) throws Exception {
     session.invalidate();
+    request.getSession(true);
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:loginForm");
     return mv;

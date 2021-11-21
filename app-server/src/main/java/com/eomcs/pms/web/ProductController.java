@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.pms.dao.ProductDao;
 import com.eomcs.pms.dao.ReviewDao;
+import com.eomcs.pms.dao.StockDao;
 import com.eomcs.pms.domain.Product;
 import com.eomcs.pms.domain.ProductType;
 import com.eomcs.pms.domain.Review;
@@ -26,6 +27,7 @@ public class ProductController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired ProductDao productDao;
+  @Autowired StockDao stockDao;
   @Autowired ReviewDao reviewDao;
   @Autowired ServletContext sc;
 
@@ -170,10 +172,13 @@ public class ProductController {
   @GetMapping("/product/delete")
   public ModelAndView delete(int no) throws Exception {
     Product product = productDao.findByNo(no);
+
     if (product == null) {
       throw new Exception("해당 번호의 상품이 없습니다.");
     }  
 
+    stockDao.delete2(product.getProductNumber());
+    reviewDao.delete2(product.getProductNumber());
     productDao.delete(product);
     sqlSessionFactory.openSession().commit();
 

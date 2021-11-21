@@ -30,7 +30,7 @@
       <div class="mb-3 row">
         <label for='f-name' class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-6">
-          <input id='f-name' type='text' name='name' class="form-control" value='${buyer.member.name}' readonly><br>
+          <input id='f-name' type='text' name='member.name' class="form-control" value='${buyer.member.name}' readonly><br>
         </div>
       </div>
       <div class="mb-3 row">
@@ -61,7 +61,7 @@
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
           <a href="../upload/buyer/${buyer.member.photo}" >
-            <img id="f-photo-image" src="../upload/buyer/${buyer.member.photo}_100x100.jpg" onError="this.src='../image/profile.png'" 
+            <img id="f-photo-image" src="../upload/buyer/${buyer.member.photo}_100x100.jpg" onError="this.src='../../image/profile.png'" 
         style="width:10rem; height:200px; padding:3px">
           </a>
           <input id='f-photo' type='file' name='photoFile' class="form-control"><br>
@@ -112,3 +112,4 @@
       <%-- <a href='passwordDetail?id=${buyer.member.id}' class="btn btn-outline-success">암호변경</a> --%>
       <a href='delete?id=${buyer.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-outline-success">탈퇴하기</a>
     </form>
+    

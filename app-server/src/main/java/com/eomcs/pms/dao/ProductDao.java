@@ -18,6 +18,7 @@ public interface ProductDao {
   void update(Product product) throws Exception;
   void updateRate(Product product) throws Exception;
   void delete(Product product) throws Exception;
+  void delete2(int no) throws Exception;
   List<ProductType> findAllProductType() throws Exception;
   List<Product> ranking() throws Exception;
   List<Product> rankingType(@Param("input")String input) throws Exception;

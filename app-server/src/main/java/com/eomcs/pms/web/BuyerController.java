@@ -94,8 +94,8 @@ public class BuyerController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("refresh", "2;url=list");
     mv.addObject("buyer", buyer);
+    mv.addObject("refresh", "2;url=list");
     mv.addObject("pageTitle", "회원가입(구매자)");
     mv.addObject("contentUrl", "buyer/BuyerAdd.jsp");
     mv.setViewName("template2");
@@ -141,6 +141,7 @@ public class BuyerController {
   }
 
   @PostMapping("/buyer/update")
+
   public ModelAndView update(Buyer buyer, Member member, Part photoFile, HttpServletRequest request) throws Exception {
 
     HttpSession session = request.getSession(false);
@@ -197,9 +198,10 @@ public class BuyerController {
       sqlSessionFactory.openSession().commit();
 
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "개인정보 변경");
-      mv.addObject("contentUrl", "main/MyPage.jsp");
+      //      mv.addObject("pageTitle", "개인정보 변경");
+      //      mv.addObject("contentUrl", "main/MyPage.jsp");
       mv.setViewName("template2");
+      mv.setViewName("redirect:detail");
       return mv;
 
     } else if (loginUser.getAuthority() == 8) {
@@ -208,10 +210,8 @@ public class BuyerController {
       buyerDao.updateLevel(oldBuyer);
       sqlSessionFactory.openSession().commit();
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "등급 변경");
-      mv.addObject("contentUrl", "main/MyPage.jsp");
-      //      mv.setViewName("redirect:list");
       mv.setViewName("template2");
+      mv.setViewName("redirect:list");
       return mv;
     }
     return null;
@@ -219,12 +219,11 @@ public class BuyerController {
   }
 
   @GetMapping("/buyer/delete")
-  public ModelAndView delete(String id) throws Exception {
+  public ModelAndView delete(String id, HttpServletRequest request) throws Exception {
 
     //    if (session.getAttribute("loginUser") == null) {
     //      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
     //      out.flush();
-    //      return;
     //    }
 
     Buyer buyer = buyerDao.findById(id);
@@ -236,7 +235,11 @@ public class BuyerController {
     buyerDao.delete(buyer.getMember().getNumber());
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
+    ModelAndView mv = new ModelAndView();  
+    HttpSession loginUser = request.getSession();
+    loginUser.setAttribute("loginUser", null);
+    loginUser.invalidate();
+    request.getSession(true);
     mv.addObject("contentUrl", "main/LoginForm.jsp");
     mv.setViewName("template3");
     return mv;

@@ -59,6 +59,7 @@ a {
     text-decoration: none;
     color: black;
 }
+
  button {
   position: relative; 
   z-index:10;
@@ -75,6 +76,7 @@ display:inline-block;
 }
 
 #find-product { 
+    z-index:2;
     float:right;
     margin-right: 25%;
     margin-top: 350px;
@@ -89,8 +91,6 @@ display:inline-block;
     cursor: pointer; 
     outline: none; 
   } 
-
-
 </style>
 
 <img id="f-photo-image" src="../../upload/product/${product.photo}_1000x1000.jpg" 
@@ -143,27 +143,28 @@ display:inline-block;
 </div>
 
 
-<%-- <button type="button" onclick="location.href='listType?type=${product.productType.type}'" class="btn btn-outline-success">목록</button> --%>
+   <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+
 <button type="button" onclick="location.href='list'" class="btn btn-outline-secondary btn-sm">목록</button>
 
 <c:choose> 
-  <c:when test="${loginUser.authority eq 8}">
+<%--   <c:when test="${not empty loginUser}">
+ <div>
+   <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+   </div>
+  </c:when>  --%>
+  <c:when test="${loginUser.authority eq 2}">
   <div>
-    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+     <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">장바구니등록</button>
   </div>
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
   <div>
   <button type="button" onclick="btn_add(${product.productNumber})" class="btn btn-outline-secondary btn-sm" >재고등록</button>
-  <button type="button"  onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
-  </div>
+  <%-- <button type="button"  onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+  --%> </div>
   </c:when>
-  <c:when test="${loginUser.authority eq 2}">
-  <div>
-    <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">장바구니등록</button>
-  </div>
-  </c:when>
-</c:choose>
+</c:choose> 
 </form><br>
 
 <h4><i class="far fa-star"></i>최근 리뷰<i class="far fa-star"></i></h4>
@@ -193,6 +194,8 @@ document.ex_form.target_name.value = "100";
 return rate;
 }
 </script>
+
+
 <script>
 function btn_add(no){
 	var xhr = new XMLHttpRequest();

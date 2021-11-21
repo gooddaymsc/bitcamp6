@@ -14,7 +14,7 @@ button {
 
 </style>
 <h1>장바구니 상세</h1>
-<img id="f-photo-image" src="../upload/product/${cart.stock.product.photo}_1000x1000.jpg" 
+<img id="f-photo-image" src="../../upload/product/${cart.stock.product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="450px" >
         
   <form action='update' method='post'>

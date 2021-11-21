@@ -41,7 +41,6 @@ public class SellerController {
 
   @PostMapping("/seller/add")
   public ModelAndView add(Seller seller, HttpServletRequest request, Part photoFile) throws Exception {
-
     Member member = new Member();
     member.setAuthority(4);
     member.setId(request.getParameter("id"));
@@ -51,7 +50,6 @@ public class SellerController {
     member.setBirthday(Date.valueOf(request.getParameter("birthday")));
     member.setPassword(request.getParameter("password"));
     member.setPhoneNumber(request.getParameter("phoneNumber"));
-    System.out.println("baddd");
 
     if (photoFile.getSize() > 0) {
       System.out.println("gooood");
@@ -100,14 +98,10 @@ public class SellerController {
   }
 
   @GetMapping("/seller/detail")
-  public ModelAndView detail(String id, HttpServletRequest request) throws Exception {
+  public ModelAndView detail(String id, HttpSession session) throws Exception {
     String page = "";
-
-    Member member = (Member) request.getSession(false).getAttribute("loginUser");
-
+    Member member = (Member)session.getAttribute("loginUser");
     Seller seller = sellerDao.findById(id);
-
-    System.out.println(seller);
 
     if (seller == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
@@ -128,10 +122,9 @@ public class SellerController {
   }
 
   @PostMapping("/seller/update")
-  public ModelAndView update(Seller seller, Part photoFile, HttpServletRequest request) throws Exception {
+  public ModelAndView update(Seller seller, Member member, Part photoFile, HttpServletRequest request) throws Exception {
 
-    HttpSession session = request.getSession(false);
-    Member loginUser = (Member) session.getAttribute("loginUser");
+    Member loginUser = (Member) request.getSession(false).getAttribute("loginUser");
 
     Seller oldSeller = sellerDao.findById(seller.getMember().getId());
 
@@ -139,15 +132,36 @@ public class SellerController {
       throw new Exception("해당 아이디의 회원이 없습니다.");
     }
 
+    //    if (member.getId().equals(oldSeller.getMember().getId())) {
     if (loginUser.getId().equals(seller.getMember().getId())) {
+
+      seller.getMember().setNickname(oldSeller.getMember().getNickname());
+      seller.getMember().setEmail(oldSeller.getMember().getEmail());
+      seller.getMember().setPassword(oldSeller.getMember().getPassword());
+      seller.getMember().setPhoneNumber(oldSeller.getMember().getPhoneNumber());
+      seller.getMember().setPhoto(oldSeller.getMember().getPhoto());
+
+      oldSeller.setMember(member);
 
       if (photoFile.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
 
         seller.getMember().setPhoto(filename);
+        oldSeller.setMember(member);
 
         Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
+
+        Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
         .size(100, 100)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -157,47 +171,39 @@ public class SellerController {
             return name + "_100x100";
           }
         });
-
-        Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
-        .size(1000, 1000)
-        .outputFormat("jpg")
-        .crop(Positions.CENTER)
-        .toFiles(new Rename() {
-          @Override
-          public String apply(String name, ThumbnailParameter param) {
-            return name + "_1000x1000";
-          }
-        });
-
-        seller.getMember().setPhoto(filename);
+        //        seller.getMember().setPhoto(filename);
       }
+      //        }
       sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSessionFactory.openSession().commit();
 
       ModelAndView mv = new ModelAndView();
-      mv.setViewName("redirect:list");
-      return mv;
-
-
-    } else if (loginUser.getAuthority() == 8) {
-      sellerDao.update(seller.getMember());
-      sellerDao.updateSeller(seller);
-      sqlSessionFactory.openSession().commit();
-      ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "개인정보변경");
-      mv.setViewName("redirect:list");
+      //      mv.addObject("contentUrl", "main/MyPage.jsp");
       mv.setViewName("template2");
+      mv.setViewName("redirect:detail");
+      return mv;
+    } else if (loginUser.getAuthority() == 8) {
+      oldSeller.setMember(member);
+      //seller.getMember().setLevel(Integer.parseInt(oldSeller.getMember().getLevel());
+      sellerDao.updateLevel(seller.getMember());
+      sellerDao.updateSeller(seller);
+      sqlSessionFactory.openSession().commit();
+      ModelAndView mv = new ModelAndView();
+
+      mv.addObject("pageTitle", "등급 변경");
+      mv.setViewName("template2");
+      mv.setViewName("redirect:list");
       return mv;
     }
     return null;
   }
 
   @GetMapping("/seller/delete")
-  public ModelAndView delete(String id) throws Exception {
+  public ModelAndView delete(String id, HttpServletRequest request) throws Exception {
     Seller seller = sellerDao.findById(id);
     if (seller == null) {
-      throw new Exception("해당 번호의 회원이 없습니다.");
+      throw new Exception("해당 아이디의 회원이 없습니다.");
     }  
 
     sellerDao.delete(seller.getMember().getNumber());
@@ -205,6 +211,10 @@ public class SellerController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
+    HttpSession loginUser = request.getSession();
+    loginUser.setAttribute("loginUser", null);
+    loginUser.invalidate();
+    request.getSession(true);
     mv.addObject("contentUrl", "main/LoginForm.jsp");
     mv.setViewName("template3");
     return mv;

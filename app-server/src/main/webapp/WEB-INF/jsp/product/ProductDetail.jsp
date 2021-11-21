@@ -108,6 +108,6 @@ button {
 </div>
 
   <button type="button" onclick="location.href='list'" class="btn btn-outline-success">목록</button>
-  <button type="button" onclick="location.href='delete?no=${product.productNumber}'" class="btn btn-outline-success">삭제</button>
+<%--   <button type="button" onclick="location.href='delete?no=${product.productNumber}'" class="btn btn-outline-success">삭제</button> --%>
   <button class="btn btn-outline-success">변경</button>
 </form>
