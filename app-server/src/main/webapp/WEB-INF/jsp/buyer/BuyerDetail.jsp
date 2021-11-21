@@ -62,8 +62,8 @@
       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
-          <a href="../upload/buyer/${buyer.member.photo}" >
-            <img id="f-photo-image" src="../upload/buyer/${buyer.member.photo}_100x100.jpg" onError="this.src='../image/profile.png'" 
+          <a href="${contextPath}/upload/buyer/${buyer.member.photo}" >
+            <img id="f-photo-image" src="${contextPath}/upload/buyer/${buyer.member.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/buyer/profile.png'" 
         style="width:10rem; height:200px; padding:3px">
           </a>
           <input id='f-photo' type='file' name='photoFile' class="form-control"><br>

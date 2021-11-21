@@ -92,8 +92,6 @@ public class BuyerController {
       member.setPhoto(filename);
       buyer.setMember(member);
 
-      System.out.println(3333);
-
       Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
       .size(20, 20)
       .outputFormat("jpg")
@@ -101,7 +99,7 @@ public class BuyerController {
       .toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
-          return name + "_20x20";
+          return name + "_50x50";
         }
       });
 
@@ -207,7 +205,7 @@ public class BuyerController {
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_20x20";
+            return name + "_50x50";
           }
         });
 
@@ -221,14 +219,14 @@ public class BuyerController {
             return name + "_100x100";
           }
         });
+      } else {
+        buyer.getMember().setPhoto(oldBuyer.getMember().getPhoto());
       }
       buyerDao.update(oldBuyer);
       sqlSessionFactory.openSession().commit();
 
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "개인정보변경");
-      mv.addObject("contentUrl", "main/MyPage.jsp");
-      mv.setViewName("template2");
+      mv.setViewName("redirect:../main/myPage");
       return mv;
 
     } else if (loginUser.getAuthority() == 8) {

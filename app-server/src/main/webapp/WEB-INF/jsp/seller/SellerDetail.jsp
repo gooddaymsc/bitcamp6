@@ -66,8 +66,8 @@
       <div class="mb-3 row">
         <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <div class="col-sm-6">
-          <a href="../upload/seller/${seller.member.photo}" >
-              <img id="f-photo-image" src="../upload/seller/${seller.member.photo}_100x100.jpg" onError="this.src='../image/profile.png'"
+          <a href="${contextPath}/upload/seller/${seller.member.photo}" >
+              <img id="f-photo-image" src="${contextPath}/upload/seller/${seller.member.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/seller/profile.png'"
      style="width:10rem; height:200px; padding:3px">
           </a>
           <input id='f-photo' type='file' name='photoFile' class="form-control"><br>
@@ -136,8 +136,8 @@
             value="${seller.member.registeredDate}" readonly>
         </div>
       </div>
-      <button class="btn btn-outline-success">변경</button>
-      <a href='../main/myPage' class="btn btn-outline-success">이전</a>
+      <button class="btn btn-outline-secondary btn-sm">변경</button>
+      <a href='../main/myPage' class="btn btn-outline-secondary btn-sm">이전</a>
       <%-- <a href='passwordDetail?id=${seller.member.id}' class="btn btn-outline-success">암호변경</a> --%>
-      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-outline-success">탈퇴하기</a>
+      <a href='delete?id=${seller.member.id}' onclick="return confirm('정말 탈퇴하시겠습니까?');" class="btn btn-outline-secondary btn-sm">탈퇴하기</a>
     </form>

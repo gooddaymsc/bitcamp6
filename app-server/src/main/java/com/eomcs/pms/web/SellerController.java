@@ -78,14 +78,23 @@ public class SellerController {
     member.setBirthday(Date.valueOf(request.getParameter("birthday")));
     member.setPassword(request.getParameter("password"));
     member.setPhoneNumber(request.getParameter("phoneNumber"));
-    System.out.println("baddd");
 
     if (photoFile.getSize() > 0) {
-      System.out.println("gooood");
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
       member.setPhoto(filename);
       seller.setMember(member);
+
+      Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_50x50";
+        }
+      });
 
       Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
       .size(1000, 1000)
@@ -94,7 +103,7 @@ public class SellerController {
       .toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
-          return name + "_1000x1000";
+          return name + "_100x100";
         }
       });
     }
@@ -127,10 +136,10 @@ public class SellerController {
   }
 
   @GetMapping("/seller/detail")
-  public ModelAndView detail(String id, HttpServletRequest request) throws Exception {
+  public ModelAndView detail(String id, HttpSession session) throws Exception {
     String page = "";
 
-    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+    Member member = (Member) session.getAttribute("loginUser");
 
     Seller seller = sellerDao.findById(id);
 
@@ -181,29 +190,31 @@ public class SellerController {
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_100x100";
+            return name + "_50x50";
           }
         });
 
-        Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
+        Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
         .size(1000, 1000)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_1000x1000";
+            return name + "_100x100";
           }
         });
 
         seller.getMember().setPhoto(filename);
+      } else {
+        seller.getMember().setPhoto(oldSeller.getMember().getPhoto());
       }
       sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSessionFactory.openSession().commit();
 
       ModelAndView mv = new ModelAndView();
-      mv.setViewName("redirect:list");
+      mv.setViewName("redirect:../main/myPage");
       return mv;
 
 
