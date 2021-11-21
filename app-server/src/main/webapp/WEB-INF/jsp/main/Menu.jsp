@@ -25,7 +25,6 @@ tr a:visited {
 tr:hover {
     cursor: pointer;
 }
-
 h1{
   font-size: 25px; 
   font-weight: bold; 
@@ -33,7 +32,6 @@ h1{
   text-align: center;
   margin-right:30px;
 }
-
 .b{
   margin-top:30px;
   font-size: 35px; 
@@ -49,49 +47,39 @@ h1{
   font-family: 'Cafe24Oneprettynight';
   text-align: center;
 }
-
 #next-icon{
   xmargin-left:300px;
 }
-
 #prev-icon{
   xmargin-right:500px;
 }
-
 #carousel-indicators{
   margin-top:400px;
-
 .id{
 font-size: 15px; 
 font-weight: bold; 
 color:black;
 }
-
 #border{
   margin-left: 115px;
   margin-top: 30px;
 }
-
-.root_daum_roughmap { 
+/* .root_daum_roughmap { 
   margin: auto !important; 
   background-color:yellow;
   border: 4px solid #14148C;
   height:500px;
+  margin-left: 200px;
   z-index:-2;
-}
+} */
 
-#map {
-  background-color:red;
-  border: 4px solid #14148C;
-  height:500px;
-  z-index:-2;
-}
 </style>
 
 </head>
 <body>
 
 <div class = 'container-ranking' >
+<!-- 랭킹 -->
 <h1 class='b'> Top Lists </h1>
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -188,6 +176,7 @@ color:black;
   </table>   
       </div>
   </div>
+
   <br>
   <br>
   <button class="carousel-control-prev" id="prev-icon" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
@@ -200,14 +189,13 @@ color:black;
   </button>
 </div>
 </div>
- 
+  
 
 <script>
 <!-- d.card div.card-->
 document.querySelectorAll("table a").forEach((aTag) => {
   aTag.onclick = () => false;
 });
-
 var trList = document.querySelectorAll("table div"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
@@ -219,21 +207,5 @@ trList.forEach(function(trTag) {
 });
 </script>
 
-
-<!-- 1. 약도 노드 -->
-<div id="daumRoughmapContainer1637139287479" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-
-<!-- 2. 설치 스크립트 -->
-<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-
-<!-- 3. 실행 스크립트 -->
-<script charset="UTF-8">
-  new daum.roughmap.Lander({
-    "timestamp" : "1637139287479",
-    "key" : "28476",
-    "mapWidth" : "640",
-    "mapHeight" : "360",
-  }).render();
-</script>
 </body> 
 </html>

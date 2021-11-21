@@ -47,7 +47,7 @@
     xbackground-color: #f2f8fc;
     z-index: -1;
 
-  }
+  } 
 
   
 </style>
