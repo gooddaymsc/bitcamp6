@@ -8,7 +8,6 @@
 	    height: 100%
 	    margin: 0; 
 	    font-family: Arial, Helvetica, sans-serif; 
-	    display: grid; justify-items: center; 
 	    align-items: center; 
 	    min-width:80%; 
 	  }  
@@ -77,8 +76,7 @@
     border: 2px solid lightgray;
     border-radius: 18px; 
   }
-   
-  
+
 .comment-set {
   position : relative;
   left : 60px;
@@ -234,7 +232,7 @@ xfloat: right;
 <div class="html-board">
 <br>
 <h2>게시판</h2>
-<h6>게시글보기</h6>
+<h7>게시글보기</h7>
 </div>
 <div class="board-menu">
   <c:choose> 

@@ -71,11 +71,8 @@ aside {
 }
 
 footer {
-	xposition: absolute;
-	xbackground: linear-gradient(#988DB3 15%, #D7D7EA 85%);
 	background: linear-gradient(#988DB3 15%, #D7D7EA 85%);
   width:100%;
-  xmargin-top:105px;
   right: 0;
   clear: left; 
   *position:fixed;
