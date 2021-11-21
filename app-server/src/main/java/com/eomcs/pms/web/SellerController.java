@@ -68,6 +68,7 @@ public class SellerController {
   }
   @PostMapping("/seller/add")
   public ModelAndView add(Seller seller, HttpServletRequest request, Part photoFile) throws Exception {
+
     Member member = new Member();
     member.setAuthority(4);
     member.setId(request.getParameter("id"));
@@ -79,11 +80,21 @@ public class SellerController {
     member.setPhoneNumber(request.getParameter("phoneNumber"));
 
     if (photoFile.getSize() > 0) {
-      System.out.println("gooood");
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
       member.setPhoto(filename);
       seller.setMember(member);
+
+      Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_50x50";
+        }
+      });
 
       Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
       .size(1000, 1000)
@@ -92,7 +103,7 @@ public class SellerController {
       .toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
-          return name + "_1000x1000";
+          return name + "_100x100";
         }
       });
     }
@@ -127,8 +138,12 @@ public class SellerController {
   @GetMapping("/seller/detail")
   public ModelAndView detail(String id, HttpSession session) throws Exception {
     String page = "";
-    Member member = (Member)session.getAttribute("loginUser");
+
+    Member member = (Member) session.getAttribute("loginUser");
+
     Seller seller = sellerDao.findById(id);
+
+    System.out.println(seller);
 
     if (seller == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
@@ -149,9 +164,10 @@ public class SellerController {
   }
 
   @PostMapping("/seller/update")
-  public ModelAndView update(Seller seller, Member member, Part photoFile, HttpServletRequest request) throws Exception {
+  public ModelAndView update(Seller seller, Part photoFile, HttpServletRequest request) throws Exception {
 
-    Member loginUser = (Member) request.getSession(false).getAttribute("loginUser");
+    HttpSession session = request.getSession(false);
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
     Seller oldSeller = sellerDao.findById(seller.getMember().getId());
 
@@ -159,37 +175,27 @@ public class SellerController {
       throw new Exception("해당 아이디의 회원이 없습니다.");
     }
 
-    //    if (member.getId().equals(oldSeller.getMember().getId())) {
     if (loginUser.getId().equals(seller.getMember().getId())) {
-
-      seller.getMember().setNickname(oldSeller.getMember().getNickname());
-      seller.getMember().setEmail(oldSeller.getMember().getEmail());
-      seller.getMember().setPassword(oldSeller.getMember().getPassword());
-      seller.getMember().setPhoneNumber(oldSeller.getMember().getPhoneNumber());
-      seller.getMember().setPhoto(oldSeller.getMember().getPhoto());
-
-      oldSeller.setMember(member);
 
       if (photoFile.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
 
         seller.getMember().setPhoto(filename);
-        oldSeller.setMember(member);
 
         Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
-        .size(20, 20)
+        .size(100, 100)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
         .toFiles(new Rename() {
           @Override
           public String apply(String name, ThumbnailParameter param) {
-            return name + "_20x20";
+            return name + "_50x50";
           }
         });
 
-        Thumbnails.of(sc.getRealPath("/upload/product") + "/" + filename)
-        .size(100, 100)
+        Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+        .size(1000, 1000)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
         .toFiles(new Rename() {
@@ -198,27 +204,27 @@ public class SellerController {
             return name + "_100x100";
           }
         });
-        //        seller.getMember().setPhoto(filename);
+
+        seller.getMember().setPhoto(filename);
+      } else {
+        seller.getMember().setPhoto(oldSeller.getMember().getPhoto());
       }
-      //        }
       sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSessionFactory.openSession().commit();
 
       ModelAndView mv = new ModelAndView();
-      //      mv.addObject("contentUrl", "main/MyPage.jsp");
-      mv.setViewName("template2");
-      mv.setViewName("redirect:detail");
+      mv.setViewName("redirect:../main/myPage");
       return mv;
+
+
     } else if (loginUser.getAuthority() == 8) {
-      oldSeller.setMember(member);
-      //seller.getMember().setLevel(Integer.parseInt(oldSeller.getMember().getLevel());
-      sellerDao.updateLevel(seller.getMember());
+      sellerDao.update(seller.getMember());
       sellerDao.updateSeller(seller);
       sqlSessionFactory.openSession().commit();
       ModelAndView mv = new ModelAndView();
 
-      mv.addObject("pageTitle", "등급 변경");
+      mv.addObject("pageTitle", "등급변경");
       mv.setViewName("template2");
       mv.setViewName("redirect:list");
       return mv;
@@ -246,5 +252,4 @@ public class SellerController {
     mv.setViewName("template3");
     return mv;
   }
-
 }
