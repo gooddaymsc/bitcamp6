@@ -51,7 +51,7 @@ left:750px;
 <h1>예약 상세보기</h1><h5>상품명 : ${booking.cart.stock.product.productName}</h5>
 <div class='booking-all'>
 <div class='booking-img'>
-<img id="f-photo-image" src="../upload/product/${booking.cart.stock.product.photo}_1000x1000.jpg" 
+<img id="f-photo-image" src="../../upload/product/${booking.cart.stock.product.photo}_1000x1000.jpg" 
         align="left" width="300px" height="450px" >
 </div>   
 <form action='update' method='post'>

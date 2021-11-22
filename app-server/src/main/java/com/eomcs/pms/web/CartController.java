@@ -33,10 +33,14 @@ public class CartController {
   public ModelAndView form(int no, HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
-    HttpSession session = request.getSession(false);
 
-    if (session.getAttribute("loginUser") == null) {
+    Member member = (Member) request.getSession(false).getAttribute("loginUser");
+
+    if (member == null) {
       out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginForm'</script>");
+      out.flush();
+    } else if (member.getAuthority() == 4) {
+      out.printf("<script>alert('판매자는 장바구니 사용이 불가합니다.'); location.href='../main/menu'</script>");
       out.flush();
     }
 

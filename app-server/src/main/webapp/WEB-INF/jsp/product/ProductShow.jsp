@@ -143,16 +143,14 @@ display:inline-block;
 </div>
 
 
-   <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
-
 <button type="button" onclick="location.href='list'" class="btn btn-outline-secondary btn-sm">목록</button>
 
 <c:choose> 
-<%--   <c:when test="${not empty loginUser}">
+  <c:when test="${loginUser.authority eq 8}">
  <div>
    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
    </div>
-  </c:when>  --%>
+  </c:when> 
   <c:when test="${loginUser.authority eq 2}">
   <div>
      <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">장바구니등록</button>
@@ -161,8 +159,8 @@ display:inline-block;
   <c:when test="${loginUser.authority eq 4}">
   <div>
   <button type="button" onclick="btn_add(${product.productNumber})" class="btn btn-outline-secondary btn-sm" >재고등록</button>
-  <%-- <button type="button"  onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
-  --%> </div>
+   <button type="button"  onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+  </div>
   </c:when>
 </c:choose> 
 </form><br>

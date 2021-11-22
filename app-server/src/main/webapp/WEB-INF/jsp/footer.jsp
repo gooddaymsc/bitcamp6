@@ -37,7 +37,7 @@ style attribute {
 
 <li><ul><li>
 <div data-is-vacant="no" style="padding-top:40px;  padding-left:40px; float:left;">
-<div data-text-editable="true" style="text-align: left; font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);">
+<div data-text-editable="true" style="/* text-align: left; */ font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);">
 <p><span style="font-weight: 300; color: rgb(255, 255, 255);">LOCATION</span></p></div>
 <div data-text-editable="true" style="font-family: Nanum Gothic; font-size: 12px; color: rgb(142, 142, 142);" class=""><p>&nbsp;</p>
 <p><span style="color: rgb(164, 164, 164);">경기도 성남시 분당구 대왕판교로 670</span></p>
@@ -49,7 +49,7 @@ style attribute {
 
 <li><ul><li>
 <div data-is-vacant="no" style="padding-top:40px;  padding-left:80px; float:left;">
-<div data-text-editable="true" style="text-align: left; font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);">
+<div data-text-editable="true" style="/* text-align: left; */ font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);">
 <p><span style="font-weight: 300; color: rgb(255, 255, 255);">CUSTOMER</span></p></div>
 <div data-text-editable="true" style="font-family: Lato; font-size: 13px; color: rgb(142, 142, 142);" class="">
 <p>&nbsp;</p><p><span style="font-weight: 300;">T. 82-1544-3270</span></p>
@@ -59,7 +59,7 @@ style attribute {
 
 <li><ul><li>
 <div data-is-vacant="no" style="padding-top:40px;  padding-left:100px;">
-<div data-text-editable="true" style="text-align: left; font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);" >
+<div data-text-editable="true" style="/* text-align: left; */ font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);" >
 <p><span style="font-weight: 300; color: rgb(255, 255, 255);">SNS</span></p></div>
 <div data-text-editable="true" style="font-family: Lato; font-size: 13px; color: rgb(142, 142, 142);" class=""><p>&nbsp;</p>
 <p>Instgram</p><p>Facebook</p><p>Twitter</p></div></div>

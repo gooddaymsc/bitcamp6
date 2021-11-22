@@ -130,7 +130,7 @@ tr:hover {
 <c:forEach items="${commentList}" var="comment">
 <tr>
     <td>${comment.commentNumber}</td>  
-    <td><a href='../board/detail?no=${comment.boardNumber}'>${comment.boardNumber}</a></td> 
+    <td><a href='../board/show?no=${comment.boardNumber}'>${comment.boardNumber}</a></td> 
     <td>${comment.writer.id}</td> 
     <td>${comment.content}</td> 
     <td>${comment.registrationDate}</td> 
