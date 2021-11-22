@@ -8,7 +8,6 @@
 	    height: 100%
 	    margin: 0; 
 	    font-family: Arial, Helvetica, sans-serif; 
-	    display: grid; justify-items: center; 
 	    align-items: center; 
 	    min-width:80%; 
 	  }  
@@ -27,7 +26,7 @@
 	   min-width:700px; 
 	 } 
 	 
-	 #top-title{
+	 .top-title{
 	  font-size: 19px;
 	  text-align: center;
 	 }
@@ -53,19 +52,31 @@
   #board-header{
     font-size: 14px;
     margin-left: 20px;
+    height:100px;
    }
   
 
   #f-writer{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold; 
   }
   
   #f-content{
     margin-left: 20px;
     width:90%;
+    height:240px;
   }
   
+  .tag-content{
+   margin-left: 18px;
+   }
+  
+  
+  #f-tag{
+    border: 2px solid lightgray;
+    border-radius: 18px; 
+  }
+
 .comment-set {
   position : relative;
   left : 60px;
@@ -221,7 +232,7 @@ xfloat: right;
 <div class="html-board">
 <br>
 <h2>게시판</h2>
-<h6>게시글보기</h6>
+<h7>게시글보기</h7>
 </div>
 <div class="board-menu">
   <c:choose> 
@@ -244,26 +255,22 @@ xfloat: right;
 </div>
 
 <div id="title-label">
-<div class="mb-3 row"  id="title-container">
-  <label for='f-title' class="col-sm-2 col-form-label"></label>
-  <div class="col-sm-6">
-    <label for='f-title' id='f-title' class="col-sm-2 col-form-label">${board.title}</label>
-  </div>
-</div>
+    <label for='f-title' id='f-title'> ${board.title}</label>
 </div>
 
 <div class="board-header" id="board-header">
   <label for='f-writer' class="col-sm-2 col-form-label"></label>
     <div class="board-header-second">
     <input type='hidden' id='btn-writer' type='text' name='writer' value='${board.writer.id}'readOnly><br>
-     <label for="f-writer" id='f-writer' class="col-sm-2 col-form-label">${board.writer.id}</label>
-     <br><label for='f-registrationDate' class="col-sm-2 col-form-label">${board.registrationDate}</label>
-     <label for='f-views' class="col-sm-2 col-form-label">조회 ${board.views}</label>    
+     <label for="f-writer" id='f-writer'>${board.writer.id}</label>
+     <br><p style="color: grey;"><label for='f-registrationDate'>${board.registrationDate} |</label>
+     <label for='f-views'>조회 ${board.views}</label>    
   </div>
 </div>
 
 <hr>
 <br>
+<div id ="board-body">
 <div id="title block">
 <div class="board-content" id="board-content">
    <label for='f-content' id="f-content">${board.content}</label>
@@ -272,16 +279,16 @@ xfloat: right;
 <br>
 <br>
 <br>
-<div class="mb-3 row">
-	<label for='f-tag' class="col-sm-2 col-form-label"># 태그</label> 
-  <div class="col-sm-6">
-  <button id='f-tag' class="btn">${board.tag}</button>
+<div class="tag-content">
+	<p style="color: grey;"><label for='f-tag'>tag</label> 
+  <button id='f-tag' class="btn">#${board.tag}</button>
   </div>
 </div>
 </div>
 </div>
 </section>
 </main>
+
 <!--        <button class="btn btn-outline-secondary btn-sm">변경</button>
        <button class="btn btn-outline-secondary btn-sm">삭제</button> -->
 <div class="comment-container">

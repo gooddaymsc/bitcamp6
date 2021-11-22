@@ -43,8 +43,7 @@ style attribute {
 <p><span style="color: rgb(164, 164, 164);">경기도 성남시 분당구 대왕판교로 670</span></p>
 <p><span style="color: rgb(164, 164, 164);">유스페이스2 B동 3층 322,323호 / A동 4층 403호</span></p></div>
 <div data-text-editable="true" style="font-family: Lato; font-size: 13px; color: rgb(142, 142, 142);" class=""><p>&nbsp;</p>
-<p>670, Daewangpangyo-ro, Bundang-gu,&nbsp;</p>
-<p>Seongnam-si, Gyeonggi-do, Republic of Korea</p>
+
 </div></div>
 </li></ul></li>
 

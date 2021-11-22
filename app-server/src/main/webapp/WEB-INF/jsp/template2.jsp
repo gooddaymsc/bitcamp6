@@ -38,7 +38,7 @@
 
   </div><!-- .container -->
 
-  <jsp:include page="footer.jsp" />
 </body>
+  <jsp:include page="footer2.jsp" />
 
 </html>

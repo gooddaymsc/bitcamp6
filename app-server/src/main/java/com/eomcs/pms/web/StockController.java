@@ -70,7 +70,7 @@ public class StockController {
     mv.addObject("stockList", stockList.getSellerStock());
     mv.addObject("pageTitle", "재고목록");
     mv.addObject("contentUrl", "stock/StockList.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
     return mv;
   }
 
@@ -84,7 +84,7 @@ public class StockController {
     mv.addObject("productNo", no);
     mv.addObject("pageTitle", "재고판매자목록");
     mv.addObject("contentUrl", "stock/StockSellerList.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
     return mv;
   }
 
@@ -100,7 +100,7 @@ public class StockController {
     mv.addObject("stock", stock);
     mv.addObject("pageTitle", "재고상세보기");
     mv.addObject("contentUrl", "stock/StockDetail.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
     return mv;
   }
 

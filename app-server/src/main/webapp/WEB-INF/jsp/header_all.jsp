@@ -234,7 +234,7 @@
 
 <!-- 메인로고 -->
 <div class='wrap'>
-<img class="html-img" src="${contextRoot}/image/menuD.jpg"> 
+<img class="html-img" src="${contextRoot}/image/menuC2.jpg"> 
 <!-- 검색 -->
   <div class="logo1">
     <a class="navbar-brand1" href="${contextRoot}/app/main/menu"><img src="${contextRoot}/image/logoW.png"></a>

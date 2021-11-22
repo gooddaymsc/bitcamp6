@@ -7,9 +7,7 @@
     height: 100%
     margin: 0; 
     font-family: Arial, Helvetica, sans-serif; 
-    display: grid; justify-items: center; 
-    align-items: center; 
-    min-width:80%; 
+  
   }  
   
   html, body {

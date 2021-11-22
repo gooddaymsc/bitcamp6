@@ -8,6 +8,11 @@
 	h2,h7{
 	  display:inline;
 	}
+	
+	.first-container{ 
+	   color:white;
+	   text-decoration: none;   
+	}
 
   .html-img-container {
     position: relative;
@@ -27,14 +32,14 @@
     height: 100px;
     position: fixed;
     object-fit: cover;
-    z-index: 10;
   }
   .html-board{
     top: 100px;
     position: absolute;
     width: 100%;
-    height: 100px;
-    background-color: #fbfbe3;
+    height: 80px;
+    background-color:#26274e;
+    color:white;
     z-index: -1;
   }
 
@@ -44,10 +49,9 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    xbackground-color: #f2f8fc;
     z-index: -1;
 
-  }
+  } 
 
   
 </style>
@@ -94,8 +98,6 @@
 
 
   </div><!-- .container -->
-
-<%--   <jsp:include page="/footer.jsp" /> --%>
 </body>
 
 </html>

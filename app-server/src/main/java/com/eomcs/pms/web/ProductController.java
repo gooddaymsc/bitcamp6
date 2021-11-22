@@ -244,7 +244,7 @@ public class ProductController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "장소찾기");
-    mv.addObject("contentUrl", "product/ProductList.jsp");
+    mv.addObject("contentUrl", "product/ProductSearch.jsp");
     mv.setViewName("template2"); 
     return mv;
   }
@@ -264,14 +264,18 @@ public class ProductController {
 
   @GetMapping("/product/ranking")
   public ModelAndView ranking() throws Exception {
-    ModelAndView mv = new ModelAndView();
-    Collection<Product> productList = productDao.ranking();
-    mv.addObject("productList", productList);
+    //HttpSession session = request.getSession(false);
 
+    Collection<Product> productList = productDao.ranking();
+
+    //    Product product =  (Product) session.getAttribute("productNumber");
+    //    Collection<Review> reviewList = reviewDao.findRecent(product.getProductNumber());
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("productList", productList);
+    //mv.addObject("reviewList", reviewList);
     mv.addObject("pageTitle", "오늘의술");
     mv.addObject("contentUrl", "product/Ranking.jsp");
     mv.setViewName("template2");
     return mv;
   }
-
 }

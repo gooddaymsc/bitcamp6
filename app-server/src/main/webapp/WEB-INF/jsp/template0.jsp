@@ -28,21 +28,25 @@
 .html-white1 {
   xborder: 2px solid blue;
   position: absolute;
-    width: 100%;
- height: 600px;
+  width: 100%;
+  height: 600px;
   background-color:white;
-   z-index:-1;
+  z-index:-1;
 
 }
 .html-color2 {
   top:600px;
   xborder: 2px solid yellow;
   position: absolute;
-    width: 100%; 
+   width: 100%; 
    height: 600px;
-   background-color:#f5d6bb;
-   z-index:-1;
-   
+   background-color:#fef7f0;
+   z-index:-1;   
+}
+
+#map{
+  margin-left:10%;
+  position:relative;
 }
 
 </style>
@@ -75,11 +79,21 @@
 
 <div id="content">
 <jsp:include page="${contentUrl}"/>
+
 </div><!-- .content -->
-
-
 </div><!-- .container -->
 
 </body>
-<jsp:include page="footer.jsp"/>
+
+<div id="map">
+<jsp:include page="main/map.jsp"/> 
+</div>
+
+<!-- <div class= "middle container">
+  <img align="middle" id="mid_image" src = "../../image/menuP.jpg" style="width:100%; height:450px;">
+<button type="button" id="rev_btn" class="btn btn-outline-dark">reservation</button>
+</div> -->
+
+<jsp:include page="footer.jsp"/> 
+
 </html>
