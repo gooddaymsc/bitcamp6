@@ -9,11 +9,13 @@
 
 .ranking_title {
   margin-top: 160px;
-   color: black;
-   font-family: 'Praise', cursive;
-   text-align: center;
-  font-size: 23px; 
+  color: black;
+  font-family: 'Praise', cursive;
+  text-align: center;
   font-weight: bold; 
+}
+.ranking_title h1{
+  font-size: 52px; 
 }
 
 	.ranking_image{
@@ -21,33 +23,41 @@
 	height:50px;
 	}
 
-  #ranking_container {
-    xborder: 1px dashed red;
-    xmargin-top: 30px;
-  }
-
 .ranking_detail { 
-  margin-left: 170px;
-  border: 2px solid gray;
-  color: white; 
-  background-color: black; 
-  
+  border: 1px solid white;
+  border-radius: 50px; 
+  color: #454444; 
+  background-color: white;
+  height: 270px;
+  width:89%;
+  box-shadow: 0px 0px 5px 8px #e0a3a3; 
   }
   
+ .ranking-num{
+  color: black; 
+  font-family: 'Praise', cursive;
+ 
+ }
+ 
  .ranking_detail2 {
   font-size: 20px; 
   text-align: center;
-  width:150px;
   padding: 0;
   float: right;
-  margin-right: 600px;
-   }  
+  margin-right: 400px;
+  margin-top:25px;
+  }  
 
- .ranking_detail a:visited {
-    color: black;
+.ranking_detail .image{
+  margin-top:10px;
+  margin-left:70px;
+}
+
+ .ranking_detail2 a:visited {
+    color: white;
     float:right;
 }
- .ranking_detail :hover {
+ .ranking_detail2 a:hover {
     cursor: pointer;
 }
 
@@ -58,19 +68,16 @@
 }
 
 #product_rate{
-    font-size: 25px; 
-    font-family: Cafe24Oneprettynight;
+    font-size: 28px; 
     text-align: center;
 }
 
 #product_find{
     font-size: 14px; 
-    font-family: Cafe24Oneprettynight;
     color: white; 
     background-color: black; 
     cursor: pointer; 
     outline: none; 
-    border-radius: 20px; 
 }
 
 #best_label{
@@ -80,6 +87,10 @@
   color: #fb8b12;
 } 
 
+ #product_rate img {
+   width: 20px;
+   height: auto;
+ }
 
  .image {
 width:250px;
@@ -99,48 +110,41 @@ text-align:center;
 
 <body>
 <br>
-<!--   <div class="best row">
-	  <div class="col-sm">
+<!-- <div class="ranking-num">
+	  <h3 class="col-sm1">
 	  Best1
-	  </div>
-	  <div class="col-sm">
+	  </h3>
+	  <h3 class="col-sm">
 	  Best2
-	  </div>
-	  <div class="col-sm">
+	  </h3>
+	  <h3 class="col-sm">
 	  Best3
-	  </div>
-	  <div class="col-sm">
+	  </h3>
+	  <h3 class="col-sm">
 	  Best4
-	  </div>
-	  <div class="col-sm">
+	  </h3>
+	  <h3 class="col-sm">
 	  Best5
-	  </div> -->
-
+	  </h3> 
+	</div>
+ -->
   <div class="ranking_container">
     <c:forEach items="${productList}" var="product">
       <div class="ranking_detail">
         <img align="middle" class="image" src="../../upload/product/${product.photo}_300x300.jpg">
         <div class="ranking_detail2">
-        <p class="productName"> <a href="show?no=${product.productNumber}">${product.productName}</a> </p>
-        <p class="rate" id="product_rate">${product.rate}</p>
-        <p class="type" id="product_info"> 주종: ${product.productType.type} </p>
-          <p class="type" id="product_info"> 상세주종: ${product.productType.subType} </p>
+        <p class="productName" id="product_name"> <a href="show?no= ${product.productNumber}">${product.productName}</a> </p>
+        <p class="rate" id="product_rate"> <img src="../../image/favourite.png">${product.rate}</p>
+        <p class="type" id="product_info"> ${product.productType.type} > ${product.productType.subType} </p>
         <p class="level" id="product_info"> 도수: ${product.alcoholLevel}%</p>
         <p class="volume" id="product_info"> 용량: ${product.volume}ml</p>
         </div>
         <br>
         <br>
       </div>
-     </c:forEach>   
-     
- <%--      <c:forEach items="${reviewList}"var="review">
-      <fieldset>
-  <h4><i class="far fa-id-badge"></i> ${review.member.id}><a href='review/detail?no=${review.no}'>${review.comment}</a></h4>
-     <i class="far fa-thumbs-up"></i> ${review.score} 
-     <hr />
-     </fieldset>
-   </c:forEach>  --%>
-     
+      <br>
+      <br>
+     </c:forEach> 
       </div>
 
 <script>
@@ -154,11 +158,5 @@ text-align:center;
       window.location.href = e.currentTarget.querySelector("a").href;
     };
   });
-</script>
-
-<script>
-var rvList = document.querySelectorAll(".review);
-
-
 </script>
 </body>
