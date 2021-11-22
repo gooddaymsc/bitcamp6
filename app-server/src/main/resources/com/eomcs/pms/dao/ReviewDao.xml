@@ -123,6 +123,8 @@
       r.registeredDate 
     from 
       review r join product pro on r.product_no = pro.product_no join member m on r.member_no = m.member_no 
+    where 
+      pro.product_no = #{productNo}
     order by "r.registeredDate" DESC LIMIT 1
   </select> 
   

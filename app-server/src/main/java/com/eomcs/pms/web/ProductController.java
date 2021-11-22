@@ -264,11 +264,15 @@ public class ProductController {
 
   @GetMapping("/product/ranking")
   public ModelAndView ranking() throws Exception {
+    //HttpSession session = request.getSession(false);
+
     Collection<Product> productList = productDao.ranking();
-    Collection<Review> reviewList = reviewDao.findRecent();
+
+    //    Product product =  (Product) session.getAttribute("productNumber");
+    //    Collection<Review> reviewList = reviewDao.findRecent(product.getProductNumber());
     ModelAndView mv = new ModelAndView();
     mv.addObject("productList", productList);
-    mv.addObject("reviewList", reviewList);
+    //mv.addObject("reviewList", reviewList);
     mv.addObject("pageTitle", "오늘의술");
     mv.addObject("contentUrl", "product/Ranking.jsp");
     mv.setViewName("template2");

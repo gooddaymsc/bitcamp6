@@ -15,5 +15,5 @@ public interface ReviewDao {
   List<Review> myReview(String id) throws Exception;
   boolean findPurchased(String productName) throws Exception;
   float avg(Review review) throws Exception;
-  List<Review> findRecent() throws Exception;
+  List<Review> findRecent(int i) throws Exception;
 }
