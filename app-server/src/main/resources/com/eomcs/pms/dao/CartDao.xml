@@ -19,6 +19,7 @@
     <association property="product" javaType="Product">
       <id column="product_no" property="productNumber"/>
       <result column="name" property="productName"/> 
+      <result column="photo" property="photo"/>
     </association>
     
     <association property="seller" javaType="Seller">
@@ -38,7 +39,7 @@
     select 
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount as C_amount, c.registeredDate, 
       s.stock_no, s.member_no sellerNo, s.price as S_price,
-      p.product_no, p.name,
+      p.product_no, p.name, p.photo,
       m1.id as buyerId, 
       m2.id as sellerId 
     from 
@@ -54,7 +55,7 @@
     select 
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount as C_amount, c.registeredDate, 
       s.stock_no, s.member_no sellerNo, s.price as S_price, s.amount as S_amount,
-      p.product_no, p.name,
+      p.product_no, p.name, p.photo,
       m1.id as buyerId, 
       m2.id as sellerId, 
       sl.openingTime, sl.closingTime, sl.business_name

@@ -15,8 +15,8 @@ button {
 
  <h1>상품 정보수정</h1>
  <a href="../../upload/product/${product.photo}">
-<img id="f-photo-image" src="../upload/product/${product.photo}_1000x1000.jpg" 
-        align="left" width="300px" height="700px" >
+<img id="f-photo-image" src="../../upload/product/${product.photo}_1000x1000.jpg" 
+        align="left" width="300px" height="800px" >
         </a>
 <form action='update' method='post' enctype="multipart/form-data">
     <input type='hidden' id='f-productNumber' type='text' name='productNumber' class="form-control" value='${product.productNumber}' readonly>

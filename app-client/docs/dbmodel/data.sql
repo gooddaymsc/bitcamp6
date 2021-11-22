@@ -39,6 +39,10 @@ update stock set amount=6, price=20 where stock_no=2;
     
 --구매 타입 등록
 insert into payment_type(payment_no, type) values(1,1);
+insert into payment_type(payment_no, type) values(2,2);
+insert into payment_type(payment_no, type) values(3,3);
+insert into payment_type(payment_no, type) values(4,4);
+insert into payment_type(payment_no, type) values(5,5);
 
 insert into board_tag(board_no, tag_no) values(31, 1);
 

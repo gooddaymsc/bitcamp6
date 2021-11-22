@@ -15,7 +15,7 @@
 	  
 	  html, body {
 	    height: 100%; 
-	    min-width:80%; 
+	    xmin-width:80%; 
 	  } 
 	  
 	  #main-holder {
@@ -200,14 +200,14 @@ left : 1000px;
 body {
   text-align: center;
 }
-a {
+.comment-img a {
   text-decoration: none;
   color: black;
 }
-a:visited {
+.comment-img a:visited {
   color: black;
 }
-a:hover {
+.comment-img a:hover {
   color: black;
     cursor: pointer;
 }

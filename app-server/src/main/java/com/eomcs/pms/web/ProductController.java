@@ -100,7 +100,7 @@ public class ProductController {
     Collection<Review> reviewList = reviewDao.findAll(no);
 
     if (reviewList.equals(null)) {
-      System.out.println("등록된 댓글이 없습니다.");
+      System.out.println("등록된 리뷰가 없습니다.");
     }
 
     if (product == null) {
@@ -193,7 +193,7 @@ public class ProductController {
     Collection<Review> reviewList = reviewDao.findAll(no);
 
     if (reviewList.equals(null)) {
-      System.out.println("등록된 댓글이 없습니다.");
+      System.out.println("등록된 리뷰가 없습니다.");
     }
 
     if (product == null) {

@@ -28,6 +28,7 @@
         <association property="product" javaType="Product">
         <id column="product_no" property="productNumber"/> 
         <result column="name" property="productName"/>
+        <result column="photo" property="photo"/>
         </association>
 
         <association property="seller" javaType="Seller">
@@ -51,7 +52,7 @@
       b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
       s.stock_no, s.member_no sellerNo, s.price S_price,
-      p.product_no, p.name,
+      p.product_no, p.name, p.photo,
       m1.id as buyerId, 
       m2.id as sellerId, 
       sl.business_name
@@ -71,7 +72,7 @@
       b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
       s.stock_no, s.member_no sellerNo, s.price S_price,
-      p.product_no, p.name,
+      p.product_no, p.name, p.photo,
       m1.id as buyerId, 
       m2.id as sellerId 
     from 
@@ -89,7 +90,7 @@
       b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
       s.stock_no, s.member_no sellerNo, s.price S_price,
-      p.product_no, p.name,
+      p.product_no, p.name, p.photo,
       m1.id as buyerId, 
       m2.id as sellerId, 
       sl.business_name, sl.business_address, sl.business_tel, sl.openingTime, sl.closingTime,
@@ -111,7 +112,7 @@
       b.purchase_no, b.pickup_booking_date, b.pickup_time, b.registeredDate, b.payment_no, b.payment_status,
       c.cart_no, c.member_no buyerNo, c.stock_no, c.amount C_amount, 
       s.stock_no, s.member_no sellerNo, s.price S_price,
-      p.product_no, p.name,
+      p.product_no, p.name, p.photo,
       m1.id as buyerId, 
       m2.id as sellerId, 
       sl.business_name, sl.business_address, sl.business_tel,
