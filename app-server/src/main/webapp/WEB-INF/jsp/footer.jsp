@@ -40,8 +40,8 @@ style attribute {
 <div data-text-editable="true" style="/* text-align: left; */ font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);">
 <p><span style="font-weight: 300; color: rgb(255, 255, 255);">LOCATION</span></p></div>
 <div data-text-editable="true" style="font-family: Nanum Gothic; font-size: 12px; color: rgb(142, 142, 142);" class=""><p>&nbsp;</p>
-<p><span style="color: rgb(164, 164, 164);">경기도 성남시 분당구 대왕판교로 670</span></p>
-<p><span style="color: rgb(164, 164, 164);">유스페이스2 B동 3층 322,323호 / A동 4층 403호</span></p></div>
+<p><span style="color: rgb(164, 164, 164);">서울 강남구 강남대로94길 20</span></p>
+<p><span style="color: rgb(164, 164, 164);">삼호빌딩 9층(역삼동 819-3)</span></p></div>
 <div data-text-editable="true" style="font-family: Lato; font-size: 13px; color: rgb(142, 142, 142);" class=""><p>&nbsp;</p>
 
 </div></div>
@@ -52,13 +52,13 @@ style attribute {
 <div data-text-editable="true" style="/* text-align: left; */ font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);">
 <p><span style="font-weight: 300; color: rgb(255, 255, 255);">CUSTOMER</span></p></div>
 <div data-text-editable="true" style="font-family: Lato; font-size: 13px; color: rgb(142, 142, 142);" class="">
-<p>&nbsp;</p><p><span style="font-weight: 300;">T. 82-1544-3270</span></p>
-<p><span style="font-weight: 300;">P. 010-1544-3270</span></p>
-<p><span style="font-weight: 300;">M. gabiacns@gabiacns.com</span></p></div></div>
+<p>&nbsp;</p><p><span style="font-weight: 300;">T. 02-3486-9600</span></p>
+<p><span style="font-weight: 300;">P. 010-0000-0000</span></p>
+<p><span style="font-weight: 300;">M. admin@drinker.com</span></p></div></div>
 </li></ul></li>
 
 <li><ul><li>
-<div data-is-vacant="no" style="padding-top:40px;  padding-left:100px;">
+<div data-is-vacant="no" style="padding-top:40px;  padding-left:100px; float:left;">
 <div data-text-editable="true" style="/* text-align: left; */ font-family: Lato; font-size: 18px; font-weight: 700; color: rgb(82, 82, 82);" >
 <p><span style="font-weight: 300; color: rgb(255, 255, 255);">SNS</span></p></div>
 <div data-text-editable="true" style="font-family: Lato; font-size: 13px; color: rgb(142, 142, 142);" class=""><p>&nbsp;</p>
@@ -67,8 +67,8 @@ style attribute {
 </ul>
 </div></div>
 
-<hr />
-<div class="container">
+<!-- <hr />
+<div class="container" style="bottom:0">
   <div class="hm-footer-copyright text-center">
     <div class="c">
         <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>  
@@ -78,7 +78,7 @@ style attribute {
         </div>
         <p>
         ©copyright. designed and developed by <a href="https://www.alchoholFinder.com/">AlchoholFinder</a>
-    </p><!--/p-->
-  </div><!--/.text-center-->
+    </p>/p
+  </div>/.text-center
 </div>
-</footer>
+</footer> -->
