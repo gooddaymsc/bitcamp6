@@ -18,6 +18,7 @@
     <result column="id" property="id"/>
     <result column="name" property="name"/>
     <result column="email" property="email"/>
+    <result column="photo" property="photo"/>
   </association>
   
   <association property="boardTag" javaType="boardTag">    
@@ -41,6 +42,7 @@
          b.views,
          m.name,
          m.id,
+         m.photo,
          t.tag 
       from board b
         left join member m on b.member_no=m.member_no
@@ -58,6 +60,7 @@
          b.views,
          m.name,
          m.id,
+         m.photo,
          t.tag 
       from board b
         left join member m on b.member_no=m.member_no
@@ -104,6 +107,7 @@
          m.id, 
          m.name,
          m.email,
+         m.photo,
          t.tag,
          t.tag_no
        from board b 
@@ -180,6 +184,7 @@
          b.views,
          m.name,
          m.id,
+         m.photo,
          t.tag 
       from board b
         left join member m on b.member_no=m.member_no

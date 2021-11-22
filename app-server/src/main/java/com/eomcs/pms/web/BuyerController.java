@@ -87,12 +87,12 @@ public class BuyerController {
 
     if (photoFile.getSize() > 0) { 
       String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
+      photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
 
       member.setPhoto(filename);
       buyer.setMember(member);
 
-      Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
       .size(20, 20)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -103,7 +103,7 @@ public class BuyerController {
         }
       });
 
-      Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
       .size(100, 100)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -192,12 +192,12 @@ public class BuyerController {
 
       if (photoFile.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
-        photoFile.write(sc.getRealPath("/upload/buyer") + "/" + filename);
+        photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
         member.setPhoto(filename);
         oldBuyer.setMember(member);
 
 
-        Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
         .size(20, 20)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -208,7 +208,7 @@ public class BuyerController {
           }
         });
 
-        Thumbnails.of(sc.getRealPath("/upload/buyer") + "/" + filename)
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
         .size(100, 100)
         .outputFormat("jpg")
         .crop(Positions.CENTER)

@@ -7,19 +7,19 @@
 <div class="mb-3 row">
   <label for='f-productName' class="col-sm-2 col-form-label">상품명</label>
   <div class="col-sm-6">
-    <input id='f-productName' type='text' name='productName' class="form-control">
+    <input id='f-productName' type='text' name='productName' class="form-control" required>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
   <div class="col-sm-6">
-    <input id='f-photo' type='file' name='photoFile' class="form-control">
+    <input id='f-photo' type='file' name='photoFile' class="form-control" required>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-type' class="col-sm-2 col-form-label">주종</label>
   <div class="col-sm-6">
-     <select id='f-type' onchange="categoryChange(this)" class="form-select" name='type' aria-label="Default select example">
+     <select id='f-type' onchange="categoryChange(this)" class="form-select" name='type' aria-label="Default select example" required>
       <option selected>주종선택</option>
       <option value="와인" >와인</option>
       <option value="위스키">위스키</option>
@@ -32,7 +32,7 @@
 <div class="mb-3 row">
   <label for='f-type' class="col-sm-2 col-form-label">상세주종</label>
   <div class="col-sm-6"> 
-  <select id="good" name="subType" class="form-select">
+  <select id="good" name="subType" class="form-select" required>
   <option>주종상세</option>
   </select>
     <label for='f-variety' class="col-sm-2 col-form-label">품종</label>
@@ -44,26 +44,26 @@
 <div class="mb-3 row">
   <label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지</label>
   <div class="col-sm-6">
-    <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control">
+    <input id='f-countryOrigin' type='text' name='countryOrigin' class="form-control" required>
   </div>
 </div>
 
 <div class="mb-3 row">
   <label for='f-volume' class="col-sm-2 col-form-label">용량</label>
   <div class="col-sm-6">
-    <input id='f-volume' type='number' name='volume' class="form-control">
+    <input id='f-volume' type='number' name='volume' class="form-control" required>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-alcoholLevel' class="col-sm-2 col-form-label">도수</label>
   <div class="col-sm-6">
-    <input id='f-alcoholLevel' type="number" name='alcoholLevel' class="form-control">
+    <input id='f-alcoholLevel' type="number" name='alcoholLevel' class="form-control" required>
   </div>
 </div>
 <div class="mb-3 row">
   <label for='f-sugarLevel' class="col-sm-2 col-form-label">당도</label>
   <div class="col-sm-6">
-    <select id='f-sugarLevel' class="form-select" name='sugarLevel' aria-label="Default select example">
+    <select id='f-sugarLevel' class="form-select" name='sugarLevel' aria-label="Default select example" required>
       <option value="1" selected>1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -75,7 +75,7 @@
 <div class="mb-3 row">
   <label for='f-acidity' class="col-sm-2 col-form-label">산도</label>
   <div class="col-sm-6">
-    <select id='f-acidity' class="form-select" name='acidity' aria-label="Default select example">
+    <select id='f-acidity' class="form-select" name='acidity' aria-label="Default select example" required>
       <option value="1" selected>1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -87,7 +87,7 @@
 <div class="mb-3 row">
   <label for='f-weight' class="col-sm-2 col-form-label">바디감</label>
   <div class="col-sm-6">
-    <select id='f-weight' class="form-select" name='weight' aria-label="Default select example">
+    <select id='f-weight' class="form-select" name='weight' aria-label="Default select example" required>
 		  <option value="1" selected>1</option>
 		  <option value="2">2</option>
 		  <option value="3">3</option>

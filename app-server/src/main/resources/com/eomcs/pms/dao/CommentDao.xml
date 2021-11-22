@@ -14,13 +14,14 @@
       <association property="writer" javaType="member">    
         <id column="member_no" property="number"/>
         <result column="id" property="id"/>
+      <result column="photo" property="photo"/>
       </association>
   </resultMap>
   
   <select id="findAll" resultMap="CommentMap">
     select 
       c.comment_no, c.content, c.registeredDate, c.board_no, 
-      m.member_no, m.id 
+      m.member_no, m.id, m.photo
     from comment c join member m on c.member_no=m.member_no 
     where c.board_no=#{boardNo}
   </select>
@@ -28,7 +29,7 @@
     <select id="findMine" resultMap="CommentMap" parameterType="int">
     select 
       c.comment_no, c.content, c.registeredDate, c.board_no, 
-      m.member_no, m.id 
+      m.member_no, m.id, m.photo
     from comment c join member m on c.member_no=m.member_no 
     where m.member_no=#{memberNo}
   </select>
@@ -46,7 +47,8 @@
       c.comment_no,
       c.board_no, 
       m.member_no, 
-      m.id
+      m.id,
+      m.photo
     from   comment c join member m 
            on c.member_no=m.member_no
     where comment_no=#{no} 
