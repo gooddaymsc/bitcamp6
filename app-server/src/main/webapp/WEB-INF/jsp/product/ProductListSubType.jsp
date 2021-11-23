@@ -58,8 +58,7 @@
     text-decoration: none;
   }
 
-  .desc h4 {
-    font-weight: bold;
+  .desc h5 {
     margin-bottom: -5px;
   }
 
@@ -131,9 +130,9 @@
           <img id="thumbnail" src="../../upload/product/${product.photo}_300x300.jpg" name="photo" align="middle"
             width="600" height="400">
           <div class="desc">
-            <h4>
+            <h5>
               <a href="show?no=${product.productNumber}" class="list-group-item">${product.productName}</a>
-            </h4>
+            </h5>
             <div class="box">
               <div class="row top-row">
                 <div class="col-sm">

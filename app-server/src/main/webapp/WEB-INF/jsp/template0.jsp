@@ -34,7 +34,7 @@
   z-index:-1;
 
 }
-.html-color2 {
+/* .html-color2 {
   top:600px;
   xborder: 2px solid yellow;
   position: absolute;
@@ -42,7 +42,7 @@
    height: 600px;
    background-color:#fef7f0;
    z-index:-1;   
-}
+} */
 
 #map{
   margin-left:10%;
