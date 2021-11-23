@@ -46,7 +46,7 @@ position: absolute;
 #product_top_detail{
  float:right;
  margin-right: 50%;
- font-family: 'Praise', cursive;
+ xfont-family: 'Praise', cursive;
 }
 
 #product_bottom_detail{
@@ -85,17 +85,26 @@ a {
 
  button {
   position: relative; 
-  z-index:10;
+  xz-index:10;
 } 
 
-h2 
+/* h2 
 .star-rating {width:205px;}
 .star-rating,.star-rating span {display:inline-block; height:39px; overflow:hidden; background:url(../image/icon/star.png)no-repeat; }
 .star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
-
+ */
 f-rate{
 font-size: 30px; 
 display:inline-block;
+}
+
+.product-menulist {
+  xborder : 2px solid yellow;
+  position : relative;
+  left : 750px;
+  top : -100px;
+  width : 200px;
+  white-space:nowrap;
 }
 
 #find-product { 
@@ -139,54 +148,125 @@ display:inline-block;
 
 <div id='f-rat2' onchange="isSame()" > &nbsp;&nbsp;<span id="same"></span></div>
 
-   <div id='f-sugarLevel'> 당도> ${product.sugarLevel}</div>
-   <div id='f-acidity'> 산도> ${product.acidity}</div>
-   <div id='f-weight'> 바디감> ${product.weight}</div>
-  </div>  
-</div>
-<br>
-<br>
-<br>
-<button class="btn btn-primary" id="find-product">상품찾아보기</button><br>
-
-<div id="product_bottom_detail" > 
-<br/>
-<hr/>
-<label id="product_detail_label">상품상세정보</label>
-<br>
-<label for='f-countryOrigin' class="col-sm-2 col-form-label">원산지 : ${product.countryOrigin}</label><br>
+   <div id='f-sugarLevel'> 
+    <c:choose> 
+  <c:when  test="${product.sugarLevel eq 1}">
+    ☆ ☆ ☆ ☆ ★
+   </c:when>
+     <c:when  test="${product.sugarLevel eq 2}">
+    ☆ ☆ ☆ ★ ★
+   </c:when>
+     <c:when  test="${product.sugarLevel eq 3}">
+    ☆ ☆ ★ ★ ★
+   </c:when>
+     <c:when  test="${product.sugarLevel eq 4}">
+    ☆ ★ ★ ★ ★
+   </c:when>
+     <c:when  test="${product.sugarLevel eq 5}">
+    ★ ★ ★ ★ ★
+   </c:when>
+   </c:choose>
+   (당도)
+   </div>
+   <div id='f-acidity'>
+    <c:choose> 
+  <c:when  test="${product.acidity eq 1}">
+    ☆ ☆ ☆ ☆ ★
+   </c:when>
+     <c:when  test="${product.acidity eq 2}">
+    ☆ ☆ ☆ ★ ★
+   </c:when>
+     <c:when  test="${product.acidity eq 3}">
+    ☆ ☆ ★ ★ ★
+   </c:when>
+     <c:when  test="${product.acidity eq 4}">
+    ☆ ★ ★ ★ ★
+   </c:when>
+     <c:when  test="${product.acidity eq 5}">
+    ★ ★ ★ ★ ★
+   </c:when>
+   </c:choose>
+   (산도)
+   </div>
+   <div id='f-weight'> 
+    <c:choose> 
+  <c:when  test="${product.weight eq 1}">
+    ☆ ☆ ☆ ☆ ★
+   </c:when>
+     <c:when  test="${product.weight eq 2}">
+    ☆ ☆ ☆ ★ ★
+   </c:when>
+     <c:when  test="${product.weight eq 3}">
+    ☆ ☆ ★ ★ ★
+   </c:when>
+     <c:when  test="${product.weight eq 4}">
+    ☆ ★ ★ ★ ★
+   </c:when>
+     <c:when  test="${product.weight eq 5}">
+    ★ ★ ★ ★ ★
+   </c:when>
+   </c:choose>
+   (바디감) 
+  </div>  <br>
+  <div id='f-weight'> 
+  <label for='f-countryOrigin'>원산지 : ${product.countryOrigin}</label><br><br>
+  </div>
+    <div id='f-weight'> 
 <c:choose> 
   <c:when test="${product.productType.type eq '와인'}">
-      <label for='f-variety' class="col-sm-2 col-form-label">품종 : ${product.variety}</label><br>
+      <label for='f-variety' >품종 : ${product.variety}</label><br><br>
   </c:when>
 </c:choose>
-
- <label for='f-volume' class="col-sm-2 col-form-label">용량 : ${product.volume}</label><br>
- <label for='f-alcoholLevel' class="col-sm-2 col-form-label">도수 : ${product.alcoholLevel}</label><br>
+  </div>
+  <div id='f-weight'> 
+ <label for='f-volume' >용량 : ${product.volume}</label><br><br>
+   </div>
+  <div id='f-weight'> 
+ <label for='f-alcoholLevel' >도수 : ${product.alcoholLevel}</label><br><br>
+  </div>
 </div>
+</div>
+<br>
+<br>
+<br>
+<a href="../stock/sellerList?no=${product.productNumber}" class="btn btn-primary" id="find-product">상품 찾아보기</a><br>
 
-
-<button type="button" onclick="location.href='list'" class="btn btn-outline-secondary btn-sm">목록</button>
-
+<div class="product-menulist">
 <c:choose> 
   <c:when test="${loginUser.authority eq 8}">
  <div>
    <button type="button" onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
+  <a href="list" class="btn btn-outline-secondary btn-sm">목록</a>
+  
    </div>
   </c:when> 
   <c:when test="${loginUser.authority eq 2}">
   <div>
+  <a href="list" class="btn btn-outline-secondary btn-sm">목록</a>
      <button type="button" onclick="location.href='../stock/sellerList?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">장바구니등록</button>
   </div>
   </c:when>
   <c:when test="${loginUser.authority eq 4}">
   <div>
+  <a href="list" class="btn btn-outline-secondary btn-sm">목록</a>
   <button type="button" onclick="btn_add(${product.productNumber})" class="btn btn-outline-secondary btn-sm" >재고등록</button>
    <button type="button"  onclick="location.href='detail?no=${product.productNumber}'" class="btn btn-outline-secondary btn-sm">상품정보수정</button>
   </div>
   </c:when>
+  <c:otherwise>
+<a href="list" class="btn btn-outline-secondary btn-sm">목록</a>
+  </c:otherwise>
 </c:choose> 
-</form><br>
+</div>
+<div id="product_bottom_detail" > 
+<br/>
+<hr/>
+
+</div>
+
+
+
+</form>
 
 <h4>리뷰</h4>
 
@@ -196,8 +276,6 @@ display:inline-block;
     <a href='review/form?no=${product.productNumber}'> 리뷰남기기</a><br>
   </c:when>
 </c:choose>
-<hr/>
-
 
 <c:forEach items="${reviewList}" var="review">
 <fieldset>
