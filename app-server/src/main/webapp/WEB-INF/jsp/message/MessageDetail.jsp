@@ -5,13 +5,48 @@
  
 <style>
 #chat-room {
-    height:400px;
-    width:600px;
-    background-color:#6884b3;
-    /* 임시 */
-    outline:2px solid black;
-    position:relative;
+    height:600px;
+    width:400px;
+    padding: 6px 10px 7px;
+    border-radius: 30px;
+    xbackground: rgba(0, 0, 0, .3);
+    background-color:#c7d4e0;
+    margin: 8px 0;
+    position: relative;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
 }
+#chat-title {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 10px 10px 10px 50px;
+}
+  #chat-title h1 {
+    font-weight: normal;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }  
+#chat-title .avatar {
+    position: absolute;
+    z-index: 1;
+    top: 8px;
+    left: 9px;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.24);
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
 
 #chat-room .message-box {
     padding:0 0.7rem;
@@ -63,22 +98,25 @@
     padding:0.8rem;
     border-radius:1rem;
     clear:both;
-    font-weight:bold;
-    font-size:1rem;
+    font-size: 14px;
     box-shadow: 1px 1px 0 rgba(0,0,0,0.3);
 }
 
 #chat-room .chat-message.mine > div {
     background-color:#FDF01B;
+    xborder:2px #FDF01B;
     text-align:right;
     float:right;
     box-shadow: -1px 1px 0 rgba(0,0,0,0.3);
 }
 
 #chat-room .chat-message.other > div {
-    background-color:#FDF01B;
+    border:1px blue;
+    background-color:white;
+    padding: 10px;
     text-align:left;
     float:left;
+    margin-right:100px;
     box-shadow: -1px 1px 0 rgba(0,0,0,0.3);
 }
 
@@ -105,9 +143,8 @@
     padding-right:8.5rem;
     padding-left:4.8rem;
     padding-top:0.1rem;
-    font-size:1.4rem;
-    line-height:4rem;
-    font-weight:bold;
+    font-size:15px;
+    line-height:30px;
     box-sizing:border-box;
 }
 
@@ -130,38 +167,34 @@
 }
 
 #chat-room .input-box .btn-submit {
-    position:absolute;
-    right:1rem;
-    top:50%;
-    transform:translateY(-50%);
-    padding:10px;
-    background-color:#fdf01b;
-    padding:10px;
-    color:#bfb73d;
-    border-radius:3px;
-    font-size:1.3rem;
-    box-shadow:0 1px 10px rgba(0,0,0,0.2);
-    user-select:none;
+   position: absolute;
+    z-index: 1;
+    top: 9px;
+    right: 10px;
+    color: #fff;
+    border: none;
+    background: #248A52;
+    font-size: 13px;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 5px 10px; 
+    border-radius: 10px;
+    outline: none!important;
+    transition: background .2s ease;
 }
 
-#chat-room .input-box .btn-emo {
-    position:absolute;
-    right:6rem;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:2rem;
-    color:#CBCBCB;
-    user-select:none;
-}
+
 </style>
 
-<h1>Message</h1>
-
 <form action='update' method='post'>
-
+   <a href='list' class="btn btn-outline-secondary btn-sm">이전</a><br><br>
 <div id="chat-room">
     <div class="message-box" id="message-box">
-
+ <div class="chat-title" id="chat-title">
+    <h1>${theOtherId}</h1>
+     <figure class="avatar">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+  </div>
 <c:set var="id" value="${loginUser.id}"/>
 <c:forEach items="${messages}" var="message">
 <c:choose>
@@ -173,8 +206,8 @@
 </c:when>
     <c:otherwise>  
     <div class="chat-message other">
-    <div class="message-group" data-date-str="${message.registrationDate}">
-    <i class="fa fa-user"></i><span> ${message.theOtherId}</span> : ${message.content}
+    <span><i class="fa fa-user"></i>${message.theOtherId}</span> 
+    <div class="message-group" data-date-str="${message.registrationDate}"> ${message.content}
     </div></div>
    </c:otherwise>
 </c:choose>
@@ -184,22 +217,21 @@
         <input type='hidden' id='text-input' type='text' name='roomNumber' value="${roomNumber}"><br><br>
         <input type='hidden' id='text-input' type='text' name='theOtherId' value="${theOtherId}"><br><br>
     <div class="input-box">
-        <input type="text" id="text-input" name='content'>
-        <div class="btn-plus">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-        </div>
-        <div class="btn-emo">
-            <i class="fa fa-smile-o" aria-hidden="true"></i>
-        </div>
+        <input type="text" id="text-input" name='content' placeholder="메세지 입력...">
             <button class="btn-submit">전송</button>
     </div>
 </div>
 </form>
-   <a href='list' class="btn btn-outline-secondary btn-sm">이전</a><br><br>
+
 
 <script>
 var element = document.getElementById("message-box");
 element.scrollTop = element.scrollHeight;
 </script>
 
-
+<script>
+$('.follower').click(function(){
+    $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
+    $('.modal-title').text("팔로우");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
+});
+</script>

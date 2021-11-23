@@ -98,7 +98,7 @@ public class MessageController {
     mv.addObject("roomNumber", no);
     mv.addObject("theOtherId", other);
     mv.addObject("pageTitle", "메세지상세보기");
-    mv.addObject("contentUrl", "message/MessageDetail.jsp");
+    mv.addObject("contentUrl", "message/MessageDetail.jsp"); 
     mv.setViewName("template2");
     return mv;
   }

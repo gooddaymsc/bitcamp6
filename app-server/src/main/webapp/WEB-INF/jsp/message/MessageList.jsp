@@ -60,3 +60,9 @@ trList.forEach(function(trTag) {
 });
 </script>
 
+<script>
+$('.follower').click(function(){
+    $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다. 
+    $('.modal-title').text("팔로우");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
+});
+</script>
