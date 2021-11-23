@@ -16,6 +16,7 @@
     <association property="member" javaType="member">
       <id column="member_no" property="number"/>
       <result column="id" property="id"/>
+      <result column="photo" property="photo"/>
     </association>
   </resultMap>
   
@@ -25,6 +26,7 @@
       r.review_no, 
       pro.product_no, 
       m.id, 
+     m.photo,
       r.score, 
       r.comment, 
       r.registeredDate 
@@ -44,6 +46,7 @@
      r.review_no, 
      pro.product_no, 
      m.id, 
+     m.photo,
      r.score, 
      r.comment, 
      r.registeredDate 
@@ -58,6 +61,7 @@
      r.review_no, 
      pro.product_no, 
      m.id, 
+     m.photo,
      r.score, 
      r.comment, 
      r.registeredDate 
@@ -84,6 +88,7 @@
      pro.product_no, 
      pro.name,
      m.id, 
+     m.photo,
      r.score, 
      r.comment, 
      r.registeredDate 
@@ -118,6 +123,7 @@
       r.review_no, 
       pro.product_no, 
       m.id, 
+     m.photo,
       r.score, 
       r.comment, 
       r.registeredDate 

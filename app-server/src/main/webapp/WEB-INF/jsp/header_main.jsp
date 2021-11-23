@@ -136,7 +136,7 @@ footer {
  .nav {
   position: absolute;
     xborder: 2px solid grey;
-      width: 880px;
+      width: 1000px;
     height: 60px;
     top: 230px;
     left:50%;
@@ -147,6 +147,7 @@ footer {
   } 
  .nav a {
     position:relative;
+    left : 30px;
     bottom: -20px;
     text-decoration: none;
     color: white;

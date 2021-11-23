@@ -244,12 +244,13 @@ public class BuyerController {
   }
 
   @GetMapping("/buyer/delete")
-  public ModelAndView delete(String id, HttpServletRequest request) throws Exception {
+  public ModelAndView delete(String id, HttpSession session, HttpServletRequest request) throws Exception {
 
     //    if (session.getAttribute("loginUser") == null) {
     //      out.printf("<script>alert('로그인 후 사용 가능합니다.'); location.href='../main/loginMenu'</script>");
     //      out.flush();
     //    }
+    Member member = (Member) session.getAttribute("loginUser");
 
     Buyer buyer = buyerDao.findById(id);
 
@@ -259,15 +260,20 @@ public class BuyerController {
 
     buyerDao.delete(buyer.getMember().getNumber());
     sqlSessionFactory.openSession().commit();
-
     ModelAndView mv = new ModelAndView();
-    HttpSession loginUser = request.getSession();
-    loginUser.setAttribute("loginUser", null);
-    loginUser.invalidate();
-    request.getSession(true);
-    mv.addObject("contentUrl", "main/LoginForm.jsp");
-    mv.setViewName("template3");
-    return mv;
+    if (member.getAuthority()!=8) {
+      HttpSession loginUser = request.getSession();
+      loginUser.setAttribute("loginUser", null);
+      loginUser.invalidate();
+      request.getSession(true);
+      mv.addObject("contentUrl", "main/LoginForm.jsp");
+      mv.setViewName("template3");
+      return mv;
+    } else {
+      mv.addObject("contentUrl", "main/MyPage.jsp");
+      mv.setViewName("template2");
+      return mv;
+    }
   }
 
 }

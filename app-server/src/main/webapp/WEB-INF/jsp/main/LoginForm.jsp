@@ -15,6 +15,13 @@
    justify-items: center; 
    align-items: center; 
   }
+.login_menu a {
+    color: black;
+
+}
+.login_menu a:hover {
+    color: black;
+    }
   </style>
 
 </head>
@@ -40,7 +47,7 @@
 <br>
 <button class="btn btn-primary" id="login-form-submit">LOGIN</button><br>
 
-<div>
+<div class='login_menu'>
 <a href="./findidMenu">아이디 |</a>
 <a href="./findpwMenu">비밀번호찾기 |</a>
 <a href='../buyer/form' >회원가입</a>
