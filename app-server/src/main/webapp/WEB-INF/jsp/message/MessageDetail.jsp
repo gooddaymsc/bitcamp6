@@ -192,8 +192,8 @@
     <div class="message-box" id="message-box">
  <div class="chat-title" id="chat-title">
     <h1>${theOtherId}</h1>
-     <figure class="avatar">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure>
+     <!-- <figure class="avatar">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/156381/profile/profile-80.jpg" /></figure> -->
   </div>
 <c:set var="id" value="${loginUser.id}"/>
 <c:forEach items="${messages}" var="message">
