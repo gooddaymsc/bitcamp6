@@ -21,7 +21,6 @@ tr:hover {
 <table class="table table-hover">
 <thead>
   <tr>
-    <th>번호</th>
     <th>채팅상대</th>
     <th>내용</th>
     <th>등록일</th>
@@ -31,7 +30,7 @@ tr:hover {
 
 <c:forEach items="${messages}" var="message">
 <tr>
-    <td><a href='detail?no=${message.roomNumber}' >${message.roomNumber}</a></td>  
+    <td style="display:none"><a href='detail?no=${message.roomNumber}' >${message.roomNumber}</a></td>  
     <td>${message.theOtherId} <i class="fas fa-arrow-right"></i> ${message.Id}</td> 
     <td>${message.content}</td>
     <td>${message.registrationDate}</td> 

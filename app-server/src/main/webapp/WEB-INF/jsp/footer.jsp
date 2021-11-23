@@ -66,7 +66,7 @@ style attribute {
 </li></ul></li>
 </ul>
 </div></div>
-
+</footer>
 <!-- <hr />
 <div class="container" style="bottom:0">
   <div class="hm-footer-copyright text-center">
