@@ -81,11 +81,11 @@ public class SellerController {
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
+      photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
       member.setPhoto(filename);
       seller.setMember(member);
 
-      Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
       .size(100, 100)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -96,7 +96,7 @@ public class SellerController {
         }
       });
 
-      Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
       .size(1000, 1000)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -179,11 +179,11 @@ public class SellerController {
 
       if (photoFile.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
-        photoFile.write(sc.getRealPath("/upload/seller") + "/" + filename);
+        photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
 
         seller.getMember().setPhoto(filename);
 
-        Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
         .size(100, 100)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -194,7 +194,7 @@ public class SellerController {
           }
         });
 
-        Thumbnails.of(sc.getRealPath("/upload/seller") + "/" + filename)
+        Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
         .size(1000, 1000)
         .outputFormat("jpg")
         .crop(Positions.CENTER)
@@ -233,7 +233,9 @@ public class SellerController {
   }
 
   @GetMapping("/seller/delete")
-  public ModelAndView delete(String id, HttpServletRequest request) throws Exception {
+  public ModelAndView delete(String id, HttpSession session, HttpServletRequest request) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
+
     Seller seller = sellerDao.findById(id);
     if (seller == null) {
       throw new Exception("해당 아이디의 회원이 없습니다.");
@@ -242,14 +244,19 @@ public class SellerController {
     sellerDao.delete(seller.getMember().getNumber());
     sellerDao.deleteSeller(seller.getMember().getNumber());
     sqlSessionFactory.openSession().commit();
-
     ModelAndView mv = new ModelAndView();
-    HttpSession loginUser = request.getSession();
-    loginUser.setAttribute("loginUser", null);
-    loginUser.invalidate();
-    request.getSession(true);
-    mv.addObject("contentUrl", "main/LoginForm.jsp");
-    mv.setViewName("template3");
-    return mv;
+    if (member.getAuthority()!=8) {
+      HttpSession loginUser = request.getSession();
+      loginUser.setAttribute("loginUser", null);
+      loginUser.invalidate();
+      request.getSession(true);
+      mv.addObject("contentUrl", "main/LoginForm.jsp");
+      mv.setViewName("template3");
+      return mv;
+    } else {
+      mv.addObject("contentUrl", "main/MyPage.jsp");
+      mv.setViewName("template2");
+      return mv;
+    }
   }
 }

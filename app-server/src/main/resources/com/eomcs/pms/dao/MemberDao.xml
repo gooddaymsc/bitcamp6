@@ -18,6 +18,7 @@
     <result column="registeredDate" property="registeredDate"/>
     <result column="active" property="active"/>
     <result column="level" property="level"/>
+    <result column="photo" property="photo"/>
   </resultMap>
   
   <select id="findByIdAndPassword" resultMap="MemberMap">

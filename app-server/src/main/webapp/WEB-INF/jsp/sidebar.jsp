@@ -9,7 +9,34 @@
   background-color: white;
   z-index: 11;
 }
-
+.side-col-sm-10 {
+position: relative;
+  xborder : 2px solid red;
+  border-radius:50%; 
+  xtop : 50px;
+  left : 20px;
+  xpadding-left : 40px;
+  width : 70px;
+  height: 70px;
+}
+.side-col-sm-10 img {
+    position: absolute;
+    border-radius:50%; 
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    object-fit: fill;
+}
+.btn-group-vertical {
+  xborder: 2px solid blue;
+  position : relative;
+  xtop : 20px;
+}
+.f-loginUserid {
+  xborder: 2px solid black;
+  top : 60px;
+}
 </style>
 
 
@@ -24,7 +51,10 @@
     </div>
   </c:when>
   <c:otherwise>
-  <p class="id">${loginUser.id}님</p>
+  <div class=side-col-sm-10>
+     <img id="f-photo-image" src="${contextPath}/upload/member/${loginUser.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/member/profile.png'">
+   </div>
+  <p class="f-loginUserid" style="font-weight: bold;">${loginUser.id}</p>
   <br>
   </c:otherwise>
 </c:choose> 

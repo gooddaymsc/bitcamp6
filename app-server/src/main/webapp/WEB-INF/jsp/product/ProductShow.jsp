@@ -3,8 +3,31 @@ trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     
-<style>/* 
+<style> 
+.col-sm-10 {
+position: absolute;
+  xborder : 2px solid red;
+  border-radius:50%; 
+  width : 50px;
+  height: 50px;
+}
+.col-sm-10 img {
+    position: absolute;
+    border-radius:50%; 
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    object-fit: fill;
+}
 
+.review-content {
+  position : relative;
+  top : 10px;
+  left : 65px;
+  width : 800px;
+  xborder : 2px solid green;
+}
 /* @font-face {
   font-family: "NotoSansKR";
   src: url("../fonts/notoSansKR/NotoSans-Bold.woff") format("woff");
@@ -165,7 +188,7 @@ display:inline-block;
 </c:choose> 
 </form><br>
 
-<h4><i class="far fa-star"></i>최근 리뷰<i class="far fa-star"></i></h4>
+<h4>리뷰</h4>
 
 <c:choose> 
   <c:when test="${loginUser.authority eq 2}">
@@ -178,10 +201,16 @@ display:inline-block;
 
 <c:forEach items="${reviewList}" var="review">
 <fieldset>
-<h4><i class="far fa-id-badge"></i> ${review.member.id}><a href='review/detail?no=${review.no}'>${review.comment}</a></h4>
+    <div class="col-sm-10">
+        <img id="f-photo-image" src="${contextPath}/upload/member/${review.member.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/member/profile.png'">
+    </div>
+    <div class='review-content'>
+    <p style='font-size:normal; font-weight: bold;'>${review.member.id}</p>
+    <a style='font-size:large;' href='review/detail?no=${review.no}'>${review.comment}</a><br><br>
      <i class="far fa-thumbs-up"></i> ${review.score} / 
      <i class="far fa-calendar-alt"></i> ${review.registeredDate}
      <hr />
+     </div>
 </fieldset>
 </c:forEach>
 

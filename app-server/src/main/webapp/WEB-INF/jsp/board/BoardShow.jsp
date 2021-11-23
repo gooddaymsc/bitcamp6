@@ -227,6 +227,11 @@ position: relative;
   left : 900px;
 xfloat: right;
 }
+.board-header-second #board-id{
+position : relative;
+xborder : 2px solid yellow;
+left : 55px;
+}
   </style>
   
 <div class="html-board">
@@ -260,9 +265,14 @@ xfloat: right;
 
 <div class="board-header" id="board-header">
   <label for='f-writer' class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+     <img id="f-photo-image" src="${contextPath}/upload/member/${board.writer.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/member/profile.png'">
+   </div>
     <div class="board-header-second">
     <input type='hidden' id='btn-writer' type='text' name='writer' value='${board.writer.id}'readOnly><br>
+     <div id='board-id'>
      <label for="f-writer" id='f-writer'>${board.writer.id}</label>
+     </div>
      <br><p style="color: grey;"><label for='f-registrationDate'>${board.registrationDate} |</label>
      <label for='f-views'>조회 ${board.views}</label>    
   </div>
@@ -301,7 +311,7 @@ xfloat: right;
 	<c:forEach items= "${commentList}" var="comment">
 	<fieldset>
     <div class="col-sm-10">
-        <img id="f-photo-image" onerror="${contextPath}/upload/member/${comment.writer.photo}_100x100.jpg" src="${contextPath}/image/profile.png">
+        <img id="f-photo-image" src="${contextPath}/upload/member/${comment.writer.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/member/profile.png'">
     </div>
 	   <div class="comment-cng">
 	   <c:choose> 
@@ -323,7 +333,7 @@ xfloat: right;
 	</div>
 	<div class="comment-add">
 	 <div class="col-sm-10">
-     <img id="f-photo-image" onerror="${contextPath}/upload/member/${loginUser.photo}_100x100.jpg" src="${contextPath}/image/profile.png">
+     <img id="f-photo-image" src="${contextPath}/upload/member/${loginUser.photo}_100x100.jpg" onError="this.src='${contextPath}/upload/member/profile.png'">
     <p id="f-photo-id">${loginUser.id}</p>
    </div>
 	<form action='./comment/add' method='post'>

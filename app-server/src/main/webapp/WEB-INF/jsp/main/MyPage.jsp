@@ -24,7 +24,7 @@
 }
 .col:hover {
     cursor: pointer;
-    background-color : #f5d6bb;
+    background-color : #ceccd0;
     xborder-bottom: 3px solid #000;
     
 }
@@ -42,7 +42,7 @@ display:;
 }
 .col {
   xposition: absolute;
-  border: 2px solid #eebc90;
+  border: 2px solid #afacb3;
   xwidth:880px;
   xheight: 150px;
 }
@@ -64,14 +64,18 @@ tr:hover {
     <div class="col">
      <a class="nav-link" href="javascript:view(2)">내 댓글</a>
     </div>
-    <div class="col">
-    <a class="nav-link" href="javascript:view(3)">내 리뷰</a>
-    </div>
+    <c:choose> 
+    <c:when test="${loginUser.authority ne 8}">
+      <div class="col">
+        <a class="nav-link" href="javascript:view(3)">내 리뷰</a>
+      </div>
+    </c:when >
+    </c:choose>
       <c:choose> 
     <c:when test="${loginUser.authority eq 2}">
     <div class="col">
       <a class="nav-link" href="../buyer/detail?id=${loginUser.id}">개인정보</a>
-    </div>ß
+    </div>
     </c:when >
     <c:when test="${loginUser.authority eq 4}">
     <div class="col">
