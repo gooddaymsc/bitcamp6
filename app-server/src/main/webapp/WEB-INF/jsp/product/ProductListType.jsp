@@ -139,7 +139,7 @@
                 <div class="col-sm">
                   <p class="p-top">주종</p>
                    <hr> 
-                   <p class="p-bottom">${product.productType.type}</p>
+                   <p class="p-bottom" style="font-size:small;">${product.productType.type}</p>
                 </div>
                 <div class="col-sm">
                   <p class="p-top">도수</p>
