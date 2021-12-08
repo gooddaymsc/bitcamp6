@@ -1,6 +1,7 @@
 # Drinker
 
 
+
 ### 📍**프로젝트 소개**
 
 현재 주류는 판매처 마다 수입해오는 주류의 가격이 천차만별이며 종류도 다양하여
@@ -24,3 +25,4 @@
 판매처 & 재고파악 |  픽업예약 및 관리  | 별점 & 리뷰 남기기 | 주류 실시간 랭킹 | 게시글 & 댓글 남기기 |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 |<img src="https://user-images.githubusercontent.com/86589750/145247860-08250e14-4e6d-4d28-8d83-21837df36536.png" width="120px">|<img src="https://user-images.githubusercontent.com/86589750/145247891-1c4e35a3-8769-43b2-a942-443950d5a9f6.png" width="120px">|<img src="https://user-images.githubusercontent.com/86589750/145247940-2f0fd43a-aa21-49a5-9908-3b40d35e6b7c.png" width="120px">|<img src="https://user-images.githubusercontent.com/86589750/145247976-5cb83aa2-3d3f-4fbe-87c4-57a9635966fb.png" width="120px">|<img src="https://user-images.githubusercontent.com/86589750/145248047-c6b5e9f4-3ae3-4f73-ae03-8683f33d26c2.png" width="120px">|
+
